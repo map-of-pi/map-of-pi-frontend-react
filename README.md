@@ -1,64 +1,36 @@
-<h1 align="center"">Map of Pi</h1>
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-<div align="center">
+## Getting Started
 
-[![Hackathon](https://img.shields.io/badge/hackathon-PiCommerce-purple.svg)](https://github.com/pi-apps/PiOS/blob/main/pi-commerce.md)
-![Status](https://img.shields.io/badge/status-active-success.svg)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/1d8fa9c7-015b-4531-9b81-ccf16517b39b/deploy-status)](https://app.netlify.com/sites/map-of-pi/deploys)
-![License](https://img.shields.io/badge/license-PIOS-blue.svg)
+First, run the development server:
 
-</div>
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-<div>
-    <p align="justify"><b>Map of Pi</b> is a mobile application developed to help Pi community members easily locate local businesses that accept Pi as payment. This project was initiated as part of the Pi Commerce Hackathon with the goal of facilitating Pi transactions and connecting businesses with the Pi community.</p>
-</div>
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Table of Contents
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- [Brand Design](#brand-design)
-- [Tech Stack](#tech-stack)
-- [Team](#team)
-- [Contributions](#contributions)
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## <a name='brand-design'></a>Brand Design
+## Learn More
 
-| App Logo  | App Icon |
-| ------------- |:-------------:|
-| <img src="https://i.ibb.co/GTRWzSb/map-of-pi-logo-revised-3.png" alt="map-of-pi-logo-revised-3" border="0">     | <img src="https://i.ibb.co/4FQqXTG/map-of-pi-app-icon-revised-3b-transparent.png" alt="map-of-pi-app-icon-revised-3b-transparent" border="0">
+To learn more about Next.js, take a look at the following resources:
 
-## <a name='tech-stack'></a>Tech Stack 📊
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- **Frontend**: React, TypeScript, HTML, SCSS, CSS
-- **Backend**: Node.js, REST API
-- **Database**: MongoDB
-- **DevOps**: GitHub Actions, Netlify
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## <a name='team'></a>Team 🧑👩‍🦱🧔👨🏾‍🦱👨🏾 
+## Deploy on Vercel
 
-### Project Manager
-- Philip Jennings
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-### Marketing
-- Bonnie Ford
-- Joseph Ciccone 
-
-### Solution Design / UX
-- Femma Ashraf
-- Oluwabukola Adesina
-- Folorunsho Omotunde
-
-### DevOps
-- Danny Lee
-
-### Frontend Developers
-- Darin Hajou
-- Zoltan Magyar
-
-### Backend Developers
-- Rokundo Soleil
-
-## <a name='contributions'></a>Contributions
-
-<div>
-    <p align="justify">We welcome contributions from the community to improve the Map of Pi project.</p>
-</div>
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
