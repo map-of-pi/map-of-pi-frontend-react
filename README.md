@@ -29,7 +29,7 @@
 
 ## <a name='tech-stack'></a>Tech Stack 📊
 
-- **Frontend**: React, TypeScript, HTML, SCSS, CSS
+- **Frontend**: NextJS/ React, TypeScript, HTML, SCSS, CSS
 - **Backend**: Node.js, REST API
 - **Database**: MongoDB
 - **DevOps**: GitHub Actions, Netlify
@@ -53,6 +53,10 @@ The Map of Pi Front End is a [Next.js](https://nextjs.org/) project bootstrapped
 ### Execute Unit Tests
 
 - Run `npm run test` to launch the [Jest](https://jestjs.io/) Testing Framework in the interactive watch mode.
+
+### Linting the Project
+
+- Run `npm run lint` for static code analysis.
 
 ## <a name='team'></a>Team 🧑👩‍🦱🧔👨🏾‍🦱👨🏾 
 

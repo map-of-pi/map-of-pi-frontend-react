@@ -1,3 +1,7 @@
 {
-  "extends": "next/core-web-vitals"
+  "ignorePatterns": ["node_modules/", "dist/"],
+  "extends": [
+    "next/core-web-vitals",
+    "prettier"
+  ]
 }
