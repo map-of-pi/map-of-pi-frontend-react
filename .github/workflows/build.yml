@@ -34,7 +34,7 @@ jobs:
         run: npm install
 
       - name: Build Frontend
-        run: npm run build -- --configuration=production
+        run: npm run build
         
       - name: Execute Tests for Frontend
-        run: npm run test -- --watch=false
+        run: npm run test
