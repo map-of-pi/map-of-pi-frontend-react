@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  reactStrictMode: true,
+  distDir: 'dist/map-of-pi',
+}
 
 export default nextConfig;
