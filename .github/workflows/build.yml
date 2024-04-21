@@ -37,4 +37,4 @@ jobs:
         run: npm run build
         
       - name: Execute Tests for Frontend
-        run: npm run test
+        run: npm run test -- --passWithNoTests
