@@ -40,7 +40,7 @@ The Map of Pi Front End is a [Next.js](https://nextjs.org/) project bootstrapped
 
 ### Build the Project
 
-- Run `npm run build` to build the project; builds the app for production to the `build` folder.
+- Run `npm run build` to build the project; builds the app for production to the `.next` folder.
     - The build artifacts are bundled for production mode and optimized for the best performance.
 
 ### Execute the Development Server
