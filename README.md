@@ -4,7 +4,7 @@
 
 [![Hackathon](https://img.shields.io/badge/hackathon-PiCommerce-purple.svg)](https://github.com/pi-apps/PiOS/blob/main/pi-commerce.md)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c42efe75-6465-4c71-8a13-237419bfaf31/deploy-status)](https://app.netlify.com/sites/mapofpi/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4d4c5ac2-b6f0-453e-b13c-891e92403749/deploy-status)](https://app.netlify.com/sites/mapofpi-react/deploys)
 ![License](https://img.shields.io/badge/license-PIOS-blue.svg)
 
 </div>
@@ -40,7 +40,7 @@ The Map of Pi Front End is a [Next.js](https://nextjs.org/) project bootstrapped
 
 ### Build the Project
 
-- Run `npm run build` to build the project; builds the app for production to the `build` folder.
+- Run `npm run build` to build the project; builds the app for production to the `.next` folder.
     - The build artifacts are bundled for production mode and optimized for the best performance.
 
 ### Execute the Development Server
