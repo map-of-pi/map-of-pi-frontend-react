@@ -1,5 +1,5 @@
 {
-  "ignorePatterns": ["node_modules/", "dist/"],
+  "ignorePatterns": ["node_modules/", "build/"],
   "extends": [
     "eslint:recommended",
     "next/core-web-vitals",

@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "dist/map-of-pi/types/**/*.ts"
+    "build/map-of-pi/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
