@@ -28,7 +28,7 @@ export default function Home() {
         <meta name="keywords" content="map, pi, business, app" />
         <meta name="author" content="Map of Pi Team" />
         <meta
-          http-equiv="Content-Security-Policy"
+          httpEquiv="Content-Security-Policy"
           content="font-src 'self' https://cdnjs.cloudflare.com/ajax/libs/font-awesome/ https://fonts.gstatic.com/;"
         />
         <link
@@ -49,18 +49,6 @@ export default function Home() {
           href="/favicon-16x16.png"
         />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-        />
       </Head>
     </div>
   );
