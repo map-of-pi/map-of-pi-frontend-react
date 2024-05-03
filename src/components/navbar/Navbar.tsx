@@ -36,7 +36,7 @@ function Navbar() {
           <Link href="/" style={{ height: '24px' }}>
             <MdHome
               size={24}
-              color={resolvedTheme === 'light' ? '#000000' : '#FFFFFF'}
+              className='text-[#000000] dark:text-[#FFFFFF]'
             />
           </Link>
         </div>
@@ -52,13 +52,13 @@ function Navbar() {
             onClick={() => setToggleInfo(true)}>
             <MdInfo
               size={24}
-              color={resolvedTheme === 'light' ? '#000000' : '#FFFFFF'}
+              className='text-[#000000] dark:text-[#FFFFFF]'
             />
           </button>
           <button onClick={handleTheme} className={styles.nav_item}>
             <MdBrightness4
               size={24}
-              color={resolvedTheme === 'light' ? '#000000' : '#FFFFFF'}
+              className='text-[#000000] dark:text-[#FFFFFF]'
             />
           </button>
           <button
@@ -66,7 +66,7 @@ function Navbar() {
             onClick={() => setToggleLang(true)}>
             <MdOutlineLanguage
               size={24}
-              color={resolvedTheme === 'light' ? '#000000' : '#FFFFFF'}
+              className='text-[#000000] dark:text-[#FFFFFF]'
             />
           </button>
         </div>

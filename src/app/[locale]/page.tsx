@@ -10,7 +10,7 @@ export default function Index(
   const t = useTranslations('CORE');
   return (
     <>
-      <h1>{t('APP_NAME')}</h1>
+      <h1 className=' text-black dark:text-black'>{t('APP_NAME')}</h1>
     </>
   );
 }
