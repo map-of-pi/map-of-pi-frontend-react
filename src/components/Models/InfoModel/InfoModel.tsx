@@ -44,7 +44,7 @@ const InfoModel = (props: any) => {
                   className={styles.social_media__link}
                   target="_blank">
                   <Image
-                    src="/images/shared/footer/email-icon.svg"
+                    src="/images/shared/social-media/email-icon.svg"
                     alt="Map of Pi Email Address"
                     className={styles.social_media__icon}
                     fill={true}
@@ -55,7 +55,7 @@ const InfoModel = (props: any) => {
                   className={styles.social_media__link}
                   target="_blank">
                   <Image
-                    src="/images/shared/footer/facebook.icon.png"
+                    src="/images/shared/social-media/facebook.icon.png"
                     alt="Map of Pi Facebook Page"
                     className={styles.social_media__icon}
                     fill={true}
@@ -67,7 +67,7 @@ const InfoModel = (props: any) => {
                   aria-label="Instagram page"
                   target="_blank">
                   <Image
-                    src="/images/shared/footer/instagram-icon.png"
+                    src="/images/shared/social-media/instagram-icon.png"
                     alt="Map of Pi Instagram Page"
                     className={styles.social_media__icon}
                     fill={true}
@@ -78,7 +78,7 @@ const InfoModel = (props: any) => {
                   className={styles.social_media__link}
                   target="_blank">
                   <Image
-                    src="/images/shared/footer/x-icon.png"
+                    src="/images/shared/social-media/x-icon.png"
                     alt="Map of Pi Twitter Page"
                     className={styles.social_media__icon}
                     fill={true}
@@ -89,7 +89,7 @@ const InfoModel = (props: any) => {
                   className={styles.social_media__link}
                   target="_blank">
                   <Image
-                    src="/images/shared/footer/tiktok-icon.svg"
+                    src="/images/shared/social-media/tiktok-icon.svg"
                     alt="Map of Pi TikTok Channel"
                     className={styles.social_media__icon}
                     fill={true}
@@ -100,7 +100,7 @@ const InfoModel = (props: any) => {
                   className={styles.social_media__link}
                   target="_blank">
                   <Image
-                    src="/images/shared/footer/youtube-icon.png"
+                    src="/images/shared/social-media/youtube-icon.png"
                     alt="Map of Pi YouTube Channel"
                     className={styles.social_media__icon}
                     fill={true}
