@@ -1,13 +1,12 @@
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
-export default function Index({
-    params: {locale}
+export default function Index(
+  {
+    // params: { locale },
   }: {
-    params: {locale: string};
-  }) {
-
-
+    params: { locale: string };
+  },
+) {
   const t = useTranslations('CORE');
   return (
     <>

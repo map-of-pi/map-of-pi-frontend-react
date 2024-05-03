@@ -6,7 +6,7 @@
     align-items: center;
     padding: 2px 16px;
     height: 56px;
-    background-color: var(--header-bg);
+    /* background-color: var(--header-bg); */
 }
 
 .nav_item {
@@ -25,7 +25,7 @@
     height: 48px;
     border: none;
     border-radius: 50%;
-    background-color: #f0f0f0;
+    background-color: #d0d0d086;
    
 }
 

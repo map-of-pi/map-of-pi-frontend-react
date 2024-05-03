@@ -1,6 +1,5 @@
 // THIS IS LANGUAGE MODEL POP UP
-'use client'
-
+'use client';
 
 import Image from 'next/image';
 
@@ -9,6 +8,7 @@ import styles from './LangModel.module.css';
 // import { useParams } from 'next/navigation';
 // import {usePathname, useRouter} from '../../../navigation';
 import { usePathname, useRouter, useParams } from 'next/navigation';
+import { useTheme } from 'next-themes';
 
 export interface LangMenuItem {
   code: string;
@@ -17,7 +17,6 @@ export interface LangMenuItem {
   translation: string;
   imageUrl: string;
 }
-
 
 const LangModel = (props: any) => {
   const Languages: LangMenuItem[] = [
@@ -67,17 +66,15 @@ const LangModel = (props: any) => {
 
   const pathname = usePathname();
   const router = useRouter();
-  const params = useParams();
 
-
+  const { setTheme, theme } = useTheme();
 
   const handleLanguageChange = (code: string) => {
-    const slip =  pathname.split('/').slice(2)
-    slip.unshift(code)
-   const xxx = slip.join('/')
-   xxx.toString()
-    console.log(xxx)
-    router.replace(`/${xxx}`)
+    const slipPathname = pathname.split('/').slice(2);
+    slipPathname.unshift(code);
+    const retPathname = slipPathname.join('/');
+    retPathname.toString();
+    router.replace(`/${retPathname}`);
   };
 
   return (
@@ -87,11 +84,18 @@ const LangModel = (props: any) => {
         onClick={() => props.setToggleLang(false)}></div>
       <div
         className={styles.lang_container}
-        style={{ backgroundColor: 'white' }}>
-        {Languages.map((lang, i) => (
+        style={{
+          backgroundColor: theme === 'light' ? '#ffffff' : '#424242',
+        }}>
+        {Languages.map((lang) => (
           <div
             key={lang.code}
             className={`${styles.lang_section} mb-2`}
+            style={{
+              backgroundColor:
+                theme === 'light' ? '#f0f0f0' : 'rgba(0, 0, 0, 0.822)',
+              color: theme === 'light' ? '#000000' : '#ffffff',
+            }}
             onClick={() => handleLanguageChange(lang.code)}>
             <div className={styles.lan_img_con}>
               <div className="min-w-6 min-h-6 relative">

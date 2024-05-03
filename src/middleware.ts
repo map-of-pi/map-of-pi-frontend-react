@@ -1,12 +1,12 @@
 import createMiddleware from 'next-intl/middleware';
-import {locales, localePrefix} from './navigation';
+import { locales, localePrefix } from './navigation';
 
 export default createMiddleware({
   defaultLocale: 'en',
   localePrefix,
-  locales
+  locales,
 });
- 
+
 export const config = {
   // Match only internationalized pathnames
   matcher: [
@@ -15,6 +15,6 @@ export const config = {
     // - … the ones containing a dot (e.g. `favicon.ico`)
     '/((?!api|_next|_vercel|.*\\..*).*)',
     // However, match all pathnames within `/users`, optionally with a locale prefix
-    '/([\\w-]+)?/users/(.+)'
-  ]
+    '/([\\w-]+)?/users/(.+)',
+  ],
 };

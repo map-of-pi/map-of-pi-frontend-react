@@ -8,13 +8,14 @@
     padding: 10px 16px;
     border-radius: 4px;
     position: absolute;
-    right: 30px;
+    right: 16px;
+    top: 52px;
     /* will-change: transform, opacity; */
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px;
 }
 
 .lang_section {
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     display: flex;
     border-radius: 6px;
     padding: 5px;
@@ -22,7 +23,7 @@
 }
 
 .lang_section:hover {
-    background-color: #e5e5e5;
+    background-color: #e8e8e8ba !important;
 }
 
 .lan_img_con {

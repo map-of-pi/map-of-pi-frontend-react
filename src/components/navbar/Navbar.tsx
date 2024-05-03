@@ -15,17 +15,29 @@ import {
 import LogoImage from '../../../public/images/logo.svg';
 import InfoModel from '../Models/InfoModel/InfoModel';
 import LangModel from '../Models/LangModel/LangModel';
+import { useTheme } from 'next-themes';
 
 function Navbar() {
   const [toggleInfo, setToggleInfo] = useState(false);
   const [toggleLang, setToggleLang] = useState(false);
 
+  const { resolvedTheme, setTheme } = useTheme();
+
+  const handleTheme = () => {
+    resolvedTheme === 'dark' ? setTheme('light') : setTheme('dark')
+  };
+
   return (
     <>
-      <div className={styles.navbar}>
+      <div
+        className={`${styles.navbar} bg-[#F5F5F5] dark:bg-[#212121]`}
+        >
         <div className={`${styles.nav_item}`}>
           <Link href="/" style={{ height: '24px' }}>
-            <MdHome size={24} color="#000000" />
+            <MdHome
+              size={24}
+              color={resolvedTheme === 'light' ? '#000000' : '#FFFFFF'}
+            />
           </Link>
         </div>
         <div className={styles.pi_content}>
@@ -38,18 +50,24 @@ function Navbar() {
           <button
             className={styles.nav_item}
             onClick={() => setToggleInfo(true)}>
-            <MdInfo size={24} />
+            <MdInfo
+              size={24}
+              color={resolvedTheme === 'light' ? '#000000' : '#FFFFFF'}
+            />
+          </button>
+          <button onClick={handleTheme} className={styles.nav_item}>
+            <MdBrightness4
+              size={24}
+              color={resolvedTheme === 'light' ? '#000000' : '#FFFFFF'}
+            />
           </button>
           <button
             className={styles.nav_item}
-            
-            >
-            <MdBrightness4 size={24} />
-          </button>
-          <button className={styles.nav_item}
-          onClick={() => setToggleLang(true)}
-          >
-            <MdOutlineLanguage size={24} />
+            onClick={() => setToggleLang(true)}>
+            <MdOutlineLanguage
+              size={24}
+              color={resolvedTheme === 'light' ? '#000000' : '#FFFFFF'}
+            />
           </button>
         </div>
       </div>
