@@ -1,13 +1,23 @@
 // THIS IS INFO MODEL POP UP
+'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
 import styles from './infoModel.module.css';
+import { useRouter } from 'next/navigation';
 
 const InfoModel = (props: any) => {
+  const router = useRouter()
+  const t = useTranslations();
   const [version, setVersion] = useState('Beta V2.2.6');
+
+  const handLinking = (route: any) => {
+    router.push(`/${route}`)
+    props.setToggleInfo(false)
+  }
 
   return (
     <>
@@ -29,12 +39,12 @@ const InfoModel = (props: any) => {
               <h3>{version}</h3>
             </div>
             <div className="text-center">
-              <Link href="" className={styles.legal_link}>
-                Privacy Policy
-              </Link>
-              <Link href="" className={styles.legal_link}>
-                Terms of Service
-              </Link>
+              <button onClick={() => handLinking('privacy-policy')} className={styles.legal_link}>
+                {t('FOOTER.PRIVACY_POLICY' || 'Privacy Policy')}
+              </button>
+              <button onClick={() => handLinking('terms-of-service')} className={styles.legal_link}>
+                {t('FOOTER.TERMS_OF_SERVICE' || 'Terms of Service')}
+              </button>
             </div>
 
             <div className={styles.social_media}>
@@ -110,8 +120,9 @@ const InfoModel = (props: any) => {
             </div>
 
             <div className={styles.defects_contact}>
+              <span>{t('INFORMATION_DIALOG.REPORTING_MESSAGE') || 'Please report defects'} </span>
               <Link href="mailto:mapofpi@gmail.com" target="_blank">
-                <span>Please report defects to mapofpi@gmail.com </span>
+                mapofpi@gmail.com
               </Link>
             </div>
           </div>
