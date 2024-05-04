@@ -10,9 +10,12 @@ import styles from './infoModel.module.css';
 import { useRouter } from 'next/navigation';
 
 const InfoModel = (props: any) => {
+
   const router = useRouter()
   const t = useTranslations();
-  const [version, setVersion] = useState('Beta V2.2.6');
+
+  const [version, setVersion] = useState('V1.0.0');
+
 
   const handLinking = (route: any) => {
     router.push(`/${route}`)
