@@ -24,20 +24,16 @@ function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
 
   const handleTheme = () => {
-    resolvedTheme === 'dark' ? setTheme('light') : setTheme('dark')
+    resolvedTheme === 'dark' ? setTheme('light') : setTheme('dark');
   };
 
   return (
     <>
       <div
-        className={`${styles.navbar} bg-[#F5F5F5] dark:bg-[#212121]`}
-        >
+        className={`${styles.navbar} bg-[#F5F5F5] dark:bg-[#212121] fixed top-0 left-0 right-0`}>
         <div className={`${styles.nav_item}`}>
           <Link href="/" style={{ height: '24px' }}>
-            <MdHome
-              size={24}
-              className='text-[#000000] dark:text-[#FFFFFF]'
-            />
+            <MdHome size={24} className="text-[#000000] dark:text-[#FFFFFF]" />
           </Link>
         </div>
         <div className={styles.pi_content}>
@@ -50,15 +46,12 @@ function Navbar() {
           <button
             className={styles.nav_item}
             onClick={() => setToggleInfo(true)}>
-            <MdInfo
-              size={24}
-              className='text-[#000000] dark:text-[#FFFFFF]'
-            />
+            <MdInfo size={24} className="text-[#000000] dark:text-[#FFFFFF]" />
           </button>
           <button onClick={handleTheme} className={styles.nav_item}>
             <MdBrightness4
               size={24}
-              className='text-[#000000] dark:text-[#FFFFFF]'
+              className="text-[#000000] dark:text-[#FFFFFF]"
             />
           </button>
           <button
@@ -66,7 +59,7 @@ function Navbar() {
             onClick={() => setToggleLang(true)}>
             <MdOutlineLanguage
               size={24}
-              className='text-[#000000] dark:text-[#FFFFFF]'
+              className="text-[#000000] dark:text-[#FFFFFF]"
             />
           </button>
         </div>
