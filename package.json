@@ -1,6 +1,6 @@
 {
   "name": "map-of-pi-frontend-react",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "author": "Map of Pi Team",
   "description": "Map of Pi Frontend React",
   "license": "PiOS",
@@ -13,9 +13,15 @@
     "test": "jest"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "cookies-next": "^4.1.1",
     "next": "14.2.2",
+    "next-intl": "^3.12.0",
+    "next-themes": "^0.3.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-icons": "^5.1.0",
+    "react-intl": "^6.6.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
