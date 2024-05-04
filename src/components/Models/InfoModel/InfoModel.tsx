@@ -7,7 +7,7 @@ import { useState } from 'react';
 import styles from './infoModel.module.css';
 
 const InfoModel = (props: any) => {
-  const [version, setVersion] = useState('Beta V2.2.6');
+  const [version, setVersion] = useState('V1.0.0');
 
   return (
     <>
