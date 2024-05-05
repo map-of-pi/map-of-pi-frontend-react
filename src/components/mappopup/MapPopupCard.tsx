@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Popup } from 'react-leaflet';
 
 const MapPopupCard = () => {
@@ -5,8 +6,10 @@ const MapPopupCard = () => {
     <Popup>
       {/* <MapPopupCard shop={coord} /> */}
       <div className="max-w-sm rounded-md overflow-hidden">
-        <img
+        <Image
           className="w-full"
+          width={200}
+          height={200}
           src="https://tse3.mm.bing.net/th?id=OIP.Ijh2DJJVlAmhBAYABFwI-wAAAA&pid=Api&P=0&h=220"
           alt="Shop Image"
         />
