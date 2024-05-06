@@ -32,7 +32,8 @@
     "react-icons": "^5.1.0",
     "react-intl": "^6.6.5",
     "react-logger": "^1.1.0",
-    "sass": "^1.76.0"
+    "sass": "^1.76.0",
+    "winston": "^3.13.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",

@@ -7,9 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import { useTranslation } from 'react-i18next';
-// import { Logger } from 'react-logger'; 
-import { NGXLogger } from 'ngx-logger';
-
+import Snackbar from '@mui/material/Snackbar';
 import './SearchBar.scss';
 
 
@@ -21,8 +19,8 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => {
   const [searchBarValue, setSearchBarValue] = useState('');
   const [isBusinessSearchType, setIsBusinessSearchType] = useState(true);
+  const [message, setMessage] = useState('');
   const { t } = useTranslation();
-  // const logger = new Logger();
 
   const handleSearchBarChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchBarValue(event.target.value);
@@ -33,18 +31,32 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => {
     document.getElementById('search-input').focus();
   };
 
-  const handleSubmitSearch = (event: FormEvent) => {
+  const handleSubmitSearch = async (event: FormEvent) => {
     event.preventDefault();
     const query = searchBarValue;
-    if (query !== null) {
+    if (query) {
       const searchType = isBusinessSearchType ? 'business' : 'product';
-      this.logger.info(`Search query emitted for ${searchType}: `, query);
+      console.info(`Search query emitted for ${searchType}: `, query);
+
+      const searchResults = await fetchSearchResults(query, searchType);
       setSearchQuery({ query, searchType });
+
+      setSearchQuery({ query, searchType });
+      
+      setMessage(`Your search found ${searchResults.length} shops. Please zoom out to view all shop markers.`); 
+      console.log(message);
     }
   };
 
   return (
     <div className="w-full min-w-40 fixed top-20 z-5 flex justify-center">
+       <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={!!message}
+        message={message}
+        autoHideDuration={6000}
+        onClose={() => setMessage('')}
+      />
       <div className="w-full max-w-xl pl-14 pr-4 flex items-center">
         <form className="w-full" onSubmit={handleSubmitSearch}>
           <FormControl className="w-full mb-0 flex-grow">
@@ -82,7 +94,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => {
               )}
               <IconButton
                 aria-label="delete"
-                className="bg-gray-600 rounded h-10 w-10 flex items-center justify-center ml-5 hover:bg-gray-600">
+                className="bg-gray-600 rounded h-10 w-10 flex items-center justify-center ml-5 hover:bg-gray-600" onClick={handleSubmitSearch}>
                 <SearchIcon className="text-white text-2xl mb-1" />
               </IconButton>
             </div>
