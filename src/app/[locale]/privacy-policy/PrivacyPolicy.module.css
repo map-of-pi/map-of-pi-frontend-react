@@ -1,0 +1,31 @@
+.privacy_policy_content {
+  text-align: left;
+  padding: 50px;
+}
+
+.privacy_policy_content h1,
+.privacy_policy_content h2 {
+  color: #1d724b;
+  font-size: 20px;
+}
+
+.privacy_policy_content h2 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.privacy_policy_content h4 {
+    margin-bottom: 16px;
+}
+
+.privacy_policy_content p {
+  margin-bottom: 20px;
+}
+
+.privacy_policy_content ul {
+  list-style-type: none;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
