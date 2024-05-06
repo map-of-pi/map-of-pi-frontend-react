@@ -1,0 +1,28 @@
+button {
+    outline: none;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+  
+.toggle-label {
+    display: flex;
+    flex-direction: column-reverse;
+    cursor: pointer;
+}
+  
+.search-toggle-element {
+    // width: 100%;
+    height: auto;
+    font-size: 25px !important;
+    color: #1d724b; 
+}
+  
+.toggle-checkbox:checked + .toggle-label .business-icon {
+    display: none;
+}
+  
+.toggle-checkbox:not(:checked) + .toggle-label .product-icon {
+    display: none;
+}

@@ -1,4 +1,5 @@
 import Navbar from '@/components/navbar/Navbar';
+import SearchBar from '@/components/SearchBar/SearchBar';
 import '../global.css';
 import { Providers } from '../providers';
 
@@ -18,6 +19,8 @@ export default function LocaleLayout({
           {children}
         </Providers>
         {/* </AppWrapper> */}
+        <SearchBar />
+        
       </body>
     </html>
   );
