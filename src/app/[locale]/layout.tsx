@@ -1,5 +1,5 @@
 import { NextIntlClientProvider, useMessages } from 'next-intl';
-import Navbar from '@/components/navbar/Navbar';
+import Navbar from '@/components/shared/navbar/Navbar';
 import '../global.css';
 import { Providers } from '../providers';
 import { Roboto } from 'next/font/google';

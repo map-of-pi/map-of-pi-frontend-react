@@ -1,11 +1,12 @@
 import React from 'react'
 import styles from './TermOfService.module.css';
 import { useTranslations } from 'next-intl';
+
 function TermsOfService() {
 
   const t = useTranslations();
-  
-  const lastUpdated = "3/1/2024";
+
+  const lastUpdated = "5/5/2024";
   const emailAddress = "mapofpi@gmail.com";
 
   return (

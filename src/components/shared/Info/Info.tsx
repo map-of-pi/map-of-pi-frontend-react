@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import styles from './infoModel.module.css';
+import styles from './Info.module.css';
 import { useRouter } from 'next/navigation';
 
 const InfoModel = (props: any) => {
