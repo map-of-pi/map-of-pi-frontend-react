@@ -2,13 +2,10 @@
 'use client';
 
 import Image from 'next/image';
-
-import styles from './LangModel.module.css';
-
-// import { useParams } from 'next/navigation';
-// import {usePathname, useRouter} from '../../../navigation';
 import { usePathname, useRouter, useParams } from 'next/navigation';
 import { useTheme } from 'next-themes';
+
+import styles from './Lang-switcher.module.css';
 
 export interface LangMenuItem {
   code: string;
