@@ -1,0 +1,31 @@
+.terms_of_service_content {
+  text-align: left;
+  padding: 50px;
+}
+
+.terms_of_service_content h1,
+.terms_of_service_content h2 {
+  color: #1d724b;
+  font-size: 20px;
+}
+
+.terms_of_service_content h2 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.terms_of_service_content p {
+  margin-bottom: 20px;
+}
+
+.terms_of_service_content ul {
+  list-style-type: none;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.terms_of_service_content a {
+  font-weight: bold;
+}
