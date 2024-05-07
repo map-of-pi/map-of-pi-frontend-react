@@ -14,7 +14,7 @@ import {
 
 import LogoImage from '../../../public/images/logo.svg';
 import InfoModel from '../Info/Info';
-import LangModel from '../lang-switcher/Lang-switcher';
+import LangModel from '../Lang-switcher/Lang-switcher';
 import { useTheme } from 'next-themes';
 // import { useTranslations } from 'next-intl';
 
