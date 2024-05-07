@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import styles from '@/components/navbar/Navbar.module.css';
+import styles from './Navbar.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -13,9 +13,10 @@ import {
 } from 'react-icons/md';
 
 import LogoImage from '../../../public/images/logo.svg';
-import InfoModel from '../Models/InfoModel/InfoModel';
-import LangModel from '../Models/LangModel/LangModel';
+import InfoModel from '../Info/Info';
+import LangModel from '../Lang-switcher/Lang-switcher';
 import { useTheme } from 'next-themes';
+// import { useTranslations } from 'next-intl';
 
 function Navbar() {
   const [toggleInfo, setToggleInfo] = useState(false);
@@ -37,9 +38,16 @@ function Navbar() {
           </Link>
         </div>
         <div className={styles.pi_content}>
-          <div className={styles.pi_cont1}>Map of Pi</div>
+          <div className={`${styles.pi_cont1} text-black dark:text-white`}>
+            Map of Pi
+          </div>
           <div className={styles.pi_cont2}>
-            <Image src={LogoImage} width={48} height={48} alt="Logo image" />
+            <Image
+              src="/images/logo.svg"
+              width={48}
+              height={48}
+              alt="Logo image"
+            />
           </div>
         </div>
         <div className="flex flex-row">

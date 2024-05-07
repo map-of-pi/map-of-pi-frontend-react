@@ -103,8 +103,8 @@
       text-align: center;
   }
   
-  .defects_contact span {
-      font-size: 12px;
+  .defects_contact span, .defects_contact a {
+      font-size: 13px;
       color: #ff0000;
   }
   

@@ -7,9 +7,14 @@
     --color-bg-color: #F1F7FF
 }
 
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    background: url('../../public/background.svg') rgba(255, 255, 255, 0.15) center no-repeat fixed;
+    background-size: cover;
+    
 }
