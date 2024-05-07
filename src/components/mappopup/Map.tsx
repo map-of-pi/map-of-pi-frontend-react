@@ -2,7 +2,7 @@ import L from 'leaflet';
 import React from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import MapPopupCard from './MapPopupCard';
-import { dummyCoordinates } from '../../../constants/cooardinates';
+import { dummyCoordinates } from '../../constants/coordinates';
 
 function Map() {
 

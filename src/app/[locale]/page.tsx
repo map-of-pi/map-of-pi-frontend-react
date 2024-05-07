@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import L from 'leaflet';
-import { dummyCoordinates } from '../../../constants/coardinates';
+import { dummyCoordinates } from '../../constants/coordinates';
 import MapPopupCard from '@/components/popup/MapPopupCard';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
