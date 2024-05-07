@@ -2,17 +2,16 @@ import L from 'leaflet';
 import React from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import MapPopupCard from './MapPopupCard';
-import { dummyCoordinates } from '../../constants/coordinates';
+import { dummyCoordinates } from '../../../constants/coordinates';
 
 function Map() {
 
-    const customIcon = L.icon({
-        iconUrl: '/favicon-32x32.png',
-        iconSize: [25, 30],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-      });
-
+  const customIcon = L.icon({
+    iconUrl: '/favicon-32x32.png',
+    iconSize: [25, 30],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  });
 
   return (
     <MapContainer
