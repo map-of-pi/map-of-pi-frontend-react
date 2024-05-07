@@ -1,10 +1,8 @@
 import Image from 'next/image';
-import { Popup } from 'react-leaflet';
 
 const MapPopupCard = () => {
   return (
-    <Popup>
-      {/* <MapPopupCard shop={coord} /> */}
+    <>
       <div className="max-w-sm rounded-md overflow-hidden">
         <Image
           className="w-full"
@@ -74,7 +72,7 @@ const MapPopupCard = () => {
           </div>
         </div>
       </div>
-    </Popup>
+    </>
   );
 };
 
