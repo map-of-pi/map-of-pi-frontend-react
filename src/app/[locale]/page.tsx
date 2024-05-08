@@ -1,16 +1,20 @@
-import { useTranslations } from 'next-intl';
+'use client';
+
+import dynamic from 'next/dynamic';
 
 export default function Index(
   {
-    // params: { locale },
   }: {
     params: { locale: string };
   },
 ) {
-  const t = useTranslations('CORE');
+  const DynamicMap = dynamic(() => import('../../components/shared/map/Map'), {
+    ssr: false,
+  });
+
   return (
     <>
-      <h1 className=' text-black dark:text-black'>{t('APP_NAME')}</h1>
+      <DynamicMap />
     </>
   );
 }
