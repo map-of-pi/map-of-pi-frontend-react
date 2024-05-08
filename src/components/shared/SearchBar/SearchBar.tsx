@@ -21,7 +21,8 @@ const SearchBar: React.FC = () => {
     setSearchBarValue(event.target.value);
   };
   
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleIconClick = () => {
     // Move the placeholder text up
     if(inputRef.current) {
