@@ -87,11 +87,11 @@ export default function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Navbar />
-            <SearchBar />
+            
             {children}
           </Providers>
         </NextIntlClientProvider>
-        
+        <SearchBar />
       </body>
     </html>
   );
