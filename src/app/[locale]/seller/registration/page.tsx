@@ -5,7 +5,7 @@ function Page() {
 
   return (
     <>
-    <div className="flex items-center justify-center p-5">
+    <div className="flex items-center justify-center p-5 mt-[56px]">
       <form action="" className="w-full md:w-1/2  mx-auto">
         <InputField labelText="Business Name" inputId="busName" intText="Enter the name of your business" />
         <InputField labelText="Business Description" inputId="busDesc" intText="Enter a simple description of your business" />
