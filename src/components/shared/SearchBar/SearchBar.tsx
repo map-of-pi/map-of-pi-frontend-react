@@ -30,16 +30,16 @@ const SearchBar: React.FC = () => {
     }
   };
 
-  // const fetchSearchResults = async (query, searchType) => {
-  //   // fetch logic to be defined here
-  //   // For now, it returns an empty array
-  //   return [];
-  // };
+  const fetchSearchResults = async (query: string, searchType: string):Promise<any[]> => {
+    // fetch logic to be defined here
+    // For now, it returns an empty array
+    return new Promise((resolve) => resolve([]));
+  };
 
-  // const setSearchQuery = (query, searchType) => {
-  //   // setSearchQuery logic here
-  // };
-
+  const setSearchQuery = (query: string, searchType: string) => {
+    // setSearchQuery logic here
+  };
+  
   const handleSubmitSearch = async (event: FormEvent) => {
     event.preventDefault();
     const query = searchBarValue;
@@ -48,7 +48,7 @@ const SearchBar: React.FC = () => {
       console.info(`Search query emitted for ${searchType}: `, query);
 
       const searchResults = await fetchSearchResults(query, searchType);
-      setSearchQuery({ query, searchType });
+      setSearchQuery( query, searchType );
 
       setMessage(`Your search found ${searchResults.length} shops. Please zoom out to view all shop markers.`); 
       console.log(message);
@@ -114,7 +114,6 @@ const SearchBar: React.FC = () => {
 };
 
 export default SearchBar;
-function setSearchQuery(arg0: { query: string; searchType: string; }) {
-  throw new Error('Function not implemented.');
-}
+
+
 
