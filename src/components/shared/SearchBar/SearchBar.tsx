@@ -1,6 +1,7 @@
 'use client'
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { FormControl, Input, makeStyles } from '@mui/material';
+
+import React, { useState, useRef, ChangeEvent, FormEvent } from 'react';
+import { FormControl, makeStyles } from '@mui/material';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,13 +11,7 @@ import { useTranslation } from 'react-i18next';
 import Snackbar from '@mui/material/Snackbar';
 import './SearchBar.scss';
 
-
-interface SearchBarProps {
-  setSearchQuery: (query: { query: string, searchType: string }) => void;
-  setSearchTypeToggled: () => void;
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => {
+const SearchBar: React.FC = () => {
   const [searchBarValue, setSearchBarValue] = useState('');
   const [isBusinessSearchType, setIsBusinessSearchType] = useState(true);
   const [message, setMessage] = useState('');
@@ -25,11 +20,22 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => {
   const handleSearchBarChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchBarValue(event.target.value);
   };
-
+  
+  const inputRef = useRef(null);
   const handleIconClick = () => {
     // Move the placeholder text up
-    document.getElementById('search-input').focus();
+    inputRef.current.focus();
   };
+
+  // const fetchSearchResults = async (query, searchType) => {
+  //   // fetch logic to be defined here
+  //   // For now, it returns an empty array
+  //   return [];
+  // };
+
+  // const setSearchQuery = (query, searchType) => {
+  //   // setSearchQuery logic here
+  // };
 
   const handleSubmitSearch = async (event: FormEvent) => {
     event.preventDefault();
@@ -41,8 +47,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => {
       const searchResults = await fetchSearchResults(query, searchType);
       setSearchQuery({ query, searchType });
 
-      setSearchQuery({ query, searchType });
-      
       setMessage(`Your search found ${searchResults.length} shops. Please zoom out to view all shop markers.`); 
       console.log(message);
     }
@@ -65,14 +69,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => {
             type="text" 
             variant="filled"
             color="success"
-            className='bg-'
+            className="bg-white hover:bg-gray-100"
             label={t(
               isBusinessSearchType
-                ? 'Search Businesses..'
-                : 'Search Products..',
+                ? "Search Businesses.."
+                : "Search Products..",
             )} 
             value={searchBarValue} 
             onChange={handleSearchBarChange}
+            ref={inputRef}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-2">
               {isBusinessSearchType ? (
@@ -106,3 +111,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchQuery }) => {
 };
 
 export default SearchBar;
+function setSearchQuery(arg0: { query: string; searchType: string; }) {
+  throw new Error('Function not implemented.');
+}
+
