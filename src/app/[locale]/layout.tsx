@@ -1,5 +1,6 @@
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import Navbar from '@/components/shared/navbar/Navbar';
+import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import '../global.css';
 import { Providers } from '../providers';
 import { Roboto } from 'next/font/google';
@@ -86,9 +87,11 @@ export default function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Navbar />
+            
             {children}
           </Providers>
         </NextIntlClientProvider>
+        <SearchBar />
       </body>
     </html>
   );
