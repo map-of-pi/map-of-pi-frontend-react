@@ -24,7 +24,9 @@ const SearchBar: React.FC = () => {
   const inputRef = useRef(null);
   const handleIconClick = () => {
     // Move the placeholder text up
-    inputRef.current.focus();
+    if(inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   // const fetchSearchResults = async (query, searchType) => {
