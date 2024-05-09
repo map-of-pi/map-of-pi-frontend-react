@@ -1,6 +1,6 @@
 'use client';
 
-export default function YellowBtn(props){
+export default function YellowBtn(props: any){
     return(
       <>
       <div>

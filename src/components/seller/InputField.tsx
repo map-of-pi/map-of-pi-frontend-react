@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-export default function InputField(props){
+export default function InputField(props: any){
     return (
       <>
       <div className="pb-3 ">
