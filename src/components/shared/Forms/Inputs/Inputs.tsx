@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 export const Input = (props: any) => {
-  const { label, ...input } = props;
+  const { label, icon, ...input } = props;
   return (
     <>
-      <div className="">
+      <div className="relative">
         {props.label && (
           <label className="block font-medium text-gray-700">
             {props.label}
@@ -52,15 +52,30 @@ export const FileInput = (props: any) => {
         </div>
         <input
           type="file"
+          accept='image/png, image/jpeg, image/jpg'
+          multiple
           className={`absolute scale-[5] opacity-0 cursor-pointer`}
+          onChange={(e) => props.handleAddImages(e)}
         />
       </div>
       <label className="block font-medium text-gray-700 mt-2">
         {t('BUSINESS.ADD_PRODUCT.PLACEHOLDERS.PRODUCT_IMAGES_MAX')}
       </label>
-      <div className="my-2 text-center text-gray-500 text-[14px]">
+      {
+        props.images.length > 0 ? (
+          <div className="flex flex-wrap gap-2 mb-3"> {
+            props.images.map((image: any) => (
+                <Image key={image} src={image} alt="Selected Image" width={50} height={50} />
+            ))
+          }
+              </div>
+        ) : (
+          <div className="my-2 text-center text-gray-500 text-[14px]">
         {t('BUSINESS.ADD_PRODUCT.VALIDATIONS.PRODUCT_IMAGES')}
       </div>
+        )
+      }
+      
     </div>
   );
 };
