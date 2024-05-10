@@ -15,8 +15,13 @@ export const Input = (props: any) => {
         )}
         <input
           {...input}
-          className={`mt-1 p-2 block w-full rounded-md border-[#1d724b] border-[1px] mb-3`}
+          className={`mt-1 p-2 block w-full rounded-md border-[rgb(209 213 219 1)] outline-0 focus:border-[#1d724b] border-[1px] mb-3`}
         />
+        {icon && (
+          <div className="absolute right-1 bottom-[4px]">
+            <Image src="/favicon-32x32.png" alt="icon" width={32} height={32} />
+          </div>
+        )}
       </div>
     </>
   );
@@ -28,7 +33,7 @@ export const TextArea = (props: any) => {
       {props.label && (
         <label className="block font-medium text-gray-700">{props.label}</label>
       )}
-      <textarea className="mt-1 p-2 block w-full rounded-md border-[#1d724b] border-[1px] mb-3"></textarea>
+      <textarea className="mt-1 p-2 block w-full rounded-md  border-[rgb(209 213 219 1)] outline-0 focus:border-[#1d724b] border-[1px] mb-3"></textarea>
     </div>
   );
 };
@@ -52,7 +57,7 @@ export const FileInput = (props: any) => {
         </div>
         <input
           type="file"
-          accept='image/png, image/jpeg, image/jpg'
+          accept="image/png, image/jpeg, image/jpg"
           multiple
           className={`absolute scale-[5] opacity-0 cursor-pointer`}
           onChange={(e) => props.handleAddImages(e)}
@@ -61,21 +66,81 @@ export const FileInput = (props: any) => {
       <label className="block font-medium text-gray-700 mt-2">
         {t('BUSINESS.ADD_PRODUCT.PLACEHOLDERS.PRODUCT_IMAGES_MAX')}
       </label>
-      {
-        props.images.length > 0 ? (
-          <div className="flex flex-wrap gap-2 mb-3"> {
-            props.images.map((image: any) => (
-                <Image key={image} src={image} alt="Selected Image" width={50} height={50} />
-            ))
-          }
-              </div>
-        ) : (
-          <div className="my-2 text-center text-gray-500 text-[14px]">
-        {t('BUSINESS.ADD_PRODUCT.VALIDATIONS.PRODUCT_IMAGES')}
-      </div>
-        )
-      }
-      
+      {props.images.length > 0 ? (
+        <div className="flex flex-wrap gap-2 mb-3">
+          {' '}
+          {props.images.map((image: any) => (
+            <Image
+              key={image}
+              src={image}
+              alt="Selected Image"
+              width={50}
+              height={50}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="my-2 text-center text-gray-500 text-[14px]">
+          {t('BUSINESS.ADD_PRODUCT.VALIDATIONS.PRODUCT_IMAGES')}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export const FileInput2 = (props: any) => {
+  const t = useTranslations();
+  return (
+    <div className="">
+      {props.label && (
+        <label className="block font-medium text-gray-700">{props.label}</label>
+      )}
+
+      {!props.image && (
+        <div className="flex justify-center relative overflow-hidden w-[80%] left-0 right-0 m-auto gap-2 items-center mb-3">
+          <Image
+            src="/images/business/add-item-button.png"
+            alt=""
+            width={60}
+            height={60}
+            className="rounded-md"
+          />
+          <span>
+            {t('BUSINESS.CONFIGURATION.ADD_PRODUCT_MENU.LABELS.ADD_IMAGE')}
+          </span>
+          <input
+            type="file"
+            name=""
+            id=""
+            className="absolute scale-[3] left-0 right-0 opacity-0"
+            onChange={(e) => props.handleAddImage(e)}
+          />
+        </div>
+      )}
+      {props.image && (
+        <div className="flex justify-between items-center">
+          <Image
+            src={props.image}
+            alt="image"
+            width={70}
+            height={62}
+            objectFit="cover"
+          />
+          <Image
+            src={props.image}
+            alt="image"
+            width={60}
+            height={60}
+            objectFit="contain"
+          />
+          <div 
+          className="text-red-700 self-center self-start text-3xl cursor-pointer"
+          onClick={props.handleDeleteImage}
+          >
+            ×
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -88,11 +153,11 @@ export const Select = (props: any) => {
       )}
       <select className="mt-1 p-2 block w-full rounded-md border-[#1d724b] border-[1px] mb-3">
         <option value=""></option>
-            {
-                props.options.map((option: any) => (
-                    <option key={option.value} value={option.value}>{option.name}</option>
-                ))
-            }
+        {props.options.map((option: any) => (
+          <option key={option.value} value={option.value}>
+            {option.name}
+          </option>
+        ))}
       </select>
     </div>
   );

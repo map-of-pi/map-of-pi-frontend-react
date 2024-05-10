@@ -86,8 +86,7 @@ export default function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Navbar />
-            
-            {children}
+            <div className='pt-14'>{children}</div>
           </Providers>
         </NextIntlClientProvider>
       </body>

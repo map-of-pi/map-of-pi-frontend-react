@@ -57,7 +57,7 @@ function AddProduct() {
   }, [files]);
 
   return (
-    <div className="max-w-[400px] m-auto p-4">
+    <div className="max-w-[400px] mt-[50px] m-auto p-4">
       <form action="">
         <Input
           label={t('BUSINESS.ADD_PRODUCT.LABELS.PRODUCT_NAME')}
