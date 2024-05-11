@@ -6,6 +6,7 @@
     align-items: center;
     padding: 2px 16px;
     height: 56px;
+    z-index: 100;
     /* background-color: var(--header-bg); */
 }
 

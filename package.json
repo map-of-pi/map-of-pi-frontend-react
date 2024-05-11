@@ -34,7 +34,8 @@
     "react-intl": "^6.6.5",
     "react-leaflet": "^4.2.1",
     "react-logger": "^1.1.0",
-    "sass": "^1.76.0",
+    "react-switch": "^7.0.0",
+    "sass": "^1.77.0",
     "sharp": "^0.33.3",
     "winston": "^3.13.0"
   },
