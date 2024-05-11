@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import SearchBar from '@/components/shared/SearchBar/SearchBar';
 
 export default function Index(
   {
@@ -15,6 +16,7 @@ export default function Index(
   return (
     <>
       <DynamicMap />
+      <SearchBar />
     </>
   );
 }
