@@ -1,0 +1,27 @@
+.sidebar {
+    width: 250px;
+    position: fixed;
+    height: calc(100vh - 55.99px);
+}
+
+
+.lan_img_con {
+    border-right: 1px solid black;
+    padding: 0.2rem;
+    padding-right: 0.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.lang_section {
+    /* background-color: #f0f0f0; */
+    display: flex;
+    border-radius: 6px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.lang_section:hover {
+    background-color: #e8e8e8ba !important;
+}

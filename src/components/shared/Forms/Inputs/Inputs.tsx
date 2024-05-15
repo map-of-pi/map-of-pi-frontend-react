@@ -9,13 +9,11 @@ export const Input = (props: any) => {
     <>
       <div className="relative">
         {props.label && (
-          <label className="block font-medium text-gray-700">
-            {props.label}
-          </label>
+          <label className="block text-xl text-[#333333]">{props.label}</label>
         )}
         <input
           {...input}
-          className={`mt-1 p-2 block w-full rounded-md border-[rgb(209 213 219 1)] outline-0 focus:border-[#1d724b] border-[1px] mb-3`}
+          className={`mt-1 p-[8px] block w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-3`}
         />
         {icon && (
           <div className="absolute right-1 bottom-[4px]">
@@ -31,7 +29,7 @@ export const TextArea = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block font-medium text-gray-700">{props.label}</label>
+        <label className=" block text-xl text-[#333333]">{props.label}</label>
       )}
       <textarea className="mt-1 p-2 block w-full rounded-md  border-[rgb(209 213 219 1)] outline-0 focus:border-[#1d724b] border-[1px] mb-3"></textarea>
     </div>
@@ -45,16 +43,21 @@ export const FileInput = (props: any) => {
       {props.label && (
         <label className="block font-medium text-gray-700">{props.label}</label>
       )}
-      <div className="flex gap-5 items-center  overflow-hidden bg-blue-200 p-3 rounded-md relative">
+      <div className="flex flex-col items-center justify-center overflow-hidden p-3 rounded-md relative border-dashed border-[2px]">
         <Image
-          src="/images/business/upload.jpg"
+          src="/images/shared/upload.png"
           alt="upload image"
-          width={50}
-          height={50}
+          width={85}
+          height={85}
         />
-        <div className="select-none">
-          {t('BUSINESS.ADD_PRODUCT.PLACEHOLDERS.PRODUCT_IMAGES')}
+        <div className="mt-5">
+          Drop your image here, or <span className='text-[#593B8B]'>browse</span>
         </div>
+        <span className='text-[#828282] text-[11px] mt-1'>Supports: PNG, JPG, JPEG, WEBP</span>
+        <span className='text-[#DF2C2C] text-[11px] mt-1'>One Photo Only</span>
+        {/* <div className="select-none">
+          {t('BUSINESS.ADD_PRODUCT.PLACEHOLDERS.PRODUCT_IMAGES')}
+        </div> */}
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"
@@ -63,10 +66,10 @@ export const FileInput = (props: any) => {
           onChange={(e) => props.handleAddImages(e)}
         />
       </div>
-      <label className="block font-medium text-gray-700 mt-2">
+      {/* <label className="block font-medium text-gray-700 mt-2">
         {t('BUSINESS.ADD_PRODUCT.PLACEHOLDERS.PRODUCT_IMAGES_MAX')}
-      </label>
-      {props.images.length > 0 ? (
+      </label> */}
+      {/* {props.images.length > 0 ? (
         <div className="flex flex-wrap gap-2 mb-3">
           {' '}
           {props.images.map((image: any) => (
@@ -83,7 +86,7 @@ export const FileInput = (props: any) => {
         <div className="my-2 text-center text-gray-500 text-[14px]">
           {t('BUSINESS.ADD_PRODUCT.VALIDATIONS.PRODUCT_IMAGES')}
         </div>
-      )}
+      )} */}
     </div>
   );
 };
@@ -133,10 +136,9 @@ export const FileInput2 = (props: any) => {
             height={60}
             objectFit="contain"
           />
-          <div 
-          className="text-red-700 self-center self-start text-3xl cursor-pointer"
-          onClick={props.handleDeleteImage}
-          >
+          <div
+            className="text-red-700 self-start text-3xl cursor-pointer"
+            onClick={props.handleDeleteImage}>
             ×
           </div>
         </div>
@@ -149,10 +151,9 @@ export const Select = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block font-medium text-gray-700">{props.label}</label>
+        <label className="block text-xl text-[#333333]">{props.label}</label>
       )}
-      <select className="mt-1 p-2 block w-full rounded-md border-[#1d724b] border-[1px] mb-3">
-        <option value=""></option>
+      <select className="mt-1 p-[8px] block w-full rounded-xl border-[#BDBDBD] outline-0 bg-transparent border-[2px] focus:border-[#1d724b] mb-3">
         {props.options.map((option: any) => (
           <option key={option.value} value={option.value}>
             {option.name}

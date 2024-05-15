@@ -56,7 +56,7 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-w-40 fixed top-20 z-5 flex justify-center">
+    <div className="w-[80%] sm:m-auto sm:left-0 sm:right-0 max-w-[504px] fixed top-20 z-5 flex right-[25px]">
        <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={!!message}
@@ -64,7 +64,7 @@ const SearchBar: React.FC = () => {
         autoHideDuration={6000}
         onClose={() => setMessage('')}
       />
-      <div className="w-full max-w-xl pl-14 pr-4 flex items-center">
+      <div className="w-[100%] m-auto flex items-center">
         <form className="w-full" onSubmit={handleSubmitSearch}>
           <FormControl className="w-full mb-0 flex-grow">
             <TextField 
@@ -73,17 +73,18 @@ const SearchBar: React.FC = () => {
             variant="filled"
             color="success"
             className="bg-white hover:bg-gray-100"
-            label={t(
-              isBusinessSearchType
-                ? "Search Businesses.."
-                : "Search Products..",
-            )} 
+            // label={t(
+            //   isBusinessSearchType
+            //     ? "Search Businesses.."
+            //     : "Search Products..",
+            // )} 
+            label='Search for seller or item to buy'
             value={searchBarValue} 
             onChange={handleSearchBarChange}
             ref={inputRef}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-2">
-              {isBusinessSearchType ? (
+              {/* {isBusinessSearchType ? (
                 <StorefrontIcon
                   className="search-toggle-element cursor-pointer"
                   onClick={() => {
@@ -99,7 +100,7 @@ const SearchBar: React.FC = () => {
                     handleIconClick();
                   }}
                 />
-              )}
+              )} */}
               <IconButton
                 aria-label="delete"
                 className="bg-gray-600 rounded h-10 w-10 flex items-center justify-center ml-5 hover:bg-gray-600" onClick={handleSubmitSearch}>
