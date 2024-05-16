@@ -31,7 +31,9 @@ export const TextArea = (props: any) => {
       {props.label && (
         <label className=" block text-xl text-[#333333]">{props.label}</label>
       )}
-      <textarea className="mt-1 p-2 block w-full rounded-md  border-[rgb(209 213 219 1)] outline-0 focus:border-[#1d724b] border-[1px] mb-3"></textarea>
+      <textarea
+        placeholder={props.placeholder}
+        className="mt-1 p-2 block w-full rounded-xl  border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-3"></textarea>
     </div>
   );
 };
@@ -51,10 +53,13 @@ export const FileInput = (props: any) => {
           height={85}
         />
         <div className="mt-5">
-          Drop your image here, or <span className='text-[#593B8B]'>browse</span>
+          Drop your image here, or{' '}
+          <span className="text-[#593B8B]">browse</span>
         </div>
-        <span className='text-[#828282] text-[11px] mt-1'>Supports: PNG, JPG, JPEG, WEBP</span>
-        <span className='text-[#DF2C2C] text-[11px] mt-1'>One Photo Only</span>
+        <span className="text-[#828282] text-[11px] mt-1">
+          Supports: PNG, JPG, JPEG, WEBP
+        </span>
+        <span className="text-[#DF2C2C] text-[11px] mt-1">One Photo Only</span>
         {/* <div className="select-none">
           {t('BUSINESS.ADD_PRODUCT.PLACEHOLDERS.PRODUCT_IMAGES')}
         </div> */}

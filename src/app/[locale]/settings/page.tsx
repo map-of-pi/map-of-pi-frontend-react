@@ -6,6 +6,7 @@ import {
   FileInput,
   Input,
   Select,
+  TextArea,
 } from '@/components/shared/Forms/Inputs/Inputs';
 import Switch from 'react-switch';
 
@@ -38,20 +39,25 @@ function Settings() {
     <>
       <div className="px-[25px] py-[36px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <div className="flex justify-between items-center mb-7">
-          <h1 className="text-[#333333] font-bold text-3xl">Settings</h1>
+          <h1 className="text-[#333333] font-bold text-3xl">Seller Settings</h1>
         </div>
         <div className="">
           <h2 className="text-3xl mb-5">Profile Settings</h2>
           <Input label="Enter Name" placeholder="peejenn" />
           <Input
-            label="Enter Email Address"
+            label="Pioneer User Id"
             placeholder="peejenn@example.com"
             tyoe="email"
           />
           <Input
-            label="Enter Phone Number "
-            placeholder="(+233) 4567 8579 97"
+            label="Seller business name"
+            placeholder="M & M Restaurant"
             tyoe="number"
+          />
+          <TextArea 
+            label='Location of Seller'
+            placeholder='Describe location, e.g. address or proximity to
+            landmark'
           />
           <FileInput
             label="Upload Photo (Optional)"
@@ -86,7 +92,7 @@ function Settings() {
           <div className="flex justify-between">
             <h1 className="block text-xl text-[#333333]">Search Center</h1>
             <Switch
-              onChange={() => handleCenter('prod_on')}
+              onChange={() => handleCenter('search')}
               {...switchProp}
               checked={center.search}
             />

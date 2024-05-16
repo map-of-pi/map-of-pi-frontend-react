@@ -55,7 +55,7 @@ function Map() {
       <MapContainer
         center={{ lat: -1.6279, lng: 29.7451 }}
         zoom={13}
-        // zoomControl={false}
+        zoomControl={false}
         // scrollWheelZoom={false}
         className="w-full flex-1 fixed top-[55px] h-[calc(100vh-55px)] left-0 right-0 bottom-0">
         <TileLayer

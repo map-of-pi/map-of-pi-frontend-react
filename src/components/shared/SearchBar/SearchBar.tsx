@@ -56,7 +56,7 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="w-[80%] sm:m-auto sm:left-0 sm:right-0 max-w-[504px] fixed top-20 z-5 flex right-[25px]">
+    <div className="w-[90%] m-auto left-0 right-0 max-w-[504px] fixed top-20 z-5 flex">
        <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={!!message}
@@ -78,7 +78,7 @@ const SearchBar: React.FC = () => {
             //     ? "Search Businesses.."
             //     : "Search Products..",
             // )} 
-            label='Search for seller or item to buy'
+            label='Search for seller or items'
             value={searchBarValue} 
             onChange={handleSearchBarChange}
             ref={inputRef}

@@ -4,7 +4,7 @@ import { Button, YellowBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { IoMdAdd } from 'react-icons/io';
+import { FaCirclePlus } from "react-icons/fa6";
 
 export default function Index({}: { params: { locale: string } }) {
   const DynamicMap = dynamic(() => import('../../components/shared/map/Map'), {
@@ -15,8 +15,9 @@ export default function Index({}: { params: { locale: string } }) {
     <>
       <DynamicMap />
       <SearchBar />
-      <div className="absolute bottom-[78px] z-500 flex justify-center gap-[22px] px-6 right-0 left-0 m-auto">
+      <div className="absolute bottom-[78px] z-10 flex justify-center gap-[22px] px-6 right-0 left-0 m-auto">
           <Button
+          icon={<FaCirclePlus />}
             label="Sell"
             styles={{padding: '5px 12px', borderRadius: '10px', width: '147px', height: '48px'}}
           />
