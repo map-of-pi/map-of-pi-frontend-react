@@ -37,7 +37,7 @@ function Settings() {
 
   return (
     <>
-      <div className="px-[25px] py-[36px] text-[#333333] sm:max-w-[520px] w-full m-auto">
+      <form className="px-[25px] py-[36px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <div className="flex justify-between items-center mb-7">
           <h1 className="text-[#333333] font-bold text-3xl">Seller Settings</h1>
         </div>
@@ -58,6 +58,10 @@ function Settings() {
             label='Location of Seller'
             placeholder='Describe location, e.g. address or proximity to
             landmark'
+          />
+          <TextArea 
+            label='Describe Items'
+            placeholder='Describe items for sale, price, etc'
           />
           <FileInput
             label="Upload Photo (Optional)"
@@ -101,7 +105,7 @@ function Settings() {
         <div className="mt-10 ml-auto">
           <Button label="Save" disabled={true} />
         </div>
-      </div>
+      </form>
     </>
   );
 }
