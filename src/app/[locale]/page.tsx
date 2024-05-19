@@ -15,15 +15,14 @@ export default function Index({}: { params: { locale: string } }) {
     <>
       <DynamicMap />
       <SearchBar />
-      <div className="absolute bottom-[78px] z-10 flex justify-center gap-[22px] px-6 right-0 left-0 m-auto">
+      <div className="absolute bottom-8 z-10 flex justify-between gap-[22px] px-7 right-0 left-0 m-auto">
           <Button
-          icon={<FaCirclePlus />}
-            label="Sell"
-            styles={{padding: '5px 12px', borderRadius: '10px', width: '147px', height: '48px'}}
+            label="+Sell"
+            styles={{ borderRadius: '10px', color: '#ffc153'}}
           />
           <Button
-            icon={<Image src='/images/shared/my_location.png' width={35} height={35} alt='my location' objectFit='cover' />}
-            styles={{borderRadius: '50%', width: '48px', height: '48px', padding: '0px'}}
+            icon={<Image src='/images/shared/my_location.png' width={30} height={30} alt='my location' objectFit='cover' />}
+            styles={{borderRadius: '50%', width: '40px', height: '40px', padding: '0px'}}
           />
         </div>
     </>

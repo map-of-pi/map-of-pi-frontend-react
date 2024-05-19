@@ -39,29 +39,20 @@ function Settings() {
     <>
       <form className="px-[25px] py-[36px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <div className="flex justify-between items-center mb-7">
-          <h1 className="text-[#333333] font-bold text-3xl">Seller Settings</h1>
+          <h1 className="text-[#333333] dark:text-white font-bold text-3xl">Seller Settings</h1>
         </div>
         <div className="">
-          <h2 className="text-3xl mb-5">Profile Settings</h2>
+          <h2 className="text-2xl mb-5 dark:text-white">Profile Settings</h2>
           <Input label="Enter Name" placeholder="peejenn" />
           <Input
-            label="Pioneer User Id"
+            label="Enter Email Address"
             placeholder="peejenn@example.com"
             tyoe="email"
           />
           <Input
-            label="Seller business name"
+            label="Enter Phone Number"
             placeholder="M & M Restaurant"
             tyoe="number"
-          />
-          <TextArea 
-            label='Location of Seller'
-            placeholder='Describe location, e.g. address or proximity to
-            landmark'
-          />
-          <TextArea 
-            label='Describe Items'
-            placeholder='Describe items for sale, price, etc'
           />
           <FileInput
             label="Upload Photo (Optional)"
@@ -70,7 +61,13 @@ function Settings() {
           />
         </div>
         <div className="mt-10">
-          <h1 className="text-[#333333] text-3xl mb-5">Map Center Settings</h1>
+          <h1 className="text-[#333333] dark:text-white text-2xl mb-5">Map Center Settings</h1>
+          <Select
+            label="Search Center"
+            options={[
+              { value: 'Ilinois cener, 4 bk', name: 'Ilinois cener, 4 bk' },
+            ]}
+          />
           <Select
             label="Search Center"
             options={[
@@ -91,14 +88,30 @@ function Settings() {
           />
         </div>
         <div className="mt-10">
-          <h1 className="text-[#333333] text-3xl mb-2">Search Settings</h1>
+          <h1 className="text-[#333333] dark:text-white text-2xl mb-2">Search Settings</h1>
           <h2 className="mb-5">Select map center to be shown on your map</h2>
-          <div className="flex justify-between">
-            <h1 className="block text-xl text-[#333333]">Search Center</h1>
+          <div className="flex justify-between mb-4">
+            <h1 className="block text-xl text-[#333333] dark:text-white">Search Center</h1>
             <Switch
               onChange={() => handleCenter('search')}
               {...switchProp}
               checked={center.search}
+            />
+          </div>
+          <div className="flex justify-between mb-4">
+            <h1 className="block text-xl text-[#333333] dark:text-white">Buy Center</h1>
+            <Switch
+              onChange={() => handleCenter('buy')}
+              {...switchProp}
+              checked={center.buy}
+            />
+          </div>
+          <div className="flex justify-between mb-4">
+            <h1 className="block text-xl text-[#333333] dark:text-white">Sell Center</h1>
+            <Switch
+              onChange={() => handleCenter('sell')}
+              {...switchProp}
+              checked={center.sell}
             />
           </div>
         </div>
