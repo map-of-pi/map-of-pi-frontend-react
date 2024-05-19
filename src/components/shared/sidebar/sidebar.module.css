@@ -2,10 +2,10 @@
   /* width: 300px; */
   position: absolute;
   background-color: #ffffff;
-  right: 0;
+  left: 0;
   top: 0;
   z-index: 50;
-  padding: 2.5rem 1rem 0rem 1rem;
+  padding: 1rem 1rem 0rem 1rem;
   height: calc(100vh);
 }
 
