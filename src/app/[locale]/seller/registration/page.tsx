@@ -1,5 +1,5 @@
 import InputField from '@/components/seller/InputField';
-import YellowBtn from '@/components/seller/YellowBtn';
+import { YellowBtn } from '@/components/shared/Forms/Buttons/Buttons';
 
 function Page() {
 

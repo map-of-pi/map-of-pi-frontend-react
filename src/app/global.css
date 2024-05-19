@@ -14,6 +14,7 @@
 }
 
 body {
-    background: url('../../public/background.svg') rgba(255, 255, 255, 0.15) center no-repeat fixed;
-    background-size: cover;
+    /* background: url('../../public/background.svg') rgba(255, 255, 255, 0.15) center no-repeat fixed;
+    background-size: cover; */
+    /* background-color: ; */
 }

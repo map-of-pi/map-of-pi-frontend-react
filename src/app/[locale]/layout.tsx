@@ -82,7 +82,7 @@ export default function LocaleLayout({
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </head>
       <body
-        className={`bg-white dark:bgwhite text-black dark:text-black ${roboto.className}`}>
+        className={`bg-[#F1F7FF] dark:bgwhite text-black dark:text-black ${roboto.className}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Navbar />
