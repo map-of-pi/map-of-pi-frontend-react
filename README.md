@@ -71,16 +71,21 @@ The Map of Pi Front End is a [Next.js](https://nextjs.org/) project bootstrapped
 - Femma Ashraf
 - Oluwabukola Adesina
 - Folorunsho Omotunde
+- Henry Fasakin
 
-### DevOps
+### Technical Lead/ DevOps
 - Danny Lee
 
-### Frontend Developers
-- Darin Hajou
+### Technical Advisor
 - Zoltan Magyar
 
-### Backend Developers
+### Application Developers
+- Darin Hajou
 - Rokundo Soleil
+- Ayomikun Omotosho
+- Samuel Oluyomi
+- Yusuf Adisa
+- Francis Mwaura
 
 ## <a name='contributions'></a>Contributions
 
