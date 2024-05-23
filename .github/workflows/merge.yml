@@ -1,0 +1,36 @@
+name: Map of Pi Merge
+
+# Controls when the workflow will execute
+on:
+  # Triggers the workflow when build successfully completes
+  workflow_run:
+    workflows: ["Map of Pi Build"]
+    types:
+      - completed
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  merge:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'dev' }}
+    name: 🔀 Merge
+    runs-on: ubuntu-latest
+    # The sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure git
+        run: |
+          git config --global user.name 'map-of-pi[bot]'
+          git config --global user.email 'map-of-pi[bot]@users.noreply.github.com'
+
+      - name: Merge dev into main
+        run: |
+          git fetch
+          git checkout main
+          git merge dev
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
