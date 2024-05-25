@@ -1,18 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import styles from './Navbar.module.css';
+import { useLocale } from 'next-intl';
 import Link from 'next/link';
-
-import { MdHome } from 'react-icons/md';
-import { FiMenu } from 'react-icons/fi';
-import { IoMdArrowBack } from 'react-icons/io';
-
-import { useTheme } from 'next-themes';
 import { usePathname, useRouter } from 'next/navigation';
+
+import { useEffect, useState } from 'react';
+import { FiMenu } from 'react-icons/fi';
+import { IoMdArrowBack, IoMdClose } from 'react-icons/io';
+import { MdHome } from 'react-icons/md';
+
 import Sidebar from '../sidebar/sidebar';
-import { IoMdClose } from 'react-icons/io';
-import { useTranslations, useLocale } from 'next-intl';
+import styles from './Navbar.module.css';
 
 function Navbar() {
   const router = useRouter();
@@ -21,6 +19,7 @@ function Navbar() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [checkHomePage, setCheckHomePage] = useState(true);
 
+  // check if the current page is the homepage
   useEffect(() => {
     const CheckHomePage = () => {
       if (pathname === `/${local}`) {
@@ -87,6 +86,6 @@ function Navbar() {
       )}
     </>
   );
-}
+};
 
 export default Navbar;

@@ -2,32 +2,11 @@
   /* width: 300px; */
   position: absolute;
   background-color: #ffffff;
-  left: 0;
+  right: 0;
   top: 0;
   z-index: 50;
   padding: 1rem 1rem 0rem 1rem;
   height: calc(100vh);
-}
-
-
-.nav_item {
-    width: 48px;
-    height: 48px;
-    border: none;
-   background-color: transparent;
-   cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.nav_item:hover {
-    width: 48px;
-    height: 48px;
-    border: none;
-    border-radius: 50%;
-    background-color: #d0d0d086;
-   
 }
 
 .slide_content {

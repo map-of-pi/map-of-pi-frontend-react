@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import styles from './sidebar.module.css';
-import { MdOutlineLanguage } from 'react-icons/md';
-import { FaChevronDown } from 'react-icons/fa6';
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useParams, usePathname, useRouter } from 'next/navigation';
+
+import { useState } from 'react';
+import { FaChevronDown } from 'react-icons/fa6';
+
 import { menu } from '@/constants/menu';
-import { useTheme } from 'next-themes';
+import styles from './sidebar.module.css';
+
 function Sidebar(props: any) {
   const pathname = usePathname();
   const params = useParams();
@@ -45,7 +47,7 @@ function Sidebar(props: any) {
 
   return (
     <>
-      <div className="w-full h-[calc(100vh-56px)] fixed bottom-0 bg-transparent left-0 z-500">
+      <div className="w-full h-[calc(100vh-56px)] fixed bottom-0 bg-transparent right-0 z-500">
         <div
           className="absolute w-full h-full bg-[#82828284]"
           onClick={() => props.setToggleDis(false)}></div>
@@ -113,9 +115,8 @@ function Sidebar(props: any) {
           </div>
         </div>
       </div>
-      
     </>
   );
-}
+};
 
 export default Sidebar;

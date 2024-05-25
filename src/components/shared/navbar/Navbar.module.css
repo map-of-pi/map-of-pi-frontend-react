@@ -13,8 +13,8 @@
     width: 48px;
     height: 48px;
     border: none;
-   background-color: transparent;
-   cursor: pointer;
+    background-color: transparent;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,39 +26,4 @@
     border: none;
     border-radius: 50%;
     background-color: #d0d0d086;
-   
-}
-
-.pi_content {
-    position: relative;
-    width: max-content;
-    height: 48px;
-    cursor: crosshair;
-}
-
-.pi_cont1 {
-    position: absolute;
-    white-space: nowrap;
-    font-size: 20px;
-    font-weight: 500;
-    top: 8px;
-    left: -13px;
-    bottom: 0;
-    margin: auto;
-    opacity: 0;
-    transition: opacity .5s ease-in-out;
-
-}
-
-.pi_cont2 {
-    opacity: 1;
-    transition: opacity .5s ease-in-out;
-}
-
-.pi_content:hover .pi_cont1 {
-    opacity: 1;
-}
-
-.pi_content:hover .pi_cont2 {
-    opacity: 0;
 }
