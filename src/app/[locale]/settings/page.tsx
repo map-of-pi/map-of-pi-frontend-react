@@ -47,12 +47,12 @@ function Settings() {
           <Input
             label="Enter Email Address"
             placeholder="peejenn@example.com"
-            tyoe="email"
+            type="email"
           />
           <Input
             label="Enter Phone Number"
             placeholder="M & M Restaurant"
-            tyoe="number"
+            type="number"
           />
           <FileInput
             label="Upload Photo (Optional)"
