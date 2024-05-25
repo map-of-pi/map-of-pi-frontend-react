@@ -1,5 +1,8 @@
 import React from 'react';
+import PhoneInput from 'react-phone-number-input'
+
 import styles from './Inputs.module.css';
+
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
@@ -22,6 +25,21 @@ export const Input = (props: any) => {
         )}
       </div>
     </>
+  );
+};
+
+export const TelephoneInput = (props: any) => {
+  const { label, ...input } = props;
+  return (
+    <div className="">
+      {props.label && (
+        <label className="block text-[17px] text-[#333333] dark:text-white">{props.label}</label>
+      )}
+      <PhoneInput 
+        {...input}
+        className={`flex mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
+      />
+    </div>
   );
 };
 

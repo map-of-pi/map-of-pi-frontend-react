@@ -5,7 +5,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 
-import { Input } from '@/components/shared/Forms/Inputs/Inputs';
+import { Input, TelephoneInput } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
 import styles from './sidebar.module.css';
 
@@ -19,6 +19,11 @@ function Sidebar(props: any) {
     Themes: false,
     Languages: false,
   });
+  
+  const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
+  const handlePhoneNumberChange = (value: string | undefined) => {
+    setPhoneNumber(value);
+  };
 
   const handChildMenu = (title: any, code: string) => {
     if (title === 'Languages') {
@@ -56,11 +61,15 @@ function Sidebar(props: any) {
           className={`${styles.sidebar} dark:bg-[#212121] sm:w-[300px] w-[200px] overflow-y-auto`}>
             <div className="text-2xl font-bold mb-4 pb-5">User Preferences</div>
             <Input
-            label="Your Email Address"
-            placeholder="mapofpi@mapofpi.com"
-            type="email"
+              label="Your Email Address"
+              placeholder="mapofpi@mapofpi.com"
+              type="email"
             />
-
+            <TelephoneInput
+              label="Your Phone Number"
+              value={phoneNumber}
+              onChange={handlePhoneNumberChange}
+            />
           {/* <div
             className="ml-auto flex justify-end mb-8"
             onClick={() => props.setToggleDis(false)}>
