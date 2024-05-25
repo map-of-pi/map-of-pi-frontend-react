@@ -53,6 +53,7 @@ function Sidebar(props: any) {
           onClick={() => props.setToggleDis(false)}></div>
         <div
           className={`${styles.sidebar} dark:bg-[#212121] sm:w-[300px] w-[200px] overflow-y-auto`}>
+            <div className="text-2xl font-bold mb-4">User Preferences</div>
           {/* <div
             className="ml-auto flex justify-end mb-8"
             onClick={() => props.setToggleDis(false)}>
