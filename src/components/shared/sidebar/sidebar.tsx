@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
-import { Input, TelephoneInput } from '@/components/shared/Forms/Inputs/Inputs';
+import { FileInput, Input, TelephoneInput } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
 import styles from './sidebar.module.css';
 
@@ -25,6 +25,8 @@ function Sidebar(props: any) {
   const handlePhoneNumberChange = (value: string | undefined) => {
     setPhoneNumber(value);
   };
+
+  const handleAddImages = () => {};
 
   const handleChildMenu = (title: any, code: string) => {
     if (title === 'Languages') {
@@ -80,6 +82,13 @@ function Sidebar(props: any) {
                 <Button 
                   label="Check Reviews"
                   styles={{background: '#fff', color: '#ffc153', width: '100%', height: '50px', padding: '10px', borderColor: '#386F4F', borderWidth: '2px'}}
+                />
+              </div>
+              <div className="pt-5">
+                <FileInput
+                  label="Upload Photo (Optional)"
+                  images={[]}
+                  handleAddImages={handleAddImages}
                 />
               </div>
             </div>

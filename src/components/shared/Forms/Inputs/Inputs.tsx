@@ -61,16 +61,16 @@ export const FileInput = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block font-medium text-gray-700 dark:text-white">{props.label}</label>
+        <label className="block pb-3 font-medium text-gray-700 dark:text-white">{props.label}</label>
       )}
-      <div className="flex flex-col items-center justify-center overflow-hidden p-3 rounded-md relative border-dashed border-[2px]">
+      <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative border-dashed border-[2px] border-green-700">
         <Image
           src="/images/shared/upload.png"
           alt="upload image"
           width={85}
           height={85}
         />
-        <div className="mt-5 text-[#828282] dark:text-white">
+        <div className="mt-5 text-center text-[#828282] dark:text-white">
           Drop your image here, or{' '}
           <span className="text-[#593B8B]">browse</span>
         </div>
