@@ -5,6 +5,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 
+import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { Input, TelephoneInput } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
 import styles from './sidebar.module.css';
@@ -25,7 +26,7 @@ function Sidebar(props: any) {
     setPhoneNumber(value);
   };
 
-  const handChildMenu = (title: any, code: string) => {
+  const handleChildMenu = (title: any, code: string) => {
     if (title === 'Languages') {
       const slipPathname = pathname.split('/').slice(2);
       slipPathname.unshift(code);
@@ -60,16 +61,24 @@ function Sidebar(props: any) {
         <div
           className={`${styles.sidebar} dark:bg-[#212121] sm:w-[300px] w-[200px] overflow-y-auto`}>
             <div className="text-2xl font-bold mb-4 pb-5">User Preferences</div>
-            <Input
-              label="Your Email Address"
-              placeholder="mapofpi@mapofpi.com"
-              type="email"
-            />
-            <TelephoneInput
-              label="Your Phone Number"
-              value={phoneNumber}
-              onChange={handlePhoneNumberChange}
-            />
+            <div className="">
+              <Input
+                label="Your Email Address"
+                placeholder="mapofpi@mapofpi.com"
+                type="email"
+              />
+              <TelephoneInput
+                label="Your Phone Number"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+              />
+              <div className="pt-5">
+                <Button 
+                  label="Set Search Center"
+                  styles={{color: '#ffc153', width: '100%', height: '50px', padding: '10px'}}
+                />
+              </div>
+            </div>
           {/* <div
             className="ml-auto flex justify-end mb-8"
             onClick={() => props.setToggleDis(false)}>
@@ -112,7 +121,7 @@ function Sidebar(props: any) {
                       <div key={child.id} className="ml-6">
                         <div
                           className={`${styles.slide_content} hover:bg-[#424242] hover:text-white hover:dark:bg-[#ffffff] dark:text-white hover:dark:text-black`}
-                          onClick={() => handChildMenu(menu.title, child.code)}>
+                          onClick={() => handleChildMenu(menu.title, child.code)}>
                           <Image
                             src={child.icon}
                             alt={child.title}
