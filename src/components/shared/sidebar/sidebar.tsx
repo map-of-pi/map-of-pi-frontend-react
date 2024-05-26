@@ -72,10 +72,14 @@ function Sidebar(props: any) {
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
               />
-              <div className="pt-5">
+              <div className="pt-5 flex flex-col gap-5">
                 <Button 
                   label="Set Search Center"
                   styles={{color: '#ffc153', width: '100%', height: '50px', padding: '10px'}}
+                />
+                <Button 
+                  label="Check Reviews"
+                  styles={{background: '#fff', color: '#ffc153', width: '100%', height: '50px', padding: '10px', borderColor: '#386F4F', borderWidth: '2px'}}
                 />
               </div>
             </div>
