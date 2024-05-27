@@ -44,12 +44,12 @@ function Sidebar(props: any) {
   };
 
   const handleMenu = (title: any, url: string) => {
-    if (title !== 'Themes' && title !== 'Languages') {
+    if (title !== 'Themes' && title !== 'Languages' && title !== 'About Map of Pi') {
       router.push(url);
       props.setToggleDis(false);
     }
 
-    if (title === 'Themes' || title === 'Languages') {
+    if (title === 'Themes' || title === 'Languages' || title === 'About Map of Pi') {
       setToggle({ ...toggle, [title]: !toggle[title] });
     }
   };
@@ -103,7 +103,7 @@ function Sidebar(props: any) {
               className="dark:invert cursor-pointer"
             />
           </div> */}
-          <div className="">
+          <div className="pt-5">
             {menu.map((menu) => (
               <>
                 <div key={menu.id} className="">
@@ -135,13 +135,15 @@ function Sidebar(props: any) {
                         <div
                           className={`${styles.slide_content} hover:bg-[#424242] hover:text-white hover:dark:bg-[#ffffff] dark:text-white hover:dark:text-black`}
                           onClick={() => handleChildMenu(menu.title, child.code)}>
-                          <Image
-                            src={child.icon}
-                            alt={child.title}
-                            width={17}
-                            height={17}
-                            className=""
-                          />
+                          {child.icon && (  // conditional rendering
+                            <Image
+                              src={child.icon}
+                              alt={child.title}
+                              width={17}
+                              height={17}
+                              className=""
+                            />
+                          )}
                           <span className="ml-2 text-[14px]">
                             {child.title}
                           </span>

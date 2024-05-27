@@ -71,8 +71,7 @@ export const FileInput = (props: any) => {
           height={85}
         />
         <div className="mt-5 text-center text-[#828282] dark:text-white">
-          Drop your image here, or{' '}
-          <span className="text-[#593B8B]">browse</span>
+          Drop your image here, or browse
         </div>
         <span className="text-[#828282] dark:text-white text-[11px] mt-1">
           Supports: PNG, JPG, JPEG, WEBP
