@@ -6,7 +6,8 @@
   top: 0;
   z-index: 50;
   padding: 1rem 1rem 0rem 1rem;
-  height: calc(100vh);
+  height: calc(100vh - 50px); /* adjust this value if you have a fixed header */
+  overflow-y: auto;
 }
 
 .slide_content {
@@ -20,9 +21,4 @@
 
 .slide_content:hover img {
   filter: invert(100%);
-}
-
-.scrollable_section {
-  max-height: 300px; /* adjust this value as needed */
-  overflow-y: auto;
 }
