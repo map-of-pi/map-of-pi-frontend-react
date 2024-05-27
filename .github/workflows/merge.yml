@@ -13,9 +13,10 @@ on:
 
 jobs:
   merge:
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'dev' }}
     name: 🔀 Merge
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'dev' }}
+
     # The sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout code
@@ -28,9 +29,10 @@ jobs:
 
       - name: Merge dev into main
         run: |
-          git fetch
+          git fetch origin
           git checkout main
-          git merge --allow-unrelated-histories dev
+          git pull origin main
+          git merge --no-ff --allow-unrelated-histories dev
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
