@@ -10,6 +10,27 @@ import { FileInput, Input, TelephoneInput } from '@/components/shared/Forms/Inpu
 import { menu } from '@/constants/menu';
 import styles from './sidebar.module.css';
 
+// type definitions for menu items
+interface MenuItem {
+  id: number;
+  title: string;
+  icon: string;
+  url?: string;
+  code?: string;
+  children?: MenuItem[];
+}
+
+interface LanguageMenuItem extends MenuItem {
+  code: string;
+  label: string;
+  translation: string;
+}
+
+// type guard function to check if a menu item is a LanguageMenuItem
+function isLanguageMenuItem(item: MenuItem): item is LanguageMenuItem {
+  return (item as LanguageMenuItem).translation !== undefined;
+}
+
 function Sidebar(props: any) {
   const pathname = usePathname();
   const params = useParams();
@@ -145,7 +166,14 @@ function Sidebar(props: any) {
                             />
                           )}
                           <span className="ml-2 text-[14px]">
-                            {child.title}
+                            {menu.title === 'Languages' && isLanguageMenuItem(child) ? (
+                              <div className="ml-2 text-[14px]">
+                                <div className="font-bold">{child.label}</div>
+                                <div>{child.translation}</div>
+                              </div>
+                            ) : (
+                              <span className="ml-2 text-[14px]">{child.title}</span>
+                            )}
                           </span>
                         </div>
                       </div>
