@@ -78,14 +78,14 @@ export default function Page() {
     }, [files]);
 
     return (
-        <div className="bg-[#FFFFFF] w-full md:w-[500px] md:mx-auto p-5">
-            <h1 className='mb-5 font-bold'>Buy From Seller</h1>
+        <div className="bg-[#FFFFFF] w-full md:w-[500px] md:mx-auto p-4">
+            <h1 className='mb-5 font-bold text-2xl'>Buy From Seller</h1>
 
             {/* Seller Profile */}
             <div className='flex gap-4 align-center mb-6'>
                 <Image alt='seller logo' src={itemData.seller.url} width={100} height={100} className='rounded-[100%]' />
                 <div className='my-auto'>
-                    <h2 className='text-green-700 font-bold mb-2'>{itemData.seller.business}</h2>
+                    <h2 className='font-bold mb-2'>{itemData.seller.business}</h2>
                     <p className='text-sm'>{itemData.seller.category}</p>
                 </div>
             </div>
@@ -97,7 +97,7 @@ export default function Page() {
             </div>
 
             {/* Items List */}
-            <h2 className='my-2 font-bold'>Seller Items for Sale</h2>
+            <h2 className='my-2 font-bold'>Seller Items for sale</h2>
             <div className="bg-zinc-100 mx-2 mb-6 rounded-[8px] p-3">
                 <ul>
                     {itemData.items.map((item) => (
@@ -109,12 +109,6 @@ export default function Page() {
                 </ul>
             </div>
 
-            {/* Trust-O-meter */}
-            <div className='flex mb-6'>
-                <h3 className='font-bold'>Trust-O-meter</h3>
-                <TrustMeter ratings={itemData.seller.ratings} />
-            </div>
-
             {/* Seller Location */}
             <div className='flex gap-2 mb-7 align-center'>
                 <div>
@@ -124,13 +118,16 @@ export default function Page() {
                 <div>
                     <h2 className='font-bold'>Seller Address or Whereabouts</h2>
                     <p>{itemData.seller.address}</p>
+                    <button className="outline outline-[#8DBE95] text-yellow-500 py-1 px-6 mt-2 rounded-[5px]">
+                        Navigate
+                    </button>
                 </div>
             </div>
 
             {/* Leave a Review */}
             <div className='mb-3'>
                 <h2 className='font-bold'>Leave a Review</h2>
-                <p>Select the face which shows how you feel about the above seller</p>
+                <p>Select the face which shows how you feel about the above Seller</p>
                 <EmojiPicker />
             </div>
 
@@ -149,7 +146,7 @@ export default function Page() {
             {/* Save Button */}
             <div className='mb-7'>
                 <button
-                    className="px-4 py-1 bg-[#386F4F] opacity-50 hover:opacity-100 text-white rounded-md flex cursor-pointer justify-right ms-auto text-[15px]"
+                className="px-4 py-1 bg-[#386F4F] opacity-50 hover:opacity-100 text-white rounded-md flex justify-right ms-auto text-[15px]"
                 >
                     Save
                 </button>
@@ -157,13 +154,21 @@ export default function Page() {
 
             {/* Summary of Reviews */}
             <div className='mb-7'>
-                <h2>Summary of all reviews received by this seller</h2>
-                <p>Review Score: {itemData.seller.ratings} out of 5.0</p>
+                <h2 className='font-bold mb-2'>Reviews</h2>
+                {/* Trust-O-meter */}
+                <div className='mb-2'>                    
+                    <TrustMeter ratings={itemData.seller.ratings} />
+                </div>
+                <div className='flex gap-3 mb-5 font-bold'>
+                    <p className='text-sm'>Review Score: {itemData.seller.ratings} out of 5.0</p>
+                    <button 
+                    className="outline outline-[#8DBE95] text-[#8DBE95] btn-span py-1 px-5 w-full rounded-[5px] ms-auto"
+                    >Check Reviews
+                    </button>
+                </div>
                 <EmojiPicker reviews={itemData.seller.reviews} clickDisabled={true} />
             </div>
 
-            {/* Check Reviews Button */}
-            <button className="bg-[#386F4F] text-white py-2 px-5 rounded-[5px] ms-auto mb-3 flex justify-right">Check Reviews</button>
         </div>
     );
 }

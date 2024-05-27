@@ -17,12 +17,12 @@ interface EmojiPickerProps {
 
 export default function EmojiPicker(props: EmojiPickerProps) {
 
-    const despairEmoji: Emoji = { name: "Despair", unicode: "🙂", code: ":despair:", value: 1 };
+    const despairEmoji: Emoji = { name: "Despair", unicode: "😠", code: ":despair:", value: 0 };
     const emojis: Emoji[] = [
-        { name: "Sad", unicode: "🙁", code: ":sad_face:", value: 2 },
-        { name: "Okay", unicode: "🙂", code: ":okay_face:", value: 3 },
-        { name: "Happy", unicode: "😃", code: ":happy_face:", value: 4 },
-        { name: "Delight", unicode: "😍", code: ":delight_face:", value: 5 }
+        { name: "Sad", unicode: "🙁", code: ":sad_face:", value: 1 },
+        { name: "Okay", unicode: "🙂", code: ":okay_face:", value: 2 },
+        { name: "Happy", unicode: "😃", code: ":happy_face:", value: 3 },
+        { name: "Delight", unicode: "😍", code: ":delight_face:", value: 4 }
     ];
 
     const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null);
