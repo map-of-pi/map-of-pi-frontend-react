@@ -27,13 +27,19 @@ jobs:
           git config --global user.name 'map-of-pi[bot]'
           git config --global user.email 'map-of-pi[bot]@users.noreply.github.com'
 
+      - name: Fetch changes from origin
+        run: git fetch origin
+
+      - name: Checkout dev branch
+        run: git checkout dev
+
+      - name: Pull latest changes from origin/dev
+        run: git pull --ff-only origin dev
+      
       - name: Merge dev into main
         run: |
-          git fetch origin
           git checkout main
-          git pull origin main
-          git pull origin dev
-          git merge --no-ff --allow-unrelated-histories origin/dev
+          git merge --no-ff --allow-unrelated-histories dev
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
