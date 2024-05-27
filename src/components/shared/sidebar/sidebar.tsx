@@ -149,23 +149,22 @@ function Sidebar(props: any) {
                     )}
                   </div>
                   {/* MENU WITH CHILDREN */}
-                  {menu.children &&
-                    toggle[menu.title] &&
-                    menu.children.map((child) => (
-                      <div key={child.id} className="ml-6">
-                        <div
-                          className={`${styles.slide_content} hover:bg-[#424242] hover:text-white hover:dark:bg-[#ffffff] dark:text-white hover:dark:text-black`}
-                          onClick={() => handleChildMenu(menu.title, child.code)}>
-                          {child.icon && (  // conditional rendering
-                            <Image
-                              src={child.icon}
-                              alt={child.title}
-                              width={17}
-                              height={17}
-                              className=""
-                            />
-                          )}
-                          <span className="ml-2 text-[14px]">
+                  {menu.children && toggle[menu.title] &&
+                    <div className={menu.title === 'Languages' ? styles.scrollable_section : ''}>
+                      {menu.children.map((child) => (
+                        <div key={child.id} className="ml-6">
+                          <div
+                            className={`${styles.slide_content} hover:bg-[#424242] hover:text-white hover:dark:bg-[#ffffff] dark:text-white hover:dark:text-black`}
+                            onClick={() => handleChildMenu(menu.title, child.code)}>
+                            {child.icon && (  // conditional rendering
+                              <Image
+                                src={child.icon}
+                                alt={child.title}
+                                width={17}
+                                height={17}
+                                className=""
+                              />
+                            )}
                             {menu.title === 'Languages' && isLanguageMenuItem(child) ? (
                               <div className="ml-2 text-[14px]">
                                 <div className="font-bold">{child.label}</div>
@@ -174,10 +173,11 @@ function Sidebar(props: any) {
                             ) : (
                               <span className="ml-2 text-[14px]">{child.title}</span>
                             )}
-                          </span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                  }
                 </div>
               </>
             ))}

@@ -21,3 +21,8 @@
 .slide_content:hover img {
   filter: invert(100%);
 }
+
+.scrollable_section {
+  max-height: 300px; /* adjust this value as needed */
+  overflow-y: auto;
+}
