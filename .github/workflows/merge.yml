@@ -32,7 +32,7 @@ jobs:
           git fetch origin
           git checkout main
           git pull origin main
-          git merge --no-ff --allow-unrelated-histories dev
+          git merge --no-ff --allow-unrelated-histories origin/dev
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
