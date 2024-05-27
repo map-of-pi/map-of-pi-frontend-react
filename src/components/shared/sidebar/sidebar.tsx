@@ -1,13 +1,39 @@
-import React, { useState } from 'react';
-import styles from './sidebar.module.css';
-import { MdOutlineLanguage } from 'react-icons/md';
-import { FaChevronDown } from 'react-icons/fa6';
-import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
-import { menu } from '@/constants/menu';
 import { useTheme } from 'next-themes';
+import Image from 'next/image';
+import { useParams, usePathname, useRouter } from 'next/navigation';
+
+import { useState } from 'react';
+import { FaChevronDown } from 'react-icons/fa6';
+
+import { Button } from '@/components/shared/Forms/Buttons/Buttons';
+import { FileInput, Input, TelephoneInput } from '@/components/shared/Forms/Inputs/Inputs';
+import { menu } from '@/constants/menu';
+import styles from './sidebar.module.css';
+
+// type definitions for menu items
+interface MenuItem {
+  id: number;
+  title: string;
+  icon: string;
+  url?: string;
+  code?: string;
+  children?: MenuItem[];
+}
+
+interface LanguageMenuItem extends MenuItem {
+  code: string;
+  label: string;
+  translation: string;
+}
+
+// type guard function to check if a menu item is a LanguageMenuItem
+function isLanguageMenuItem(item: MenuItem): item is LanguageMenuItem {
+  return (item as LanguageMenuItem).translation !== undefined;
+}
+
 function Sidebar(props: any) {
   const pathname = usePathname();
+  const params = useParams();
   const router = useRouter();
 
   const { resolvedTheme, setTheme } = useTheme();
@@ -15,40 +41,79 @@ function Sidebar(props: any) {
     Themes: false,
     Languages: false,
   });
+  
+  const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
+  const handlePhoneNumberChange = (value: string | undefined) => {
+    setPhoneNumber(value);
+  };
 
-  const handChildMenu = (title: any, code: string) => {
+  const handleAddImages = () => {};
+
+  const handleChildMenu = (title: any, code: string) => {
     if (title === 'Languages') {
       const slipPathname = pathname.split('/').slice(2);
       slipPathname.unshift(code);
       const retPathname = slipPathname.join('/');
       retPathname.toString();
       router.replace(`/${retPathname}`);
+      props.setToggleDis(false);
     }
     if (title === 'Themes') {
       code === 'dark' ? setTheme('dark') : setTheme('light');
+      props.setToggleDis(false);
     }
   };
 
   const handleMenu = (title: any, url: string) => {
-    if (title !== 'Themes' || title !== 'Languages') {
+    if (title !== 'Themes' && title !== 'Languages' && title !== 'About Map of Pi') {
       router.push(url);
-      // props.setToggleDis(false);
+      props.setToggleDis(false);
     }
 
-    if (title === 'Themes' || title === 'Languages') {
+    if (title === 'Themes' || title === 'Languages' || title === 'About Map of Pi') {
       setToggle({ ...toggle, [title]: !toggle[title] });
     }
   };
 
   return (
     <>
-      <div className="w-full h-full fixed top-0 bg-transparent left-0 z-500">
+      <div className="w-full h-[calc(100vh-56px)] fixed bottom-0 bg-transparent right-0 z-500">
         <div
           className="absolute w-full h-full bg-[#82828284]"
           onClick={() => props.setToggleDis(false)}></div>
         <div
-          className={`${styles.sidebar} dark:bg-[#212121] sm:w-[300px] w-[250px] overflow-y-auto`}>
-          <div
+          className={`${styles.sidebar} dark:bg-[#212121] sm:w-[300px] w-[200px] overflow-y-auto`}>
+            <div className="text-2xl font-bold mb-4 pb-5">User Preferences</div>
+            <div className="">
+              <Input
+                label="Your Email Address"
+                placeholder="mapofpi@mapofpi.com"
+                type="email"
+              />
+              <TelephoneInput
+                label="Your Phone Number"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+              />
+              <div className="pt-5 flex flex-col gap-5">
+                <Button 
+                  label="Set Search Center"
+                  styles={{color: '#ffc153', width: '100%', height: '50px', padding: '10px'}}
+                />
+                <Button 
+                  label="Check Reviews"
+                  styles={{background: '#fff', color: '#ffc153', width: '100%', height: '50px', padding: '10px', borderColor: '#386F4F', borderWidth: '2px'}}
+                />
+              </div>
+              <div className="pt-5">
+                <FileInput
+                  label="Upload Photo (Optional)"
+                  images={[]}
+                  handleAddImages={handleAddImages}
+                />
+              </div>
+            </div>
+          {/* <div
             className="ml-auto flex justify-end mb-8"
             onClick={() => props.setToggleDis(false)}>
             <Image
@@ -58,8 +123,8 @@ function Sidebar(props: any) {
               height={22}
               className="dark:invert cursor-pointer"
             />
-          </div>
-          <div className="">
+          </div> */}
+          <div className="pt-5">
             {menu.map((menu) => (
               <>
                 <div key={menu.id} className="">
@@ -84,64 +149,40 @@ function Sidebar(props: any) {
                     )}
                   </div>
                   {/* MENU WITH CHILDREN */}
-                  {menu.children &&
-                    toggle[menu.title] &&
+                  {menu.children && toggle[menu.title] &&
                     menu.children.map((child) => (
-                      <div key={child.id} className="">
+                      <div key={child.id} className="ml-6">
                         <div
                           className={`${styles.slide_content} hover:bg-[#424242] hover:text-white hover:dark:bg-[#ffffff] dark:text-white hover:dark:text-black`}
-                          onClick={() => handChildMenu(menu.title, child.code)}>
-                          <Image
-                            src={child.icon}
-                            alt={child.title}
-                            width={17}
-                            height={17}
-                            className=""
-                          />
-                          <span className="ml-2 text-[14px]">
-                            {child.title}
-                          </span>
+                          onClick={() => handleChildMenu(menu.title, child.code)}>
+                          {child.icon && (  // conditional rendering
+                            <Image
+                              src={child.icon}
+                              alt={child.title}
+                              width={17}
+                              height={17}
+                              className=""
+                            />
+                          )}
+                          {menu.title === 'Languages' && isLanguageMenuItem(child) ? (
+                            <div className="ml-2 text-[14px]">
+                              <div className="font-bold">{child.label}</div>
+                              <div>{child.translation}</div>
+                            </div>
+                          ) : (
+                            <span className="ml-2 text-[14px]">{child.title}</span>
+                          )}
                         </div>
                       </div>
                     ))}
                 </div>
               </>
             ))}
-
-            {/* <div className="flex justify-between py-3 items-center">
-              <div className="flex gap-2 items-center">
-                <MdOutlineLanguage
-                  size={24}
-                  className="text-[#000000] dark:text-[#FFFFFF]"
-                />
-                <span>Language</span>
-              </div>
-              <FaChevronDown
-                size={16}
-                className="text-[#000000] dark:text-[#FFFFFF]"
-              />
-            </div>
-            {Languages.map((lang) => (
-              <div
-                key={lang.code}
-                className={`${styles.lang_section} mb-2 bg-[#f0f0f0] dark:rgba(0, 0, 0, 0.822) text-[#000000] dark:text-[#ffffff]`}
-                onClick={() => handleLanguageChange(lang.code)}>
-                <div className={styles.lan_img_con}>
-                  <div className="min-w-5 min-h-5 relative">
-                    <Image src={lang.imageUrl} alt={lang.name} fill />
-                  </div>
-                </div>
-                <div className="ml-[1rem] flex flex-col">
-                  <span className="font-bold text-[12px]">{lang.label}</span>
-                  <span className="block text-[10px]">{lang.translation}</span>
-                </div>
-              </div>
-            ))} */}
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
 export default Sidebar;

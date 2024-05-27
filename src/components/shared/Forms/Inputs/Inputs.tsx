@@ -1,5 +1,8 @@
 import React from 'react';
+import PhoneInput from 'react-phone-number-input'
+
 import styles from './Inputs.module.css';
+
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
@@ -9,11 +12,11 @@ export const Input = (props: any) => {
     <>
       <div className="relative">
         {props.label && (
-          <label className="block text-xl text-[#333333]">{props.label}</label>
+          <label className="block text-[17px] text-[#333333] dark:text-white">{props.label}</label>
         )}
         <input
           {...input}
-          className={`mt-1 p-[8px] block w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-3`}
+          className={`mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
         />
         {icon && (
           <div className="absolute right-1 bottom-[4px]">
@@ -25,15 +28,30 @@ export const Input = (props: any) => {
   );
 };
 
+export const TelephoneInput = (props: any) => {
+  const { label, ...input } = props;
+  return (
+    <div className="">
+      {props.label && (
+        <label className="block text-[17px] text-[#333333] dark:text-white">{props.label}</label>
+      )}
+      <PhoneInput 
+        {...input}
+        className={`flex mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
+      />
+    </div>
+  );
+};
+
 export const TextArea = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className=" block text-xl text-[#333333]">{props.label}</label>
+        <label className=" block text-[17px] text-[#333333] dark:text-white">{props.label}</label>
       )}
       <textarea
         placeholder={props.placeholder}
-        className="mt-1 p-2 block w-full rounded-xl  border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-3"></textarea>
+        className="mt-1 p-2 block w-full rounded-xl  border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4"></textarea>
     </div>
   );
 };
@@ -43,20 +61,19 @@ export const FileInput = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block font-medium text-gray-700">{props.label}</label>
+        <label className="block pb-3 font-medium text-gray-700 dark:text-white">{props.label}</label>
       )}
-      <div className="flex flex-col items-center justify-center overflow-hidden p-3 rounded-md relative border-dashed border-[2px]">
+      <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative border-dashed border-[2px] border-green-700">
         <Image
           src="/images/shared/upload.png"
           alt="upload image"
           width={85}
           height={85}
         />
-        <div className="mt-5">
-          Drop your image here, or{' '}
-          <span className="text-[#593B8B]">browse</span>
+        <div className="mt-5 text-center text-[#828282] dark:text-white">
+          Drop your image here, or browse
         </div>
-        <span className="text-[#828282] text-[11px] mt-1">
+        <span className="text-[#828282] dark:text-white text-[11px] mt-1">
           Supports: PNG, JPG, JPEG, WEBP
         </span>
         <span className="text-[#DF2C2C] text-[11px] mt-1">One Photo Only</span>
@@ -156,9 +173,9 @@ export const Select = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block text-xl text-[#333333]">{props.label}</label>
+        <label className="block text-xl text-[#333333] dark:text-white ">{props.label}</label>
       )}
-      <select className="mt-1 p-[8px] block w-full rounded-xl border-[#BDBDBD] outline-0 bg-transparent border-[2px] focus:border-[#1d724b] mb-3">
+      <select className="mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] text-[#333333] dark:text-white outline-0 bg-transparent border-[2px] focus:border-[#1d724b] mb-3">
         {props.options.map((option: any) => (
           <option key={option.value} value={option.value}>
             {option.name}

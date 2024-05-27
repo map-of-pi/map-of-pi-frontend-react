@@ -14,7 +14,7 @@ export const Button = (props: any) => {
   const {styles, icon, label, disabled} = props;
   return (
     <button
-      className={`px-4 py-1 ${disabled ? `bg-[grey]` : `bg-[#386F4F]`} text-white rounded-md flex gap-1 cursor-pointer items-center justify-center font-bold text-[20px]`}
+      className={`px-4 py-1 ${disabled ? `bg-[grey]` : `bg-[#386F4F]`} text-white rounded-md flex gap-1 cursor-pointer items-center justify-center `}
       style={styles} disabled={disabled}>
       {icon && icon}
       {label && label}
