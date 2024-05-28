@@ -30,16 +30,16 @@ jobs:
       - name: Fetch changes from origin
         run: git fetch origin
 
-      - name: Checkout dev branch
-        run: git checkout dev
+      - name: Checkout main branch
+        run: git checkout main
 
-      - name: Pull latest changes from origin/dev
-        run: git pull --ff-only origin dev
+      - name: Pull latest changes from main
+        run: git pull origin main
       
       - name: Merge dev into main
-        run: |
-          git checkout main
-          git merge --no-ff --allow-unrelated-histories dev
-          git push origin main
+        run: git merge --no-ff --allow-unrelated-histories origin/dev
+
+      - name: Push changes to main
+        run: git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
