@@ -22,24 +22,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Configure git
-        run: |
-          git config --global user.name 'map-of-pi[bot]'
-          git config --global user.email 'map-of-pi[bot]@users.noreply.github.com'
-
-      - name: Fetch changes from origin
-        run: git fetch origin
-
-      - name: Checkout dev branch
-        run: git checkout dev
-
-      - name: Pull latest changes from origin/dev
-        run: git pull --ff-only origin dev
-      
-      - name: Merge dev into main
-        run: |
-          git checkout main
-          git merge --no-ff --allow-unrelated-histories dev
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge dev to main
+        uses: repo-sync/pull-request@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: "dev"
+          destination_branch: "main"
+          pr_title: "Automated PR to merge dev to main"
+          pr_body: ":robot: Automated PR from **dev** to **main**; see commits."
+          pr_label: "auto-pr"
