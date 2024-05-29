@@ -1,4 +1,3 @@
-// THIS IS INFO MODEL POP UP
 'use client';
 
 import { useTranslations } from 'next-intl';
@@ -41,15 +40,6 @@ const InfoModel = (props: any) => {
             <div className={`${styles.version} mb-[16px]`}>
               <h3>{version}</h3>
             </div>
-            <div className="text-center">
-              <button onClick={() => handLinking('privacy-policy')} className={styles.legal_link}>
-                {t('FOOTER.PRIVACY_POLICY' || 'Privacy Policy')}
-              </button>
-              <button onClick={() => handLinking('terms-of-service')} className={styles.legal_link}>
-                {t('FOOTER.TERMS_OF_SERVICE' || 'Terms of Service')}
-              </button>
-            </div>
-
             <div className={styles.social_media}>
               <div className={styles.social_media__links}>
                 <Link
