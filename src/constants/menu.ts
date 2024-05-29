@@ -78,7 +78,7 @@ export const menu = [
   {
     id: 3,
     title: 'About Map of Pi',
-    icon: `/images/shared/sidebar/theme.svg`,
+    icon: `/images/shared/sidebar/info.svg`,
     url: '',
     children: [
       {
@@ -104,7 +104,7 @@ export const menu = [
   {
     id: 4,
     title: 'Contact Map of Pi',
-    icon: `/images/shared/sidebar/theme.svg`,
+    icon: `/images/shared/sidebar/contact.svg`,
     url: ''
   }
 ];

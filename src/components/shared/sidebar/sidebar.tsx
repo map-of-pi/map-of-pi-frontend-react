@@ -8,6 +8,7 @@ import { FaChevronDown } from 'react-icons/fa6';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, Input, TelephoneInput } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
+import InfoModel from '@/components/shared/Info/Info';
 import styles from './sidebar.module.css';
 
 // type definitions for menu items
@@ -47,6 +48,9 @@ function Sidebar(props: any) {
     setPhoneNumber(value);
   };
 
+  // state to control InfoModel visibility
+  const [showInfoModel, setShowInfoModel] = useState(false);
+
   const handleAddImages = () => {};
 
   const handleChildMenu = (title: any, code: string) => {
@@ -61,6 +65,9 @@ function Sidebar(props: any) {
     if (title === 'Themes') {
       code === 'dark' ? setTheme('dark') : setTheme('light');
       props.setToggleDis(false);
+    }
+    if (title === 'About Map of Pi' && code === 'version') {
+      setShowInfoModel(true); // Show InfoModel popup for App Version
     }
   };
 
@@ -181,6 +188,7 @@ function Sidebar(props: any) {
           </div>
         </div>
       </div>
+      <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel}/>
     </>
   );
 };
