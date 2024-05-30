@@ -1,19 +1,19 @@
 .model_container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: hwb(0 0% 100% / 0.502);
+  background-color: #00000080;
   z-index: 550;
-  overflow-y: auto;
 }
 
 .model_body {
   width: 500px;
   max-width: 500px;
+  height: auto;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px #0003;
@@ -21,6 +21,7 @@
   padding-bottom: 20px;
   z-index: 600;
   cursor: crosshair;
+  overflow-y: auto;
 }
 
 .model_event {
