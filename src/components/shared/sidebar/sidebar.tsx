@@ -110,6 +110,8 @@ function Sidebar(props: any) {
                 <Button 
                   label="Check Reviews"
                   styles={{background: '#fff', color: '#ffc153', width: '100%', height: '50px', padding: '10px', borderColor: '#386F4F', borderWidth: '2px'}}
+                  onClick={() => {console.log('Button clicked');
+                  router.push('/feedback-for-seller');}}
                 />
               </div>
               <div className="pt-5">
