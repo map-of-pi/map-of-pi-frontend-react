@@ -27,7 +27,8 @@ const InfoModel = (props: any) => {
         <div className={styles.model_container}>
           <div
             className={styles.model_event}
-            onClick={() => props.setToggleInfo(false)}></div>
+            onClick={() => props.setToggleInfo(false)}>
+          </div>
           <div className={styles.model_body}>
             <div className="flex justify-center mb-[10px]">
               <div className={styles.logo}>
