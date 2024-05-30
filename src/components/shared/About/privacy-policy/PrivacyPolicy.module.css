@@ -50,7 +50,8 @@
 }
 
 .privacy_policy_content h4 {
-  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .privacy_policy_content p {

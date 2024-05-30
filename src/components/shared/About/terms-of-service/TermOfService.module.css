@@ -49,6 +49,11 @@
   font-weight: 500;
 }
 
+.terms_of_service_content h4 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .terms_of_service_content p {
   margin-bottom: 20px;
 }
@@ -57,6 +62,7 @@
   list-style-type: none;
   margin-bottom: 20px;
   font-size: 14px;
+  text-align: justify;
 }
 
 .terms_of_service_content a {
