@@ -1,24 +1,6 @@
 export const menu = [
   {
     id: 1,
-    title: 'Profile',
-    url: '/profile',
-    icon: `/images/shared/sidebar/user.svg`,
-  },
-  {
-    id: 2,
-    title: 'Settings',
-    url: '/settings',
-    icon: `/images/shared/sidebar/settings.svg`,
-  },
-  {
-    id: 3,
-    title: 'Request Help',
-    url: '/',
-    icon: `/images/shared/sidebar/question.svg`,
-  },
-  {
-    id: 4,
     title: 'Themes',
     icon: `/images/shared/sidebar/theme.svg`,
     url: '',
@@ -38,7 +20,7 @@ export const menu = [
     ],
   },
   {
-    id: 5,
+    id: 2,
     title: 'Languages',
     icon: `/images/shared/sidebar/language.svg`,
     url: '',
@@ -94,9 +76,35 @@ export const menu = [
     ],
   },
   {
-    id: 6,
-    title: 'Favourite Places',
-    url: '/',
-    icon: `/images/shared/sidebar/location.svg`,
+    id: 3,
+    title: 'About Map of Pi',
+    icon: `/images/shared/sidebar/info.svg`,
+    url: '',
+    children: [
+      {
+        id: 1,
+        title: 'App Version',
+        icon: '',
+        code: 'version',
+      },
+      {
+        id: 2,
+        title: 'Privacy Policy',
+        icon: '',
+        code: 'privacy-policy',
+      },
+      {
+        id: 3,
+        title: 'Terms of Service',
+        icon: '',
+        code: 'tos',
+      },
+    ],
   },
+  {
+    id: 4,
+    title: 'Contact Map of Pi',
+    icon: `/images/shared/sidebar/contact.svg`,
+    url: ''
+  }
 ];

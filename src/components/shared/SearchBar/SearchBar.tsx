@@ -65,49 +65,26 @@ const SearchBar: React.FC = () => {
         onClose={() => setMessage('')}
       />
       <div className="w-[100%] m-auto flex items-center">
-        <form className="w-full" onSubmit={handleSubmitSearch}>
-          <FormControl className="w-full mb-0 flex-grow">
+        <form className="w-full flex items-center justify-between" onSubmit={handleSubmitSearch}>
+          <FormControl className="flex-grow mr-3">
             <TextField 
-            id="search-input" 
-            type="text" 
-            variant="filled"
-            color="success"
-            className="bg-white hover:bg-gray-100"
-            // label={t(
-            //   isBusinessSearchType
-            //     ? "Search Businesses.."
-            //     : "Search Products..",
-            // )} 
-            label='Search for seller or items'
-            value={searchBarValue} 
-            onChange={handleSearchBarChange}
-            ref={inputRef}
+              id="search-input" 
+              type="text" 
+              variant="outlined"
+              color="success"
+              className="bg-white dark:bg-[#4A4A4A] hover:bg-gray-100 w-full rounded"
+              label='Search for sellers or items'
+              value={searchBarValue} 
+              onChange={handleSearchBarChange}
+              ref={inputRef}
             />
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2">
-              {/* {isBusinessSearchType ? (
-                <StorefrontIcon
-                  className="search-toggle-element cursor-pointer"
-                  onClick={() => {
-                    setIsBusinessSearchType(false);
-                    handleIconClick();
-                  }}
-                />
-              ) : (
-                <Inventory2Icon
-                  className="search-toggle-element cursor-pointer"
-                  onClick={() => {
-                    setIsBusinessSearchType(true);
-                    handleIconClick();
-                  }}
-                />
-              )} */}
-              <IconButton
-                aria-label="delete"
-                className="bg-gray-600 rounded h-10 w-10 flex items-center justify-center ml-5 hover:bg-gray-600" onClick={handleSubmitSearch}>
-                <SearchIcon className="text-white text-2xl mb-1" />
-              </IconButton>
-            </div>
           </FormControl>
+          <IconButton
+            aria-label="search"
+            className="bg-[#386F4F] rounded h-full w-15 p-[15.5px] flex items-center justify-center hover:bg-gray-600" 
+            onClick={handleSubmitSearch}>
+            <SearchIcon className="text-[#ffc153]" />
+          </IconButton>
         </form>
       </div>
     </div>

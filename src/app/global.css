@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '~react-phone-number-input/style.css';
+
 :root {
     --header-bg: #F5F5F5;
     --color-bg-color: #F1F7FF
