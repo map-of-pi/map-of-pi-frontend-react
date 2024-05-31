@@ -10,6 +10,7 @@ import { FileInput, Input, TelephoneInput } from '@/components/shared/Forms/Inpu
 import { menu } from '@/constants/menu';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
+import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
 import styles from './sidebar.module.css';
 
 // type definitions for menu items
@@ -49,10 +50,9 @@ function Sidebar(props: any) {
     setPhoneNumber(value);
   };
 
-  // state to control InfoModel visibility
   const [showInfoModel, setShowInfoModel] = useState(false);
-  // state to control PrivacyPolicyModel visibility
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
+  const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
 
   const handleAddImages = () => {};
 
@@ -74,6 +74,8 @@ function Sidebar(props: any) {
         setShowInfoModel(true);
       } else if (code === 'privacy-policy') {
         setShowPrivacyPolicyModel(true);
+      } else if (code === 'tos') {
+        setShowTermsOfServiceModel(true);
       }
     }
   };
@@ -196,8 +198,8 @@ function Sidebar(props: any) {
         </div>
       </div>
       <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel}/>
-      <PrivacyPolicyModel togglePrivacyPolicy={showPrivacyPolicyModel} setTogglePrivacyPolicy={setShowPrivacyPolicyModel}
-      />
+      <PrivacyPolicyModel togglePrivacyPolicy={showPrivacyPolicyModel} setTogglePrivacyPolicy={setShowPrivacyPolicyModel}/>
+      <TermsOfServiceModel toggleTermsOfService={showTermsOfServiceModel} setToggleTermsOfService={setShowTermsOfServiceModel}/>
     </>
   );
 };
