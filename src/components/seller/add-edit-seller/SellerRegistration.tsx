@@ -19,7 +19,7 @@ const SellerRegistrationForm = () => {
     sellerAddress: ''
   });
   
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
