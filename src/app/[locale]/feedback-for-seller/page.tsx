@@ -1,87 +1,128 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+"use client";
 
-interface Feedback {
-  satisfaction: number;
-  comment: string;
-  photos: File[];
-  sellerName: string;
-}
+import React, { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import EmojiPicker from '@/components/shared/Review/emojipicker';
+import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
+import ConfirmDialog from '@/components/shared/confirm';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-const FeedbackForSeller: React.FC = () => {
-  const [feedback, setFeedback] = useState<Feedback>({ satisfaction: 0, comment: '', photos: [], sellerName: '' });
-  const [unsavedChanges, setUnsavedChanges] = useState(false);
-  const [isSaveButtonActive, setIsSaveButtonActive] = useState(false);
-  const router = useRouter();
+export default function ReplyToReviewPage() {
+    const t = useTranslations();
+    const router = useRouter();
 
-  useEffect(() => {
-    if (unsavedChanges) {
-      setIsSaveButtonActive(true);
-    } else {
-      setIsSaveButtonActive(false);
-    }
-  }, [unsavedChanges]);
+    const [files, setFiles] = useState<File[]>([]);
+    const [previewImage, setPreviewImage] = useState<string[]>([]);
+    const [comments, setComments] = useState('');
+    const [reviewEmoji, setReviewEmoji] = useState(null);
+    const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    const [linkUrl, setLinkUrl] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFeedback({ ...feedback, [e.target.name]: e.target.value });
-    setUnsavedChanges(true);
-  };
+    useEffect(() => {
+        if (files.length === 0) return;
 
-  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFeedback({ ...feedback, photos: Array.from(e.target.files) });
-      setUnsavedChanges(true);
-    }
-  };
+        const objectUrls = files.map(file => URL.createObjectURL(file));
+        setPreviewImage(objectUrls);
 
-  const handleSubmit = () => {
-    // Submit feedback logic here
-    console.log(feedback);
-    setUnsavedChanges(false);
-  };
+        return () => {
+            objectUrls.forEach(url => URL.revokeObjectURL(url));
+        };
+    }, [files]);
 
-  const handleNavigationAway = () => {
-    if (unsavedChanges) {
-      const userConfirmed = window.confirm('You have unsaved changes. Are you sure you want to leave?');
-      if (userConfirmed) {
-        // User confirmed they want to navigate away and lose unsaved changes
-        setUnsavedChanges(false);
-        return true;
-      } else {
-        // User cancelled navigation
-        return false;
-      }
-    }
-    return true;
-  };
+    useEffect(() => {
+        const noReview = comments === "" && reviewEmoji === null && files.length === 0;
+        setIsSaveEnabled(!noReview);
+    }, [comments, reviewEmoji, files]);
 
-  // Fetch seller name from the database
-  const fetchSellerName = () => {
-    // Fetch logic here
-    const sellerNameFromDB = 'Seller Name'; // Placeholder
-    setFeedback({ ...feedback, sellerName: sellerNameFromDB });
-  };
+    const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFiles = e.target.files;
+        if (selectedFiles && selectedFiles.length > 0) {
+            setFiles(Array.from(selectedFiles));
+        }
+    };
 
-  return (
-    <div className='p-4'>
-      <div className='bg-white rounded-lg shadow-md p-5'>
-        <h2 className='text-lg font-semibold mb-4'>Seller Feedback</h2>
-        <div className='mb-4'>
-          <button onClick={fetchSellerName} className='bg-gray-200 py-2 px-4 rounded-lg'>
-            {feedback.sellerName || 'Tap to display all Seller information'}
-          </button>
+    const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setComments(e.target.value);
+    };
+
+    // Function to set emoji button value (null or 0 to 4 )
+    const handleEmojiSelect = (emoji: any) => {
+        setReviewEmoji(emoji);
+    };
+
+    // Function to collect reviews value and submit to DB
+    const handleSave = () => {
+        // Function to save data to the database
+        // Example: saveData({ files, comments, reviewEmoji });
+
+        setIsSaveEnabled(false);
+    };
+
+    // Function to trigger notification dialogue
+    const handleNavigation = (route: string) => {
+        if (isSaveEnabled) {
+            setLinkUrl(route);
+            setShowConfirmDialog(true);
+        } else {
+            router.push(`/${route}`);
+        }
+    };
+
+    return (
+        <div className="bg-[#FFFFFF] w-full md:w-[500px] md:mx-auto p-4">
+            <h1 className='mb-5 font-bold text-2xl'>Reply to Review</h1>
+
+            <div className="mb-4">
+                <p className="mb-2">I am happy to let you all know that consumer to seller relationship is good.</p>
+                <p className="text-sm text-gray-600">23 Oct. 2023 01:00pm</p>
+                <p className="text-sm text-gray-600">By peejenn</p>
+                <div className="flex items-center mt-2">
+                    <span className="mr-2">😊</span>
+                    <Image alt='review image' src="/images/shared/upload.png" width={50} height={50} className='rounded' />
+                </div>
+            </div>
+
+            <div className='mb-3'>
+                <h2 className="font-bold mb-2">Leave your reply to the above review</h2>
+                <p>Select the face which shows how you feel about the above review</p>
+                <EmojiPicker onSelect={handleEmojiSelect} />
+            </div>
+
+            <div className='mb-2'>
+                <TextArea
+                    placeholder={'Enter additional comments here...'}
+                    value={comments}
+                    onChange={handleCommentsChange}
+                />
+            </div>
+
+            <div className='mb-2'>
+                <FileInput
+                    label={'Optional feedback photo upload'}
+                    handleAddImages={handleAddImages}
+                    images={previewImage}
+                />
+            </div>
+
+            <div className='mb-7'>
+                <button
+                    onClick={handleSave}
+                    disabled={!isSaveEnabled}
+                    className={`${isSaveEnabled ? "opacity-100" : "opacity-50"} px-6 py-2 bg-[#386F4F] text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}
+                >
+                    Save
+                </button>
+            </div>
+
+            <ConfirmDialog
+                show={showConfirmDialog}
+                onClose={() => setShowConfirmDialog(false)}
+                onConfirm={setShowConfirmDialog}
+                message="You have unsaved changes. Do you really want to leave?"
+                url={linkUrl}
+            />
         </div>
-        {/* Rest of the component */}
-        <button
-          onClick={handleSubmit}
-          disabled={!isSaveButtonActive}
-          className={`mt-4 ${isSaveButtonActive ? 'bg-blue-500' : 'bg-blue-200'} text-white py-2 px-4 rounded-lg`}
-        >
-          Save Feedback
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default FeedbackForSeller;
+    );
+}

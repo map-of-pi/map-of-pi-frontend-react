@@ -4,7 +4,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
-
+import Link from 'next/link';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, Input, TelephoneInput } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
@@ -117,12 +117,12 @@ function Sidebar(props: any) {
                   label="Set Search Center"
                   styles={{color: '#ffc153', width: '100%', height: '50px', padding: '10px'}}
                 />
+               <Link href="/feedback-for-seller">
                 <Button 
                   label="Check Reviews"
                   styles={{background: '#fff', color: '#ffc153', width: '100%', height: '50px', padding: '10px', borderColor: '#386F4F', borderWidth: '2px'}}
-                  onClick={() => {console.log('Button clicked');
-                  router.push('/${locale}/feedback-for-seller');}}
                 />
+               </Link>
               </div>
               <div className="pt-5">
                 <FileInput
