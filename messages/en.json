@@ -155,20 +155,21 @@
       "SUBHEADER_2_1": "User Information",
       "CONTENT_2_1_1": "When you register as a user, we may collect your name, email address, username, and other relevant details.",
       "CONTENT_2_1_2": "We may collect information about your device, including device type, operating system, and unique device identifiers.",
-      "SUBHEADER_2_2": "Vendor Information",
-      "CONTENT_2_2_1": "Vendors registering on the platform may be required to provide business information, including business name, location, and contact details.",
+      "SUBHEADER_2_2": "Seller Information",
+      "CONTENT_2_2_1": "Sellers registering on the platform may be required to provide Seller information, including Seller name, location, and contact details.",
+      "CONTENT_2_2_2": "A Seller may be a business or a private individual.",
 
       "HEADER_3": "How We Use Your Information",
       "SUBHEADER_3_1": "Providing Services",
-      "CONTENT_3_1_1": "We use your information to provide and enhance the Map of Pi app services, including user and vendor functionalities.",
+      "CONTENT_3_1_1": "We use your information to provide and enhance the Map of Pi app services, including user and Seller functionalities.",
       "SUBHEADER_3_2": "Communications",
       "CONTENT_3_2_1": "We may use your contact information to send you updates, notifications, and promotional messages related to the Map of Pi app.",
       "SUBHEADER_3_3": "Analytics",
       "CONTENT_3_3_1": "We collect and analyze data to improve the performance, features, and functionality of the app.",
 
       "HEADER_4": "Sharing Your Information",
-      "SUBHEADER_4_1": "With Vendors",
-      "CONTENT_4_1_1": "User information may be shared with vendors for order fulfillment and communication purposes.",
+      "SUBHEADER_4_1": "With Sellers",
+      "CONTENT_4_1_1": "User information may be shared with Sellers for order fulfillment and communication purposes.",
       "SUBHEADER_4_2": "With Third Parties",
       "CONTENT_4_2_1": "We may share information with third-party service providers for app functionality, analytics, and payment processing.",
 
@@ -176,13 +177,13 @@
       "CONTENT_5_1": "We employ industry-standard security measures to protect your information. However, no method of transmission over the internet or electronic storage is completely secure.",
 
       "HEADER_6": "Your Choices",
-      "CONTENT_6_1": "You can update or delete your account information through the app settings. You may also opt-out of promotional communications.",
+      "CONTENT_6_1": "You can update your account information through the app settings. You may delete your Map of Pi account by deleting your Pi Network account and then choosing the option to delete your Map of Pi data when you next access Map of Pi. You may opt-out of promotional communications.",
 
       "HEADER_7": "Changes to This Privacy Policy",
       "CONTENT_7_1": "We may update this Privacy Policy as necessary. The latest version will be posted on our website or within the app.",
 
       "HEADER_8": "Contact Us",
-      "CONTENT_8_1": "If you have any questions or concerns about this Privacy Policy, please contact us "
+      "CONTENT_8_1": "If you have any questions or concerns about this Privacy Policy, please contact us by sending an email to"
     }
   },
   "TERMS_OF_SERVICE": {
