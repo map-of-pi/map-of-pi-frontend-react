@@ -12,6 +12,15 @@ export default function ReplyToReviewPage() {
     const t = useTranslations();
     const router = useRouter();
 
+    // Synthetic review data
+    const reviewData = {
+        reviewText: "I am happy to let you all know that consumer to seller relationship is good.",
+        reviewDate: "23 Oct. 2023 01:00pm",
+        reviewer: "peejenn",
+        emoji: "😊", // This could be the actual emoji or an image URL if you have emoji images
+        reviewImage: "/images/shared/upload.png" // This is the path to the review image if any
+    };
+
     const [files, setFiles] = useState<File[]>([]);
     const [previewImage, setPreviewImage] = useState<string[]>([]);
     const [comments, setComments] = useState('');
@@ -47,20 +56,14 @@ export default function ReplyToReviewPage() {
         setComments(e.target.value);
     };
 
-    // Function to set emoji button value (null or 0 to 4 )
     const handleEmojiSelect = (emoji: any) => {
         setReviewEmoji(emoji);
     };
 
-    // Function to collect reviews value and submit to DB
     const handleSave = () => {
-        // Function to save data to the database
-        // Example: saveData({ files, comments, reviewEmoji });
-
         setIsSaveEnabled(false);
     };
 
-    // Function to trigger notification dialogue
     const handleNavigation = (route: string) => {
         if (isSaveEnabled) {
             setLinkUrl(route);
@@ -75,12 +78,12 @@ export default function ReplyToReviewPage() {
             <h1 className='mb-5 font-bold text-2xl'>Reply to Review</h1>
 
             <div className="mb-4">
-                <p className="mb-2">I am happy to let you all know that consumer to seller relationship is good.</p>
-                <p className="text-sm text-gray-600">23 Oct. 2023 01:00pm</p>
-                <p className="text-sm text-gray-600">By peejenn</p>
+                <p className="mb-2">{reviewData.reviewText}</p>
+                <p className="text-sm text-gray-600">{reviewData.reviewDate}</p>
+                <p className="text-sm text-gray-600">By {reviewData.reviewer}</p>
                 <div className="flex items-center mt-2">
-                    <span className="mr-2">😊</span>
-                    <Image alt='review image' src="/images/shared/upload.png" width={50} height={50} className='rounded' />
+                    <span className="mr-2">{reviewData.emoji}</span>
+                    <Image alt='review image' src={reviewData.reviewImage} width={50} height={50} className='rounded' />
                 </div>
             </div>
 
