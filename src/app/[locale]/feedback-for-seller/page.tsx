@@ -18,6 +18,7 @@ export default function ReplyToReviewPage() {
         reviewDate: "23 Oct. 2023 01:00pm",
         reviewer: "peejenn",
         emoji: "😊", // This could be the actual emoji or an image URL if you have emoji images
+        emojiText: "Happy", // Text representing the emoji
         reviewImage: "/images/shared/upload.png" // This is the path to the review image if any
     };
 
@@ -83,7 +84,8 @@ export default function ReplyToReviewPage() {
                 <p className="text-sm text-gray-600">By {reviewData.reviewer}</p>
                 <div className="flex items-center mt-2">
                     <span className="mr-2">{reviewData.emoji}</span>
-                    <Image alt='review image' src={reviewData.reviewImage} width={50} height={50} className='rounded' />
+                    <span>{reviewData.emojiText}</span>
+                    <Image alt='review image' src={reviewData.reviewImage} width={50} height={50} className='rounded ml-2' />
                 </div>
             </div>
 
