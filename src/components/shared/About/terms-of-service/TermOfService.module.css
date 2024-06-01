@@ -65,6 +65,10 @@
   text-align: justify;
 }
 
+.terms_of_service_content li {
+  margin-bottom: 10px;
+}
+
 .terms_of_service_content a {
   font-weight: bold;
 }

@@ -9,7 +9,7 @@ const TermsOfServiceModel = (props: any) => {
   const t = useTranslations();
 
   const lastUpdated = "5/5/2024";
-  const emailAddress = "mapofpi@gmail.com";
+  const emailAddress = "email@mapofpi.com";
 
   return (
     <>
@@ -34,6 +34,7 @@ const TermsOfServiceModel = (props: any) => {
               <ul>
                   <li>{t('TERMS_OF_SERVICE.SECTIONS.CONTENT_2_1')}</li>
                   <li>{t('TERMS_OF_SERVICE.SECTIONS.CONTENT_2_2')}</li>
+                  <li>{t('TERMS_OF_SERVICE.SECTIONS.CONTENT_2_3')}</li>
               </ul>
 
               <h2>3. {t('TERMS_OF_SERVICE.SECTIONS.HEADER_3')}</h2>
