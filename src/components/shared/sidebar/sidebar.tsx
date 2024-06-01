@@ -116,11 +116,13 @@ function Sidebar(props: any) {
                 <Button 
                   label="Set Search Center"
                   styles={{color: '#ffc153', width: '100%', height: '50px', padding: '10px'}}
+                  onClick={() => props.setToggleDis(false)} // Close sidebar on click
                 />
                <Link href="/feedback-for-seller">
                 <Button 
                   label="Check Reviews"
                   styles={{background: '#fff', color: '#ffc153', width: '100%', height: '50px', padding: '10px', borderColor: '#386F4F', borderWidth: '2px'}}
+                  onClick={() => props.setToggleDis(false)} // Close sidebar on click
                 />
                </Link>
               </div>
