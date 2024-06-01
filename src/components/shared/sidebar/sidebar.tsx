@@ -37,6 +37,7 @@ function Sidebar(props: any) {
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
+  const locale = 'en';
 
   const { resolvedTheme, setTheme } = useTheme();
   const [toggle, setToggle] = useState<any>({
@@ -118,7 +119,7 @@ function Sidebar(props: any) {
                   label="Check Reviews"
                   styles={{background: '#fff', color: '#ffc153', width: '100%', height: '50px', padding: '10px', borderColor: '#386F4F', borderWidth: '2px'}}
                   onClick={() => {console.log('Button clicked');
-                  router.push('/feedback-for-seller');}}
+                  router.push('/${locale}/feedback-for-seller');}}
                 />
               </div>
               <div className="pt-5">
