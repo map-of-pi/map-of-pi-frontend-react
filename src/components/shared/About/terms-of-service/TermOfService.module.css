@@ -31,36 +31,40 @@
   background-color: transparent;
 }
 
-.privacy_policy_content {
+.terms_of_service_content {
   text-align: left;
   padding: 50px;
 }
 
-.privacy_policy_content h1,
-.privacy_policy_content h2 {
+.terms_of_service_content h1,
+.terms_of_service_content h2 {
   color: #1d724b;
   font-size: 20px;
 }
 
-.privacy_policy_content h2 {
+.terms_of_service_content h2 {
   border-bottom: 1px solid #ccc;
   padding-bottom: 5px;
   margin-bottom: 16px;
   font-weight: 500;
 }
 
-.privacy_policy_content h4 {
+.terms_of_service_content h4 {
   font-size: 14px;
   font-weight: bold;
 }
 
-.privacy_policy_content p {
+.terms_of_service_content p {
   margin-bottom: 20px;
 }
 
-.privacy_policy_content ul {
+.terms_of_service_content ul {
   list-style-type: none;
   margin-bottom: 20px;
   font-size: 14px;
   text-align: justify;
+}
+
+.terms_of_service_content a {
+  font-weight: bold;
 }

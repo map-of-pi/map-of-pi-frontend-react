@@ -20,3 +20,33 @@ body {
     background-size: cover; */
     /* background-color: ; */
 }
+
+.seller_item_container{
+    background: #E0E0E066;
+    border: 1px solid #BDBDBD4D;
+    width: Fill (335px)px;
+    height: Hug (94px)px;
+    padding: 8px 16px 8px 16px;
+    gap: 12px;
+    border-radius: 10px 10px 10px 10px;
+
+}
+
+.subheader_text{
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+
+}
+.normal_btn{
+    border: 1px solid var(--Green, #386F4F);
+    width: Fixed (122px)px;
+    height: Fixed (38px)px;
+    padding: var(--space-0) var(--space-8) var(--space-0) var(--space-8);
+    gap: var(--space-3);
+    border-radius: 6px;
+    border: 1px;
+
+
+}
