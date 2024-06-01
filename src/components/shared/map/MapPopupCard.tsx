@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const MapPopupCard = () => {
   return (
@@ -60,11 +61,13 @@ const MapPopupCard = () => {
         </div>
 
         <div className="flex items-center mt-3 justify-center gap-3">
-          <div
-            className="bg-red-800 w-[100px]   text-center rounded-md text-white py-1 mt-1"
-            id="${shop._id}">
-            visit shop
-          </div>
+          <Link href={'/seller/seller-item'}>
+            <div
+              className="bg-red-800 w-[100px]   text-center rounded-md text-white py-1 mt-1"
+              id="${shop._id}">
+              visit shop
+            </div>
+          </Link>
           <div
             className="bg-blue-800 w-[100px]   text-center rounded-md text-white py-1 mt-1"
             id="comming">
