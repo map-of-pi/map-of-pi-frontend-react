@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import styles from './emojipicker.module.css';
 
 interface Emoji {
     name: string;
@@ -10,12 +9,8 @@ interface Emoji {
     value: number;
 }
 
-interface EmojiPickerProps {
-    clickDisabled?: boolean;
-    reviews?: { [key: string]: number };
-}
 
-export default function EmojiPicker(props: EmojiPickerProps) {
+export default function EmojiPicker(props: any) {
 
     const despairEmoji: Emoji = { name: "Despair", unicode: "😠", code: ":despair:", value: 0 };
     const emojis: Emoji[] = [
@@ -31,8 +26,10 @@ export default function EmojiPicker(props: EmojiPickerProps) {
     const handleEmojiClick = (emojiValue: number) => {
         if (selectedEmoji === emojiValue) {
             setSelectedEmoji(null);
+            props.onSelect(null) // return null when no emoji is sellected
         } else {
             setSelectedEmoji(emojiValue);
+            props.onSelect(emojiValue);  // return selected emoji value
         }
     };
 
@@ -42,15 +39,16 @@ export default function EmojiPicker(props: EmojiPickerProps) {
         }
         return undefined;
     };
+    const emojiBtnClass = 'rounded-md w-full outline outline-[0.5px] flex justify-center items-center cursor-pointer p-1'
 
     return (
         <div>
-            <div className='flex gap-3 w-full text-center my-2'>
-                <div className='bg-red-200 rounded-[10px] w-[100px] md:w-[100px] p-2'>
+            <div className='flex gap-3 w-full text-center justify-center my-2'>
+                <div className='bg-[#DF2C2C33] rounded-md p-2'>
                     <p className='text-red-700 mb-2'>Unsafe</p>
                     <div
                         onClick={() => !props.clickDisabled ? handleEmojiClick(despairEmoji.value) : undefined}
-                        className={`${selectedEmoji !== despairEmoji.value ? 'bg-red-200' : 'bg-red-700'} w-full outline outline-red-300 rounded-[10px] flex justify-center items-center cursor-pointer p-1`}
+                        className={`${selectedEmoji !== despairEmoji.value ? 'bg-red-200' : 'bg-red-700'} outline-[#DF2C2C] ${emojiBtnClass}`}
                     >
                         <div>
                             <p className='text-3xl py-2'>{despairEmoji.unicode}</p>
@@ -61,21 +59,21 @@ export default function EmojiPicker(props: EmojiPickerProps) {
                         </div>
                     </div>
                 </div>
-                <div className='bg-[#8DBE95] rounded-[10px] w-full p-2 text-center text-white'>
+                <div className='bg-[#3D924A8A] rounded-[10px] w-full p-2 text-center text-white'>
                     <p className='mb-2'>Trust</p>
-                    <div id='emoji-picker' className='flex gap-3'>
+                    <div id='emoji-picker' className='flex gap-3 justify-center'>
                         {emojis.map((emoji, index) => (
                             <li
                                 key={index}
                                 onClick={() => !props.clickDisabled ? handleEmojiClick(emoji.value) : undefined}
-                                className={`${selectedEmoji !== emoji.value ? 'bg-[#8DBE95]' : 'bg-[#386F4F]'} w-full md:w-[75px] outline outline-green-700 rounded-[10px] flex justify-center items-center cursor-pointer p-1`}
+                                className={`${selectedEmoji !== emoji.value ? 'bg-[#3D924A8A]' : 'bg-[#386F4F]'} outline-[#090C49] ${emojiBtnClass}`}
                             >
                                 <div>
                                     <p className='text-3xl py-2'>{emoji.unicode}</p>
                                     <p>{emoji.name}</p>
                                     {props.reviews && (
                                         <p>{getReview(props.reviews, emoji.name)}</p>
-                                    )}
+                                    )}                                 
                                 </div>
                             </li>
                         ))}
@@ -83,5 +81,7 @@ export default function EmojiPicker(props: EmojiPickerProps) {
                 </div>
             </div>
         </div>
-    );
+    );  
+    
+
 }

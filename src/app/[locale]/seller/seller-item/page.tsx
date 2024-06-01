@@ -5,23 +5,26 @@ import { useTranslations } from 'next-intl';
 import TrustMeter from '@/components/seller/TrustMeter';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
+import ConfirmDialog from '@/components/shared/confirm';
 import Image from 'next/image';
 import Link from 'next/link';
-
-// import { useRouter } from 'next/navigation';
-// const router = useRouter();
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
     const t = useTranslations();
+    const router = useRouter();
 
     // synthetic database data
     const itemData = {
         seller: {
             business: "Peejenn",
+            pioneer_id: "peejen",
             url: "/images/shared/upload.png",
             category: "Pioneer",
-            ratings: 4.1,  // the trust-o-meter changed when adjusted 
+            ratings: 4.1,
             address: "Crescent Way, Bab 2/4, New York City",
+            phone: '+234 567 8910',
+            email: 'selleremail@example.com',
             description: "Discover handcrafted jewelry and artisanal candles, available for purchase using Pi cryptocurrency. Elevate your space and style with our unique offerings today.",
             reviews: {
                 Despair: 1,
@@ -52,19 +55,18 @@ export default function Page() {
                 name: 'Two Shirt',
                 price: 7,
             },
-
         ]
     }
 
     const [files, setFiles] = useState<File[]>([]);
     const [previewImage, setPreviewImage] = useState<string[]>([]);
+    const [comments, setComments] = useState('');
+    const [reviewEmoji, setReviewEmoji] = useState(null);
+    const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    // const [dialogueMessage, setDialogueMessage] = useState('')
+    const [linkUrl, setLinkUrl] = useState('');
 
-    const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFiles = e.target.files;
-        if (selectedFiles && selectedFiles.length > 0) {
-            setFiles(Array.from(selectedFiles));
-        }
-    };
 
     useEffect(() => {
         if (files.length === 0) return;
@@ -76,6 +78,49 @@ export default function Page() {
             objectUrls.forEach(url => URL.revokeObjectURL(url));
         };
     }, [files]);
+
+    useEffect(() => {
+        const noReview = comments === "" && reviewEmoji===null && files.length === 0;
+        setIsSaveEnabled(!noReview);
+    }, [comments, reviewEmoji, files]);
+
+    const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFiles = e.target.files;
+        if (selectedFiles && selectedFiles.length > 0) {
+            setFiles(Array.from(selectedFiles));
+        }
+    };
+
+    const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setComments(e.target.value);
+    };
+
+    // Function to set emoji button value (null or 0 to 4 )
+    const handleEmojiSelect = (emoji: any) => {
+        setReviewEmoji(emoji);
+    };
+
+
+    // Function to collect reviews value and submit to DB
+    const handleSave = () => {
+        // Function to save data to the database
+        // Example: saveData({ files, comments, reviewEmoji });
+
+        setIsSaveEnabled(false);
+    };
+
+    // Function to triger notification dialogue
+    const handleNavigation = (route:string) => {
+        if (isSaveEnabled){
+            // setDialogueMessage(message);
+            setLinkUrl(route);
+            setShowConfirmDialog(true);
+        }else{
+            router.push(`/${route}`);
+        }
+    }
+
+    const SUBHEADER = "font-bold mb-2";
 
     return (
         <div className="bg-[#FFFFFF] w-full md:w-[500px] md:mx-auto p-4">
@@ -92,13 +137,13 @@ export default function Page() {
 
             {/* Seller Description */}
             <div className='mb-5'>
-                <h2 className='font-bold mb-1'>Seller Description</h2>
+                <h2 className={SUBHEADER}>Seller Description</h2>
                 <p className='text-justify'>{itemData.seller.description}</p>
             </div>
 
             {/* Items List */}
-            <h2 className='my-2 font-bold'>Seller Items for sale</h2>
-            <div className="bg-zinc-100 mx-2 mb-6 rounded-[8px] p-3">
+            <h2 className={SUBHEADER}>Seller items for sale</h2>
+            <div className="seller_item_container mb-6">
                 <ul>
                     {itemData.items.map((item) => (
                         <div key={item.id} className='flex gap-2'>
@@ -110,29 +155,29 @@ export default function Page() {
             </div>
 
             {/* Seller Location */}
-            <div className='flex gap-2 mb-7 align-center'>
-                <div>
-                    <Image alt='location pin' src='/favicon-16x16.png' width={20} height={20} />
-                </div>
-                
-                <div>
-                    <h2 className='font-bold'>Seller Address or Whereabouts</h2>
-                    <p>{itemData.seller.address}</p>
-                    <button className="outline outline-[#8DBE95] text-yellow-500 py-1 px-6 mt-2 rounded-[5px]">
-                        Navigate
-                    </button>
-                </div>
+            <div className='mb-6'>
+                <h2 className={SUBHEADER}>Seller address or whereabouts</h2>
+                <p>{itemData.seller.address}</p>
+                <button 
+                className="outline outline-[#386F4F] text-[#F6C367] hover:bg-[#386F4F] hover:text-white  py-1 px-6 mt-2 rounded-md"
+                onClick={() => handleNavigation('location')}
+                >
+                    Navigate
+                </button>
             </div>
 
             {/* Leave a Review */}
             <div className='mb-3'>
-                <h2 className='font-bold'>Leave a Review</h2>
+                <h2 className={SUBHEADER}>Leave a review</h2>
                 <p>Select the face which shows how you feel about the above Seller</p>
-                <EmojiPicker />
+                <EmojiPicker onSelect={handleEmojiSelect} />
             </div>
 
             <div className='mb-2'>
-                <TextArea placeholder={'Enter additional comments here...'} />
+                <TextArea placeholder={'Enter additional comments here...'}
+                    value={comments}
+                    onChange={handleCommentsChange}
+                />
             </div>
 
             <div className='mb-2'>
@@ -146,7 +191,9 @@ export default function Page() {
             {/* Save Button */}
             <div className='mb-7'>
                 <button
-                className="px-4 py-1 bg-[#386F4F] opacity-50 hover:opacity-100 text-white rounded-md flex justify-right ms-auto text-[15px]"
+                    onClick={handleSave}
+                    disabled={!isSaveEnabled}
+                    className={`${isSaveEnabled ? "opacity-100" : "opacity-50"} px-6 py-2 bg-[#386F4F] text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}
                 >
                     Save
                 </button>
@@ -154,21 +201,42 @@ export default function Page() {
 
             {/* Summary of Reviews */}
             <div className='mb-7'>
-                <h2 className='font-bold mb-2'>Reviews</h2>
+                <h2 className={SUBHEADER}>Reviews summary</h2>
                 {/* Trust-O-meter */}
-                <div className='mb-2'>                    
+                <div>
                     <TrustMeter ratings={itemData.seller.ratings} />
                 </div>
-                <div className='flex gap-3 mb-5 font-bold'>
-                    <p className='text-sm'>Review Score: {itemData.seller.ratings} out of 5.0</p>
-                    <button 
-                    className="outline outline-[#8DBE95] text-[#8DBE95] btn-span py-1 px-5 w-full rounded-[5px] ms-auto"
-                    >Check Reviews
+                <div className='flex items-center gap-2'>
+                    <p className='text-sm'>Reviews Score: {itemData.seller.ratings} out of 5.0</p>
+                    <button className="outline outline-[#8DBE95] hover:bg-[#386F4F] hover:text-white text-xl text-yellow-500 py-2 px-4 rounded-md flex justify-right ms-auto"
+                        onClick={()=>handleNavigation('review')}
+                    >
+                        Check Reviews
                     </button>
                 </div>
-                <EmojiPicker reviews={itemData.seller.reviews} clickDisabled={true} />
             </div>
-
+            <div className='mb-7'>
+                <h2 className={SUBHEADER}>Seller contact details</h2>
+                <div className='text-sm mb-2'>
+                    <span className=' font-bold'>Seller pioneer id: </span>
+                    <span>{itemData.seller.pioneer_id}</span>
+                </div>
+                <div className='text-sm mb-2'>
+                    <span className=' font-bold'>Seller phone: </span>
+                    <span>{itemData.seller.phone}</span>
+                </div>
+                <div className='text-sm mb-2'>
+                    <span className=' font-bold'>Seller email: </span>
+                    <span>{itemData.seller.email}</span>
+                </div>
+            </div>
+            <ConfirmDialog
+                show={showConfirmDialog}
+                onClose={() => setShowConfirmDialog(false)}
+                onConfirm={setShowConfirmDialog}
+                message="You have unsaved changes. Do you really want to leave?"
+                url={linkUrl}
+            />
         </div>
     );
 }

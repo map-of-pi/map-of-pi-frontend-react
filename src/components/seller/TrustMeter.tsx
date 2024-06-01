@@ -45,7 +45,7 @@ const TrustMeter: React.FC<TrustMeterProps> = ({ ratings }) => {
             <span>0%</span>
             <span className="ps-[30%]">50%</span>
             <span className="ps-[12%]">80%</span>
-            <span className="ps-[8%] md:ms-[11%]">100%</span>
+            <span className="ps-[6.5%] md:ps-[11%]">100%</span>
           </div>
         </div>
       </div>
