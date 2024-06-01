@@ -9,54 +9,12 @@ import ConfirmDialog from '@/components/shared/confirm';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
+import { itemData } from '@/constants/demoAPI';
 
 export default function Page() {
     const t = useTranslations();
     const router = useRouter();
 
-    // synthetic database data
-    const itemData = {
-        seller: {
-            business: "Peejenn",
-            pioneer_id: "peejen",
-            url: "/images/shared/upload.png",
-            category: "Pioneer",
-            ratings: 4.1,
-            address: "Crescent Way, Bab 2/4, New York City",
-            phone: '+234 567 8910',
-            email: 'selleremail@example.com',
-            description: "Discover handcrafted jewelry and artisanal candles, available for purchase using Pi cryptocurrency. Elevate your space and style with our unique offerings today.",
-            reviews: {
-                Despair: 1,
-                Sad: 2,
-                Okay: 15,
-                Happy: 11,
-                Delight: 6
-            }
-        },
-        items: [
-            {
-                id: 10,
-                name: "Bicycle",
-                price: 10,
-            },
-            {
-                id: 9,
-                name: 'Books',
-                price: 4,
-            },
-            {
-                id: 8,
-                name: 'House',
-                price: 5,
-            },
-            {
-                id: 7,
-                name: 'Two Shirt',
-                price: 7,
-            },
-        ]
-    }
 
     const [files, setFiles] = useState<File[]>([]);
     const [previewImage, setPreviewImage] = useState<string[]>([]);

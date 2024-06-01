@@ -7,7 +7,7 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import MapPopupCard from './MapPopupCard';
+import MapPopupCard from './NewMapCard';
 import { dummyCoordinates } from '../../../constants/coordinates';
 import { Button, YellowBtn } from '../Forms/Buttons/Buttons';
 import { IoMdAdd } from 'react-icons/io';
