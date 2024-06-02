@@ -2,9 +2,9 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
-
+import Link from 'next/link';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, Input, TelephoneInput } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
@@ -12,6 +12,9 @@ import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
 import styles from './sidebar.module.css';
+import { AppContext } from '../../../../context/AppContextProvider';
+
+
 
 // type definitions for menu items
 interface MenuItem {
@@ -38,6 +41,7 @@ function Sidebar(props: any) {
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
+  const locale = 'en';
 
   const { resolvedTheme, setTheme } = useTheme();
   const [toggle, setToggle] = useState<any>({
@@ -55,6 +59,8 @@ function Sidebar(props: any) {
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
 
   const handleAddImages = () => {};
+
+  const {currentUser } = useContext(AppContext);
 
   const handleChildMenu = (title: any, code: string) => {
     if (title === 'Languages') {
@@ -100,6 +106,7 @@ function Sidebar(props: any) {
         <div
           className={`${styles.sidebar} dark:bg-[#212121] sm:w-[300px] w-[200px] overflow-y-auto`}>
             <div className="text-2xl font-bold mb-4 pb-5">User Preferences</div>
+            {currentUser?.username} current user
             <div className="">
               <Input
                 label="Your Email Address"
@@ -115,11 +122,15 @@ function Sidebar(props: any) {
                 <Button 
                   label="Set Search Center"
                   styles={{color: '#ffc153', width: '100%', height: '50px', padding: '10px'}}
+                  onClick={() => props.setToggleDis(false)} // Close sidebar on click
                 />
+               <Link href="/feedback-for-seller">
                 <Button 
                   label="Check Reviews"
                   styles={{background: '#fff', color: '#ffc153', width: '100%', height: '50px', padding: '10px', borderColor: '#386F4F', borderWidth: '2px'}}
+                  onClick={() => props.setToggleDis(false)} // Close sidebar on click
                 />
+               </Link>
               </div>
               <div className="pt-5">
                 <FileInput
