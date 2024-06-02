@@ -9,7 +9,7 @@ const PrivacyPolicyModel = (props: any) => {
   const t = useTranslations();
 
   const lastUpdated = '5/5/2024';
-  const emailAddress = 'mapofpi@gmail.com';
+  const emailAddress = 'email@mapofpi.com';
 
   return (
     <>
@@ -103,9 +103,9 @@ const PrivacyPolicyModel = (props: any) => {
               <h2>8. {t('PRIVACY_POLICY.SECTIONS.HEADER_8')}</h2>
               <ul>
                 <li>
-                  {t('PRIVACY_POLICY.SECTIONS.CONTENT_8_1')} &#64;{' '}
+                  {t('PRIVACY_POLICY.SECTIONS.CONTENT_8_1')}
                   <strong>
-                    <a href={`mailto:${emailAddress}`}>Map of Pi</a>
+                    <a href={`mailto:${emailAddress}`}>{' ' + emailAddress}</a>
                   </strong>
                   .
                 </li>
