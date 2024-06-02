@@ -13,7 +13,7 @@ const ConfirmDialog = ({ show, onClose, setConfirm, message, url }:any) => {
 
     return createPortal(
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4 sm:mx-auto relative">
+            <div className="bg-white rounded-lg p-6 w-full max-w-md mx-6 sm:mx-auto relative">
                 <button
                     onClick={onClose}
                     className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
@@ -23,10 +23,10 @@ const ConfirmDialog = ({ show, onClose, setConfirm, message, url }:any) => {
                 </button>
                 <div className="text-center mt-5">
                     <p className="text-lg mb-4">{message}</p>
-                    <div className="flex justify-end space-x-4">
+                    <div className="flex justify-center space-x-4">
                         <button
                             onClick={handleClicked}
-                            className="px-4 py-2 bg-[#386F4F] text-white rounded-md"
+                            className="px-4 py-2 bg-[#386F4F] text-[#F6C367] text-xl rounded-md"
                         >
                             Confirm
                         </button>
