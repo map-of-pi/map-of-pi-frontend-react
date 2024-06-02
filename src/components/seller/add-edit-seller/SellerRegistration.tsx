@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const INPUT_CLASS = 'w-full p-2 border rounded-lg';
 const BUTTON_CLASS = 'w-full p-2 rounded-lg';
@@ -66,9 +67,11 @@ const SellerRegistrationForm = () => {
       </div>
       <div className="mb-4">
         <label className={LABEL_CLASS}>Reviews Score </label>
-        <button className={`${BUTTON_CLASS} border border-green-600 text-green-600`}>
+        <Link href="/feedback-for-seller">
+         <button className={`${BUTTON_CLASS} border border-green-600 text-green-600`}>
           Check Reviews
-        </button>
+         </button>
+        </Link>
       </div>
       <div className="mb-4">
         <label className={LABEL_CLASS}>Seller Name</label>
