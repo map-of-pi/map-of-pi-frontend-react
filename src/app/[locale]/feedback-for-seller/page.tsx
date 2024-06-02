@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 export default function ReplyToReviewPage() {
     const t = useTranslations();
@@ -105,7 +107,7 @@ export default function ReplyToReviewPage() {
 
             <div className='mb-2'>
                 <FileInput
-                    label={'Optional feedback photo upload'}
+                    label={'Feedback photo upload'}
                     handleAddImages={handleAddImages}
                     images={previewImage}
                 />
