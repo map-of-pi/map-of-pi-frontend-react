@@ -3,25 +3,27 @@ import Link from 'next/link';
 import { itemData } from '@/constants/demoAPI';
 import TrustMeter from '@/components/seller/TrustMeter';
 
-const MapPopupCard = () => {
+const MapMarkerPopup = () => {
     const SUBHEADER = "font-bold mb-2";
 
   return (
     <>
-        <div className="max-w-sm rounded-md overflow-hidden">
+        <div className="max-w-sm rounded-md justify-center mx-auto">
             {/* Seller Profile */}
-            <h1 className='font-bold mb-1'> 
+            <h1 className='font-bold text-base mb-1'> 
                 {itemData.seller.business} 
                 <span className='ps-2'>({itemData.seller.ratings}/5.0)</span>
             </h1>
             <div className='flex gap-2 mb-2'>
-                <Image alt='seller logo' src={itemData.seller.url} width={80} height={50} className='rounded-lg h-[100px] my-auto' />
+                <Image alt='seller logo' src={itemData.seller.url} width={50} height={50} className='rounded-lg h-[75px] w-[75px] my-auto' />
                 <p className='font-bold text-justify '>{itemData.seller.description}</p>
             </div>
-            <TrustMeter ratings={itemData.seller.ratings} />
+            <div>
+              <TrustMeter ratings={itemData.seller.ratings} />
+            </div>
 
             {/* Items List */}
-            <h2 className={`${SUBHEADER} text-lg`}>Seller items for sale</h2>
+            <h2 className={`${SUBHEADER} text-base`}>Seller items for sale</h2>
             <div className="seller_item_container mb-2 max-h-[200px] overflow-auto">
                 <ul>
                     {itemData.items.map((item) => (
@@ -54,4 +56,4 @@ const MapPopupCard = () => {
   );
 };
 
-export default MapPopupCard;
+export default MapMarkerPopup;

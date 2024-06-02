@@ -7,7 +7,7 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import MapPopupCard from './NewMapCard';
+import MapMarkerPopup from './MapMarkerPopup';
 import { dummyCoordinates } from '../../../constants/coordinates';
 import { Button, YellowBtn } from '../Forms/Buttons/Buttons';
 import { IoMdAdd } from 'react-icons/io';
@@ -65,8 +65,8 @@ function Map() {
         <LocationMarker />
         {dummyCoordinates.map((coord, i) => (
           <Marker position={coord} key={i} icon={customIcon}>
-            <Popup>
-              <MapPopupCard />
+            <Popup closeButton={false}>
+              <MapMarkerPopup />
             </Popup>
           </Marker>
         ))}

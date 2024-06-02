@@ -18,7 +18,7 @@ const TrustMeter: React.FC<TrustMeterProps> = ({ ratings }) => {
 
   return (
     <div className='w-full flex'>
-      <h3 className='font-bold text-sm text-nowrap pe-3'>Trust-O-meter</h3>
+      <h3 className='font-bold text-sm text-nowrap pe-3'>Trust-o-meter</h3>
       <div className='w-full'>
 
         <div className="flex w-full">          
