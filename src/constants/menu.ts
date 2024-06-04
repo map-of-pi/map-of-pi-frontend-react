@@ -1,24 +1,24 @@
 export const menu = [
-  {
-    id: 1,
-    title: 'Themes',
-    icon: `/images/shared/sidebar/theme.svg`,
-    url: '',
-    children: [
-      {
-        id: 1,
-        title: 'Light Mode',
-        icon: `/images/shared/sidebar/light.svg`,
-        code: 'light',
-      },
-      {
-        id: 2,
-        title: 'Dark Mode',
-        icon: `/images/shared/sidebar/dark.svg`,
-        code: 'dark',
-      },
-    ],
-  },
+  // {
+  //   id: 1,
+  //   title: 'Themes',
+  //   icon: `/images/shared/sidebar/theme.svg`,
+  //   url: '',
+  //   children: [
+  //     {
+  //       id: 1,
+  //       title: 'Light Mode',
+  //       icon: `/images/shared/sidebar/light.svg`,
+  //       code: 'light',
+  //     },
+  //     {
+  //       id: 2,
+  //       title: 'Dark Mode',
+  //       icon: `/images/shared/sidebar/dark.svg`,
+  //       code: 'dark',
+  //     },
+  //   ],
+  // },
   {
     id: 2,
     title: 'Languages',
