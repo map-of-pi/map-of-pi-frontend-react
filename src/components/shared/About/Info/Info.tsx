@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { useState } from 'react';
+import { IoMdClose } from 'react-icons/io';
 
 import styles from './Info.module.css';
 import { useRouter } from 'next/navigation';
@@ -31,6 +32,11 @@ const InfoModel = (props: any) => {
             onClick={() => props.setToggleInfo(false)}>
           </div>
           <div className={styles.model_body}>
+            <IoMdClose
+              size={24}
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
+              onClick={() => props.setToggleInfo(false)}
+            />
             <div className="flex justify-center mb-[10px]">
               <div className={styles.logo}>
                 <Image src="/images/logo.svg" alt="Map of Pi" fill={true} />
