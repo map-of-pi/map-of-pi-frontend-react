@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { useState } from 'react';
 
 import styles from './Info.module.css';
@@ -115,8 +116,8 @@ const InfoModel = (props: any) => {
 
             <div className={styles.defects_contact}>
               <span>{t('INFORMATION_DIALOG.REPORTING_MESSAGE') || 'Please report defects'} </span>
-              <Link href="mailto:mapofpi@gmail.com" target="_blank">
-                mapofpi@gmail.com
+              <Link href="mailto:email@mapofpi.com" target="_blank">
+                email@mapofpi.com
               </Link>
             </div>
           </div>
