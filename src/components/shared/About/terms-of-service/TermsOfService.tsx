@@ -1,14 +1,16 @@
 'use client';
 
+import styles from './TermOfService.module.css';
+
 import { useTranslations } from 'next-intl';
 
-import styles from './TermOfService.module.css';
+import { CloseButton } from '@/components/shared/Forms/Buttons/Buttons';
 
 const TermsOfServiceModel = (props: any) => {
 
   const t = useTranslations();
 
-  const lastUpdated = "5/5/2024";
+  const lastUpdated = "6/3/2024";
   const emailAddress = "email@mapofpi.com";
 
   return (
@@ -20,6 +22,7 @@ const TermsOfServiceModel = (props: any) => {
             onClick={() => props.setToggleTermsOfService(false)}>
           </div>
           <div className={styles.model_body}>
+          <CloseButton onClick={() => props.setToggleTermsOfService(false)}/>
             <div className={styles.terms_of_service_content}>
               <h2><strong>Map of Pi {t('TERMS_OF_SERVICE.TITLE')}</strong></h2>
               <h4>{t('TERMS_OF_SERVICE.LAST_UPDATED')}: {lastUpdated}</h4>
