@@ -1,5 +1,6 @@
-import React from 'react';
 import styles from './Buttons.module.css';
+
+import { IoMdClose } from 'react-icons/io';
 import { RiAddFill } from 'react-icons/ri';
 
 export const AddButton = (props: any) => {
@@ -33,5 +34,15 @@ export const YellowBtn = (props: any) => {
         {props.text && props.text}
       </button>
     </div>
+  );
+};
+
+export const CloseButton = (props: any) => {
+  return (
+    <IoMdClose
+      size={24}
+      className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 cursor-pointer"
+      onClick={props.onClick}
+    />
   );
 };

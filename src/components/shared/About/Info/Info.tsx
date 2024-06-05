@@ -1,14 +1,15 @@
 'use client';
 
+import styles from './Info.module.css';
+
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { useState } from 'react';
-import { IoMdClose } from 'react-icons/io';
 
-import styles from './Info.module.css';
-import { useRouter } from 'next/navigation';
+import { CloseButton } from '@/components/shared/Forms/Buttons/Buttons';
 
 const InfoModel = (props: any) => {
 
@@ -17,8 +18,7 @@ const InfoModel = (props: any) => {
 
   const [version, setVersion] = useState('V1.0.0');
 
-
-  const handLinking = (route: any) => {
+  const handleLinking = (route: any) => {
     router.push(`/${route}`)
     props.setToggleInfo(false)
   }
@@ -32,11 +32,7 @@ const InfoModel = (props: any) => {
             onClick={() => props.setToggleInfo(false)}>
           </div>
           <div className={styles.model_body}>
-            <IoMdClose
-              size={24}
-              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
-              onClick={() => props.setToggleInfo(false)}
-            />
+            <CloseButton onClick={() => props.setToggleInfo(false)}/>
             <div className="flex justify-center mb-[10px]">
               <div className={styles.logo}>
                 <Image src="/images/logo.svg" alt="Map of Pi" fill={true} />
