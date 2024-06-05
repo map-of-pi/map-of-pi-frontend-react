@@ -5,8 +5,9 @@
 @import '~react-phone-number-input/style.css';
 
 :root {
-    --header-bg: #F5F5F5;
-    --color-bg-color: #F1F7FF
+    --default-primary-color: #386F4F;
+    --default-secondary-color: #FAD09E;
+    --color-bg-color: #F1F7FF;
 }
 
 * {
@@ -40,7 +41,7 @@ body {
 
 }
 .normal_btn{
-    border: 1px solid var(--Green, #386F4F);
+    border: 1px solid var(--default-primary-color);
     width: Fixed (122px)px;
     height: Fixed (38px)px;
     padding: var(--space-0) var(--space-8) var(--space-0) var(--space-8);
