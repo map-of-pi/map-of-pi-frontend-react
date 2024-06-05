@@ -5,8 +5,8 @@
   right: 0;
   top: 0;
   z-index: 50;
-  padding: 1rem 1rem 0rem 1rem;
-  height: calc(100vh - 50px); /* adjust this value if you have a fixed header */
+  padding: 1.2rem;
+  height: calc(100vh - 91px); /* adjust this value if you have a fixed header */
   overflow-y: auto;
 }
 
