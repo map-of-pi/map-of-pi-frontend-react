@@ -56,7 +56,7 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="w-[90%] m-auto left-0 right-0 max-w-[504px] fixed top-20 z-5 flex">
+    <div className="w-[90%] m-auto left-0 right-0 max-w-[504px] fixed top-[120px] z-5 flex">
        <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={!!message}
