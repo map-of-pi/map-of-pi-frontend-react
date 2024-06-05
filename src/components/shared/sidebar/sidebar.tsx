@@ -6,7 +6,11 @@ import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 import Link from 'next/link';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
-import { FileInput, Input, TelephoneInput } from '@/components/shared/Forms/Inputs/Inputs';
+import {
+  FileInput,
+  Input,
+  TelephoneInput,
+} from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
@@ -45,7 +49,7 @@ function Sidebar(props: any) {
     Themes: false,
     Languages: false,
   });
-  
+
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
   const handlePhoneNumberChange = (value: string | undefined) => {
     setPhoneNumber(value);
@@ -82,58 +86,79 @@ function Sidebar(props: any) {
   };
 
   const handleMenu = (title: any, url: string) => {
-    if (title !== 'Themes' && title !== 'Languages' && title !== 'About Map of Pi') {
+    if (
+      title !== 'Themes' &&
+      title !== 'Languages' &&
+      title !== 'About Map of Pi'
+    ) {
       router.push(url);
       props.setToggleDis(false);
     }
 
-    if (title === 'Themes' || title === 'Languages' || title === 'About Map of Pi') {
+    if (
+      title === 'Themes' ||
+      title === 'Languages' ||
+      title === 'About Map of Pi'
+    ) {
       setToggle({ ...toggle, [title]: !toggle[title] });
     }
   };
 
   return (
     <>
-      <div className="w-full h-[calc(100vh-56px)] fixed bottom-0 bg-transparent right-0 z-500">
+      <div className="w-full h-[calc(100vh-91px)] fixed bottom-0 bg-transparent right-0 z-500">
         <div
           className="absolute w-full h-full bg-[#82828284]"
           onClick={() => props.setToggleDis(false)}></div>
         <div
-          className={`${styles.sidebar} dark:bg-[#212121] sm:w-[300px] w-[200px] overflow-y-auto`}>
-            <div className="text-2xl font-bold mb-4 pb-5">User Preferences</div>
-            <div className="">
-              <Input
-                label="Your Email Address"
-                placeholder="mapofpi@mapofpi.com"
-                type="email"
+          className={`${styles.sidebar} dark:bg-[#212121] sm:w-[350px] w-[250px] overflow-y-auto`}>
+          <div className="text-2xl font-bold mb-4 pb-5">User Preferences</div>
+          <div className="">
+            <Input
+              label="Your Email Address"
+              placeholder="mapofpi@mapofpi.com"
+              type="email"
+            />
+            <TelephoneInput
+              label="Your Phone Number"
+              value={phoneNumber}
+              onChange={handlePhoneNumberChange}
+            />
+            <div className="pt-5 flex flex-col gap-5">
+              <Button
+                label="Set Search Center"
+                styles={{
+                  color: '#ffc153',
+                  width: '100%',
+                  height: '50px',
+                  padding: '10px',
+                }}
+                onClick={() => props.setToggleDis(false)} // Close sidebar on click
               />
-              <TelephoneInput
-                label="Your Phone Number"
-                value={phoneNumber}
-                onChange={handlePhoneNumberChange}
-              />
-              <div className="pt-5 flex flex-col gap-5">
-                <Button 
-                  label="Set Search Center"
-                  styles={{color: '#ffc153', width: '100%', height: '50px', padding: '10px'}}
-                  onClick={() => props.setToggleDis(false)} // Close sidebar on click
-                />
-               <Link href="/feedback-for-seller">
-                <Button 
+              <Link href="/feedback-for-seller">
+                <Button
                   label="Check Reviews"
-                  styles={{background: '#fff', color: '#ffc153', width: '100%', height: '50px', padding: '10px', borderColor: '#386F4F', borderWidth: '2px'}}
+                  styles={{
+                    background: '#fff',
+                    color: '#ffc153',
+                    width: '100%',
+                    height: '50px',
+                    padding: '10px',
+                    borderColor: '#386F4F',
+                    borderWidth: '2px',
+                  }}
                   onClick={() => props.setToggleDis(false)} // Close sidebar on click
                 />
-               </Link>
-              </div>
-              <div className="pt-5">
-                <FileInput
-                  label="Upload Photo (Optional)"
-                  images={[]}
-                  handleAddImages={handleAddImages}
-                />
-              </div>
+              </Link>
             </div>
+            <div className="pt-5">
+              <FileInput
+                label="Upload Photo (Optional)"
+                images={[]}
+                handleAddImages={handleAddImages}
+              />
+            </div>
+          </div>
           {/* <div
             className="ml-auto flex justify-end mb-8"
             onClick={() => props.setToggleDis(false)}>
@@ -170,13 +195,16 @@ function Sidebar(props: any) {
                     )}
                   </div>
                   {/* MENU WITH CHILDREN */}
-                  {menu.children && toggle[menu.title] &&
+                  {menu.children &&
+                    toggle[menu.title] &&
                     menu.children.map((child) => (
                       <div key={child.id} className="ml-6">
                         <div
                           className={`${styles.slide_content} hover:bg-[#424242] hover:text-white hover:dark:bg-[#ffffff] dark:text-white hover:dark:text-black`}
-                          onClick={() => handleChildMenu(menu.title, child.code)}>
-                          {child.icon && (  // conditional rendering
+                          onClick={() =>
+                            handleChildMenu(menu.title, child.code)
+                          }>
+                          {child.icon && ( // conditional rendering
                             <Image
                               src={child.icon}
                               alt={child.title}
@@ -185,13 +213,16 @@ function Sidebar(props: any) {
                               className=""
                             />
                           )}
-                          {menu.title === 'Languages' && isLanguageMenuItem(child) ? (
+                          {menu.title === 'Languages' &&
+                          isLanguageMenuItem(child) ? (
                             <div className="ml-2 text-[14px]">
                               <div className="font-bold">{child.label}</div>
                               <div>{child.translation}</div>
                             </div>
                           ) : (
-                            <span className="ml-2 text-[14px]">{child.title}</span>
+                            <span className="ml-2 text-[14px]">
+                              {child.title}
+                            </span>
                           )}
                         </div>
                       </div>
@@ -202,11 +233,17 @@ function Sidebar(props: any) {
           </div>
         </div>
       </div>
-      <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel}/>
-      <PrivacyPolicyModel togglePrivacyPolicy={showPrivacyPolicyModel} setTogglePrivacyPolicy={setShowPrivacyPolicyModel}/>
-      <TermsOfServiceModel toggleTermsOfService={showTermsOfServiceModel} setToggleTermsOfService={setShowTermsOfServiceModel}/>
+      <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel} />
+      <PrivacyPolicyModel
+        togglePrivacyPolicy={showPrivacyPolicyModel}
+        setTogglePrivacyPolicy={setShowPrivacyPolicyModel}
+      />
+      <TermsOfServiceModel
+        toggleTermsOfService={showTermsOfServiceModel}
+        setToggleTermsOfService={setShowTermsOfServiceModel}
+      />
     </>
   );
-};
+}
 
 export default Sidebar;

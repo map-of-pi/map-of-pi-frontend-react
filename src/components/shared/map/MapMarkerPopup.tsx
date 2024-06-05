@@ -10,13 +10,13 @@ const MapMarkerPopup = () => {
     <>
         <div className="max-w-sm rounded-md justify-center mx-auto">
             {/* Seller Profile */}
-            <h1 className='font-bold text-base mb-1'> 
+            <div className='font-bold text-base mb-1'> 
                 {itemData.seller.business} 
                 <span className='ps-2'>({itemData.seller.ratings}/5.0)</span>
-            </h1>
-            <div className='flex gap-2 mb-2'>
-                <Image alt='seller logo' src={itemData.seller.url} width={50} height={50} className='rounded-lg h-[75px] w-[75px] my-auto' />
-                <p className='font-bold text-justify '>{itemData.seller.description}</p>
+            </div>
+            <div className='flex gap-2 mb-1'>
+                <Image alt='seller logo' src={itemData.seller.url} width={50} height={50} className='rounded-lg m-0 relative h-[70px] w-[70px] my-auto' />
+                <p className='font-bold'>{itemData.seller.description}</p>
             </div>
             <div>
               <TrustMeter ratings={itemData.seller.ratings} />
@@ -24,7 +24,7 @@ const MapMarkerPopup = () => {
 
             {/* Items List */}
             <h2 className={`${SUBHEADER} text-base`}>Seller items for sale</h2>
-            <div className="seller_item_container mb-2 max-h-[200px] overflow-auto">
+            <div className="seller_item_container mb-1 max-h-[200px] overflow-auto">
                 <ul>
                     {itemData.items.map((item) => (
                         <div key={item.id} className='flex gap-2'>
@@ -34,7 +34,7 @@ const MapMarkerPopup = () => {
                     ))}
                 </ul>
             </div>
-            <p className='font-bold'>Distance: <span>XXX km</span> away</p>
+            <div className='font-bold m-3'>Distance: <span>XXX km</span> away</div>
         
             <div className="flex justify-between space-x-4 gap-2 text-lg">
                 <Link

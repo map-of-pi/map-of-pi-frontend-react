@@ -40,7 +40,9 @@ const SellerRegistrationForm = () => {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto bg-zinc-100 dark:bg-zinc-800 rounded-lg shadow-md h-screen">
+    <>
+    {/* <div className="p-4 max-w-md mx-auto bg-zinc-100 dark:bg-zinc-800 rounded-lg shadow-md h-screen"> */}
+    <div className="p-4 max-w-md mx-auto ">
       <h2 className="text-lg font-semibold mb-4">Add/Edit Seller Registration</h2>
       <div className="mb-4">
         <label className={LABEL_CLASS}>Seller items for sale</label>
@@ -154,6 +156,7 @@ const SellerRegistrationForm = () => {
         Save
       </button>
     </div>
+    </>
   );
 };
 
