@@ -1,14 +1,16 @@
 'use client';
 
+import styles from './PrivacyPolicy.module.css';
+
 import { useTranslations } from 'next-intl';
 
-import styles from './PrivacyPolicy.module.css';
+import { CloseButton } from '@/components/shared/Forms/Buttons/Buttons';
 
 const PrivacyPolicyModel = (props: any) => {
   
   const t = useTranslations();
 
-  const lastUpdated = '5/5/2024';
+  const lastUpdated = '6/3/2024';
   const emailAddress = 'email@mapofpi.com';
 
   return (
@@ -20,6 +22,7 @@ const PrivacyPolicyModel = (props: any) => {
             onClick={() => props.setTogglePrivacyPolicy(false)}>
           </div>
           <div className={styles.model_body}>
+            <CloseButton onClick={() => props.setTogglePrivacyPolicy(false)}/>
             <div className={styles.privacy_policy_content}>
               <h2><strong>Map of Pi {t('PRIVACY_POLICY.TITLE')}</strong></h2>
               <h4>{t('PRIVACY_POLICY.LAST_UPDATED')}: {lastUpdated}</h4>
