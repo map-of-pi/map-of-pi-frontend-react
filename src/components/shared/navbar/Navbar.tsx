@@ -43,8 +43,8 @@ function Navbar() {
   return (
     <>
       <div
-        className={`${styles.navbar} bg-[#386F4F] dark:bg-[#212121] fixed top-0 left-0 right-0 `}>
-        <div className="text-center text-[#F6C367] text-[1.5rem] font-semibold">
+        className={`${styles.navbar} bg-primary dark:bg-[#212121] fixed top-0 left-0 right-0 `}>
+        <div className="text-center text-secondary text-[1.5rem] font-semibold">
         Map of Pi          
         </div>
         <div className={`flex ${checkHomePage ? 'justify-end' : 'justify-between'}`}>
@@ -53,7 +53,7 @@ function Navbar() {
               <Link href="/" style={{ height: '24px' }} onClick={handleBackBtn}>
                 <IoMdArrowBack
                   size={26}
-                  className="text-[#F6C367] dark:text-[#FFFFFF]"
+                  className="text-secondary dark:text-[#FFFFFF]"
                 />
               </Link>
             </div>
@@ -63,7 +63,7 @@ function Navbar() {
               <Link href="/" style={{ height: '24px' }}>
                 <MdHome
                   size={24}
-                  className="text-[#F6C367] dark:text-[#FFFFFF]"
+                  className="text-secondary dark:text-[#FFFFFF]"
                 />
               </Link>
             </div>
@@ -74,12 +74,12 @@ function Navbar() {
               {sidebarToggle ? (
                 <IoMdClose
                   size={24}
-                  className="text-[#F6C367] dark:text-[#FFFFFF]"
+                  className="text-secondary dark:text-[#FFFFFF]"
                 />
               ) : (
                 <FiMenu
                   size={24}
-                  className="text-[#F6C367] dark:text-[#FFFFFF]"
+                  className="text-secondary dark:text-[#FFFFFF]"
                 />
               )}
             </Link>

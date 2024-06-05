@@ -81,7 +81,7 @@ const SearchBar: React.FC = () => {
           </FormControl>
           <IconButton
             aria-label="search"
-            className="bg-[#386F4F] rounded h-full w-15 p-[15.5px] flex items-center justify-center hover:bg-gray-600" 
+            className="bg-primary rounded h-full w-15 p-[15.5px] flex items-center justify-center hover:bg-gray-600" 
             onClick={handleSubmitSearch}>
             <SearchIcon className="text-[#ffc153]" />
           </IconButton>
