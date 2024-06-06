@@ -7,7 +7,7 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import MapPopupCard from './NewMapCard';
+import MapMarkerPopup from './MapMarkerPopup';
 import { dummyCoordinates } from '../../../constants/coordinates';
 import { Button, YellowBtn } from '../Forms/Buttons/Buttons';
 import { IoMdAdd } from 'react-icons/io';
@@ -57,7 +57,7 @@ function Map() {
         zoom={13}
         zoomControl={false}
         // scrollWheelZoom={false}
-        className="w-full flex-1 fixed top-[55px] h-[calc(100vh-55px)] left-0 right-0 bottom-0">
+        className="w-full flex-1 fixed top-[90px] h-[calc(100vh-55px)] left-0 right-0 bottom-0">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -65,8 +65,8 @@ function Map() {
         <LocationMarker />
         {dummyCoordinates.map((coord, i) => (
           <Marker position={coord} key={i} icon={customIcon}>
-            <Popup>
-              <MapPopupCard />
+            <Popup closeButton={false}>
+              <MapMarkerPopup />
             </Popup>
           </Marker>
         ))}

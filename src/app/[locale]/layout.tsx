@@ -4,7 +4,7 @@ import '../global.css';
 import { Providers } from '../providers';
 import { Roboto } from 'next/font/google';
 
-const roboto = Roboto({ weight: '400', subsets: ['latin'] });
+const roboto = Roboto({ weight: '400', subsets: ['latin'], display: 'swap' });
 
 export default function LocaleLayout({
   children,
@@ -63,10 +63,10 @@ export default function LocaleLayout({
           sizes="16x16"
           href="/favicon-16x16.png"
         />
-        <link
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
           rel="stylesheet"
-        />
+        /> */}
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
@@ -86,7 +86,7 @@ export default function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Navbar />
-            <div className='pt-14'>{children}</div>
+            <div className='pt-[110px]'>{children}</div>
           </Providers>
         </NextIntlClientProvider>
       </body>

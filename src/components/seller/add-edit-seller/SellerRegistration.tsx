@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const INPUT_CLASS = 'w-full p-2 border rounded-lg';
 const BUTTON_CLASS = 'w-full p-2 rounded-lg';
@@ -39,7 +40,9 @@ const SellerRegistrationForm = () => {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto bg-zinc-100 dark:bg-zinc-800 rounded-lg shadow-md h-screen">
+    <>
+    {/* <div className="p-4 max-w-md mx-auto bg-zinc-100 dark:bg-zinc-800 rounded-lg shadow-md h-screen"> */}
+    <div className="p-4 max-w-md mx-auto ">
       <h2 className="text-lg font-semibold mb-4">Add/Edit Seller Registration</h2>
       <div className="mb-4">
         <label className={LABEL_CLASS}>Seller items for sale</label>
@@ -66,9 +69,11 @@ const SellerRegistrationForm = () => {
       </div>
       <div className="mb-4">
         <label className={LABEL_CLASS}>Reviews Score </label>
-        <button className={`${BUTTON_CLASS} border border-green-600 text-green-600`}>
+        <Link href="/feedback-for-seller">
+         <button className={`${BUTTON_CLASS} border border-green-600 text-green-600`}>
           Check Reviews
-        </button>
+         </button>
+        </Link>
       </div>
       <div className="mb-4">
         <label className={LABEL_CLASS}>Seller Name</label>
@@ -151,6 +156,7 @@ const SellerRegistrationForm = () => {
         Save
       </button>
     </div>
+    </>
   );
 };
 

@@ -1,15 +1,17 @@
 'use client';
 
+import styles from './PrivacyPolicy.module.css';
+
 import { useTranslations } from 'next-intl';
 
-import styles from './PrivacyPolicy.module.css';
+import { CloseButton } from '@/components/shared/Forms/Buttons/Buttons';
 
 const PrivacyPolicyModel = (props: any) => {
   
   const t = useTranslations();
 
-  const lastUpdated = '5/5/2024';
-  const emailAddress = 'mapofpi@gmail.com';
+  const lastUpdated = '6/3/2024';
+  const emailAddress = 'email@mapofpi.com';
 
   return (
     <>
@@ -20,6 +22,7 @@ const PrivacyPolicyModel = (props: any) => {
             onClick={() => props.setTogglePrivacyPolicy(false)}>
           </div>
           <div className={styles.model_body}>
+            <CloseButton onClick={() => props.setTogglePrivacyPolicy(false)}/>
             <div className={styles.privacy_policy_content}>
               <h2><strong>Map of Pi {t('PRIVACY_POLICY.TITLE')}</strong></h2>
               <h4>{t('PRIVACY_POLICY.LAST_UPDATED')}: {lastUpdated}</h4>
@@ -103,9 +106,9 @@ const PrivacyPolicyModel = (props: any) => {
               <h2>8. {t('PRIVACY_POLICY.SECTIONS.HEADER_8')}</h2>
               <ul>
                 <li>
-                  {t('PRIVACY_POLICY.SECTIONS.CONTENT_8_1')} &#64;{' '}
+                  {t('PRIVACY_POLICY.SECTIONS.CONTENT_8_1')}
                   <strong>
-                    <a href={`mailto:${emailAddress}`}>Map of Pi</a>
+                    <a href={`mailto:${emailAddress}`}>{' ' + emailAddress}</a>
                   </strong>
                   .
                 </li>
