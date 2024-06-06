@@ -117,7 +117,7 @@ export default function Page() {
                 <h2 className={SUBHEADER}>Seller address or whereabouts</h2>
                 <p>{itemData.seller.address}</p>
                 <button 
-                className="outline outline-[#386F4F] text-[#F6C367] hover:bg-[#386F4F] hover:text-white  py-1 px-6 mt-2 rounded-md"
+                className="outline outline-primary text-secondary hover:bg-primary hover:text-white  py-1 px-6 mt-2 rounded-md"
                 onClick={() => handleNavigation('location')}
                 >
                     Navigate
@@ -151,7 +151,7 @@ export default function Page() {
                 <button
                     onClick={handleSave}
                     disabled={!isSaveEnabled}
-                    className={`${isSaveEnabled ? "opacity-100" : "opacity-50"} px-6 py-2 bg-[#386F4F] text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}
+                    className={`${isSaveEnabled ? "opacity-100" : "opacity-50"} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}
                 >
                     Save
                 </button>
@@ -166,7 +166,7 @@ export default function Page() {
                 </div>
                 <div className='flex items-center gap-2'>
                     <p className='text-sm'>Reviews Score: {itemData.seller.ratings} out of 5.0</p>
-                    <button className="outline outline-[#8DBE95] hover:bg-[#386F4F] hover:text-white text-xl text-yellow-500 py-2 px-4 rounded-md flex justify-right ms-auto"
+                    <button className="outline outline-[#8DBE95] hover:bg-primary hover:text-white text-xl text-secondary py-2 px-4 rounded-md flex justify-right ms-auto"
                         onClick={()=>handleNavigation('review')}
                     >
                         Check Reviews

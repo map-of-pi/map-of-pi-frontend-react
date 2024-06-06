@@ -66,7 +66,7 @@ export default function EmojiPicker(props: any) {
                             <li
                                 key={index}
                                 onClick={() => !props.clickDisabled ? handleEmojiClick(emoji.value) : undefined}
-                                className={`${selectedEmoji !== emoji.value ? 'bg-[#3D924A8A]' : 'bg-[#386F4F]'} outline-[#090C49] ${emojiBtnClass}`}
+                                className={`${selectedEmoji !== emoji.value ? 'bg-[#3D924A8A]' : 'bg-primary'} outline-[#090C49] ${emojiBtnClass}`}
                             >
                                 <div>
                                     <p className='text-3xl py-2'>{emoji.unicode}</p>

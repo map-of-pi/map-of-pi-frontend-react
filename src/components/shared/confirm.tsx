@@ -26,7 +26,7 @@ const ConfirmDialog = ({ show, onClose, setConfirm, message, url }:any) => {
                     <div className="flex justify-center space-x-4">
                         <button
                             onClick={handleClicked}
-                            className="px-4 py-2 bg-[#386F4F] text-[#F6C367] text-xl rounded-md"
+                            className="px-4 py-2 bg-primary text-secondary text-xl rounded-md"
                         >
                             Confirm
                         </button>
