@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: 'var(--default-primary-color)',
+        secondary: 'var(--default-secondary-color)',  
+      },
       height: {
         100: '25rem',
       },
