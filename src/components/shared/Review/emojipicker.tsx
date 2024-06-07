@@ -52,7 +52,7 @@ export default function EmojiPicker(props: any) {
                     >
                         <div>
                             <p className='text-3xl py-2'>{despairEmoji.unicode}</p>
-                            <p>{despairEmoji.name}</p>
+                            <p className='md:text-[16px] text-[14px]'>{despairEmoji.name}</p>
                             {props.reviews && (
                                 <p>{getReview(props.reviews, despairEmoji.name)}</p>
                             )}
@@ -60,17 +60,17 @@ export default function EmojiPicker(props: any) {
                     </div>
                 </div>
                 <div className='bg-[#3D924A8A] rounded-[10px] w-full p-2 text-center text-white'>
-                    <p className='mb-2'>Trust</p>
+                    <p className='mb-2'>Trustworthy</p>
                     <div id='emoji-picker' className='flex gap-3 justify-center'>
                         {emojis.map((emoji, index) => (
                             <li
                                 key={index}
                                 onClick={() => !props.clickDisabled ? handleEmojiClick(emoji.value) : undefined}
-                                className={`${selectedEmoji !== emoji.value ? 'bg-[#3D924A8A]' : 'bg-[#386F4F]'} outline-[#090C49] ${emojiBtnClass}`}
+                                className={`${selectedEmoji !== emoji.value ? 'bg-transparent' : 'bg-[#386F4F]'} outline-[#090C49] ${emojiBtnClass}`}
                             >
                                 <div>
-                                    <p className='text-3xl py-2'>{emoji.unicode}</p>
-                                    <p>{emoji.name}</p>
+                                    <p className='text-3xl md:py-2 py-1'>{emoji.unicode}</p>
+                                    <p className='md:text-[16px] text-[14px]'>{emoji.name}</p>
                                     {props.reviews && (
                                         <p>{getReview(props.reviews, emoji.name)}</p>
                                     )}                                 

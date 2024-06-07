@@ -2,9 +2,9 @@ import { NextIntlClientProvider, useMessages } from 'next-intl';
 import Navbar from '@/components/shared/navbar/Navbar';
 import '../global.css';
 import { Providers } from '../providers';
-import { Roboto } from 'next/font/google';
+import { Lato } from 'next/font/google';
 
-const roboto = Roboto({ weight: '400', subsets: ['latin'], display: 'swap' });
+const lato = Lato({ weight: '400', subsets: ['latin'], display: 'swap' });
 
 export default function LocaleLayout({
   children,
@@ -82,7 +82,7 @@ export default function LocaleLayout({
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </head>
       <body
-        className={`bg-[#F1F7FF] dark:bg-[#000000D2] text-black dark:text-white ${roboto.className}`}>
+        className={`bg-[#F1F7FF] dark:bg-[#000000D2] text-black dark:text-white ${lato.className}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Navbar />
