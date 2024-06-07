@@ -5,7 +5,6 @@ import styles from './Info.module.css';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { useState } from 'react';
 
@@ -13,15 +12,9 @@ import { CloseButton } from '@/components/shared/Forms/Buttons/Buttons';
 
 const InfoModel = (props: any) => {
 
-  const router = useRouter()
   const t = useTranslations();
 
   const [version, setVersion] = useState('V1.0.0');
-
-  const handleLinking = (route: any) => {
-    router.push(`/${route}`)
-    props.setToggleInfo(false)
-  }
 
   return (
     <>
