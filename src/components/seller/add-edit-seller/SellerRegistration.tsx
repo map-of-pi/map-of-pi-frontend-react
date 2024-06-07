@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -69,7 +68,7 @@ const SellerRegistrationForm = () => {
       </div>
       <div className="mb-4">
         <label className={LABEL_CLASS}>Reviews Score </label>
-        <Link href="/feedback-for-seller">
+        <Link href="/seller/seller-reviews">
          <button className={`${BUTTON_CLASS} border border-green-600 text-green-600`}>
           Check Reviews
          </button>
