@@ -11,11 +11,27 @@ export const AddButton = (props: any) => {
 };
 
 export const Button = (props: any) => {
-  const {styles, icon, label, disabled, onClick} = props;
+  const { styles, icon, label, disabled, onClick } = props;
   return (
     <button
       className={`px-4 py-1 ${disabled ? `bg-[grey]` : `bg-[#386F4F]`} text-white rounded-md flex gap-1 cursor-pointer items-center justify-center `}
-      style={styles} disabled={disabled} onClick={onClick}>
+      style={styles}
+      disabled={disabled}
+      onClick={onClick}>
+      {icon && icon}
+      {label && label}
+    </button>
+  );
+};
+
+export const OutlineBtn = (props: any) => {
+  const { styles, icon, label, disabled, onClick } = props;
+  return (
+    <button
+      className={`px-4 py-1 gap-1 cursor-pointer items-center justify-center outline outline-[#386F4F] outline-[1.5px] hover:bg-[#386F4F] hover:text-white text-yellow-500 rounded-md flex`}
+      style={styles}
+      disabled={disabled}
+      onClick={onClick}>
       {icon && icon}
       {label && label}
     </button>
