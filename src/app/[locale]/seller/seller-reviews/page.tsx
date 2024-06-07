@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 
@@ -62,7 +63,9 @@ function SellerReviews() {
                   height={60}
                 />
               </div>
-              <OutlineBtn label="Reply" />
+              <Link href="/feedback-for-seller">
+                <OutlineBtn label="Reply"/>
+              </Link>
             </div>
           </div>
         ))}
