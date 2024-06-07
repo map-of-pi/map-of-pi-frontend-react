@@ -1,4 +1,3 @@
-import React from 'react';
 import SellerRegistration from '@/components/seller/add-edit-seller/SellerRegistration';
 
 const SellerRegistrationPage: React.FC = () => {
