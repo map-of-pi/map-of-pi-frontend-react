@@ -1,8 +1,9 @@
 import { NextIntlClientProvider, useMessages } from 'next-intl';
-import Navbar from '@/components/shared/navbar/Navbar';
-import '../global.css';
-import { Providers } from '../providers';
 import { Lato } from 'next/font/google';
+
+import { Providers } from '../providers';
+
+import Navbar from '@/components/shared/navbar/Navbar';
 
 const lato = Lato({ weight: '400', subsets: ['latin'], display: 'swap' });
 

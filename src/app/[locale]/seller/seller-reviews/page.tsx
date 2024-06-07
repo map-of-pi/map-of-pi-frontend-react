@@ -1,6 +1,6 @@
-import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import Image from 'next/image';
-import React from 'react';
+
+import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 
 function SellerReviews() {
   interface ReviewInt {
@@ -48,7 +48,7 @@ function SellerReviews() {
               <p>{item.date}</p>
               <p>{item.time}</p>
             </div>
-            <div className="text-[#3D9264] mb-3">{item.user}</div>
+            <div className="text-primary mb-3">{item.user}</div>
             <div className="flex justify-between items-center">
               <div className="flex">
                 <div className="mr-4">

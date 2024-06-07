@@ -1,16 +1,18 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
 import TrustMeter from '@/components/seller/TrustMeter';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
+import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+
 import { itemData } from '@/constants/demoAPI';
-import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 
 export default function Page() {
   const t = useTranslations();
@@ -53,7 +55,7 @@ export default function Page() {
     setComments(e.target.value);
   };
 
-  // Function to set emoji button value (null or 0 to 4 )
+  // Function to set emoji button value (null or 0 to 4)
   const handleEmojiSelect = (emoji: any) => {
     setReviewEmoji(emoji);
   };
@@ -62,7 +64,6 @@ export default function Page() {
   const handleSave = () => {
     // Function to save data to the database
     // Example: saveData({ files, comments, reviewEmoji });
-
     setIsSaveEnabled(false);
   };
 
@@ -77,70 +78,11 @@ export default function Page() {
     }
   };
 
-    const SUBHEADER = "font-bold mb-2";
-
-    return (
-        <div className="bg-[#FFFFFF] w-full md:w-[500px] md:mx-auto p-4">
-            <h1 className='mb-5 font-bold text-2xl'>Buy From Seller</h1>
-
-            {/* Seller Profile */}
-            <div className='flex gap-4 align-center mb-6'>
-                <Image alt='seller logo' src={itemData.seller.url} width={100} height={100} className='rounded-[100%]' />
-                <div className='my-auto'>
-                    <h2 className='font-bold mb-2'>{itemData.seller.business}</h2>
-                    <p className='text-sm'>{itemData.seller.category}</p>
-                </div>
-            </div>
-
-            {/* Seller Description */}
-            <div className='mb-5'>
-                <h2 className={SUBHEADER}>Seller Description</h2>
-                <p className='text-justify'>{itemData.seller.description}</p>
-            </div>
-
-            {/* Items List */}
-            <h2 className={SUBHEADER}>Seller items for sale</h2>
-            <div className="seller_item_container mb-6">
-                <ul>
-                    {itemData.items.map((item) => (
-                        <div key={item.id} className='flex gap-2'>
-                            <li>{item.name}</li>
-                            <li>{item.price}Pi</li>
-                        </div>
-                    ))}
-                </ul>
-            </div>
-
-            {/* Seller Location */}
-            <div className='mb-6'>
-                <h2 className={SUBHEADER}>Seller address or whereabouts</h2>
-                <p>{itemData.seller.address}</p>
-                <button 
-                className="outline outline-primary text-secondary hover:bg-primary hover:text-white  py-1 px-6 mt-2 rounded-md"
-                onClick={() => handleNavigation('location')}
-                >
-                    Navigate
-                </button>
-            </div>
-
-            {/* Leave a Review */}
-            <div className='mb-3'>
-                <h2 className={SUBHEADER}>Leave a review</h2>
-                <p>Select the face which shows how you feel about the above Seller</p>
-                <EmojiPicker onSelect={handleEmojiSelect} />
-            </div>
-
-            <div className='mb-2'>
-                <TextArea placeholder={'Enter additional comments here...'}
-                    value={comments}
-                    onChange={handleCommentsChange}
-                />
-            </div>
+  const SUBHEADER = "font-bold mb-2";
 
   return (
     <div className="w-full md:w-[500px] md:mx-auto p-4">
       <h1 className="mb-5 font-bold text-lg md:text-2xl">Buy From Seller</h1>
-
 
       {/* Seller Profile */}
       <div className="flex gap-4 align-center mb-6 relative">
@@ -210,7 +152,7 @@ export default function Page() {
         <button
           onClick={handleSave}
           disabled={!isSaveEnabled}
-          className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-[#386F4F] text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
+          className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
           Save
         </button>
       </div>
@@ -259,7 +201,6 @@ export default function Page() {
         message="You have unsaved changes. Do you really want to leave?"
         url={linkUrl} 
       />
-    </div>
     </div>
   );
 }
