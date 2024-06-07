@@ -260,5 +260,6 @@ export default function Page() {
         url={linkUrl} 
       />
     </div>
+    </div>
   );
 }
