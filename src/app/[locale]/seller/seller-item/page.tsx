@@ -77,11 +77,70 @@ export default function Page() {
     }
   };
 
-  const SUBHEADER = 'font-bold mb-2';
+    const SUBHEADER = "font-bold mb-2";
+
+    return (
+        <div className="bg-[#FFFFFF] w-full md:w-[500px] md:mx-auto p-4">
+            <h1 className='mb-5 font-bold text-2xl'>Buy From Seller</h1>
+
+            {/* Seller Profile */}
+            <div className='flex gap-4 align-center mb-6'>
+                <Image alt='seller logo' src={itemData.seller.url} width={100} height={100} className='rounded-[100%]' />
+                <div className='my-auto'>
+                    <h2 className='font-bold mb-2'>{itemData.seller.business}</h2>
+                    <p className='text-sm'>{itemData.seller.category}</p>
+                </div>
+            </div>
+
+            {/* Seller Description */}
+            <div className='mb-5'>
+                <h2 className={SUBHEADER}>Seller Description</h2>
+                <p className='text-justify'>{itemData.seller.description}</p>
+            </div>
+
+            {/* Items List */}
+            <h2 className={SUBHEADER}>Seller items for sale</h2>
+            <div className="seller_item_container mb-6">
+                <ul>
+                    {itemData.items.map((item) => (
+                        <div key={item.id} className='flex gap-2'>
+                            <li>{item.name}</li>
+                            <li>{item.price}Pi</li>
+                        </div>
+                    ))}
+                </ul>
+            </div>
+
+            {/* Seller Location */}
+            <div className='mb-6'>
+                <h2 className={SUBHEADER}>Seller address or whereabouts</h2>
+                <p>{itemData.seller.address}</p>
+                <button 
+                className="outline outline-primary text-secondary hover:bg-primary hover:text-white  py-1 px-6 mt-2 rounded-md"
+                onClick={() => handleNavigation('location')}
+                >
+                    Navigate
+                </button>
+            </div>
+
+            {/* Leave a Review */}
+            <div className='mb-3'>
+                <h2 className={SUBHEADER}>Leave a review</h2>
+                <p>Select the face which shows how you feel about the above Seller</p>
+                <EmojiPicker onSelect={handleEmojiSelect} />
+            </div>
+
+            <div className='mb-2'>
+                <TextArea placeholder={'Enter additional comments here...'}
+                    value={comments}
+                    onChange={handleCommentsChange}
+                />
+            </div>
 
   return (
     <div className="w-full md:w-[500px] md:mx-auto p-4">
       <h1 className="mb-5 font-bold text-lg md:text-2xl">Buy From Seller</h1>
+
 
       {/* Seller Profile */}
       <div className="flex gap-4 align-center mb-6 relative">

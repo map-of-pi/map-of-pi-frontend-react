@@ -144,7 +144,7 @@ function Sidebar(props: any) {
                     width: '100%',
                     height: '50px',
                     padding: '10px',
-                    borderColor: '#386F4F',
+                    borderColor: 'var(--default-primary-color)',
                     borderWidth: '2px',
                   }}
                   onClick={() => props.setToggleDis(false)} // Close sidebar on click

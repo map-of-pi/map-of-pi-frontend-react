@@ -1,5 +1,6 @@
-import React from 'react';
 import styles from './Buttons.module.css';
+
+import { IoMdClose } from 'react-icons/io';
 import { RiAddFill } from 'react-icons/ri';
 
 export const AddButton = (props: any) => {
@@ -43,11 +44,21 @@ export const YellowBtn = (props: any) => {
     <div>
       <button
         onClick={props.handleClick}
-        className="btn bg-yellow-500 flex gap-1 cursor-pointer items-center font-bold text-[20px] p-2 w-full text-left rounded-[px] mb-2"
+        className="btn bg-secondary flex gap-1 cursor-pointer items-center font-bold text-[20px] p-2 w-full text-left rounded-[px] mb-2"
         style={props.styles}>
         {props.icon && props.icon}
         {props.text && props.text}
       </button>
     </div>
+  );
+};
+
+export const CloseButton = (props: any) => {
+  return (
+    <IoMdClose
+      size={24}
+      className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 cursor-pointer"
+      onClick={props.onClick}
+    />
   );
 };

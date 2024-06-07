@@ -39,14 +39,14 @@ const MapMarkerPopup = () => {
             <div className="flex justify-between space-x-4 gap-2 text-lg">
                 <Link
                 href={'/seller/seller-item'} //change to items list screen
-                className="px-3 py-1 bg-[#386F4F] rounded-md w-full flex justify-center"
+                className="px-3 py-1 bg-primary rounded-md w-full flex justify-center"
                 >
-                    <span className='text-[#F6C367]'>Buy</span>
+                    <span className='text-secondary'>Buy</span>
                     {/* <Link href={'/seller/seller-item'} className='text-[#F6C367]'>Buy</Link> */}
                 </Link>
                 <Link
                 href={'/seller/seller-item'} // change to navigate url
-                className="px-3 py-1 outline outline-[1px] outline-[#386F4F]  rounded-md w-full flex justify-center"
+                className="px-3 py-1 outline outline-[1px] outline-primary rounded-md w-full flex justify-center"
                 >
                     <span className='text-[#F6C367]'>Navigate</span>
                 </Link>
