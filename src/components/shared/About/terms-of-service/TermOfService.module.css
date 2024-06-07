@@ -12,6 +12,7 @@
 }
 
 .model_body {
+  position: relative;
   width: 500px;
   max-width: 500px;
   height: 90vh;
