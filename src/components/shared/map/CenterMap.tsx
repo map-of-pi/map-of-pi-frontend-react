@@ -6,10 +6,18 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './CenterMap.css';
 
-const centerIcon = new L.Icon({
-  iconUrl: '/images/icons/crosshair.png', // Update this path to your icon's path
+// Define the crosshair icon for the center of the map
+const crosshairIcon = new L.Icon({
+  iconUrl: '/images/icons/crosshair.png',
   iconSize: [32, 32],
   iconAnchor: [16, 16],
+});
+
+// Define the pin icon for the saved location
+const pinIcon = new L.Icon({
+  iconUrl: '/images/icons/map_of_pi_logo.svg',
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
 });
 
 const CenterMarker = () => {
@@ -19,7 +27,7 @@ const CenterMarker = () => {
     },
   });
 
-  return null; // We don't need to render anything here as we are using the icon method
+  return null; // We don't to render anything here as we are using the icon method
 };
 
 const CenterMap = () => {
