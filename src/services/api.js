@@ -6,61 +6,57 @@ const API = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
 });
 
-
 // Fetch a single pioneer user
 export const fetchUser = async (userId) => {
-    try {
-      const response = await API.get(`/user/${userId}`);
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching pioneer user with ID ${userId}:`, error);
-      throw error;
-    }
+  try {
+    const response = await API.get(`/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching pioneer user with ID ${userId}:`, error);
+    throw error;
+  }
 };
-
 
 // Fetch a single pioneer user configuration settings
 export const fetchUserSettings = async (userId) => {
-    try {
-      const response = await API.get(`/user/${userId}`);
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching pioneer user configuration settings with ID ${userId}:`, error);
-      throw error;
-    }
+  try {
+    const response = await API.get(`/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching pioneer user configuration settings with ID ${userId}:`, error);
+    throw error;
+  }
 };
 
-// Register a new seller
-export const createUserSettings = async (formData) => {
-    try {
-      const response = await API.post(`/user/${userId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Error registering new seller:', error);
-      throw error;
-    }
+// Create new pioneer user settings
+export const createUserSettings = async (userId, formData) => {
+  try {
+    const response = await API.post(`/user/${userId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error registering new seller:', error);
+    throw error;
+  }
 };
-  
 
 // Update pioneer user settings
 export const updateUserSettings = async (userId, formData) => {
-    try {
-      const response = await API.put(`/user/${userId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error(`Error updating pioneer user configuration settings with ID ${userId}:`, error);
-      throw error;
-    }
+  try {
+    const response = await API.put(`/user/${userId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating pioneer user configuration settings with ID ${userId}:`, error);
+    throw error;
+  }
 };
-
 
 // Fetch all sellers
 export const fetchSellers = async () => {
@@ -127,13 +123,11 @@ export const deleteSeller = async (sellerId) => {
 
 // Fetch a seller ReviewFeedback
 export const fetchSellerReview = async (sellerId) => {
-    try {
-      const response = await API.get(`/seller/${sellerId}`);
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching Review of seller with ID ${sellerId}:`, error);
-      throw error;
-    }
-  };
-
-
+  try {
+    const response = await API.get(`/seller/${sellerId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching Review of seller with ID ${sellerId}:`, error);
+    throw error;
+  }
+};
