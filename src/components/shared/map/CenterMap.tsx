@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './CenterMap.css';
@@ -21,7 +21,13 @@ const pinIcon = new L.Icon({
 });
 
 const CenterMarker = ({ position }) => {
-  return <Marker position={position} icon={pinIcon} />;
+  return (
+    <Marker position={position} icon={pinIcon}>
+      <Tooltip permanent direction="top" offset={[0, -32]}>
+        You can move the map to adjust the location.
+      </Tooltip>
+    </Marker>
+  );
 };
 
 const CenterMap = () => {
@@ -54,12 +60,12 @@ const CenterMap = () => {
     mapRef.current = map;
     map.on('movestart', () => {
       setIsButtonVisible(false); // Hide the Save button on map move
+      setMarkerPosition(null); // Remove the dropped pin when the user starts moving the map again
     });
     map.on('moveend', () => {
       const center = map.getCenter();
       setMapCenter([center.lat, center.lng]);
       setIsButtonDisabled(false); // Enable the Save button on move
-      setMarkerPosition(null); // Remove the dropped pin
       setIsButtonVisible(true); // Show the Save button when map movement stops
     });
   };
@@ -133,19 +139,21 @@ const CenterMap = () => {
           </button>
         </section>
       )}
-      <div
-        className="crosshair-icon"
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          pointerEvents: 'none',
-          zIndex: 2000, // Ensure it's on top of the map
-        }}
-      >
-        <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
-      </div>
+      {!markerPosition && (
+        <div
+          className="crosshair-icon"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            pointerEvents: 'none',
+            zIndex: 2000, // Ensure it's on top of the map
+          }}
+        >
+          <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
+        </div>
+      )}
     </div>
   );
 };
