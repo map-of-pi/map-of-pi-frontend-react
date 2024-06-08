@@ -51,9 +51,11 @@ const CenterMap = () => {
 
   const handleMapReady = (map: L.Map) => {
     mapRef.current = map;
-    map.on('move', () => {
+    map.on('moveend', () => {
       const center = map.getCenter();
       setMapCenter([center.lat, center.lng]);
+      setIsButtonDisabled(false); // Enable the Save button on move
+      setMarkerPosition(null); // Remove the dropped pin
     });
   };
 
