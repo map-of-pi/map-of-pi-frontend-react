@@ -15,7 +15,7 @@ const MapMarkerPopup = () => {
                 <span className='ps-2'>({itemData.seller.ratings}/5.0)</span>
             </div>
             <div className='flex gap-2 mb-1'>
-                <Image alt='seller logo' src={itemData.seller.url} width={50} height={50} className='rounded-lg m-0 relative h-[70px] w-[70px] my-auto' />
+                <Image alt='seller logo' src={itemData.seller.image} width={50} height={50} className='rounded-lg m-0 relative h-[70px] w-[70px] my-auto' />
                 <p className='font-bold'>{itemData.seller.description}</p>
             </div>
             <div>
@@ -25,14 +25,7 @@ const MapMarkerPopup = () => {
             {/* Items List */}
             <h2 className={`${SUBHEADER} text-base`}>Seller items for sale</h2>
             <div className="seller_item_container mb-1 max-h-[200px] overflow-auto">
-                <ul>
-                    {itemData.items.map((item) => (
-                        <div key={item.id} className='flex gap-2'>
-                            <li>{item.name}</li>
-                            <li>{item.price}Pi</li>
-                        </div>
-                    ))}
-                </ul>
+                <p>{itemData.seller.sale_items}</p>
             </div>
             <div className='font-bold m-3'>Distance: <span>XXX km</span> away</div>
         

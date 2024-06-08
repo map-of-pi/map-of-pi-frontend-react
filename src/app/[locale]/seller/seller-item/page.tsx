@@ -12,6 +12,7 @@ import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 
 import { fetchSingleSeller } from '@/services/api';
+import { itemData } from '@/constants/demoAPI';
 
 interface Seller {
   id: string;
@@ -59,20 +60,6 @@ export default function Page() {
   
     getSellerData();
   }, []);
-  
-  
-  {seller && (
-    <div className="flex gap-4 align-center mb-6 relative">
-      <div className="rounded-[50%] w-[65px] h-[65px] relative">
-        <Image alt="seller logo" src={seller.image} fill={true} className="rounded-[50%]" />
-      </div>
-      <div className="my-auto">
-        <h2 className="font-bold mb-2">{seller.name}</h2>
-        <p className="text-sm">pioneer</p>
-      </div>
-    </div>
-  )}
-  
 
   useEffect(() => {
     if (files.length === 0) return;
@@ -133,6 +120,8 @@ export default function Page() {
   if (error) {
     return <div>{error}</div>;
   }
+
+  // const seller = itemData.seller
 
   return (
     
