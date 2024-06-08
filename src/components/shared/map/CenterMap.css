@@ -5,7 +5,7 @@
   
   .map-controls__button {
     position: absolute;
-    top: 75%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 250px;
@@ -80,8 +80,8 @@
   }
   
   .popup-message__button--confirm {
-    padding: 0.8em 1.2em;
-    /* margin-top: 1.2rem; */
+    padding: 0.6em 1em;
+    margin-top: 1.2rem;
     min-width: 12.5rem;
     background-color: #1d724b;
     color: #ffffff;
