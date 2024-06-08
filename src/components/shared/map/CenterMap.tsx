@@ -31,7 +31,7 @@ const CenterMap = () => {
   const [popupDismissed, setPopupDismissed] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [markerPosition, setMarkerPosition] = useState<[number, number] | null>(null);
-  const [isSaveButtonVisible, setIsSaveButtonVisible] = useState(false); // New state for button visibility
+  const [isButtonVisible, setIsButtonVisible] = useState(true); // State to handle button visibility
   const mapRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
@@ -52,11 +52,15 @@ const CenterMap = () => {
 
   const handleMapReady = (map: L.Map) => {
     mapRef.current = map;
+    map.on('movestart', () => {
+      setIsButtonVisible(false); // Hide the Save button on map move
+    });
     map.on('moveend', () => {
       const center = map.getCenter();
       setMapCenter([center.lat, center.lng]);
       setIsButtonDisabled(false); // Enable the Save button on move
       setMarkerPosition(null); // Remove the dropped pin
+      setIsButtonVisible(true); // Show the Save button when map movement stops
     });
   };
 
@@ -76,7 +80,6 @@ const CenterMap = () => {
   const closePopup = () => {
     setShowPopup(false);
     setPopupDismissed(true);
-    setIsSaveButtonVisible(true); // Show the Save button
   };
 
   return (
@@ -93,7 +96,7 @@ const CenterMap = () => {
         />
         {markerPosition && <CenterMarker position={markerPosition} />}
       </MapContainer>
-      {isSaveButtonVisible && ( // Conditionally render the button
+      {isButtonVisible && (
         <div className="map-controls__item">
           <button
             className="map-controls__button"
@@ -138,7 +141,7 @@ const CenterMap = () => {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           pointerEvents: 'none',
-          zIndex: 2000,
+          zIndex: 2000, // Ensure it's on top of the map
         }}
       >
         <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
