@@ -100,7 +100,7 @@ export default function ReplyToReviewPage() {
             <div className="mb-4">
                 <p className="mb-2">{reviewData.reviewText}</p>
                 <p className="text-sm text-gray-600">{reviewData.reviewDate}</p>
-                <p className="text-sm text-gray-600">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER') + " " + reviewData.reviewer}</p>
+                <p className="text-sm text-gray-600">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', {buyer_id: reviewData.reviewer})}</p>
                 <div className="flex items-center mt-2">
                     <span className="mr-2">{reviewData.emoji}</span>
                     <span>{translateReactionRating(reviewData.emojiText)}</span>

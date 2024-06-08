@@ -37,32 +37,32 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe location where you are selling from"
     },
     "BUY_FROM_SELLER": {
-      "SELLER_TYPE_PIONEER": "Pioneer",
+      "BUY_FROM_SELLER_HEADER": "Buy from Seller",
       "SELLER_DESCRIPTION_LABEL": "Seller Description",
       "SELLER_SALE_ITEMS_LABEL": "Seller items for sale",
       "SELLER_ADDRESS_LOCATION_LABEL": "Seller Address or Location",
       "LEAVE_A_REVIEW_MESSAGE": "Leave a review",
       "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above seller",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload" 
-    },
-    "CHECK_REVIEWS_FEEDBACK": {
-      "CHECK_REVIEWS_FEEDBACK_HEADER": "List of Reviews left for",
-      "BY_REVIEWER": "By"
-    },
-    "REPLY_TO_REVIEW": {
-      "REPLY_TO_REVIEW_HEADER": "Reply to Review",
-      "BY_REVIEWER": "By",
-      "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
-      "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above review",
-      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
-      "REVIEWS_SCORE_MESSAGE": "Reviews Score: {{seller_review_rating}} out of 5.0",
+      "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Seller contact details",
       "SELLER_PI_ID_LABEL": "Seller pioneer ID",
       "SELLER_PHONE_LABEL": "Seller phone number", 
       "SELLER_EMAIL_LABEL": "Seller email" 
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "List of Reviews left for {seller_id}",
+      "BY_REVIEWER": "By {buyer_id}"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_HEADER": "Reply to Review",
+      "BY_REVIEWER": "By {buyer_id}",
+      "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above review",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload"
     }
   },
   "POPUP": {

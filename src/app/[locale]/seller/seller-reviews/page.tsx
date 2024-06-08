@@ -60,7 +60,7 @@ function SellerReviews() {
     <>
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <h1 className="text-[#333333] text-lg font-semibold dark:text-white md:font-bold md:text-2xl mb-1">
-        {t('SCREEN.CHECK_REVIEWS_FEEDBACK.CHECK_REVIEWS_FEEDBACK_HEADER') + " Femma"} 
+        {t('SCREEN.CHECK_REVIEWS_FEEDBACK.CHECK_REVIEWS_FEEDBACK_HEADER', {seller_id: 'Femma'})} 
         </h1>
         {ReviewData.map((item, index) => (
           <div key={index} className="border-b border-[#D9D9D9] py-4">
@@ -69,7 +69,7 @@ function SellerReviews() {
               <p>{item.date}</p>
               <p>{item.time}</p>
             </div>
-            <div className="text-primary mb-3">{t('SCREEN.CHECK_REVIEWS_FEEDBACK.BY_REVIEWER') + " " + item.user}</div>
+            <div className="text-primary mb-3">{t('SCREEN.CHECK_REVIEWS_FEEDBACK.BY_REVIEWER', {buyer_id: item.user})}</div>
             <div className="flex justify-between items-center">
               <div className="flex">
                 <div className="mr-4">
