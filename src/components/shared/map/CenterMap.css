@@ -24,6 +24,13 @@
     background-color: #164c36;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   }
+
+  .map-controls__button:disabled {
+    background-color: #aaa;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+}
   
   .popup-message {
     position: fixed;
