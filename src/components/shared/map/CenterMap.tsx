@@ -20,14 +20,8 @@ const pinIcon = new L.Icon({
   iconAnchor: [16, 32],
 });
 
-const CenterMarker = () => {
-  const map = useMapEvents({
-    move: () => {
-      // No operation needed here for the marker to move
-    },
-  });
-
-  return null; // We don't to render anything here as we are using the icon method
+const CenterMarker = ({ position }) => {
+  return <Marker position={position} icon={pinIcon} />;
 };
 
 const CenterMap = () => {
