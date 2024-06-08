@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './CenterMap.css';
@@ -31,6 +31,7 @@ const CenterMap = () => {
   const [popupDismissed, setPopupDismissed] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [markerPosition, setMarkerPosition] = useState<[number, number] | null>(null);
+  const [isSaveButtonVisible, setIsSaveButtonVisible] = useState(false); // New state for button visibility
   const mapRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
@@ -75,6 +76,7 @@ const CenterMap = () => {
   const closePopup = () => {
     setShowPopup(false);
     setPopupDismissed(true);
+    setIsSaveButtonVisible(true); // Show the Save button
   };
 
   return (
@@ -91,17 +93,19 @@ const CenterMap = () => {
         />
         {markerPosition && <CenterMarker position={markerPosition} />}
       </MapContainer>
-      <div className="map-controls__item">
-        <button
-          className="map-controls__button"
-          onClick={saveCenterToLocalStorage}
-          role="button"
-          tabIndex={0}
-          disabled={isButtonDisabled}
-        >
-          Save Center
-        </button>
-      </div>
+      {isSaveButtonVisible && ( // Conditionally render the button
+        <div className="map-controls__item">
+          <button
+            className="map-controls__button"
+            onClick={saveCenterToLocalStorage}
+            role="button"
+            tabIndex={0}
+            disabled={isButtonDisabled}
+          >
+            Save Center
+          </button>
+        </div>
+      )}
       {showPopup && (
         <section
           className="popup-message"
