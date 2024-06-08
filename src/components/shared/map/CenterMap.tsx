@@ -24,7 +24,10 @@ const CenterMarker = ({ position }) => {
   return (
     <Marker position={position} icon={pinIcon}>
       <Tooltip permanent direction="top" offset={[0, -32]}>
-        You can move the map to adjust the location.
+        <span style={{ fontSize: '14px', lineHeight: '1.5', padding: '5px', textAlign: 'center', display: 'block', color: '#333' }}>
+          Your set map location is saved!<br />
+          You can move the map to adjust the location.
+        </span>
       </Tooltip>
     </Marker>
   );
@@ -42,7 +45,7 @@ const CenterMap = () => {
   const intervalRef = useRef(null);  // Ref to manage the typing interval
 
   useEffect(() => {
-      typeText("Welcome to the Set Map Center Page! Please select your preferred central location on the map, then confirm by clicking 'Save Center'", 40);
+      typeText("Welcome to the Set Map Center Page! Please select your preferred central location on the map, then confirm by clicking 'Save Center'.", 40);
       return () => clearInterval(intervalRef.current);  // Cleanup function to clear the interval when the component unmounts
   }, []);
 
@@ -112,7 +115,7 @@ const closePopup = () => {
             tabIndex={0}
             disabled={isButtonDisabled}
           >
-            Save Center
+            Set Map Center
           </button>
         </div>
       )}
@@ -149,7 +152,7 @@ const closePopup = () => {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             pointerEvents: 'none',
-            zIndex: 2000, // Ensure it's on top of the map
+            zIndex: 2000,
           }}
         >
           <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
