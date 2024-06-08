@@ -12,11 +12,33 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 
-import { itemData } from '@/constants/demoAPI';
+// import { itemData } from '@/constants/demoAPI';
+import { fetchSingleSeller } from '@/services/api';
+
+interface Seller {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  address: string;
+  phone: number;
+  email: string;
+  sale_items: string;
+  average_rating: number;
+  trust_meter_rating: number;
+  type: string;
+  coordinates: [];
+  order_online_enabled_pref: boolean;
+};
+
 
 export default function Page() {
   const t = useTranslations();
   const router = useRouter();
+
+  const [seller, setSeller] = useState<Seller[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   const [files, setFiles] = useState<File[]>([]);
   const [previewImage, setPreviewImage] = useState<string[]>([]);
@@ -24,8 +46,36 @@ export default function Page() {
   const [reviewEmoji, setReviewEmoji] = useState(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-  // const [dialogueMessage, setDialogueMessage] = useState('')
   const [linkUrl, setLinkUrl] = useState('');
+
+
+  useEffect(() => {
+    const getSellerData = async () => {
+      try {
+        const data = await fetchSingleSeller()
+        setSeller(data)
+      } catch (error) {
+        setError('Error fetching market data')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    getSellerData()
+  }, [])
+
+  if (loading) {
+    return (
+    <div id="loading-screen">
+      <p>error loading seller data</p>
+    </div>
+    )
+  }
+
+  if (error) {
+    return <div>{error}</div>
+  }
+
 
   useEffect(() => {
     if (files.length === 0) return;
@@ -87,37 +137,30 @@ export default function Page() {
       {/* Seller Profile */}
       <div className="flex gap-4 align-center mb-6 relative">
         <div className="rounded-[50%] w-[65px] h-[65px] relative">
-          <Image alt="seller logo" src={itemData.seller.url} fill={true} className='rounded-[50%]' />
+          <Image alt="seller logo" src={seller.image} fill={true} className='rounded-[50%]' />
         </div>
         <div className="my-auto">
-          <h2 className="font-bold mb-2">{itemData.seller.business}</h2>
-          <p className="text-sm">{itemData.seller.category}</p>
+          <h2 className="font-bold mb-2">{seller.name}</h2>
+          <p className="text-sm">pioneer</p>
         </div>
       </div>
 
       {/* Seller Description */}
       <div className="mb-5">
         <h2 className={SUBHEADER}>Seller Description</h2>
-        <p className="">{itemData.seller.description}</p>
+        <p className="">{seller.description}</p>
       </div>
 
       {/* Items List */}
       <h2 className={SUBHEADER}>Seller items for sale</h2>
       <div className="seller_item_container mb-6">
-        <ul>
-          {itemData.items.map((item) => (
-            <div key={item.id} className="flex gap-2">
-              <li>{item.name}</li>
-              <li>{item.price}Pi</li>
-            </div>
-          ))}
-        </ul>
+        <p>{seller.sale_items}</p>
       </div>
 
       {/* Seller Location */}
       <div className="mb-6">
         <h2 className={`SUBHEADER`}>Seller address or whereabouts</h2>
-        <p className="mb-3">{itemData.seller.address}</p>
+        <p className="mb-3">{seller.address}</p>
         <OutlineBtn
           label="Navigate"
           onClick={() => handleNavigation('location')}
@@ -162,11 +205,11 @@ export default function Page() {
         <h2 className={SUBHEADER}>Reviews summary</h2>
         {/* Trust-O-meter */}
         <div>
-          <TrustMeter ratings={itemData.seller.ratings} />
+          <TrustMeter ratings={seller.trust_meter_rating} />
         </div>
         <div className="flex items-center justify-between mt-3">
           <p className="text-sm">
-            Reviews Score: {itemData.seller.ratings} out of 5.0
+            Reviews Score: {seller.trust_meter_rating} out of 5.0
           </p>
           {/* <button className="outline outline-[#8DBE95] hover:bg-[#386F4F] hover:text-white text-xl text-yellow-500 py-2 px-4 rounded-md flex justify-right ms-auto"
                         onClick={()=>handleNavigation('seller/seller-reviews')}
@@ -183,15 +226,15 @@ export default function Page() {
         <h2 className={`${SUBHEADER} mb-4`}>Seller contact details</h2>
         <div className="text-sm mb-3">
           <span className=" font-bold">Seller pioneer id: </span>
-          <span>{itemData.seller.pioneer_id}</span>
+          <span>{seller.seller_id}</span>
         </div>
         <div className="text-sm mb-3">
           <span className=" font-bold">Seller phone: </span>
-          <span>{itemData.seller.phone}</span>
+          <span>{seller.phone}</span>
         </div>
         <div className="text-sm mb-3">
           <span className=" font-bold">Seller email: </span>
-          <span>{itemData.seller.email}</span>
+          <span>{seller.email}</span>
         </div>
       </div>
       <ConfirmDialog
