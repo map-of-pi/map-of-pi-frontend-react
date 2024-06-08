@@ -47,8 +47,8 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload" 
     },
     "CHECK_REVIEWS_FEEDBACK": {
-      "CHECK_REVIEWS_FEEDBACK_HEADER": "List of Reviews left for {{seller_id}}",
-      "BY_REVIEWER": "By {{buyer_id}}"
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "List of Reviews left for",
+      "BY_REVIEWER": "By"
     },
     "REPLY_TO_REVIEW": {
       "REPLY_TO_REVIEW_HEADER": "Reply to Review",
@@ -158,6 +158,13 @@
       "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
       "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
       "SINGLE_PHOTO_MESSAGE": "One Photo Only"
+    },
+    "REACTION_RATING": {
+      "DESPAIR": "Despair",
+      "SAD": "Sad",
+      "OKAY": "Okay",
+      "HAPPY": "Happy",
+      "DELIGHT": "Delight"
     }
   }
 }

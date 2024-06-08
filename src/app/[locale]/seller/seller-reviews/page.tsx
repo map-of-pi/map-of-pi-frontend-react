@@ -1,9 +1,12 @@
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 
 function SellerReviews() {
+  const t = useTranslations();
+
   interface ReviewInt {
     heading: string;
     date: string;
@@ -19,7 +22,7 @@ function SellerReviews() {
       ' I am happy to let you all know that consumer to seller relationship is good.',
     date: '23 Oct. 2023',
     time: '01:00pm',
-    user: 'By peejenn',
+    user: 'peejenn',
     reaction: 'Happy',
     unicode: '🙂',
   };
@@ -30,17 +33,34 @@ function SellerReviews() {
         ' I am happy to let you all know that consumer to seller relationship is good.',
       date: '23 Oct. 2023',
       time: '01:00pm',
-      user: 'By peejenn',
+      user: 'peejenn',
       reaction: 'Happy',
       unicode: '🙂',
     }
   ].concat(ReviewsInfo,ReviewsInfo,ReviewsInfo,ReviewsInfo,ReviewsInfo);
 
+  const translateReactionRating = (reaction: string): string => {
+    switch (reaction) {
+      case 'Despair':
+        return t('SHARED.REACTION_RATING.DESPAIR');
+      case 'Sad':
+        return t('SHARED.REACTION_RATING.SAD');
+      case 'Okay':
+        return t('SHARED.REACTION_RATING.OKAY');
+      case 'Happy':
+        return t('SHARED.REACTION_RATING.HAPPY');
+      case 'Delight':
+        return t('SHARED.REACTION_RATING.DELIGHT');
+      default:
+        return reaction;
+    }
+  };
+
   return (
     <>
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <h1 className="text-[#333333] text-lg font-semibold dark:text-white md:font-bold md:text-2xl mb-1">
-          List of Reviews left for Femma
+        {t('SCREEN.CHECK_REVIEWS_FEEDBACK.CHECK_REVIEWS_FEEDBACK_HEADER') + " Femma"} 
         </h1>
         {ReviewData.map((item, index) => (
           <div key={index} className="border-b border-[#D9D9D9] py-4">
@@ -49,12 +69,12 @@ function SellerReviews() {
               <p>{item.date}</p>
               <p>{item.time}</p>
             </div>
-            <div className="text-primary mb-3">{item.user}</div>
+            <div className="text-primary mb-3">{t('SCREEN.CHECK_REVIEWS_FEEDBACK.BY_REVIEWER') + " " + item.user}</div>
             <div className="flex justify-between items-center">
               <div className="flex">
                 <div className="mr-4">
                   <span>{item.unicode}</span>{' '}
-                  <span className="text-sm">{item.reaction}</span>
+                  <span className="text-sm">{translateReactionRating(item.reaction)}</span>
                 </div>
                 <Image
                   src="/images/business/product.png"
@@ -64,7 +84,7 @@ function SellerReviews() {
                 />
               </div>
               <Link href="/feedback-for-seller">
-                <OutlineBtn label="Reply"/>
+                <OutlineBtn label={t('SHARED.REPLY')}/>
               </Link>
             </div>
           </div>
