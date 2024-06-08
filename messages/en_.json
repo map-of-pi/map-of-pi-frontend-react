@@ -1,0 +1,163 @@
+{
+  "HOME": {
+    "ADD_SELLER": "Sell",
+    "SEARCH_BAR_PLACEHOLDER": "Search for sellers or items"
+  },
+  "MAP_MARKER": {
+    "SELLER_SALE_ITEMS_FIELD": "Seller items for sale",
+    "DISTANCE_MESSAGE": "Distance: XXX km away"
+  },
+  "SIDE_NAVIGATION": {
+    "USER_PREFERENCES_HEADER": "User Preferences",
+    "EMAIL_ADDRESS_FIELD": "Your Email Address",
+    "PHONE_NUMBER_FIELD": "Your Phone Number",
+    "LANGUAGES": "Languages",
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "About Map of Pi",
+      "APP_VERSION": "App Version",
+      "PRIVACY_POLICY": "Privacy Policy",
+      "TERMS_OF_SERVICE": "Terms of Service"
+    },
+    "CONTACT_MAP_OF_PI": "Contact Map of Pi"
+  },
+  "SCREEN": {
+    "SELLER_REGISTRATION": {
+      "SELLER_REGISTRATION_HEADER": "Add/ Edit Seller Registration",
+      "SELLER_SALE_ITEMS_LABEL": "Seller items for sale",
+      "SELLER_SALE_ITEMS_PLACEHOLDER": "Describe your items for sale, price, etc.",
+      "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
+      "REVIEWS_SCORE_LABEL": "Reviews Score",
+      "SELLER_NAME": "Seller Name",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "Seller Type",
+        "SELLER_TYPE_OPTIONS": {
+          "PIONEER": "Pioneer",
+          "OTHER": "Other"
+        }
+      },
+      "SELLER_BUSINESS_NAME": "Seller Business Name",
+      "SELLER_DESCRIPTION": "Seller Description",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Seller Address or Location",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe location where you are selling from"
+    },
+    "BUY_FROM_SELLER": {
+      "SELLER_TYPE_PIONEER": "Pioneer",
+      "SELLER_DESCRIPTION_LABEL": "Seller Description",
+      "SELLER_SALE_ITEMS_LABEL": "Seller items for sale",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Seller Address or Location",
+      "LEAVE_A_REVIEW_MESSAGE": "Leave a review",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above seller",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload" 
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "List of Reviews left for {{seller_id}}",
+      "BY_REVIEWER": "By {{buyer_id}}"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_HEADER": "Reply to Review",
+      "BY_REVIEWER": "By {{buyer_id}}",
+      "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above review",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
+      "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
+      "REVIEWS_SCORE_MESSAGE": "Reviews Score: {{seller_review_rating}} out of 5.0",
+      "SELLER_CONTACT_DETAILS_LABEL": "Seller contact details",
+      "SELLER_PI_ID_LABEL": "Seller pioneer ID",
+      "SELLER_PHONE_LABEL": "Seller phone number", 
+      "SELLER_EMAIL_LABEL": "Seller email" 
+    }
+  },
+  "POPUP": {
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "Please report defects to {{org_email}}"
+    },
+    "PRIVACY_POLICY_INFO": {
+      "TITLE": "Privacy Policy",
+      "LAST_UPDATED": "Last Updated",
+      "EMAIL_ADDRESS": "Email Address",
+      "SECTIONS": {
+        "HEADER_1": "Introduction",
+        "CONTENT_1": "Welcome to the Map of Pi app, developed by the Map of Pi team in collaboration with the Pi Community. This Privacy Policy outlines how we collect, use, disclose, and protect your personal information when you use our mobile application.",
+        
+        "HEADER_2": "Information We Collect",
+        "SUBHEADER_2_1": "User Information",
+        "CONTENT_2_1_1": "When you register as a user, we may collect your name, email address, username, and other relevant details.",
+        "CONTENT_2_1_2": "We may collect information about your device, including device type, operating system, and unique device identifiers.",
+        "SUBHEADER_2_2": "Seller Information",
+        "CONTENT_2_2_1": "Sellers registering on the platform may be required to provide Seller information, including Seller name, location, and contact details.",
+        "CONTENT_2_2_2": "A Seller may be a business or a private individual.",
+
+        "HEADER_3": "How We Use Your Information",
+        "SUBHEADER_3_1": "Providing Services",
+        "CONTENT_3_1_1": "We use your information to provide and enhance the Map of Pi app services, including user and Seller functionalities.",
+        "SUBHEADER_3_2": "Communications",
+        "CONTENT_3_2_1": "We may use your contact information to send you updates, notifications, and promotional messages related to the Map of Pi app.",
+        "SUBHEADER_3_3": "Analytics",
+        "CONTENT_3_3_1": "We collect and analyze data to improve the performance, features, and functionality of the app.",
+
+        "HEADER_4": "Sharing Your Information",
+        "SUBHEADER_4_1": "With Sellers",
+        "CONTENT_4_1_1": "User information may be shared with Sellers for order fulfillment and communication purposes.",
+        "SUBHEADER_4_2": "With Third Parties",
+        "CONTENT_4_2_1": "We may share information with third-party service providers for app functionality, analytics, and payment processing.",
+
+        "HEADER_5": "Security Measures",
+        "CONTENT_5_1": "We employ industry-standard security measures to protect your information. However, no method of transmission over the internet or electronic storage is completely secure.",
+
+        "HEADER_6": "Your Choices",
+        "CONTENT_6_1": "You can update your account information through the app settings. You may delete your Map of Pi account by deleting your Pi Network account and then choosing the option to delete your Map of Pi data when you next access Map of Pi. You may opt-out of promotional communications.",
+
+        "HEADER_7": "Changes to This Privacy Policy",
+        "CONTENT_7_1": "We may update this Privacy Policy as necessary. The latest version will be posted on our website or within the app.",
+
+        "HEADER_8": "Contact Us",
+        "CONTENT_8_1": "If you have any questions or concerns about this Privacy Policy, please contact us by sending an email to {{org_email}}"
+      }
+    },
+    "TERMS_OF_SERVICE_INFO": {
+      "TITLE": "Terms of Service",
+      "LAST_UPDATED": "Last Updated",
+      "EMAIL_ADDRESS": "Email Address",
+      "SECTIONS": {
+        "HEADER_1": "Acceptance of Terms",
+        "CONTENT_1_1": "Welcome to the Map of Pi app, developed by the Map of Pi team in collaboration with the Pi Community. By using this app, you agree to abide by these Terms of Service, as well as our Privacy Policy.",
+        
+        "HEADER_2": "Use of the App",
+        "CONTENT_2_1": "You agree to use the Map of Pi app in compliance with all applicable laws and regulations.",
+        "CONTENT_2_2": "You shall not use the app for any unlawful or prohibited purpose, or in any way that could damage, disable, overburden, or impair the app.", 
+        "CONTENT_2_3": "To use Map of Pi you must be registered as a pioneer user of the Pi Network.", 
+
+        "HEADER_3": "Intellectual Property",
+        "CONTENT_3_1": "The Map of Pi app and all content, features, and functionality are owned by Map of Pi and are protected by copyright, trademark, and other intellectual property laws.",
+
+        "HEADER_4": "Limitation of Liability",
+        "CONTENT_4_1": "Map of Pi shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with the use of the Map of Pi app.",
+
+        "HEADER_5": "Indemnification",
+        "CONTENT_5_1": "You agree to indemnify and hold harmless Map of Pi and its affiliates, officers, directors, employees, and agents from any and all claims, liabilities, damages, losses, or expenses (including attorneys' fees) arising out of or in any way related to your use of the Map of Pi app.",
+
+        "HEADER_6": "Governing Law",
+        "CONTENT_6_1": "These Terms of Service shall be governed by and construed in accordance with the law of England and Wales without regard to their conflict of law provisions, including any dispute or claim arising out of or in connection with their subject matter or formation (including non-contractual disputes or claims).",
+
+        "HEADER_7": "Changes to These Terms",
+        "CONTENT_7_1": "We reserve the right to update or modify these Terms of Service at any time without prior notice. The latest version will be posted on our website or within the app."
+      }
+    }
+  },
+  "SHARED": {
+    "BUY": "Buy",
+    "NAVIGATE": "Navigate",
+    "SEARCH_CENTER": "Set Search Center",
+    "CHECK_REVIEWS": "Check Reviews",
+    "REPLY": "Reply",
+    "SAVE": "Save",
+    "PHOTO": {
+      "UPLOAD_PHOTO_LABEL": "Upload Photo (Optional)",
+      "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
+      "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
+      "SINGLE_PHOTO_MESSAGE": "One Photo Only"
+    }
+  }
+}
