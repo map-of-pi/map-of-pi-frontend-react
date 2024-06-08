@@ -3,10 +3,6 @@
     "ADD_SELLER": "Sell",
     "SEARCH_BAR_PLACEHOLDER": "Search for sellers or items"
   },
-  "MAP_MARKER": {
-    "SELLER_SALE_ITEMS_FIELD": "Seller items for sale",
-    "DISTANCE_MESSAGE": "Distance: XXX km away"
-  },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "User Preferences",
     "EMAIL_ADDRESS_FIELD": "Your Email Address",
@@ -70,6 +66,10 @@
     }
   },
   "POPUP": {
+    "MAP_MARKER": {
+      "SELLER_SALE_ITEMS_FIELD": "Seller items for sale",
+      "DISTANCE_MESSAGE": "Distance: XXX km away"
+    },
     "APP_VERSION_INFO": {
       "REPORTING_MESSAGE": "Please report defects to {{org_email}}"
     },
