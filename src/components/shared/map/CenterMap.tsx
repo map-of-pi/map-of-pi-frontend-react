@@ -89,11 +89,16 @@ const CenterMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='Map data © OpenStreetMap contributors'
         />
-        <Marker position={mapCenter} icon={centerIcon} />
-        <CenterMarker /> {/* CenterMarker must be inside MapContainer */}
+        {markerPosition && <CenterMarker position={markerPosition} />}
       </MapContainer>
       <div className="map-controls__item">
-        <button className="map-controls__button" onClick={saveCenterToLocalStorage} role="button" tabIndex={0}>
+        <button
+          className="map-controls__button"
+          onClick={saveCenterToLocalStorage}
+          role="button"
+          tabIndex={0}
+          disabled={isButtonDisabled}
+        >
           Save Center
         </button>
       </div>
@@ -129,7 +134,7 @@ const CenterMap = () => {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           pointerEvents: 'none',
-          zIndex: 2000, // Ensure it's on top of the map
+          zIndex: 2000,
         }}
       >
         <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '32px', height: '32px' }} />
