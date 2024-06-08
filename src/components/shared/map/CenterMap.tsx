@@ -29,6 +29,8 @@ const CenterMap = () => {
   const [showPopup, setShowPopup] = useState(true);
   const [typedMessage, setTypedMessage] = useState('');
   const [popupDismissed, setPopupDismissed] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [markerPosition, setMarkerPosition] = useState<[number, number] | null>(null);
   const mapRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
@@ -41,7 +43,9 @@ const CenterMap = () => {
     if (mapRef.current) {
       const center = mapRef.current.getCenter();
       localStorage.setItem('mapCenter', JSON.stringify([center.lat, center.lng]));
-      alert('Center saved: ' + JSON.stringify([center.lat, center.lng]));
+      console.log('Center saved: ' + JSON.stringify([center.lat, center.lng]));
+      setIsButtonDisabled(true); // Grey out the Save button
+      setMarkerPosition([center.lat, center.lng]); // Drop pin at the center
     }
   };
 
