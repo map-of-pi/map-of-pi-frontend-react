@@ -141,7 +141,7 @@ function Sidebar(props: any) {
           className="absolute w-full h-full bg-[#82828284]"
           onClick={() => props.setToggleDis(false)}></div>
         <div
-          className={`${styles.sidebar} dark:bg-[#212121] sm:w-[350px] w-[250px] overflow-y-auto`}>
+          className={`${styles.sidebar} sm:w-[350px] w-[250px] overflow-y-auto`}>
           <div className="text-2xl font-bold mb-4 pb-5">{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</div>
           <div className="">
             <Input
@@ -194,21 +194,21 @@ function Sidebar(props: any) {
               <>
                 <div key={menu.id} className="">
                   <div
-                    className={`${styles.slide_content} hover:bg-[#424242] hover:text-white hover:dark:bg-[#ffffff] dark:text-white hover:dark:text-black`}
+                    className={`${styles.slide_content} hover:bg-[#424242] hover:text-white`}
                     onClick={() => handleMenu(menu.title, menu.url)}>
                     <Image
                       src={menu.icon}
                       alt={menu.title}
                       width={22}
                       height={22}
-                      className="dark:invert"
+                      className=""
                     />
                     <span className="ml-2">{translateMenuTitle(menu.title)}</span>
                     {menu.children && (
                       <div className="ml-4">
                         <FaChevronDown
                           size={13}
-                          className="text-[#000000] dark:text-[#FFFFFF] hover:invert"
+                          className="text-[#000000] hover:invert"
                         />
                       </div>
                     )}
@@ -219,7 +219,7 @@ function Sidebar(props: any) {
                     menu.children.map((child) => (
                       <div key={child.id} className="ml-6">
                         <div
-                          className={`${styles.slide_content} hover:bg-[#424242] hover:text-white hover:dark:bg-[#ffffff] dark:text-white hover:dark:text-black`}
+                          className={`${styles.slide_content} hover:bg-[#424242] hover:text-white `}
                           onClick={() =>
                             handleChildMenu(menu.title, child.code)
                           }>

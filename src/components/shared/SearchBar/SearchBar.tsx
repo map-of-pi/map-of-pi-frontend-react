@@ -74,7 +74,7 @@ const SearchBar: React.FC = () => {
               type="text" 
               variant="outlined"
               color="success"
-              className="bg-white dark:bg-[#4A4A4A] hover:bg-gray-100 w-full rounded"
+              className="bg-white hover:bg-gray-100 w-full rounded"
               label={t('HOME.SEARCH_BAR_PLACEHOLDER')}
               value={searchBarValue} 
               onChange={handleSearchBarChange}
