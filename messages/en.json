@@ -71,7 +71,7 @@
       "DISTANCE_MESSAGE": "Distance: XXX km away"
     },
     "APP_VERSION_INFO": {
-      "REPORTING_MESSAGE": "Please report defects to {{org_email}}"
+      "REPORTING_MESSAGE": "Please report defects to"
     },
     "PRIVACY_POLICY_INFO": {
       "TITLE": "Privacy Policy",
