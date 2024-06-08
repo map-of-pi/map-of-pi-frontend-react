@@ -9,8 +9,8 @@ import './CenterMap.css';
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
   iconUrl: '/images/icons/crosshair.png',
-  iconSize: [32, 32],
-  iconAnchor: [16, 16],
+  iconSize: [80, 80],
+  iconAnchor: [40, 40],
 });
 
 // Define the pin icon for the saved location
@@ -141,7 +141,7 @@ const CenterMap = () => {
           zIndex: 2000,
         }}
       >
-        <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '32px', height: '32px' }} />
+        <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
       </div>
     </div>
   );
