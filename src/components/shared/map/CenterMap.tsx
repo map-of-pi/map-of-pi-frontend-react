@@ -37,7 +37,7 @@ const CenterMap = () => {
   const [popupDismissed, setPopupDismissed] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [markerPosition, setMarkerPosition] = useState<[number, number] | null>(null);
-  const [isButtonVisible, setIsButtonVisible] = useState(true);
+  const [isButtonVisible, setIsButtonVisible] = useState(false); // Initial state set to false
   const mapRef = useRef<L.Map | null>(null);
   const intervalRef = useRef(null);  // Ref to manage the typing interval
 
@@ -86,6 +86,7 @@ const CenterMap = () => {
 const closePopup = () => {
   setShowPopup(false);
   setPopupDismissed(true);
+  setIsButtonVisible(true); // Show the Save button when the popup is dismissed
 };
 
   return (
