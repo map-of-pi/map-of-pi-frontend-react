@@ -12,7 +12,7 @@ export const Input = (props: any) => {
     <>
       <div className="relative">
         {props.label && (
-          <label className="block text-[17px] text-[#333333] dark:text-white">{props.label}</label>
+          <label className="block text-[17px] text-[#333333]">{props.label}</label>
         )}
         <input
           {...input}
@@ -33,7 +33,7 @@ export const TelephoneInput = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block text-[17px] text-[#333333] dark:text-white">{props.label}</label>
+        <label className="block text-[17px] text-[#333333]">{props.label}</label>
       )}
       <PhoneInput 
         {...input}
@@ -47,7 +47,7 @@ export const TextArea = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className=" block text-[17px] text-[#333333] dark:text-white">{props.label}</label>
+        <label className=" block text-[17px] text-[#333333]">{props.label}</label>
       )}
       <textarea
         placeholder={props.placeholder}
@@ -62,7 +62,7 @@ export const FileInput = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block pb-3 font-medium text-gray-700 dark:text-white">{props.label}</label>
+        <label className="block pb-3 font-medium text-gray-700">{props.label}</label>
       )}
       <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative border-dashed border-[2px] border-green-700">
         <Image
@@ -71,10 +71,10 @@ export const FileInput = (props: any) => {
           width={85}
           height={85}
         />
-        <div className="mt-5 text-center text-[#828282] dark:text-white">
+        <div className="mt-5 text-center text-[#828282]">
           Drop your image here, or browse
         </div>
-        <span className="text-[#828282] dark:text-white text-[11px] mt-1">
+        <span className="text-[#828282] text-[11px] mt-1">
           Supports: PNG, JPG, JPEG, WEBP
         </span>
         <span className="text-[#DF2C2C] text-[11px] mt-1">One Photo Only</span>
@@ -174,9 +174,9 @@ export const Select = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block text-xl text-[#333333] dark:text-white ">{props.label}</label>
+        <label className="block text-xl text-[#333333] ">{props.label}</label>
       )}
-      <select className="mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] text-[#333333] dark:text-white outline-0 bg-transparent border-[2px] focus:border-[#1d724b] mb-3">
+      <select className="mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] text-[#333333] outline-0 bg-transparent border-[2px] focus:border-[#1d724b] mb-3">
         {props.options.map((option: any) => (
           <option key={option.value} value={option.value}>
             {option.name}

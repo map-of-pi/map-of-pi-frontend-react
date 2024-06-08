@@ -10,7 +10,6 @@ import ConfirmDialog from '@/components/shared/confirm';
 import { itemData } from '@/constants/demoAPI';
 import { fetchSingleSeller } from '@/services/api';
 
-
 interface Seller {
   seller_id: string;
   name: string;
