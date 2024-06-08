@@ -2,18 +2,22 @@
     height: calc(100vh - var(--mat-toolbar-mobile-height));
     z-index: 0;
   }
+
+  h1 {
+    text-align: center;
+  }
   
   .map-controls__button {
     position: absolute;
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 250px;
+    width: 150px;
     height: auto;
     margin: 10px; 
     padding: 0.6rem;
     background-color: #1d724b;
-    color: #ffffff;
+    color: #f6c367;
     font-weight: bold;
     letter-spacing: 1.1px;
     border-radius: 8px;
@@ -55,36 +59,43 @@
   }
   
   .popup-message__typed-message {
-    padding: 1.2rem;
-    font-family: 'Courier New', Courier, monospace; /* Monospace font for typewriter effect */
-    font-size: 1.1rem; /* Font size */
-    font-weight: 60;
-    color: #333; /* Text color */
-    white-space: pre-wrap; /* Maintains whitespace */
+    padding: 0 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #000;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    white-space: pre-wrap;
     animation: typing 0.1s steps(30, end), blink-caret .75s step-end infinite;
-  }
-  
-  @keyframes typing {
+    margin-bottom: 3rem;
+}
+
+@keyframes typing {
     from { width: 0 }
     to { width: 100% }
-  }
-  
-  @keyframes blink-caret {
+}
+
+@keyframes blink-caret {
     from, to { border-color: transparent }
     50% { border-color: black; }
-  }
-  
-  .popup-message__title {
-    padding: 1.2rem;
-    font-size: 1.1rem;
-  }
-  
+}
+
+.popup-message__title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #000;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
   .popup-message__button--confirm {
     padding: 0.6em 1em;
-    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
     min-width: 12.5rem;
     background-color: #1d724b;
-    color: #ffffff;
+    color: #f6c367;
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
@@ -133,12 +144,18 @@
   
     .popup-message {
       font-size: 0.8rem;
-      height: 240px;
+      height: 350px;
       max-width: 350px;
+      padding-top: 4rem;
     }
+
+    .popup-message__typed-message {
+      font-size: 1rem;
+  }
   
     .popup-message__button--confirm {
       min-width: 8rem;
+      margin-bottom: 4rem;
     }
   }
   
