@@ -37,13 +37,13 @@ const CenterMap = () => {
   const [popupDismissed, setPopupDismissed] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [markerPosition, setMarkerPosition] = useState<[number, number] | null>(null);
-  const [isButtonVisible, setIsButtonVisible] = useState(true); // State to handle button visibility
+  const [isButtonVisible, setIsButtonVisible] = useState(true);
   const mapRef = useRef<L.Map | null>(null);
+  const intervalRef = useRef(null);  // Ref to manage the typing interval
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      typeText('Welcome to the Map Center!', 40);
-    }
+      typeText("Welcome to the Set Map Center Page! Please select your preferred central location on the map, then confirm by clicking 'Save Center'", 40);
+      return () => clearInterval(intervalRef.current);  // Cleanup function to clear the interval when the component unmounts
   }, []);
 
   const saveCenterToLocalStorage = () => {
@@ -70,23 +70,23 @@ const CenterMap = () => {
     });
   };
 
-  const typeText = (text: string, speed: number) => {
+  const typeText = (text, speed) => {
     let i = 0;
-    setTypedMessage('');
-    const interval = setInterval(() => {
-      if (i < text.length) {
-        setTypedMessage((prev) => prev + text.charAt(i));
-        i++;
-      } else {
-        clearInterval(interval);
-      }
+    clearInterval(intervalRef.current);  // Clear any existing interval before starting a new one
+    intervalRef.current = setInterval(() => {
+        if (i < text.length) {
+            setTypedMessage(prev => prev + text.charAt(i));  // Append the next character
+            i++;
+        } else {
+            clearInterval(intervalRef.current);  // Clear the interval once the text is fully typed
+        }
     }, speed);
-  };
+};
 
-  const closePopup = () => {
-    setShowPopup(false);
-    setPopupDismissed(true);
-  };
+const closePopup = () => {
+  setShowPopup(false);
+  setPopupDismissed(true);
+};
 
   return (
     <div style={{ position: 'relative', height: '100vh', width: '100%' }}>
@@ -127,7 +127,7 @@ const CenterMap = () => {
             <figcaption className="visually-hidden">App Name</figcaption>
           </figure>
           <div id="popupMessageTitle">
-            <h2 className="popup-message__title">Welcome Message</h2>
+            <h2 className="popup-message__title">Dear user</h2>
             <p className="popup-message__typed-message">{typedMessage}</p>
           </div>
           <button
