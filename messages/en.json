@@ -52,7 +52,7 @@
     },
     "REPLY_TO_REVIEW": {
       "REPLY_TO_REVIEW_HEADER": "Reply to Review",
-      "BY_REVIEWER": "By {{buyer_id}}",
+      "BY_REVIEWER": "By",
       "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
       "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above review",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
@@ -153,6 +153,7 @@
     "CHECK_REVIEWS": "Check Reviews",
     "REPLY": "Reply",
     "SAVE": "Save",
+    "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Upload Photo",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
@@ -160,11 +161,15 @@
       "SINGLE_PHOTO_MESSAGE": "One Photo Only"
     },
     "REACTION_RATING": {
-      "DESPAIR": "Despair",
-      "SAD": "Sad",
-      "OKAY": "Okay",
-      "HAPPY": "Happy",
-      "DELIGHT": "Delight"
+      "UNSAFE": "Unsafe",
+      "TRUSTWORTHY": "Trustworthy",
+      "EMOTIONS": {
+        "DESPAIR": "Despair",
+        "SAD": "Sad",
+        "OKAY": "Okay",
+        "HAPPY": "Happy",
+        "DELIGHT": "Delight"
+      }
     }
   }
 }

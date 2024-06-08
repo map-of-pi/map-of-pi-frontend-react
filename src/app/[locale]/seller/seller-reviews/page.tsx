@@ -42,15 +42,15 @@ function SellerReviews() {
   const translateReactionRating = (reaction: string): string => {
     switch (reaction) {
       case 'Despair':
-        return t('SHARED.REACTION_RATING.DESPAIR');
+        return t('SHARED.REACTION_RATING.EMOTIONS.DESPAIR');
       case 'Sad':
-        return t('SHARED.REACTION_RATING.SAD');
+        return t('SHARED.REACTION_RATING.EMOTIONS.SAD');
       case 'Okay':
-        return t('SHARED.REACTION_RATING.OKAY');
+        return t('SHARED.REACTION_RATING.EMOTIONS.OKAY');
       case 'Happy':
-        return t('SHARED.REACTION_RATING.HAPPY');
+        return t('SHARED.REACTION_RATING.EMOTIONS.HAPPY');
       case 'Delight':
-        return t('SHARED.REACTION_RATING.DELIGHT');
+        return t('SHARED.REACTION_RATING.EMOTIONS.DELIGHT');
       default:
         return reaction;
     }
