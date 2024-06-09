@@ -121,13 +121,55 @@ export const deleteSeller = async (sellerId) => {
   }
 };
 
-// Fetch a seller ReviewFeedback
-export const fetchSellerReview = async (sellerId) => {
+
+// Fetch reviews for a seller
+export const fetchReviews = async (sellerId) => {
   try {
-    const response = await API.get(`/seller/${sellerId}`);
+    const response = await API.get(`/reviews/${sellerId}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching Review of seller with ID ${sellerId}:`, error);
+    console.error(`Error fetching reviews for seller with ID ${sellerId}:`, error);
+    throw error;
+  }
+};
+
+// Create a new review
+export const createReview = async (formData) => {
+  try {
+    const response = await API.post('/reviews/add', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error creating review:', error);
+    throw error;
+  }
+};
+
+// Update a review
+export const updateReview = async (reviewId, formData) => {
+  try {
+    const response = await API.put(`/reviews/${reviewId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating review with ID ${reviewId}:`, error);
+    throw error;
+  }
+};
+
+// Delete a review
+export const deleteReview = async (reviewId) => {
+  try {
+    const response = await API.delete(`/reviews/${reviewId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error deleting review with ID ${reviewId}:`, error);
     throw error;
   }
 };

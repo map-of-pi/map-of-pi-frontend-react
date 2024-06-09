@@ -11,9 +11,9 @@ export const itemData = {
         reviews: {
             Despair: 1,
             Sad: 2,
-            Okay: 15,
-            Happy: 11,
-            Delight: 6
+            Okay: 3,
+            Happy: 4,
+            Delight: 5,
         },
         sale_items: "bicycle 10pi, books 5pi, car 100pi",
         average_rating: 5.0,
@@ -44,4 +44,22 @@ export const itemData = {
     //         price: 7,
     //     },
     // ]
-}
+};
+
+
+export const PiFestJson = {
+    ReviewFeedback: {
+        review_id: "rvid123",
+        review_receiver_id: "rcvid456",
+        review_giver_id: "gvid798",
+        reply_to_review_id: "repid321",
+        rating: 1, //this is enum object
+        comment: "I am happy to let you all know that consumer to seller relationship is good.",
+        image: "/images/shared/upload.png",
+        review_date: "23 Oct. 2023 01:00pm",
+        
+    },
+};
+
+// get emojis index
+// count length of emojis for a user

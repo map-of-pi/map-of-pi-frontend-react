@@ -1,28 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-
+import Image from 'next/image';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
+import { fetchReviews, createReview, updateReview, deleteReview } from '@/services/api';
 
 export default function ReplyToReviewPage() {
-    const t = useTranslations();
     const router = useRouter();
-
-    // Synthetic review data
-    const reviewData = {
-        reviewText: "I am happy to let you all know that consumer to seller relationship is good.",
-        reviewDate: "23 Oct. 2023 01:00pm",
-        reviewer: "peejenn",
-        emoji: "😊", // This could be the actual emoji or an image URL if you have emoji images
-        emojiText: "Happy", // Text representing the emoji
-        reviewImage: "/images/shared/upload.png" // This is the path to the review image if any
-    };
 
     const [files, setFiles] = useState<File[]>([]);
     const [previewImage, setPreviewImage] = useState<string[]>([]);
@@ -31,6 +18,27 @@ export default function ReplyToReviewPage() {
     const [isSaveEnabled, setIsSaveEnabled] = useState(false);
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [linkUrl, setLinkUrl] = useState('');
+
+    const [reviewData, setReviewData] = useState({
+        reviewText: '',
+        reviewDate: '',
+        reviewer: '',
+        emoji: '',
+        emojiText: '',
+        reviewImage: ''
+    });
+
+    useEffect(() => {
+        const fetchReviewData = async () => {
+            try {
+                const data = await fetchReviews('sellerId'); // replace 'sellerId' with actual seller ID
+                setReviewData(data);
+            } catch (error) {
+                console.error('Error fetching review data:', error);
+            }
+        };
+        fetchReviewData();
+    }, []);
 
     useEffect(() => {
         if (files.length === 0) return;
@@ -63,8 +71,18 @@ export default function ReplyToReviewPage() {
         setReviewEmoji(emoji);
     };
 
-    const handleSave = () => {
-        setIsSaveEnabled(false);
+    const handleSave = async () => {
+        const formData = new FormData();
+        formData.append('comments', comments);
+        formData.append('emoji', reviewEmoji);
+        files.forEach(file => formData.append('images', file));
+
+        try {
+            await createReview(formData); // Or updateReview if editing an existing review
+            setIsSaveEnabled(false);
+        } catch (error) {
+            console.error('Error saving review:', error);
+        }
     };
 
     const handleNavigation = (route: string) => {
@@ -76,13 +94,16 @@ export default function ReplyToReviewPage() {
         }
     };
 
+    const HEADER = "mb-5 font-bold text-lg md:text-2xl";
+    const SUBHEADER = "font-bold mb-2";
+
     return (
-        <div className="bg-[#FFFFFF] w-full md:w-[500px] md:mx-auto p-4">
-            <h1 className='mb-5 font-bold text-2xl'>Reply to Review</h1>
+        <div className="w-full md:w-[500px] md:mx-auto p-4">
+            <h1 className={HEADER}>Reply to Review</h1>
 
             <div className="mb-4">
                 <p className="mb-2">{reviewData.reviewText}</p>
-                <p className="text-sm text-gray-600">{reviewData.reviewDate}</p>
+                <p className="text-sm text-gray-400">{reviewData.reviewDate}</p>
                 <p className="text-sm text-gray-600">By {reviewData.reviewer}</p>
                 <div className="flex items-center mt-2">
                     <span className="mr-2">{reviewData.emoji}</span>
@@ -92,7 +113,7 @@ export default function ReplyToReviewPage() {
             </div>
 
             <div className='mb-3'>
-                <h2 className="font-bold mb-2">Leave your reply to the above review</h2>
+                <h2 className={SUBHEADER}>Leave your reply to the above review</h2>
                 <p>Select the face which shows how you feel about the above review</p>
                 <EmojiPicker onSelect={handleEmojiSelect} />
             </div>
