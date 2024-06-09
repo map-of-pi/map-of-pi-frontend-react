@@ -48,6 +48,12 @@ export const itemData = {
 
 
 export const PiFestJson = {
+
+    User: {
+        user_id: 'pioneer123',
+        user_name: 'pioneer name',
+    },
+
     ReviewFeedback: {
         review_id: "rvid123",
         review_receiver_id: "rcvid456",
@@ -59,6 +65,20 @@ export const PiFestJson = {
         review_date: "23 Oct. 2023 01:00pm",
         
     },
+
+    Seller: {
+        seller_id: 'user_id',
+        name: 'User ID',
+        description: 'I sell using pay with pi', //default value
+        image: '/images/logo.svg',
+        phone: '+234 567 8910',
+        email: 'selleremail@example.com',
+        address: 'Help your buyers find you by describing your address or whereabouts',
+        sale_items: 'Describe your items for sale, pi prices etc',
+        average_rating: 5.0,
+        trust_meter_rating: [0, 50, 80, 100],
+        coordinates: ['long', 'lat'],    
+    }
 };
 
 // get emojis index

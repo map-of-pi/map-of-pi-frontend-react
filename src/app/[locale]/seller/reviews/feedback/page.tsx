@@ -6,7 +6,7 @@ import Image from 'next/image';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
-import { fetchReviews, createReview, updateReview, deleteReview } from '@/services/api';
+import { fetcSinglehReview, createReview, updateReview, deleteReview } from '@/services/api';
 
 export default function ReplyToReviewPage() {
     const router = useRouter();
@@ -14,24 +14,26 @@ export default function ReplyToReviewPage() {
     const [files, setFiles] = useState<File[]>([]);
     const [previewImage, setPreviewImage] = useState<string[]>([]);
     const [comments, setComments] = useState('');
-    const [reviewEmoji, setReviewEmoji] = useState(null);
+    const [reviewEmoji, setReviewEmoji] = useState<any>(null);
     const [isSaveEnabled, setIsSaveEnabled] = useState(false);
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [linkUrl, setLinkUrl] = useState('');
 
     const [reviewData, setReviewData] = useState({
-        reviewText: '',
-        reviewDate: '',
-        reviewer: '',
-        emoji: '',
-        emojiText: '',
-        reviewImage: ''
+        reviewId: '',
+        reviewReceiver: '',
+        comment: 'no review yet',
+        reviewDate: '00/00/0000',
+        reviewer: 'Reviewer name',
+        emoji: 'no',
+        emojiText: 'no',
+        reviewImage: '/images/shared/upload.png'
     });
 
     useEffect(() => {
         const fetchReviewData = async () => {
             try {
-                const data = await fetchReviews('sellerId'); // replace 'sellerId' with actual seller ID
+                const data = await fetcSinglehReview('reviewId'); // replace 'sellerId' with actual seller ID
                 setReviewData(data);
             } catch (error) {
                 console.error('Error fetching review data:', error);
@@ -99,10 +101,10 @@ export default function ReplyToReviewPage() {
 
     return (
         <div className="w-full md:w-[500px] md:mx-auto p-4">
-            <h1 className={HEADER}>Reply to Review</h1>
+            <h1 className={HEADER}>Reply to Review of {reviewData.reviewReceiver}</h1>
 
             <div className="mb-4">
-                <p className="mb-2">{reviewData.reviewText}</p>
+                <p className="mb-2">{reviewData.comment}</p>
                 <p className="text-sm text-gray-400">{reviewData.reviewDate}</p>
                 <p className="text-sm text-gray-600">By {reviewData.reviewer}</p>
                 <div className="flex items-center mt-2">

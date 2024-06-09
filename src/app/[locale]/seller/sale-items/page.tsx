@@ -11,8 +11,8 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 
-import { fetchSingleSeller } from '@/services/api';
-import { itemData } from '@/constants/demoAPI';
+import { fetchSingleSeller, createReview } from '@/services/api';
+import { itemData, PiFestJson } from '@/constants/demoAPI';
 
 interface Seller {
   id: string;
@@ -34,10 +34,7 @@ export default function Page() {
   const t = useTranslations();
   const router = useRouter();
 
-  const [seller, setSeller] = useState<Seller | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
+  
   const [files, setFiles] = useState<File[]>([]);
   const [previewImage, setPreviewImage] = useState<string[]>([]);
   const [comments, setComments] = useState('');
@@ -46,13 +43,18 @@ export default function Page() {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
+  const [seller, setSeller] = useState(PiFestJson.Seller);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+
   useEffect(() => {
     const getSellerData = async () => {
       try {
-        const data = await fetchSingleSeller();
+        const data = await fetchSingleSeller('sellerId');
         setSeller(data);  // Ensure this is a single object, not an array
       } catch (error) {
-        setError('Error fetching market data');
+        setError('Error fetching seller data');
       } finally {
         setLoading(false);
       }
@@ -92,11 +94,20 @@ export default function Page() {
     setReviewEmoji(emoji);
   };
 
-  const handleSave = () => {
-    // Function to save data to the database
-    // Example: saveData({ files, comments, reviewEmoji });
-    setIsSaveEnabled(false);
+  const handleSave = async () => {
+    const formData = new FormData();
+    formData.append('comments', comments);
+    formData.append('emoji', reviewEmoji);
+    files.forEach(file => formData.append('images', file));
+
+    try {
+        await createReview(formData); // Or updateReview if editing an existing review
+        setIsSaveEnabled(false);
+    } catch (error) {
+        console.error('Error saving review:', error);
+    }
   };
+
 
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {
@@ -109,6 +120,7 @@ export default function Page() {
 
   const SUBHEADER = "font-bold mb-2";
 
+  // loading condition
   if (loading) {
     return (
       <div id="loading-screen">
@@ -117,9 +129,10 @@ export default function Page() {
     );
   }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  // if (error) {
+  //   setSeller(PiFestJson.Seller)
+  //   // return <div>{error}</div>;
+  // }
 
   // const seller = itemData.seller
 
@@ -189,7 +202,7 @@ export default function Page() {
           <h2 className={SUBHEADER}>Reviews summary</h2>
           {/* Trust-O-meter */}
           <div>
-            <TrustMeter ratings={seller.trust_meter_rating} />
+            <TrustMeter ratings={seller.average_rating} />
           </div>
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">Reviews Score: {seller.trust_meter_rating} out of 5.0</p>
@@ -200,7 +213,7 @@ export default function Page() {
           <h2 className={`${SUBHEADER} mb-4`}>Seller contact details</h2>
           <div className="text-sm mb-3">
             <span className="font-bold">Seller pioneer id: </span>
-            <span>{seller.id}</span>
+            <span>{seller.seller_id}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">Seller phone: </span>

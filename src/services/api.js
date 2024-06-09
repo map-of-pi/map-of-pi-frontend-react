@@ -121,6 +121,17 @@ export const deleteSeller = async (sellerId) => {
   }
 };
 
+// Fetch a single review for a seller
+export const fetcSinglehReview = async (reviewID) => {
+  try {
+    const response = await API.get(`/reviews/${reviewID}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching review with ID ${reviewID}:`, error);
+    throw error;
+  }
+};
+
 
 // Fetch reviews for a seller
 export const fetchReviews = async (sellerId) => {
