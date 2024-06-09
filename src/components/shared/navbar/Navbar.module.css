@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.nav_item:hover {
+.nav_item:active {
     width: 45px;
     height: 45px;
     border: none;
