@@ -1,25 +1,20 @@
 'use client';
 
+import styles from './Info.module.css';
+
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { useState } from 'react';
 
-import styles from './Info.module.css';
-import { useRouter } from 'next/navigation';
+import { CloseButton } from '@/components/shared/Forms/Buttons/Buttons';
 
 const InfoModel = (props: any) => {
 
-  const router = useRouter()
   const t = useTranslations();
 
   const [version, setVersion] = useState('V1.0.0');
-
-
-  const handLinking = (route: any) => {
-    router.push(`/${route}`)
-    props.setToggleInfo(false)
-  }
 
   return (
     <>
@@ -30,6 +25,7 @@ const InfoModel = (props: any) => {
             onClick={() => props.setToggleInfo(false)}>
           </div>
           <div className={styles.model_body}>
+            <CloseButton onClick={() => props.setToggleInfo(false)}/>
             <div className="flex justify-center mb-[10px]">
               <div className={styles.logo}>
                 <Image src="/images/logo.svg" alt="Map of Pi" fill={true} />
@@ -115,8 +111,8 @@ const InfoModel = (props: any) => {
 
             <div className={styles.defects_contact}>
               <span>{t('INFORMATION_DIALOG.REPORTING_MESSAGE') || 'Please report defects'} </span>
-              <Link href="mailto:mapofpi@gmail.com" target="_blank">
-                mapofpi@gmail.com
+              <Link href="mailto:email@mapofpi.com" target="_blank">
+                email@mapofpi.com
               </Link>
             </div>
           </div>

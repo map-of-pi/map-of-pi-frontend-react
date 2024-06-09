@@ -43,42 +43,47 @@ function Navbar() {
   return (
     <>
       <div
-        className={`${styles.navbar} bg-[#ffffff] dark:bg-[#212121] fixed top-0 left-0 right-0 ${checkHomePage ? 'justify-end': 'justify-between'}`}>
-        {!checkHomePage && (
-          <div className={`${styles.nav_item}`}>
-            <Link href="/" style={{ height: '24px' }} onClick={handleBackBtn}>
-              <IoMdArrowBack
-                size={26}
-                className="text-[#000000] dark:text-[#FFFFFF]"
-              />
-            </Link>
-          </div>
-        )}
-        {!checkHomePage && (
-          <div className={`${styles.nav_item}`}>
-            <Link href="/" style={{ height: '24px' }}>
-              <MdHome
-                size={24}
-                className="text-[#000000] dark:text-[#FFFFFF]"
-              />
-            </Link>
-          </div>
-        )}
+        className={`${styles.navbar} bg-primary fixed top-0 left-0 right-0 `}>
+        <div className="text-center text-secondary text-[1.5rem] font-semibold">
+        Map of Pi          
+        </div>
+        <div className={`flex ${checkHomePage ? 'justify-end' : 'justify-between'}`}>
+          {!checkHomePage && (
+            <div className={`${styles.nav_item}`}>
+              <Link href="/" style={{ height: '24px' }} onClick={handleBackBtn}>
+                <IoMdArrowBack
+                  size={26}
+                  className="text-secondary"
+                />
+              </Link>
+            </div>
+          )}
+          {!checkHomePage && (
+            <div className={`${styles.nav_item}`}>
+              <Link href="/" style={{ height: '24px' }}>
+                <MdHome
+                  size={24}
+                  className="text-secondary"
+                />
+              </Link>
+            </div>
+          )}
 
-        <div className={`${styles.nav_item}`}>
-          <Link href="" onClick={handleMenu} style={{ height: '24px' }}>
-            {sidebarToggle ? (
-              <IoMdClose
-                size={24}
-                className="text-[#000000] dark:text-[#FFFFFF]"
-              />
-            ) : (
-              <FiMenu
-                size={24}
-                className="text-[#000000] dark:text-[#FFFFFF]"
-              />
-            )}
-          </Link>
+          <div className={`${styles.nav_item}`}>
+            <Link href="" onClick={handleMenu} style={{ height: '24px' }}>
+              {sidebarToggle ? (
+                <IoMdClose
+                  size={24}
+                  className="text-secondary"
+                />
+              ) : (
+                <FiMenu
+                  size={24}
+                  className="text-secondary"
+                />
+              )}
+            </Link>
+          </div>
         </div>
       </div>
       {sidebarToggle && (
@@ -86,6 +91,6 @@ function Navbar() {
       )}
     </>
   );
-};
+}
 
 export default Navbar;
