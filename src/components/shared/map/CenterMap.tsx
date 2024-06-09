@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './CenterMap.css';
+import Image from 'next/image';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -15,7 +16,7 @@ const crosshairIcon = new L.Icon({
 
 // Define the pin icon for the saved location
 const pinIcon = new L.Icon({
-  iconUrl: '/images/icons/map_of_pi_logo.svg',
+  iconUrl: '/images/icons/map_of_pi_logo.jpeg',
   iconSize: [32, 32],
   iconAnchor: [16, 32],
 });
@@ -155,7 +156,7 @@ const closePopup = () => {
             zIndex: 2000,
           }}
         >
-          <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
+          <image src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
         </div>
       )}
     </div>
