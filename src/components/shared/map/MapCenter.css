@@ -1,0 +1,150 @@
+#map {
+  height: calc(100vh - var(--mat-toolbar-mobile-height));
+  z-index: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+.map-controls__button {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: auto;
+  margin: 10px; 
+  padding: 0.6rem;
+  background-color: #1d724b;
+  color: #f6c367;
+  font-weight: bold;
+  letter-spacing: 1.1px;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.map-controls__button:hover {
+  background-color: #164c36;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.map-controls__button:disabled {
+  background-color: #aaa;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.popup-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 450px;
+  padding: 1.2rem;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.7;
+  letter-spacing: 1.5px;
+}
+
+.popup-message__typed-message {
+  padding: 0 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #000;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  white-space: pre-wrap;
+  margin-bottom: 3rem;
+}
+
+.popup-message__title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #000;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.popup-message__button--confirm {
+  padding: 0.6em 1em;
+  margin-bottom: 0.8rem;
+  min-width: 12.5rem;
+  background-color: #1d724b;
+  color: #f6c367;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  letter-spacing: 1.3px;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.popup-message__button--confirm:hover {
+  background-color: #164c36;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.popup-message__text--welcome {
+  font-family: var(--font-family-main);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.visually-hidden {
+  display: none;
+}
+
+/* Search bar */
+.search-bar__container {
+  position: relative;
+  z-index: 1000000;
+}
+
+.crosshair-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+@media (max-width: 576px) {
+  .popup-message__text--welcome {
+    font-size: 0.9rem;
+  }
+
+  .popup-message {
+    font-size: 0.8rem;
+    height: 350px;
+    max-width: 350px;
+    padding-top: 4rem;
+  }
+
+  .popup-message__typed-message {
+    font-size: 1rem;
+}
+
+  .popup-message__button--confirm {
+    min-width: 8rem;
+    margin-bottom: 4rem;
+  }
+}
+  

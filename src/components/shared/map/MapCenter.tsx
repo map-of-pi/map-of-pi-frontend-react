@@ -1,7 +1,7 @@
 'use client';
 
 import 'leaflet/dist/leaflet.css';
-import './CenterMap.css';
+import './MapCenter.css';
 
 import Image from 'next/image';
 
@@ -36,7 +36,7 @@ const CenterMarker = ({ position }: { position: [number, number] }) => {
   );
 };
 
-const CenterMap = () => {
+const MapCenter = () => {
   const [mapCenter, setMapCenter] = useState<[number, number]>([50.064192, 19.944544]);
   const [showPopup, setShowPopup] = useState(true);
   const [typedMessage, setTypedMessage] = useState('');
@@ -48,7 +48,7 @@ const CenterMap = () => {
   const intervalRef = useRef<any>(null);  // Ref to manage the typing interval
 
   useEffect(() => {
-    typeText("Welcome to the Set Map Center Page! Please select your preferred central location on the map, then confirm by clicking 'Save Center'.", 40);
+    
     return () => clearInterval(intervalRef.current);  // Cleanup function to clear the interval when the component unmounts
   }, []);
 
@@ -167,4 +167,4 @@ const CenterMap = () => {
   );
 };
 
-export default CenterMap;
+export default MapCenter;
