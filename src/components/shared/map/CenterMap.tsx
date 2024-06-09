@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './CenterMap.css';
+
 import Image from 'next/image';
+
+import { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
+import L from 'leaflet';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -157,8 +159,8 @@ const CenterMap = () => {
             pointerEvents: 'none',
             zIndex: 2000,
           }}
-        >
-          <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
+          >
+          <Image src='/images/icons/crosshair.png' alt='Center Marker' width={80} height={80} />
         </div>
       )}
     </div>
