@@ -71,6 +71,16 @@ h1 {
   margin-bottom: 3rem;
 }
 
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: black; }
+}
+
 .popup-message__title {
   font-size: 1.3rem;
   font-weight: bold;

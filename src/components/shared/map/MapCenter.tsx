@@ -48,7 +48,7 @@ const MapCenter = () => {
   const intervalRef = useRef<any>(null);  // Ref to manage the typing interval
 
   useEffect(() => {
-    
+    typeText("Welcome to the Set Map Center Page! Please select your preferred central location on the map, then confirm by clicking 'Save Center'.", 40);
     return () => clearInterval(intervalRef.current);  // Cleanup function to clear the interval when the component unmounts
   }, []);
 
