@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { itemData } from '@/constants/demoAPI';
-import TrustMeter from '@/components/seller/TrustMeter';
+import TrustMeter from '@/components/shared/Review/TrustMeter';
 
 const MapMarkerPopup = () => {
     const SUBHEADER = "font-bold mb-2";
@@ -31,14 +31,14 @@ const MapMarkerPopup = () => {
         
             <div className="flex justify-between space-x-4 gap-2 text-lg">
                 <Link
-                href={'/seller/seller-item'} //change to items list screen
+                href={'/seller/sale-items'} //change to items list screen
                 className="px-3 py-1 bg-primary rounded-md w-full flex justify-center"
                 >
                     <span className='text-secondary'>Buy</span>
                     {/* <Link href={'/seller/seller-item'} className='text-[#F6C367]'>Buy</Link> */}
                 </Link>
                 <Link
-                href={'/seller/seller-item'} // change to navigate url
+                href={'/seller/location'} // change to navigate url
                 className="px-3 py-1 outline outline-[1px] outline-primary rounded-md w-full flex justify-center"
                 >
                     <span className='text-[#F6C367]'>Navigate</span>

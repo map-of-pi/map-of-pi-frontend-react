@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import TrustMeter from '@/components/seller/TrustMeter';
+import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea, Input, Select } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
@@ -153,7 +153,7 @@ const SellerRegistrationForm = () => {
           <TrustMeter ratings={seller.trust_meter_rating} />
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">Reviews Score: 3.2 out of 5.0</p>
-            <OutlineBtn label="Check Reviews" onClick={() => handleNavigation('seller/seller-reviews')} />
+            <OutlineBtn label="Check Reviews" onClick={() => handleNavigation('seller/reviews')} />
           </div>
         </div>
         <div className="mb-7">

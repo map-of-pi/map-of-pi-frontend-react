@@ -17,7 +17,7 @@ export default function Index() {
       <DynamicMap />
       <SearchBar />
       <div className="absolute bottom-8 z-10 flex justify-between gap-[22px] px-6 right-0 left-0 m-auto">
-        <Link href="/seller-registration">
+        <Link href="/seller/registration">
           <Button
             label="+ Sell"
             styles={{ borderRadius: '10px', color: '#ffc153', paddingLeft: '50px', paddingRight: '50px' }}

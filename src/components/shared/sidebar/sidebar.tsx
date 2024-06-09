@@ -135,7 +135,7 @@ function Sidebar(props: any) {
                 }}
                 onClick={() => props.setToggleDis(false)} // Close sidebar on click
               />
-              <Link href="/seller/seller-reviews">
+              <Link href="/seller/reviews">
                 <Button
                   label="Check Reviews"
                   styles={{

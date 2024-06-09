@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import TrustMeter from '@/components/seller/TrustMeter';
+import TrustMeter from '@/components/shared/Review/TrustMeter';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
@@ -156,7 +156,7 @@ export default function Page() {
         <div className="mb-6">
           <h2 className={`SUBHEADER`}>Seller address or whereabouts</h2>
           <p className="mb-3">{seller.address}</p>
-          <OutlineBtn label="Navigate" onClick={() => handleNavigation('location')} />
+          <OutlineBtn label="Navigate" onClick={() => handleNavigation('')} />
         </div>
 
         {/* Leave a Review */}
@@ -193,7 +193,7 @@ export default function Page() {
           </div>
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">Reviews Score: {seller.trust_meter_rating} out of 5.0</p>
-            <OutlineBtn label="Check Reviews" onClick={() => handleNavigation('seller/seller-reviews')} />
+            <OutlineBtn label="Check Reviews" onClick={() => handleNavigation('seller/reviews')} />
           </div>
         </div>
         <div className="mb-7">
