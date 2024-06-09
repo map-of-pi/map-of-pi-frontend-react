@@ -21,7 +21,7 @@ const pinIcon = new L.Icon({
   iconAnchor: [16, 32],
 });
 
-const CenterMarker = ({ position }) => {
+const CenterMarker = ({ position }: { position: [number, number] }) => {
   return (
     <Marker position={position} icon={pinIcon}>
       <Tooltip permanent direction="top" offset={[0, -32]}>
@@ -43,11 +43,11 @@ const CenterMap = () => {
   const [markerPosition, setMarkerPosition] = useState<[number, number] | null>(null);
   const [isButtonVisible, setIsButtonVisible] = useState(false); // Initial state set to false
   const mapRef = useRef<L.Map | null>(null);
-  const intervalRef = useRef(null);  // Ref to manage the typing interval
+  const intervalRef = useRef<any>(null);  // Ref to manage the typing interval
 
   useEffect(() => {
-      typeText("Welcome to the Set Map Center Page! Please select your preferred central location on the map, then confirm by clicking 'Save Center'.", 40);
-      return () => clearInterval(intervalRef.current);  // Cleanup function to clear the interval when the component unmounts
+    typeText("Welcome to the Set Map Center Page! Please select your preferred central location on the map, then confirm by clicking 'Save Center'.", 40);
+    return () => clearInterval(intervalRef.current);  // Cleanup function to clear the interval when the component unmounts
   }, []);
 
   const saveCenterToLocalStorage = () => {
@@ -60,38 +60,40 @@ const CenterMap = () => {
     }
   };
 
-  const handleMapReady = (map: L.Map) => {
-    mapRef.current = map;
-    map.on('movestart', () => {
-      setIsButtonVisible(false); // Hide the Save button on map move
-      setMarkerPosition(null); // Remove the dropped pin when the user starts moving the map again
-    });
-    map.on('moveend', () => {
-      const center = map.getCenter();
-      setMapCenter([center.lat, center.lng]);
-      setIsButtonDisabled(false); // Enable the Save button on move
-      setIsButtonVisible(true); // Show the Save button when map movement stops
-    });
+  const handleMapReady = () => {
+    const map = mapRef.current;
+    if (map) {
+      map.on('movestart', () => {
+        setIsButtonVisible(false); // Hide the Save button on map move
+        setMarkerPosition(null); // Remove the dropped pin when the user starts moving the map again
+      });
+      map.on('moveend', () => {
+        const center = map.getCenter();
+        setMapCenter([center.lat, center.lng]);
+        setIsButtonDisabled(false); // Enable the Save button on move
+        setIsButtonVisible(true); // Show the Save button when map movement stops
+      });
+    }
   };
 
-  const typeText = (text, speed) => {
+  const typeText = (text: string, speed: number) => {
     let i = 0;
     clearInterval(intervalRef.current);  // Clear any existing interval before starting a new one
     intervalRef.current = setInterval(() => {
-        if (i < text.length) {
-            setTypedMessage(prev => prev + text.charAt(i));  // Append the next character
-            i++;
-        } else {
-            clearInterval(intervalRef.current);  // Clear the interval once the text is fully typed
-        }
+      if (i < text.length) {
+        setTypedMessage(prev => prev + text.charAt(i));  // Append the next character
+        i++;
+      } else {
+        clearInterval(intervalRef.current);  // Clear the interval once the text is fully typed
+      }
     }, speed);
-};
+  };
 
-const closePopup = () => {
-  setShowPopup(false);
-  setPopupDismissed(true);
-  setIsButtonVisible(true); // Show the Save button when the popup is dismissed
-};
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupDismissed(true);
+    setIsButtonVisible(true); // Show the Save button when the popup is dismissed
+  };
 
   return (
     <div style={{ position: 'relative', height: '100vh', width: '100%' }}>
@@ -99,7 +101,7 @@ const closePopup = () => {
         center={mapCenter}
         zoom={13}
         style={{ height: '100%', width: '100%' }}
-        whenReady={(event) => handleMapReady(event.target)}
+        whenReady={() => handleMapReady()}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -156,7 +158,7 @@ const closePopup = () => {
             zIndex: 2000,
           }}
         >
-          <image src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
+          <img src='/images/icons/crosshair.png' alt='Center Marker' style={{ width: '80px', height: '80px' }} />
         </div>
       )}
     </div>
