@@ -39,7 +39,7 @@ function SellerReviews() {
   return (
     <>
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto">
-        <h1 className="text-[#333333] text-lg font-semibold dark:text-white md:font-bold md:text-2xl mb-1">
+        <h1 className="text-[#333333] text-lg font-semibold md:font-bold md:text-2xl mb-1">
           List of Reviews left for Femma
         </h1>
         {ReviewData.map((item, index) => (

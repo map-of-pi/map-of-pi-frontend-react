@@ -39,10 +39,10 @@ function Settings() {
     <>
       <form className="px-[25px] py-[36px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <div className="flex justify-between items-center mb-7">
-          <h1 className="text-[#333333] dark:text-white font-bold text-3xl">Seller Settings</h1>
+          <h1 className="text-[#333333] font-bold text-3xl">Seller Settings</h1>
         </div>
         <div className="">
-          <h2 className="text-2xl mb-5 dark:text-white">Profile Settings</h2>
+          <h2 className="text-2xl mb-5">Profile Settings</h2>
           <Input label="Enter Name" placeholder="peejenn" />
           <Input
             label="Enter Email Address"
@@ -61,7 +61,7 @@ function Settings() {
           />
         </div>
         <div className="mt-10">
-          <h1 className="text-[#333333] dark:text-white text-2xl mb-5">Map Center Settings</h1>
+          <h1 className="text-[#333333] text-2xl mb-5">Map Center Settings</h1>
           <Select
             label="Search Center"
             options={[
@@ -88,10 +88,10 @@ function Settings() {
           />
         </div>
         <div className="mt-10">
-          <h1 className="text-[#333333] dark:text-white text-2xl mb-2">Search Settings</h1>
+          <h1 className="text-[#333333] text-2xl mb-2">Search Settings</h1>
           <h2 className="mb-5">Select map center to be shown on your map</h2>
           <div className="flex justify-between mb-4">
-            <h1 className="block text-xl text-[#333333] dark:text-white">Search Center</h1>
+            <h1 className="block text-xl text-[#333333]">Search Center</h1>
             <Switch
               onChange={() => handleCenter('search')}
               {...switchProp}
@@ -99,7 +99,7 @@ function Settings() {
             />
           </div>
           <div className="flex justify-between mb-4">
-            <h1 className="block text-xl text-[#333333] dark:text-white">Buy Center</h1>
+            <h1 className="block text-xl text-[#333333]">Buy Center</h1>
             <Switch
               onChange={() => handleCenter('buy')}
               {...switchProp}
@@ -107,7 +107,7 @@ function Settings() {
             />
           </div>
           <div className="flex justify-between mb-4">
-            <h1 className="block text-xl text-[#333333] dark:text-white">Sell Center</h1>
+            <h1 className="block text-xl text-[#333333]">Sell Center</h1>
             <Switch
               onChange={() => handleCenter('sell')}
               {...switchProp}
