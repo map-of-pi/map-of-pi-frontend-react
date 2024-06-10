@@ -1,216 +1,175 @@
 {
-  "CORE": {
-    "APP_NAME": "Mapa de Pi"
-  },
   "HOME": {
-    "ADD_MY_BUSINESS": "Agregar mi negocio",
-    "SEARCH_BY_BUSINESS_PLACEHOLDER": "Buscar negocios..",
-    "SEARCH_BY_PRODUCT_PLACEHOLDER": "Buscar productos..",
-    "SEARCH_RESULT_FOUND_MESSAGE": "Tu búsqueda encontró {{numberOfShopsFound}} tiendas. Por favor, haz zoom para ver todos los marcadores de tiendas.",
-    "SEARCH_RESULT_NOT_FOUND_MESSAGE": "Tu búsqueda no encontró ninguna tienda. Por favor, inténtalo de nuevo con diferentes criterios."
+    "ADD_SELLER": "Vender",
+    "SEARCH_BAR_PLACEHOLDER": "Buscar vendedores o artículos"
   },
-  "MAP": {
-    "USER_LOCATION": "Estás aquí",
-    "MOBILE_TRANSPORTATION_DISTANCE_MESSAGE": " se ha seleccionado como tu destino y se ha proporcionado la ruta. El transporte móvil te llevará aproximadamente ",
-    "MOBILE_TRANSPORTATION_TIME_MESSAGE": "XX horas y XX minutos",
-    "MIDDLE_CLICKED_MESSAGE": "Clic medio",
-    "UNKNOWN_MARKER_CLICKED_MESSAGE": "Marcador desconocido clicado",
-    "BUTTONS": {
-      "CANCEL": "Cancelar"
-    }
-  },
-  "FOOTER": {
-    "PRIVACY_POLICY": "Política de privacidad",
-    "TERMS_OF_SERVICE": "Condiciones de servicio"
-  },
-  "INFORMATION_DIALOG": {
-    "LATEST_UPDATES": "Últimas actualizaciones",
-    "REPORTING_MESSAGE": "Por favor, reporte defectos a"
-  },
-  "BUSINESS_MARKER_DIALOG": {
-    "DISTANCE_MESSAGE": "Lejos de ti",
-    "ONLINE_PI_ORDERS_ALLOWED_MESSAGE": "Pedidos Pi en línea permitidos",
-    "PRODUCTS_AVAILABLE_MESSAGE": "Producto/s disponible", 
-    "BUTTONS": {
-        "VISIT_SHOP": "Visitar Tienda",
-        "TAKE_ROUTE": "Tomar Ruta"
-    }
-  },
-  "BUSINESS": {
-    "REGISTRATION": {
-      "LABELS": {
-        "BUSINESS_NAME": "Nombre del negocio",
-        "BUSINESS_DESCRIPTION": "Descripción del negocio",
-        "BUSINESS_TYPE": "Tipo de Negocio",
-        "BUSINESS_TYPES": {
-          "RESTAURANT": "Restaurante",
-          "RETAIL_STORE": "Tienda Minorista",
-          "SERVICE": "Servicio",
-          "CONSTRUCTION": "Construcción",
-          "TRANSPORTATION": "Transporte"
-        },        
-        "BUSINESS_LOCATION": "Ubicación del negocio",
-        "BUSINESS_PHONE_NUMBER": "Número de teléfono del negocio",
-        "BUSINESS_EMAIL_ADDRESS": "Correo electrónico del negocio"
-      },
-      "PLACEHOLDERS": {
-        "BUSINESS_NAME": "Ingrese el nombre de su negocio",
-        "BUSINESS_DESCRIPTION": "Ingrese una descripción breve de su negocio",
-        "BUSINESS_LOCATION": "Ingrese la ubicación de su negocio",
-        "BUSINESS_IMAGE_UPLOAD": "Sube la imagen de tu negocio",
-        "BUSINESS_IMAGE_CHANGE": "Cambia la imagen de tu negocio",
-        "BUSINESS_IMAGE_LOADING": "Cargando imagen",
-        "BUSINESS_PHONE_NUMBER": "Ingrese el número de teléfono de su negocio",
-        "BUSINESS_EMAIL_ADDRESS": "Ingrese la dirección de correo electrónico de su negocio"
-      },
-      "VALIDATIONS": {
-        "BUSINESS_NAME": "El nombre del negocio es obligatorio",
-        "BUSINESS_DESCRIPTION": "La descripción del negocio es obligatoria",
-        "BUSINESS_TYPE": "El tipo de negocio es obligatorio",
-        "BUSINESS_LOCATION": "La dirección del negocio es obligatoria",
-        "BUSINESS_IMAGES": "El negocio debe tener una imagen asociada",
-        "BUSINESS_PHONE_NUMBER": "El número de teléfono del negocio es obligatorio",
-        "BUSINESS_EMAIL_ADDRESS": "La dirección de correo electrónico del negocio es obligatoria"
-      },
-      "BUTTONS": {
-        "MENU": "Menú",
-        "LOYALTY_STAMPS": "Sellos de lealtad",
-        "BUSINESS_PHOTOS": "Fotos del negocio",
-        "QR_CODE": "Obtener código QR",
-        "CONFIRM": "Confirmar configuración del negocio",
-        "UNDER_CONSTRUCTION": "Esta funcionalidad aún no está completamente desarrollada"
-      }
+  "SIDE_NAVIGATION": {
+    "USER_PREFERENCES_HEADER": "Preferencias del Usuario",
+    "EMAIL_ADDRESS_FIELD": "Tu Dirección de Correo Electrónico",
+    "PHONE_NUMBER_FIELD": "Tu Número de Teléfono",
+    "LANGUAGES": "Idiomas",
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "Acerca de Map of Pi",
+      "APP_VERSION": "Versión de la App",
+      "PRIVACY_POLICY": "Política de Privacidad",
+      "TERMS_OF_SERVICE": "Términos de Servicio"
     },
-    "CONFIGURATION": {
-      "LABELS": {
-        "SHOP_NAME": "Nombre de la tienda",
-        "MENU": "Menú",
-        "ACCEPT_ORDERS_WITHOUT_PAYMENT_MESSAGE": "Aceptar pedidos sin pago",
-        "ACCEPT_PI_TRANSACTIONS_MESSAGE": "Aceptar transacciones de Pi"
-      },
-      "ADD_PRODUCT_MENU": {
-        "LABELS": {
-          "ADD_PRODUCT_INTO_SHOP_MESSAGE": "Agregar producto a tu tienda",
-          "PRODUCT_NAME": "Nombre del producto",
-          "PRODUCT_IMAGES": "Imágenes del producto",
-          "ADD_IMAGE": "Agregar imagen",
-          "PRICE": "Precio",
-          "DESCRIPTION": "Descripción",
-          "FOOD_SERVICE": {
-            "TIME_PREPARATION_MESSAGE": "¿Cuánto tiempo lleva preparar esta comida?"
-          }
-        },
-        "BUTTONS": {
-          "LOADING": "Cargando...",
-          "CONFIRM": "Confirmar"
-        }
-      }
-    },
-    "ADD_PRODUCT": {
-      "LABELS": {
-        "PRODUCT_NAME": "Nombre del Producto",
-        "PRODUCT_DESCRIPTION": "Descripción del Producto",
-        "PRODUCT_IMAGES": "Imágenes del Producto",
-        "PRODUCT_PRICE": "Precio del Producto",
-        "PRODUCT_QUANTITY": "Cantidad del Producto",
-        "SHIPPING_TYPE": "Tipo de Envío"
-      },
-      "PLACEHOLDERS": {
-        "PRODUCT_IMAGES": "Subir Imágenes del Producto",
-        "PRODUCT_IMAGES_MAX": "Imágenes del Producto (Límite: 3)"
-      },
-      "VALIDATIONS": {
-        "PRODUCT_IMAGES": "No se han seleccionado imágenes del producto"
-      },
-      "OPTIONS": {
-        "SHIPPING_TYPES": {
-          "FREE_SHIPPING": "Envío Gratuito",
-          "PAID_SHIPPING": "Envío Pago",
-          "PICKUP": "Recoger",
-          "PAY_ON_DELIVERY": "Pagar al recibir"
+    "CONTACT_MAP_OF_PI": "Contactar a Map of Pi"
+  },
+  "SCREEN": {
+    "SELLER_REGISTRATION": {
+      "SELLER_REGISTRATION_HEADER": "Añadir/ Editar Registro de Vendedor",
+      "SELLER_SALE_ITEMS_LABEL": "Artículos del vendedor en venta",
+      "SELLER_SALE_ITEMS_PLACEHOLDER": "Describe tus artículos en venta, precio, etc.",
+      "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
+      "REVIEWS_SCORE_LABEL": "Puntuación de Reseñas",
+      "SELLER_NAME": "Nombre del Vendedor",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "Tipo de Vendedor",
+        "SELLER_TYPE_OPTIONS": {
+          "PIONEER": "Pionero",
+          "OTHER": "Otro"
         }
       },
-      "BUTTONS": {
-        "SUBMIT": "Enviar"
+      "SELLER_BUSINESS_NAME": "Nombre del Negocio del Vendedor",
+      "SELLER_DESCRIPTION": "Descripción del Vendedor",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o Ubicación del Vendedor",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe la ubicación desde donde estás vendiendo"
+    },
+    "BUY_FROM_SELLER": {
+      "BUY_FROM_SELLER_HEADER": "Comprar del Vendedor",
+      "SELLER_DESCRIPTION_LABEL": "Descripción del Vendedor",
+      "SELLER_SALE_ITEMS_LABEL": "Artículos del vendedor en venta",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o Ubicación del Vendedor",
+      "LEAVE_A_REVIEW_MESSAGE": "Deja una reseña",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes sobre el vendedor anterior",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
+      "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
+      "REVIEWS_SCORE_MESSAGE": "Puntuación de Reseñas: {seller_review_rating} de 5.0",
+      "SELLER_CONTACT_DETAILS_LABEL": "Detalles de contacto del vendedor",
+      "SELLER_PI_ID_LABEL": "ID de pionero del vendedor",
+      "SELLER_PHONE_LABEL": "Número de teléfono del vendedor",
+      "SELLER_EMAIL_LABEL": "Correo electrónico del vendedor"
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "Lista de Reseñas dejadas para {seller_id}",
+      "BY_REVIEWER": "Por {buyer_id}"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_HEADER": "Responder a la Reseña",
+      "BY_REVIEWER": "Por {buyer_id}",
+      "REPLY_TO_REVIEW_MESSAGE": "Deja tu respuesta a la reseña anterior",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes sobre la reseña anterior",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación"
+    }
+  },
+  "POPUP": {
+    "MAP_MARKER": {
+      "SELLER_SALE_ITEMS_FIELD": "Artículos del vendedor en venta",
+      "DISTANCE_MESSAGE": "Distancia: XXX km de distancia"
+    },
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "Por favor reporta defectos a"
+    },
+    "PRIVACY_POLICY_INFO": {
+      "TITLE": "Política de Privacidad",
+      "LAST_UPDATED": "Última Actualización",
+      "EMAIL_ADDRESS": "Dirección de Correo Electrónico",
+      "SECTIONS": {
+        "HEADER_1": "Introducción",
+        "CONTENT_1": "Bienvenido a la app Map of Pi, desarrollada por el equipo de Map of Pi en colaboración con la Comunidad Pi. Esta Política de Privacidad describe cómo recopilamos, usamos, divulgamos y protegemos tu información personal cuando usas nuestra aplicación móvil.",
+        
+        "HEADER_2": "Información que Recopilamos",
+        "SUBHEADER_2_1": "Información del Usuario",
+        "CONTENT_2_1_1": "Cuando te registras como usuario, podemos recopilar tu nombre, dirección de correo electrónico, nombre de usuario y otros detalles relevantes.",
+        "CONTENT_2_1_2": "Podemos recopilar información sobre tu dispositivo, incluyendo tipo de dispositivo, sistema operativo e identificadores únicos del dispositivo.",
+        "SUBHEADER_2_2": "Información del Vendedor",
+        "CONTENT_2_2_1": "Los vendedores que se registren en la plataforma pueden necesitar proporcionar información del Vendedor, incluyendo nombre del Vendedor, ubicación y detalles de contacto.",
+        "CONTENT_2_2_2": "Un Vendedor puede ser un negocio o un individuo privado.",
+
+        "HEADER_3": "Cómo Usamos Tu Información",
+        "SUBHEADER_3_1": "Provisión de Servicios",
+        "CONTENT_3_1_1": "Usamos tu información para proporcionar y mejorar los servicios de la app Map of Pi, incluyendo funcionalidades para usuarios y vendedores.",
+        "SUBHEADER_3_2": "Comunicaciones",
+        "CONTENT_3_2_1": "Podemos usar tu información de contacto para enviarte actualizaciones, notificaciones y mensajes promocionales relacionados con la app Map of Pi.",
+        "SUBHEADER_3_3": "Análisis",
+        "CONTENT_3_3_1": "Recopilamos y analizamos datos para mejorar el rendimiento, las características y la funcionalidad de la app.",
+
+        "HEADER_4": "Compartir Tu Información",
+        "SUBHEADER_4_1": "Con Vendedores",
+        "CONTENT_4_1_1": "La información del usuario puede ser compartida con los vendedores para el cumplimiento de pedidos y propósitos de comunicación.",
+        "SUBHEADER_4_2": "Con Terceros",
+        "CONTENT_4_2_1": "Podemos compartir información con proveedores de servicios de terceros para la funcionalidad de la app, análisis y procesamiento de pagos.",
+
+        "HEADER_5": "Medidas de Seguridad",
+        "CONTENT_5_1": "Empleamos medidas de seguridad estándar de la industria para proteger tu información. Sin embargo, ningún método de transmisión por internet o almacenamiento electrónico es completamente seguro.",
+
+        "HEADER_6": "Tus Opciones",
+        "CONTENT_6_1": "Puedes actualizar la información de tu cuenta a través de la configuración de la app. Puedes eliminar tu cuenta de Map of Pi eliminando tu cuenta de Pi Network y luego eligiendo la opción de eliminar tus datos de Map of Pi cuando accedas a Map of Pi la próxima vez. Puedes optar por no recibir comunicaciones promocionales.",
+
+        "HEADER_7": "Cambios en Esta Política de Privacidad",
+        "CONTENT_7_1": "Podemos actualizar esta Política de Privacidad según sea necesario. La versión más reciente estará publicada en nuestro sitio web o dentro de la app.",
+
+        "HEADER_8": "Contáctanos",
+        "CONTENT_8_1": "Si tienes alguna pregunta o inquietud sobre esta Política de Privacidad, por favor contáctanos enviando un correo electrónico a"
+      }
+    },
+    "TERMS_OF_SERVICE_INFO": {
+      "TITLE": "Términos de Servicio",
+      "LAST_UPDATED": "Última Actualización",
+      "EMAIL_ADDRESS": "Dirección de Correo Electrónico",
+      "SECTIONS": {
+        "HEADER_1": "Aceptación de los Términos",
+        "CONTENT_1_1": "Bienvenido a la app Map of Pi, desarrollada por el equipo de Map of Pi en colaboración con la Comunidad Pi. Al usar esta app, aceptas cumplir con estos Términos de Servicio, así como con nuestra Política de Privacidad.",
+        
+        "HEADER_2": "Uso de la App",
+        "CONTENT_2_1": "Aceptas usar la app Map of Pi en cumplimiento con todas las leyes y regulaciones aplicables.",
+        "CONTENT_2_2": "No deberás usar la app para ningún propósito ilegal o prohibido, ni de ninguna manera que pueda dañar, deshabilitar, sobrecargar o deteriorar la app.", 
+        "CONTENT_2_3": "Para usar Map of Pi debes estar registrado como usuario pionero de la Pi Network.", 
+
+        "HEADER_3": "Propiedad Intelectual",
+        "CONTENT_3_1": "La app Map of Pi y todo el contenido, características y funcionalidades son propiedad de Map of Pi y están protegidos por derechos de autor, marcas comerciales y otras leyes de propiedad intelectual.",
+
+        "HEADER_4": "Limitación de Responsabilidad",
+        "CONTENT_4_1": "Map of Pi no será responsable por ningún daño directo, indirecto, incidental, especial o consecuente que surja de o en cualquier manera esté relacionado con el uso de la app Map of Pi.",
+
+        "HEADER_5": "Indemnización",
+        "CONTENT_5_1": "Aceptas indemnizar y mantener indemne a Map of Pi y sus afiliados, oficiales, directores, empleados y agentes de cualquier reclamo, responsabilidad, daño, pérdida o gasto (incluidos los honorarios de abogados) que surja de o esté relacionado de alguna manera con tu uso de la app Map of Pi.",
+
+        "HEADER_6": "Ley Aplicable",
+        "CONTENT_6_1": "Estos Términos de Servicio se regirán e interpretarán de acuerdo con la ley de Inglaterra y Gales sin tener en cuenta sus disposiciones sobre conflictos de leyes, incluyendo cualquier disputa o reclamo que surja de o esté relacionado con su objeto o formación (incluyendo disputas o reclamos no contractuales).",
+
+        "HEADER_7": "Cambios en Estos Términos",
+        "CONTENT_7_1": "Nos reservamos el derecho de actualizar o modificar estos Términos de Servicio en cualquier momento sin previo aviso. La versión más reciente estará publicada en nuestro sitio web o dentro de la app."
       }
     }
   },
-  "SHOPPING": {
-    "ORDER_SCREEN": {
-      "MENU": "Menú",
-      "HIGHLIGHT_MESSAGE": "Puedes ordenar en línea y pagar en persona",
-      "BUY_NOW_MESSAGE": "Comprar Ahora",
-      "NO_PRODUCTS_MESSAGE": "Este negocio no tiene productos."
-    }
-  },
-  "PRIVACY_POLICY": {
-    "TITLE": "Política de privacidad",
-    "LAST_UPDATED": "Última actualización",
-    "EMAIL_ADDRESS": "Correo electrónico",
-    "SECTIONS": {
-      "HEADER_1": "Introducción",
-      "CONTENT_1": "Bienvenido a la aplicación Mapa de Pi, desarrollada por el equipo de Mapa de Pi en colaboración con la Comunidad Pi. Esta política de privacidad describe cómo recopilamos, usamos, divulgamos y protegemos su información personal cuando utiliza nuestra aplicación móvil.",
-      
-      "HEADER_2": "Información que recopilamos",
-      "SUBHEADER_2_1": "Información del usuario",
-      "CONTENT_2_1_1": "Cuando se registra como usuario, podemos recopilar su nombre, dirección de correo electrónico, nombre de usuario y otros detalles relevantes.",
-      "CONTENT_2_1_2": "Podemos recopilar información sobre su dispositivo, incluido el tipo de dispositivo, el sistema operativo y los identificadores únicos del dispositivo.",
-      "SUBHEADER_2_2": "Información del proveedor",
-      "CONTENT_2_2_1": "Los proveedores que se registran en la plataforma pueden estar obligados a proporcionar información comercial, incluido el nombre del negocio, la ubicación y los detalles de contacto.",
-
-      "HEADER_3": "Cómo utilizamos su información",
-      "SUBHEADER_3_1": "Proporcionar servicios",
-      "CONTENT_3_1_1": "Utilizamos su información para proporcionar y mejorar los servicios de la aplicación Mapa de Pi, incluidas las funcionalidades de usuario y proveedor.",
-      "SUBHEADER_3_2": "Comunicaciones",
-      "CONTENT_3_2_1": "Podemos utilizar su información de contacto para enviarle actualizaciones, notificaciones y mensajes promocionales relacionados con la aplicación Mapa de Pi.",
-      "SUBHEADER_3_3": "Análisis",
-      "CONTENT_3_3_1": "Recopilamos y analizamos datos para mejorar el rendimiento, las características y la funcionalidad de la aplicación.",
-
-      "HEADER_4": "Cómo compartimos su información",
-      "SUBHEADER_4_1": "Con proveedores",
-      "CONTENT_4_1_1": "La información del usuario puede compartirse con proveedores para el cumplimiento de pedidos y fines de comunicación.",
-      "SUBHEADER_4_2": "Con terceros",
-      "CONTENT_4_2_1": "Podemos compartir información con proveedores de servicios de terceros para la funcionalidad de la aplicación, análisis y procesamiento de pagos.",
-
-      "HEADER_5": "Medidas de seguridad",
-      "CONTENT_5_1": "Utilizamos medidas de seguridad estándar de la industria para proteger su información. Sin embargo, ningún método de transmisión a través de Internet o almacenamiento electrónico es completamente seguro.",
-
-      "HEADER_6": "Sus opciones",
-      "CONTENT_6_1": "Puede actualizar o eliminar su información de cuenta a través de la configuración de la aplicación. También puede optar por no participar en comunicaciones promocionales.",
-
-      "HEADER_7": "Cambios en esta política de privacidad",
-      "CONTENT_7_1": "Podemos actualizar esta política de privacidad según sea necesario. La última versión se publicará en nuestro sitio web o dentro de la aplicación.",
-
-      "HEADER_8": "Contáctenos",
-      "CONTENT_8_1": "Si tiene alguna pregunta o inquietud sobre esta política de privacidad, contáctenos "
-    }
-  },
-  "TERMS_OF_SERVICE": {
-    "TITLE": "Condiciones de servicio",
-    "LAST_UPDATED": "Última actualización",
-    "EMAIL_ADDRESS": "Correo electrónico",
-    "SECTIONS": {
-      "HEADER_1": "Aceptación de los términos",
-      "CONTENT_1_1": "Bienvenido a la aplicación Mapa de Pi, desarrollada por el equipo de Mapa de Pi en colaboración con la Comunidad Pi. Al utilizar esta aplicación, usted acepta cumplir con estos Términos de Servicio, así como con nuestra Política de Privacidad.",
-      
-      "HEADER_2": "Uso de la aplicación",
-      "CONTENT_2_1": "Usted acepta utilizar la aplicación Mapa de Pi de conformidad con todas las leyes y regulaciones aplicables.",
-      "CONTENT_2_2": "No deberá utilizar la aplicación para ningún propósito ilícito o prohibido, ni de ninguna manera que pudiera dañar, deshabilitar, sobrecargar o perjudicar la aplicación.", 
-
-      "HEADER_3": "Propiedad intelectual",
-      "CONTENT_3_1": "La aplicación Mapa de Pi y todo su contenido, características y funcionalidades son propiedad de Mapa de Pi y están protegidos por las leyes de derechos de autor, marcas comerciales y otras leyes de propiedad intelectual.",
-
-      "HEADER_4": "Limitación de responsabilidad",
-      "CONTENT_4_1": "Mapa de Pi no será responsable de ningún daño directo, indirecto, incidental, especial o consecuente que surja de alguna manera relacionada con el uso de la aplicación Mapa de Pi.",
-
-      "HEADER_5": "Indemnización",
-      "CONTENT_5_1": "Usted acepta indemnizar y eximir de responsabilidad a Mapa de Pi y sus afiliados, funcionarios, directores, empleados y agentes de cualquier reclamo, responsabilidad, daño, pérdida o gasto (incluidos honorarios de abogados) que surja de alguna manera relacionado con su uso de la aplicación Mapa de Pi.",
-
-      "HEADER_6": "Ley aplicable",
-      "CONTENT_6_1": "Estos Términos de Servicio estarán regidos por y se interpretarán de acuerdo con las leyes de nuestra jurisdicción definida, sin tener en cuenta sus disposiciones sobre conflicto de leyes.",
-
-      "HEADER_7": "Cambios en estos términos",
-      "CONTENT_7_1": "Nos reservamos el derecho de actualizar o modificar estos Términos de Servicio en cualquier momento sin previo aviso. La versión más reciente se publicará en nuestro sitio web o dentro de la aplicación."
+  "SHARED": {
+    "BUY": "Comprar",
+    "NAVIGATE": "Navegar",
+    "SEARCH_CENTER": "Establecer Centro de Búsqueda",
+    "CHECK_REVIEWS": "Ver Reseñas",
+    "REPLY": "Responder",
+    "SAVE": "Guardar",
+    "CONFIRM_DIALOG": "Tienes cambios sin guardar. ¿Realmente quieres salir?",
+    "PHOTO": {
+      "UPLOAD_PHOTO_LABEL": "Subir Foto",
+      "IMAGE_DROP_UPLOAD_MESSAGE": "Suelta tu imagen aquí o busca",
+      "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP",
+      "SINGLE_PHOTO_MESSAGE": "Solo una foto"
+    },
+    "REACTION_RATING": {
+      "UNSAFE": "Inseguro",
+      "TRUSTWORTHY": "Confiable",
+      "EMOTIONS": {
+        "DESPAIR": "Desesperación",
+        "SAD": "Triste",
+        "OKAY": "Aceptable",
+        "HAPPY": "Feliz",
+        "DELIGHT": "Delicia"
+      }
     }
   }
 }

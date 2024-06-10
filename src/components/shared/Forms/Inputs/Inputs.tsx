@@ -1,10 +1,8 @@
-import React from 'react';
-import PhoneInput from 'react-phone-number-input'
-
-import styles from './Inputs.module.css';
-
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+
+import React from 'react';
+import PhoneInput from 'react-phone-number-input'
 
 export const Input = (props: any) => {
   const { label, icon, ...input } = props;
@@ -72,15 +70,12 @@ export const FileInput = (props: any) => {
           height={85}
         />
         <div className="mt-5 text-center text-[#828282]">
-          Drop your image here, or browse
+          {t('SHARED.PHOTO.IMAGE_DROP_UPLOAD_MESSAGE')}
         </div>
         <span className="text-[#828282] text-[11px] mt-1">
-          Supports: PNG, JPG, JPEG, WEBP
+        {t('SHARED.PHOTO.SUPPORTS_FILE_MESSAGE')}
         </span>
-        <span className="text-[#DF2C2C] text-[11px] mt-1">One Photo Only</span>
-        {/* <div className="select-none">
-          {t('BUSINESS.ADD_PRODUCT.PLACEHOLDERS.PRODUCT_IMAGES')}
-        </div> */}
+        <span className="text-[#DF2C2C] text-[11px] mt-1">{t('SHARED.PHOTO.SINGLE_PHOTO_MESSAGE')}</span>
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"
@@ -89,27 +84,6 @@ export const FileInput = (props: any) => {
           onChange={(e) => props.handleAddImages(e)}
         />
       </div>
-      {/* <label className="block font-medium text-gray-700 mt-2">
-        {t('BUSINESS.ADD_PRODUCT.PLACEHOLDERS.PRODUCT_IMAGES_MAX')}
-      </label> */}
-      {/* {props.images.length > 0 ? (
-        <div className="flex flex-wrap gap-2 mb-3">
-          {' '}
-          {props.images.map((image: any) => (
-            <Image
-              key={image}
-              src={image}
-              alt="Selected Image"
-              width={50}
-              height={50}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="my-2 text-center text-gray-500 text-[14px]">
-          {t('BUSINESS.ADD_PRODUCT.VALIDATIONS.PRODUCT_IMAGES')}
-        </div>
-      )} */}
     </div>
   );
 };
