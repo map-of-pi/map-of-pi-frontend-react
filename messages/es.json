@@ -34,7 +34,8 @@
       "SELLER_BUSINESS_NAME": "Nombre del Negocio del Vendedor",
       "SELLER_DESCRIPTION": "Descripción del Vendedor",
       "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o Ubicación del Vendedor",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe la ubicación desde donde estás vendiendo"
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe la ubicación desde donde estás vendiendo",
+      "SELLER_SETTINGS_LABEL": "Configuración del Vendedor"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Comprar del Vendedor",

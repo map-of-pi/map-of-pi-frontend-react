@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { useState, useEffect } from 'react';
@@ -30,6 +29,9 @@ interface Seller {
 }
 
 const SellerRegistrationForm = () => {
+  const HEADER = "mb-5 font-bold text-lg md:text-2xl";
+  const SUBHEADER = "font-bold mb-2";
+
   const router = useRouter();
   const seller = itemData.seller;
 
@@ -126,8 +128,16 @@ const SellerRegistrationForm = () => {
     setIsSaveEnabled(false);
   };
 
-  const HEADER = "mb-5 font-bold text-lg md:text-2xl";
-  const SUBHEADER = "font-bold mb-2";
+  const translateSellerCategory = (category: string): string => {
+    switch (category) {
+      case 'Pioneer':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER');
+      case 'Other':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER');
+      default:
+        return category;
+    }
+  };
 
   return (
     <>
@@ -180,9 +190,9 @@ const SellerRegistrationForm = () => {
         </div>
 
         <div className="mb-4">
-          <h2 className={SUBHEADER}>Seller settings</h2>
+          <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}</h2>
           <Input 
-            label="Seller name" 
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
             name="sellerName"
             placeholder="Peejen"
             type="text"
@@ -191,17 +201,18 @@ const SellerRegistrationForm = () => {
           />
 
           <Select
-            label="Search Center"
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
             name="sellerType"
-            value={formData.sellerType}
+            value={translateSellerCategory(formData.sellerType)}
             onChange={handleChange}
             options={[
-              { value: 'Ilinois cener, 4 bk', name: 'Ilinois cener, 4 bk' },
+              { value: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'), name: 'Pioneer' },
+              { value: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'), name: 'Other' }
             ]}
           />
 
           <Input 
-            label="Seller business name" 
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_BUSINESS_NAME')}
             name="businessName"
             placeholder="M & M Restaurant"
             type="text"
@@ -210,17 +221,17 @@ const SellerRegistrationForm = () => {
           />
 
           <TextArea 
-            label="Seller description" 
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')} 
             name="sellerDescription"
-            placeholder="I sell items for pay with pi"
+            placeholder=""
             value={formData.sellerDescription}
             onChange={handleChange}
           />
 
           <TextArea 
-            label="Seller address or whereabouts" 
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
             name="sellerAddress"
-            placeholder="Describe location where you are selling from"
+            placeholder={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER')}
             value={formData.sellerAddress}
             onChange={handleChange}
           />
@@ -229,27 +240,22 @@ const SellerRegistrationForm = () => {
         <div className="mb-4">
           <label>Photo</label>
           <label className="border-dashed border-2 border-zinc-400 p-4 rounded-lg flex flex-col items-center cursor-pointer">
-            <Image src="/images/shared/upload.png" alt="Upload" width={100} height={100} className="mb-2" />
-            <p className="text-sm text-zinc-600">Drop your image here, or browse</p>
-            <p className="text-xs text-zinc-400">Supports: PNG, JPG, JPEG, WEBP</p>
-            <p className="text-xs text-red-600">One Photo Only</p>
-            <input 
-              type="file" 
-              accept="image/*" 
-              className="hidden" 
-              onChange={handleFileChange} 
+            <FileInput
+              label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+              images={[]}
+              handleAddImages={handleAddImages}
             />
           </label>
           {selectedFile && (
             <div className="mt-2">
-              <p className="text-sm text-zinc-600">Selected file: {selectedFile.name}</p>
+              <p className="text-sm text-zinc-600">{selectedFile.name}</p>
             </div>
           )}
         </div>
 
         <div className="mb-7">
           <Button
-            label="Save"
+            label={t('SHARED.SAVE')}
             disabled={!isSaveEnabled}
             styles={{
               color: '#ffc153',
@@ -265,7 +271,7 @@ const SellerRegistrationForm = () => {
           show={showConfirmDialog}
           onClose={() => setShowConfirmDialog(false)}
           onConfirm={setShowConfirmDialog}
-          message="You have unsaved changes. Do you really want to leave?"
+          message={t('SHARED.CONFIRM_DIALOG')}
           url={linkUrl}
         />
       </div>
