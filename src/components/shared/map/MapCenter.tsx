@@ -6,8 +6,17 @@ import './MapCenter.css';
 import Image from 'next/image';
 
 import { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Tooltip,
+  useMapEvents,
+} from 'react-leaflet';
 import L from 'leaflet';
+import { Button } from '../Forms/Buttons/Buttons';
+import RecenterAutomatically from './RecenterAutomatically';
+import { ConfirmDialogX } from '../confirm';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -23,146 +32,82 @@ const pinIcon = new L.Icon({
   iconAnchor: [16, 32],
 });
 
-const CenterMarker = ({ position }: { position: [number, number] }) => {
-  return (
-    <Marker position={position} icon={pinIcon}>
-      <Tooltip permanent direction="top" offset={[0, -32]}>
-        <span style={{ fontSize: '14px', lineHeight: '1.5', padding: '5px', textAlign: 'center', display: 'block', color: '#333' }}>
-          Your set map location is saved!<br />
-          You can move the map to adjust the location.
-        </span>
-      </Tooltip>
-    </Marker>
-  );
-};
-
 const MapCenter = () => {
-  const [mapCenter, setMapCenter] = useState<[number, number]>([50.064192, 19.944544]);
-  const [showPopup, setShowPopup] = useState(true);
-  const [typedMessage, setTypedMessage] = useState('');
-  const [popupDismissed, setPopupDismissed] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [markerPosition, setMarkerPosition] = useState<[number, number] | null>(null);
-  const [isButtonVisible, setIsButtonVisible] = useState(false); // Initial state set to false
-  const mapRef = useRef<L.Map | null>(null);
-  const intervalRef = useRef<any>(null);  // Ref to manage the typing interval
+  const [showPopup, setShowPopup] = useState(false);
+  const [center, setCenter] = useState({ lat: 50.064192, lng: 19.944544 });
 
   useEffect(() => {
-    typeText("Welcome to the Set Map Center Page! Please select your preferred central location on the map, then confirm by clicking 'Save Center'.", 40);
-    return () => clearInterval(intervalRef.current);  // Cleanup function to clear the interval when the component unmounts
+    const getLocal = localStorage.getItem('mapCenter');
+    if (getLocal) {
+      const parseLocal = JSON.parse(getLocal);
+      console.log(parseLocal);
+      setCenter({ lat: parseLocal[0], lng: parseLocal[1] });
+    }
   }, []);
 
-  const saveCenterToLocalStorage = () => {
-    if (mapRef.current) {
-      const center = mapRef.current.getCenter();
-      localStorage.setItem('mapCenter', JSON.stringify([center.lat, center.lng]));
-      console.log('Center saved: ' + JSON.stringify([center.lat, center.lng]));
-      setIsButtonDisabled(true); // Grey out the Save button
-      setMarkerPosition([center.lat, center.lng]); // Drop pin at the center
+  const CenterMarker = () => {
+    const map = useMapEvents({
+      moveend() {
+        setCenter(map.getCenter());
+      },
+      load() {
+        setCenter(map.getCenter());
+      },
+    });
+
+    return center ? (
+      <Marker position={center} icon={crosshairIcon}></Marker>
+    ) : null;
+  };
+
+  const handleSetCenter = () => {
+    if (center !== null) {
+      console.log(center);
+      localStorage.setItem(
+        'mapCenter',
+        JSON.stringify([center.lat, center.lng]),
+      );
+      setShowPopup(true);
     }
   };
 
-  const handleMapReady = () => {
-    const map = mapRef.current;
-    if (map) {
-      map.on('movestart', () => {
-        setIsButtonVisible(false); // Hide the Save button on map move
-        setMarkerPosition(null); // Remove the dropped pin when the user starts moving the map again
-      });
-      map.on('moveend', () => {
-        const center = map.getCenter();
-        setMapCenter([center.lat, center.lng]);
-        setIsButtonDisabled(false); // Enable the Save button on move
-        setIsButtonVisible(true); // Show the Save button when map movement stops
-      });
-    }
-  };
-
-  const typeText = (text: string, speed: number) => {
-    let i = 0;
-    clearInterval(intervalRef.current);  // Clear any existing interval before starting a new one
-    intervalRef.current = setInterval(() => {
-      if (i < text.length) {
-        setTypedMessage(prev => prev + text.charAt(i));  // Append the next character
-        i++;
-      } else {
-        clearInterval(intervalRef.current);  // Clear the interval once the text is fully typed
-      }
-    }, speed);
-  };
-
-  const closePopup = () => {
+  const handleClickDialog =() => {
     setShowPopup(false);
-    setPopupDismissed(true);
-    setIsButtonVisible(true); // Show the Save button when the popup is dismissed
-  };
+  }
 
   return (
-    <div style={{ position: 'relative', height: '100vh', width: '100%' }}>
+    <div>
       <MapContainer
-        center={mapCenter}
+        zoomControl={false}
+        center={center}
         zoom={13}
-        style={{ height: '100%', width: '100%' }}
-        whenReady={() => handleMapReady()}
+        className="w-full flex-1 fixed top-[90px] h-[calc(100vh-90px)] left-0 right-0 bottom-0"
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='Map data © OpenStreetMap contributors'
+          attribution="Map data © OpenStreetMap contributors"
         />
-        {markerPosition && <CenterMarker position={markerPosition} />}
+        <CenterMarker />
+        {/* this is use to get the set center on page load */}
+        <RecenterAutomatically position={center} />
       </MapContainer>
-      {isButtonVisible && (
-        <div className="map-controls__item">
-          <button
-            className="map-controls__button"
-            onClick={saveCenterToLocalStorage}
-            role="button"
-            tabIndex={0}
-            disabled={isButtonDisabled}
-          >
-            Set Map Center
-          </button>
-        </div>
-      )}
-      {showPopup && (
-        <section
-          className="popup-message"
-          role="alertdialog"
-          aria-modal="true"
-          aria-labelledby="popupMessageTitle"
-          tabIndex={0}
-        >
-          <figure className="popup-message__logo">
-            <figcaption className="visually-hidden">App Name</figcaption>
-          </figure>
-          <div id="popupMessageTitle">
-            <h2 className="popup-message__title">Dear user</h2>
-            <p className="popup-message__typed-message">{typedMessage}</p>
-          </div>
-          <button
-            onClick={closePopup}
-            className="popup-message__button--confirm"
-            aria-label="Close popup"
-          >
-            Got it
-          </button>
-        </section>
-      )}
-      {!markerPosition && (
-        <div
-          className="crosshair-icon"
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            pointerEvents: 'none',
-            zIndex: 2000,
+      <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
+        <Button
+          label="Set Map Center"
+          onClick={handleSetCenter}
+          styles={{
+            borderRadius: '10px',
+            color: '#ffc153',
+            paddingLeft: '50px',
+            paddingRight: '50px',
           }}
-          >
-          <Image src='/images/icons/crosshair.png' alt='Center Marker' width={80} height={80} />
-        </div>
-      )}
+        />
+      </div>
+      {
+        showPopup && (
+          <ConfirmDialogX message="Your search center has been saved successfully" toggle={() => setShowPopup(false)} handleClicked={handleClickDialog} />
+        )
+      }
     </div>
   );
 };

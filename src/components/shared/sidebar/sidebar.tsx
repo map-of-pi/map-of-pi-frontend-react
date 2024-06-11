@@ -133,7 +133,10 @@ function Sidebar(props: any) {
                   height: '50px',
                   padding: '10px',
                 }}
-                onClick={() => props.setToggleDis(false)} // Close sidebar on click
+                onClick={() => {
+                  router.push('/map-center')
+                  props.setToggleDis(false) // Close sidebar on click
+                }} 
               />
               <Link href="/seller/seller-reviews">
                 <Button
