@@ -1,5 +1,6 @@
 'use client;'
-import React, { useEffect } from 'react'
+
+import { useEffect } from 'react'
 import { useMap } from 'react-leaflet';
 
 function RecenterAutomatically(props: any) {
