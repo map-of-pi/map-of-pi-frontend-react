@@ -1,10 +1,14 @@
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { itemData } from '@/constants/demoAPI';
 import TrustMeter from '@/components/seller/TrustMeter';
 
 const MapMarkerPopup = () => {
-    const SUBHEADER = "font-bold mb-2";
+  const t = useTranslations();
+
+  const SUBHEADER = "font-bold mb-2";
 
   return (
     <>
@@ -23,25 +27,25 @@ const MapMarkerPopup = () => {
             </div>
 
             {/* Items List */}
-            <h2 className={`${SUBHEADER} text-base`}>Seller items for sale</h2>
+            <h2 className={`${SUBHEADER} text-base`}>{t('POPUP.MAP_MARKER.SELLER_SALE_ITEMS_FIELD')}</h2>
             <div className="seller_item_container mb-1 max-h-[200px] overflow-auto">
                 <p>{itemData.seller.sale_items}</p>
             </div>
-            <div className='font-bold m-3'>Distance: <span>XXX km</span> away</div>
+            <div className='font-bold m-3'>{t('POPUP.MAP_MARKER.DISTANCE_MESSAGE')}</div>
         
             <div className="flex justify-between space-x-4 gap-2 text-lg">
                 <Link
                 href={'/seller/seller-item'} //change to items list screen
                 className="px-3 py-1 bg-primary rounded-md w-full flex justify-center"
                 >
-                    <span className='text-secondary'>Buy</span>
+                    <span className='text-secondary'>{t('SHARED.BUY')}</span>
                     {/* <Link href={'/seller/seller-item'} className='text-[#F6C367]'>Buy</Link> */}
                 </Link>
                 <Link
                 href={'/seller/seller-item'} // change to navigate url
                 className="px-3 py-1 outline outline-[1px] outline-primary rounded-md w-full flex justify-center"
                 >
-                    <span className='text-[#F6C367]'>Navigate</span>
+                    <span className='text-[#F6C367]'>{t('SHARED.NAVIGATE')}</span>
                 </Link>
             </div>
         </div>

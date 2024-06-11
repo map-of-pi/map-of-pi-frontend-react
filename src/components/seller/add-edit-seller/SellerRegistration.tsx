@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+
+import { useState, useEffect } from 'react';
+
 import TrustMeter from '@/components/seller/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea, Input, Select } from '@/components/shared/Forms/Inputs/Inputs';
@@ -37,11 +40,14 @@ const SellerRegistrationForm = () => {
     businessName: '',
     sellerDescription: '',
     sellerAddress: ''
-  });  
+  });
+  
+  const t = useTranslations();
+
   const [dbSeller, setDbSeller] = useState<Seller>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
@@ -97,6 +103,8 @@ const SellerRegistrationForm = () => {
     }
   };
 
+  const handleAddImages = () => {};
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
@@ -124,21 +132,21 @@ const SellerRegistrationForm = () => {
   return (
     <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
-        <h1 className={HEADER}>Add/Edit Seller Registration</h1>
+        <h1 className={HEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}</h1>
         
         <div className="mb-4">
-          <h2 className={SUBHEADER}>Seller items for sale</h2>
+          <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_LABEL')}</h2>
           <div className="mb-2">
             <TextArea 
               name="itemsForSale"
-              placeholder="Describe your items for sale, price, etc" 
+              placeholder={t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_PLACEHOLDER')} 
               value={formData.itemsForSale} 
               onChange={handleChange} 
             />
           </div>
         </div>
         <Button 
-          label="Set Search Centre" 
+          label={t('SHARED.SEARCH_CENTER')}
           styles={{
             color: '#ffc153',
             height: '40px',
@@ -148,25 +156,25 @@ const SellerRegistrationForm = () => {
         />
 
         <div className="mb-7">
-          <h2 className={SUBHEADER}>Reviews summary</h2>
+          <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}</h2>
           <TrustMeter ratings={seller.trust_meter_rating} />
           <div className="flex items-center justify-between mt-3">
-            <p className="text-sm">Reviews Score: 3.2 out of 5.0</p>
-            <OutlineBtn label="Check Reviews" onClick={() => handleNavigation('seller/seller-reviews')} />
+            <p className="text-sm">{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.trust_meter_rating})}</p>
+            <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} onClick={() => handleNavigation('seller/seller-reviews')} />
           </div>
         </div>
         <div className="mb-7">
-          <h2 className={`${SUBHEADER} mb-4`}>Seller contact details</h2>
+          <h2 className={`${SUBHEADER} mb-4`}>{t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}</h2>
           <div className="text-sm mb-3">
-            <span className="font-bold">Seller pioneer id: </span>
+            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ": "}</span>
             <span>{seller ? seller.seller_id : ""}</span>
           </div>
           <div className="text-sm mb-3">
-            <span className="font-bold">Seller phone: </span>
+            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ": "}</span>
             <span>{seller.phone}</span>
           </div>
           <div className="text-sm mb-3">
-            <span className="font-bold">Seller email: </span>
+            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ": "}</span>
             <span>{seller.email}</span>
           </div>
         </div>
