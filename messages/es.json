@@ -57,7 +57,7 @@
       "BY_REVIEWER": "Por {buyer_id}"
     },
     "REPLY_TO_REVIEW": {
-      "REPLY_TO_REVIEW_HEADER": "Responder a la Reseña",
+      "REPLY_TO_REVIEW_HEADER": "Responder a la reseña dejada para {seller_id}",
       "BY_REVIEWER": "Por {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Deja tu respuesta a la reseña anterior",
       "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes sobre la reseña anterior",
@@ -170,6 +170,7 @@
         "HAPPY": "Feliz",
         "DELIGHT": "Delicia"
       }
-    }
+    },
+    "LOADING_SCREEN_MESSAGE": "Cargando datos..."
   }
 }

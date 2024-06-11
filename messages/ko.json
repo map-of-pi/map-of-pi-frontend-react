@@ -57,7 +57,7 @@
       "BY_REVIEWER": "{buyer_id}에 의해"
     },
     "REPLY_TO_REVIEW": {
-      "REPLY_TO_REVIEW_HEADER": "리뷰에 답장",
+      "REPLY_TO_REVIEW_HEADER": "{seller_id}에 남긴 리뷰에 답장하기",
       "BY_REVIEWER": "{buyer_id}에 의해",
       "REPLY_TO_REVIEW_MESSAGE": "위 리뷰에 대한 답장을 남기세요",
       "FACE_SELECTION_REVIEW_MESSAGE": "위 리뷰에 대한 느낌을 나타내는 얼굴을 선택하세요",
@@ -170,6 +170,7 @@
         "HAPPY": "행복",
         "DELIGHT": "기쁨"
       }
-    }
+    },
+    "LOADING_SCREEN_MESSAGE": "데이터 로딩 중..."
   }
 }

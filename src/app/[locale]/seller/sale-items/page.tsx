@@ -1,40 +1,25 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+
+import React, { useEffect, useState } from 'react';
 
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
-
+import { PiFestJson } from '@/constants/demoAPI';
 import { fetchSingleSeller, createReview } from '@/services/api';
-import { itemData, PiFestJson } from '@/constants/demoAPI';
-
-interface Seller {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  address: string;
-  phone: number;
-  email: string;
-  sale_items: string;
-  average_rating: number;
-  trust_meter_rating: number;
-  type: string;
-  coordinates: [];
-  order_online_enabled_pref: boolean;
-}
 
 export default function Page() {
+  const SUBHEADER = "font-bold mb-2";
+
   const t = useTranslations();
   const router = useRouter();
 
-  
   const [files, setFiles] = useState<File[]>([]);
   const [previewImage, setPreviewImage] = useState<string[]>([]);
   const [comments, setComments] = useState('');
@@ -47,7 +32,6 @@ export default function Page() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-
   useEffect(() => {
     const getSellerData = async () => {
       try {
@@ -59,7 +43,6 @@ export default function Page() {
         setLoading(false);
       }
     };
-  
     getSellerData();
   }, []);
 
@@ -108,7 +91,6 @@ export default function Page() {
     }
   };
 
-
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {
       setLinkUrl(route);
@@ -118,28 +100,29 @@ export default function Page() {
     }
   };
 
-  const SUBHEADER = "font-bold mb-2";
+  const translateSellerCategory = (category: string): string => {
+    switch (category) {
+      case 'Pioneer':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER');
+      case 'Other':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER');
+      default:
+        return category;
+    }
+  };
 
   // loading condition
   if (loading) {
     return (
       <div id="loading-screen">
-        <p>Loading seller data...</p>
+        <p>{t('SHARED.LOADING_SCREEN_MESSAGE')}</p>
       </div>
     );
   }
 
-  // if (error) {
-  //   setSeller(PiFestJson.Seller)
-  //   // return <div>{error}</div>;
-  // }
-
-  // const seller = itemData.seller
-
   return (
-    
     <div className="w-full md:w-[500px] md:mx-auto p-4">
-      <h1 className="mb-5 font-bold text-lg md:text-2xl">Buy From Seller</h1>
+      <h1 className="mb-5 font-bold text-lg md:text-2xl">{t('SCREEN.BUY_FROM_SELLER.BUY_FROM_SELLER_HEADER')}</h1>
 
       {seller && (<div>
         {/* Seller Profile */}
@@ -149,42 +132,42 @@ export default function Page() {
           </div>
           <div className="my-auto">
             <h2 className="font-bold mb-2">{seller.name}</h2>
-            <p className="text-sm">pioneer</p>
+            <p className="text-sm">{translateSellerCategory('Pioneer')}</p>
           </div>
         </div>
 
         {/* Seller Description */}
         <div className="mb-5">
-          <h2 className={SUBHEADER}>Seller Description</h2>
+          <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.SELLER_DESCRIPTION_LABEL')}</h2>
           <p className="">{seller.description}</p>
         </div>
 
         {/* Items List */}
-        <h2 className={SUBHEADER}>Seller items for sale</h2>
+        <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.SELLER_SALE_ITEMS_LABEL')}</h2>
         <div className="seller_item_container mb-6">
           <p>{seller.sale_items}</p>
         </div>
 
         {/* Seller Location */}
         <div className="mb-6">
-          <h2 className={`SUBHEADER`}>Seller address or whereabouts</h2>
+          <h2 className={`SUBHEADER`}>{t('SCREEN.BUY_FROM_SELLER.SELLER_ADDRESS_LOCATION_LABEL')}</h2>
           <p className="mb-3">{seller.address}</p>
-          <OutlineBtn label="Navigate" onClick={() => handleNavigation('')} />
+          <OutlineBtn label={t('SHARED.NAVIGATE')} onClick={() => handleNavigation('')} />
         </div>
 
         {/* Leave a Review */}
         <div className="mb-3">
-          <h2 className={SUBHEADER}>Leave a review</h2>
-          <p>Select the face which shows how you feel about the above Seller</p>
+          <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.LEAVE_A_REVIEW_MESSAGE')}</h2>
+          <p>{t('SCREEN.BUY_FROM_SELLER.FACE_SELECTION_REVIEW_MESSAGE')}</p>
           <EmojiPicker onSelect={handleEmojiSelect} />
         </div>
 
         <div className="mb-2">
-          <TextArea placeholder="Enter additional comments here..." value={comments} onChange={handleCommentsChange} />
+          <TextArea placeholder={t('SCREEN.BUY_FROM_SELLER.ADDITIONAL_COMMENTS_PLACEHOLDER')} value={comments} onChange={handleCommentsChange} />
         </div>
 
         <div className="mb-2">
-          <FileInput label="Optional feedback photo upload" handleAddImages={handleAddImages} images={previewImage} />
+          <FileInput label={t('SCREEN.BUY_FROM_SELLER.FEEDBACK_PHOTO_UPLOAD_LABEL')} handleAddImages={handleAddImages} images={previewImage} />
         </div>
 
         {/* Save Button */}
@@ -193,34 +176,36 @@ export default function Page() {
             onClick={handleSave}
             disabled={!isSaveEnabled}
             className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
-            Save
+            {t('SHARED.SAVE')}
           </button>
         </div>
 
         {/* Summary of Reviews */}
         <div className="mb-7">
-          <h2 className={SUBHEADER}>Reviews summary</h2>
+          <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SUMMARY_LABEL')}</h2>
           {/* Trust-O-meter */}
           <div>
             <TrustMeter ratings={seller.average_rating} />
           </div>
           <div className="flex items-center justify-between mt-3">
-            <p className="text-sm">Reviews Score: {seller.trust_meter_rating} out of 5.0</p>
-            <OutlineBtn label="Check Reviews" onClick={() => handleNavigation('seller/reviews')} />
+            <p className="text-sm">
+              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.average_rating})}
+            </p>
+            <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} onClick={() => handleNavigation('seller/reviews')} />
           </div>
         </div>
         <div className="mb-7">
-          <h2 className={`${SUBHEADER} mb-4`}>Seller contact details</h2>
+          <h2 className={`${SUBHEADER} mb-4`}>{t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}</h2>
           <div className="text-sm mb-3">
-            <span className="font-bold">Seller pioneer id: </span>
+            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ": "}</span>
             <span>{seller.seller_id}</span>
           </div>
           <div className="text-sm mb-3">
-            <span className="font-bold">Seller phone: </span>
+            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ": "}</span>
             <span>{seller.phone}</span>
           </div>
           <div className="text-sm mb-3">
-            <span className="font-bold">Seller email: </span>
+            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ": "}</span>
             <span>{seller.email}</span>
           </div>
         </div>
@@ -229,12 +214,11 @@ export default function Page() {
           show={showConfirmDialog}
           onClose={() => setShowConfirmDialog(false)}
           onConfirm={setShowConfirmDialog}
-          message="You have unsaved changes. Do you really want to leave?"
+          message={t('SHARED.CONFIRM_DIALOG')}
           url={linkUrl}
         />
       </div>
       )}
-    </div>
-    
+    </div>  
   );
 }
