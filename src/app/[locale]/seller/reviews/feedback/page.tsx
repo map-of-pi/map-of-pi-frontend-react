@@ -1,14 +1,20 @@
 "use client";
-
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+
+import { useEffect, useState } from 'react';
+
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import { fetcSinglehReview, createReview, updateReview, deleteReview } from '@/services/api';
 
 export default function ReplyToReviewPage() {
+    const HEADER = "mb-5 font-bold text-lg md:text-2xl";
+    const SUBHEADER = "font-bold mb-2";
+
+    const t = useTranslations();
     const router = useRouter();
 
     const [files, setFiles] = useState<File[]>([]);
@@ -96,33 +102,47 @@ export default function ReplyToReviewPage() {
         }
     };
 
-    const HEADER = "mb-5 font-bold text-lg md:text-2xl";
-    const SUBHEADER = "font-bold mb-2";
+    const translateReactionRating = (reaction: string): string => {
+      switch (reaction) {
+        case 'Despair':
+          return t('SHARED.REACTION_RATING.EMOTIONS.DESPAIR');
+        case 'Sad':
+          return t('SHARED.REACTION_RATING.EMOTIONS.SAD');
+        case 'Okay':
+          return t('SHARED.REACTION_RATING.EMOTIONS.OKAY');
+        case 'Happy':
+          return t('SHARED.REACTION_RATING.EMOTIONS.HAPPY');
+        case 'Delight':
+          return t('SHARED.REACTION_RATING.EMOTIONS.DELIGHT');
+        default:
+          return reaction;
+      }
+    };
 
     return (
         <div className="w-full md:w-[500px] md:mx-auto p-4">
-            <h1 className={HEADER}>Reply to Review of {reviewData.reviewReceiver}</h1>
+            <h1 className={HEADER}>{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_HEADER', {seller_id: reviewData.reviewReceiver})}</h1>
 
             <div className="mb-4">
                 <p className="mb-2">{reviewData.comment}</p>
                 <p className="text-sm text-gray-400">{reviewData.reviewDate}</p>
-                <p className="text-sm text-gray-600">By {reviewData.reviewer}</p>
+                <p className="text-sm text-gray-600">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', {buyer_id: reviewData.reviewer})}</p>
                 <div className="flex items-center mt-2">
                     <span className="mr-2">{reviewData.emoji}</span>
-                    <span>{reviewData.emojiText}</span>
+                    <span>{translateReactionRating(reviewData.emojiText)}</span>
                     <Image alt='review image' src={reviewData.reviewImage} width={50} height={50} className='rounded ml-2' />
                 </div>
             </div>
 
             <div className='mb-3'>
-                <h2 className={SUBHEADER}>Leave your reply to the above review</h2>
-                <p>Select the face which shows how you feel about the above review</p>
+                <h2 className={SUBHEADER}>{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_MESSAGE')}</h2>
+                <p>{t('SCREEN.REPLY_TO_REVIEW.FACE_SELECTION_REVIEW_MESSAGE')}</p>
                 <EmojiPicker onSelect={handleEmojiSelect} />
             </div>
 
             <div className='mb-2'>
                 <TextArea
-                    placeholder={'Enter additional comments here...'}
+                    placeholder={t('SCREEN.REPLY_TO_REVIEW.ADDITIONAL_COMMENTS_PLACEHOLDER')}
                     value={comments}
                     onChange={handleCommentsChange}
                 />
@@ -130,7 +150,7 @@ export default function ReplyToReviewPage() {
 
             <div className='mb-2'>
                 <FileInput
-                    label={'Feedback photo upload'}
+                    label={t('SCREEN.REPLY_TO_REVIEW.FEEDBACK_PHOTO_UPLOAD_LABEL')}
                     handleAddImages={handleAddImages}
                     images={previewImage}
                 />
@@ -142,7 +162,7 @@ export default function ReplyToReviewPage() {
                     disabled={!isSaveEnabled}
                     className={`${isSaveEnabled ? "opacity-100" : "opacity-50"} px-6 py-2 bg-[#386F4F] text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}
                 >
-                    Save
+                    {t('SHARED.SAVE')}
                 </button>
             </div>
 
@@ -150,7 +170,7 @@ export default function ReplyToReviewPage() {
                 show={showConfirmDialog}
                 onClose={() => setShowConfirmDialog(false)}
                 onConfirm={setShowConfirmDialog}
-                message="You have unsaved changes. Do you really want to leave?"
+                message={t('SHARED.CONFIRM_DIALOG')}
                 url={linkUrl}
             />
         </div>
