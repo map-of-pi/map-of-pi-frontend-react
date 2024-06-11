@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from 'next-intl';
+
 import { useState } from 'react';
 
 interface Emoji {
@@ -10,12 +12,14 @@ interface Emoji {
 }
 
 export default function EmojiPicker(props: any) {
-  const despairEmoji: Emoji = { name: "Despair", unicode: "😠", code: ":despair:", value: 0 };
+  const t = useTranslations();
+
+  const despairEmoji: Emoji = { name: t('SHARED.REACTION_RATING.EMOTIONS.DESPAIR'), unicode: "😠", code: ":despair:", value: 0 };
   const emojis: Emoji[] = [
-    { name: "Sad", unicode: "🙁", code: ":sad_face:", value: 1 },
-    { name: "Okay", unicode: "🙂", code: ":okay_face:", value: 2 },
-    { name: "Happy", unicode: "😃", code: ":happy_face:", value: 3 },
-    { name: "Delight", unicode: "😍", code: ":delight_face:", value: 4 }
+    { name: t('SHARED.REACTION_RATING.EMOTIONS.SAD'), unicode: "🙁", code: ":sad_face:", value: 1 },
+    { name: t('SHARED.REACTION_RATING.EMOTIONS.OKAY'), unicode: "🙂", code: ":okay_face:", value: 2 },
+    { name: t('SHARED.REACTION_RATING.EMOTIONS.HAPPY'), unicode: "😃", code: ":happy_face:", value: 3 },
+    { name: t('SHARED.REACTION_RATING.EMOTIONS.DELIGHT'), unicode: "😍", code: ":delight_face:", value: 4 }
   ];
 
   const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null);
@@ -43,7 +47,7 @@ export default function EmojiPicker(props: any) {
     <div>
       <div className='flex gap-3 w-full text-center justify-center my-2'>
         <div className='bg-[#DF2C2C33] rounded-md p-2'>
-          <p className='text-red-700 mb-2'>Unsafe</p>
+          <p className='text-red-700 mb-2'>{t('SHARED.REACTION_RATING.UNSAFE')}</p>
           <div
             onClick={() => !props.clickDisabled ? handleEmojiClick(despairEmoji.value) : undefined}
             className={`${selectedEmoji !== despairEmoji.value ? 'bg-red-200' : 'bg-red-700'} outline-[#DF2C2C] ${emojiBtnClass}`}
@@ -58,7 +62,7 @@ export default function EmojiPicker(props: any) {
           </div>
         </div>
         <div className='bg-[#3D924A8A] rounded-[10px] w-full p-2 text-center text-white'>
-          <p className='mb-2'>Trustworthy</p>
+          <p className='mb-2'>{t('SHARED.REACTION_RATING.TRUSTWORTHY')}</p>
           <div id='emoji-picker' className='flex gap-3 justify-center'>
             {emojis.map((emoji, index) => (
               <li
