@@ -1,4 +1,3 @@
-import MapCenter from '@/components/shared/map/MapCenter';
 import dynamic from 'next/dynamic';
 
 const MapCenterPage = () => {

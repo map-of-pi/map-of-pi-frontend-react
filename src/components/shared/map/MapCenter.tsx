@@ -34,13 +34,12 @@ const pinIcon = new L.Icon({
 
 const MapCenter = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const [center, setCenter] = useState({ lat: 50.064192, lng: 19.944544 });
+  const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
 
   useEffect(() => {
     const getLocal = localStorage.getItem('mapCenter');
     if (getLocal) {
       const parseLocal = JSON.parse(getLocal);
-      console.log(parseLocal);
       setCenter({ lat: parseLocal[0], lng: parseLocal[1] });
     }
   }, []);
@@ -81,7 +80,7 @@ const MapCenter = () => {
         zoomControl={false}
         center={center}
         zoom={13}
-        className="w-full flex-1 fixed top-[90px] h-[calc(100vh-90px)] left-0 right-0 bottom-0"
+        className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

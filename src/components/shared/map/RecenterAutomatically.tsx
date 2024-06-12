@@ -1,11 +1,19 @@
 'use client;'
-import React, { useEffect } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { useMap } from 'react-leaflet';
 
-function RecenterAutomatically(props: any) {
-    const map = useMap();
-    useEffect(() => {
-      map.setView(props.position);
+interface RecenterAutomaticallyProps {
+  position: {
+    lat: number;
+    lng: number;
+  },
+}
+
+function RecenterAutomatically({ position}: RecenterAutomaticallyProps) {
+  const map = useMap();
+
+  useEffect(() => {
+      map.setView(position);
     }, []);
     return null;
 }

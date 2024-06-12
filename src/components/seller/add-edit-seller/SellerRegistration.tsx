@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
+import { useRouter } from 'next/navigation';
+import TrustMeter from '../TrustMeter';
 
 const INPUT_CLASS = 'w-full p-2 border rounded-lg';
 const BUTTON_CLASS = 'w-full p-2 rounded-lg';
@@ -10,6 +13,10 @@ const LABEL_CLASS = 'block text-sm mb-2';
 const TEXTAREA_CLASS = 'w-full p-2 border rounded-lg';
 
 const SellerRegistrationForm = () => {
+
+  const router = useRouter();
+
+
   const [formData, setFormData] = useState({
     itemsForSale: '',
     sellerName: '',
@@ -53,26 +60,22 @@ const SellerRegistrationForm = () => {
           onChange={handleChange}
         ></textarea>
       </div>
-      <button className={`${BUTTON_CLASS} bg-green-600 text-white mb-4`}>Set Search Centre</button>
+      <div className="flex justify-end">
+      <Button label='Set Search Centre' onClick={() => router.push('/map-center')} />
+      </div>
+      {/* <button className={`${BUTTON_CLASS} bg-green-600 text-white mb-4`}>Set Search Centre</button> */}
       <div className="mb-4">
         <h3 className="text-sm font-semibold mb-2">Reviews Summary</h3>
-        <label className={LABEL_CLASS}>Trust-o-meter</label>
-        <input type="range" className="w-full mb-2" min="0" max="100" value="50" />
-        <div className="flex justify-between text-xs">
-          <span>0%</span>
-          <span>25%</span>
-          <span>50%</span>
-          <span>75%</span>
-          <span>100%</span>
-        </div>
+        <TrustMeter ratings={2} />
       </div>
-      <div className="mb-4">
-        <label className={LABEL_CLASS}>Reviews Score </label>
-        <Link href="/seller/seller-reviews">
+      <div className="mb-4 flex justify-between items-center">
+        <label className={` text-[22px] ${LABEL_CLASS}`}>Reviews Score 4.1 out of 5</label>
+        <OutlineBtn label='Check Reviews' onClick={() => router.push('/seller/seller-reviews')} />
+        {/* <Link href="/seller/seller-reviews">
          <button className={`${BUTTON_CLASS} border border-green-600 text-green-600`}>
           Check Reviews
          </button>
-        </Link>
+        </Link> */}
       </div>
       <div className="mb-4">
         <label className={LABEL_CLASS}>Seller Name</label>
