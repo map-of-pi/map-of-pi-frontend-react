@@ -4,23 +4,32 @@ import Link from 'next/link';
 
 import { itemData } from '@/constants/demoAPI';
 import TrustMeter from '@/components/seller/TrustMeter';
+import { Button, OutlineBtn } from '../Forms/Buttons/Buttons';
+import { useRouter } from 'next/navigation';
 
 const MapMarkerPopup = () => {
-  const t = useTranslations();
-
-  const SUBHEADER = "font-bold mb-2";
+  const t = useTranslations()
+  const SUBHEADER = 'font-bold mb-2';
+  const router = useRouter();
 
   return (
     <>
-      <div className="max-w-sm rounded-md justify-center mx-auto">
+      <div className="max-w-sm rounded-md justify-center mx-auto z-20">
         {/* Seller Profile */}
-        <div className='font-bold text-base mb-1'> 
-          {itemData.seller.business} 
-          <span className='ps-2'>({itemData.seller.ratings}/5.0)</span>
+        <div className="font-bold text-base mb-3">
+          {itemData.seller.business}
+          <span className="ps-2">({itemData.seller.ratings}/5.0)</span>
         </div>
-        <div className='flex gap-2 mb-1'>
-          <Image alt='seller logo' src={itemData.seller.url} width={50} height={50} className='rounded-lg m-0 relative h-[70px] w-[70px] my-auto' />
-          <p className='font-bold'>{itemData.seller.description}</p>
+        <div className="flex gap-2 items-center mb-2">
+          <div className="w-[70px] h-[70px] min-w-[70px] min-h-[70px] relative">
+            <Image
+              alt="seller logo"
+              src={itemData.seller.url}
+              fill={true}
+              className="rounded-xl m-0 my-auto"
+            />
+          </div>
+          <div className="font-bold line-clamp-4">{itemData.seller.description}</div>
         </div>
         <div>
           <TrustMeter ratings={itemData.seller.ratings} />
@@ -31,28 +40,26 @@ const MapMarkerPopup = () => {
         <div className="seller_item_container mb-1 max-h-[200px] overflow-auto">
           <ul>
             {itemData.items.map((item) => (
-              <div key={item.id} className='flex gap-2'>
+              <div key={item.id} className="flex gap-2">
                 <li>{item.name}</li>
                 <li>{item.price}Pi</li>
               </div>
             ))}
           </ul>
         </div>
-        <div className='font-bold m-3'>{t('POPUP.MAP_MARKER.DISTANCE_MESSAGE')}</div>
-    
-        <div className="flex justify-between space-x-4 gap-2 text-lg">
-          <Link
-            href={'/seller/seller-item'} //change to items list screen
-            className="px-3 py-1 bg-primary rounded-md w-full flex justify-center"
-          >
-            <span className='text-secondary'>{t('SHARED.BUY')}</span>
-          </Link>
-          <Link
-            href={'/seller/seller-item'} // change to navigate url
-            className="px-3 py-1 outline outline-[1px] outline-primary rounded-md w-full flex justify-center"
-          >
-            <span className='text-[#F6C367]'>{t('SHARED.NAVIGATE')}</span>
-          </Link>
+        <div className="font-bold m-3">{t('POPUP.MAP_MARKER.DISTANCE_MESSAGE')}</div>
+
+        <div className="flex justify-between space-x-4 gap-2">
+          <Button
+            label={t('SHARED.BUY')}
+            onClick={() => router.push('/seller/seller-item')}
+            styles={{ width: '100%', padding: '6px' }}
+          />
+          <OutlineBtn
+            label={t('SHARED.NAVIGATE')}
+            onClick={() => router.push('/seller/seller-item')}
+            styles={{ width: '100%', padding: '6px' }}
+          />
         </div>
       </div>
     </>
