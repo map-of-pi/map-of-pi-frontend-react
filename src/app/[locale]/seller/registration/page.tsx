@@ -1,7 +1,7 @@
 "use client";
 
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { useState, useEffect } from 'react';
@@ -12,6 +12,7 @@ import { FileInput, TextArea, Input, Select } from '@/components/shared/Forms/In
 import ConfirmDialog from '@/components/shared/confirm';
 import { itemData } from '@/constants/demoAPI';
 import { fetchSingleSeller } from '@/services/api';
+
 
 interface Seller {
   seller_id: string;
@@ -135,16 +136,17 @@ const SellerRegistrationForm = () => {
             />
           </div>
         </div>
-        <Button 
-          label={t('SHARED.SEARCH_CENTER')} 
-          styles={{
-            color: '#ffc153',
-            height: '40px',
-            padding: '10px',
-            marginLeft: 'auto',
-          }}
-        />
-
+        <Link href="/map-center">
+          <Button 
+            label={t('SHARED.SEARCH_CENTER')} 
+            styles={{
+              color: '#ffc153',
+              height: '40px',
+              padding: '10px',
+              marginLeft: 'auto',
+            }}
+          />
+        </Link>
         <div className="mb-7">
           <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}</h2>
           <TrustMeter ratings={seller.trust_meter_rating} />
