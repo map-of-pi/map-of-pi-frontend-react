@@ -83,7 +83,7 @@ export default function LocaleLayout({
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </head>
       <body
-        className={`bg-[#F1F7FF] text-black ${lato.className}`}>
+        className={`bg-[#EBF1ED] text-black ${lato.className}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Navbar />

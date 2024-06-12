@@ -2,6 +2,7 @@ import styles from './Buttons.module.css';
 
 import { IoMdClose } from 'react-icons/io';
 import { RiAddFill } from 'react-icons/ri';
+import { MdArrowForward } from 'react-icons/md';
 
 export const AddButton = (props: any) => {
   return (
@@ -48,6 +49,7 @@ export const YellowBtn = (props: any) => {
         style={props.styles}>
         {props.icon && props.icon}
         {props.text && props.text}
+        <MdArrowForward className="ms-auto my-auto" />
       </button>
     </div>
   );

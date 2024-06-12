@@ -83,7 +83,7 @@ function SellerReviews() {
                   height={60}
                 />
               </div>
-              <Link href="/feedback-for-seller">
+              <Link href="reviews/feedback">
                 <OutlineBtn label={t('SHARED.REPLY')}/>
               </Link>
             </div>
