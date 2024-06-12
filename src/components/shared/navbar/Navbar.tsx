@@ -43,14 +43,14 @@ function Navbar() {
   return (
     <>
       <div
-        className={`${styles.navbar} bg-primary fixed top-0 left-0 right-0 `}>
-        <div className="text-center text-secondary text-[1.5rem] font-semibold">
+        className={`w-full h-[76.19px] z-500 px-[16px] py-[5px] bg-primary fixed top-0 left-0 right-0 `}>
+        <div className="text-center text-secondary text-[1.3rem]">
         Map of Pi          
         </div>
         <div className={`flex ${checkHomePage ? 'justify-end' : 'justify-between'}`}>
           {!checkHomePage && (
             <div className={`${styles.nav_item}`}>
-              <Link href="/" style={{ height: '24px' }} onClick={handleBackBtn}>
+              <Link href="/" onClick={handleBackBtn}>
                 <IoMdArrowBack
                   size={26}
                   className="text-secondary"
@@ -60,7 +60,7 @@ function Navbar() {
           )}
           {!checkHomePage && (
             <div className={`${styles.nav_item}`}>
-              <Link href="/" style={{ height: '24px' }}>
+              <Link href="/">
                 <MdHome
                   size={24}
                   className="text-secondary"
@@ -70,7 +70,7 @@ function Navbar() {
           )}
 
           <div className={`${styles.nav_item}`}>
-            <Link href="" onClick={handleMenu} style={{ height: '24px' }}>
+            <Link href="" onClick={handleMenu}>
               {sidebarToggle ? (
                 <IoMdClose
                   size={24}

@@ -136,12 +136,12 @@ function Sidebar(props: any) {
 
   return (
     <>
-      <div className="w-full h-[calc(100vh-91px)] fixed bottom-0 bg-transparent right-0 z-500">
+      <div className="w-full h-[calc(100vh-74px)] fixed bottom-0 bg-transparent right-0 z-[70]">
         <div
           className="absolute w-full h-full bg-[#82828284]"
           onClick={() => props.setToggleDis(false)}></div>
         <div
-          className={`${styles.sidebar} sm:w-[350px] w-[250px] overflow-y-auto`}>
+          className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
           <div className="text-2xl font-bold mb-4 pb-5">{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</div>
           <div className="">
             <Input
@@ -163,7 +163,10 @@ function Sidebar(props: any) {
                   height: '50px',
                   padding: '10px',
                 }}
-                onClick={() => props.setToggleDis(false)} // Close sidebar on click
+                onClick={() => {
+                  router.push('/map-center')
+                  props.setToggleDis(false) // Close sidebar on click
+                }} 
               />
               <Link href="/seller/seller-reviews">
                 <Button
