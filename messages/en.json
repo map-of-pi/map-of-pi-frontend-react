@@ -34,7 +34,8 @@
       "SELLER_BUSINESS_NAME": "Seller Business Name",
       "SELLER_DESCRIPTION": "Seller Description",
       "SELLER_ADDRESS_LOCATION_LABEL": "Seller Address or Location",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe location where you are selling from"
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe location where you are selling from",
+      "SELLER_SETTINGS_LABEL": "Seller Settings"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Buy from Seller",
