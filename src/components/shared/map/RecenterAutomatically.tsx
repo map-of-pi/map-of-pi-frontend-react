@@ -1,5 +1,6 @@
 'use client;'
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react'
+
+import { useEffect } from 'react'
 import { useMap } from 'react-leaflet';
 
 interface RecenterAutomaticallyProps {

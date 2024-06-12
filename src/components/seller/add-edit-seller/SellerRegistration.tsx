@@ -1,11 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { useRouter } from 'next/navigation';
 import TrustMeter from '../TrustMeter';
+
+import { useState, useEffect } from 'react';
+
+import { FileInput } from '@/components/shared/Forms/Inputs/Inputs';
 
 const INPUT_CLASS = 'w-full p-2 border rounded-lg';
 const BUTTON_CLASS = 'w-full p-2 rounded-lg';
@@ -26,6 +29,8 @@ const SellerRegistrationForm = () => {
     sellerAddress: ''
   });
   
+  const t = useTranslations();
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -39,6 +44,8 @@ const SellerRegistrationForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleAddImages = () => {};
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
@@ -47,15 +54,14 @@ const SellerRegistrationForm = () => {
 
   return (
     <>
-    {/* <div className="p-4 max-w-md mx-auto bg-zinc-100 rounded-lg shadow-md h-screen"> */}
     <div className="p-4 max-w-md mx-auto ">
-      <h2 className="text-lg font-semibold mb-4">Add/Edit Seller Registration</h2>
+      <h2 className="text-lg font-semibold mb-4">{t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}</h2>
       <div className="mb-4">
-        <label className={LABEL_CLASS}>Seller items for sale</label>
+        <label className={LABEL_CLASS}>{t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_LABEL')}</label>
         <textarea
           name="itemsForSale"
           className={TEXTAREA_CLASS}
-          placeholder="Describe your items for sale, price, etc"
+          placeholder={t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_PLACEHOLDER')}
           value={formData.itemsForSale}
           onChange={handleChange}
         ></textarea>
@@ -73,89 +79,76 @@ const SellerRegistrationForm = () => {
         <OutlineBtn label='Check Reviews' onClick={() => router.push('/seller/seller-reviews')} />
         {/* <Link href="/seller/seller-reviews">
          <button className={`${BUTTON_CLASS} border border-green-600 text-green-600`}>
-          Check Reviews
+          {t('SHARED.CHECK_REVIEWS')}
          </button>
         </Link> */}
       </div>
       <div className="mb-4">
-        <label className={LABEL_CLASS}>Seller Name</label>
+        <label className={LABEL_CLASS}>{t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}</label>
         <input
           type="text"
           name="sellerName"
           className={INPUT_CLASS}
-          placeholder="Seller Name"
+          placeholder={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
           value={formData.sellerName}
           onChange={handleChange}
         />
       </div>
       <div className="mb-4">
-        <label className={LABEL_CLASS}>Seller Type</label>
+        <label className={LABEL_CLASS}>{t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}</label>
         <select
           name="sellerType"
           className={INPUT_CLASS}
           value={formData.sellerType}
           onChange={handleChange}
         >
-          <option>Pioneer</option>
-          <option>Others</option>
+          <option>{t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER')}</option>
+          <option>{t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER')}</option>
         </select>
       </div>
       <div className="mb-4">
-        <label className={LABEL_CLASS}>Seller business name</label>
+        <label className={LABEL_CLASS}>{t('SCREEN.SELLER_REGISTRATION.SELLER_BUSINESS_NAME')}</label>
         <input
           type="text"
           name="businessName"
           className={INPUT_CLASS}
-          placeholder="Seller business name"
+          placeholder={t('SCREEN.SELLER_REGISTRATION.SELLER_BUSINESS_NAME')}
           value={formData.businessName}
           onChange={handleChange}
         />
       </div>
       <div className="mb-4">
-        <label className={LABEL_CLASS}>Seller Description</label>
+        <label className={LABEL_CLASS}>{t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')}</label>
         <textarea
           name="sellerDescription"
           className={TEXTAREA_CLASS}
-          placeholder="Seller Description"
+          placeholder={t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')}
           value={formData.sellerDescription}
           onChange={handleChange}
         ></textarea>
       </div>
       <div className="mb-4">
-        <label className={LABEL_CLASS}>Seller address or whereabouts</label>
+        <label className={LABEL_CLASS}>{t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}</label>
         <textarea
           name="sellerAddress"
           className={TEXTAREA_CLASS}
-          placeholder="Describe location where you are selling from"
+          placeholder={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER')}
           value={formData.sellerAddress}
           onChange={handleChange}
         ></textarea>
       </div>
       <div className="mb-4">
-        <label className={LABEL_CLASS}>Upload Photo (Optional)</label>
-        <label className="border-dashed border-2 border-zinc-400 p-4 rounded-lg flex flex-col items-center cursor-pointer">
-          <Image src="/images/shared/upload.png" alt="Upload" width={100} height={100} className="mb-2" />
-          <p className="text-sm text-zinc-600">Drop your image here, or browse</p>
-          <p className="text-xs text-zinc-400">Supports: PNG, JPG, JPEG, WEBP</p>
-          <p className="text-xs text-red-600">One Photo Only</p>
-          <input 
-            type="file" 
-            accept="image/*" 
-            className="hidden" 
-            onChange={handleFileChange} 
-          />
-        </label>
-        {selectedFile && (
-          <div className="mt-2">
-            <p className="text-sm text-zinc-600">Selected file: {selectedFile.name}</p>
-          </div>
-        )}
+        <FileInput
+          label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+          images={[]}
+          handleAddImages={handleAddImages}
+        />
       </div>
       <button
         className={`${BUTTON_CLASS} bg-zinc-400 text-white`}
         disabled={!isFormValid}
       >
-        Save
+        {t('SHARED.SAVE')}
       </button>
     </div>
     </>

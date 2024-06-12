@@ -1,10 +1,14 @@
+import styles from './sidebar.module.css';
+
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
-import Link from 'next/link';
+
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import {
   FileInput,
@@ -15,7 +19,6 @@ import { menu } from '@/constants/menu';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
-import styles from './sidebar.module.css';
 
 // type definitions for menu items
 interface MenuItem {
@@ -39,6 +42,7 @@ function isLanguageMenuItem(item: MenuItem): item is LanguageMenuItem {
 }
 
 function Sidebar(props: any) {
+  const t = useTranslations();
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
@@ -104,6 +108,32 @@ function Sidebar(props: any) {
     }
   };
 
+  const translateMenuTitle = (title: string): string => {
+    switch (title) {
+      case 'Languages':
+        return t('SIDE_NAVIGATION.LANGUAGES');
+      case 'About Map of Pi':
+        return t('SIDE_NAVIGATION.ABOUT.ABOUT_MAP_OF_PI');
+      case 'Contact Map of Pi':
+        return t('SIDE_NAVIGATION.CONTACT_MAP_OF_PI'); 
+      default:
+        return title;
+    }
+  };
+
+  const translateChildMenuTitle = (title: string): string => {
+    switch (title) {
+      case 'App Version':
+        return t('SIDE_NAVIGATION.ABOUT.APP_VERSION');
+      case 'Privacy Policy':
+        return t('SIDE_NAVIGATION.ABOUT.PRIVACY_POLICY');
+      case 'Terms of Service':
+        return t('SIDE_NAVIGATION.ABOUT.TERMS_OF_SERVICE'); 
+      default:
+        return title;
+    }
+  };
+
   return (
     <>
       <div className="w-full h-[calc(100vh-74px)] fixed bottom-0 bg-transparent right-0 z-[70]">
@@ -112,21 +142,21 @@ function Sidebar(props: any) {
           onClick={() => props.setToggleDis(false)}></div>
         <div
           className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
-          <div className="text-2xl font-bold mb-4 pb-5">User Preferences</div>
+          <div className="text-2xl font-bold mb-4 pb-5">{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</div>
           <div className="">
             <Input
-              label="Your Email Address"
+              label={t('SIDE_NAVIGATION.EMAIL_ADDRESS_FIELD')}
               placeholder="mapofpi@mapofpi.com"
               type="email"
             />
             <TelephoneInput
-              label="Your Phone Number"
+              label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
             />
             <div className="pt-5 flex flex-col gap-5">
               <Button
-                label="Set Search Center"
+                label={t('SHARED.SEARCH_CENTER')}
                 styles={{
                   color: '#ffc153',
                   width: '100%',
@@ -140,7 +170,7 @@ function Sidebar(props: any) {
               />
               <Link href="/seller/seller-reviews">
                 <Button
-                  label="Check Reviews"
+                  label={t('SHARED.CHECK_REVIEWS')}
                   styles={{
                     background: '#fff',
                     color: '#ffc153',
@@ -156,23 +186,12 @@ function Sidebar(props: any) {
             </div>
             <div className="pt-5">
               <FileInput
-                label="Upload Photo (Optional)"
+                label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
                 images={[]}
                 handleAddImages={handleAddImages}
               />
             </div>
           </div>
-          {/* <div
-            className="ml-auto flex justify-end mb-8"
-            onClick={() => props.setToggleDis(false)}>
-            <Image
-              src="/images/shared/sidebar/close.svg"
-              alt="close button"
-              width={22}
-              height={22}
-              className=" cursor-pointer"
-            />
-          </div> */}
           <div className="pt-5">
             {menu.map((menu) => (
               <>
@@ -187,7 +206,7 @@ function Sidebar(props: any) {
                       height={22}
                       className=""
                     />
-                    <span className="ml-2">{menu.title}</span>
+                    <span className="ml-2">{translateMenuTitle(menu.title)}</span>
                     {menu.children && (
                       <div className="ml-4">
                         <FaChevronDown
@@ -224,7 +243,7 @@ function Sidebar(props: any) {
                             </div>
                           ) : (
                             <span className="ml-2 text-[14px]">
-                              {child.title}
+                              {translateChildMenuTitle(child.title)}
                             </span>
                           )}
                         </div>

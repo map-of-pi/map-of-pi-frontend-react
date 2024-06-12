@@ -1,21 +1,23 @@
 'use client'
 
-import React, { useState, useRef, ChangeEvent, FormEvent } from 'react';
-import { FormControl, makeStyles } from '@mui/material';
-import StorefrontIcon from '@mui/icons-material/Storefront';
-import Inventory2Icon from '@mui/icons-material/Inventory2';
-import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
-import TextField from '@mui/material/TextField';
-import { useTranslation } from 'react-i18next';
-import Snackbar from '@mui/material/Snackbar';
 import './SearchBar.scss';
 
+import { useTranslations } from 'next-intl';
+
+import { useState, useRef, ChangeEvent, FormEvent } from 'react';
+
+import { FormControl } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import Snackbar from '@mui/material/Snackbar';
+import TextField from '@mui/material/TextField';
+
 const SearchBar: React.FC = () => {
+  const t = useTranslations();
+
   const [searchBarValue, setSearchBarValue] = useState('');
   const [isBusinessSearchType, setIsBusinessSearchType] = useState(true);
   const [message, setMessage] = useState('');
-  const { t } = useTranslation();
 
   const handleSearchBarChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchBarValue(event.target.value);
@@ -73,7 +75,7 @@ const SearchBar: React.FC = () => {
               variant="outlined"
               color="success"
               className="bg-white hover:bg-gray-100 w-full rounded"
-              label='Search for sellers or items'
+              label={t('HOME.SEARCH_BAR_PLACEHOLDER')}
               value={searchBarValue} 
               onChange={handleSearchBarChange}
               ref={inputRef}

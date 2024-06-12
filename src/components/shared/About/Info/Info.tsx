@@ -11,7 +11,6 @@ import { useState } from 'react';
 import { CloseButton } from '@/components/shared/Forms/Buttons/Buttons';
 
 const InfoModel = (props: any) => {
-
   const t = useTranslations();
 
   const [version, setVersion] = useState('V1.0.0');
@@ -110,7 +109,7 @@ const InfoModel = (props: any) => {
             </div>
 
             <div className={styles.defects_contact}>
-              <span>{t('INFORMATION_DIALOG.REPORTING_MESSAGE') || 'Please report defects'} </span>
+              <span>{t('POPUP.APP_VERSION_INFO.REPORTING_MESSAGE')} </span>
               <Link href="mailto:email@mapofpi.com" target="_blank">
                 email@mapofpi.com
               </Link>
