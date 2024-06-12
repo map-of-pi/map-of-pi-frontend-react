@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
-import { fetcSinglehReview, createReview, updateReview, deleteReview } from '@/services/api';
+import { fetchSingleReview, createReview, updateReview, deleteReview } from '@/services/api';
 
 export default function ReplyToReviewPage() {
     const HEADER = "mb-5 font-bold text-lg md:text-2xl";
@@ -27,19 +27,19 @@ export default function ReplyToReviewPage() {
 
     const [reviewData, setReviewData] = useState({
         reviewId: '',
-        reviewReceiver: '',
-        comment: 'no review yet',
-        reviewDate: '00/00/0000',
-        reviewer: 'Reviewer name',
-        emoji: 'no',
-        emojiText: 'no',
+        reviewReceiver: 'Test Seller',
+        comment: 'Test review comment',
+        reviewDate: '12/31/9999',
+        reviewer: 'Test Buyer',
+        emoji: '🙂',
+        emojiText: 'Happy',
         reviewImage: '/images/shared/upload.png'
     });
 
     useEffect(() => {
         const fetchReviewData = async () => {
             try {
-                const data = await fetcSinglehReview('reviewId'); // replace 'sellerId' with actual seller ID
+                const data = await fetchSingleReview('reviewId'); // replace 'sellerId' with actual seller ID
                 setReviewData(data);
             } catch (error) {
                 console.error('Error fetching review data:', error);

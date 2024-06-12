@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+
+import { useState, useEffect } from 'react';
+
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea, Input, Select } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import { itemData } from '@/constants/demoAPI';
 import { fetchSingleSeller } from '@/services/api';
-
 
 interface Seller {
   seller_id: string;
@@ -28,6 +30,10 @@ interface Seller {
 }
 
 const SellerRegistrationForm = () => {
+  const HEADER = "mb-5 font-bold text-lg md:text-2xl";
+  const SUBHEADER = "font-bold mb-2";
+
+  const t = useTranslations();
   const router = useRouter();
   const seller = itemData.seller;
 
@@ -64,29 +70,10 @@ const SellerRegistrationForm = () => {
     getSellerData();
   }, []);
 
-  // if (loading) {
-  //   return (
-  //     <div id="loading-screen">
-  //       <p>Loading seller data...</p>
-  //     </div>
-  //   );
-  // }
-
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
-
-
   useEffect(() => {
     const { itemsForSale, sellerName, businessName, sellerDescription, sellerAddress } = formData;
     setIsFormValid(!!(itemsForSale && sellerName && businessName && sellerDescription && sellerAddress));
   }, [formData]);
-
-  // useEffect(() => {
-  //   const { itemsForSale, sellerName, businessName, sellerDescription, sellerAddress } = formData;
-  //   const noInput = itemsForSale === '' && sellerName === '' && businessName === '' && sellerDescription === '' && sellerAddress === '';
-  //   setIsSaveEnabled(!noInput);
-  // }, [formData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -97,6 +84,8 @@ const SellerRegistrationForm = () => {
       setIsSaveEnabled(false)
     }
   };
+
+  const handleAddImages = () => {};
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -119,27 +108,35 @@ const SellerRegistrationForm = () => {
     setIsSaveEnabled(false);
   };
 
-  const HEADER = "mb-5 font-bold text-lg md:text-2xl";
-  const SUBHEADER = "font-bold mb-2";
+  const translateSellerCategory = (category: string): string => {
+    switch (category) {
+      case 'Pioneer':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER');
+      case 'Other':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER');
+      default:
+        return category;
+    }
+  };
 
   return (
     <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
-        <h1 className={HEADER}>Add/Edit Seller Registration</h1>
+        <h1 className={HEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}</h1>
         
         <div className="mb-4">
-          <h2 className={SUBHEADER}>Seller items for sale</h2>
+          <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_LABEL')}</h2>
           <div className="mb-2">
             <TextArea 
               name="itemsForSale"
-              placeholder="Describe your items for sale, price, etc" 
+              placeholder={t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_PLACEHOLDER')}
               value={formData.itemsForSale} 
               onChange={handleChange} 
             />
           </div>
         </div>
         <Button 
-          label="Set Search Centre" 
+          label={t('SHARED.SEARCH_CENTER')} 
           styles={{
             color: '#ffc153',
             height: '40px',
@@ -149,52 +146,53 @@ const SellerRegistrationForm = () => {
         />
 
         <div className="mb-7">
-          <h2 className={SUBHEADER}>Reviews summary</h2>
+          <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}</h2>
           <TrustMeter ratings={seller.trust_meter_rating} />
           <div className="flex items-center justify-between mt-3">
-            <p className="text-sm">Reviews Score: 3.2 out of 5.0</p>
-            <OutlineBtn label="Check Reviews" onClick={() => handleNavigation('seller/reviews')} />
+            <p className="text-sm">{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.trust_meter_rating})}</p>
+            <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} onClick={() => handleNavigation('seller/reviews')} />
           </div>
         </div>
         <div className="mb-7">
-          <h2 className={`${SUBHEADER} mb-4`}>Seller contact details</h2>
+          <h2 className={`${SUBHEADER} mb-4`}>{t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}</h2>
           <div className="text-sm mb-3">
-            <span className="font-bold">Seller pioneer id: </span>
+            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ": "}</span>
             <span>{seller ? seller.seller_id : ""}</span>
           </div>
           <div className="text-sm mb-3">
-            <span className="font-bold">Seller phone: </span>
+            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ": "}</span>
             <span>{seller.phone}</span>
           </div>
           <div className="text-sm mb-3">
-            <span className="font-bold">Seller email: </span>
+            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ": "}</span>
             <span>{seller.email}</span>
           </div>
         </div>
 
         <div className="mb-4">
-          <h2 className={SUBHEADER}>Seller settings</h2>
+          <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}</h2>
           <Input 
-            label="Seller name" 
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')} 
             name="sellerName"
-            placeholder="Peejen"
+            placeholder="peejen"
             type="text"
             value={formData.sellerName}
             onChange={handleChange}
           />
 
           <Select
-            label="Seller type"
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
             name="sellerType"
-            value={formData.sellerType}
+            value={translateSellerCategory(formData.sellerType)}
             onChange={handleChange}
             options={[
-              { value: 'Ilinois cener, 4 bk', name: 'Ilinois cener, 4 bk' },
+              { value: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'), name: 'Pioneer' },
+              { value: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'), name: 'Other' }
             ]}
           />
 
           <Input 
-            label="Seller business name" 
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_BUSINESS_NAME')} 
             name="businessName"
             placeholder="M & M Restaurant"
             type="text"
@@ -203,46 +201,40 @@ const SellerRegistrationForm = () => {
           />
 
           <TextArea 
-            label="Seller description" 
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')}
             name="sellerDescription"
-            placeholder="I sell items for pay with pi"
+            placeholder="I sell test items for pay with Pi"
             value={formData.sellerDescription}
             onChange={handleChange}
           />
 
           <TextArea 
-            label="Seller address or whereabouts" 
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')} 
             name="sellerAddress"
-            placeholder="Describe location where you are selling from"
+            placeholder={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER')}
             value={formData.sellerAddress}
             onChange={handleChange}
           />
         </div>
 
         <div className="mb-4">
-          <label>Photo</label>
           <label className="border-dashed border-2 border-zinc-400 p-4 rounded-lg flex flex-col items-center cursor-pointer">
-            <Image src="/images/shared/upload.png" alt="Upload" width={100} height={100} className="mb-2" />
-            <p className="text-sm text-zinc-600">Drop your image here, or browse</p>
-            <p className="text-xs text-zinc-400">Supports: PNG, JPG, JPEG, WEBP</p>
-            <p className="text-xs text-red-600">One Photo Only</p>
-            <input 
-              type="file" 
-              accept="image/*" 
-              className="hidden" 
-              onChange={handleFileChange} 
+            <FileInput
+              label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+              images={[]}
+              handleAddImages={handleAddImages}
             />
           </label>
           {selectedFile && (
             <div className="mt-2">
-              <p className="text-sm text-zinc-600">Selected file: {selectedFile.name}</p>
+              <p className="text-sm text-zinc-600">{selectedFile.name}</p>
             </div>
           )}
         </div>
 
         <div className="mb-7">
           <Button
-            label="Save"
+            label={t('SHARED.SAVE')}
             disabled={!isSaveEnabled}
             styles={{
               color: '#ffc153',
@@ -258,7 +250,7 @@ const SellerRegistrationForm = () => {
           show={showConfirmDialog}
           onClose={() => setShowConfirmDialog(false)}
           onConfirm={setShowConfirmDialog}
-          message="You have unsaved changes. Do you really want to leave?"
+          message={t('SHARED.CONFIRM_DIALOG')}
           url={linkUrl}
         />
       </div>
