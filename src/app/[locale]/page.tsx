@@ -5,8 +5,12 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useContext, useEffect } from 'react';
+
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
+
+import { AppContext } from '../../../context/AppContextProvider';
 
 export default function Index() {
   const t = useTranslations();
@@ -14,6 +18,17 @@ export default function Index() {
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), {
     ssr: false,
   });
+
+  const { loginUser ,autoLoginUser} = useContext(AppContext);
+
+  const token= localStorage.getItem('token');
+  useEffect(() => {
+    if (!token) {
+      loginUser();
+    } else {
+      autoLoginUser();
+    }
+  }, []);
 
   return (
     <>
