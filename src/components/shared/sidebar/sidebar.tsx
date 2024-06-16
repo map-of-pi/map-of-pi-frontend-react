@@ -142,7 +142,7 @@ function Sidebar(props: any) {
           onClick={() => props.setToggleDis(false)}></div>
         <div
           className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
-          <div className="text-2xl font-bold mb-4 pb-5">{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</div>
+          <div className="text-2xl font-bold mb-2 pb-3">{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</div>
           <div className="">
             <Input
               label={t('SIDE_NAVIGATION.EMAIL_ADDRESS_FIELD')}
@@ -154,31 +154,33 @@ function Sidebar(props: any) {
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
             />
-            <div className="pt-5 flex flex-col gap-5">
+            <div className="pt-2 flex flex-col gap-5">
               <Button
                 label={t('SHARED.SEARCH_CENTER')}
                 styles={{
                   color: '#ffc153',
                   width: '100%',
-                  height: '50px',
                   padding: '10px',
+                  borderRadius: '10px',
+                  fontSize: '18px',
                 }}
                 onClick={() => {
                   router.push('/map-center')
                   props.setToggleDis(false) // Close sidebar on click
                 }} 
               />
-              <Link href="/seller/reviews">
+              <Link href="/seller/reviews/userId">
                 <Button
                   label={t('SHARED.CHECK_REVIEWS')}
                   styles={{
                     background: '#fff',
                     color: '#ffc153',
                     width: '100%',
-                    height: '50px',
-                    padding: '10px',
+                    padding: '8px',
                     borderColor: 'var(--default-primary-color)',
                     borderWidth: '2px',
+                    borderRadius: '10px',
+                    fontSize: '18px',
                   }}
                   onClick={() => props.setToggleDis(false)} // Close sidebar on click
                 />
@@ -211,7 +213,7 @@ function Sidebar(props: any) {
                       <div className="ml-4">
                         <FaChevronDown
                           size={13}
-                          className="text-[#000000] hover:invert"
+                          className="text-[#000000]"
                         />
                       </div>
                     )}
@@ -222,7 +224,7 @@ function Sidebar(props: any) {
                     menu.children.map((child) => (
                       <div key={child.id} className="ml-6">
                         <div
-                          className={`${styles.slide_content} hover:bg-[#424242] hover:text-white `}
+                          className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
                           onClick={() =>
                             handleChildMenu(menu.title, child.code)
                           }>
@@ -232,13 +234,14 @@ function Sidebar(props: any) {
                               alt={child.title}
                               width={17}
                               height={17}
-                              className=""
+                              className={styles.lng_img}
                             />
                           )}
                           {menu.title === 'Languages' &&
                           isLanguageMenuItem(child) ? (
-                            <div className="ml-2 text-[14px]">
-                              <div className="font-bold">{child.label}</div>
+                            <div className="ml-2 text-[14px] flex">
+                              <div className="font-bold">{child.label}</div> 
+                              <div className='mx-1'> - </div>
                               <div>{child.translation}</div>
                             </div>
                           ) : (
