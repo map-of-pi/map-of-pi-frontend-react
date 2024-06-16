@@ -169,7 +169,7 @@ function Sidebar(props: any) {
                   props.setToggleDis(false) // Close sidebar on click
                 }} 
               />
-              <Link href="/seller/reviews/userId">
+              <Link href="/seller/reviews/userid">
                 <Button
                   label={t('SHARED.CHECK_REVIEWS')}
                   styles={{
