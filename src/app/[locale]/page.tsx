@@ -21,8 +21,8 @@ export default function Index() {
 
   const { loginUser ,autoLoginUser} = useContext(AppContext);
 
-  const token= localStorage.getItem('token');
   useEffect(() => {
+    const token= localStorage.getItem('token');
     if (!token) {
       loginUser();
     } else {

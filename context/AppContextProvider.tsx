@@ -1,3 +1,5 @@
+"use client";
+
 import 'react-toastify/dist/ReactToastify.css';
 
 import {
@@ -45,10 +47,12 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     const isInitiated= await Pi.initialized
     try {
       if (isInitiated) {
-        const authResult = await Pi.authenticate(["payments", "username", "wallet_address"], onIncompletePaymentFound)
+        const authResult = await Pi.authenticate(["payments", "username"], onIncompletePaymentFound)
+        console.log(authResult)
         const res = await axiosClient.post("/api/v1/users/authenticate", {authResult})  
         toast.success(res.data?.user?.username)
         setCurrentUser(res.data?.user)
+        console.log(res)
         localStorage.setItem("token", res.data?.token)
       } else {
         console.log("PI SDK failed to initialize.")
