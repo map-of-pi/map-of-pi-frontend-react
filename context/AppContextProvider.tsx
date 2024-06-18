@@ -72,7 +72,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, loginUser ,autoLoginUser}}>
+    <AppContext.Provider value={{ currentUser, setCurrentUser, loginUser, autoLoginUser}}>
       {children}
     </AppContext.Provider>
   );

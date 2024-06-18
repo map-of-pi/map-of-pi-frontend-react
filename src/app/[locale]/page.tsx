@@ -19,7 +19,7 @@ export default function Index() {
     ssr: false,
   });
 
-  const { loginUser ,autoLoginUser} = useContext(AppContext);
+  const { loginUser, autoLoginUser} = useContext(AppContext);
 
   useEffect(() => {
     const token= localStorage.getItem('token');
