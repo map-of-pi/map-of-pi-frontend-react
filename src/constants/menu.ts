@@ -1,26 +1,6 @@
 export const menu = [
-  // {
-  //   id: 1,
-  //   title: 'Themes',
-  //   icon: `/images/shared/sidebar/theme.svg`,
-  //   url: '',
-  //   children: [
-  //     {
-  //       id: 1,
-  //       title: 'Light Mode',
-  //       icon: `/images/shared/sidebar/light.svg`,
-  //       code: 'light',
-  //     },
-  //     {
-  //       id: 2,
-  //       title: 'Dark Mode',
-  //       icon: `/images/shared/sidebar/dark.svg`,
-  //       code: 'dark',
-  //     },
-  //   ],
-  // },
   {
-    id: 2,
+    id: 1,
     title: 'Languages',
     icon: `/images/shared/sidebar/language.svg`,
     url: '',
@@ -76,7 +56,7 @@ export const menu = [
     ],
   },
   {
-    id: 3,
+    id: 2,
     title: 'About Map of Pi',
     icon: `/images/shared/sidebar/info.svg`,
     url: '',
@@ -101,10 +81,4 @@ export const menu = [
       },
     ],
   },
-  {
-    id: 4,
-    title: 'Contact Map of Pi',
-    icon: `/images/shared/sidebar/contact.svg`,
-    url: ''
-  }
 ];
