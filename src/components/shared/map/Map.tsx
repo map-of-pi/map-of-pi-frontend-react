@@ -15,6 +15,13 @@ import _ from 'lodash';
 // Mock function to simulate fetching initial coordinates
 const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<LatLngExpression[]> => {
   console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
+  
+  // Replace this mock function with the actual API call
+  // const response = await axios.get('/api/sellers', {
+  //   params: { origin, radius }
+  // });
+  // return response.data;
+  
   return new Promise((resolve) => {
     setTimeout(() => {
       console.log('Initial coordinates fetched:', dummyCoordinates);
@@ -26,6 +33,13 @@ const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radi
 // Mock function to simulate fetching additional data based on the map bounds
 const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<LatLngExpression[]> => {
   console.log('Fetching additional seller data with center:', center, 'and radius:', radius);
+  
+  // Replace this mock function with the actual API call
+  // const response = await axios.get('/api/sellers/additional', {
+  //   params: { center, radius }
+  // });
+  // return response.data;
+  
   return new Promise((resolve) => {
     setTimeout(() => {
       const additionalData = dummyCoordinates.slice(0, 10); // Simulate fetching a subset of data
