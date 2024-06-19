@@ -152,7 +152,9 @@ const SellerRegistrationForm = () => {
           <TrustMeter ratings={seller.trust_meter_rating} />
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.trust_meter_rating})}</p>
+            <Link href="/seller/reviews/userid">
             <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} onClick={() => handleNavigation('seller/reviews')} />
+            </Link>
           </div>
         </div>
         <div className="mb-7">

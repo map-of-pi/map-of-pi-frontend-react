@@ -45,15 +45,15 @@ export default function EmojiPicker(props: any) {
 
   return (
     <div>
-      <div className='flex gap-3 w-full text-center justify-center my-2'>
-        <div className='bg-[#DF2C2C33] rounded-md p-2'>
+      <div className='flex flex-wrap gap-3 w-full text-center justify-center my-2'>
+        <div className='bg-[#DF2C2C33] flex-grow-[0.5] rounded-md p-2'>
           <p className='text-red-700 mb-2'>{t('SHARED.REACTION_RATING.UNSAFE')}</p>
           <div
             onClick={() => !props.clickDisabled ? handleEmojiClick(despairEmoji.value) : undefined}
             className={`${selectedEmoji !== despairEmoji.value ? 'bg-red-200' : 'bg-red-700'} outline-[#DF2C2C] ${emojiBtnClass}`}
           >
             <div>
-              <p className='text-3xl py-2'>{despairEmoji.unicode}</p>
+              <p className='text-3xl md:py-2 py-1'>{despairEmoji.unicode}</p>
               <p className='md:text-[16px] text-[14px]'>{despairEmoji.name}</p>
               {props.reviews && (
                 <p>{getReview(props.reviews, despairEmoji.name)}</p>
@@ -61,7 +61,7 @@ export default function EmojiPicker(props: any) {
             </div>
           </div>
         </div>
-        <div className='bg-[#3D924A8A] rounded-[10px] w-full p-2 text-center text-white'>
+        <div className='bg-[#3D924A8A] rounded-[10px] flex-grow-[4.3] flex-4 p-2 text-center text-white'>
           <p className='mb-2'>{t('SHARED.REACTION_RATING.TRUSTWORTHY')}</p>
           <div id='emoji-picker' className='flex gap-3 justify-center'>
             {emojis.map((emoji, index) => (
