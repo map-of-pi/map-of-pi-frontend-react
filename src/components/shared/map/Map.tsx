@@ -1,5 +1,4 @@
-import L from 'leaflet';
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {
   MapContainer,
   Marker,
@@ -7,10 +6,12 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import MapMarkerPopup from './MapMarkerPopup';
-import { dummyCoordinates } from '../../../constants/coordinates';
+import L from 'leaflet';
 import { LatLngExpression, LatLngBounds } from 'leaflet';
 import _ from 'lodash';
+
+import MapMarkerPopup from './MapMarkerPopup';
+import { dummyCoordinates } from '../../../constants/coordinates';
 
 // Mock function to simulate fetching initial coordinates
 const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<LatLngExpression[]> => {
@@ -43,7 +44,6 @@ const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, r
   return new Promise((resolve) => {
     setTimeout(() => {
       const additionalData = dummyCoordinates.slice(0, 10); // Simulate fetching a subset of data
-      console.log('Additional seller data fetched:', additionalData);
       resolve(additionalData);
     }, 500);
   });
@@ -65,7 +65,6 @@ const Map = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log('Component mounted, fetching initial coordinates...');
     fetchInitialCoordinates();
   }, []);
 
@@ -76,7 +75,6 @@ const Map = () => {
       const coordinates = await fetchSellerCoordinates(origin, radius);
       setSellerCoordinates(coordinates);
     } catch (err) {
-      console.error('Failed to fetch initial coordinates:', err);
       setError('Failed to fetch initial coordinates');
     } finally {
       setLoading(false);
@@ -84,25 +82,21 @@ const Map = () => {
   };
 
   const handleMapInteraction = async (newBounds: L.LatLngBounds) => {
-    console.log('Map interaction detected, new bounds:', newBounds);
     const newCenter = newBounds.getCenter();
     const newRadius = calculateRadius(newBounds);
     setLoading(true);
     setError(null);
     try {
       const additionalData = await fetchAdditionalSellerData({ lat: newCenter.lat, lng: newCenter.lng }, newRadius);
-      if (additionalData.length === 0) {
-        console.warn('No additional seller data found for the new bounds.');
-      } else {
-        console.log('Appending additional data to existing seller coordinates');
+      if (additionalData.length > 0) {
         setSellerCoordinates((prevCoordinates) => {
           const newCoordinates = [...prevCoordinates, ...additionalData];
-          console.log('Updated seller coordinates:', newCoordinates);
           return newCoordinates;
         });
+      } else {
+        console.warn('No additional seller data found for the new bounds.');
       }
     } catch (err) {
-      console.error('Failed to fetch additional data:', err);
       setError('Failed to fetch additional data');
     } finally {
       setLoading(false);
@@ -110,7 +104,6 @@ const Map = () => {
   };   
 
   const calculateRadius = (bounds: L.LatLngBounds) => {
-    console.log('Calculating radius for bounds:', bounds);
     // Implement logic to calculate radius based on map bounds
     return 10; // Example radius value
   };
@@ -125,18 +118,15 @@ const Map = () => {
   function LocationMarker() {
     const map = useMapEvents({
       locationfound(e) {
-        console.log('Location found:', e.latlng);
         setPosition(e.latlng);
         map.flyTo(e.latlng, map.getZoom());
       },
       moveend() {
         const bounds = map.getBounds();
-        console.log('Map move ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds);
       },
       zoomend() {
         const bounds = map.getBounds();
-        console.log('Map zoom ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds);
       },
     });
