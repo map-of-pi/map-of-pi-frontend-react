@@ -13,6 +13,7 @@ import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
 import { fetchSingleSeller, createReview } from '@/services/api';
+import Link from 'next/link';
 
 export default function Page() {
   const SUBHEADER = "font-bold mb-2";
@@ -191,7 +192,9 @@ export default function Page() {
             <p className="text-sm">
               {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.average_rating})}
             </p>
-            <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} onClick={() => handleNavigation('seller/reviews')} />
+            <Link href={`/seller/reviews/userid?buyer=true`}>
+            <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} />
+            </Link>
           </div>
         </div>
         <div className="mb-7">
