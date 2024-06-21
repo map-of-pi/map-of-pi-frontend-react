@@ -48,11 +48,9 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     try {
       if (isInitiated) {
         const authResult = await Pi.authenticate(["payments", "username"], onIncompletePaymentFound)
-        console.log(authResult)
         const res = await axiosClient.post("/api/v1/users/authenticate", {authResult})  
         toast.success(res.data?.user?.username)
         setCurrentUser(res.data?.user)
-        console.log(res)
         localStorage.setItem("token", res.data?.token)
       } else {
         console.log("PI SDK failed to initialize.")
@@ -65,7 +63,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const autoLoginUser = async () => {
     try {
       const res = await autoSigninUser()
-        setCurrentUser(res.data?.currentUser)
+      setCurrentUser(res.data?.currentUser)
+      toast.success(res.data?.user?.username)
     } catch (error: any) {
       console.log(error)
     }
