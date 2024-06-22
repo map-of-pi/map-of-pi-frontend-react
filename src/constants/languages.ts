@@ -13,7 +13,7 @@ export const Languages: LangMenuItem[] = [
       label: 'EN',
       name: 'English',
       translation: 'English',
-      imageUrl: '/images/shared/language/en.svg',
+      imageUrl: '/images/shared/language/en_us.svg',
     },
     {
       code: 'es',

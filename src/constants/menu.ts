@@ -11,7 +11,7 @@ export const menu = [
         label: 'EN',
         title: 'English',
         translation: 'English',
-        icon: '/images/shared/language/en.svg',
+        icon: '/images/shared/language/en_us.svg',
       },
       {
         id: 2,
