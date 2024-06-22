@@ -7,7 +7,7 @@ export const menu = [
     children: [
       {
         id: 1,
-        code: 'en_us',
+        code: 'en',
         label: 'EN/US',
         title: 'American English',
         translation: 'English',
