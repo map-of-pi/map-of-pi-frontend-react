@@ -99,7 +99,7 @@ function SellerReviews({
                 />
               </div>
               {buyer == 'true' ? null : (
-                <Link href="reviews/feedback">
+                <Link href="/seller/reviews/feedback">
                   <OutlineBtn label={t('SHARED.REPLY')} />
                 </Link>
               )}

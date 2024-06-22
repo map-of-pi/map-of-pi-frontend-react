@@ -25,7 +25,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
   
   return (
     <ThemeProvider attribute="class" enableColorScheme={false}>
-      {children}
       <AppContextProvider>
         {children}
         <ToastContainer />

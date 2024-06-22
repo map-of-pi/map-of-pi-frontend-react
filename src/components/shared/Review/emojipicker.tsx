@@ -45,7 +45,7 @@ export default function EmojiPicker(props: any) {
 
   return (
     <div>
-      <div className='flex flex-wrap gap-3 w-full text-center justify-center my-2'>
+      <div className='flex sm:overflow-hidden overflow-auto gap-3 w-full text-center justify-center my-2'>
         <div className='bg-[#DF2C2C33] flex-grow-[0.5] rounded-md p-2'>
           <p className='text-red-700 mb-2'>{t('SHARED.REACTION_RATING.UNSAFE')}</p>
           <div

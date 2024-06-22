@@ -10,7 +10,7 @@ const PrivacyPolicyModel = (props: any) => {
   const t = useTranslations();
 
   const lastUpdated = '6/3/2024';
-  const emailAddress = 'email@mapofpi.com';
+  const emailAddress = 'philip@mapofpi.com';
 
   return (
     <>
