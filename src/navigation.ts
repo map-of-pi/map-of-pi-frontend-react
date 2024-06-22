@@ -2,11 +2,9 @@ import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 
 export const locales = [
   'en',
+  'en-GB',
   'es',
-  'ko',
-  'ng_hau',
-  'ng_ibo',
-  'ng_yor',
+  'ko'
 ] as const;
 export const localePrefix = 'always'; // Default
 
