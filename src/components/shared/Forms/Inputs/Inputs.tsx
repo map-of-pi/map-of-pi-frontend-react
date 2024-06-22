@@ -75,7 +75,7 @@ export const FileInput = (props: any) => {
         <span className="text-[#828282] text-[11px] mt-1">
         {t('SHARED.PHOTO.SUPPORTS_FILE_MESSAGE')}
         </span>
-        <span className="text-[#DF2C2C] text-[11px] mt-1">{t('SHARED.PHOTO.SINGLE_PHOTO_MESSAGE')}</span>
+        {/* <span className="text-[#DF2C2C] text-[11px] mt-1">{t('SHARED.PHOTO.SINGLE_PHOTO_MESSAGE')}</span> */}
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"

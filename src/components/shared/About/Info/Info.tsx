@@ -110,8 +110,8 @@ const InfoModel = (props: any) => {
 
             <div className={styles.defects_contact}>
               <span>{t('POPUP.APP_VERSION_INFO.REPORTING_MESSAGE')} </span>
-              <Link href="mailto:email@mapofpi.com" target="_blank">
-                email@mapofpi.com
+              <Link href="mailto:philip@mapofpi.com" target="_blank">
+              philip@mapofpi.com
               </Link>
             </div>
           </div>
