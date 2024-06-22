@@ -46,7 +46,7 @@ function Sidebar(props: any) {
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
-  const locale = 'en';
+  const locale = 'en_us';
 
   const { resolvedTheme, setTheme } = useTheme();
   const [toggle, setToggle] = useState<any>({
