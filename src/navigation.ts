@@ -2,7 +2,7 @@ import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 
 export const locales = [
   'en',
-  'en_gb',
+  'en-GB',
   'es',
   'ko'
 ] as const;

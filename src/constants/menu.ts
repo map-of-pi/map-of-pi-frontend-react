@@ -15,7 +15,7 @@ export const menu = [
       },
       {
         id: 2,
-        code: 'en_gb',
+        code: 'en-GB',
         label: 'EN/GB',
         title: 'British English',
         translation: 'English',
