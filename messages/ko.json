@@ -158,8 +158,7 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "사진 업로드",
       "IMAGE_DROP_UPLOAD_MESSAGE": "여기에 이미지를 드롭하거나 찾아보기",
-      "SUPPORTS_FILE_MESSAGE": "지원: PNG, JPG, JPEG, WEBP",
-      "SINGLE_PHOTO_MESSAGE": "한 장의 사진만"
+      "SUPPORTS_FILE_MESSAGE": "지원: PNG, JPG, JPEG, WEBP"
     },
     "REACTION_RATING": {
       "UNSAFE": "안전하지 않음",

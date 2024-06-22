@@ -67,7 +67,7 @@ const SearchBar: React.FC = () => {
         onClose={() => setMessage('')}
       />
       <div className="w-[100%] m-auto flex items-center">
-        <form className="w-full flex items-center justify-between" onSubmit={handleSubmitSearch}>
+        <form className="w-full flex items-center gap-2 justify-between" onSubmit={handleSubmitSearch}>
           <FormControl className="flex-grow mr-3">
             <TextField 
               id="search-input" 
@@ -81,12 +81,13 @@ const SearchBar: React.FC = () => {
               ref={inputRef}
             />
           </FormControl>
-          <IconButton
+          <button
             aria-label="search"
             className="bg-primary rounded h-full w-15 p-[15.5px] flex items-center justify-center hover:bg-gray-600" 
-            onClick={handleSubmitSearch}>
+            // onClick={handleSubmitSearch} style={{backgroundColor: 'red'}}
+            >
             <SearchIcon className="text-[#ffc153]" />
-          </IconButton>
+          </button>
         </form>
       </div>
     </div>
