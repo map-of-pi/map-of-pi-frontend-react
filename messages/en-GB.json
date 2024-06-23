@@ -96,11 +96,11 @@
         "SUBHEADER_3_2": "Communications",
         "CONTENT_3_2_1": "We may use your contact information to send you updates, notifications, and promotional messages related to the Map of Pi app.",
         "SUBHEADER_3_3": "Analytics",
-        "CONTENT_3_3_1": "We collect and analyze data to improve the performance, features, and functionality of the app.",
+        "CONTENT_3_3_1": "We collect and analyse data to improve the performance, features, and functionality of the app.",
 
         "HEADER_4": "Sharing Your Information",
         "SUBHEADER_4_1": "With Sellers",
-        "CONTENT_4_1_1": "User information may be shared with Sellers for order fulfillment and communication purposes.",
+        "CONTENT_4_1_1": "User information may be shared with Sellers for order fulfilment and communication purposes.",
         "SUBHEADER_4_2": "With Third Parties",
         "CONTENT_4_2_1": "We may share information with third-party service providers for app functionality, analytics, and payment processing.",
 
@@ -150,7 +150,7 @@
   "SHARED": {
     "BUY": "Buy",
     "NAVIGATE": "Navigate",
-    "SEARCH_CENTER": "Set Search Center",
+    "SEARCH_CENTER": "Set Search Centre",
     "CHECK_REVIEWS": "Check Reviews",
     "REPLY": "Reply",
     "SAVE": "Save",
@@ -158,7 +158,8 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Upload Photo",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
-      "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP"
+      "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
+      "SINGLE_PHOTO_MESSAGE": "One Photo Only"
     },
     "REACTION_RATING": {
       "UNSAFE": "Unsafe",

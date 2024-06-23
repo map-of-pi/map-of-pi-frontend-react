@@ -1,24 +1,16 @@
-.sidebar {
-  /* width: 300px; */
-  position: absolute;
-  background-color: #ffffff;
-  right: 0;
-  top: 0;
-  z-index: 50;
-  padding: 1.2rem;
-  height: calc(100vh - 91px); /* adjust this value if you have a fixed header */
-  overflow-y: auto;
-}
-
-.slide_content {
+.slide_content, .slide_contentx {
   display: flex;
   align-items: center;
-  padding: 0.75rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   cursor: pointer;
   /* margin-bottom: 0.5rem; */
   border-radius: 0.75rem;
 }
 
-.slide_content:hover img {
+.slide_content:hover img, .slide_content:hover svg {
   filter: invert(100%);
+}
+
+.slide_content:hover {
+  color: white;
 }

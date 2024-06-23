@@ -34,7 +34,8 @@
       "SELLER_BUSINESS_NAME": "Nombre del Negocio del Vendedor",
       "SELLER_DESCRIPTION": "Descripción del Vendedor",
       "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o Ubicación del Vendedor",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe la ubicación desde donde estás vendiendo"
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe la ubicación desde donde estás vendiendo",
+      "SELLER_SETTINGS_LABEL": "Configuración del Vendedor"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Comprar del Vendedor",
@@ -57,7 +58,7 @@
       "BY_REVIEWER": "Por {buyer_id}"
     },
     "REPLY_TO_REVIEW": {
-      "REPLY_TO_REVIEW_HEADER": "Responder a la Reseña",
+      "REPLY_TO_REVIEW_HEADER": "Responder a la reseña dejada para {seller_id}",
       "BY_REVIEWER": "Por {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Deja tu respuesta a la reseña anterior",
       "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes sobre la reseña anterior",
@@ -157,8 +158,7 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Subir Foto",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Suelta tu imagen aquí o busca",
-      "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP",
-      "SINGLE_PHOTO_MESSAGE": "Solo una foto"
+      "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP"
     },
     "REACTION_RATING": {
       "UNSAFE": "Inseguro",
@@ -170,6 +170,7 @@
         "HAPPY": "Feliz",
         "DELIGHT": "Delicia"
       }
-    }
+    },
+    "LOADING_SCREEN_MESSAGE": "Cargando datos..."
   }
 }

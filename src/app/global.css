@@ -7,7 +7,7 @@
 :root {
     --default-primary-color: #386F4F;
     --default-secondary-color: #F6C367;
-    --color-bg-color: #F1F7FF;
+    --color-bg-color: #EBF1ED;
 }
 
 * {
@@ -19,7 +19,7 @@
 body {
     /* background: url('../../public/background.svg') rgba(255, 255, 255, 0.15) center no-repeat fixed;
     background-size: cover; */
-    /* background-color: ; */
+    /* background-color: #EBF1ED; */
 }
 
 .seller_item_container{
@@ -50,4 +50,10 @@ body {
     border: 1px;
 
 
+}
+
+.disabled {
+    pointer-events: none;
+    /* opacity: 0.5; */
+    color: grey
 }
