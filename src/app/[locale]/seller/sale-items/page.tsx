@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import React, { useEffect, useState } from 'react';
 
@@ -20,6 +20,10 @@ export default function Page() {
 
   const t = useTranslations();
   const router = useRouter();
+  const searchParams = useSearchParams()
+  const sellerId = searchParams.get('seller_id'); // Use useSearchParams to get seller ID
+  console.log('this is seller id', sellerId);
+ 
 
   const [files, setFiles] = useState<File[]>([]);
   const [previewImage, setPreviewImage] = useState<string[]>([]);
@@ -36,7 +40,7 @@ export default function Page() {
   useEffect(() => {
     const getSellerData = async () => {
       try {
-        const data = await fetchSingleSeller('sellerId');
+        const data = await fetchSingleSeller(sellerId); //'testme'
         setSeller(data);  // Ensure this is a single object, not an array
       } catch (error) {
         setError('Error fetching seller data');
@@ -186,11 +190,11 @@ export default function Page() {
           <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SUMMARY_LABEL')}</h2>
           {/* Trust-O-meter */}
           <div>
-            <TrustMeter ratings={seller.average_rating} />
+            <TrustMeter ratings={seller.average_rating.$numberDecimal} />
           </div>
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">
-              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.average_rating})}
+              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.average_rating.$numberDecimal})}
             </p>
             <Link href={`/seller/reviews/userid?buyer=true`}>
             <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} />

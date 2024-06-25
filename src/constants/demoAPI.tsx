@@ -75,10 +75,23 @@ export const PiFestJson = {
         email: 'selleremail@example.com',
         address: 'Help your buyers find you by describing your address or whereabouts',
         sale_items: 'Describe your items for sale, pi prices etc',
-        average_rating: 5.0,
-        trust_meter_rating: [0, 50, 80, 100],
-        coordinates: ['long', 'lat'],    
-    }
+        average_rating: {
+            $numberDecimal: 5.0
+        },
+        trust_meter_rating: 100,
+        coordinates: {
+            type: "Point",
+            coordinates: [
+                [
+                    125.6,
+                    10.1
+                ],
+            ]
+        },
+        order_online_enabled_pref: true,
+        _id: "666c84b9d77068c6efeeaa1a",
+        __v: 0
+        }
 };
 
 // get emojis index
