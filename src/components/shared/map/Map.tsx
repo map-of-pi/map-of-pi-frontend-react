@@ -18,15 +18,18 @@ import { SellerType } from '@/constants/types';
 // Function to fetch seller coordinates from the API
 const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
   console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
+
   try {
     const sellersData = await fetchSellers();
+
     const sellersWithCoordinates = sellersData.map((seller: any) => {
       const [lng, lat] = seller.coordinates.coordinates;
       return {
         ...seller,
-        coordinates: [lat, lng] as LatLngExpression,
+        coordinates: [lat, lng] as LatLngExpression
       };
     });
+
     return sellersWithCoordinates;
   } catch (error) {
     console.error('Error fetching seller coordinates:', error);
@@ -37,14 +40,16 @@ const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radi
 // Function to simulate fetching additional data based on the map bounds
 const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
   console.log('Fetching additional seller data with center:', center, 'and radius:', radius);
+
   return new Promise((resolve) => {
     setTimeout(async () => {
       const sellersData = await fetchSellers();
+
       const additionalData = sellersData.map((seller: any) => {
         const [lng, lat] = seller.coordinates.coordinates;
         return {
           ...seller,
-          coordinates: [lat, lng] as LatLngExpression,
+          coordinates: [lat, lng] as LatLngExpression
         };
       });
       resolve(additionalData);
