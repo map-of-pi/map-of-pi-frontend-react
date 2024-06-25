@@ -36,6 +36,14 @@ export const menu = [
         title: 'Korean',
         translation: '한국어',
         icon: '/images/shared/language/ko.svg',
+      },
+      {
+        id: 5,
+        code: 'ng-HAU',
+        label: 'NG/HAU',
+        title: 'Nigerian Hausa',
+        translation: 'Hausa',
+        icon: '/images/shared/language/ng.svg',
       }
     ],
   },
