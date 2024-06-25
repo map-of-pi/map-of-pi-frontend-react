@@ -1,4 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
+import L from 'leaflet';
+import React, { useEffect, useState, useCallback } from 'react';
+import axios from 'axios';
 import {
   MapContainer,
   Marker,
@@ -6,7 +8,6 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import L from 'leaflet';
 import { LatLngExpression, LatLngBounds } from 'leaflet';
 import _ from 'lodash';
 
@@ -17,18 +18,15 @@ import { SellerType } from '@/constants/types';
 // Function to fetch seller coordinates from the API
 const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
   console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
-
   try {
     const sellersData = await fetchSellers();
-
     const sellersWithCoordinates = sellersData.map((seller: any) => {
       const [lng, lat] = seller.coordinates.coordinates;
       return {
         ...seller,
-        coordinates: [lat, lng] as LatLngExpression
+        coordinates: [lat, lng] as LatLngExpression,
       };
     });
-
     return sellersWithCoordinates;
   } catch (error) {
     console.error('Error fetching seller coordinates:', error);
@@ -39,16 +37,14 @@ const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radi
 // Function to simulate fetching additional data based on the map bounds
 const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
   console.log('Fetching additional seller data with center:', center, 'and radius:', radius);
-
   return new Promise((resolve) => {
     setTimeout(async () => {
       const sellersData = await fetchSellers();
-
       const additionalData = sellersData.map((seller: any) => {
         const [lng, lat] = seller.coordinates.coordinates;
         return {
           ...seller,
-          coordinates: [lat, lng] as LatLngExpression
+          coordinates: [lat, lng] as LatLngExpression,
         };
       });
       resolve(additionalData);
@@ -72,6 +68,7 @@ const Map = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log('Component mounted, fetching initial coordinates...');
     fetchInitialCoordinates();
   }, []);
 
@@ -83,6 +80,7 @@ const Map = () => {
       setSellers(sellersData);
       console.log('Seller data:', sellersData);
     } catch (err) {
+      console.error('Failed to fetch initial coordinates:', err);
       setError('Failed to fetch initial coordinates');
     } finally {
       setLoading(false);
@@ -90,6 +88,7 @@ const Map = () => {
   };
 
   const handleMapInteraction = async (newBounds: L.LatLngBounds) => {
+    console.log('Map interaction detected, new bounds:', newBounds);
     const newCenter = newBounds.getCenter();
     const newRadius = calculateRadius(newBounds);
     setLoading(true);
@@ -102,6 +101,7 @@ const Map = () => {
         console.warn('No additional seller data found for the new bounds.');
       }
     } catch (err) {
+      console.error('Failed to fetch additional data:', err);
       setError('Failed to fetch additional data');
     } finally {
       setLoading(false);
@@ -125,15 +125,18 @@ const Map = () => {
   function LocationMarker() {
     const map = useMapEvents({
       locationfound(e) {
+        console.log('Location found:', e.latlng);
         setPosition(e.latlng);
         map.flyTo(e.latlng, map.getZoom());
       },
       moveend() {
         const bounds = map.getBounds();
+        console.log('Map move ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds);
       },
       zoomend() {
         const bounds = map.getBounds();
+        console.log('Map zoom ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds);
       },
     });
