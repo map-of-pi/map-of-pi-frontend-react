@@ -5,8 +5,8 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-ignoreDuringBuilds: true,
-  }, 
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -14,6 +14,14 @@ ignoreDuringBuilds: true,
         hostname: 'tse3.mm.bing.net',
       },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:3000/api/:path*',
+      },
+    ];
   },
 };
 
