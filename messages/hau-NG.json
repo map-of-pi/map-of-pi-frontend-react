@@ -34,7 +34,8 @@
       "SELLER_BUSINESS_NAME": "Sunan Kasuwanci Mai Sayarwa",
       "SELLER_DESCRIPTION": "Bayanin Mai Sayarwa",
       "SELLER_ADDRESS_LOCATION_LABEL": "Adireshin Mai Siyarwa ko Wuri",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Bayyana wurin da kuke siyarwa"
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Bayyana wurin da kuke siyarwa",
+      "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Saya daga Mai Sayarwa",

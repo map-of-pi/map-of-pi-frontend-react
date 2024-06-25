@@ -39,7 +39,7 @@ export const menu = [
       },
       {
         id: 5,
-        code: 'ng-HAU',
+        code: 'hau-NG',
         label: 'NG/HAU',
         title: 'Nigerian Hausa',
         translation: 'Hausa',
