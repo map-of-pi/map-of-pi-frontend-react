@@ -18,7 +18,6 @@ import { SellerType } from '@/constants/types';
 // Function to fetch seller coordinates from the API
 const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
   console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
-
   try {
     const sellersData = await fetchSellers();
 
@@ -37,24 +36,24 @@ const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radi
   }
 };
 
-// Function to simulate fetching additional data based on the map bounds
+// Function to fetch additional data based on the map bounds
 const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
   console.log('Fetching additional seller data with center:', center, 'and radius:', radius);
+  try {
+    const sellersData = await fetchSellers();
 
-  return new Promise((resolve) => {
-    setTimeout(async () => {
-      const sellersData = await fetchSellers();
-
-      const additionalData = sellersData.map((seller: any) => {
-        const [lng, lat] = seller.coordinates.coordinates;
-        return {
-          ...seller,
-          coordinates: [lat, lng] as LatLngExpression
-        };
-      });
-      resolve(additionalData);
-    }, 500);
-  });
+    const additionalData = sellersData.map((seller: any) => {
+      const [lng, lat] = seller.coordinates.coordinates;
+      return {
+        ...seller,
+        coordinates: [lat, lng] as LatLngExpression
+      };
+    });
+    return additionalData;
+  } catch (error) {
+    console.error('Error fetching additional seller data:', error);
+    throw error;
+  }
 };
 
 const Map = () => {
@@ -67,7 +66,7 @@ const Map = () => {
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellers, setSellers] = useState<SellerType[]>([]);
-  const [origin] = useState({ lat: -1.6279, lng: 29.7451 });
+  const [origin, setOrigin] = useState({ lat: -1.6279, lng: 29.7451 });
   const [radius, setRadius] = useState(5); // Initial radius in km
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -161,7 +160,7 @@ const Map = () => {
         center={origin}
         zoom={13}
         zoomControl={false}
-        className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0">
+        className="w-full flex-1 fixed top-[90px] h-[calc(100vh-55px)] left-0 right-0 bottom-0">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
