@@ -157,7 +157,7 @@ const Map = () => {
         />
         <LocationMarker />
         {sellerCoordinates.map((coord, i) => (
-          coord && coord.lat && coord.lng && ( // Ensure the coordinates are valid before rendering
+          coord && coord.lat && coord.lng && (
             <Marker position={coord} key={i} icon={customIcon}>
               <Popup closeButton={false}>
                 <MapMarkerPopup />
