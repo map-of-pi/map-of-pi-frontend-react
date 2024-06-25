@@ -4,7 +4,8 @@ export const locales = [
   'en',
   'en-GB',
   'es',
-  'ko'
+  'ko',
+  'ng-HAU'
 ] as const;
 export const localePrefix = 'always'; // Default
 
