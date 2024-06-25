@@ -1,5 +1,3 @@
-// services/api.js
-
 import axios from 'axios';
 
 const API = axios.create({
@@ -131,7 +129,6 @@ export const fetchSingleReview = async (reviewID) => {
     throw error;
   }
 };
-
 
 // Fetch reviews for a seller
 export const fetchReviews = async (sellerId) => {
