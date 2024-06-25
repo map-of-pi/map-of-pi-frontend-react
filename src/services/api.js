@@ -1,9 +1,7 @@
-// services/api.js
-
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api',
 });
 
 // Fetch a single pioneer user
@@ -131,7 +129,6 @@ export const fetchSingleReview = async (reviewID) => {
     throw error;
   }
 };
-
 
 // Fetch reviews for a seller
 export const fetchReviews = async (sellerId) => {
