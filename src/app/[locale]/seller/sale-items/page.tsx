@@ -14,6 +14,7 @@ import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
 import { fetchSingleSeller, createReview } from '@/services/api';
 import Link from 'next/link';
+import Skeleton from '@/components/skeleton/skeleton';
 
 export default function Page() {
   const SUBHEADER = "font-bold mb-2";
@@ -115,13 +116,12 @@ export default function Page() {
   // loading condition
   if (loading) {
     return (
-      <div id="loading-screen">
-        <p>{t('SHARED.LOADING_SCREEN_MESSAGE')}</p>
-      </div>
+      <Skeleton type="seller_item" />
     );
   }
 
   return (
+    <>
     <div className="w-full md:w-[500px] md:mx-auto p-4">
       <h1 className="mb-5 font-bold text-lg md:text-2xl">{t('SCREEN.BUY_FROM_SELLER.BUY_FROM_SELLER_HEADER')}</h1>
 
@@ -223,5 +223,6 @@ export default function Page() {
       </div>
       )}
     </div>  
+    </>
   );
 }
