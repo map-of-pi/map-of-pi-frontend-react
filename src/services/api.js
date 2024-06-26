@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  baseURL: process.env.PROD_API_URL || 'http://localhost:8001/api/v1',
 });
 
 // Fetch a single pioneer user

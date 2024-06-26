@@ -5,18 +5,30 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true,
   }, 
   images: {
-    domains: ['example.com', 'http://localhost:8001'], // images repository domain should be listed here
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'tse3.mm.bing.net',
-        
+        hostname: 'example.com',
+        port: '',
+        pathname: '/**',
       },
-    ],
-  },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8001',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'tse3.mm.bing.net',
+        port: '',
+        pathname: '/**',
+      }
+    ]
+  }
 };
 
 export default withNextIntl(nextConfig);
