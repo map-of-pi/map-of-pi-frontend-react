@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import React, { useEffect, useState } from 'react';
 
@@ -15,13 +15,13 @@ import { PiFestJson } from '@/constants/demoAPI';
 import { fetchSingleSeller, createReview } from '@/services/api';
 import Link from 'next/link';
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
 
   const t = useTranslations();
   const router = useRouter();
-  const searchParams = useSearchParams()
-  const sellerId = searchParams.get('seller_id'); // Use useSearchParams to get seller ID
+
+  const sellerId = params.id
   console.log('this is seller id', sellerId);
  
 

@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { itemData } from '@/constants/demoAPI';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
@@ -48,7 +47,7 @@ const MapMarkerPopup = ({ seller }:any) => {
 
         <div className="flex space-x-4 gap-2">
           <Link
-            href={`/seller/sale-items/?seller_id=${seller.seller_id}`} //change to items list screen
+            href={`/seller/sale-items/${seller.seller_id}`} //change to items list screen
             className="flex-1">
               <Button label={t('SHARED.BUY')} styles={{color: '#ffc153', paddingTop: '6px', paddingBottom: '6px', width: '100%' }} />
             {/* <span className="text-secondary">{t('SHARED.BUY')}</span> */}
