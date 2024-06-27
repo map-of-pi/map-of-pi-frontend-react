@@ -11,7 +11,7 @@ import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea, Input, Select } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import { itemData } from '@/constants/demoAPI';
-import { fetchSingleSeller } from '@/services/api';
+import { fetchSingleSeller, registerNewSeller } from '@/services/api';
 
 
 interface Seller {
