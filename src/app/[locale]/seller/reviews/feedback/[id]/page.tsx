@@ -144,7 +144,7 @@ export default function ReplyToReviewPage({
             <p className="text-sm text-gray-600">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', { buyer_id: reviewData.review_giver_id })}</p>
             <div className="flex items-center mt-2">
               <span className="mr-2">{resolveRating(reviewData.rating)?.unicode}</span>
-              <span>{translateReactionRating(resolveRating(reviewData.rating)?.reaction)}</span>
+              <span>{translateReactionRating(resolveRating(reviewData.rating)?.reaction ?? '')}</span>
               <Image alt="review image" src={reviewData.image} width={50} height={50} className="rounded ml-2" />
             </div>
           </div>
