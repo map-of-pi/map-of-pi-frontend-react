@@ -17,7 +17,6 @@ import {
 import ConfirmDialog from '@/components/shared/confirm';
 import { itemData } from '@/constants/demoAPI';
 import { fetchSingleSeller } from '@/services/api';
-import Skeleton from '@/components/skeleton/skeleton';
 
 interface Seller {
   seller_id: string;
