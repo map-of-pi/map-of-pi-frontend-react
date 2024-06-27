@@ -24,13 +24,13 @@ export const SkeletonSellerItem = () => {
         <div className="w-[80%] h-3 mb-3"></div>
         <div className="my-bg-trans flex gap-4 mb-3">
             <div className="h-[130px] flex-grow-[1] flex items-end rounded-md p-3">
-            <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: '#EBF1ED'}}></div>
+            <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: 'var(--default-bg-color)'}}></div>
             </div>
             <div className="h-[130px] flex-grow-[4.1] rounded-md p-3 flex gap-2 items-end">
-                <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: '#EBF1ED'}}></div>
-                <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: '#EBF1ED'}}></div>
-                <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: '#EBF1ED'}}></div>
-                <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: '#EBF1ED'}}></div>
+                <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: 'var(--default-bg-color)'}}></div>
+                <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: 'var(--default-bg-color)'}}></div>
+                <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: 'var(--default-bg-color)'}}></div>
+                <div className="h-[88px] flex-1 rounded-md" style={{backgroundColor: 'var(--default-bg-color)'}}></div>
             </div>
         </div>
 
@@ -38,8 +38,8 @@ export const SkeletonSellerItem = () => {
 
         <div className="w-[45%] h-4 mb-3"></div>
         <div className="w-full h-[180px] flex flex-col justify-end py-3 items-center mb-2 rounded-md">
-            <div className="w-[60%] h-3 mb-3" style={{backgroundColor: '#EBF1ED'}}></div>
-            <div className="w-[50%] h-3 mb-3" style={{backgroundColor: '#EBF1ED'}}></div>
+            <div className="w-[60%] h-3 mb-3" style={{backgroundColor: 'var(--default-bg-color)'}}></div>
+            <div className="w-[50%] h-3 mb-3" style={{backgroundColor: 'var(--default-bg-color)'}}></div>
         </div>
         <div className="w-[145px] h-10 ml-auto rounded-md mb-2"></div>
       </div>

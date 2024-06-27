@@ -17,10 +17,10 @@ export const SkeletonSidebar = () => {
       <div className="w-full h-[180px] flex flex-col justify-end py-3 items-center mb-2 rounded-md">
         <div
           className="w-[60%] h-3 mb-3"
-          style={{ backgroundColor: '#EBF1ED' }}></div>
+          style={{ backgroundColor: 'var(--default-bg-color)' }}></div>
         <div
           className="w-[50%] h-3 mb-3"
-          style={{ backgroundColor: '#EBF1ED' }}></div>
+          style={{ backgroundColor: 'var(--default-bg-color)' }}></div>
       </div>
     </div>
     </>
