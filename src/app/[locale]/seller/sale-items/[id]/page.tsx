@@ -196,7 +196,7 @@ export default function Page({ params }: { params: { id: string } }) {
             <p className="text-sm">
               {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.average_rating.$numberDecimal})}
             </p>
-            <Link href={`/seller/reviews/userid?buyer=true`}>
+            <Link href={`/seller/reviews/${sellerId}?buyer=true&seller_name=${seller.name}`}>
             <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} />
             </Link>
           </div>
