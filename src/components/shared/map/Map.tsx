@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   MapContainer,
   Marker,
@@ -6,8 +6,7 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import L from 'leaflet';
-import { LatLngExpression, LatLngBounds } from 'leaflet';
+import L, { LatLngExpression, LatLngBounds } from 'leaflet';
 import _ from 'lodash';
 
 import MapMarkerPopup from './MapMarkerPopup';
@@ -16,12 +15,6 @@ import { dummyCoordinates } from '../../../constants/coordinates';
 // Mock function to simulate fetching initial coordinates
 const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<LatLngExpression[]> => {
   console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
-  
-  // Replace this mock function with the actual API call
-  // const response = await axios.get('/api/sellers', {
-  //   params: { origin, radius }
-  // });
-  // return response.data;
   
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -35,12 +28,6 @@ const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radi
 const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<LatLngExpression[]> => {
   console.log('Fetching additional seller data with center:', center, 'and radius:', radius);
   
-  // Replace this mock function with the actual API call
-  // const response = await axios.get('/api/sellers/additional', {
-  //   params: { center, radius }
-  // });
-  // return response.data;
-  
   return new Promise((resolve) => {
     setTimeout(() => {
       const additionalData = dummyCoordinates.slice(0, 10); // Simulate fetching a subset of data
@@ -49,7 +36,7 @@ const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, r
   });
 };
 
-const Map = () => {
+const Map = ({ center }: { center: LatLngExpression }) => {
   const customIcon = L.icon({
     iconUrl: '/favicon-32x32.png',
     iconSize: [32, 32],
@@ -59,7 +46,7 @@ const Map = () => {
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellerCoordinates, setSellerCoordinates] = useState<LatLngExpression[]>([]);
-  const [origin, setOrigin] = useState({ lat: -1.6279, lng: 29.7451 });
+  const [origin, setOrigin] = useState(center);
   const [radius, setRadius] = useState(5); // Initial radius in km
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -67,6 +54,12 @@ const Map = () => {
   useEffect(() => {
     fetchInitialCoordinates();
   }, []);
+
+  useEffect(() => {
+    if (center) {
+      setOrigin(center);
+    }
+  }, [center]);
 
   const fetchInitialCoordinates = async () => {
     setLoading(true);
@@ -161,6 +154,7 @@ const Map = () => {
         ))}
       </MapContainer>
     </>
-  )};  
+  );
+};
 
 export default Map;
