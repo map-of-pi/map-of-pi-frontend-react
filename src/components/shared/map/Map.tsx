@@ -12,27 +12,10 @@ import _ from 'lodash';
 
 import MapMarkerPopup from './MapMarkerPopup';
 import { fetchSellers } from '@/services/api';
-
-// Define the Seller type to include the necessary information
-type Seller = {
-  coordinates: [number, number];
-  _id: string;
-  seller_id: string;
-  name: string;
-  description: string;
-  image: string;
-  address: string;
-  sale_items: string;
-  average_rating: {
-    $numberDecimal: string;
-  };
-  trust_meter_rating: number;
-  order_online_enabled_pref: boolean;
-  __v: number;
-};
+import { SellerType } from '@/constants/types';
 
 // Function to fetch seller coordinates from the API
-const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<Seller[]> => {
+const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
   console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
 
   try {
@@ -54,7 +37,7 @@ const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radi
 };
 
 // Function to simulate fetching additional data based on the map bounds
-const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<Seller[]> => {
+const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
   console.log('Fetching additional seller data with center:', center, 'and radius:', radius);
 
   return new Promise((resolve) => {
@@ -82,7 +65,7 @@ const Map = () => {
   });
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
-  const [sellers, setSellers] = useState<Seller[]>([]);
+  const [sellers, setSellers] = useState<SellerType[]>([]);
   const [origin] = useState({ lat: -1.6279, lng: 29.7451 });
   const [radius, setRadius] = useState(5); // Initial radius in km
   const [loading, setLoading] = useState(false);
