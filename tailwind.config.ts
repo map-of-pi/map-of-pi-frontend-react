@@ -10,7 +10,8 @@ const config: Config = {
     extend: {
       colors: {
         primary: 'var(--default-primary-color)',
-        secondary: 'var(--default-secondary-color)',  
+        secondary: 'var(--default-secondary-color)',
+        background: 'var(--default-bg-color)'  
       },
       height: {
         100: '25rem',
