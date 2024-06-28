@@ -14,12 +14,17 @@ import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
 import { fetchSingleSeller, createReview } from '@/services/api';
 import Link from 'next/link';
+import Skeleton from '@/components/skeleton/skeleton';
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
 
   const t = useTranslations();
   const router = useRouter();
+
+  const sellerId = params.id
+  console.log('this is seller id', sellerId);
+ 
 
   const [files, setFiles] = useState<File[]>([]);
   const [previewImage, setPreviewImage] = useState<string[]>([]);
@@ -36,7 +41,7 @@ export default function Page() {
   useEffect(() => {
     const getSellerData = async () => {
       try {
-        const data = await fetchSingleSeller('sellerId');
+        const data = await fetchSingleSeller(sellerId); //'testme'
         setSeller(data);  // Ensure this is a single object, not an array
       } catch (error) {
         setError('Error fetching seller data');
@@ -115,13 +120,12 @@ export default function Page() {
   // loading condition
   if (loading) {
     return (
-      <div id="loading-screen">
-        <p>{t('SHARED.LOADING_SCREEN_MESSAGE')}</p>
-      </div>
+      <Skeleton type="seller_item" />
     );
   }
 
   return (
+    <>
     <div className="w-full md:w-[500px] md:mx-auto p-4">
       <h1 className="mb-5 font-bold text-lg md:text-2xl">{t('SCREEN.BUY_FROM_SELLER.BUY_FROM_SELLER_HEADER')}</h1>
 
@@ -186,13 +190,13 @@ export default function Page() {
           <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SUMMARY_LABEL')}</h2>
           {/* Trust-O-meter */}
           <div>
-            <TrustMeter ratings={seller.average_rating} />
+            <TrustMeter ratings={seller.average_rating.$numberDecimal} />
           </div>
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">
-              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.average_rating})}
+              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.average_rating.$numberDecimal})}
             </p>
-            <Link href={`/seller/reviews/userid?buyer=true`}>
+            <Link href={`/seller/reviews/${sellerId}?buyer=true&seller_name=${seller.name}`}>
             <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} />
             </Link>
           </div>
@@ -223,5 +227,6 @@ export default function Page() {
       </div>
       )}
     </div>  
+    </>
   );
 }
