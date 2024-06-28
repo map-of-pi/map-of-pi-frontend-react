@@ -52,7 +52,7 @@ const Map = () => {
   });
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
-  const [sellers, setSellers] = useState<SellerType[]>([]);
+  const [sellerCoordinates, setSellerCoordinates] = useState<any[]>([]);
   const [origin, setOrigin] = useState({ lat: -1.6279, lng: 29.7451 });
   const [radius, setRadius] = useState(5); // Initial radius in km
   const [loading, setLoading] = useState(false);
@@ -67,9 +67,8 @@ const Map = () => {
     setLoading(true);
     setError(null);
     try {
-      const sellersData = await fetchSellerCoordinates(origin, radius);
-      setSellers(sellersData);
-      console.log('Seller data:', sellersData);
+      const coordinates = await fetchSellerCoordinates(origin, radius);
+      setSellerCoordinates(coordinates);
     } catch (err) {
       console.error('Failed to fetch initial coordinates:', err);
       setError('Failed to fetch initial coordinates');
@@ -85,11 +84,16 @@ const Map = () => {
     setLoading(true);
     setError(null);
     try {
-      const additionalSellers = await fetchAdditionalSellerData({ lat: newCenter.lat, lng: newCenter.lng }, newRadius);
-      if (additionalSellers.length > 0) {
-        setSellers((prevSellers) => [...prevSellers, ...additionalSellers]);
-      } else {
+      const additionalData = await fetchAdditionalSellerData({ lat: newCenter.lat, lng: newCenter.lng }, newRadius);
+      if (additionalData.length === 0) {
         console.warn('No additional seller data found for the new bounds.');
+      } else {
+        console.log('Appending additional data to existing seller coordinates');
+        setSellerCoordinates((prevCoordinates) => {
+          const newCoordinates = [...prevCoordinates, ...additionalData];
+          console.log('Updated seller coordinates:', newCoordinates);
+          return newCoordinates;
+        });
       }
     } catch (err) {
       console.error('Failed to fetch additional data:', err);
@@ -100,10 +104,9 @@ const Map = () => {
   };
 
   const calculateRadius = (bounds: L.LatLngBounds) => {
-    const center = bounds.getCenter();
-    const northEast = bounds.getNorthEast();
-    const distance = center.distanceTo(northEast);
-    return distance / 1000; // Convert to kilometers
+    console.log('Calculating radius for bounds:', bounds);
+    // Implement logic to calculate radius based on map bounds
+    return 10; // Example radius value
   };
 
   const debouncedHandleMapInteraction = useCallback(
@@ -153,13 +156,18 @@ const Map = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker />
-        {sellers.map((seller) => (
-          <Marker position={seller.coordinates as LatLngExpression} key={seller._id} icon={customIcon}>
-            <Popup closeButton={false}>
-              <MapMarkerPopup seller={seller} />
-            </Popup>
-          </Marker>
-        ))}
+        {sellerCoordinates.map((seller, i) => {
+          const coords = seller.coordinates.coordinates; // Adjusting this part
+          return (
+            coords && coords[1] !== undefined && coords[0] !== undefined ? (
+              <Marker position={{ lat: coords[1], lng: coords[0] }} key={i} icon={customIcon}>
+                <Popup closeButton={false}>
+                  <MapMarkerPopup seller={seller} />
+                </Popup>
+              </Marker>
+            ) : null
+          );
+        })}
       </MapContainer>
     </>
   );
