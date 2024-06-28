@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
-  }, 
+  },
   images: {
     remotePatterns: [
       {
@@ -32,8 +32,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
-        destination: 'http://localhost:3000/api/:path*',
+        source: '/api/v1/:path*',
+        destination: 'http://localhost:8001/api/v1/:path*',
       },
     ];
   },

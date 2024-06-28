@@ -12,44 +12,31 @@ import { LatLngExpression, LatLngBounds } from 'leaflet';
 import _ from 'lodash';
 
 import MapMarkerPopup from './MapMarkerPopup';
-import { fetchSellers } from '@/services/api';
-import { SellerType } from '@/constants/types';
 
-// Function to fetch seller coordinates from the API
-const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
+// Function to fetch initial coordinates from the backend
+const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<any[]> => {
   console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
   try {
-    const sellersData = await fetchSellers();
-
-    const sellersWithCoordinates = sellersData.map((seller: any) => {
-      const [lng, lat] = seller.coordinates.coordinates;
-      return {
-        ...seller,
-        coordinates: [lat, lng] as LatLngExpression
-      };
+    const response = await axios.get('https://map-of-pi-backend-react.vercel.app/api/v1/sellers', {
+      params: { origin, radius },
     });
-
-    return sellersWithCoordinates;
+    console.log('Initial coordinates fetched:', response.data);
+    return response.data;
   } catch (error) {
-    console.error('Error fetching seller coordinates:', error);
+    console.error('Error fetching initial coordinates:', error);
     throw error;
   }
 };
 
-// Function to fetch additional data based on the map bounds
-const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
+// Function to fetch additional data based on the map bounds from the backend
+const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<any[]> => {
   console.log('Fetching additional seller data with center:', center, 'and radius:', radius);
   try {
-    const sellersData = await fetchSellers();
-
-    const additionalData = sellersData.map((seller: any) => {
-      const [lng, lat] = seller.coordinates.coordinates;
-      return {
-        ...seller,
-        coordinates: [lat, lng] as LatLngExpression
-      };
+    const response = await axios.get('https://map-of-pi-backend-react.vercel.app/api/v1/sellers', {
+      params: { origin: center, radius },
     });
-    return additionalData;
+    console.log('Additional seller data fetched:', response.data);
+    return response.data;
   } catch (error) {
     console.error('Error fetching additional seller data:', error);
     throw error;
