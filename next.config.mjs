@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
-  }, 
+  },
   images: {
     remotePatterns: [
       {
@@ -27,8 +27,16 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       }
-    ]
-  }
+    ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/v1/:path*',
+        destination: 'http://localhost:8001/api/v1/:path*',
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);
