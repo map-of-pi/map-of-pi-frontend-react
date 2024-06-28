@@ -9,12 +9,16 @@ import {
 import L, { LatLngExpression, LatLngBounds } from 'leaflet';
 import _ from 'lodash';
 
-import MapMarkerPopup from './MapMarkerPopup';
 import { fetchSellers } from '@/services/api';
 import { SellerType } from '@/constants/types';
+import { toLatLngLiteral } from '@/util/map';
+
+import MapMarkerPopup from './MapMarkerPopup';
 
 // Function to fetch seller coordinates from the API
-const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
+const fetchSellerCoordinates = async (origin: LatLngExpression, radius: number): Promise<SellerType[]> => {
+  const formattedOrigin = toLatLngLiteral(origin);
+  
   console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
 
   try {
@@ -36,8 +40,10 @@ const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radi
 };
 
 // Function to simulate fetching additional data based on the map bounds
-const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<SellerType[]> => {
-  console.log('Fetching additional seller data with center:', center, 'and radius:', radius);
+const fetchAdditionalSellerData = async (center: LatLngExpression, radius: number): Promise<SellerType[]> => {
+  const formattedCenter = toLatLngLiteral(center);
+
+  console.log('Fetching additional seller data with center:', formattedCenter, 'and radius:', radius);
 
   return new Promise((resolve) => {
     setTimeout(async () => {
@@ -84,7 +90,8 @@ const Map = ({ center }: { center: LatLngExpression }) => {
     setLoading(true);
     setError(null);
     try {
-      const sellersData = await fetchSellerCoordinates(origin, radius);
+      const formattedOrigin = toLatLngLiteral(origin);
+      const sellersData = await fetchSellerCoordinates(formattedOrigin, radius);
       setSellers(sellersData);
       console.log('Seller data:', sellersData);
     } catch (err) {
