@@ -13,9 +13,9 @@ const axiosClient = axios.create({
 export const setAuthToken = () => {
   const token = localStorage.getItem('token');
   if (token) {
-    axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    return (axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`);
   } else {
-    delete axiosClient.defaults.headers.common['Authorization'];
+    return delete axiosClient.defaults.headers.common['Authorization'];
   }
 };
 
