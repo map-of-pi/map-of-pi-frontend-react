@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { fetchReviews } from '@/services/api';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { resolveRating } from '@/components/shared/Review/utils';
-import { ReviewType } from '@/constants/types';
+import { ReviewFeedbackType } from '@/constants/types';
 import { useEffect, useState } from 'react';
 
 interface ReviewInt {
@@ -42,7 +42,7 @@ function SellerReviews({
       try {
         const data = await fetchReviews(sellerId);
 
-        const reviewFeedback = data.map((feedback: ReviewType) =>{
+        const reviewFeedback = data.map((feedback: ReviewFeedbackType) =>{
           return {
             heading: feedback.comment,
             date: feedback.review_date,

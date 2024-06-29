@@ -2,7 +2,26 @@ import axios from 'axios';
 
 const API = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1',
+  
 });
+
+// Authenticate user
+export const authenticateUser = async (uid, username) => {
+  try {
+    const response = await API.post('/users/authenticate', {
+      auth: {
+        user: {
+          uid,
+          username,
+        },
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error authenticating user:', error);
+    throw error;
+  }
+};
 
 // Fetch a single pioneer user
 export const fetchUser = async (userId) => {
@@ -56,10 +75,11 @@ export const updateUserSettings = async (userId, formData) => {
   }
 };
 
-// Fetch all sellers
-export const fetchSellers = async () => {
+// Fetch all sellers or within bounds
+export const fetchSellers = async (origin, radius) => {
   try {
-    const response = await API.get('/sellers');
+    const params = origin && radius ? { origin, radius } : {};
+    const response = await API.get('/sellers', { params });
     return response.data;
   } catch (error) {
     console.error('Error fetching sellers:', error);
@@ -104,17 +124,6 @@ export const updateSeller = async (sellerId, formData) => {
     return response.data;
   } catch (error) {
     console.error(`Error updating seller with ID ${sellerId}:`, error);
-    throw error;
-  }
-};
-
-// Delete a seller
-export const deleteSeller = async (sellerId) => {
-  try {
-    const response = await API.delete(`/sellers/${sellerId}`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error deleting seller with ID ${sellerId}:`, error);
     throw error;
   }
 };
@@ -167,17 +176,6 @@ export const updateReview = async (reviewId, formData) => {
     return response.data;
   } catch (error) {
     console.error(`Error updating review with ID ${reviewId}:`, error);
-    throw error;
-  }
-};
-
-// Delete a review
-export const deleteReview = async (reviewId) => {
-  try {
-    const response = await API.delete(`/review-feedback/${reviewId}`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error deleting review with ID ${reviewId}:`, error);
     throw error;
   }
 };
