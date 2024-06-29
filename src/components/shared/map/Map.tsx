@@ -1,6 +1,4 @@
-import L from 'leaflet';
 import React, { useEffect, useState, useCallback } from 'react';
-import axios from 'axios';
 import {
   MapContainer,
   Marker,
@@ -8,42 +6,62 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import { LatLngExpression, LatLngBounds } from 'leaflet';
+import L, { LatLngExpression, LatLngBounds } from 'leaflet';
 import _ from 'lodash';
+
+import { fetchSellers } from '@/services/api';
+import { SellerType } from '@/constants/types';
+import { toLatLngLiteral } from '@/util/map';
 
 import MapMarkerPopup from './MapMarkerPopup';
 
-// Function to fetch initial coordinates from the backend
-const fetchSellerCoordinates = async (origin: { lat: number; lng: number }, radius: number): Promise<any[]> => {
-  console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
+// Function to fetch seller coordinates from the API
+const fetchSellerCoordinates = async (origin: LatLngExpression, radius: number): Promise<SellerType[]> => {
+  const formattedOrigin = toLatLngLiteral(origin);
+  
+  console.log('Fetching initial seller coordinates with origin:', formattedOrigin, 'and radius:', radius);
+
   try {
-    const response = await axios.get('https://map-of-pi-backend-react.vercel.app/api/v1/sellers', {
-      params: { origin, radius },
+    const sellersData = await fetchSellers(formattedOrigin, radius);
+    
+    const sellersWithCoordinates = sellersData.map((seller: any) => {
+      const [lng, lat] = seller.coordinates.coordinates;
+      return {
+        ...seller,
+        coordinates: [lat, lng] as LatLngExpression
+      };
     });
-    console.log('Initial coordinates fetched:', response.data);
-    return response.data;
+
+    return sellersWithCoordinates;
   } catch (error) {
-    console.error('Error fetching initial coordinates:', error);
+    console.error('Error fetching initial seller coordinates:', error);
     throw error;
   }
 };
 
-// Function to fetch additional data based on the map bounds from the backend
-const fetchAdditionalSellerData = async (center: { lat: number; lng: number }, radius: number): Promise<any[]> => {
-  console.log('Fetching additional seller data with center:', center, 'and radius:', radius);
-  try {
-    const response = await axios.get('https://map-of-pi-backend-react.vercel.app/api/v1/sellers', {
-      params: { origin: center, radius },
-    });
-    console.log('Additional seller data fetched:', response.data);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching additional seller data:', error);
-    throw error;
-  }
+// Function to simulate fetching additional data based on the map bounds
+const fetchAdditionalSellerData = async (center: LatLngExpression, radius: number): Promise<SellerType[]> => {
+  const formattedCenter = toLatLngLiteral(center);
+
+  console.log('Fetching additional seller data with center:', formattedCenter, 'and radius:', radius);
+  
+  return new Promise((resolve) => {
+    setTimeout(async () => {
+      const sellersData = await fetchSellers(formattedCenter, radius);
+
+      const additionalData = sellersData.map((seller: any) => {
+        const [lng, lat] = seller.coordinates.coordinates;
+        return {
+          ...seller,
+          coordinates: [lat, lng] as LatLngExpression
+        };
+      });
+      resolve(additionalData);
+    }, 500);
+  });
 };
 
-const Map = () => {
+const Map = ({ center }: { center: LatLngExpression }) => {
   const customIcon = L.icon({
     iconUrl: '/favicon-32x32.png',
     iconSize: [32, 32],
@@ -52,8 +70,8 @@ const Map = () => {
   });
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
-  const [sellerCoordinates, setSellerCoordinates] = useState<any[]>([]);
-  const [origin, setOrigin] = useState({ lat: -1.6279, lng: 29.7451 });
+  const [sellers, setSellers] = useState<SellerType[]>([]);
+  const [origin, setOrigin] = useState(center);
   const [radius, setRadius] = useState(5); // Initial radius in km
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -63,12 +81,19 @@ const Map = () => {
     fetchInitialCoordinates();
   }, []);
 
+  useEffect(() => {
+    if (center) {
+      setOrigin(center);
+    }
+  }, [center]);
+
   const fetchInitialCoordinates = async () => {
     setLoading(true);
     setError(null);
     try {
-      const coordinates = await fetchSellerCoordinates(origin, radius);
-      setSellerCoordinates(coordinates);
+      // const formattedOrigin = toLatLngLiteral(origin);
+      const sellersData = await fetchSellerCoordinates(origin, radius);
+      setSellers(sellersData);
     } catch (err) {
       console.error('Failed to fetch initial coordinates:', err);
       setError('Failed to fetch initial coordinates');
@@ -78,22 +103,21 @@ const Map = () => {
   };
 
   const handleMapInteraction = async (newBounds: L.LatLngBounds) => {
-    console.log('Map interaction detected, new bounds:', newBounds);
     const newCenter = newBounds.getCenter();
     const newRadius = calculateRadius(newBounds);
     setLoading(true);
     setError(null);
     try {
-      const additionalData = await fetchAdditionalSellerData({ lat: newCenter.lat, lng: newCenter.lng }, newRadius);
-      if (additionalData.length === 0) {
-        console.warn('No additional seller data found for the new bounds.');
-      } else {
+      const additionalSellers = await fetchAdditionalSellerData({ lat: newCenter.lat, lng: newCenter.lng }, newRadius);
+      if (additionalSellers.length > 0) {
         console.log('Appending additional data to existing seller coordinates');
-        setSellerCoordinates((prevCoordinates) => {
-          const newCoordinates = [...prevCoordinates, ...additionalData];
+        setSellers((prevCoordinates) => {
+          const newCoordinates = [...prevCoordinates, ...additionalSellers];
           console.log('Updated seller coordinates:', newCoordinates);
           return newCoordinates;
         });
+      } else {
+        console.warn('No additional seller data found for the new bounds.');
       }
     } catch (err) {
       console.error('Failed to fetch additional data:', err);
@@ -156,18 +180,13 @@ const Map = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker />
-        {sellerCoordinates.map((seller, i) => {
-          const coords = seller.coordinates.coordinates; // Adjusting this part
-          return (
-            coords && coords[1] !== undefined && coords[0] !== undefined ? (
-              <Marker position={{ lat: coords[1], lng: coords[0] }} key={i} icon={customIcon}>
-                <Popup closeButton={false}>
-                  <MapMarkerPopup seller={seller} />
-                </Popup>
-              </Marker>
-            ) : null
-          );
-        })}
+        {sellers.map((seller) => (
+          <Marker position={seller.coordinates as LatLngExpression} key={seller.seller_id} icon={customIcon}>
+            <Popup closeButton={false}>
+              <MapMarkerPopup seller={seller} />
+            </Popup>
+          </Marker>
+        ))}
       </MapContainer>
     </>
   );
