@@ -8,7 +8,7 @@ import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import { fetchSingleReview, createReview, updateReview, deleteReview } from '@/services/api';
-import { ReviewType } from '@/constants/types';
+import { ReviewFeedbackType } from '@/constants/types';
 import { resolveRating } from '@/components/shared/Review/utils';
 
 interface ReplyToReviewPageProps {
@@ -41,7 +41,7 @@ export default function ReplyToReviewPage({
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
-  const [reviewData, setReviewData] = useState<ReviewType | null>(null);
+  const [reviewData, setReviewData] = useState<ReviewFeedbackType | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

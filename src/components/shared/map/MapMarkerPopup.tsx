@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { itemData } from '@/constants/demoAPI';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { Button, OutlineBtn } from '../Forms/Buttons/Buttons';
 

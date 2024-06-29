@@ -19,11 +19,11 @@ import MapMarkerPopup from './MapMarkerPopup';
 const fetchSellerCoordinates = async (origin: LatLngExpression, radius: number): Promise<SellerType[]> => {
   const formattedOrigin = toLatLngLiteral(origin);
   
-  console.log('Fetching initial coordinates with origin:', origin, 'and radius:', radius);
+  console.log('Fetching initial seller coordinates with origin:', formattedOrigin, 'and radius:', radius);
 
   try {
-    const sellersData = await fetchSellers();
-
+    const sellersData = await fetchSellers(formattedOrigin, radius);
+    
     const sellersWithCoordinates = sellersData.map((seller: any) => {
       const [lng, lat] = seller.coordinates.coordinates;
       return {
@@ -34,7 +34,7 @@ const fetchSellerCoordinates = async (origin: LatLngExpression, radius: number):
 
     return sellersWithCoordinates;
   } catch (error) {
-    console.error('Error fetching seller coordinates:', error);
+    console.error('Error fetching initial seller coordinates:', error);
     throw error;
   }
 };
@@ -44,10 +44,10 @@ const fetchAdditionalSellerData = async (center: LatLngExpression, radius: numbe
   const formattedCenter = toLatLngLiteral(center);
 
   console.log('Fetching additional seller data with center:', formattedCenter, 'and radius:', radius);
-
+  
   return new Promise((resolve) => {
     setTimeout(async () => {
-      const sellersData = await fetchSellers();
+      const sellersData = await fetchSellers(formattedCenter, radius);
 
       const additionalData = sellersData.map((seller: any) => {
         const [lng, lat] = seller.coordinates.coordinates;
@@ -77,6 +77,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log('Component mounted, fetching initial coordinates...');
     fetchInitialCoordinates();
   }, []);
 
@@ -90,11 +91,11 @@ const Map = ({ center }: { center: LatLngExpression }) => {
     setLoading(true);
     setError(null);
     try {
-      const formattedOrigin = toLatLngLiteral(origin);
-      const sellersData = await fetchSellerCoordinates(formattedOrigin, radius);
+      // const formattedOrigin = toLatLngLiteral(origin);
+      const sellersData = await fetchSellerCoordinates(origin, radius);
       setSellers(sellersData);
-      console.log('Seller data:', sellersData);
     } catch (err) {
+      console.error('Failed to fetch initial coordinates:', err);
       setError('Failed to fetch initial coordinates');
     } finally {
       setLoading(false);
@@ -109,11 +110,17 @@ const Map = ({ center }: { center: LatLngExpression }) => {
     try {
       const additionalSellers = await fetchAdditionalSellerData({ lat: newCenter.lat, lng: newCenter.lng }, newRadius);
       if (additionalSellers.length > 0) {
-        setSellers((prevSellers) => [...prevSellers, ...additionalSellers]);
+        console.log('Appending additional data to existing seller coordinates');
+        setSellers((prevCoordinates) => {
+          const newCoordinates = [...prevCoordinates, ...additionalSellers];
+          console.log('Updated seller coordinates:', newCoordinates);
+          return newCoordinates;
+        });
       } else {
         console.warn('No additional seller data found for the new bounds.');
       }
     } catch (err) {
+      console.error('Failed to fetch additional data:', err);
       setError('Failed to fetch additional data');
     } finally {
       setLoading(false);
@@ -121,10 +128,9 @@ const Map = ({ center }: { center: LatLngExpression }) => {
   };
 
   const calculateRadius = (bounds: L.LatLngBounds) => {
-    const center = bounds.getCenter();
-    const northEast = bounds.getNorthEast();
-    const distance = center.distanceTo(northEast);
-    return distance / 1000; // Convert to kilometers
+    console.log('Calculating radius for bounds:', bounds);
+    // Implement logic to calculate radius based on map bounds
+    return 10; // Example radius value
   };
 
   const debouncedHandleMapInteraction = useCallback(
@@ -137,15 +143,18 @@ const Map = ({ center }: { center: LatLngExpression }) => {
   function LocationMarker() {
     const map = useMapEvents({
       locationfound(e) {
+        console.log('Location found:', e.latlng);
         setPosition(e.latlng);
         map.flyTo(e.latlng, map.getZoom());
       },
       moveend() {
         const bounds = map.getBounds();
+        console.log('Map move ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds);
       },
       zoomend() {
         const bounds = map.getBounds();
+        console.log('Map zoom ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds);
       },
     });
@@ -165,14 +174,14 @@ const Map = ({ center }: { center: LatLngExpression }) => {
         center={origin}
         zoom={13}
         zoomControl={false}
-        className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0">
+        className="w-full flex-1 fixed top-[90px] h-[calc(100vh-55px)] left-0 right-0 bottom-0">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker />
         {sellers.map((seller) => (
-          <Marker position={seller.coordinates as LatLngExpression} key={seller._id} icon={customIcon}>
+          <Marker position={seller.coordinates as LatLngExpression} key={seller.seller_id} icon={customIcon}>
             <Popup closeButton={false}>
               <MapMarkerPopup seller={seller} />
             </Popup>
