@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
-import { fetchSingleReview, createReview, updateReview, deleteReview } from '@/services/api';
+import { fetchSingleReview, createReview, updateReview } from '@/services/api';
 import { ReviewFeedbackType } from '@/constants/types';
 import { resolveRating } from '@/components/shared/Review/utils';
 
