@@ -5,7 +5,8 @@ export const locales = [
   'en-GB',
   'es',
   'ko',
-  'hau-NG'
+  'hau-NG',
+  'ewe-BJ'
 ] as const;
 export const localePrefix = 'always'; // Default
 
