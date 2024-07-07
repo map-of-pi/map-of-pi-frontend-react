@@ -63,7 +63,7 @@ const SellerRegistrationForm = () => {
   useEffect(() => {
     const getSellerData = async () => {
       try {
-        const data = await fetchSingleSeller();
+        const data = await fetchSingleSeller(seller.seller_id);
         setDbSeller(data); // Ensure this is a single object, not an array
       } catch (error) {
         setError('Error fetching market data');

@@ -20,8 +20,21 @@ export type ReviewFeedbackType = {
   review_receiver_id: string;
   review_giver_id: string;
   reply_to_review_id: string;
-  rating: number | null;
+  rating: number;
   comment: string;
   image: string;
   review_date: string;
+}
+
+export type CreateReviewType = {
+  seller: string;
+  user: string;
+  comment: string;
+  rating: number;
+  image: File[];
+}
+
+export type UserType = {
+  token: string;
+  user: {uid: string, username:string}
 }

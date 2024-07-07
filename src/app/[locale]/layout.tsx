@@ -81,6 +81,10 @@ export default function LocaleLayout({
           href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
         />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        {/* <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+        <script>
+          Pi.init({ version: "2.0", sandbox: <%= process.env.NODE_ENV !== 'production' %> })  
+        </script> */}
       </head>
       <body
         className={`bg-background text-black ${lato.className}`}>

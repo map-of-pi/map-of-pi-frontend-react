@@ -12,9 +12,12 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
-import { fetchSingleSeller, createReview } from '@/services/api';
+import { fetchSingleSeller, createReview, authenticateUser } from '@/services/api';
 import Link from 'next/link';
 import Skeleton from '@/components/skeleton/skeleton';
+import { UserType } from '@/constants/types';
+import { set } from 'lodash';
+import { comment } from 'postcss';
 
 export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -22,9 +25,9 @@ export default function Page({ params }: { params: { id: string } }) {
   const t = useTranslations();
   const router = useRouter();
 
-  const sellerId = params.id
-  console.log('this is seller id', sellerId);
- 
+  // const user = authenticateUser()
+
+  const sellerId = params.id; 
 
   const [files, setFiles] = useState<File[]>([]);
   const [previewImage, setPreviewImage] = useState<string[]>([]);
@@ -34,9 +37,24 @@ export default function Page({ params }: { params: { id: string } }) {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
+  const [user, setUser] = useState<UserType | null>()
   const [seller, setSeller] = useState(PiFestJson.Seller);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await authenticateUser('testme', 'testme');
+        setUser(userData)
+        console.log('pi user auth:', userData);
+      } catch (error:any) {
+        console.error('Failed to auto sign-in:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const getSellerData = async () => {
@@ -83,18 +101,24 @@ export default function Page({ params }: { params: { id: string } }) {
     setReviewEmoji(emoji);
   };
 
-  const handleSave = async () => {
-    const formData = new FormData();
-    formData.append('comments', comments);
-    formData.append('emoji', reviewEmoji);
-    files.forEach(file => formData.append('images', file));
-
+  const handleSave = () => {    
     try {
-        await createReview(formData); // Or updateReview if editing an existing review
-        setIsSaveEnabled(false);
+      if (!user) {
+        return window.alert('user not authenticated');        
+      }
+      const formData = {
+        user: user.user.uid,
+        seller: sellerId,
+        comment: comments,
+        image: files,
+        rating: reviewEmoji
+      }
+      createReview(user, formData);
+      setIsSaveEnabled(false);
     } catch (error) {
         console.error('Error saving review:', error);
     }
+
   };
 
   const handleNavigation = (route: string) => {

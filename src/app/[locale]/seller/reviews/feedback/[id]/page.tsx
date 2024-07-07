@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
-import { fetchSingleReview, createReview, updateReview } from '@/services/api';
-import { ReviewFeedbackType } from '@/constants/types';
+import { fetchSingleReview, createReview, updateReview, authenticateUser } from '@/services/api';
+import { ReviewFeedbackType, UserType } from '@/constants/types';
 import { resolveRating } from '@/components/shared/Review/utils';
 
 interface ReplyToReviewPageProps {
@@ -40,10 +40,29 @@ export default function ReplyToReviewPage({
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
+  const [authUser, setAuthUser] = useState<UserType | null>()
 
   const [reviewData, setReviewData] = useState<ReviewFeedbackType | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await authenticateUser('testme', 'testme');
+        setAuthUser(userData)
+        console.log('pi user auth:', userData);
+      } catch (error:any) {
+        console.error('Failed to auto sign-in:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
 
   useEffect(() => {
     const getReviewData = async () => {
@@ -90,20 +109,25 @@ export default function ReplyToReviewPage({
     setReviewEmoji(emoji);
   };
 
-  const handleSave = async () => {
-    const formData = new FormData();
-    formData.append('comments', comments);
-    formData.append('emoji', reviewEmoji);
-    files.forEach(file => formData.append('images', file));
-
+  const handleSave = () => {    
     try {
-      await createReview(formData); // Or updateReview if editing an existing review
+      if (!authUser) {
+        return window.alert('user not authenticated');        
+      }
+      const formData = {
+        user: authUser.user.uid,
+        seller: 'sellerId',
+        comment: comments,
+        image: files,
+        rating: reviewEmoji
+      }
+      createReview(authUser, formData);
       setIsSaveEnabled(false);
     } catch (error) {
-      console.error('Error saving review:', error);
+        console.error('Error saving review:', error);
     }
-  };
 
+  };
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {
       setLinkUrl(route);

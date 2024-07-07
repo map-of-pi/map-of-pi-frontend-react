@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1';
+const baseUrl = process.env.PROD_API_URL || 'http://localhost:8001/api/v1';
 
 const axiosClient = axios.create({
   baseURL: baseUrl,
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Origin': '*',
   },
 });
 
-export const setAuthToken = () => {
-  const token = localStorage.getItem('token');
+export const setAuthToken = (token: string) => {
+  // const token = localStorage.getItem('token');
   if (token) {
     return (axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`);
   } else {

@@ -1,12 +1,16 @@
+'use server';
+
 import axios from 'axios';
+import { ReviewFeedbackType, UserType, CreateReviewType } from '@/constants/types';
+import axiosClient, { setAuthToken } from "@/config/client";
 
 const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1',
+  baseURL: process.env.PROD_API_URL || 'http://localhost:8001/api/v1',
   
 });
 
 // Authenticate user
-export const authenticateUser = async (uid, username) => {
+export const authenticateUser = async (uid:string, username:string) => {
   try {
     const response = await API.post('/users/authenticate', {
       auth: {
@@ -16,28 +20,37 @@ export const authenticateUser = async (uid, username) => {
         },
       },
     });
+    
+    const accessToken = response.data.token;
+    if (response.data.token){
+      setAuthToken(accessToken);
+      console.log('Access token set to header successfully');
+    }
+    
     return response.data;
   } catch (error) {
-    console.error('Error authenticating user:', error);
+    // console.error('Error authenticating user:', error);
+    // return {message: 'Error authenticating user'};
     throw error;
   }
 };
 
 // Fetch a single pioneer user
-export const fetchUser = async (userId) => {
+export const fetchUser = async (userId: string) => {
   try {
-    const response = await API.get(`/user/${userId}`);
+    const response = await API.get(`/users/${userId}`);
+    console.log(response.data)
     return response.data;
   } catch (error) {
-    console.error(`Error fetching pioneer user with ID ${userId}:`, error);
-    throw error;
+    // console.error(`Error fetching pioneer user with ID ${userId}:`, error);
+    return {message: 'Error fetching pioneer user with ID',}
   }
 };
 
 // Fetch a single pioneer user configuration settings
-export const fetchUserSettings = async (userId) => {
+export const fetchUserSettings = async (userId: string) => {
   try {
-    const response = await API.get(`/user/${userId}`);
+    const response = await API.get(`/users/${userId}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching pioneer user configuration settings with ID ${userId}:`, error);
@@ -46,9 +59,9 @@ export const fetchUserSettings = async (userId) => {
 };
 
 // Create new pioneer user settings
-export const createUserSettings = async (userId, formData) => {
+export const createUserSettings = async (userId:string, formData:FormData) => {
   try {
-    const response = await API.post(`/user/${userId}`, formData, {
+    const response = await API.post(`/users/${userId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -61,9 +74,9 @@ export const createUserSettings = async (userId, formData) => {
 };
 
 // Update pioneer user settings
-export const updateUserSettings = async (userId, formData) => {
+export const updateUserSettings = async (userId:string, formData:FormData) => {
   try {
-    const response = await API.put(`/user/${userId}`, formData, {
+    const response = await API.put(`/users/${userId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -76,7 +89,7 @@ export const updateUserSettings = async (userId, formData) => {
 };
 
 // Fetch all sellers or within bounds
-export const fetchSellers = async (origin, radius) => {
+export const fetchSellers = async (origin: any, radius: number) => {
   try {
     const params = origin && radius ? { origin, radius } : {};
     const response = await API.get('/sellers', { params });
@@ -88,7 +101,7 @@ export const fetchSellers = async (origin, radius) => {
 };
 
 // Fetch single seller by ID
-export const fetchSingleSeller = async (sellerId) => {
+export const fetchSingleSeller = async (sellerId:string) => {
   try {
     const response = await API.get(`/sellers/${sellerId}`);
     return response.data;
@@ -99,7 +112,7 @@ export const fetchSingleSeller = async (sellerId) => {
 };
 
 // Register a new seller
-export const registerNewSeller = async (formData) => {
+export const registerNewSeller = async (formData:FormData) => {
   try {
     const response = await API.post('/sellers/register', formData, {
       headers: {
@@ -114,7 +127,7 @@ export const registerNewSeller = async (formData) => {
 };
 
 // Update an existing seller
-export const updateSeller = async (sellerId, formData) => {
+export const updateSeller = async (sellerId:string, formData: FormData) => {
   try {
     const response = await API.put(`/sellers/${sellerId}`, formData, {
       headers: {
@@ -129,7 +142,7 @@ export const updateSeller = async (sellerId, formData) => {
 };
 
 // Fetch a single review for a seller
-export const fetchSingleReview = async (reviewID) => {
+export const fetchSingleReview = async (reviewID: string) => {
   try {
     const response = await API.get(`/review-feedback/${reviewID}`);
     return response.data;
@@ -140,7 +153,7 @@ export const fetchSingleReview = async (reviewID) => {
 };
 
 // Fetch reviews for a seller
-export const fetchReviews = async (sellerId) => {
+export const fetchReviews = async (sellerId:string) => {
   try {
     const response = await API.get(`/review-feedback/${sellerId}`);
     return response.data;
@@ -151,11 +164,22 @@ export const fetchReviews = async (sellerId) => {
 };
 
 // Create a new review
-export const createReview = async (formData) => {
+export const createReview = async (auth:UserType, params: CreateReviewType) => {
+  const formData = new FormData();
+
+  formData.append('comment', params.comment);
+  formData.append('rating', params.rating.toString());
+  formData.append('review_receiver_id', params.seller);
+  formData.append('review_giver_id', params.user);
+  params.image.forEach(file => formData.append('images', file));
+
+  console.log('this is form data:', formData)
+  
   try {
     const response = await API.post('/review-feedback/add', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${auth.token}`
       },
     });
     return response.data;
@@ -166,11 +190,12 @@ export const createReview = async (formData) => {
 };
 
 // Update a review
-export const updateReview = async (reviewId, formData) => {
+export const updateReview = async (reviewId:string, formData:FormData, authToken: string) => {
   try {
     const response = await API.put(`/review-feedback/${reviewId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${authToken}`,
       },
     });
     return response.data;
