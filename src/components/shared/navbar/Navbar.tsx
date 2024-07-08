@@ -44,7 +44,7 @@ function Navbar() {
     <>
       <div
         className={`w-full h-[76.19px] z-500 px-[16px] py-[5px] bg-primary fixed top-0 left-0 right-0 `}>
-        <div className="text-center text-secondary text-[1.3rem]">
+        <div className="text-center text-secondary text-[1.3rem] whitespace-nowrap">
           Map of Pi
         </div>
         <div
