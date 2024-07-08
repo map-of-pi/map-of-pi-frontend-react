@@ -5,9 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import EmojiPicker from '@/components/shared/Review/emojipicker';
-import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
-import { fetchSingleReview, createReview, updateReview, authenticateUser } from '@/services/api';
+import { fetchSingleReview, authenticateUser } from '@/services/api';
 import { ReviewFeedbackType, UserType } from '@/constants/types';
 import { resolveRating } from '@/components/shared/Review/utils';
 
@@ -25,7 +24,6 @@ export default function ReplyToReviewPage({
   searchParams,
 }: ReplyToReviewPageProps) {
   const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
-  const SUBHEADER = 'font-bold mb-2';
 
   const t = useTranslations();
   const router = useRouter();
@@ -33,42 +31,22 @@ export default function ReplyToReviewPage({
   const reviewId = params.id;
   const sellerName = searchParams.seller_name;
 
-  const [files, setFiles] = useState<File[]>([]);
-  const [previewImage, setPreviewImage] = useState<string[]>([]);
-  const [comments, setComments] = useState('');
-  const [reviewEmoji, setReviewEmoji] = useState<any>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-  const [authUser, setAuthUser] = useState<UserType | null>()
 
   const [reviewData, setReviewData] = useState<ReviewFeedbackType | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
 
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userData = await authenticateUser('testme', 'testme');
-        setAuthUser(userData)
-        console.log('pi user auth:', userData);
-      } catch (error:any) {
-        console.error('Failed to auto sign-in:', error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
-
   useEffect(() => {
     const getReviewData = async () => {
       try {
+        console.log('review Id: ', reviewId)
         const data = await fetchSingleReview(reviewId);
         setReviewData(data);
+        // console.log(data)
       } catch (error) {
         setError('Error fetching review data');
       } finally {
@@ -78,56 +56,7 @@ export default function ReplyToReviewPage({
     getReviewData();
   }, [reviewId]);
 
-  useEffect(() => {
-    if (files.length === 0) return;
-
-    const objectUrls = files.map(file => URL.createObjectURL(file));
-    setPreviewImage(objectUrls);
-
-    return () => {
-      objectUrls.forEach(url => URL.revokeObjectURL(url));
-    };
-  }, [files]);
-
-  useEffect(() => {
-    const noReview = comments === '' && reviewEmoji === null && files.length === 0;
-    setIsSaveEnabled(!noReview);
-  }, [comments, reviewEmoji, files]);
-
-  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files;
-    if (selectedFiles && selectedFiles.length > 0) {
-      setFiles(Array.from(selectedFiles));
-    }
-  };
-
-  const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComments(e.target.value);
-  };
-
-  const handleEmojiSelect = (emoji: any) => {
-    setReviewEmoji(emoji);
-  };
-
-  const handleSave = () => {    
-    try {
-      if (!authUser) {
-        return window.alert('user not authenticated');        
-      }
-      const formData = {
-        user: authUser.user.uid,
-        seller: 'sellerId',
-        comment: comments,
-        image: files,
-        rating: reviewEmoji
-      }
-      createReview(authUser, formData);
-      setIsSaveEnabled(false);
-    } catch (error) {
-        console.error('Error saving review:', error);
-    }
-
-  };
+  
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {
       setLinkUrl(route);
@@ -174,36 +103,8 @@ export default function ReplyToReviewPage({
           </div>
         )}
 
-        <div className="mb-3">
-          <h2 className={SUBHEADER}>{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_MESSAGE')}</h2>
-          <p>{t('SCREEN.REPLY_TO_REVIEW.FACE_SELECTION_REVIEW_MESSAGE')}</p>
-          <EmojiPicker onSelect={handleEmojiSelect} />
-        </div>
-
-        <div className="mb-2">
-          <TextArea
-            placeholder={t('SCREEN.REPLY_TO_REVIEW.ADDITIONAL_COMMENTS_PLACEHOLDER')}
-            value={comments}
-            onChange={handleCommentsChange}
-          />
-        </div>
-
-        <div className="mb-2">
-          <FileInput
-            label={t('SCREEN.REPLY_TO_REVIEW.FEEDBACK_PHOTO_UPLOAD_LABEL')}
-            handleAddImages={handleAddImages}
-            images={previewImage}
-          />
-        </div>
-
-        <div className="mb-7">
-          <button
-            onClick={handleSave}
-            disabled={!isSaveEnabled}
-            className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-[#386F4F] text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}
-          >
-            {t('SHARED.SAVE')}
-          </button>
+        <div>
+          <EmojiPicker sellerId={reviewData?.review_receiver_id} setIsSaveEnabled={setIsSaveEnabled} replyToReviewId={reviewId}/>
         </div>
 
         <ConfirmDialog

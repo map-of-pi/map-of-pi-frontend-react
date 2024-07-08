@@ -9,15 +9,11 @@ import React, { useEffect, useState } from 'react';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
-import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
-import { fetchSingleSeller, createReview, authenticateUser } from '@/services/api';
+import { fetchSingleSeller } from '@/services/api';
 import Link from 'next/link';
 import Skeleton from '@/components/skeleton/skeleton';
-import { UserType } from '@/constants/types';
-import { set } from 'lodash';
-import { comment } from 'postcss';
 
 export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -29,32 +25,14 @@ export default function Page({ params }: { params: { id: string } }) {
 
   const sellerId = params.id; 
 
-  const [files, setFiles] = useState<File[]>([]);
-  const [previewImage, setPreviewImage] = useState<string[]>([]);
-  const [comments, setComments] = useState('');
-  const [reviewEmoji, setReviewEmoji] = useState<any>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
-  const [user, setUser] = useState<UserType | null>()
   const [seller, setSeller] = useState(PiFestJson.Seller);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userData = await authenticateUser('testme', 'testme');
-        setUser(userData)
-        console.log('pi user auth:', userData);
-      } catch (error:any) {
-        console.error('Failed to auto sign-in:', error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const getSellerData = async () => {
@@ -70,56 +48,6 @@ export default function Page({ params }: { params: { id: string } }) {
     getSellerData();
   }, []);
 
-  useEffect(() => {
-    if (files.length === 0) return;
-
-    const objectUrls = files.map((file) => URL.createObjectURL(file));
-    setPreviewImage(objectUrls);
-
-    return () => {
-      objectUrls.forEach((url) => URL.revokeObjectURL(url));
-    };
-  }, [files]);
-
-  useEffect(() => {
-    const noReview = comments === '' && reviewEmoji === null && files.length === 0;
-    setIsSaveEnabled(!noReview);
-  }, [comments, reviewEmoji, files]);
-
-  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files;
-    if (selectedFiles && selectedFiles.length > 0) {
-      setFiles(Array.from(selectedFiles));
-    }
-  };
-
-  const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComments(e.target.value);
-  };
-
-  const handleEmojiSelect = (emoji: any) => {
-    setReviewEmoji(emoji);
-  };
-
-  const handleSave = () => {    
-    try {
-      if (!user) {
-        return window.alert('user not authenticated');        
-      }
-      const formData = {
-        user: user.user.uid,
-        seller: sellerId,
-        comment: comments,
-        image: files,
-        rating: reviewEmoji
-      }
-      createReview(user, formData);
-      setIsSaveEnabled(false);
-    } catch (error) {
-        console.error('Error saving review:', error);
-    }
-
-  };
 
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {
@@ -184,29 +112,8 @@ export default function Page({ params }: { params: { id: string } }) {
           <OutlineBtn label={t('SHARED.NAVIGATE')} onClick={() => handleNavigation('')} />
         </div>
 
-        {/* Leave a Review */}
-        <div className="mb-3">
-          <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.LEAVE_A_REVIEW_MESSAGE')}</h2>
-          <p>{t('SCREEN.BUY_FROM_SELLER.FACE_SELECTION_REVIEW_MESSAGE')}</p>
-          <EmojiPicker onSelect={handleEmojiSelect} />
-        </div>
-
-        <div className="mb-2">
-          <TextArea placeholder={t('SCREEN.BUY_FROM_SELLER.ADDITIONAL_COMMENTS_PLACEHOLDER')} value={comments} onChange={handleCommentsChange} />
-        </div>
-
-        <div className="mb-2">
-          <FileInput label={t('SCREEN.BUY_FROM_SELLER.FEEDBACK_PHOTO_UPLOAD_LABEL')} handleAddImages={handleAddImages} images={previewImage} />
-        </div>
-
-        {/* Save Button */}
-        <div className="mb-7">
-          <button
-            onClick={handleSave}
-            disabled={!isSaveEnabled}
-            className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
-            {t('SHARED.SAVE')}
-          </button>
+        <div>
+          <EmojiPicker sellerId={sellerId} setIsSaveEnabled={setIsSaveEnabled} />
         </div>
 
         {/* Summary of Reviews */}

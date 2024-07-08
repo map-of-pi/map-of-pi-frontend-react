@@ -32,6 +32,7 @@ export type CreateReviewType = {
   comment: string;
   rating: number;
   image: File[];
+  replyId: string //id of the review you are replying to
 }
 
 export type UserType = {

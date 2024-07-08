@@ -2,7 +2,11 @@
 
 import { useTranslations } from 'next-intl';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { TextArea } from '../Forms/Inputs/Inputs';
+import { FileInput } from '../Forms/Inputs/Inputs';
+import { UserType } from '@/constants/types';
+import { authenticateUser, createReview } from '@/services/api';
 
 interface Emoji {
   name: string;
@@ -23,15 +27,98 @@ export default function EmojiPicker(props: any) {
   ];
 
   const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [previewImage, setPreviewImage] = useState<string[]>([]);
+  const [comments, setComments] = useState('');
+  const [reviewEmoji, setReviewEmoji] = useState<number | null>(null);
+  const [isSaveActive, setIsSaveActive] = useState<boolean>(false);
+  const [user, setUser] = useState<UserType | null>()
+
+  // function to authenticate user
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await authenticateUser('testme', 'testme');
+        setUser(userData)
+        console.log('pi user auth:', userData);
+      } catch (error:any) {
+        console.error('Failed to auto sign-in:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  //function preview image upload
+  useEffect(() => {
+    if (files.length === 0) return;
+    const objectUrls = files.map((file) => URL.createObjectURL(file));
+    setPreviewImage(objectUrls);
+    return () => {
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [files]);
+
+
+  // function to toggle save button
+  useEffect(() => {
+    const noReview = comments === '' && reviewEmoji === null && files.length === 0;
+    setIsSaveActive(!noReview);
+    props.setIsSaveEnabled(!noReview)
+  }, [comments, reviewEmoji, files]);
+
+
+  const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComments(e.target.value);
+  };
+
+  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = e.target.files;
+    if (selectedFiles && selectedFiles.length > 0) {
+      setFiles(Array.from(selectedFiles));
+    }
+  };
+
+  const resetReview = () => {
+    setSelectedEmoji(null)
+    setReviewEmoji(null)
+    setComments('');
+    setPreviewImage([]);
+    setFiles([]);
+    setIsSaveActive(false);
+    props.setIsSaveEnabled(false)
+  }
+
+  const handleSave = () => {    
+    try {
+      if (!user) {
+        return window.alert('user not authenticated');        
+      }
+      const formData = {
+        user: user.user.uid,
+        seller: props.sellerId,
+        comment: comments,
+        image: files,
+        rating: !reviewEmoji? 1: reviewEmoji,
+        replyId: props.replyToReviewId
+      }
+      createReview(user, formData);
+      resetReview()
+    } catch (error) {
+        console.error('Error saving review:', error);
+    }
+
+  };
 
   // Function to handle the click of an emoji
   const handleEmojiClick = (emojiValue: number) => {
     if (selectedEmoji === emojiValue) {
       setSelectedEmoji(null);
-      props.onSelect(null) // return null when no emoji is sellected
+      setReviewEmoji(null); // return null when no emoji is sellected
     } else {
       setSelectedEmoji(emojiValue);
-      props.onSelect(emojiValue);  // return selected emoji value
+      setReviewEmoji(emojiValue);  // return selected emoji value
     }
   };
 
@@ -42,9 +129,11 @@ export default function EmojiPicker(props: any) {
     return undefined;
   };
   const emojiBtnClass = 'rounded-md w-full outline outline-[0.5px] flex justify-center items-center cursor-pointer p-1'
-
+  const SUBHEADER = "font-bold mb-2";
   return (
-    <div>
+    <div className="mb-3">
+        <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.LEAVE_A_REVIEW_MESSAGE')}</h2>
+        <p>{t('SCREEN.BUY_FROM_SELLER.FACE_SELECTION_REVIEW_MESSAGE')}</p>
       <div className='flex sm:overflow-hidden overflow-auto gap-3 w-full text-center justify-center my-2'>
         <div className='bg-[#DF2C2C33] flex-grow-[0.5] rounded-md p-2'>
           <p className='text-red-700 mb-2'>{t('SHARED.REACTION_RATING.UNSAFE')}</p>
@@ -82,6 +171,22 @@ export default function EmojiPicker(props: any) {
           </div>
         </div>
       </div>
+      <div className="mb-2">
+        <TextArea placeholder={t('SCREEN.BUY_FROM_SELLER.ADDITIONAL_COMMENTS_PLACEHOLDER')} value={comments} onChange={handleCommentsChange} />
+      </div>
+      <div className="mb-2">
+          <FileInput label={t('SCREEN.BUY_FROM_SELLER.FEEDBACK_PHOTO_UPLOAD_LABEL')} handleAddImages={handleAddImages} images={previewImage} />
+        </div>
+
+        {/* Save Button */}
+        <div className="mb-7">
+          <button
+            onClick={handleSave}
+            disabled={!isSaveActive}
+            className={`${isSaveActive ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
+            {t('SHARED.SAVE')}
+          </button>
+        </div>
     </div>
   );  
 }

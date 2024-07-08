@@ -144,7 +144,7 @@ export const updateSeller = async (sellerId:string, formData: FormData) => {
 // Fetch a single review for a seller
 export const fetchSingleReview = async (reviewID: string) => {
   try {
-    const response = await API.get(`/review-feedback/${reviewID}`);
+    const response = await API.get(`/review-feedback/single/${reviewID}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching review with ID ${reviewID}:`, error);
@@ -164,14 +164,17 @@ export const fetchReviews = async (sellerId:string) => {
 };
 
 // Create a new review
-export const createReview = async (auth:UserType, params: CreateReviewType) => {
+export const createReview = async (auth:UserType, props: CreateReviewType) => {
   const formData = new FormData();
 
-  formData.append('comment', params.comment);
-  formData.append('rating', params.rating.toString());
-  formData.append('review_receiver_id', params.seller);
-  formData.append('review_giver_id', params.user);
-  params.image.forEach(file => formData.append('images', file));
+  formData.append('comment', props.comment);
+  formData.append('rating', props.rating.toString());
+  formData.append('review_receiver_id', props.seller);
+  formData.append('review_giver_id', props.user);
+  props.image.forEach(file => formData.append('images', file));
+  formData.append('reply_to_review_id', props.replyId || '')
+
+  // formData.append('reply_to_review_id', props.replyId)
 
   console.log('this is form data:', formData)
   
