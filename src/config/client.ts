@@ -8,10 +8,12 @@ const axiosClient = axios.create({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
+  withCredentials: true,
 });
 
 export const setAuthToken = () => {
   const token = localStorage.getItem('token');
+  // const token = Cookies.get('token');
   if (token) {
     return (axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`);
   } else {

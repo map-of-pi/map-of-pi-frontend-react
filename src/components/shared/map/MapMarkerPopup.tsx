@@ -49,13 +49,6 @@ const MapMarkerPopup = ({ seller }:any) => {
             href={`/seller/sale-items/${seller.seller_id}`} //change to items list screen
             className="flex-1">
               <Button label={t('SHARED.BUY')} styles={{color: '#ffc153', paddingTop: '6px', paddingBottom: '6px', width: '100%' }} />
-            {/* <span className="text-secondary">{t('SHARED.BUY')}</span> */}
-          </Link>
-          <Link
-            href={'/seller/location'} // change to navigate url
-            className="flex-1">
-              <OutlineBtn label={t('SHARED.NAVIGATE')} styles={{color: '#ffc153', paddingTop: '6px', paddingBottom: '6px', width: '100%' }} />
-            {/* <span className="text-[#F6C367]">{t('SHARED.NAVIGATE')}</span> */}
           </Link>
         </div>
       </div>

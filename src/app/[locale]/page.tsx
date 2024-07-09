@@ -31,6 +31,7 @@ const getDeviceLocation = async (): Promise<{ lat: number; lng: number }> => {
 };
 
 export default function Index() {
+
   const t = useTranslations();
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), {
     ssr: false,
@@ -43,8 +44,10 @@ export default function Index() {
     const token = localStorage.getItem('token');
     if (!token) {
       loginUser();
+      console.log("not logged in")
     } else {
       autoLoginUser();
+      console.log("logged in")
     }
   }, [autoLoginUser, loginUser]);
 
