@@ -44,6 +44,14 @@ export const menu = [
         title: 'Nigerian Hausa',
         translation: 'Hausa',
         icon: '/images/shared/language/ng.svg',
+      },
+      {
+        id: 6,
+        code: 'ewe-BJ',
+        label: 'BJ/EWE',
+        title: 'Benin Ewe',
+        translation: 'Ewe',
+        icon: '/images/shared/language/bj.svg',
       }
     ],
   },
