@@ -15,9 +15,9 @@ import {
   Select,
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
+import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import { itemData } from '@/constants/demoAPI';
 import { fetchSingleSeller } from '@/services/api';
-import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 
 interface Seller {
   seller_id: string;

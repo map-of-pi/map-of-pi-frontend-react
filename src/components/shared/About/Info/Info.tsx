@@ -111,7 +111,7 @@ const InfoModel = (props: any) => {
             <div className={styles.defects_contact}>
               <span>{t('POPUP.APP_VERSION_INFO.REPORTING_MESSAGE')} </span>
               <Link href="https://mapofpi.zapier.app/" target="_blank">
-              mapofpi.zapier.app
+              <strong>mapofpi.zapier.app</strong>
               </Link>
             </div>
           </div>
