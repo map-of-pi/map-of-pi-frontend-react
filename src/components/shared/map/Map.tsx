@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents, useMap } from 'react-leaflet';
-import L, { LatLngExpression, LatLngBounds } from 'leaflet';
+import L, { LatLngExpression, LatLngBounds, LatLngLiteral } from 'leaflet';
 import _ from 'lodash';
 
 import { fetchSellers } from '@/services/api';
@@ -9,7 +9,12 @@ import { toLatLngLiteral } from '@/util/map';
 
 import MapMarkerPopup from './MapMarkerPopup';
 
-const fetchSellerCoordinates = async (origin: LatLngExpression, radius: number): Promise<SellerType[]> => {
+// Type guard to check if a LatLngExpression is LatLngLiteral
+const isLatLngLiteral = (latLng: LatLngExpression): latLng is LatLngLiteral => {
+  return (latLng as LatLngLiteral).lat !== undefined && (latLng as LatLngLiteral).lng !== undefined;
+};
+
+const fetchSellerCoordinates = async (origin: LatLngLiteral, radius: number): Promise<SellerType[]> => {
   const formattedOrigin = toLatLngLiteral(origin);
 
   console.log('Fetching initial seller coordinates with origin:', formattedOrigin, 'and radius:', radius);
@@ -32,7 +37,7 @@ const fetchSellerCoordinates = async (origin: LatLngExpression, radius: number):
   }
 };
 
-const fetchAdditionalSellerData = async (center: LatLngExpression, radius: number): Promise<SellerType[]> => {
+const fetchAdditionalSellerData = async (center: LatLngLiteral, radius: number): Promise<SellerType[]> => {
   const formattedCenter = toLatLngLiteral(center);
 
   console.log('Fetching additional seller data with center:', formattedCenter, 'and radius:', radius);
@@ -53,7 +58,11 @@ const fetchAdditionalSellerData = async (center: LatLngExpression, radius: numbe
   });
 };
 
-const Map = ({ center }: { center: LatLngExpression }) => {
+interface MapProps {
+  center: LatLngExpression;
+}
+
+const Map: React.FC<MapProps> = ({ center }) => {
   const customIcon = L.icon({
     iconUrl: '/favicon-32x32.png',
     iconSize: [32, 32],
@@ -63,7 +72,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellers, setSellers] = useState<SellerType[]>([]);
-  const [origin, setOrigin] = useState<LatLngExpression>(center);
+  const [origin, setOrigin] = useState<LatLngLiteral>({ lat: 0, lng: 0 });
   const [radius, setRadius] = useState(5); // Initial radius in km
   const [error, setError] = useState<string | null>(null);
   const [showLocationError, setShowLocationError] = useState(false);
@@ -76,10 +85,16 @@ const Map = ({ center }: { center: LatLngExpression }) => {
   }, []);
 
   useEffect(() => {
-    if (center.lat !== 0 && center.lng !== 0) {
+    if (isLatLngLiteral(center) && center.lat !== 0 && center.lng !== 0) {
       setOrigin(center);
     }
   }, [center]);
+
+  const calculateRadius = useCallback((bounds: L.LatLngBounds): number => {
+    console.log('Calculating radius for bounds:', bounds);
+    // Implement logic to calculate radius based on map bounds
+    return 10; // Example radius value
+  }, []);
 
   const fetchInitialCoordinates = async () => {
     setError(null);
@@ -92,7 +107,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
     }
   };
 
-  const handleMapInteraction = async (newBounds: L.LatLngBounds) => {
+  const handleMapInteraction = useCallback(async (newBounds: L.LatLngBounds) => {
     const newCenter = newBounds.getCenter();
     const newRadius = calculateRadius(newBounds);
     setError(null);
@@ -100,11 +115,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
       const additionalSellers = await fetchAdditionalSellerData({ lat: newCenter.lat, lng: newCenter.lng }, newRadius);
       if (additionalSellers.length > 0) {
         console.log('Appending additional data to existing seller coordinates');
-        setSellers((prevCoordinates) => {
-          const newCoordinates = [...prevCoordinates, ...additionalSellers];
-          console.log('Updated seller coordinates:', newCoordinates);
-          return newCoordinates;
-        });
+        setSellers((prevCoordinates) => [...prevCoordinates, ...additionalSellers]);
       } else {
         console.warn('No additional seller data found for the new bounds.');
       }
@@ -112,19 +123,13 @@ const Map = ({ center }: { center: LatLngExpression }) => {
       console.error('Failed to fetch additional data:', err);
       setError('Failed to fetch additional data');
     }
-  };
-
-  const calculateRadius = (bounds: L.LatLngBounds) => {
-    console.log('Calculating radius for bounds:', bounds);
-    // Implement logic to calculate radius based on map bounds
-    return 10; // Example radius value
-  };
+  }, [calculateRadius]);
 
   const debouncedHandleMapInteraction = useCallback(
     _.debounce((bounds: LatLngBounds) => {
       handleMapInteraction(bounds);
     }, 500),
-    []
+    [handleMapInteraction]
   );
 
   const requestLocation = () => {
@@ -151,7 +156,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
     }
   };
 
-  function LocationMarker() {
+  const LocationMarker = () => {
     const map = useMap();
 
     useEffect(() => {
@@ -188,7 +193,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
         <Popup>You are here</Popup>
       </Marker>
     );
-  }
+  };
 
   return (
     <>
@@ -236,3 +241,5 @@ const Map = ({ center }: { center: LatLngExpression }) => {
 };
 
 export default Map;
+
+
