@@ -23,7 +23,7 @@ const PrivacyPolicyModel = (props: any) => {
           <div className={styles.model_body}>
             <CloseButton onClick={() => props.setTogglePrivacyPolicy(false)}/>
             <div className={styles.privacy_policy_content}>
-              <h2><strong>Map of Pi {t('POPUP.PRIVACY_POLICY_INFO.TITLE')}</strong></h2>
+              <h2><strong className='whitespace-nowrap'>Map of Pi {t('POPUP.PRIVACY_POLICY_INFO.TITLE')}</strong></h2>
               <h4>{t('POPUP.PRIVACY_POLICY_INFO.LAST_UPDATED')}: {lastUpdated}</h4>
               <h4>{t('POPUP.PRIVACY_POLICY_INFO.EMAIL_ADDRESS')}: {emailAddress}</h4>
               <br />

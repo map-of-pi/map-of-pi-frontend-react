@@ -15,6 +15,7 @@ import {
   Select,
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
+import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import { itemData } from '@/constants/demoAPI';
 import { fetchSingleSeller } from '@/services/api';
 
@@ -165,6 +166,7 @@ const SellerRegistrationForm = () => {
               )}
               value={formData.itemsForSale}
               onChange={handleChange}
+              styles={{height: '200px'}}
             />
           </div>
         </div>
@@ -179,10 +181,20 @@ const SellerRegistrationForm = () => {
             }}
           />
         </Link>
-        <div className="mb-7">
-          <h2 className={SUBHEADER}>
-            {t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}
-          </h2>
+        <div className="mb-4 mt-3 ml-auto w-min">
+          <Button
+            label={t('SHARED.SAVE')}
+            disabled={!isSaveEnabled}
+            styles={{
+              color: '#ffc153',
+              height: '40px',
+              padding: '10px 15px',
+            }}
+            onClick={handleSave}
+          />
+        </div>
+        <ToggleCollapse
+          header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
           <TrustMeter ratings={seller.trust_meter_rating} />
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">
@@ -197,11 +209,9 @@ const SellerRegistrationForm = () => {
               />
             </Link>
           </div>
-        </div>
-        <div className="mb-7">
-          <h2 className={`${SUBHEADER} mb-4`}>
-            {t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
-          </h2>
+        </ToggleCollapse>
+        <ToggleCollapse
+          header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
           <div className="text-sm mb-3">
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ': '}
@@ -220,12 +230,9 @@ const SellerRegistrationForm = () => {
             </span>
             <span>{seller.email}</span>
           </div>
-        </div>
-
+        </ToggleCollapse>
+        <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}>
         <div className="mb-4">
-          <h2 className={SUBHEADER}>
-            {t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}
-          </h2>
           <Input
             label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
             name="sellerName"
@@ -287,7 +294,6 @@ const SellerRegistrationForm = () => {
             onChange={handleChange}
           />
         </div>
-
         <div className="mb-4">
           <FileInput
             label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
@@ -300,20 +306,21 @@ const SellerRegistrationForm = () => {
             </div>
           )}
         </div>
-
-        <div className="mb-7">
+        <div className="mb-4 mt-3 ml-auto w-min">
           <Button
             label={t('SHARED.SAVE')}
             disabled={!isSaveEnabled}
             styles={{
               color: '#ffc153',
-              width: '100%',
               height: '40px',
-              padding: '10px',
+              padding: '10px 15px',
             }}
             onClick={handleSave}
           />
         </div>
+        </ToggleCollapse>
+
+
 
         <ConfirmDialog
           show={showConfirmDialog}

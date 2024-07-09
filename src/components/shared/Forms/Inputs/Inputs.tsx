@@ -50,6 +50,7 @@ export const TextArea = (props: any) => {
       <textarea
         placeholder={props.placeholder}
         onChange={(e) => props.onChange(e)}
+        style={props.styles}
         className="mt-1 p-2 block w-full rounded-xl  border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4"></textarea>
     </div>
   );

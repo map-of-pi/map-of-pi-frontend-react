@@ -31,7 +31,7 @@ const InfoModel = (props: any) => {
               </div>
             </div>
             <div className={styles.title}>
-              <h1>Map of Pi</h1>
+              <h1 className='whitespace-nowrap'>Map of Pi</h1>
             </div>
             <div className={`${styles.version} mb-[16px]`}>
               <h3>{version}</h3>
@@ -110,8 +110,8 @@ const InfoModel = (props: any) => {
 
             <div className={styles.defects_contact}>
               <span>{t('POPUP.APP_VERSION_INFO.REPORTING_MESSAGE')} </span>
-              <Link href="mailto:philip@mapofpi.com" target="_blank">
-              philip@mapofpi.com
+              <Link href="https://mapofpi.zapier.app/" target="_blank">
+              <strong>mapofpi.zapier.app</strong>
               </Link>
             </div>
           </div>
