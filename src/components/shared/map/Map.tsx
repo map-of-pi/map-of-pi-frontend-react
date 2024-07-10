@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import React, { useEffect, useState, useCallback } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents, useMap } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngLiteral } from 'leaflet';
@@ -63,6 +65,8 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ center }) => {
+  const t = useTranslations();
+
   const customIcon = L.icon({
     iconUrl: '/favicon-32x32.png',
     iconSize: [32, 32],
@@ -189,9 +193,7 @@ const Map: React.FC<MapProps> = ({ center }) => {
     });
 
     return position === null ? null : (
-      <Marker position={position}>
-        <Popup>You are here</Popup>
-      </Marker>
+      <Marker position={position}/>
     );
   };
 
@@ -214,7 +216,7 @@ const Map: React.FC<MapProps> = ({ center }) => {
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
           }}
         >
-          Location services are off. Please switch on your device's location setting.
+          {t('HOME.LOCATION_SERVICES.DISABLED_LOCATION_SERVICES_MESSAGE')}
         </div>
       )}
       <MapContainer
