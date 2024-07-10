@@ -22,7 +22,8 @@ const getDeviceLocation = async (): Promise<{ lat: number; lng: number }> => {
         },
         (error) => {
           reject(error);
-        }
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
       );
     } else {
       reject(new Error('Geolocation is not supported by this browser.'));
@@ -31,14 +32,15 @@ const getDeviceLocation = async (): Promise<{ lat: number; lng: number }> => {
 };
 
 export default function Index() {
-
   const t = useTranslations();
-  const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), {
-    ssr: false,
-  });
+  const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), { ssr: false });
 
   const { loginUser, autoLoginUser } = useContext(AppContext);
-  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({ lat: -1.6279, lng: 29.7451 });
+  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
+  const [locationError, setLocationError] = useState<string | null>(null);
+
+  // Default map center (example: New York City)
+  const defaultMapCenter = { lat: 20, lng: -74.0060 };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -49,14 +51,28 @@ export default function Index() {
       autoLoginUser();
       console.log("logged in")
     }
+
+    const fetchLocationOnLoad = async () => {
+      try {
+        const location = await getDeviceLocation();
+        setMapCenter(location);
+      } catch (error) {
+        console.error('Error getting location on initial load:', error);
+        setMapCenter(defaultMapCenter); // Set to default location if geolocation fails
+      }
+    };
+
+    fetchLocationOnLoad();
   }, [autoLoginUser, loginUser]);
 
   const handleLocationButtonClick = async () => {
     try {
       const location = await getDeviceLocation();
       setMapCenter(location);
+      setLocationError(null); // Clear any previous errors
     } catch (error) {
       console.error('Error getting location:', error);
+      setLocationError(t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'));
     }
   };
 

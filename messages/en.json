@@ -1,7 +1,11 @@
 {
   "HOME": {
     "ADD_SELLER": "Sell",
-    "SEARCH_BAR_PLACEHOLDER": "Search for sellers or items"
+    "SEARCH_BAR_PLACEHOLDER": "Search for sellers or items",
+    "LOCATION_SERVICES": {
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "To use this feature, please enable location services in your device settings.",
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "Location services are disabled. Please enable your device's location setting."
+    }
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "User Preferences",
