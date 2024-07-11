@@ -1,7 +1,11 @@
 {
   "HOME": {
     "ADD_SELLER": "Vender",
-    "SEARCH_BAR_PLACEHOLDER": "Buscar vendedores o artículos"
+    "SEARCH_BAR_PLACEHOLDER": "Buscar vendedores o artículos",
+    "LOCATION_SERVICES": {
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "Para usar esta función, por favor active los servicios de ubicación en la configuración de su dispositivo.",
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "Los servicios de ubicación están desactivados. Por favor, active la configuración de ubicación de su dispositivo."
+    }
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Preferencias del Usuario",

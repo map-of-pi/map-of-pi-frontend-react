@@ -34,19 +34,6 @@ export const onIncompletePaymentFound = async (payment: APIPayment) => {
 };
 
 
-// export const loginPiUser = () => {
-//   const Pi = window.Pi;
-//   const scopes: APIUserScopes[] = [];
-
-//   Pi.authenticate(scopes, onIncompletePaymentFound)
-//   .then(function(auth){
-//     console.log(auth)
-//   })
-//   .catch(function(error){
-//     console.error(error);
-//   });
-// }
-
 export const autoSigninUser = async () => {
   try {
     const token = localStorage.getItem('accessToken');

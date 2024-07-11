@@ -143,7 +143,7 @@ export default function EmojiPicker(props: any) {
           >
             <div>
               <p className='text-3xl md:py-2 py-1'>{despairEmoji.unicode}</p>
-              <p className='md:text-[16px] text-[14px]'>{despairEmoji.name}</p>
+              <p className={`md:text-[16px] text-[14px] ${selectedEmoji == despairEmoji.value && 'text-white'}`}>{despairEmoji.name}</p>
               {props.reviews && (
                 <p>{getReview(props.reviews, despairEmoji.name)}</p>
               )}
