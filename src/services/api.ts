@@ -5,8 +5,7 @@ import { ReviewFeedbackType, UserType, CreateReviewType } from '@/constants/type
 import axiosClient, { setAuthToken } from "@/config/client";
 
 const API = axios.create({
-  baseURL: process.env.PROD_API_URL || 'http://localhost:8001/api/v1',
-  
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1'
 });
 
 // Authenticate user
@@ -89,13 +88,15 @@ export const updateUserSettings = async (userId:string, formData:FormData) => {
 };
 
 // Fetch all sellers or within bounds
-export const fetchSellers = async (origin: any, radius: number) => {
+export const fetchSellers = async (origin, radius) => {
   try {
-    const params = origin && radius ? { origin, radius } : {};
-    const response = await API.get('/sellers', { params });
+    const response = await API.post('/sellers/fetch', {
+      origin,
+      radius
+    }, options);
     return response.data;
   } catch (error) {
-    console.error('Error fetching sellers:', error);
+    console.error('Error fetching sellers:', error.response ? error.response.data : error.message);
     throw error;
   }
 };
