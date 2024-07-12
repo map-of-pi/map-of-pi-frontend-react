@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1'
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1'
 });
 
 // Authenticate user
@@ -76,13 +76,11 @@ export const updateUserSettings = async (userId, formData) => {
 
 // Fetch all sellers or within bounds
 export const fetchSellers = async (origin, radius, options = {}) => {
-  console.log('Starting fetchSellers');
   try {
     const response = await API.post('/sellers/fetch', {
       origin,
       radius
     }, options);
-    console.log('Response from fetchSellers:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching sellers:', error.response ? error.response.data : error.message);

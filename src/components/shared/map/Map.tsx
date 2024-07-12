@@ -190,9 +190,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
     });
 
     return position === null ? null : (
-      <Marker position={position}>
-        <Popup>You are here</Popup>
-      </Marker>
+      <Marker position={position}/>
     );
   }
 
