@@ -97,7 +97,9 @@ const Map = ({ center }: { center: LatLngExpression }) => {
     setLoading(true);
     setError(null);
     try {
-      let sellersData = await fetchSellerCoordinates(origin, radius);
+      const originLiteral = toLatLngLiteral(origin);
+      const originLatLngTuple: LatLngTuple = [originLiteral.lat, originLiteral.lng];
+      let sellersData = await fetchSellerCoordinates(originLatLngTuple, radius);
       sellersData = removeDuplicates(sellersData);
       setSellers(sellersData);
     } catch (err) {
