@@ -2,19 +2,6 @@ import { APIPayment, APIUserScopes } from "@pinetwork-js/api-typing";
 // import window  from '@pinetwork-js/sdk';
 import axiosClient, { setAuthToken } from "@/config/client";
 
-// export const autoSigninUser = async () => {
-//   try {
-//     setAuthToken();
-//     const result = await axiosClient.get('/users/me');
-//     console.log('login result from autoLogin: ', result);
-//     return result;
-//   } catch (error: any) {
-//     console.error("Error during auto sign-in:", error.response?.data || error.message);
-//     throw new Error(error.response?.data.message || error.message);
-//   }
-// };
-
-
 
 export const onIncompletePaymentFound = async (payment: APIPayment) => {
   console.log('onIncompletePaymentFound', payment);
@@ -36,14 +23,14 @@ export const onIncompletePaymentFound = async (payment: APIPayment) => {
 
 export const autoSigninUser = async () => {
   try {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('token');
     if (!token) {
       throw new Error('No token found');
     }
     
     setAuthToken(token);
     
-    const response = await axiosClient.get('/users/me');
+    const response = await axiosClient.get('/api/v1/users/me');
     console.log('Login result from autoSigninUser:', response.data);
     
     return response.data;

@@ -14,11 +14,7 @@ import { Pi } from '@pinetwork-js/sdk';
 
 import axiosClient from '@/config/client';
 import { autoSigninUser, onIncompletePaymentFound } from '@/util/auth';
-
-interface IUser {
-  username: string;
-  id: string;
-}
+import { IUser } from '@/constants/types';
 
 interface IAppContextProps {
   currentUser: IUser | null;
@@ -48,12 +44,21 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     try {
       if (isInitiated) {
         const authResult = await Pi.authenticate(["payments", "username"], onIncompletePaymentFound)
-        const res = await axiosClient.post("/api/v1/users/authenticate", {authResult})  
+        console.log('auth result', authResult)
+
+        // Extract username and uid of the pi user
+        const auth = {
+          username: authResult.user.username,
+          uid: authResult.user.uid
+        }
+        const res = await axiosClient.post("/api/v1/users/authenticate", {auth}) 
+        console.log('login response', res) 
         toast.success(res.data?.user?.username)
-        setCurrentUser(res.data?.user)
+        setCurrentUser(res.data)
         localStorage.setItem("token", res.data?.token)
       } else {
-        console.log("PI SDK failed to initialize.")
+        console.log("PI SDK failed to initialize.");
+        toast.info("can not find pioneer info");
       }
     } catch (error: any) {
       console.log(error)
@@ -62,9 +67,10 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
 
   const autoLoginUser = async () => {
     try {
-      const res = await autoSigninUser()
-      setCurrentUser(res.data?.currentUser)
-      toast.success(res.data?.user?.username)
+      const data = await autoSigninUser()
+      console.log('login response', data) 
+      setCurrentUser(data)
+      // toast.success(data.user.username)
     } catch (error: any) {
       console.log(error)
     }

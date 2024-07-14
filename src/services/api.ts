@@ -1,7 +1,7 @@
 'use server';
 
 import axios from 'axios';
-import { ReviewFeedbackType, UserType, CreateReviewType } from '@/constants/types';
+import { ReviewFeedbackType, IUser, CreateReviewType } from '@/constants/types';
 import axiosClient, { setAuthToken } from "@/config/client";
 
 const API = axios.create({
@@ -38,7 +38,7 @@ export const authenticateUser = async (uid:string, username:string) => {
 export const fetchUser = async (userId: string) => {
   try {
     const response = await API.get(`/users/${userId}`);
-    console.log(response.data)
+    console.log('pioneer user', response.data)
     return response.data;
   } catch (error) {
     // console.error(`Error fetching pioneer user with ID ${userId}:`, error);
@@ -88,14 +88,14 @@ export const updateUserSettings = async (userId:string, formData:FormData) => {
 };
 
 // Fetch all sellers or within bounds
-export const fetchSellers = async (origin, radius) => {
+export const fetchSellers = async (origin:[number, number], radius:number) => {
   try {
     const response = await API.post('/sellers/fetch', {
       origin,
       radius
-    }, options);
+    });
     return response.data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching sellers:', error.response ? error.response.data : error.message);
     throw error;
   }
@@ -165,7 +165,7 @@ export const fetchReviews = async (sellerId:string) => {
 };
 
 // Create a new review
-export const createReview = async (auth:UserType, props: CreateReviewType) => {
+export const createReview = async (auth:IUser, props: CreateReviewType, token: string) => {
   const formData = new FormData();
 
   formData.append('comment', props.comment);
@@ -183,7 +183,7 @@ export const createReview = async (auth:UserType, props: CreateReviewType) => {
     const response = await API.post('/review-feedback/add', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${auth.token}`
+        'Authorization': `Bearer ${token}`
       },
     });
     return response.data;

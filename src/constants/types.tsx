@@ -35,7 +35,7 @@ export type CreateReviewType = {
   replyId: string //id of the review you are replying to
 }
 
-export type UserType = {
-  token: string;
-  user: {uid: string, username:string}
+export interface IUser {
+  uid: string;
+  username:string
 }

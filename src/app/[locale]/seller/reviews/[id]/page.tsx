@@ -9,6 +9,7 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { resolveRating } from '@/components/shared/Review/utils';
 import { ReviewFeedbackType } from '@/constants/types';
 import { useEffect, useState } from 'react';
+import { setUsername } from '@/util/setUsername';
 
 interface ReviewInt {
   heading: string;
@@ -47,7 +48,7 @@ function SellerReviews({
             heading: feedback.comment,
             date: feedback.review_date,
             time: '',
-            user: feedback.review_giver_id,
+            user: setUsername(feedback.review_giver_id),
             reviewId: feedback.review_id,
             reaction: resolveRating(feedback.rating)?.reaction,
             unicode: resolveRating(feedback.rating)?.unicode
