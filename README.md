@@ -30,9 +30,9 @@
 ## <a name='tech-stack'></a>Tech Stack 📊
 
 - **Frontend**: NextJS/ React, TypeScript, HTML, SCSS, CSS
-- **Backend**: Node.js, REST API
+- **Backend**: Express/ NodeJS, REST API
 - **Database**: MongoDB
-- **DevOps**: GitHub Actions, Netlify
+- **DevOps**: GitHub Actions, Netlify, Vercel
 
 ## <a name='frontend-local-execution'></a>Frontend Local Execution
 
@@ -46,8 +46,10 @@ The Map of Pi Front End is a [Next.js](https://nextjs.org/) project bootstrapped
 ### Execute the Development Server
 
 - Execute `npm run dev` to spin up a dev server.
-- Navigate to http://localhost:3000/ in your browser.
+- Navigate to http://localhost:4200/ in your browser.
+- Execute **[Backend Local Execution](https://github.com/map-of-pi/map-of-pi-backend-react/blob/dev/README.md#backend-local-execution)** for integration testing. 
     - The application will automatically reload if you change any of the source files.
+    - For local debugging in VS Code, attach the runtime server accordingly.
     - Lint errors will be displayed in the console.
 
 ### Execute Unit Tests
@@ -83,9 +85,9 @@ The Map of Pi Front End is a [Next.js](https://nextjs.org/) project bootstrapped
 - Darin Hajou
 - Rokundo Soleil
 - Ayomikun Omotosho
-- Samuel Oluyomi
 - Yusuf Adisa
 - Francis Mwaura
+- Samuel Oluyomi
 
 ## <a name='contributions'></a>Contributions
 
