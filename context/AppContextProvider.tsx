@@ -51,7 +51,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           username: authResult.user.username,
           uid: authResult.user.uid
         }
-        const res = await axiosClient.post("/api/v1/users/authenticate", {auth}) 
+        const res = await axiosClient.post("/users/authenticate", {auth}) 
         console.log('login response', res) 
         toast.success(res.data?.user?.username)
         setCurrentUser(res.data)

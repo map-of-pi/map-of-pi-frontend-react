@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import ConfirmDialog from '@/components/shared/confirm';
-import { fetchSingleReview, fetchUser } from '@/services/api';
+import { fetchSingleReview } from '@/services/api';
 import { ReviewFeedbackType } from '@/constants/types';
-import { resolveRating } from '@/components/shared/Review/utils';
-import { setUsername } from '@/util/setUsername';
+import { resolveRating } from '@/util/resolveRatings';
+
 
 
 interface ReplyToReviewPageProps {
@@ -95,7 +95,7 @@ export default function ReplyToReviewPage({
         {reviewData && (
           <div className="mb-4">
             <p className="mb-2">{reviewData.comment}</p>
-            <p className="text-sm text-gray-400">{setUsername(reviewData.reply_to_review_id)}</p>
+            <p className="text-sm text-gray-400">{reviewData.reply_to_review_id}</p>
             <p className="text-sm text-gray-600">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', { buyer_id: reviewData.review_giver_id })}</p>
             <div className="flex items-center mt-2">
               <span className="mr-2">{resolveRating(reviewData.rating)?.unicode}</span>

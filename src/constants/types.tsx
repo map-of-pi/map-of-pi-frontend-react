@@ -15,6 +15,16 @@ export type SellerType = {
   order_online_enabled_pref: boolean;
 };
 
+export type CreateSellerType = {
+  seller_id: string;
+  name: string;
+  description: string;
+  image: string;
+  address: string;
+  sale_items: string;
+  // coordinates: [number, number];
+};
+
 export type ReviewFeedbackType = {
   review_id: string;
   review_receiver_id: string;

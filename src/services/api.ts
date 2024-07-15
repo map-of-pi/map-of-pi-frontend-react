@@ -1,38 +1,13 @@
 'use server';
 
 import axios from 'axios';
-import { ReviewFeedbackType, IUser, CreateReviewType } from '@/constants/types';
+import { IUser, CreateReviewType, CreateSellerType } from '@/constants/types';
 import axiosClient, { setAuthToken } from "@/config/client";
 
 const API = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1'
 });
 
-// Authenticate user
-export const authenticateUser = async (uid:string, username:string) => {
-  try {
-    const response = await API.post('/users/authenticate', {
-      auth: {
-        user: {
-          uid,
-          username,
-        },
-      },
-    });
-    
-    const accessToken = response.data.token;
-    if (response.data.token){
-      setAuthToken(accessToken);
-      console.log('Access token set to header successfully');
-    }
-    
-    return response.data;
-  } catch (error) {
-    // console.error('Error authenticating user:', error);
-    // return {message: 'Error authenticating user'};
-    throw error;
-  }
-};
 
 // Fetch a single pioneer user
 export const fetchUser = async (userId: string) => {
@@ -88,7 +63,7 @@ export const updateUserSettings = async (userId:string, formData:FormData) => {
 };
 
 // Fetch all sellers or within bounds
-export const fetchSellers = async (origin:[number, number], radius:number) => {
+export const fetchSellers = async (origin:any, radius:number) => {
   try {
     const response = await API.post('/sellers/fetch', {
       origin,
@@ -101,23 +76,29 @@ export const fetchSellers = async (origin:[number, number], radius:number) => {
   }
 };
 
-// Fetch single seller by ID
+
 export const fetchSingleSeller = async (sellerId:string) => {
   try {
     const response = await API.get(`/sellers/${sellerId}`);
-    return response.data;
-  } catch (error) {
+    return response.data; // Assuming response.data directly contains the seller object
+  } catch (error:any) {
+    if (error.response && error.response.status === 404) {
+      // Seller not found
+      return null; // or return an empty object {} as per your requirement
+    }
     console.error(`Error fetching seller with ID ${sellerId}:`, error);
     throw error;
   }
 };
 
+
 // Register a new seller
-export const registerNewSeller = async (formData:FormData) => {
+export const registerNewSeller = async (formData: CreateSellerType, token: string) => {
   try {
-    const response = await API.post('/sellers/register', formData, {
+    const response = await axiosClient.post('/sellers/register', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        // 'Authorization': `Bearer ${token}`
       },
     });
     return response.data;

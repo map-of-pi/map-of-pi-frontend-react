@@ -6,10 +6,11 @@ import Link from 'next/link';
 
 import { fetchReviews } from '@/services/api';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
-import { resolveRating } from '@/components/shared/Review/utils';
+import { resolveRating } from '@/util/resolveRatings';
 import { ReviewFeedbackType } from '@/constants/types';
 import { useEffect, useState } from 'react';
 import { setUsername } from '@/util/setUsername';
+import { resolveDate } from '@/util/resolveDate';
 
 interface ReviewInt {
   heading: string;
@@ -46,9 +47,9 @@ function SellerReviews({
         const reviewFeedback = data.map((feedback: ReviewFeedbackType) =>{
           return {
             heading: feedback.comment,
-            date: feedback.review_date,
-            time: '',
-            user: setUsername(feedback.review_giver_id),
+            date: resolveDate(feedback.review_date).date,
+            time: resolveDate(feedback.review_date).time,
+            user: feedback.review_giver_id, // reviewer ID should be resolved to username
             reviewId: feedback.review_id,
             reaction: resolveRating(feedback.rating)?.reaction,
             unicode: resolveRating(feedback.rating)?.unicode
@@ -103,7 +104,7 @@ function SellerReviews({
             <p className="text-lg mb-2">{item.heading}</p>
             <div className="flex gap-3 text-[#828282]">
               <p>{item.date}</p>
-              {/* <p>{item.time}</p> */}
+              <p>{item.time}</p>
             </div>
             <div className="text-primary mb-3">
               {t('SCREEN.CHECK_REVIEWS_FEEDBACK.BY_REVIEWER', {

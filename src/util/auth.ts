@@ -30,7 +30,7 @@ export const autoSigninUser = async () => {
     
     setAuthToken(token);
     
-    const response = await axiosClient.get('/api/v1/users/me');
+    const response = await axiosClient.get('/users/me');
     console.log('Login result from autoSigninUser:', response.data);
     
     return response.data;

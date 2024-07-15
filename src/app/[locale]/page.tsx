@@ -4,11 +4,11 @@ import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
-import { login } from '@/util/login';
+import { AppContext } from '../../../context/AppContextProvider';
 
 const getDeviceLocation = async (): Promise<{ lat: number; lng: number }> => {
   return new Promise((resolve, reject) => {
@@ -37,12 +37,21 @@ export default function Index() {
 
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
   const [locationError, setLocationError] = useState<string | null>(null);
+  const { loginUser, autoLoginUser } = useContext(AppContext);
 
   // Default map center (example: New York City)
   const defaultMapCenter = { lat: 20, lng: -74.0060 };
 
   useEffect(() => {
-    login() // signup or login user
+    // signup or login user
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log("not logged in; wait for login...")
+      loginUser();
+    } else {
+      autoLoginUser();
+      console.log("logged in")
+    }
 
     const fetchLocationOnLoad = async () => {
       try {

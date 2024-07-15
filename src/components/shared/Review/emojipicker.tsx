@@ -8,7 +8,6 @@ import { FileInput } from '../Forms/Inputs/Inputs';
 import { IUser } from '@/constants/types';
 import { createReview } from '@/services/api';
 import { AppContext } from '../../../../context/AppContextProvider';
-import { login } from '@/util/login';
 
 interface Emoji {
   name: string;
@@ -34,9 +33,8 @@ export default function EmojiPicker(props: any) {
   const [comments, setComments] = useState('');
   const [reviewEmoji, setReviewEmoji] = useState<number | null>(null);
   const [isSaveActive, setIsSaveActive] = useState<boolean>(false);
-  const [user, setUser] = useState<IUser | null>()
 
-  const { currentUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser } = useContext(AppContext);
   console.log('current user value', currentUser)
 
   // function to authenticate user
@@ -96,24 +94,29 @@ export default function EmojiPicker(props: any) {
   }
 
   const handleSave = () => {  
-    login() // signup or login current user
-    const token = localStorage.getItem('token')
+    // signup or login current user
+    const token = localStorage.getItem('token');
+
     try {
-      if (!currentUser || !token) { //check if user is authenticated
+      if (currentUser && token) { //check if user is authenticated
+        if (reviewEmoji === null){
+          return window.alert('please select emoji expression')
+        } else {
+          const formData = {
+            user: currentUser.uid,
+            seller: props.sellerId,
+            comment: comments,
+            image: files,
+            rating: reviewEmoji,
+            replyId: props.replyToReviewId
+          }
+          createReview(currentUser, formData, token);
+          resetReview()
+        }
+      } else { 
         console.log('unable to submit review; user not authenticated')
         return window.alert('unable to submit review; user not authenticated');        
-      }else{
-        const formData = {
-          user: currentUser.uid,
-          seller: props.sellerId,
-          comment: comments,
-          image: files,
-          rating: !reviewEmoji? 1: reviewEmoji,
-          replyId: props.replyToReviewId
-        }
-        createReview(currentUser, formData, token);
-        resetReview()
-    }
+      }
     } catch (error) {
         console.error('Error saving review:', error);
     }
