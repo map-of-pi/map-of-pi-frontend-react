@@ -49,7 +49,7 @@ function SellerReviews({
             heading: feedback.comment,
             date: resolveDate(feedback.review_date).date,
             time: resolveDate(feedback.review_date).time,
-            user: feedback.review_giver_id, // reviewer ID should be resolved to username
+            user: "reviewer name", // reviewer ID should be resolved to username
             reviewId: feedback.review_id,
             reaction: resolveRating(feedback.rating)?.reaction,
             unicode: resolveRating(feedback.rating)?.unicode
