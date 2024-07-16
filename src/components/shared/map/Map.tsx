@@ -209,8 +209,8 @@ const Map = ({ center }: { center: LatLngExpression }) => {
         />
         <LocationMarker />
         {sellers.map((seller) => (
-          <Marker position={seller.coordinates as LatLngTuple} key={seller.seller_id} icon={customIcon}>
-            <Popup closeButton={false}>
+          <Marker position={seller.coordinates as LatLngExpression} key={seller.seller_id} icon={customIcon}>
+            <Popup closeButton={false} minWidth={300}>
               <MapMarkerPopup seller={seller} />
             </Popup>
           </Marker>
