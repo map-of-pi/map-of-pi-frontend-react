@@ -11,7 +11,7 @@ const MapMarkerPopup = ({ seller }:any) => {
 
   return (
     <>
-      <div className="max-w-sm rounded-md justify-center mx-auto">
+      <div className="min-w-sm rounded-md justify-center mx-auto">
         {/* Seller Profile */}
         <div className="font-bold text-base mb-2">
           {seller.name}
