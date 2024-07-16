@@ -223,7 +223,7 @@ const Map: React.FC<MapProps> = ({ center }) => {
         center={isLocationAvailable ? origin : [0, 0]}
         zoom={isLocationAvailable ? 13 : 2}
         zoomControl={false} // Disable the default zoom control
-        className="w-full flex-1 fixed top-[90px] h-[calc(100vh-55px)] left-0 right-0 bottom-0"
+        className="w-full flex-1 fixed bottom-[0px] h-[calc(100vh-76px)] left-0 right-0"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -232,7 +232,7 @@ const Map: React.FC<MapProps> = ({ center }) => {
         <LocationMarker />
         {sellers.map((seller) => (
           <Marker position={seller.coordinates as LatLngExpression} key={seller.seller_id} icon={customIcon}>
-            <Popup closeButton={false}>
+            <Popup closeButton={false} minWidth={300}>
               <MapMarkerPopup seller={seller} />
             </Popup>
           </Marker>
