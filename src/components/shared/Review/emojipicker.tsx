@@ -5,9 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useState, useEffect, useContext } from 'react';
 import { TextArea } from '../Forms/Inputs/Inputs';
 import { FileInput } from '../Forms/Inputs/Inputs';
-import { IUser } from '@/constants/types';
 import { createReview } from '@/services/api';
-import { AppContext } from '../../../../context/AppContextProvider';
 
 interface Emoji {
   name: string;
@@ -34,8 +32,7 @@ export default function EmojiPicker(props: any) {
   const [reviewEmoji, setReviewEmoji] = useState<number | null>(null);
   const [isSaveActive, setIsSaveActive] = useState<boolean>(false);
 
-  const { currentUser, autoLoginUser } = useContext(AppContext);
-  console.log('current user value', currentUser)
+
 
   // function to authenticate user
   // useEffect(() => {
@@ -96,6 +93,7 @@ export default function EmojiPicker(props: any) {
   const handleSave = () => {  
     // signup or login current user
     const token = localStorage.getItem('token');
+    const currentUser  = props.currentUser;
 
     try {
       if (currentUser && token) { //check if user is authenticated
