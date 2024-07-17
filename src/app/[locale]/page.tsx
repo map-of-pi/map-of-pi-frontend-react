@@ -37,17 +37,17 @@ export default function Index() {
 
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
   const [locationError, setLocationError] = useState<string | null>(null);
-  const { loginUser, autoLoginUser } = useContext(AppContext);
+  const { registerUser, autoLoginUser } = useContext(AppContext);
 
   // Default map center (example: New York City)
   const defaultMapCenter = { lat: 20, lng: -74.0060 };
 
   useEffect(() => {
     // signup or login user
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('mapOfPiToken');
     if (!token) {
       console.log("not logged in; wait for login...")
-      loginUser();
+      registerUser();
     } else {
       autoLoginUser();
       console.log("logged in")

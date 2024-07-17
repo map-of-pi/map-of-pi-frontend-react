@@ -2,14 +2,14 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import ConfirmDialog from '@/components/shared/confirm';
 import { fetchSingleReview } from '@/services/api';
 import { ReviewFeedbackType } from '@/constants/types';
 import { resolveRating } from '@/util/resolveRatings';
-
+import { AppContext } from '../../../../../../../context/AppContextProvider';
 
 
 interface ReplyToReviewPageProps {
@@ -41,6 +41,8 @@ export default function ReplyToReviewPage({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const { currentUser, autoLoginUser, registerUser } = useContext(AppContext);
+
   useEffect(() => {
     const getReviewData = async () => {
       try {
@@ -56,7 +58,19 @@ export default function ReplyToReviewPage({
       }
     };
     getReviewData();
-  }, [reviewId]);
+
+    // try re-login user if not current user auth
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log("not logged in; wait for login...")
+      registerUser();
+    } else {
+      if (!currentUser) {
+        autoLoginUser();
+        console.log("logged in")
+      }
+    }
+  }, [reviewId, currentUser]);
 
   
   const handleNavigation = (route: string) => {
@@ -96,7 +110,7 @@ export default function ReplyToReviewPage({
           <div className="mb-4">
             <p className="mb-2">{reviewData.comment}</p>
             <p className="text-sm text-gray-400">{reviewData.reply_to_review_id}</p>
-            <p className="text-sm text-gray-600">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', { buyer_id: "reviwer name" })}</p>
+            <p className="text-sm text-gray-600">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', { buyer_id: reviewData.review_giver_id })}</p>
             <div className="flex items-center mt-2">
               <span className="mr-2">{resolveRating(reviewData.rating)?.unicode}</span>
               <span>{translateReactionRating(resolveRating(reviewData.rating)?.reaction ?? '')}</span>
@@ -106,7 +120,12 @@ export default function ReplyToReviewPage({
         )}
 
         <div>
-          <EmojiPicker sellerId={reviewData?.review_receiver_id} setIsSaveEnabled={setIsSaveEnabled} replyToReviewId={reviewId}/>
+          <EmojiPicker
+          sellerId={reviewData?.review_receiver_id} 
+          setIsSaveEnabled={setIsSaveEnabled} 
+          replyToReviewId={reviewId} 
+          currentUser={currentUser}
+          />
         </div>
 
         <ConfirmDialog

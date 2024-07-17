@@ -4,7 +4,8 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AppContext } from '../../../../../../context/AppContextProvider';
 
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
@@ -32,7 +33,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const [seller, setSeller] = useState(PiFestJson.Seller);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  const { currentUser, autoLoginUser, registerUser } = useContext(AppContext);
 
   useEffect(() => {
     const getSellerData = async () => {
@@ -46,7 +47,20 @@ export default function Page({ params }: { params: { id: string } }) {
       }
     };
     getSellerData();
-  }, []);
+
+    // try re-login user if not current user auth
+    const token = localStorage.getItem('mapOfPiToken');
+    if (!token) {
+      console.log("not logged in; wait for login...")
+      registerUser();
+    } else {
+      if (!currentUser) {
+        autoLoginUser();
+        console.log("logged in")
+      }
+    }
+
+  }, [currentUser]);
 
 
   const handleNavigation = (route: string) => {
@@ -113,7 +127,7 @@ export default function Page({ params }: { params: { id: string } }) {
         </div>
 
         <div>
-          <EmojiPicker sellerId={sellerId} setIsSaveEnabled={setIsSaveEnabled} />
+          <EmojiPicker sellerId={sellerId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} />
         </div>
 
         {/* Summary of Reviews */}
