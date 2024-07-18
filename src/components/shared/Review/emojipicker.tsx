@@ -1,11 +1,10 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
-
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { TextArea } from '../Forms/Inputs/Inputs';
 import { FileInput } from '../Forms/Inputs/Inputs';
-import { createReview } from '@/services/api';
+import { createReview } from '@/services/reviewsAPI';
 
 interface Emoji {
   name: string;
@@ -31,23 +30,6 @@ export default function EmojiPicker(props: any) {
   const [comments, setComments] = useState('');
   const [reviewEmoji, setReviewEmoji] = useState<number | null>(null);
   const [isSaveActive, setIsSaveActive] = useState<boolean>(false);
-
-
-
-  // function to authenticate user
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const userData = await authenticateUser('testme', 'testme');
-  //       setUser(userData)
-  //       console.log('pi user auth:', userData);
-  //     } catch (error:any) {
-  //       console.error('Failed to auto sign-in:', error.message);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
 
   //function preview image upload
@@ -101,12 +83,15 @@ export default function EmojiPicker(props: any) {
           return window.alert('please select emoji expression')
         } else {
           const formData = {
-            user: currentUser.uid,
-            seller: props.sellerId,
+            review_id: '',
+            review_giver_id: currentUser.uid,
+            review_receiver_id: props.sellerId,
             comment: comments,
-            image: files,
+            // image: files.map((file) => URL.createObjectURL(file)),
+            image: '',
             rating: reviewEmoji,
-            replyId: props.replyToReviewId
+            reply_to_review_id: props.replyToReviewId,
+            review_date: '',
           }
           createReview(currentUser, formData, token);
           resetReview()

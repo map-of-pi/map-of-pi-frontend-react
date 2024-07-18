@@ -4,12 +4,11 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { fetchReviews } from '@/services/api';
+import { fetchReviews } from '@/services/reviewsAPI';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { resolveRating } from '@/util/resolveRatings';
 import { ReviewFeedbackType } from '@/constants/types';
 import { useEffect, useState } from 'react';
-import { setUsername } from '@/util/setUsername';
 import { resolveDate } from '@/util/resolveDate';
 
 interface ReviewInt {

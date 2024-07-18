@@ -6,7 +6,7 @@ import { useEffect, useState, useContext } from 'react';
 
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import ConfirmDialog from '@/components/shared/confirm';
-import { fetchSingleReview } from '@/services/api';
+import { fetchSingleReview } from '@/services/reviewsAPI';
 import { ReviewFeedbackType } from '@/constants/types';
 import { resolveRating } from '@/util/resolveRatings';
 import { AppContext } from '../../../../../../../context/AppContextProvider';
