@@ -15,39 +15,13 @@ export const itemData = {
         coordinates: [],
         order_online_enabled_pref: false,
     },
-    
-    // items: [
-    //     {
-    //         id: 10,
-    //         name: "Bicycle",
-    //         price: 10,
-    //     },
-    //     {
-    //         id: 9,
-    //         name: 'Books',
-    //         price: 4,
-    //     },
-    //     {
-    //         id: 8,
-    //         name: 'House',
-    //         price: 5,
-    //     },
-    //     {
-    //         id: 7,
-    //         name: 'Two Shirt',
-    //         price: 7,
-    //     },
-    // ]
 };
 
-
 export const PiFestJson = {
-
     User: {
         user_id: 'pioneer123',
         user_name: 'pioneer name',
     },
-
     ReviewFeedback: {
         review_id: "rvid123",
         review_receiver_id: "rcvid456",
@@ -56,10 +30,8 @@ export const PiFestJson = {
         rating: 1, //this is enum object
         comment: "I am happy to let you all know that consumer to seller relationship is good.",
         image: "/images/shared/upload.png",
-        review_date: "23 Oct. 2023 01:00pm",
-        
+        review_date: "23 Oct. 2023 01:00pm",     
     },
-
     Seller: {
         seller_id: 'user_id',
         name: 'User ID',
@@ -87,6 +59,3 @@ export const PiFestJson = {
         __v: 0
         }
 };
-
-// get emojis index
-// count length of emojis for a user

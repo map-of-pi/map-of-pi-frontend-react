@@ -1,30 +1,10 @@
-import { APIPayment, APIUserScopes } from "@pinetwork-js/api-typing";
-// import window  from '@pinetwork-js/sdk';
+import { APIPayment } from "@pinetwork-js/api-typing";
 import axiosClient, { setAuthToken } from "@/config/client";
 import axios from "axios";
 
 export const onIncompletePaymentFound = async (payment: APIPayment) => {
     console.log(payment);
   };
-
-
-// export const onIncompletePaymentFound = async (payment: APIPayment) => {
-//   console.log('onIncompletePaymentFound', payment);
-
-//   const token = localStorage.getItem('mapOfPiToken');
-//   const response = await axiosClient.post(
-//     '/payments/incomplete',
-//     { payment },
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//         'Content-Type': 'application/json',
-//         'Access-Control-Allow-Origin': '*',
-//       },
-//     },
-//   );
-// };
-
 
 export const autoSigninUser = async () => {
   try {
@@ -53,6 +33,6 @@ export const PiAuthentication = async (PioneerAccessToken: string) => {
     }
   };
   const res = await axios.get('https://api.minepi.com/v2/me', header);
-  console.log('pioneer data obtained from pioneer authentication', res.data)
+  console.log('Pioneer data obtained from Pioneer authentication', res.data)
   return res.data;
 }

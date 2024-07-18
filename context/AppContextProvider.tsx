@@ -43,11 +43,10 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     const isInitiated= await Pi.initialized;
     if (isInitiated) {  
       try {
-        const pioneerAuth = await Pi.authenticate(['username'], onIncompletePaymentFound) // obtain pioneer access token from sandbox
+        const pioneerAuth = await Pi.authenticate(['username'], onIncompletePaymentFound);
         
         const authResult = await PiAuthentication(pioneerAuth.accessToken);
-        console.log('pi auth result', authResult.username);
-        // Extract username and uid of the pi user
+        console.log('Authenticated Pioneer ID: ', authResult.username);
         const user = {
           username: authResult.username,
           uid: authResult.uid
@@ -56,11 +55,11 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         console.log('signup response', res);
         localStorage.setItem("mapOfPiToken", res.data?.token);
         setCurrentUser(res.data);
-        toast.success(res.data?.user?.username);
+        toast.success(`Logged in successfully as ${res.data?.user?.username}`);
       
       } catch (error: any) {
         console.log(error)
-        toast.info("can not find pioneer info");
+        toast.info("Pioneer data not found");
       }
 
     } else {
@@ -71,10 +70,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
 
   const autoLoginUser = async () => {
     try {
-      const data = await autoSigninUser()
-      console.log('login response', data) 
+      const data = await autoSigninUser() 
       setCurrentUser(data)
-      // toast.success(data.user.username)
     } catch (error: any) {
       console.log(error)
     }

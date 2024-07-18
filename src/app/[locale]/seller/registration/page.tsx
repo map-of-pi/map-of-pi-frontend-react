@@ -18,6 +18,7 @@ import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import { itemData } from '@/constants/demoAPI';
 import { fetchSingleSeller, registerNewSeller } from '@/services/api';
+
 import { AppContext } from '../../../../../context/AppContextProvider';
 
 interface Seller {
@@ -53,7 +54,7 @@ const SellerRegistrationForm = () => {
     sellerAddress: '',
   });
   const [dbSeller, setDbSeller] = useState<Seller>(placeholderSeller);
-  const [isSellerExist, setIsSellerExist] = useState<boolean>(false)
+  const [isSellerExist, setSellerExist] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -73,12 +74,12 @@ useEffect(() => {
         if (data) {
           console.log('Seller data:', data);
           setDbSeller(data); // Ensure this is a single object, not an array
-          setIsSellerExist(true)
+          setSellerExist(true)
         } else {
           // Seller not found scenario
           console.log('Seller not found');
           setDbSeller(placeholderSeller); // Set placeholder seller
-          setIsSellerExist(false)
+          setSellerExist(false)
         }
       } catch (error) {
         console.error('Error fetching seller data:', error);
@@ -146,7 +147,6 @@ useEffect(() => {
     }
   };
 
-
   // Function to save data to the database
   const handleSave = () => {  
     // signup or login current user
@@ -165,8 +165,8 @@ useEffect(() => {
         registerNewSeller(regForm, token);
         // resetForm() // reset values and clear form after submission
       } else { 
-        console.log('unable to submit review; user not authenticated')
-        return window.alert('unable to submit review; user not authenticated');        
+        console.log('Unable to submit review; User is not authenticated')
+        return window.alert('Review submission failed; user is not authenticated');        
       }
     } catch (error) {
         console.error('Error saving review:', error);

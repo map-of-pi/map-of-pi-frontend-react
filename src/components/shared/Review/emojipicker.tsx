@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { TextArea } from '../Forms/Inputs/Inputs';
 import { FileInput } from '../Forms/Inputs/Inputs';
 import { createReview } from '@/services/api';
@@ -32,25 +32,7 @@ export default function EmojiPicker(props: any) {
   const [reviewEmoji, setReviewEmoji] = useState<number | null>(null);
   const [isSaveActive, setIsSaveActive] = useState<boolean>(false);
 
-
-
-  // function to authenticate user
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const userData = await authenticateUser('testme', 'testme');
-  //       setUser(userData)
-  //       console.log('pi user auth:', userData);
-  //     } catch (error:any) {
-  //       console.error('Failed to auto sign-in:', error.message);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-
-  //function preview image upload
+  // function preview image upload
   useEffect(() => {
     if (files.length === 0) return;
     const objectUrls = files.map((file) => URL.createObjectURL(file));
@@ -98,7 +80,7 @@ export default function EmojiPicker(props: any) {
     try {
       if (currentUser && token) { //check if user is authenticated
         if (reviewEmoji === null){
-          return window.alert('please select emoji expression')
+          return window.alert('Please select emoji expression')
         } else {
           const formData = {
             user: currentUser.uid,
@@ -112,13 +94,12 @@ export default function EmojiPicker(props: any) {
           resetReview()
         }
       } else { 
-        console.log('unable to submit review; user not authenticated')
-        return window.alert('unable to submit review; user not authenticated');        
+        console.log('Unable to submit review; User is not authenticated')
+        return window.alert('Review submission failed; user is not authenticated');        
       }
     } catch (error) {
         console.error('Error saving review:', error);
     }
-
   };
 
   // Function to handle the click of an emoji

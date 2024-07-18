@@ -6,11 +6,10 @@ import Link from 'next/link';
 
 import { fetchReviews } from '@/services/api';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
-import { resolveRating } from '@/util/resolveRatings';
+import { resolveRating } from '../util/ratingUtils';
 import { ReviewFeedbackType } from '@/constants/types';
 import { useEffect, useState } from 'react';
-import { setUsername } from '@/util/setUsername';
-import { resolveDate } from '@/util/resolveDate';
+import { resolveDate } from '@/util/date';
 
 interface ReviewInt {
   heading: string;
@@ -49,7 +48,7 @@ function SellerReviews({
             heading: feedback.comment,
             date: resolveDate(feedback.review_date).date,
             time: resolveDate(feedback.review_date).time,
-            user: feedback.review_giver_id, // reviewer ID should be resolved to username
+            user: feedback.review_giver_id,
             reviewId: feedback.review_id,
             reaction: resolveRating(feedback.rating)?.reaction,
             unicode: resolveRating(feedback.rating)?.unicode
