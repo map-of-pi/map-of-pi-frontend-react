@@ -150,7 +150,7 @@ useEffect(() => {
   // Function to save data to the database
   const handleSave = () => {  
     // signup or login current user
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('mapOfPiToken');
 
     try {
       if (currentUser && token && isFormValid) { //check if user is authenticated
