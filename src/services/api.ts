@@ -10,8 +10,8 @@ export const fetchUser = async (userId: string) => {
     console.log('Pioneer user', response.data);
     return response.data;
   } catch (error) {
-    // console.error(`Error fetching pioneer user with ID ${userId}:`, error);
-    return {message: 'Error fetching Pioneer user with ID',}
+    console.error(`Error fetching Pioneer user with ID ${userId}:`, error);
+    throw error;
   }
 };
 
@@ -21,7 +21,7 @@ export const fetchUserSettings = async (userId: string) => {
     const response = await axiosClient.get(`/users/${userId}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching Pioneer user settings for ID: ${userId}:`, error);
+    console.error(`Error fetching Pioneer user settings with ID ${userId}:`, error);
     throw error;
   }
 };
@@ -51,7 +51,7 @@ export const updateUserSettings = async (userId:string, formData:FormData) => {
     });
     return response.data;
   } catch (error) {
-    console.error(`Error updating Pioneer user settings for ID: ${userId}:`, error);
+    console.error(`Error updating Pioneer user settings with ID ${userId}:`, error);
     throw error;
   }
 };
@@ -80,7 +80,7 @@ export const fetchSingleSeller = async (sellerId:string) => {
       // Seller not found
       return null; // or return an empty object {} as per your requirement
     }
-    console.error(`Error fetching seller with ID: ${sellerId}:`, error);
+    console.error(`Error fetching seller with ID ${sellerId}:`, error);
     throw error;
   }
 };
@@ -111,7 +111,7 @@ export const updateSeller = async (sellerId:string, formData: FormData) => {
     });
     return response.data;
   } catch (error) {
-    console.error(`Error updating seller with ID: ${sellerId}:`, error);
+    console.error(`Error updating seller with ID ${sellerId}:`, error);
     throw error;
   }
 };
@@ -122,7 +122,7 @@ export const fetchSingleReview = async (reviewID: string) => {
     const response = await axiosClient.get(`/review-feedback/single/${reviewID}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching review with ID: ${reviewID}:`, error);
+    console.error(`Error fetching review with ID ${reviewID}:`, error);
     throw error;
   }
 };
@@ -133,7 +133,7 @@ export const fetchReviews = async (sellerId:string) => {
     const response = await axiosClient.get(`/review-feedback/${sellerId}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching reviews for seller with ID: ${sellerId}:`, error);
+    console.error(`Error fetching reviews for seller with ID ${sellerId}:`, error);
     throw error;
   }
 };
@@ -147,11 +147,11 @@ export const createReview = async (auth:IUser, props: CreateReviewType, token: s
   formData.append('review_receiver_id', props.seller);
   formData.append('review_giver_id', props.user);
   props.image.forEach(file => formData.append('images', file));
-  formData.append('reply_to_review_id', props.replyId || '')
+  formData.append('reply_to_review_id', props.replyId || '');
 
   // formData.append('reply_to_review_id', props.replyId)
 
-  console.log('this is form data:', formData)
+  console.log('Form data:', formData);
   
   try {
     const response = await axiosClient.post('/review-feedback/add', formData, {

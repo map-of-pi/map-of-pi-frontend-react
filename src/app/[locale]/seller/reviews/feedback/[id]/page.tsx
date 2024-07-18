@@ -8,8 +8,9 @@ import EmojiPicker from '@/components/shared/Review/emojipicker';
 import ConfirmDialog from '@/components/shared/confirm';
 import { fetchSingleReview } from '@/services/api';
 import { ReviewFeedbackType } from '@/constants/types';
-import { resolveRating } from '../../util/ratingUtils';
+import { resolveDate } from '@/util/date'
 
+import { resolveRating } from '../../util/ratingUtils';
 import { AppContext } from '../../../../../../../context/AppContextProvider';
 
 interface ReplyToReviewPageProps {
@@ -102,13 +103,13 @@ export default function ReplyToReviewPage({
       {loading && <div className="loading">Loading...</div>}
       {error && <div className="error">{error}</div>}
       <div className="w-full md:w-[500px] md:mx-auto p-4">
-        <h1 className={HEADER}>{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_HEADER', { seller_id: sellerName })}</h1>
+      <h1 className={HEADER}>{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_HEADER', { seller_id: sellerName })}</h1>
 
         {reviewData && (
           <div className="mb-4">
             <p className="mb-2">{reviewData.comment}</p>
-            <p className="text-sm text-gray-400">{reviewData.reply_to_review_id}</p>
-            <p className="text-sm text-gray-600">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', { buyer_id: reviewData.review_giver_id })}</p>
+            <p className="text-sm text-gray-600">{resolveDate(reviewData.review_date).date}  {resolveDate(reviewData.review_date).time}</p>
+            <p className="text-sm text-[#3D924A8A]">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', { buyer_id: reviewData.review_giver_id })}</p>
             <div className="flex items-center mt-2">
               <span className="mr-2">{resolveRating(reviewData.rating)?.unicode}</span>
               <span>{translateReactionRating(resolveRating(reviewData.rating)?.reaction ?? '')}</span>
