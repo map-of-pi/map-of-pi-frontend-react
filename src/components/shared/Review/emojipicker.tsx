@@ -92,7 +92,7 @@ export default function EmojiPicker(props: any) {
 
   const handleSave = () => {  
     // signup or login current user
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('mapOfPiToken');
     const currentUser  = props.currentUser;
 
     try {
