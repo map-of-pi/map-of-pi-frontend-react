@@ -77,6 +77,7 @@ const Map: React.FC<MapProps> = ({ center }) => {
   const [error, setError] = useState<string | null>(null);
   const [showLocationError, setShowLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
+  const [initialLocationSet, setInitialLocationSet] = useState(false);
 
   useEffect(() => {
     console.log('Component mounted, fetching initial coordinates...');
@@ -160,16 +161,20 @@ const Map: React.FC<MapProps> = ({ center }) => {
     const map = useMap();
 
     useEffect(() => {
-      if (position) {
-        map.setView(position, 18); // Directly set view to deep zoom level
+      if (position && !initialLocationSet) {
+        map.setView(position, 18, { animate: false }); // Directly set view to position without animation
+        setInitialLocationSet(true);
       }
-    }, [position, map]);
+    }, [position, map, initialLocationSet]);
 
     useMapEvents({
       locationfound(e) {
         console.log('Location found:', e.latlng);
         setPosition(e.latlng);
-        map.setView(e.latlng, 18); // Directly set view to deep zoom level
+        if (!initialLocationSet) {
+          map.setView(e.latlng, 18, { animate: false }); // Directly set view to location without animation
+          setInitialLocationSet(true);
+        }
       },
       locationerror() {
         console.log('Location not found');
@@ -241,5 +246,6 @@ const Map: React.FC<MapProps> = ({ center }) => {
 };
 
 export default Map;
+
 
 
