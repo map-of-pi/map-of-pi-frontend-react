@@ -9,8 +9,8 @@ export const resolveDate = (dateString: string | undefined): { date: string; tim
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const localDate = toZonedTime(date, timeZone);
 
-    const formattedDate = format(localDate, 'yyyy-MM-dd');
-    const formattedTime = format(localDate, 'HH:mm');
+    const formattedDate = format(localDate, 'dd MMM. yyyy');
+    const formattedTime = format(localDate, 'HH:mma').toLowerCase();
 
     return { date: formattedDate, time: formattedTime };
 };
