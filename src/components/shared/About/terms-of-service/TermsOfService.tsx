@@ -24,7 +24,7 @@ const TermsOfServiceModel = (props: any) => {
           <div className={styles.model_body}>
           <CloseButton onClick={() => props.setToggleTermsOfService(false)}/>
             <div className={styles.terms_of_service_content}>
-              <h2><strong>Map of Pi {t('POPUP.TERMS_OF_SERVICE_INFO.TITLE')}</strong></h2>
+              <h2><strong className='whitespace-nowrap'>Map of Pi {t('POPUP.TERMS_OF_SERVICE_INFO.TITLE')}</strong></h2>
               <h4>{t('POPUP.TERMS_OF_SERVICE_INFO.LAST_UPDATED')}: {lastUpdated}</h4>
               <h4>{t('POPUP.TERMS_OF_SERVICE_INFO.EMAIL_ADDRESS')}: {emailAddress}</h4>
               <br />

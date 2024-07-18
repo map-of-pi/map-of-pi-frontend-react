@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
@@ -62,6 +62,7 @@ function Sidebar(props: any) {
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const handleAddImages = () => {};
 
@@ -105,6 +106,12 @@ function Sidebar(props: any) {
       title === 'About Map of Pi'
     ) {
       setToggle({ ...toggle, [title]: !toggle[title] });
+      
+    }
+    if (toggle[title] === false) {
+      setTimeout(() => {
+        bottomRef.current!.scrollIntoView({ behavior: 'smooth' });
+      }, 90);
     }
   };
 
@@ -115,7 +122,7 @@ function Sidebar(props: any) {
       case 'About Map of Pi':
         return t('SIDE_NAVIGATION.ABOUT.ABOUT_MAP_OF_PI');
       case 'Contact Map of Pi':
-        return t('SIDE_NAVIGATION.CONTACT_MAP_OF_PI'); 
+        return t('SIDE_NAVIGATION.CONTACT_MAP_OF_PI');
       default:
         return title;
     }
@@ -128,7 +135,7 @@ function Sidebar(props: any) {
       case 'Privacy Policy':
         return t('SIDE_NAVIGATION.ABOUT.PRIVACY_POLICY');
       case 'Terms of Service':
-        return t('SIDE_NAVIGATION.ABOUT.TERMS_OF_SERVICE'); 
+        return t('SIDE_NAVIGATION.ABOUT.TERMS_OF_SERVICE');
       default:
         return title;
     }
@@ -142,7 +149,9 @@ function Sidebar(props: any) {
           onClick={() => props.setToggleDis(false)}></div>
         <div
           className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
-          <div className="text-2xl font-bold mb-2 pb-3">{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</div>
+          <div className="text-2xl font-bold mb-2 pb-3">
+            {t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}
+          </div>
           <div className="">
             <Input
               label={t('SIDE_NAVIGATION.EMAIL_ADDRESS_FIELD')}
@@ -165,9 +174,9 @@ function Sidebar(props: any) {
                   fontSize: '18px',
                 }}
                 onClick={() => {
-                  router.push('/map-center')
-                  props.setToggleDis(false) // Close sidebar on click
-                }} 
+                  router.push('/map-center');
+                  props.setToggleDis(false); // Close sidebar on click
+                }}
               />
               <Link href="/seller/reviews/userid">
                 <Button
@@ -208,54 +217,59 @@ function Sidebar(props: any) {
                       height={22}
                       className=""
                     />
-                    <span className="ml-2">{translateMenuTitle(menu.title)}</span>
+                    <span className="ml-2">
+                      {translateMenuTitle(menu.title)}
+                    </span>
                     {menu.children && (
                       <div className="ml-4">
                         <FaChevronDown
                           size={13}
-                          className="text-[#000000]"
+                          className={`text-[#000000] ${toggle[menu.title] && 'rotate-90'}`}
                         />
                       </div>
                     )}
                   </div>
                   {/* MENU WITH CHILDREN */}
-                  {menu.children &&
-                    toggle[menu.title] &&
-                    menu.children.map((child) => (
-                      <div key={child.id} className="ml-6">
-                        <div
-                          className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
-                          onClick={() =>
-                            handleChildMenu(menu.title, child.code)
-                          }>
-                          {child.icon && ( // conditional rendering
-                            <Image
-                              src={child.icon}
-                              alt={child.title}
-                              width={17}
-                              height={17}
-                              className={styles.lng_img}
-                            />
-                          )}
-                          {menu.title === 'Languages' &&
-                          isLanguageMenuItem(child) ? (
-                            <div className="ml-2 text-[14px] flex">
-                              <div className="font-bold">{child.label}</div> 
-                              <div className='mx-1'> - </div>
-                              <div>{child.translation}</div>
-                            </div>
-                          ) : (
-                            <span className="ml-2 text-[14px]">
-                              {translateChildMenuTitle(child.title)}
-                            </span>
-                          )}
+                  {menu.children && 
+                    (
+                      toggle[menu.title] &&
+                      menu.children.map((child) => (
+                        <div key={child.id} className="ml-6">
+                          <div
+                            className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
+                            onClick={() =>
+                              handleChildMenu(menu.title, child.code)
+                            }>
+                            {child.icon && ( // conditional rendering
+                              <Image
+                                src={child.icon}
+                                alt={child.title}
+                                width={17}
+                                height={17}
+                                className={styles.lng_img}
+                              />
+                            )}
+                            {menu.title === 'Languages' &&
+                            isLanguageMenuItem(child) ? (
+                              <div className="ml-2 text-[14px] flex">
+                                <div className="font-bold">{child.label}</div>
+                                <div className="mx-1"> - </div>
+                                <div>{child.translation}</div>
+                              </div>
+                            ) : (
+                              <span className="ml-2 text-[14px]">
+                                {translateChildMenuTitle(child.title)}
+                              </span>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      )))
+                    }
                 </div>
               </>
             ))}
           </div>
+          <div ref={bottomRef}></div>
         </div>
       </div>
       <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel} />

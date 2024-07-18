@@ -46,8 +46,10 @@ export default function Index() {
     const token = localStorage.getItem('token');
     if (!token) {
       loginUser();
+      console.log("not logged in")
     } else {
       autoLoginUser();
+      console.log("logged in")
     }
 
     const fetchLocationOnLoad = async () => {
@@ -55,7 +57,7 @@ export default function Index() {
         const location = await getDeviceLocation();
         setMapCenter(location);
       } catch (error) {
-        console.error('Error getting location on load:', error);
+        console.error('Error getting location on initial load:', error);
         setMapCenter(defaultMapCenter); // Set to default location if geolocation fails
       }
     };
@@ -70,7 +72,7 @@ export default function Index() {
       setLocationError(null); // Clear any previous errors
     } catch (error) {
       console.error('Error getting location:', error);
-      setLocationError('To use this feature, switch on location in device settings.');
+      setLocationError(t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'));
     }
   };
 
