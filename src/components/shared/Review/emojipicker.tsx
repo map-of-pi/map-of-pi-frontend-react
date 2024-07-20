@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { TextArea } from '../Forms/Inputs/Inputs';
 import { FileInput } from '../Forms/Inputs/Inputs';
 import { createReview } from '@/services/reviewsAPI';
+import { ReviewFeedbackType } from '@/constants/types';
 
 interface Emoji {
   name: string;
@@ -72,40 +73,50 @@ export default function EmojiPicker(props: any) {
     props.setIsSaveEnabled(false)
   }
 
-  const handleSave = () => {  
-    // signup or login current user
+  const handleSave = async () => {
     const token = localStorage.getItem('mapOfPiToken');
-    const currentUser  = props.currentUser;
+    const currentUser = props.currentUser;
 
     try {
-      if (currentUser && token) { //check if user is authenticated
-        if (reviewEmoji === null){
-          return window.alert('please select emoji expression')
+      if (currentUser && token) {
+        if (reviewEmoji === null) {
+          return window.alert('Please select an emoji expression.');
         } else {
-          const formData = {
-            review_id: '',
-            review_giver_id: currentUser.uid,
-            review_receiver_id: props.sellerId,
-            comment: comments,
-            // image: files.map((file) => URL.createObjectURL(file)),
-            image: '',
-            rating: reviewEmoji,
-            reply_to_review_id: props.replyToReviewId,
-            review_date: '',
-          }
-          createReview(currentUser, formData, token);
-          resetReview()
+          // const reviewData: ReviewFeedbackType = {
+          //   review_id: '',
+          //   review_receiver_id: props.sellerId,
+          //   review_giver_id: currentUser.pi_uid,
+          //   reply_to_review_id: props.replyToReviewId || '',
+          //   rating: reviewEmoji,
+          //   comment: comments,
+          //   image: '', // image will be handled by FormData
+          //   review_date: '', // backend will set this
+          // };
+
+          const formData = new FormData();
+          formData.append('comment', comments);
+          formData.append('rating', reviewEmoji.toString());
+          formData.append('review_receiver_id', props.sellerId);
+          formData.append('review_giver_id', currentUser.pi_uid);
+          files.forEach((file) => formData.append('image', file));
+          formData.append('reply_to_review_id', props.replyToReviewId || '');
+
+          console.log('Form Data:', formData);
+
+          await createReview(formData, token);
+
+          window.alert('Review submitted successfully.');
+          resetReview();
         }
-      } else { 
-        console.log('unable to submit review; user not authenticated')
-        return window.alert('unable to submit review; user not authenticated');        
+      } else {
+        console.log('Unable to submit review; user not authenticated.');
+        window.alert('Unable to submit review; user not authenticated.');
       }
     } catch (error) {
-        console.error('Error saving review:', error);
+      console.error('Error saving review:', error);
+      window.alert('An error occurred while saving the review.');
     }
-
   };
-
   // Function to handle the click of an emoji
   const handleEmojiClick = (emojiValue: number) => {
     if (selectedEmoji === emojiValue) {

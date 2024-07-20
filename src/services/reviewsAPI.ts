@@ -1,13 +1,16 @@
-'use server';
-
-import { z } from 'zod';
 import { IUser, ReviewFeedbackType } from '@/constants/types';
 import axiosClient from "@/config/client";
+import axios from 'axios';
+
+
+const API = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1'
+});
 
 // Fetch a single review for a seller
 export const fetchSingleReview = async (reviewID: string) => {
     try {
-      const response = await axiosClient.get(`/review-feedback/single/${reviewID}`);
+      const response = await API.get(`/review-feedback/single/${reviewID}`);
       return response.data;
     } catch (error) {
       console.error(`Error fetching review with ID ${reviewID}:`, error);
@@ -18,7 +21,7 @@ export const fetchSingleReview = async (reviewID: string) => {
   // Fetch reviews for a seller
   export const fetchReviews = async (sellerId:string) => {
     try {
-      const response = await axiosClient.get(`/review-feedback/${sellerId}`);
+      const response = await API.get(`/review-feedback/${sellerId}`);
       return response.data;
     } catch (error) {
       console.error(`Error fetching reviews for seller with ID ${sellerId}:`, error);
@@ -27,23 +30,9 @@ export const fetchSingleReview = async (reviewID: string) => {
   };
   
   // Create a new review
-  export const createReview = async (auth:IUser, props: ReviewFeedbackType, token: string) => {
-    const formData = new FormData();
-  
-    formData.append('comment', props.comment);
-    formData.append('rating', props.rating.toString());
-    formData.append('review_receiver_id', props.review_receiver_id);
-    formData.append('review_giver_id', props.review_giver_id);
-    // props.image.forEach(file => formData.append('images', file));
-    formData.append('image', props.image);
-    formData.append('reply_to_review_id', props.reply_to_review_id || '')
-  
-    // formData.append('reply_to_review_id', props.replyId)
-  
-    console.log('this is form data:', formData)
-    
+  export const createReview = async (formData: FormData, token: string) => {
     try {
-      const response = await axiosClient.post('/review-feedback/add', formData, {
+      const response = await API.post('/review-feedback/add', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
@@ -59,7 +48,7 @@ export const fetchSingleReview = async (reviewID: string) => {
   // Update a review
   export const updateReview = async (reviewId:string, formData:FormData, authToken: string) => {
     try {
-      const response = await axiosClient.put(`/review-feedback/${reviewId}`, formData, {
+      const response = await API.put(`/review-feedback/${reviewId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${authToken}`,

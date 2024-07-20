@@ -1,7 +1,6 @@
 'use server';
 
 import axios from 'axios';
-import { z } from 'zod';
 import { IUser, ReviewFeedbackType, CreateSellerType } from '@/constants/types';
 import axiosClient, { setAuthToken } from "@/config/client";
 

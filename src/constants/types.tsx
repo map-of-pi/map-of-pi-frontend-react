@@ -29,7 +29,7 @@ export type ReviewFeedbackType = {
   review_id: string;
   review_receiver_id: string;
   review_giver_id: string;
-  reply_to_review_id: string;
+  reply_to_review_id: string | null;
   rating: number;
   comment: string;
   image: string;
@@ -46,6 +46,7 @@ export type CreateReviewType = {
 }
 
 export interface IUser {
-  uid: string;
-  username:string
+  pi_uid: string;
+  pi_alias: string;
+  user_name: string;
 }

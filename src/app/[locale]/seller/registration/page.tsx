@@ -69,7 +69,7 @@ useEffect(() => {
     // Check if user is authenticated
     if (currentUser) {
       try {
-        const data = await fetchSingleSeller(currentUser.uid);
+        const data = await fetchSingleSeller(currentUser.pi_uid);
         if (data) {
           console.log('Seller data:', data);
           setDbSeller(data); // Ensure this is a single object, not an array
@@ -158,7 +158,7 @@ useEffect(() => {
           name: formData.businessName,
           description: formData.sellerDescription,
           sale_items: formData.itemsForSale,
-          seller_id: currentUser.uid,
+          seller_id: currentUser.pi_uid,
           image: '',
           address: formData.sellerAddress,
         }

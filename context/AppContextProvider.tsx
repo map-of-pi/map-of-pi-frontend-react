@@ -49,14 +49,15 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         console.log('pi auth result', authResult.username);
         // Extract username and uid of the pi user
         const user = {
-          username: authResult.username,
-          uid: authResult.uid
+          pi_alias: authResult.username,
+          pi_uid: authResult.uid,
+          user_name: authResult.username,
         }
         const res = await axiosClient.post("/users/authenticate", {user}) 
         console.log('signup response', res);
         localStorage.setItem("mapOfPiToken", res.data?.token);
-        setCurrentUser(res.data);
-        toast.success(res.data?.user?.username);
+        setCurrentUser(res.data.user);
+        toast.success(res.data?.user?.user_name);
       
       } catch (error: any) {
         console.log(error)

@@ -1,4 +1,5 @@
 "use client";
+
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -47,7 +48,7 @@ export default function ReplyToReviewPage({
   useEffect(() => {
     const getReviewData = async () => {
       try {
-        console.log('review Id: ', reviewId)
+        console.log('review Id:', reviewId);
         const data = await fetchSingleReview(reviewId);
         setReviewData(data);
 
@@ -63,12 +64,12 @@ export default function ReplyToReviewPage({
     // try re-login user if not current user auth
     const token = localStorage.getItem('mapOfPiToken');
     if (!token) {
-      console.log("not logged in; wait for login...")
+      console.log("not logged in; wait for login...");
       registerUser();
     } else {
       if (!currentUser) {
         autoLoginUser();
-        console.log("logged in")
+        console.log("logged in");
       }
     }
   }, [reviewId, currentUser]);
