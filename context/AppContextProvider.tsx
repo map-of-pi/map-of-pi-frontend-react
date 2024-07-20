@@ -48,8 +48,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         const authResult = await PiAuthentication(pioneerAuth.accessToken);
         console.log('pi auth result', authResult.username);
         // Extract username and uid of the pi user
-        const user = {
-          pi_alias: authResult.username,
+        const user: IUser = {
+          pi_username: authResult.username,
           pi_uid: authResult.uid,
           user_name: authResult.username,
         }

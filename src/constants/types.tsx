@@ -47,6 +47,6 @@ export type CreateReviewType = {
 
 export interface IUser {
   pi_uid: string;
-  pi_alias: string;
+  pi_username: string;
   user_name: string;
 }

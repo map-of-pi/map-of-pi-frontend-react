@@ -178,7 +178,11 @@ export default function EmojiPicker(props: any) {
         </div>
       </div>
       <div className="mb-2">
-        <TextArea placeholder={t('SCREEN.BUY_FROM_SELLER.ADDITIONAL_COMMENTS_PLACEHOLDER')} value={comments} onChange={handleCommentsChange} />
+        <TextArea placeholder={t('SCREEN.BUY_FROM_SELLER.ADDITIONAL_COMMENTS_PLACEHOLDER')} 
+        value={comments} 
+        onChange={handleCommentsChange} 
+        maxLength={100}
+        />
       </div>
       <div className="mb-2">
           <FileInput label={t('SCREEN.BUY_FROM_SELLER.FEEDBACK_PHOTO_UPLOAD_LABEL')} handleAddImages={handleAddImages} images={previewImage} />
