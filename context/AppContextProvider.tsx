@@ -46,7 +46,6 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         const pioneerAuth = await Pi.authenticate(['username'], onIncompletePaymentFound) // obtain pioneer access token from sandbox
         
         const authResult = await PiAuthentication(pioneerAuth.accessToken);
-        console.log('pi auth result', authResult.username);
         // Extract username and uid of the pi user
         const user: IUser = {
           pi_username: authResult.username,
@@ -54,7 +53,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           user_name: authResult.username,
         }
         const res = await axiosClient.post("/users/authenticate", {user}) 
-        console.log('signup response', res);
+        console.log('Signup response', res);
         localStorage.setItem("mapOfPiToken", res.data?.token);
         setCurrentUser(res.data.user);
         toast.success(res.data?.user?.user_name);

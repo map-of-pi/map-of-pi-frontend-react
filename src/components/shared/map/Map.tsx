@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import React, { useEffect, useState, useCallback } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
@@ -52,7 +54,9 @@ const removeDuplicates = (sellers: SellerType[]): SellerType[] => {
   return Object.values(uniqueSellers);
 };
 
-const Map = ({ center }: { center: LatLngExpression }) => {
+const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
+  const t = useTranslations();
+
   const customIcon = L.icon({
     iconUrl: '/favicon-32x32.png',
     iconSize: [32, 32],
@@ -63,15 +67,18 @@ const Map = ({ center }: { center: LatLngExpression }) => {
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellers, setSellers] = useState<SellerType[]>([]);
   const [origin, setOrigin] = useState(center);
-  const [radius, setRadius] = useState(10); // Initial radius in km
+  const [radius, setRadius] = useState(10);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [abortController, setAbortController] = useState<AbortController | null>(null);
+  const [locationError, setLocationError] = useState(false);
+  const [isLocationAvailable, setIsLocationAvailable] = useState(false);
+  const [initialLocationSet, setInitialLocationSet] = useState(false);
 
   // Fetch initial seller coordinates when component mounts
   useEffect(() => {
-    console.log('Component mounted, fetching initial coordinates...');
+    console.log('Component mounted, fetching initial coordinates..');
     fetchInitialCoordinates();
+    requestLocation();
   }, []);
 
   // Update origin when center prop changes
@@ -88,12 +95,6 @@ const Map = ({ center }: { center: LatLngExpression }) => {
 
   // Function to fetch initial coordinates
   const fetchInitialCoordinates = async () => {
-    if (abortController) {
-      abortController.abort(); // Cancel any ongoing fetch
-    }
-    const newController = new AbortController();
-    setAbortController(newController);
-
     setLoading(true);
     setError(null);
     try {
@@ -103,7 +104,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
       sellersData = removeDuplicates(sellersData);
       setSellers(sellersData);
     } catch (err) {
-      console.error('Failed to fetch initial coordinates:', err);
+      console.error('Failed to fetch initial coordinates: ', err);
       setError('Failed to fetch initial coordinates');
     } finally {
       setLoading(false);
@@ -112,17 +113,11 @@ const Map = ({ center }: { center: LatLngExpression }) => {
 
   // Function to handle map interactions (zoom and move)
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
-    if (abortController) {
-      abortController.abort(); // Cancel any ongoing fetch
-    }
-    const newController = new AbortController();
-    setAbortController(newController);
-
     const newCenter = newBounds.getCenter();
     const newRadius = calculateRadius(newBounds, mapInstance);
     const largerRadius = newRadius * 2; // Increase radius by 100% for fetching
 
-    console.log('Handling map interaction with new center:', newCenter, 'and radius:', newRadius);
+    console.log('Handling map interaction with new center: ', newCenter, 'and radius: ', newRadius);
     setLoading(true);
     setError(null);
 
@@ -169,28 +164,68 @@ const Map = ({ center }: { center: LatLngExpression }) => {
     [sellers] // Dependency array ensures the debounced function is updated with the latest sellers
   );
 
+  // Request user location
+  const requestLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const newLatLng = L.latLng(latitude, longitude);
+          console.log('Real-time location updated: ', newLatLng);
+          setPosition(newLatLng);
+          setOrigin(newLatLng);
+          setIsLocationAvailable(true);
+        },
+        (error) => {
+          console.log('Location not found: ', error);
+          setLocationError(true);
+          setTimeout(() => setLocationError(false), 3000);
+        }
+      );
+    } else {
+      console.log('Geolocation is not supported by this browser');
+      setLocationError(true);
+      setTimeout(() => setLocationError(false), 3000);
+    }
+  };
+
   // Component to handle location and map events
   function LocationMarker() {
     const map = useMapEvents({
       locationfound(e) {
-        console.log('Location found:', e.latlng);
+        console.log('Location found: ', e.latlng);
         setPosition(e.latlng);
-        map.flyTo(e.latlng, map.getZoom());
+        setLocationError(false);
+        if (!initialLocationSet) {
+          map.setView(e.latlng, zoom, { animate: false });
+          setInitialLocationSet(true);
+        }
+      },
+      locationerror() {
+        console.log('Location not found');
+        setLocationError(true);
+        setTimeout(() => setLocationError(false), 3000);
       },
       moveend() {
         const bounds = map.getBounds();
-        console.log('Map move ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds, map);
       },
       zoomend() {
         const bounds = map.getBounds();
-        console.log('Map zoom ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds, map);
       },
     });
 
+    // Initially set the view to user location without animation
+    useEffect(() => {
+      if (position && !initialLocationSet) {
+        map.setView(position, zoom, { animate: false });
+        setInitialLocationSet(true); // Prevent further automatic view resets
+      }
+    }, [position, map, initialLocationSet]);
+
     return position === null ? null : (
-      <Marker position={position}/>
+      <Marker position={position} />
     );
   }
 
@@ -198,11 +233,31 @@ const Map = ({ center }: { center: LatLngExpression }) => {
     <>
       {loading && <div className="loading">Loading...</div>}
       {error && <div className="error">{error}</div>}
+      {locationError && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '10%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(255, 0, 0, 0.8)',
+            color: 'white',
+            padding: '1rem',
+            borderRadius: '0.5rem',
+            zIndex: 1000,
+            textAlign: 'center',
+            maxWidth: '90%',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+          }}
+        >
+          {t('HOME.LOCATION_SERVICES.DISABLED_LOCATION_SERVICES_MESSAGE')}
+        </div>
+      )}
       <MapContainer
-        center={origin}
-        zoom={13}
+        center={isLocationAvailable ? origin : [0, 0]}
+        zoom={isLocationAvailable ? zoom : 2}
         zoomControl={false}
-        className="w-full flex-1 fixed top-[90px] h-[calc(100vh-55px)] left-0 right-0 bottom-0">
+        className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -36,6 +36,7 @@ export default function Index() {
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), { ssr: false });
 
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
+  const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
   const { registerUser, autoLoginUser } = useContext(AppContext);
 
@@ -46,20 +47,20 @@ export default function Index() {
     // signup or login user
     const token = localStorage.getItem('mapOfPiToken');
     if (!token) {
-      console.log("not logged in; wait for login...")
       registerUser();
     } else {
       autoLoginUser();
-      console.log("logged in")
     }
 
     const fetchLocationOnLoad = async () => {
       try {
         const location = await getDeviceLocation();
         setMapCenter(location);
+        setZoomLevel(13);
       } catch (error) {
-        console.error('Error getting location on initial load:', error);
-        setMapCenter(defaultMapCenter); // Set to default location if geolocation fails
+        console.error('Error getting location on initial load: ', error);
+        setMapCenter(defaultMapCenter);
+        setZoomLevel(2);
       }
     };
 
@@ -70,7 +71,8 @@ export default function Index() {
     try {
       const location = await getDeviceLocation();
       setMapCenter(location);
-      setLocationError(null); // Clear any previous errors
+      setZoomLevel(15);
+      setLocationError(null);
     } catch (error) {
       console.error('Error getting location:', error);
       setLocationError(t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'));
@@ -79,7 +81,7 @@ export default function Index() {
 
   return (
     <>
-      <DynamicMap center={[mapCenter.lat, mapCenter.lng]} />
+      <DynamicMap center={[mapCenter.lat, mapCenter.lng]} zoom={zoomLevel} />
       <SearchBar />
       <div className="absolute bottom-8 z-10 flex justify-between gap-[22px] px-6 right-0 left-0 m-auto">
         <Link href="/seller/registration">
