@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import React, { useEffect, useState, useCallback } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
@@ -53,6 +55,8 @@ const removeDuplicates = (sellers: SellerType[]): SellerType[] => {
 };
 
 const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
+  const t = useTranslations();
+
   const customIcon = L.icon({
     iconUrl: '/favicon-32x32.png',
     iconSize: [32, 32],
@@ -63,16 +67,16 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellers, setSellers] = useState<SellerType[]>([]);
   const [origin, setOrigin] = useState(center);
-  const [radius, setRadius] = useState(10); // Initial radius in km
+  const [radius, setRadius] = useState(10);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [locationError, setLocationError] = useState(false); // State to handle location services error
+  const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
-  const [initialLocationSet, setInitialLocationSet] = useState(false); // New flag to track initial location set
+  const [initialLocationSet, setInitialLocationSet] = useState(false);
 
   // Fetch initial seller coordinates when component mounts
   useEffect(() => {
-    console.log('Component mounted, fetching initial coordinates...');
+    console.log('Component mounted, fetching initial coordinates..');
     fetchInitialCoordinates();
     requestLocation();
   }, []);
@@ -100,7 +104,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
       sellersData = removeDuplicates(sellersData);
       setSellers(sellersData);
     } catch (err) {
-      console.error('Failed to fetch initial coordinates:', err);
+      console.error('Failed to fetch initial coordinates: ', err);
       setError('Failed to fetch initial coordinates');
     } finally {
       setLoading(false);
@@ -113,7 +117,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
     const newRadius = calculateRadius(newBounds, mapInstance);
     const largerRadius = newRadius * 2; // Increase radius by 100% for fetching
 
-    console.log('Handling map interaction with new center:', newCenter, 'and radius:', newRadius);
+    console.log('Handling map interaction with new center: ', newCenter, 'and radius: ', newRadius);
     setLoading(true);
     setError(null);
 
@@ -167,19 +171,19 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
         (position) => {
           const { latitude, longitude } = position.coords;
           const newLatLng = L.latLng(latitude, longitude);
-          console.log('Real-time location updated:', newLatLng);
+          console.log('Real-time location updated: ', newLatLng);
           setPosition(newLatLng);
           setOrigin(newLatLng);
           setIsLocationAvailable(true);
         },
         (error) => {
-          console.log('Location not found:', error);
+          console.log('Location not found: ', error);
           setLocationError(true);
           setTimeout(() => setLocationError(false), 3000);
         }
       );
     } else {
-      console.log('Geolocation is not supported by this browser.');
+      console.log('Geolocation is not supported by this browser');
       setLocationError(true);
       setTimeout(() => setLocationError(false), 3000);
     }
@@ -189,7 +193,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
   function LocationMarker() {
     const map = useMapEvents({
       locationfound(e) {
-        console.log('Location found:', e.latlng);
+        console.log('Location found: ', e.latlng);
         setPosition(e.latlng);
         setLocationError(false);
         if (!initialLocationSet) {
@@ -204,12 +208,10 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
       },
       moveend() {
         const bounds = map.getBounds();
-        console.log('Map move ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds, map);
       },
       zoomend() {
         const bounds = map.getBounds();
-        console.log('Map zoom ended, new bounds:', bounds);
         debouncedHandleMapInteraction(bounds, map);
       },
     });
@@ -223,9 +225,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
     }, [position, map, initialLocationSet]);
 
     return position === null ? null : (
-      <Marker position={position}>
-        <Popup>You are here</Popup>
-      </Marker>
+      <Marker position={position} />
     );
   }
 
@@ -250,7 +250,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
           }}
         >
-          Location services are off. Please enable your device's location settings.
+          {t('HOME.LOCATION_SERVICES.DISABLED_LOCATION_SERVICES_MESSAGE')}
         </div>
       )}
       <MapContainer

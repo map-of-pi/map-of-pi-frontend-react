@@ -37,7 +37,7 @@ export default function Index() {
 
   const { loginUser, autoLoginUser } = useContext(AppContext);
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
-  const [zoomLevel, setZoomLevel] = useState(2); // Default zoom level
+  const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
 
   // Default map center (example: New York City)
@@ -47,21 +47,19 @@ export default function Index() {
     const token = localStorage.getItem('token');
     if (!token) {
       loginUser();
-      console.log("not logged in");
     } else {
       autoLoginUser();
-      console.log("logged in");
     }
 
     const fetchLocationOnLoad = async () => {
       try {
         const location = await getDeviceLocation();
         setMapCenter(location);
-        setZoomLevel(13); // Set default zoom level on initial load
+        setZoomLevel(13);
       } catch (error) {
-        console.error('Error getting location on initial load:', error);
-        setMapCenter(defaultMapCenter); // Set to default location if geolocation fails
-        setZoomLevel(2); // Set default zoom level if geolocation fails
+        console.error('Error getting location on initial load: ', error);
+        setMapCenter(defaultMapCenter);
+        setZoomLevel(2);
       }
     };
 
@@ -72,8 +70,8 @@ export default function Index() {
     try {
       const location = await getDeviceLocation();
       setMapCenter(location);
-      setZoomLevel(15); // Zoom in when location is fetched
-      setLocationError(null); // Clear any previous errors
+      setZoomLevel(15);
+      setLocationError(null);
     } catch (error) {
       console.error('Error getting location:', error);
       setLocationError(t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'));
