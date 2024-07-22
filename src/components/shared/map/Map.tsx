@@ -202,7 +202,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
         center={origin}
         zoom={13}
         zoomControl={false}
-        className="w-full flex-1 fixed top-[90px] h-[calc(100vh-55px)] left-0 right-0 bottom-0">
+        className="w-full flex-1 fixed bottom-[0px] h-[calc(100vh-76.19px)] left-0 right-0">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
