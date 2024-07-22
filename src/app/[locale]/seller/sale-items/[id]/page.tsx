@@ -135,7 +135,7 @@ export default function Page({ params }: { params: { id: string } }) {
           <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SUMMARY_LABEL')}</h2>
           {/* Trust-O-meter */}
           <div>
-            <TrustMeter ratings={seller.average_rating.$numberDecimal} />
+            <TrustMeter ratings={seller.trust_meter_rating} />
           </div>
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">
