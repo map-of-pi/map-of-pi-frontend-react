@@ -2,6 +2,7 @@
 
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useTranslations } from 'next-intl';
 import {
   createContext,
   useState,
@@ -37,6 +38,7 @@ interface AppContextProviderProps {
 }
 
 const AppContextProvider = ({ children }: AppContextProviderProps) => {
+  const t = useTranslations();
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
   const registerUser = async () => {
@@ -60,7 +62,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       
       } catch (error: any) {
         console.log(error)
-        toast.info("can not find pioneer info");
+        toast.info(t('HOME.AUTHENTICATION.PI_INFORMATION_NOT_FOUND_MESSAGE'));
       }
 
     } else {

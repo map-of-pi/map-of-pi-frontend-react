@@ -5,6 +5,9 @@
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "이 기능을 사용하려면 장치 설정에서 위치 서비스를 활성화하세요.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "위치 서비스가 비활성화되어 있습니다. 장치의 위치 설정을 활성화해 주세요."
+    },
+    "AUTHENTICATION": {
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi 정보를 찾을 수 없습니다"
     }
   },
   "SIDE_NAVIGATION": {

@@ -5,6 +5,9 @@
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "To use this feature, please enable location services in your device settings.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Location services are disabled. Please enable your device's location setting."
+    },
+    "AUTHENTICATION": {
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi information not found"
     }
   },
   "SIDE_NAVIGATION": {

@@ -5,6 +5,9 @@
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Domin amfani da wannan aikin, to ka a sauke shiga manazarta a cikin saitinsa na kasa.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Manazarta sun baci. Da fatan za ka sauke shiga manazarta a cikin saitinsa na kasa."
+    },
+    "AUTHENTICATION": {
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Bayanin Pi ba a samu ba"
     }
   },
   "SIDE_NAVIGATION": {

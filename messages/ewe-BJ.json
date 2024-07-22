@@ -5,6 +5,9 @@
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Ne woana towo yi, meɖe woɖo wo gbãto le woʋa si ƒe kplɔ̃ɖeɖe.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Gbãto le woʋa si mewɔ ɖe edzi. Meɖe woɖo wo gbãto le woʋa si ƒe kplɔ̃ɖeɖe."
+    },
+    "AUTHENTICATION": {
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi ƒe nusia tɔ dɔ aɖe ma va dɔ o"
     }
   },
   "SIDE_NAVIGATION": {
