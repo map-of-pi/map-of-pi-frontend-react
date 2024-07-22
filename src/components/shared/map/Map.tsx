@@ -223,7 +223,7 @@ const Map: React.FC<MapProps> = ({ center }) => {
         center={isLocationAvailable ? origin : [0, 0]}
         zoom={isLocationAvailable ? 13 : 2}
         zoomControl={false} // Disable the default zoom control
-        className="w-full flex-1 fixed bottom-[0px] h-[calc(100vh-76px)] left-0 right-0"
+        className="w-full flex-1 fixed bottom-[0px] h-[calc(100vh-76.19px)] left-0 right-0"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

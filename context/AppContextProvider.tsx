@@ -48,7 +48,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     try {
       if (isInitiated) {
         const authResult = await Pi.authenticate(["payments", "username"], onIncompletePaymentFound)
-        const res = await axiosClient.post("/api/v1/users/authenticate", {authResult})  
+        const res = await axiosClient.post("/users/authenticate", {authResult})  
+        console.log(res.data)
         toast.success(res.data?.user?.username)
         setCurrentUser(res.data?.user)
         localStorage.setItem("token", res.data?.token)
