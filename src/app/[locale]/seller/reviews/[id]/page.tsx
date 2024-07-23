@@ -4,11 +4,13 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { fetchReviews } from '@/services/api';
-import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
-import { resolveRating } from '@/components/shared/Review/utils';
-import { ReviewFeedbackType } from '@/constants/types';
 import { useEffect, useState } from 'react';
+
+import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
+import { ReviewFeedbackType } from '@/constants/types';
+import { fetchReviews } from '@/services/reviewsAPI';
+import { resolveDate } from '@/util/date';
+import { resolveRating } from '../util/ratingUtils';
 
 interface ReviewInt {
   heading: string;
@@ -45,8 +47,8 @@ function SellerReviews({
         const reviewFeedback = data.map((feedback: ReviewFeedbackType) =>{
           return {
             heading: feedback.comment,
-            date: feedback.review_date,
-            time: '',
+            date: resolveDate(feedback.review_date).date,
+            time: resolveDate(feedback.review_date).time,
             user: feedback.review_giver_id,
             reviewId: feedback.review_id,
             reaction: resolveRating(feedback.rating)?.reaction,
@@ -102,7 +104,7 @@ function SellerReviews({
             <p className="text-lg mb-2">{item.heading}</p>
             <div className="flex gap-3 text-[#828282]">
               <p>{item.date}</p>
-              {/* <p>{item.time}</p> */}
+              <p>{item.time}</p>
             </div>
             <div className="text-primary mb-3">
               {t('SCREEN.CHECK_REVIEWS_FEEDBACK.BY_REVIEWER', {

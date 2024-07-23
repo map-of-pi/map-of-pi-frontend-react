@@ -1,5 +1,3 @@
-// Define the Seller type to include the necessary information
-
 export type SellerType = {
   seller_id: string;
   name: string;
@@ -19,9 +17,15 @@ export type ReviewFeedbackType = {
   review_id: string;
   review_receiver_id: string;
   review_giver_id: string;
-  reply_to_review_id: string;
-  rating: number | null;
+  reply_to_review_id: string | null;
+  rating: number;
   comment: string;
   image: string;
   review_date: string;
+}
+
+export interface IUser {
+  pi_uid: string;
+  pi_username: string;
+  user_name: string;
 }

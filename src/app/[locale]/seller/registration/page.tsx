@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
@@ -17,7 +17,9 @@ import {
 import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import { itemData } from '@/constants/demoAPI';
-import { fetchSingleSeller } from '@/services/api';
+import { fetchSingleSeller, registerNewSeller } from '@/services/api';
+
+import { AppContext } from '../../../../../context/AppContextProvider';
 
 interface Seller {
   seller_id: string;
@@ -25,15 +27,15 @@ interface Seller {
   description: string;
   image: string;
   address: string;
-  phone: number;
+  phone: string;
   email: string;
   sale_items: string;
   average_rating: number;
   trust_meter_rating: number;
   type: string;
-  coordinates: [];
+  coordinates: number [];
   order_online_enabled_pref: boolean;
-}
+};
 
 const SellerRegistrationForm = () => {
   const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
@@ -41,7 +43,7 @@ const SellerRegistrationForm = () => {
 
   const t = useTranslations();
   const router = useRouter();
-  const seller = itemData.seller;
+  const placeholderSeller = itemData.seller;
 
   const [formData, setFormData] = useState({
     itemsForSale: '',
@@ -51,7 +53,8 @@ const SellerRegistrationForm = () => {
     sellerDescription: '',
     sellerAddress: '',
   });
-  const [dbSeller, setDbSeller] = useState<Seller>();
+  const [dbSeller, setDbSeller] = useState<Seller>(placeholderSeller);
+  const [isSellerExist, setSellerExist] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -60,21 +63,39 @@ const SellerRegistrationForm = () => {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
+  const { currentUser } = useContext(AppContext);
 
   useEffect(() => {
     const getSellerData = async () => {
-      try {
-        const data = await fetchSingleSeller();
-        setDbSeller(data); // Ensure this is a single object, not an array
-      } catch (error) {
-        setError('Error fetching market data');
-      } finally {
+      // Check if user is authenticated
+      if (currentUser) {
+        try {
+          const data = await fetchSingleSeller(currentUser.pi_uid);
+          if (data) {
+            console.log('Seller data:', data);
+            setDbSeller(data); // Ensure this is a single object, not an array
+            setSellerExist(true)
+          } else {
+            // Seller not found scenario
+            console.log('Seller not found');
+            setDbSeller(placeholderSeller); // Set placeholder seller
+            setSellerExist(false)
+          }
+        } catch (error) {
+          console.error('Error fetching seller data: ', error);
+          setError('Error fetching seller data');
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        console.log('No current user found');
+        setDbSeller(placeholderSeller); // Set placeholder seller if no user is authenticated
         setLoading(false);
       }
     };
 
     getSellerData();
-  }, []);
+  }, [currentUser]); // Dependency array to rerun effect when currentUser changes
 
   useEffect(() => {
     const {
@@ -126,10 +147,35 @@ const SellerRegistrationForm = () => {
     }
   };
 
-  const handleSave = () => {
-    // Function to save data to the database
-    // Example: saveData({ files, comments, reviewEmoji });
-    setIsSaveEnabled(false);
+  // Function to save data to the database
+  const handleSave = () => {  
+    // signup or login current user
+    const token = localStorage.getItem('mapOfPiToken');
+
+    try {
+      if (currentUser && token && isFormValid) {
+        let regForm = {
+          seller_id: currentUser.pi_uid,
+          name: formData.businessName,
+          description: formData.sellerDescription,
+          image: '',
+          address: formData.sellerAddress,
+          sale_items: formData.itemsForSale,
+          average_rating: {
+            $numberDecimal: '5.0'
+          },
+          trust_meter_rating: 100,
+          coordinates: [0, 0] as [number, number], // TODO: pass in sell center coordinates.
+          order_online_enabled_pref: false
+        }
+        registerNewSeller(regForm, token);
+      } else { 
+        console.log('Registration failed; User is not authenticated')
+        return window.alert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
+      }
+    } catch (error) {
+        console.error('Error saving review:', error);
+    }
   };
 
   const translateSellerCategory = (category: string): string => {
@@ -195,11 +241,11 @@ const SellerRegistrationForm = () => {
         </div>
         <ToggleCollapse
           header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
-          <TrustMeter ratings={seller.trust_meter_rating} />
+          <TrustMeter ratings={dbSeller.trust_meter_rating} />
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">
               {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
-                seller_review_rating: seller.trust_meter_rating,
+                seller_review_rating: dbSeller.trust_meter_rating,
               })}
             </p>
             <Link href="/seller/reviews/userid">
@@ -216,19 +262,19 @@ const SellerRegistrationForm = () => {
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ': '}
             </span>
-            <span>{seller ? seller.seller_id : ''}</span>
+            <span>{dbSeller ? dbSeller.seller_id : ''}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ': '}
             </span>
-            <span>{seller.phone}</span>
+            <span>{dbSeller.phone}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ': '}
             </span>
-            <span>{seller.email}</span>
+            <span>{dbSeller.email}</span>
           </div>
         </ToggleCollapse>
         <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}>
@@ -319,8 +365,6 @@ const SellerRegistrationForm = () => {
           />
         </div>
         </ToggleCollapse>
-
-
 
         <ConfirmDialog
           show={showConfirmDialog}

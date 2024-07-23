@@ -1,15 +1,18 @@
 "use client";
+
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
-import EmojiPicker from '@/components/shared/Review/emojipicker';
-import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
+import { useEffect, useState, useContext } from 'react';
+
+import { AppContext } from '../../../../../../../context/AppContextProvider';
 import ConfirmDialog from '@/components/shared/confirm';
-import { fetchSingleReview, createReview, updateReview } from '@/services/api';
+import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { ReviewFeedbackType } from '@/constants/types';
-import { resolveRating } from '@/components/shared/Review/utils';
+import { fetchSingleReview } from '@/services/reviewsAPI';
+import { resolveDate } from '@/util/date';
+import { resolveRating } from '../../util/ratingUtils';
 
 interface ReplyToReviewPageProps {
   params: {
@@ -25,7 +28,6 @@ export default function ReplyToReviewPage({
   searchParams,
 }: ReplyToReviewPageProps) {
   const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
-  const SUBHEADER = 'font-bold mb-2';
 
   const t = useTranslations();
   const router = useRouter();
@@ -33,10 +35,6 @@ export default function ReplyToReviewPage({
   const reviewId = params.id;
   const sellerName = searchParams.seller_name;
 
-  const [files, setFiles] = useState<File[]>([]);
-  const [previewImage, setPreviewImage] = useState<string[]>([]);
-  const [comments, setComments] = useState('');
-  const [reviewEmoji, setReviewEmoji] = useState<any>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
@@ -45,9 +43,12 @@ export default function ReplyToReviewPage({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const { currentUser, autoLoginUser, registerUser } = useContext(AppContext);
+
   useEffect(() => {
     const getReviewData = async () => {
       try {
+        console.log('Review ID: ', reviewId);
         const data = await fetchSingleReview(reviewId);
         setReviewData(data);
       } catch (error) {
@@ -57,52 +58,19 @@ export default function ReplyToReviewPage({
       }
     };
     getReviewData();
-  }, [reviewId]);
 
-  useEffect(() => {
-    if (files.length === 0) return;
-
-    const objectUrls = files.map(file => URL.createObjectURL(file));
-    setPreviewImage(objectUrls);
-
-    return () => {
-      objectUrls.forEach(url => URL.revokeObjectURL(url));
-    };
-  }, [files]);
-
-  useEffect(() => {
-    const noReview = comments === '' && reviewEmoji === null && files.length === 0;
-    setIsSaveEnabled(!noReview);
-  }, [comments, reviewEmoji, files]);
-
-  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files;
-    if (selectedFiles && selectedFiles.length > 0) {
-      setFiles(Array.from(selectedFiles));
+    // try re-login user if not current user auth
+    const token = localStorage.getItem('mapOfPiToken');
+    if (!token) {
+      console.log("Not logged in; pending login..");
+      registerUser();
+    } else {
+      if (!currentUser) {
+        autoLoginUser();
+        console.log("Logged in");
+      }
     }
-  };
-
-  const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComments(e.target.value);
-  };
-
-  const handleEmojiSelect = (emoji: any) => {
-    setReviewEmoji(emoji);
-  };
-
-  const handleSave = async () => {
-    const formData = new FormData();
-    formData.append('comments', comments);
-    formData.append('emoji', reviewEmoji);
-    files.forEach(file => formData.append('images', file));
-
-    try {
-      await createReview(formData); // Or updateReview if editing an existing review
-      setIsSaveEnabled(false);
-    } catch (error) {
-      console.error('Error saving review:', error);
-    }
-  };
+  }, [reviewId, currentUser]);
 
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {
@@ -135,13 +103,13 @@ export default function ReplyToReviewPage({
       {loading && <div className="loading">Loading...</div>}
       {error && <div className="error">{error}</div>}
       <div className="w-full md:w-[500px] md:mx-auto p-4">
-        <h1 className={HEADER}>{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_HEADER', { seller_id: sellerName })}</h1>
+      <h1 className={HEADER}>{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_HEADER', { seller_id: sellerName })}</h1>
 
         {reviewData && (
           <div className="mb-4">
             <p className="mb-2">{reviewData.comment}</p>
-            <p className="text-sm text-gray-400">{reviewData.reply_to_review_id}</p>
-            <p className="text-sm text-gray-600">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', { buyer_id: reviewData.review_giver_id })}</p>
+            <p className="text-sm text-gray-600">{resolveDate(reviewData.review_date).date}  {resolveDate(reviewData.review_date).time}</p>
+            <p className="text-sm text-[#3D924A8A]">{t('SCREEN.REPLY_TO_REVIEW.BY_REVIEWER', { buyer_id: reviewData.review_giver_id })}</p>
             <div className="flex items-center mt-2">
               <span className="mr-2">{resolveRating(reviewData.rating)?.unicode}</span>
               <span>{translateReactionRating(resolveRating(reviewData.rating)?.reaction ?? '')}</span>
@@ -150,36 +118,13 @@ export default function ReplyToReviewPage({
           </div>
         )}
 
-        <div className="mb-3">
-          <h2 className={SUBHEADER}>{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_MESSAGE')}</h2>
-          <p>{t('SCREEN.REPLY_TO_REVIEW.FACE_SELECTION_REVIEW_MESSAGE')}</p>
-          <EmojiPicker onSelect={handleEmojiSelect} />
-        </div>
-
-        <div className="mb-2">
-          <TextArea
-            placeholder={t('SCREEN.REPLY_TO_REVIEW.ADDITIONAL_COMMENTS_PLACEHOLDER')}
-            value={comments}
-            onChange={handleCommentsChange}
+        <div>
+          <EmojiPicker
+          sellerId={reviewData?.review_receiver_id} 
+          setIsSaveEnabled={setIsSaveEnabled} 
+          replyToReviewId={reviewId} 
+          currentUser={currentUser}
           />
-        </div>
-
-        <div className="mb-2">
-          <FileInput
-            label={t('SCREEN.REPLY_TO_REVIEW.FEEDBACK_PHOTO_UPLOAD_LABEL')}
-            handleAddImages={handleAddImages}
-            images={previewImage}
-          />
-        </div>
-
-        <div className="mb-7">
-          <button
-            onClick={handleSave}
-            disabled={!isSaveEnabled}
-            className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-[#386F4F] text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}
-          >
-            {t('SHARED.SAVE')}
-          </button>
         </div>
 
         <ConfirmDialog

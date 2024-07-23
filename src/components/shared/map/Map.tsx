@@ -29,7 +29,7 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Prom
     const sellersData = await fetchSellers(formattedOrigin, radius);
 
     const sellersWithCoordinates = sellersData.map((seller: any) => {
-      const [lng, lat] = seller.coordinates.coordinates;
+      const [lng, lat] = seller.sell_map_center.coordinates;
       return {
         ...seller,
         coordinates: [lat, lng] as LatLngTuple

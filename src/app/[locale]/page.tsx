@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
@@ -35,18 +35,19 @@ export default function Index() {
   const t = useTranslations();
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), { ssr: false });
 
-  const { loginUser, autoLoginUser } = useContext(AppContext);
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
   const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const { registerUser, autoLoginUser } = useContext(AppContext);
 
   // Default map center (example: New York City)
   const defaultMapCenter = { lat: 20, lng: -74.0060 };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    // signup or login user
+    const token = localStorage.getItem('mapOfPiToken');
     if (!token) {
-      loginUser();
+      registerUser();
     } else {
       autoLoginUser();
     }
@@ -64,7 +65,7 @@ export default function Index() {
     };
 
     fetchLocationOnLoad();
-  }, [autoLoginUser, loginUser]);
+  }, []);
 
   const handleLocationButtonClick = async () => {
     try {
