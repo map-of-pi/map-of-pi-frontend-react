@@ -2,19 +2,19 @@
 
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
+import { AppContext } from '../../../../../../context/AppContextProvider';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
-import { FileInput, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
-import { fetchSingleSeller, createReview } from '@/services/api';
-import Link from 'next/link';
 import Skeleton from '@/components/skeleton/skeleton';
+import { fetchSingleSeller } from '@/services/api';
 
 export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -22,14 +22,8 @@ export default function Page({ params }: { params: { id: string } }) {
   const t = useTranslations();
   const router = useRouter();
 
-  const sellerId = params.id
-  console.log('this is seller id', sellerId);
- 
+  const sellerId = params.id; 
 
-  const [files, setFiles] = useState<File[]>([]);
-  const [previewImage, setPreviewImage] = useState<string[]>([]);
-  const [comments, setComments] = useState('');
-  const [reviewEmoji, setReviewEmoji] = useState<any>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
@@ -37,6 +31,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const [seller, setSeller] = useState(PiFestJson.Seller);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { currentUser, autoLoginUser, registerUser } = useContext(AppContext);
 
   useEffect(() => {
     const getSellerData = async () => {
@@ -50,52 +45,20 @@ export default function Page({ params }: { params: { id: string } }) {
       }
     };
     getSellerData();
-  }, []);
 
-  useEffect(() => {
-    if (files.length === 0) return;
-
-    const objectUrls = files.map((file) => URL.createObjectURL(file));
-    setPreviewImage(objectUrls);
-
-    return () => {
-      objectUrls.forEach((url) => URL.revokeObjectURL(url));
-    };
-  }, [files]);
-
-  useEffect(() => {
-    const noReview = comments === '' && reviewEmoji === null && files.length === 0;
-    setIsSaveEnabled(!noReview);
-  }, [comments, reviewEmoji, files]);
-
-  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files;
-    if (selectedFiles && selectedFiles.length > 0) {
-      setFiles(Array.from(selectedFiles));
+    // try re-login user if not current user auth
+    const token = localStorage.getItem('mapOfPiToken');
+    if (!token) {
+      console.log("Not logged in; pending login..");
+      registerUser();
+    } else {
+      if (!currentUser) {
+        autoLoginUser();
+        console.log("Logged in");
+      }
     }
-  };
 
-  const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComments(e.target.value);
-  };
-
-  const handleEmojiSelect = (emoji: any) => {
-    setReviewEmoji(emoji);
-  };
-
-  const handleSave = async () => {
-    const formData = new FormData();
-    formData.append('comments', comments);
-    formData.append('emoji', reviewEmoji);
-    files.forEach(file => formData.append('images', file));
-
-    try {
-        await createReview(formData); // Or updateReview if editing an existing review
-        setIsSaveEnabled(false);
-    } catch (error) {
-        console.error('Error saving review:', error);
-    }
-  };
+  }, [currentUser]);
 
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {
@@ -160,29 +123,8 @@ export default function Page({ params }: { params: { id: string } }) {
           <OutlineBtn label={t('SHARED.NAVIGATE')} onClick={() => handleNavigation('')} />
         </div>
 
-        {/* Leave a Review */}
-        <div className="mb-3">
-          <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.LEAVE_A_REVIEW_MESSAGE')}</h2>
-          <p>{t('SCREEN.BUY_FROM_SELLER.FACE_SELECTION_REVIEW_MESSAGE')}</p>
-          <EmojiPicker onSelect={handleEmojiSelect} />
-        </div>
-
-        <div className="mb-2">
-          <TextArea placeholder={t('SCREEN.BUY_FROM_SELLER.ADDITIONAL_COMMENTS_PLACEHOLDER')} value={comments} onChange={handleCommentsChange} />
-        </div>
-
-        <div className="mb-2">
-          <FileInput label={t('SCREEN.BUY_FROM_SELLER.FEEDBACK_PHOTO_UPLOAD_LABEL')} handleAddImages={handleAddImages} images={previewImage} />
-        </div>
-
-        {/* Save Button */}
-        <div className="mb-7">
-          <button
-            onClick={handleSave}
-            disabled={!isSaveEnabled}
-            className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
-            {t('SHARED.SAVE')}
-          </button>
+        <div>
+          <EmojiPicker sellerId={sellerId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} />
         </div>
 
         {/* Summary of Reviews */}
@@ -190,7 +132,7 @@ export default function Page({ params }: { params: { id: string } }) {
           <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SUMMARY_LABEL')}</h2>
           {/* Trust-O-meter */}
           <div>
-            <TrustMeter ratings={seller.average_rating.$numberDecimal} />
+            <TrustMeter ratings={seller.trust_meter_rating} />
           </div>
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">

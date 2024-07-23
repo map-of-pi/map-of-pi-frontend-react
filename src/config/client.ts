@@ -4,16 +4,9 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1
 
 const axiosClient = axios.create({
   baseURL: baseUrl,
-  headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  },
-  withCredentials: true,
 });
 
-export const setAuthToken = () => {
-  const token = localStorage.getItem('token');
-  // const token = Cookies.get('token');
+export const setAuthToken = (token: string) => {
   if (token) {
     return (axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`);
   } else {

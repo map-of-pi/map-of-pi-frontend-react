@@ -6,9 +6,10 @@ type TrustMeterProps = {
 
 
 const TrustMeter: React.FC<TrustMeterProps> = ({ ratings }) => {
-  const maxRating = 5.0; // this can be adjusted
-  const percentageRating = (ratings / maxRating * 100).toString();
-  const average = 2.5; // this can be adjusted
+  // const maxRating = 5.0; 
+  // const percentageRating = (ratings / maxRating * 100).toString();
+  const percentageRating = ratings.toString();
+  const average = 50; // this can be adjusted
   const condition = ratings < average
 
   const lines = Array.from({ length: 11 }, (_, i) => i); // Generates an array [0, 1, 2, ..., 7]

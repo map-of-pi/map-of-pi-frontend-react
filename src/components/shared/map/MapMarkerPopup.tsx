@@ -31,7 +31,7 @@ const MapMarkerPopup = ({ seller }:any) => {
           </div>
         </div>
         <div>
-          <TrustMeter ratings={seller.average_rating.$numberDecimal} />
+          <TrustMeter ratings={seller.trust_meter_rating} />
         </div>
         {/* Items List */}
         <h2 className={`${SUBHEADER} text-base`}>
