@@ -18,6 +18,7 @@ import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import { itemData } from '@/constants/demoAPI';
 import { fetchSingleSeller, registerNewSeller } from '@/services/api';
+
 import { AppContext } from '../../../../../context/AppContextProvider';
 
 interface Seller {
@@ -32,7 +33,7 @@ interface Seller {
   average_rating: number;
   trust_meter_rating: number;
   type: string;
-  coordinates:number [];
+  coordinates: number [];
   order_online_enabled_pref: boolean;
 };
 
@@ -53,7 +54,7 @@ const SellerRegistrationForm = () => {
     sellerAddress: '',
   });
   const [dbSeller, setDbSeller] = useState<Seller>(placeholderSeller);
-  const [isSellerExist, setIsSellerExist] = useState<boolean>(false)
+  const [isSellerExist, setSellerExist] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -64,37 +65,37 @@ const SellerRegistrationForm = () => {
   const [linkUrl, setLinkUrl] = useState('');
   const { currentUser } = useContext(AppContext);
 
-useEffect(() => {
-  const getSellerData = async () => {
-    // Check if user is authenticated
-    if (currentUser) {
-      try {
-        const data = await fetchSingleSeller(currentUser.pi_uid);
-        if (data) {
-          console.log('Seller data:', data);
-          setDbSeller(data); // Ensure this is a single object, not an array
-          setIsSellerExist(true)
-        } else {
-          // Seller not found scenario
-          console.log('Seller not found');
-          setDbSeller(placeholderSeller); // Set placeholder seller
-          setIsSellerExist(false)
+  useEffect(() => {
+    const getSellerData = async () => {
+      // Check if user is authenticated
+      if (currentUser) {
+        try {
+          const data = await fetchSingleSeller(currentUser.pi_uid);
+          if (data) {
+            console.log('Seller data:', data);
+            setDbSeller(data); // Ensure this is a single object, not an array
+            setSellerExist(true)
+          } else {
+            // Seller not found scenario
+            console.log('Seller not found');
+            setDbSeller(placeholderSeller); // Set placeholder seller
+            setSellerExist(false)
+          }
+        } catch (error) {
+          console.error('Error fetching seller data: ', error);
+          setError('Error fetching seller data');
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        console.error('Error fetching seller data:', error);
-        setError('Error fetching seller data');
-      } finally {
+      } else {
+        console.log('No current user found');
+        setDbSeller(placeholderSeller); // Set placeholder seller if no user is authenticated
         setLoading(false);
       }
-    } else {
-      console.log('No current user found');
-      setDbSeller(placeholderSeller); // Set placeholder seller if no user is authenticated
-      setLoading(false);
-    }
-  };
+    };
 
-  getSellerData();
-}, [currentUser]); // Dependency array to rerun effect when currentUser changes
+    getSellerData();
+  }, [currentUser]); // Dependency array to rerun effect when currentUser changes
 
   useEffect(() => {
     const {
@@ -146,32 +147,35 @@ useEffect(() => {
     }
   };
 
-
   // Function to save data to the database
   const handleSave = () => {  
     // signup or login current user
     const token = localStorage.getItem('mapOfPiToken');
 
     try {
-      if (currentUser && token && isFormValid) { //check if user is authenticated
+      if (currentUser && token && isFormValid) {
         let regForm = {
+          seller_id: currentUser.pi_uid,
           name: formData.businessName,
           description: formData.sellerDescription,
-          sale_items: formData.itemsForSale,
-          seller_id: currentUser.pi_uid,
           image: '',
           address: formData.sellerAddress,
+          sale_items: formData.itemsForSale,
+          average_rating: {
+            $numberDecimal: '5.0'
+          },
+          trust_meter_rating: 100,
+          coordinates: [0, 0] as [number, number], // TODO: pass in sell center coordinates.
+          order_online_enabled_pref: false
         }
         registerNewSeller(regForm, token);
-        // resetForm() // reset values and clear form after submission
       } else { 
-        console.log('unable to submit review; user not authenticated')
-        return window.alert('unable to submit review; user not authenticated');        
+        console.log('Registration failed; User is not authenticated')
+        return window.alert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
       }
     } catch (error) {
         console.error('Error saving review:', error);
     }
-
   };
 
   const translateSellerCategory = (category: string): string => {
@@ -361,8 +365,6 @@ useEffect(() => {
           />
         </div>
         </ToggleCollapse>
-
-
 
         <ConfirmDialog
           show={showConfirmDialog}

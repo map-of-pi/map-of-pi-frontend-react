@@ -2,27 +2,25 @@
 
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import React, { useEffect, useState, useContext } from 'react';
-import { AppContext } from '../../../../../../context/AppContextProvider';
 
+import { AppContext } from '../../../../../../context/AppContextProvider';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
-import { fetchSingleSeller } from '@/services/api';
-import Link from 'next/link';
 import Skeleton from '@/components/skeleton/skeleton';
+import { fetchSingleSeller } from '@/services/api';
 
 export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
 
   const t = useTranslations();
   const router = useRouter();
-
-  // const user = authenticateUser()
 
   const sellerId = params.id; 
 
@@ -51,17 +49,16 @@ export default function Page({ params }: { params: { id: string } }) {
     // try re-login user if not current user auth
     const token = localStorage.getItem('mapOfPiToken');
     if (!token) {
-      console.log("not logged in; wait for login...")
+      console.log("Not logged in; pending login..");
       registerUser();
     } else {
       if (!currentUser) {
         autoLoginUser();
-        console.log("logged in")
+        console.log("Logged in");
       }
     }
 
   }, [currentUser]);
-
 
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {

@@ -7,6 +7,7 @@
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Gbãto le woʋa si mewɔ ɖe edzi. Meɖe woɖo wo gbãto le woʋa si ƒe kplɔ̃ɖeɖe."
     },
     "AUTHENTICATION": {
+      "SUCCESSFUL_LOGIN_MESSAGE": "Dzo le gbɔŋɔ le asi kplɔe",
       "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi ƒe nusia tɔ dɔ aɖe ma va dɔ o"
     }
   },
@@ -42,7 +43,10 @@
       "SELLER_DESCRIPTION": "Adesɔ ɖe mɔkpla",
       "SELLER_ADDRESS_LOCATION_LABEL": "Ɖe le Adesɔviwo kple ɖe fɔlɔ",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Xɔ le ɖe fɔlɔ le wo ɖe wo dzidzakpɔtɔ gblɔ",
-      "SELLER_SETTINGS_LABEL": "Ɖe le Adesɔ"
+      "SELLER_SETTINGS_LABEL": "Ɖe le Adesɔ",
+      "VALIDATION": {
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nɔviɖewɔwɔ na mi kplɔ nɛ ƒe viwo nɔ anyi nyɔnu ƒe ŋu nɔ anyi"
+      }
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Xɔ le Adesɔviwo",
@@ -176,6 +180,11 @@
         "OKAY": "Ŋutɔ",
         "HAPPY": "Ŋutɔ ɖo",
         "DELIGHT": "Ʋɔ ɖo"
+      },
+      "VALIDATION": {
+        "SUCCESSFUL_RATING_SUBMISSION": "Esi ka vɔ̃ le",
+        "UNSUCCESSFUL_RATING_SUBMISSION": "Esiɖeɖe aɖe nɔe",
+        "SELECT_EMOJI_EXPRESSION": "Mɛdɔ dzi emoji la ƒe agblɔɖeɖe"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Ɣe siwo..."

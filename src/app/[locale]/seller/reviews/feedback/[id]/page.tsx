@@ -3,16 +3,16 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+
 import { useEffect, useState, useContext } from 'react';
 
-import EmojiPicker from '@/components/shared/Review/emojipicker';
-import ConfirmDialog from '@/components/shared/confirm';
-import { fetchSingleReview } from '@/services/reviewsAPI';
-import { ReviewFeedbackType } from '@/constants/types';
-import { resolveRating } from '@/util/resolveRatings';
 import { AppContext } from '../../../../../../../context/AppContextProvider';
-import { resolveDate } from '@/util/resolveDate';
-
+import ConfirmDialog from '@/components/shared/confirm';
+import EmojiPicker from '@/components/shared/Review/emojipicker';
+import { ReviewFeedbackType } from '@/constants/types';
+import { fetchSingleReview } from '@/services/reviewsAPI';
+import { resolveDate } from '@/util/date';
+import { resolveRating } from '../../util/ratingUtils';
 
 interface ReplyToReviewPageProps {
   params: {
@@ -48,11 +48,9 @@ export default function ReplyToReviewPage({
   useEffect(() => {
     const getReviewData = async () => {
       try {
-        console.log('review Id:', reviewId);
+        console.log('Review ID: ', reviewId);
         const data = await fetchSingleReview(reviewId);
         setReviewData(data);
-
-        // console.log(data)
       } catch (error) {
         setError('Error fetching review data');
       } finally {
@@ -64,17 +62,16 @@ export default function ReplyToReviewPage({
     // try re-login user if not current user auth
     const token = localStorage.getItem('mapOfPiToken');
     if (!token) {
-      console.log("not logged in; wait for login...");
+      console.log("Not logged in; pending login..");
       registerUser();
     } else {
       if (!currentUser) {
         autoLoginUser();
-        console.log("logged in");
+        console.log("Logged in");
       }
     }
   }, [reviewId, currentUser]);
 
-  
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {
       setLinkUrl(route);

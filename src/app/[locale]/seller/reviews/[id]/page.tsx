@@ -4,12 +4,13 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { fetchReviews } from '@/services/reviewsAPI';
-import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
-import { resolveRating } from '@/util/resolveRatings';
-import { ReviewFeedbackType } from '@/constants/types';
 import { useEffect, useState } from 'react';
-import { resolveDate } from '@/util/resolveDate';
+
+import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
+import { ReviewFeedbackType } from '@/constants/types';
+import { fetchReviews } from '@/services/reviewsAPI';
+import { resolveDate } from '@/util/date';
+import { resolveRating } from '../util/ratingUtils';
 
 interface ReviewInt {
   heading: string;
@@ -48,7 +49,7 @@ function SellerReviews({
             heading: feedback.comment,
             date: resolveDate(feedback.review_date).date,
             time: resolveDate(feedback.review_date).time,
-            user: feedback.review_giver_id, // reviewer ID should be resolved to username
+            user: feedback.review_giver_id,
             reviewId: feedback.review_id,
             reaction: resolveRating(feedback.rating)?.reaction,
             unicode: resolveRating(feedback.rating)?.unicode

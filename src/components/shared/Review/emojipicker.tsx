@@ -2,10 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
+
 import { TextArea } from '../Forms/Inputs/Inputs';
 import { FileInput } from '../Forms/Inputs/Inputs';
 import { createReview } from '@/services/reviewsAPI';
-import { ReviewFeedbackType } from '@/constants/types';
 
 interface Emoji {
   name: string;
@@ -33,7 +33,7 @@ export default function EmojiPicker(props: any) {
   const [isSaveActive, setIsSaveActive] = useState<boolean>(false);
 
 
-  //function preview image upload
+  // function preview image upload
   useEffect(() => {
     if (files.length === 0) return;
     const objectUrls = files.map((file) => URL.createObjectURL(file));
@@ -80,19 +80,8 @@ export default function EmojiPicker(props: any) {
     try {
       if (currentUser && token) {
         if (reviewEmoji === null) {
-          return window.alert('Please select an emoji expression.');
+          return window.alert(t('SHARED.REACTION_RATING.VALIDATION.SELECT_EMOJI_EXPRESSION'));
         } else {
-          // const reviewData: ReviewFeedbackType = {
-          //   review_id: '',
-          //   review_receiver_id: props.sellerId,
-          //   review_giver_id: currentUser.pi_uid,
-          //   reply_to_review_id: props.replyToReviewId || '',
-          //   rating: reviewEmoji,
-          //   comment: comments,
-          //   image: '', // image will be handled by FormData
-          //   review_date: '', // backend will set this
-          // };
-
           const formData = new FormData();
           formData.append('comment', comments);
           formData.append('rating', reviewEmoji.toString());
@@ -105,16 +94,16 @@ export default function EmojiPicker(props: any) {
 
           await createReview(formData, token);
 
-          window.alert('Review submitted successfully.');
+          window.alert(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_RATING_SUBMISSION'));
           resetReview();
         }
       } else {
         console.log('Unable to submit review; user not authenticated.');
-        window.alert('Unable to submit review; user not authenticated.');
+        window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_RATING_SUBMISSION'));
       }
     } catch (error) {
       console.error('Error saving review:', error);
-      window.alert('An error occurred while saving the review.');
+      window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_RATING_SUBMISSION'));
     }
   };
   // Function to handle the click of an emoji
