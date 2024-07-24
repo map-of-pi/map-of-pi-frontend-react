@@ -3,17 +3,21 @@ import axiosClient, { setAuthToken } from "@/config/client";
 import axios from "axios";
 
 export const onIncompletePaymentFound = async (payment: APIPayment) => {
-  console.log(payment);
+  try{
+    console.log(payment);
+  }catch (error){
+    console.log('no payment yet', error)
+  }
 };
 
 export const autoSigninUser = async () => {
   try {
-    const token = localStorage.getItem('mapOfPiToken');
-    if (!token) {
-      throw new Error('No token found');
-    }
+    // const token = localStorage.getItem('mapOfPiToken');
+    // if (!token) {
+    //   throw new Error('No token found');
+    // }
     
-    setAuthToken(token);
+    // setAuthToken(token);
     
     const response = await axiosClient.get('/users/me');
     console.log('Login result from autoSigninUser: ', response.data);

@@ -61,14 +61,12 @@ export default function ReplyToReviewPage({
 
     // try re-login user if not current user auth
     const token = localStorage.getItem('mapOfPiToken');
-    if (!token) {
+    if (!currentUser) {
       console.log("Not logged in; pending login..");
       registerUser();
     } else {
-      if (!currentUser) {
         autoLoginUser();
-        console.log("Logged in");
-      }
+      console.log("Logged in");
     }
   }, [reviewId, currentUser]);
 

@@ -74,11 +74,10 @@ export default function EmojiPicker(props: any) {
   }
 
   const handleSave = async () => {
-    const token = localStorage.getItem('mapOfPiToken');
-    const currentUser = props.currentUser;
+    // const token = localStorage.getItem('mapOfPiToken');
 
     try {
-      if (currentUser && token) {
+      if (props.currentUser) {
         if (reviewEmoji === null) {
           return window.alert(t('SHARED.REACTION_RATING.VALIDATION.SELECT_EMOJI_EXPRESSION'));
         } else {
@@ -86,13 +85,14 @@ export default function EmojiPicker(props: any) {
           formData.append('comment', comments);
           formData.append('rating', reviewEmoji.toString());
           formData.append('review_receiver_id', props.sellerId);
-          formData.append('review_giver_id', currentUser.pi_uid);
+          // formData.append('review_giver_id', currentUser.pi_uid);
           files.forEach((file) => formData.append('image', file));
           formData.append('reply_to_review_id', props.replyToReviewId || '');
 
           console.log('Form Data:', formData);
 
-          await createReview(formData, token);
+          const res = await createReview(formData);
+          console.log('response from review submission', res)
 
           window.alert(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_RATING_SUBMISSION'));
           resetReview();
@@ -106,6 +106,8 @@ export default function EmojiPicker(props: any) {
       window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_RATING_SUBMISSION'));
     }
   };
+
+  
   // Function to handle the click of an emoji
   const handleEmojiClick = (emojiValue: number) => {
     if (selectedEmoji === emojiValue) {

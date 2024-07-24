@@ -23,14 +23,9 @@ export const fetchSingleReview = async (reviewID: string) => {
   };
   
   // Create a new review
-  export const createReview = async (formData: FormData, token: string) => {
+  export const createReview = async (formData: FormData) => {
     try {
-      const response = await axiosClient.post('/review-feedback/add', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`
-        },
-      });
+      const response = await axiosClient.post('/review-feedback/add', formData, );
       return response.data;
     } catch (error) {
       console.error('Error creating review:', error);

@@ -14,7 +14,7 @@ export type SellerType = {
 };
 
 export type ReviewFeedbackType = {
-  review_id: string;
+  _id: string;
   review_receiver_id: string;
   review_giver_id: string;
   reply_to_review_id: string | null;

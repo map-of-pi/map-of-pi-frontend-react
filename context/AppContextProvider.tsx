@@ -13,13 +13,14 @@ import { toast } from 'react-toastify';
 
 import { Pi } from '@pinetwork-js/sdk';
 
-import axiosClient from '@/config/client';
-import { autoSigninUser, onIncompletePaymentFound, PiAuthentication } from '@/util/auth';
+import axiosClient, {setAuthToken} from '@/config/client';
+import { onIncompletePaymentFound, PiAuthentication } from '@/util/auth';
 import { IUser } from '@/constants/types';
+import { error } from 'console';
 
 interface IAppContextProps {
-  currentUser: IUser | null;
-  setCurrentUser: React.Dispatch<SetStateAction<IUser | null>>;
+  currentUser: string | null;
+  setCurrentUser: React.Dispatch<SetStateAction<string | null>>;
   registerUser: () => void;
   autoLoginUser:()=> void,
 }
@@ -39,12 +40,14 @@ interface AppContextProviderProps {
 
 const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const t = useTranslations();
-  const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+  const [currentUser, setCurrentUser] = useState<string | null>(null);
 
   const registerUser = async () => {
     const isInitiated= await Pi.initialized;
+
     if (isInitiated) {  
       try {
+        // localStorage.removeItem("mapOfPiToken");
         const pioneerAuth = await Pi.authenticate(['username'], onIncompletePaymentFound);
         
         const authResult = await PiAuthentication(pioneerAuth.accessToken);
@@ -55,30 +58,44 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           user_name: authResult.username,
         }
         const res = await axiosClient.post("/users/authenticate", {user}) 
-        console.log('Signup response', res);
-        localStorage.setItem("mapOfPiToken", res.data?.token);
-        setCurrentUser(res.data.user);
-        toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data?.user?.username}`);
 
+        if (res.status===200){
+          console.log('Signup response', res);
+          setAuthToken(res.data?.token)
+          // localStorage.setItem("mapOfPiToken", res.data?.token);
+          setCurrentUser(res.data.username);
+          toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data.username}`);
+          // window.alert(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data?.user_name}`);
+
+        }else if(res.status===500){
+          setCurrentUser(null);
+          toast.error(`user authentication failed: ${res.data.message}`)
+        }        
       
       } catch (error: any) {
-        console.log(error)
+        console.log(error);
         toast.info(t('HOME.AUTHENTICATION.PI_INFORMATION_NOT_FOUND_MESSAGE'));
+        // window.alert(t('HOME.AUTHENTICATION.PI_INFORMATION_NOT_FOUND_MESSAGE'));
       }
 
     } else {
       console.log("PI SDK failed to initialize.");
-      
     }
   };
 
   const autoLoginUser = async () => {
     try {
-      const data = await autoSigninUser()
-      console.log('Login response: ', data) 
-      setCurrentUser(data)
+      const res = await axiosClient.get('/users/me');
+
+      if (res.status===200){
+        console.log('Login result from autoSigninUser: ', res.data);
+        setCurrentUser(res.data);
+        toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data}`);
+      }
+
     } catch (error: any) {
-      console.log(error)
+      console.log('something is wrong with login', error);
+      await registerUser();
     }
   }
 

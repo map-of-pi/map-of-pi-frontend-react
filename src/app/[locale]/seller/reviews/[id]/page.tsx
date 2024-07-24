@@ -50,7 +50,7 @@ function SellerReviews({
             date: resolveDate(feedback.review_date).date,
             time: resolveDate(feedback.review_date).time,
             user: feedback.review_giver_id,
-            reviewId: feedback.review_id,
+            reviewId: feedback._id,
             reaction: resolveRating(feedback.rating)?.reaction,
             unicode: resolveRating(feedback.rating)?.unicode
           }

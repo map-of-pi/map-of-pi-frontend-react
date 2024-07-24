@@ -47,18 +47,16 @@ export default function Page({ params }: { params: { id: string } }) {
     getSellerData();
 
     // try re-login user if not current user auth
-    const token = localStorage.getItem('mapOfPiToken');
-    if (!token) {
+    // const token = localStorage.getItem('mapOfPiToken');
+    if (!currentUser) {
       console.log("Not logged in; pending login..");
       registerUser();
     } else {
-      if (!currentUser) {
         autoLoginUser();
         console.log("Logged in");
-      }
     }
 
-  }, [currentUser]);
+  }, []);
 
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {
