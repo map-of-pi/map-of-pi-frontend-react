@@ -45,6 +45,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     const isInitiated= await Pi.initialized;
     if (isInitiated) {  
       try {
+        localStorage.removeItem("mapOfPiToken");
         const pioneerAuth = await Pi.authenticate(['username'], onIncompletePaymentFound);
         
         const authResult = await PiAuthentication(pioneerAuth.accessToken);
@@ -74,11 +75,12 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
 
   const autoLoginUser = async () => {
     try {
-      const data = await autoSigninUser()
-      console.log('Login response: ', data) 
-      setCurrentUser(data)
+      const data = await autoSigninUser();
+      console.log('Login response: ', data); 
+      setCurrentUser(data);
     } catch (error: any) {
-      console.log(error)
+      await registerUser();
+      console.log(error);
     }
   }
 
