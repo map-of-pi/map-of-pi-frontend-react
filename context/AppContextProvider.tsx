@@ -91,6 +91,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         console.log('Login result from autoSigninUser: ', res.data);
         setCurrentUser(res.data);
         toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data}`);
+      }else{
+        setCurrentUser(null);
       }
 
     } catch (error: any) {
