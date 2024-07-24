@@ -12,7 +12,7 @@ import MapMarkerPopup from './MapMarkerPopup';
 // Utility function to ensure coordinates are within valid ranges
 const sanitizeCoordinates = (lat: number, lng: number) => {
   const sanitizedLat = Math.min(Math.max(lat, -90), 90);
-  const sanitizedLng = ((lng + 180) % 360 + 360) % 360 - 180; // Ensures -180 < lng <= 180
+  const sanitizedLng = ((lng + 180) % 360 + 360) % 360 - 180;
   return { lat: sanitizedLat, lng: sanitizedLng };
 };
 
@@ -26,17 +26,31 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Prom
   try {
     const sellersData = await fetchSellers(formattedOrigin, radius);
 
-    const sellersWithCoordinates = sellersData.map((seller: any) => {
-      const [lng, lat] = seller.coordinates.coordinates;
-      return {
-        ...seller,
-        coordinates: [lat, lng] as LatLngTuple
-      };
-    });
+    console.log('Fetched sellers data:', sellersData);
 
-    console.log('Fetched sellers data:', sellersWithCoordinates);
+    const sellersWithCoordinates = sellersData.map((seller: SellerType | any) => {
+      // Check if sell_map_center and its coordinates exist
+      if (seller.sell_map_center && seller.sell_map_center.coordinates) {
+        const [lng, lat] = seller.sell_map_center.coordinates;
+        return {
+          ...seller,
+          coordinates: [lat, lng] as LatLngTuple
+        };
+      } else if (seller.coordinates && seller.coordinates.coordinates) {
+        const [lng, lat] = seller.coordinates.coordinates;
+        return {
+          ...seller,
+          coordinates: [lat, lng] as LatLngTuple
+        };
+      } else {
+        console.error(`Seller ${seller.seller_id} is missing coordinates`);
+        return null;
+      }
+    }).filter((seller: SellerType | null) => seller !== null); // Filter out null sellers
 
-    return sellersWithCoordinates;
+    console.log('Sellers with coordinates:', sellersWithCoordinates);
+
+    return sellersWithCoordinates as SellerType[];
   } catch (error) {
     console.error('Error fetching seller coordinates:', error);
     throw error;
@@ -202,7 +216,7 @@ const Map = ({ center }: { center: LatLngExpression }) => {
         center={origin}
         zoom={13}
         zoomControl={false}
-        className="w-full flex-1 fixed bottom-[0px] h-[calc(100vh-76.19px)] left-0 right-0">
+        className="w-full flex-1 fixed top-[90px] h-[calc(100vh-55px)] left-0 right-0 bottom-0">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
