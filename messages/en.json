@@ -182,8 +182,8 @@
         "DELIGHT": "Delight"
       },
       "VALIDATION": {
-        "SUCCESSFUL_RATING_SUBMISSION": "Rating submitted successfully",
-        "UNSUCCESSFUL_RATING_SUBMISSION": "Rating submitted unsuccessfully",
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Review submitted successfully",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Review failed to submit",
         "SELECT_EMOJI_EXPRESSION": "Please select emoji expression"
       }
     },
