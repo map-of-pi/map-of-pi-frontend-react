@@ -60,7 +60,6 @@ export default function ReplyToReviewPage({
     getReviewData();
 
     // try re-login user if not current user auth
-    const token = localStorage.getItem('mapOfPiToken');
     if (!currentUser) {
       console.log("Not logged in; pending login..");
       registerUser();

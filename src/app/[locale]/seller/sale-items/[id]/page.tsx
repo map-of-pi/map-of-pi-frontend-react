@@ -14,7 +14,7 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
 import Skeleton from '@/components/skeleton/skeleton';
-import { fetchSingleSeller } from '@/services/api';
+import { fetchSingleSeller } from '@/services/sellerAPI';
 
 export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
