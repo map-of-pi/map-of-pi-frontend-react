@@ -183,8 +183,8 @@
         "DELIGHT": "Murna"
       },
       "VALIDATION": {
-        "SUCCESSFUL_RATING_SUBMISSION": "An aika da kimantawa cikin nasara",
-        "UNSUCCESSFUL_RATING_SUBMISSION": "Bayanin ƙima ba a samu nasara ba",
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Bincike ya samu nasara",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Bincike bai samu nasara ba",
         "SELECT_EMOJI_EXPRESSION": "Da fatan za a zaɓi emoji mai bayyana rai"
       }
     },

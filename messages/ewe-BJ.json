@@ -182,8 +182,8 @@
         "DELIGHT": "Ʋɔ ɖo"
       },
       "VALIDATION": {
-        "SUCCESSFUL_RATING_SUBMISSION": "Esi ka vɔ̃ le",
-        "UNSUCCESSFUL_RATING_SUBMISSION": "Esiɖeɖe aɖe nɔe",
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Nugɔgbeame sia nyui",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Nugɔgbeame sia megblɔ alo",
         "SELECT_EMOJI_EXPRESSION": "Mɛdɔ dzi emoji la ƒe agblɔɖeɖe"
       }
     },
