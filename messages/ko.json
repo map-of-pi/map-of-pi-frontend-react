@@ -182,8 +182,8 @@
         "DELIGHT": "기쁨"
       },
       "VALIDATION": {
-        "SUCCESSFUL_RATING_SUBMISSION": "평가가 성공적으로 제출되었습니다",
-        "UNSUCCESSFUL_RATING_SUBMISSION": "평가 제출에 실패했습니다",
+        "SUCCESSFUL_REVIEW_SUBMISSION": "리뷰가 성공적으로 제출되었습니다",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "리뷰 제출에 실패했습니다",
         "SELECT_EMOJI_EXPRESSION": "이모지 표현을 선택해 주세요" 
       }
     },

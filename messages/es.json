@@ -182,8 +182,8 @@
         "DELIGHT": "Delicia"
       },
       "VALIDATION": {
-        "SUCCESSFUL_RATING_SUBMISSION": "Calificación enviada con éxito",
-        "UNSUCCESSFUL_RATING_SUBMISSION": "Calificación no enviada con éxito",
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Reseña enviada con éxito",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "La reseña no se pudo enviar",
         "SELECT_EMOJI_EXPRESSION": "Por favor, selecciona una expresión con emoji"
       }
     },
