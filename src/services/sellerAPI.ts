@@ -32,7 +32,7 @@ export const fetchSellers = async (origin: any, radius: number) => {
 
   export const fetchOwnSeller = async () => {
     try {
-      const response = await axiosClient.get('/sellers/own-seller');
+      const response = await axiosClient.post('/sellers/own_seller');
       return response.data;
     } catch (error:any) {
       if (error.response && error.response.status === 404) {
