@@ -94,16 +94,16 @@ export default function EmojiPicker(props: any) {
 
           await createReview(formData, token);
 
-          window.alert(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_RATING_SUBMISSION'));
+          window.alert(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
           resetReview();
         }
       } else {
         console.log('Unable to submit review; user not authenticated.');
-        window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_RATING_SUBMISSION'));
+        window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
       }
     } catch (error) {
       console.error('Error saving review:', error);
-      window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_RATING_SUBMISSION'));
+      window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
     }
   };
   // Function to handle the click of an emoji
