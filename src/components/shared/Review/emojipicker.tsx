@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 import { TextArea } from '../Forms/Inputs/Inputs';
 import { FileInput } from '../Forms/Inputs/Inputs';
-import { createReview } from '@/services/reviewsAPI';
+import { createReview } from '@/services/reviewsApi';
 
 interface Emoji {
   name: string;
@@ -32,7 +32,6 @@ export default function EmojiPicker(props: any) {
   const [reviewEmoji, setReviewEmoji] = useState<number | null>(null);
   const [isSaveActive, setIsSaveActive] = useState<boolean>(false);
 
-
   // function preview image upload
   useEffect(() => {
     if (files.length === 0) return;
@@ -42,7 +41,6 @@ export default function EmojiPicker(props: any) {
       objectUrls.forEach((url) => URL.revokeObjectURL(url));
     };
   }, [files]);
-
 
   // function to toggle save button
   useEffect(() => {
@@ -74,8 +72,6 @@ export default function EmojiPicker(props: any) {
   }
 
   const handleSave = async () => {
-    // const token = localStorage.getItem('mapOfPiToken');
-
     try {
       if (props.currentUser) {
         if (reviewEmoji === null) {
@@ -85,7 +81,6 @@ export default function EmojiPicker(props: any) {
           formData.append('comment', comments);
           formData.append('rating', reviewEmoji.toString());
           formData.append('review_receiver_id', props.sellerId);
-          // formData.append('review_giver_id', currentUser.pi_uid);
           files.forEach((file) => formData.append('image', file));
           formData.append('reply_to_review_id', props.replyToReviewId || '');
 
@@ -106,7 +101,6 @@ export default function EmojiPicker(props: any) {
       window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
     }
   };
-
   
   // Function to handle the click of an emoji
   const handleEmojiClick = (emojiValue: number) => {

@@ -17,8 +17,8 @@ import {
 import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import { itemData } from '@/constants/demoAPI';
-import { fetchOwnSeller, registerNewSeller } from '@/services/sellerAPI';
 import { SellerType } from '@/constants/types';
+import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 
@@ -54,7 +54,6 @@ const SellerRegistrationForm = () => {
     sellerAddress: '',
   });
   const [dbSeller, setDbSeller] = useState<SellerType | null>(null);
-  const [isSellerExist, setSellerExist] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -64,24 +63,21 @@ const SellerRegistrationForm = () => {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-  const { currentUser, registerUser, autoLoginUser } = useContext(AppContext);
+  const { currentUser, registerUser } = useContext(AppContext);
 
- 
   useEffect(() => {
-    // try re-login user if not current user auth
     if (!currentUser) {
-      console.log("Not logged in; try login...");
+      console.log("Not logged in; pending login attempt..");
       registerUser();
     }
 
     const getSellerData = async () => {
       try {
-        const data = await fetchOwnSeller();
+        const data = await fetchSellerRegistration();
         if (data) {
           console.log('Seller data:', data);
           setDbSeller(data); // Ensure this is a single object, not an array
         } else {
-          // Seller not found scenario
           console.log('Seller not found');
           setDbSeller(null); // Set placeholder seller
         }
@@ -91,11 +87,10 @@ const SellerRegistrationForm = () => {
       } finally {
         setLoading(false);
       }
-      
     };
 
     getSellerData();
-  }, []); // Dependency array to rerun effect when currentUser changes
+  }, []);
 
   useEffect(() => {
     const {
@@ -145,27 +140,11 @@ const SellerRegistrationForm = () => {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      // setFiles(e.target.files[0]);
-    }
-  };
-
-  const handleNavigation = (route: string) => {
-    if (isSaveEnabled) {
-      setLinkUrl(route);
-      setShowConfirmDialog(true);
-    } else {
-      router.push(`/${route}`);
-    }
-  };
-
   // Function to save data to the database
   const handleSave = async () => {  
-
     // check if user is authenticated and form is valid
     if (!currentUser || !isFormValid) {
-      console.log('failed to submit form')
+      console.log('Form submission failed');
       return window.alert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
     }
     
@@ -184,13 +163,12 @@ const SellerRegistrationForm = () => {
         coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
       },
     }    
-    console.log('registration form', regForm)
+    console.log('registration form', regForm);
 
     try {
-      await registerNewSeller(regForm);
-
+      await registerSeller(regForm);
     } catch (error) {
-      console.error('Error saving review:', error);
+      console.error('Error saving seller registration: ', error);
     }
   }
 
@@ -211,7 +189,7 @@ const SellerRegistrationForm = () => {
 
   return (
     <>    
-      {loading && <div className="loading">Loading...</div>}
+      {loading && <div className="loading">{t('SHARED.LOADING_SCREEN_MESSAGE')}</div>}
       {error && <div className="error">{error}</div>}
 
       <div className="w-full md:w-[500px] md:mx-auto p-4">

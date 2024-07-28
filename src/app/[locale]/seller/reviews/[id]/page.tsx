@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { ReviewFeedbackType } from '@/constants/types';
-import { fetchReviews } from '@/services/reviewsAPI';
+import { fetchReviews } from '@/services/reviewsApi'
 import { resolveDate } from '@/util/date';
 import { resolveRating } from '../util/ratingUtils';
 

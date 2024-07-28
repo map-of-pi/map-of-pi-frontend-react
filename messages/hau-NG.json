@@ -8,6 +8,7 @@
     },
     "AUTHENTICATION": {
       "SUCCESSFUL_LOGIN_MESSAGE": "Shiga cikin nasara",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Shiga ya kasa",
       "PI_INFORMATION_NOT_FOUND_MESSAGE": "Bayanin Pi ba a samu ba"
     }
   },

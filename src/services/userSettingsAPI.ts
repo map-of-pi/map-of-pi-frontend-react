@@ -1,6 +1,5 @@
 import axiosClient from "@/config/client";
 
-
 // Fetch a single pioneer user
 export const fetchUser = async (userId: string) => {
   try {
@@ -8,7 +7,7 @@ export const fetchUser = async (userId: string) => {
     console.log('Pioneer user ', response.data);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching Pioneer user with ID ${userId}:`, error);
+    console.error(`Error fetching Pioneer user with ID ${userId}: `, error);
     throw error;
   }
 };
@@ -19,7 +18,7 @@ export const fetchUserSettings = async (userId: string) => {
     const response = await axiosClient.get(`/users/${userId}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching Pioneer user settings with ID ${userId}:`, error);
+    console.error(`Error fetching Pioneer user settings with ID ${userId}: `, error);
     throw error;
   }
 };
@@ -49,8 +48,7 @@ export const updateUserSettings = async (userId: string, formData: FormData) => 
     });
     return response.data;
   } catch (error) {
-    console.error(`Error updating Pioneer user settings with ID ${userId}:`, error);
+    console.error(`Error updating Pioneer user settings with ID ${userId}: `, error);
     throw error;
   }
 };
-

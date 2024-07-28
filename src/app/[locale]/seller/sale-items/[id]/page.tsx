@@ -14,7 +14,7 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
 import Skeleton from '@/components/skeleton/skeleton';
-import { fetchSingleSeller } from '@/services/sellerAPI';
+import { fetchSingleSeller } from '@/services/sellerApi';
 
 export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -47,15 +47,13 @@ export default function Page({ params }: { params: { id: string } }) {
     getSellerData();
 
     // try re-login user if not current user auth
-    // const token = localStorage.getItem('mapOfPiToken');
     if (!currentUser) {
-      console.log("Not logged in; pending login..");
+      console.log("Not logged in; pending login attempt..");
       registerUser();
     } else {
-        autoLoginUser();
-        console.log("Logged in");
+      autoLoginUser();
+      console.log("Logged in");
     }
-
   }, []);
 
   const handleNavigation = (route: string) => {

@@ -32,7 +32,6 @@ export const PiFestJson = {
     comment: "I am happy to let you all know that consumer to seller relationship is good.",
     image: "/images/shared/upload.png",
     review_date: "23 Oct. 2023 01:00pm",
-      
   },
 
   Seller: {

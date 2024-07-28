@@ -8,6 +8,7 @@
     },
     "AUTHENTICATION": {
       "SUCCESSFUL_LOGIN_MESSAGE": "Dzo le gbɔŋɔ le asi kplɔe",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Dɔ wòkplɔ nye",
       "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi ƒe nusia tɔ dɔ aɖe ma va dɔ o"
     }
   },

@@ -8,6 +8,7 @@
     },
     "AUTHENTICATION": {
       "SUCCESSFUL_LOGIN_MESSAGE": "Successful login",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Login failed",
       "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi information not found"
     }
   },

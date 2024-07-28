@@ -10,7 +10,7 @@ import { AppContext } from '../../../../../../../context/AppContextProvider';
 import ConfirmDialog from '@/components/shared/confirm';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { ReviewFeedbackType } from '@/constants/types';
-import { fetchSingleReview } from '@/services/reviewsAPI';
+import { fetchSingleReview } from '@/services/reviewsApi';
 import { resolveDate } from '@/util/date';
 import { resolveRating } from '../../util/ratingUtils';
 
@@ -61,22 +61,13 @@ export default function ReplyToReviewPage({
 
     // try re-login user if not current user auth
     if (!currentUser) {
-      console.log("Not logged in; pending login..");
+      console.log("Not logged in; pending login attempt..");
       registerUser();
     } else {
-        autoLoginUser();
+      autoLoginUser();
       console.log("Logged in");
     }
   }, [reviewId, currentUser]);
-
-  const handleNavigation = (route: string) => {
-    if (isSaveEnabled) {
-      setLinkUrl(route);
-      setShowConfirmDialog(true);
-    } else {
-      router.push(`/${route}`);
-    }
-  };
 
   const translateReactionRating = (reaction: string): string => {
     switch (reaction) {

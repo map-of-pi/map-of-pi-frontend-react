@@ -5,7 +5,7 @@ import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaf
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
 import _ from 'lodash';
 
-import { fetchSellers } from '@/services/sellerAPI';
+import { fetchSellers } from '@/services/sellerApi';
 import { SellerType } from '@/constants/types';
 import { toLatLngLiteral } from '@/util/map';
 

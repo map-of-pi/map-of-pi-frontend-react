@@ -1,8 +1,8 @@
 export type SellerType = {
   seller_id: string;
   name: string;
-  seller_type: string;
   description: string;
+  seller_type: string;
   image: string;
   address: string;
   sale_items: string;
