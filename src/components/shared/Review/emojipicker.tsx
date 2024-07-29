@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { TextArea } from '../Forms/Inputs/Inputs';
 import { FileInput } from '../Forms/Inputs/Inputs';
 import { createReview } from '@/services/reviewsApi';
+import { toast } from 'react-toastify';
 
 interface Emoji {
   name: string;
@@ -86,19 +87,19 @@ export default function EmojiPicker(props: any) {
 
           console.log('Form Data:', formData);
 
-          const res = await createReview(formData);
-          console.log('response from review submission', res)
-
-          window.alert(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
+          const newReview = await createReview(formData);
+          if (newReview) {
+            toast.success(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
+          }
           resetReview();
         }
       } else {
         console.log('Unable to submit review; user not authenticated.');
-        window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
+        toast.error(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
       }
     } catch (error) {
       console.error('Error saving review:', error);
-      window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
+      // toast.error(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
     }
   };
   

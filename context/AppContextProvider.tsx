@@ -59,7 +59,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           console.log('Signup response', res);
           setAuthToken(res.data?.token)
           setCurrentUser(res.data.user);
-          toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data?.user?.pi_username}`);
+          toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data?.user?.user_name}`);
         } else if (res.status === 500) {
           setCurrentUser(null);
           toast.error(`${t('HOME.AUTHENTICATION.UNSUCCESSFUL_LOGIN_MESSAGE')}`);
@@ -80,7 +80,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       if (res.status === 200) {
         console.log('Login result from autoSigninUser: ', res.data);
         setCurrentUser(res.data);
-        toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data}`);
+        toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data.user_name}`);
       } else {
         setCurrentUser(null);
       }

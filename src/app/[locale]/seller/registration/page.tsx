@@ -21,6 +21,7 @@ import { SellerType } from '@/constants/types';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
+import { autoSigninUser } from '@/util/auth';
 
 interface Seller {
   seller_id: string;
@@ -68,7 +69,7 @@ const SellerRegistrationForm = () => {
   useEffect(() => {
     if (!currentUser) {
       console.log("Not logged in; pending login attempt..");
-      registerUser();
+      autoSigninUser();
     }
 
     const getSellerData = async () => {

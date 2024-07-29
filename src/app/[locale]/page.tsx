@@ -45,7 +45,6 @@ export default function Index() {
 
   useEffect(() => {
     // signup or login user
-    // const token = localStorage.getItem('mapOfPiToken');
     if (!currentUser) {
       registerUser();
     } else {

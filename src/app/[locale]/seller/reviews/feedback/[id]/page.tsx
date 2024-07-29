@@ -46,7 +46,13 @@ export default function ReplyToReviewPage({
   const { currentUser, autoLoginUser, registerUser } = useContext(AppContext);
 
   useEffect(() => {
-    const getReviewData = async () => {
+    // try re-login user if not current user auth
+    if (!currentUser) {
+      console.log("Not logged in; pending login attempt..");
+      autoLoginUser();
+    };
+
+    const getReviewData = async () => {      
       try {
         console.log('Review ID: ', reviewId);
         const data = await fetchSingleReview(reviewId);
@@ -59,15 +65,7 @@ export default function ReplyToReviewPage({
     };
     getReviewData();
 
-    // try re-login user if not current user auth
-    if (!currentUser) {
-      console.log("Not logged in; pending login attempt..");
-      registerUser();
-    } else {
-      autoLoginUser();
-      console.log("Logged in");
-    }
-  }, [reviewId, currentUser]);
+  }, [reviewId]);
 
   const translateReactionRating = (reaction: string): string => {
     switch (reaction) {

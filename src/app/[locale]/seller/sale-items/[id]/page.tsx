@@ -34,6 +34,12 @@ export default function Page({ params }: { params: { id: string } }) {
   const { currentUser, autoLoginUser, registerUser } = useContext(AppContext);
 
   useEffect(() => {
+    // try re-login user if not current user auth
+    if (!currentUser) {
+      console.log("Not logged in; pending login attempt..");
+      autoLoginUser();
+    };
+    
     const getSellerData = async () => {
       try {
         const data = await fetchSingleSeller(sellerId); //'testme'
@@ -46,14 +52,7 @@ export default function Page({ params }: { params: { id: string } }) {
     };
     getSellerData();
 
-    // try re-login user if not current user auth
-    if (!currentUser) {
-      console.log("Not logged in; pending login attempt..");
-      registerUser();
-    } else {
-      autoLoginUser();
-      console.log("Logged in");
-    }
+    
   }, []);
 
   const handleNavigation = (route: string) => {

@@ -1,4 +1,5 @@
 import axiosClient from "@/config/client";
+import { toast } from "react-toastify";
 
 // Fetch a single review for a seller
 export const fetchSingleReview = async (reviewID: string) => {
@@ -25,10 +26,21 @@ export const fetchReviews = async (sellerId:string) => {
 // Create a new review
 export const createReview = async (formData: FormData) => {
   try {
-    const response = await axiosClient.post('/review-feedback/add', formData, );
-    return response.data;
-  } catch (error) {
-    console.error('Error creating review: ', error);
+    const response = await axiosClient.post('/review-feedback/add', formData);
+    if (response.status === 200) {
+      return response.data;
+    }
+
+    if (response.status === 400) {
+      toast.error(response.data.message);
+    }
+  } catch (error: any) {
+    if (error.response && error.response.data) {
+      toast.info(error.response.data.message);
+    } else {
+      toast.error('An unexpected error occurred. Please try again.');
+    }
+    console.error('Error creating review:', error);
     throw error;
   }
 };

@@ -1,4 +1,5 @@
 import axiosClient from "@/config/client";
+import { toast } from "react-toastify";
 
 // Fetch all sellers or within bounds
 export const fetchSellers = async (origin: any, radius: number) => {
@@ -33,6 +34,7 @@ export const fetchSellerRegistration = async () => {
     return response.data;
   } catch (error:any) {
     if (error.response && error.response.status === 404) {
+      toast.error("user not register as seller")
       return null;
     }
     console.error(`Error fetching seller registration `, error);
