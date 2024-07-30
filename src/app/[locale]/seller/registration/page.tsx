@@ -189,63 +189,18 @@ const SellerRegistrationForm = () => {
   };
 
   return (
-    <>    
-      {loading && <div className="loading">{t('SHARED.LOADING_SCREEN_MESSAGE')}</div>}
-      {error && <div className="error">{error}</div>}
-
+    <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
         <h1 className={HEADER}>
           {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
         </h1>
 
-        <div className='mb-6'>
-          <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}</h2>          
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ': '}
-            </span>
-            <span>{dbSeller ? dbSeller.seller_id : placeholderSeller.name}</span>
-          </div>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ': '}
-            </span>
-            <span>{dbSeller ? dbSeller.name : placeholderSeller.phone}</span>
-          </div>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ': '}
-            </span>
-            <span>{dbSeller ? dbSeller.name : placeholderSeller.email}</span>
-          </div>
-        </div>
-
-        <div className='mb-6'>
-            <p className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')} </p>
-            <TrustMeter ratings={dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating} />
-            <div className="flex items-center justify-between mt-3">
-              <p className="text-sm">
-                {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
-                  seller_review_rating: dbSeller ? dbSeller.trust_meter_rating: placeholderSeller.trust_meter_rating,
-                })}
-              </p>
-              <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}`: '#'}>
-                <OutlineBtn
-                  disabled={!currentUser}
-                  label={t('SHARED.CHECK_REVIEWS')}
-                />
-              </Link>
-            </div>
-        </div>
-        
-        <div>
-          <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}</h2>
-          <div className="mb-4">
-          <div className="mb-4">
-
-          <div className="mb-4">
+        <div className="mb-4">
+          <h2 className={SUBHEADER}>
+            {t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_LABEL')}
+          </h2>
+          <div className="mb-2">
             <TextArea
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_LABEL')}
               name="itemsForSale"
               placeholder={t(
                 'SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_PLACEHOLDER',
@@ -267,11 +222,62 @@ const SellerRegistrationForm = () => {
             }}
           />
         </Link>
-        
+        <div className="mb-4 mt-3 ml-auto w-min">
+          <Button
+            label={t('SHARED.SAVE')}
+            disabled={!isSaveEnabled}
+            styles={{
+              color: '#ffc153',
+              height: '40px',
+              padding: '10px 15px',
+            }}
+            onClick={handleSave}
+          />
+        </div>
+        <ToggleCollapse
+          header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
+          <TrustMeter ratings={dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating} />
+          <div className="flex items-center justify-between mt-3">
+            <p className="text-sm">
+              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
+                seller_review_rating: dbSeller ? dbSeller.trust_meter_rating: placeholderSeller.trust_meter_rating,
+              })}
+            </p>
+            <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}`: '#'}>
+              <OutlineBtn
+                disabled={!currentUser}
+                label={t('SHARED.CHECK_REVIEWS')}
+              />
+            </Link>
+          </div>
+        </ToggleCollapse>
+        <ToggleCollapse
+          header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
+          <div className="text-sm mb-3">
+            <span className="font-bold">
+              {t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ': '}
+            </span>
+            <span>{dbSeller ? dbSeller.seller_id : ''}</span>
+          </div>
+          <div className="text-sm mb-3">
+            <span className="font-bold">
+              {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ': '}
+            </span>
+            <span>{dbSeller ? dbSeller.name : placeholderSeller.phone}</span>
+          </div>
+          <div className="text-sm mb-3">
+            <span className="font-bold">
+              {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ': '}
+            </span>
+            <span>{dbSeller ? dbSeller.name : placeholderSeller.email}</span>
+          </div>
+        </ToggleCollapse>
+        <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}>
+        <div className="mb-4">
           <Input
             label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
             name="sellerName"
-            placeholder="peejen"
+            placeholder="business name"
             type="text"
             value={formData.sellerName}
             onChange={handleChange}
@@ -344,7 +350,7 @@ const SellerRegistrationForm = () => {
             onClick={handleSave}
           />
         </div>
-        </div>
+        </ToggleCollapse>
 
         <ConfirmDialog
           show={showConfirmDialog}
