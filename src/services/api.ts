@@ -112,3 +112,30 @@ export const updateSeller = async (sellerId: string, formData: FormData) => {
     throw error;
   }
 };
+
+// Function to Fetch Map Center
+export const fetchMapCenter = async (userId: string) => {
+  try {
+    const response = await axiosClient.get(`/map-center/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching map center for user ${userId}`, error);
+    throw error;
+  }
+};
+
+// Function to Save Map Center
+export const saveMapCenter = async (userId: string, latitude: number, longitude: number) => {
+  try {
+    const response = await axiosClient.post(`/api/v1/map-center`, {
+      pi_uid: userId,
+      latitude,
+      longitude
+    });
+    console.log('API Response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error(`Error saving map center for user ${userId}:`, error);
+    throw error;
+  }
+};
