@@ -3,20 +3,19 @@
 import 'leaflet/dist/leaflet.css';
 import './MapCenter.css';
 
-import Image from 'next/image';
-
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
   MapContainer,
   TileLayer,
   Marker,
-  Tooltip,
   useMapEvents,
 } from 'react-leaflet';
 import L from 'leaflet';
 import { Button } from '../Forms/Buttons/Buttons';
 import RecenterAutomatically from './RecenterAutomatically';
 import { ConfirmDialogX } from '../confirm';
+import { fetchMapCenter, saveMapCenter } from '@/services/api'; // Import the API functions
+import { AppContext } from '../../../../context/AppContextProvider';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -35,14 +34,24 @@ const pinIcon = new L.Icon({
 const MapCenter = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
+  const { currentUser } = useContext(AppContext); // Get currentUser from context
 
   useEffect(() => {
-    const getLocal = localStorage.getItem('mapCenter');
-    if (getLocal) {
-      const parseLocal = JSON.parse(getLocal);
-      setCenter({ lat: parseLocal[0], lng: parseLocal[1] });
-    }
-  }, []);
+    const getMapCenter = async () => {
+      if (currentUser?.pi_uid) {
+        try {
+          const mapCenter = await fetchMapCenter(currentUser.pi_uid);
+          if (mapCenter) {
+            setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
+          }
+        } catch (error) {
+          console.error('Error fetching map center:', error);
+        }
+      }
+    };
+
+    getMapCenter();
+  }, [currentUser]);
 
   const CenterMarker = () => {
     const map = useMapEvents({
@@ -59,20 +68,28 @@ const MapCenter = () => {
     ) : null;
   };
 
-  const handleSetCenter = () => {
-    if (center !== null) {
+  const handleSetCenter = async () => {
+    console.log('handleSetCenter called');
+    if (center !== null && currentUser?.pi_uid) {
       console.log(center);
-      localStorage.setItem(
-        'mapCenter',
-        JSON.stringify([center.lat, center.lng]),
-      );
-      setShowPopup(true);
+      console.log('Current User ID:', currentUser.pi_uid);
+      localStorage.setItem('mapCenter', JSON.stringify([center.lat, center.lng]));
+
+      try {
+        const response = await saveMapCenter(currentUser.pi_uid, center.lat, center.lng);
+        console.log('Map center saved successfully', response);
+        setShowPopup(true);
+      } catch (error) {
+        console.error('Error saving map center:', error);
+      }
+    } else {
+      console.log('Center or currentUser.pi_uid is null');
     }
   };
 
-  const handleClickDialog =() => {
+  const handleClickDialog = () => {
     setShowPopup(false);
-  }
+  };
 
   return (
     <div>
@@ -87,7 +104,6 @@ const MapCenter = () => {
           attribution="Map data © OpenStreetMap contributors"
         />
         <CenterMarker />
-        {/* this is use to get the set center on page load */}
         <RecenterAutomatically position={center} />
       </MapContainer>
       <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
@@ -102,11 +118,9 @@ const MapCenter = () => {
           }}
         />
       </div>
-      {
-        showPopup && (
-          <ConfirmDialogX message="Your search center has been saved successfully" toggle={() => setShowPopup(false)} handleClicked={handleClickDialog} />
-        )
-      }
+      {showPopup && (
+        <ConfirmDialogX message="Your search center has been saved successfully" toggle={() => setShowPopup(false)} handleClicked={handleClickDialog} />
+      )}
     </div>
   );
 };
