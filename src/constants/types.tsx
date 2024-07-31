@@ -30,3 +30,14 @@ export interface IUser {
   pi_username: string;
   user_name: string;
 }
+
+export interface IUserSettings {
+  user_settings_id?: string | null;
+  email?: string;
+  phone_number?: number;
+  image?: string; 
+  search_map_center?: {
+    type: 'Point';
+    coordinates: [number, number];
+  };
+}

@@ -22,6 +22,7 @@ import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 import { autoSigninUser } from '@/util/auth';
+import { toast } from 'react-toastify';
 
 interface Seller {
   seller_id: string;
@@ -149,17 +150,9 @@ const SellerRegistrationForm = () => {
       return window.alert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
     }
     
-    const sellCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null');
-
-    const sell_map_center = sellCenter
-      ? {
-          type: 'Point' as const,
-          coordinates: [sellCenter[0], sellCenter[1]] as [number, number],
-        }
-      : {
-          type: 'Point' as const,
-          coordinates: [0, 0] as [number, number], // Provide a default coordinate if searchCenter is not found
-        };
+    const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
+    console.log('coordinates', sellCenter);
+    console.log('form data:', formData);
 
     const regForm = {
       name: formData.sellerName,
@@ -167,12 +160,30 @@ const SellerRegistrationForm = () => {
       address: formData.sellerAddress,
       sale_items: formData.itemsForSale,
       seller_type: formData.sellerType,
-      sell_map_center: sell_map_center
-    }    
+    } as {
+      name: string;
+      description: string;
+      address: string;
+      sale_items: string;
+      seller_type: string;
+      sell_map_center?: {
+        type: 'Point';
+        coordinates: [number, number];
+      };
+    };  
+
+    // Add sell_map_center field only if sellCenter is available
+    if (sellCenter) {
+      regForm.sell_map_center = {
+        type: 'Point' as const,
+        coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
+      };
+    }  
     console.log('registration form', regForm);
 
     try {
-      await registerSeller(regForm);
+      const seller = await registerSeller(regForm);
+      seller? toast.success(`${seller.name} data added successfully`): null;
     } catch (error) {
       console.error('Error saving seller registration: ', error);
     }

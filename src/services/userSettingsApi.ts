@@ -1,4 +1,6 @@
 import axiosClient from "@/config/client";
+import { IUserSettings } from "@/constants/types";
+import { toast } from "react-toastify";
 
 // Fetch a single pioneer user
 export const fetchUser = async (userId: string) => {
@@ -15,40 +17,34 @@ export const fetchUser = async (userId: string) => {
 // Fetch a single pioneer user configuration settings
 export const fetchUserSettings = async (userId: string) => {
   try {
-    const response = await axiosClient.get(`/users/${userId}`);
+    const response = await axiosClient.get(`/user-preferences/${userId}`);
     return response.data;
-  } catch (error) {
+
+  } catch (error: any) {
+    if (error.response && error.response.data) {
+      toast.info(error.response.data.message);
+      return null
+    }
     console.error(`Error fetching Pioneer user settings with ID ${userId}: `, error);
     throw error;
   }
 };
 
 // Create new pioneer user settings
-export const createUserSettings = async (userId: string, formData: FormData) => {
+export const createUserSettings = async (formData: IUserSettings) => {
   try {
-    const response = await axiosClient.post(`/users/${userId}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error registering new seller: ', error);
-    throw error;
+    const response = await axiosClient.post('/user-preferences/add', {json: JSON.stringify(formData)});
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error: any) {
+    if (error.response && error.response.data) {
+      toast.info(error.response.data.message);
+    }else {
+      toast.error('Error setting user preference');
+    }
+    return null;
   }
 };
 
-// Update pioneer user settings
-export const updateUserSettings = async (userId: string, formData: FormData) => {
-  try {
-    const response = await axiosClient.put(`/users/${userId}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error(`Error updating Pioneer user settings with ID ${userId}: `, error);
-    throw error;
-  }
-};
+

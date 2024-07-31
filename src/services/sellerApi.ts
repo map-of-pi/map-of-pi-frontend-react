@@ -45,8 +45,8 @@ export const fetchSellerRegistration = async () => {
 // Register or update seller
 export const registerSeller = async (formData: any) => {
   try {
-    const response = await axiosClient.post('/sellers/register', {data: JSON.stringify(formData)});
-    return response.data;
+    const response = await axiosClient.post('/sellers/register', {json: JSON.stringify(formData)});
+    return response.data.seller;
   } catch (error) {
     console.error('Error registering or updating seller: ', error);
     throw error;
