@@ -2,10 +2,10 @@ import axiosClient from "@/config/client";
 import { IUserSettings } from "@/constants/types";
 import { handleAxiosError } from "@/util/error";
 
-// Fetch a single pioneer user configuration settings
+// Fetch a single pioneer user settings
 export const fetchUserSettings = async () => {
   try {
-    const response = await axiosClient.get(`/user-preferences/me`);
+    const response = await axiosClient.post(`/user-preferences/me`);
     if (response.status === 200) {
       return response.data;
     } else {
@@ -33,5 +33,3 @@ export const createUserSettings = async (formData: IUserSettings) => {
     throw error;
   }
 };
-
-
