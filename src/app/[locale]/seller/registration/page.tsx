@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { useState, useEffect, useContext } from 'react';
+import { toast } from 'react-toastify';
 
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
@@ -16,14 +17,13 @@ import {
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
+import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { SellerType } from '@/constants/types';
 import { sellerPrompt } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
-import { toast } from 'react-toastify';
-import Skeleton from '@/components/skeleton/skeleton';
 
 interface Seller {
   seller_id: string;
@@ -202,7 +202,7 @@ const SellerRegistrationForm = () => {
     try {
       const seller = await registerSeller(regForm);
       setDbSeller(seller)
-      seller ? toast.success(`${seller.name} data added successfully`) : null;
+      seller ? toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION')) : null;
     } catch (error) {
       console.error('Error saving seller registration: ', error);
     }
@@ -226,7 +226,7 @@ const SellerRegistrationForm = () => {
   // loading condition
   if (loading) {
     return (
-      <Skeleton type='seller_reg' />
+      <Skeleton type='seller_registration' />
     );
   }
 
@@ -326,7 +326,7 @@ const SellerRegistrationForm = () => {
             <Select
               label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
               name="sellerType"
-              value={formData.sellerType}
+              value={translateSellerCategory(formData.sellerType)}
               onChange={handleChange}
               options={[
                 {

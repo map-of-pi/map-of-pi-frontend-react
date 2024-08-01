@@ -8,6 +8,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 
 import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import {
@@ -19,10 +20,9 @@ import { menu } from '@/constants/menu';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
-import { AppContext } from '../../../../context/AppContextProvider';
-import { toast } from 'react-toastify';
-import { createUserSettings } from '@/services/userSettingsApi';
 import { IUserSettings } from '@/constants/types';
+import { createUserSettings } from '@/services/userSettingsApi';
+import { AppContext } from '../../../../context/AppContextProvider';
 
 // type definitions for menu items
 interface MenuItem {
@@ -137,7 +137,7 @@ const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLText
       [inputName]: inputValue,
     };
 
-    if (searchCenter){
+    if (searchCenter) {
       userSettingsData.search_map_center = {
         type: 'Point' as const,
         coordinates: [searchCenter[0], searchCenter[1]] as [number, number]
@@ -147,10 +147,10 @@ const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLText
     try {
       const settings = await createUserSettings(userSettingsData);
       if (settings) {
-        toast.success(`${inputValue} set successfully`);
+        toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
       }
     } catch (error: any) {
-      toast.error(error.message || 'Error setting user preference');
+      toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
     }
   } else {
     return null;

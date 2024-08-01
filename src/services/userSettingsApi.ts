@@ -1,6 +1,7 @@
+import { toast } from "react-toastify";
+
 import axiosClient from "@/config/client";
 import { IUserSettings } from "@/constants/types";
-import { toast } from "react-toastify";
 
 // Fetch a single pioneer user
 export const fetchUser = async (userId: string) => {
@@ -30,10 +31,10 @@ export const fetchUserSettings = async () => {
   }
 };
 
-// Create new pioneer user settings
+// Create new or update existing user settings
 export const createUserSettings = async (formData: IUserSettings) => {
   try {
-    const response = await axiosClient.post('/user-preferences/add', {json: JSON.stringify(formData)});
+    const response = await axiosClient.put('/user-preferences/add', {json: JSON.stringify(formData)});
     if (response.status === 200) {
       return response.data;
     }
