@@ -18,11 +18,12 @@ import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import { itemData } from '@/constants/demoAPI';
 import { SellerType } from '@/constants/types';
+import { sellerPrompt } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
-import { autoSigninUser } from '@/util/auth';
 import { toast } from 'react-toastify';
+import Skeleton from '@/components/skeleton/skeleton';
 
 interface Seller {
   seller_id: string;
@@ -36,9 +37,9 @@ interface Seller {
   average_rating: number;
   trust_meter_rating: number;
   type: string;
-  coordinates: number [];
+  coordinates: number[];
   order_online_enabled_pref: boolean;
-};
+}
 
 const SellerRegistrationForm = () => {
   const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
@@ -65,12 +66,12 @@ const SellerRegistrationForm = () => {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-  const { currentUser, registerUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
     if (!currentUser) {
       console.log("Not logged in; pending login attempt..");
-      autoSigninUser();
+      autoLoginUser();
     }
 
     const getSellerData = async () => {
@@ -92,7 +93,20 @@ const SellerRegistrationForm = () => {
     };
 
     getSellerData();
-  }, []);
+  }, [currentUser]);
+
+  // Initialize formData with dbSeller values if available
+  useEffect(() => {
+    if (dbSeller) {
+      setFormData({
+        sellerName: dbSeller.name || '',
+        sellerDescription: dbSeller.description || '',
+        sellerAddress: dbSeller.address || '',
+        itemsForSale: dbSeller.sale_items || '',
+        sellerType: dbSeller.seller_type || '',
+      });
+    }
+  }, [dbSeller]);
 
   useEffect(() => {
     const {
@@ -127,7 +141,11 @@ const SellerRegistrationForm = () => {
     >,
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+    
     if (value !== '' && formData) {
       setIsSaveEnabled(true);
     } else {
@@ -147,7 +165,7 @@ const SellerRegistrationForm = () => {
     // check if user is authenticated and form is valid
     if (!currentUser || !isFormValid) {
       console.log('Form submission failed');
-      return window.alert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
+      return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
     }
     
     const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
@@ -183,7 +201,8 @@ const SellerRegistrationForm = () => {
 
     try {
       const seller = await registerSeller(regForm);
-      seller? toast.success(`${seller.name} data added successfully`): null;
+      setDbSeller(seller)
+      seller ? toast.success(`${seller.name} data added successfully`) : null;
     } catch (error) {
       console.error('Error saving seller registration: ', error);
     }
@@ -204,6 +223,13 @@ const SellerRegistrationForm = () => {
     }
   };
 
+  // loading condition
+  if (loading) {
+    return (
+      <Skeleton type='seller_reg' />
+    );
+  }
+
   return (
     <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
@@ -218,12 +244,10 @@ const SellerRegistrationForm = () => {
           <div className="mb-2">
             <TextArea
               name="itemsForSale"
-              placeholder={t(
-                'SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_PLACEHOLDER',
-              )}
+              placeholder={sellerPrompt.sale_items}
               value={formData.itemsForSale}
               onChange={handleChange}
-              styles={{height: '200px'}}
+              styles={{ height: '200px' }}
             />
           </div>
         </div>
@@ -256,10 +280,10 @@ const SellerRegistrationForm = () => {
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">
               {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
-                seller_review_rating: dbSeller ? dbSeller.trust_meter_rating: placeholderSeller.trust_meter_rating,
+                seller_review_rating: dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating,
               })}
             </p>
-            <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}`: '#'}>
+            <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#'}>
               <OutlineBtn
                 disabled={!currentUser}
                 label={t('SHARED.CHECK_REVIEWS')}
@@ -289,83 +313,73 @@ const SellerRegistrationForm = () => {
           </div>
         </ToggleCollapse>
         <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}>
-        <div className="mb-4">
-          <Input
-            label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
-            name="sellerName"
-            placeholder="business name"
-            type="text"
-            value={formData.sellerName}
-            onChange={handleChange}
-          />
+          <div className="mb-4">
+            <Input
+              label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
+              name="sellerName"
+              placeholder={sellerPrompt.name}
+              type="text"
+              value={formData.sellerName}
+              onChange={handleChange}
+            />
 
-          <Select
-            label={t(
-              'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL',
-            )}
-            name="sellerType"
-            value={translateSellerCategory(formData.sellerType)}
-            onChange={handleChange}
-            options={[
-              {
-                value: t(
-                  'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER',
-                ),
-                name: 'Pioneer',
-              },
-              {
-                value: t(
-                  'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER',
-                ),
-                name: 'Other',
-              },
-            ]}
-          />
+            <Select
+              label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
+              name="sellerType"
+              value={formData.sellerType}
+              onChange={handleChange}
+              options={[
+                {
+                  value: 'Pioneer',
+                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
+                },
+                {
+                  value: 'Other',
+                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'),
+                },
+              ]}
+            />
 
-          <TextArea
-            label={t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')}
-            name="sellerDescription"
-            placeholder="I sell test items for pay with Pi"
-            value={formData.sellerDescription}
-            onChange={handleChange}
-          />
+            <TextArea
+              label={t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')}
+              name="sellerDescription"
+              placeholder={sellerPrompt.description}
+              value={formData.sellerDescription}
+              onChange={handleChange}
+            />
 
-          <TextArea
-            label={t(
-              'SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL',
+            <TextArea
+              label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
+              name="sellerAddress"
+              placeholder={sellerPrompt.address}
+              value={formData.sellerAddress}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-4">
+            <FileInput
+              label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+              images={[]}
+              handleAddImages={handleAddImages}
+            />
+            {previewImage && (
+              <div className="mt-2">
+                <p className="text-sm text-zinc-600">{previewImage}</p>
+              </div>
             )}
-            name="sellerAddress"
-            placeholder={t(
-              'SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER',
-            )}
-            value={formData.sellerAddress}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-4">
-          <FileInput
-            label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
-            images={[]}
-            handleAddImages={handleAddImages}
-          />
-          {previewImage && (
-            <div className="mt-2">
-              <p className="text-sm text-zinc-600">{previewImage}</p>
-            </div>
-          )}
-        </div>
-        <div className="mb-4 mt-3 ml-auto w-min">
-          <Button
-            label={t('SHARED.SAVE')}
-            disabled={!isSaveEnabled}
-            styles={{
-              color: '#ffc153',
-              height: '40px',
-              padding: '10px 15px',
-            }}
-            onClick={handleSave}
-          />
-        </div>
+          </div>
+          <div className="mb-4 mt-3 ml-auto w-min">
+            <Button
+              label={t('SHARED.SAVE')}
+              disabled={!isSaveEnabled}
+              styles={{
+                color: '#ffc153',
+                height: '40px',
+                padding: '10px 15px',
+              }}
+              onClick={handleSave}
+            />
+          </div>
         </ToggleCollapse>
 
         <ConfirmDialog

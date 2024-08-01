@@ -11,6 +11,7 @@ import { ReviewFeedbackType } from '@/constants/types';
 import { fetchReviews } from '@/services/reviewsApi'
 import { resolveDate } from '@/util/date';
 import { resolveRating } from '../util/ratingUtils';
+import Skeleton from '@/components/skeleton/skeleton';
 
 interface ReviewInt {
   heading: string;
@@ -83,6 +84,13 @@ function SellerReviews({
     }
   };
 
+  // loading condition
+  if (loading) {
+    return (
+      <Skeleton type='seller_review' />
+    );
+  }
+
   return (
     sellerReviews?.length===0 ? 
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto">
@@ -91,7 +99,6 @@ function SellerReviews({
         </h1>
       </div> :
     <>
-      {loading && <div className="loading">Loading...</div>}
       {error && <div className="error">{error}</div>}
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <h1 className="text-[#333333] text-lg font-semibold md:font-bold md:text-2xl mb-1">

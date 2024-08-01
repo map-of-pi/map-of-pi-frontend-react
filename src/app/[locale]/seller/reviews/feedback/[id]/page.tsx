@@ -13,6 +13,7 @@ import { ReviewFeedbackType } from '@/constants/types';
 import { fetchSingleReview } from '@/services/reviewsApi';
 import { resolveDate } from '@/util/date';
 import { resolveRating } from '../../util/ratingUtils';
+import Skeleton from '@/components/skeleton/skeleton';
 
 interface ReplyToReviewPageProps {
   params: {
@@ -43,7 +44,7 @@ export default function ReplyToReviewPage({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { currentUser, autoLoginUser, registerUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
     // try re-login user if not current user auth
@@ -84,9 +85,15 @@ export default function ReplyToReviewPage({
     }
   };
 
+  // loading condition
+  if (loading) {
+    return (
+      <Skeleton type='seller_review' />
+    );
+  }
+
   return (
     <>
-      {loading && <div className="loading">Loading...</div>}
       {error && <div className="error">{error}</div>}
       <div className="w-full md:w-[500px] md:mx-auto p-4">
       <h1 className={HEADER}>{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_HEADER', { seller_id: sellerName })}</h1>

@@ -20,7 +20,6 @@ import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
 import { AppContext } from '../../../../context/AppContextProvider';
-import { autoSigninUser } from '@/util/auth';
 import { toast } from 'react-toastify';
 import { createUserSettings } from '@/services/userSettingsApi';
 import { IUserSettings } from '@/constants/types';
@@ -58,11 +57,11 @@ function Sidebar(props: any) {
     Themes: false,
     Languages: false,
   });
-  const { currentUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(()=>{
     if (!currentUser){
-      autoSigninUser;
+      autoLoginUser;
     }
   })
 

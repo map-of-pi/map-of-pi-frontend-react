@@ -45,7 +45,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
 
     if (isInitiated) {  
       try {
-        const pioneerAuth = await Pi.authenticate(['username'], onIncompletePaymentFound);       
+        const pioneerAuth = await Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);       
         const authResult = await PiAuthentication(pioneerAuth.accessToken);
         console.log('Authenticated Pioneer ID: ', authResult.username);
         const user: IUser = {

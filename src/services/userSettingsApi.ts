@@ -15,9 +15,9 @@ export const fetchUser = async (userId: string) => {
 };
 
 // Fetch a single pioneer user configuration settings
-export const fetchUserSettings = async (userId: string) => {
+export const fetchUserSettings = async () => {
   try {
-    const response = await axiosClient.get(`/user-preferences/${userId}`);
+    const response = await axiosClient.get(`/user-preferences/me`);
     return response.data;
 
   } catch (error: any) {
@@ -25,7 +25,7 @@ export const fetchUserSettings = async (userId: string) => {
       toast.info(error.response.data.message);
       return null
     }
-    console.error(`Error fetching Pioneer user settings with ID ${userId}: `, error);
+    console.error(`Error fetching Pioneer user settings: `, error);
     throw error;
   }
 };
