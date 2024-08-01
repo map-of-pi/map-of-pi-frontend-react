@@ -193,6 +193,9 @@
         "SELECT_EMOJI_EXPRESSION": "Por favor, selecciona una expresión con emoji"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Cargando datos..."
+    "LOADING_SCREEN_MESSAGE": "Cargando datos...",
+    "VALIDATION": {
+      "UNEXPECTED_ERROR_MESSAGE": "Ocurrió un error inesperado"
+    }
   }
 }

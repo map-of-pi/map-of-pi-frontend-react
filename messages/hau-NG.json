@@ -194,6 +194,9 @@
         "SELECT_EMOJI_EXPRESSION": "Da fatan za a zaɓi emoji mai bayyana rai"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Ana ɗaukar bayanai..."
+    "LOADING_SCREEN_MESSAGE": "Ana ɗaukar bayanai...",
+    "VALIDATION": {
+      "UNEXPECTED_ERROR_MESSAGE": "An samu kuskure da ba a zata ba"
+    }
   }
 }

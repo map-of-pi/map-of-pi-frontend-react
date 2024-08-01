@@ -1,32 +1,19 @@
-import { toast } from "react-toastify";
-
 import axiosClient from "@/config/client";
 import { IUserSettings } from "@/constants/types";
-
-// Fetch a single pioneer user
-export const fetchUser = async (userId: string) => {
-  try {
-    const response = await axiosClient.get(`/users/${userId}`);
-    console.log('Pioneer user ', response.data);
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching Pioneer user with ID ${userId}: `, error);
-    throw error;
-  }
-};
+import { handleAxiosError } from "@/util/error";
 
 // Fetch a single pioneer user configuration settings
 export const fetchUserSettings = async () => {
   try {
     const response = await axiosClient.get(`/user-preferences/me`);
-    return response.data;
-
-  } catch (error: any) {
-    if (error.response && error.response.data) {
-      toast.info(error.response.data.message);
-      return null
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      console.error(`Fetch user settings failed: ${response.status}`);
+      return null;
     }
-    console.error(`Error fetching Pioneer user settings: `, error);
+  } catch (error: any) {
+    handleAxiosError(error);
     throw error;
   }
 };
@@ -37,14 +24,13 @@ export const createUserSettings = async (formData: IUserSettings) => {
     const response = await axiosClient.put('/user-preferences/add', {json: JSON.stringify(formData)});
     if (response.status === 200) {
       return response.data;
+    } else {
+      console.error(`Create user settings failed: ${response.status}`);
+      return null;
     }
   } catch (error: any) {
-    if (error.response && error.response.data) {
-      toast.info(error.response.data.message);
-    }else {
-      toast.error('Error setting user preference');
-    }
-    return null;
+    handleAxiosError(error);
+    throw error;
   }
 };
 

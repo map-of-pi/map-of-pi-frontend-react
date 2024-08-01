@@ -1,5 +1,5 @@
 import axiosClient from "@/config/client";
-import { toast } from "react-toastify";
+import { handleAxiosError } from "@/util/error";
 
 // Fetch all sellers or within bounds
 export const fetchSellers = async (origin: any, radius: number) => {
@@ -8,9 +8,14 @@ export const fetchSellers = async (origin: any, radius: number) => {
       origin,
       radius
     });
-    return response.data;
-  } catch (error:any) {
-    console.error('Error fetching sellers: ', error.response ? error.response.data : error.message);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      console.error(`Fetch sellers failed: ${response.status}`);
+      return null;
+    }
+  } catch (error: any) {
+    handleAxiosError(error);
     throw error;
   }
 };
@@ -18,12 +23,14 @@ export const fetchSellers = async (origin: any, radius: number) => {
 export const fetchSingleSeller = async (sellerId: string) => {
   try {
     const response = await axiosClient.get(`/sellers/${sellerId}`);
-    return response.data;
-  } catch (error:any) {
-    if (error.response && error.response.status === 404) {
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      console.error(`Fetch single seller failed: ${response.status}`);
       return null;
     }
-    console.error(`Error fetching seller with ID ${sellerId}: `, error);
+  } catch (error: any) {
+    handleAxiosError(error);
     throw error;
   }
 };
@@ -31,13 +38,14 @@ export const fetchSingleSeller = async (sellerId: string) => {
 export const fetchSellerRegistration = async () => {
   try {
     const response = await axiosClient.post('/sellers/me');
-    return response.data;
-  } catch (error:any) {
-    if (error.response && error.response.status === 404) {
-      toast.error("user not register as seller")
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      console.error(`Fetch seller registration failed: ${response.status}`);
       return null;
     }
-    console.error(`Error fetching seller registration `, error);
+  } catch (error: any) {
+    handleAxiosError(error);
     throw error;
   }
 };
@@ -45,10 +53,15 @@ export const fetchSellerRegistration = async () => {
 // Register or update seller
 export const registerSeller = async (formData: any) => {
   try {
-    const response = await axiosClient.post('/sellers/register', {json: JSON.stringify(formData)});
-    return response.data.seller;
-  } catch (error) {
-    console.error('Error registering or updating seller: ', error);
+    const response = await axiosClient.put('/sellers/register', {json: JSON.stringify(formData)});
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      console.error(`Seller registeration failed: ${response.status}`);
+      return null;
+    }
+  } catch (error: any) {
+    handleAxiosError(error);
     throw error;
   }
 };

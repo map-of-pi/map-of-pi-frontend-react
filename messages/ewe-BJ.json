@@ -193,6 +193,9 @@
         "SELECT_EMOJI_EXPRESSION": "Mɛdɔ dzi emoji la ƒe agblɔɖeɖe"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Ɣe siwo..."
+    "LOADING_SCREEN_MESSAGE": "Ɣe siwo...",
+    "VALIDATION": {
+      "UNEXPECTED_ERROR_MESSAGE": "Nuxlɔ̃sia na mi ɖe mɔ o"
+    }
   }
 }
