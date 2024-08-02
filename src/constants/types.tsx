@@ -2,6 +2,7 @@ export type SellerType = {
   seller_id: string;
   name: string;
   description: string;
+  seller_type: string;
   image: string;
   address: string;
   sale_items: string;
@@ -14,7 +15,7 @@ export type SellerType = {
 };
 
 export type ReviewFeedbackType = {
-  review_id: string;
+  _id: string;
   review_receiver_id: string;
   review_giver_id: string;
   reply_to_review_id: string | null;
@@ -28,4 +29,15 @@ export interface IUser {
   pi_uid: string;
   pi_username: string;
   user_name: string;
+}
+
+export interface IUserSettings {
+  user_settings_id?: string | null;
+  email?: string;
+  phone_number?: number;
+  image?: string; 
+  search_map_center?: {
+    type: 'Point';
+    coordinates: [number, number];
+  };
 }

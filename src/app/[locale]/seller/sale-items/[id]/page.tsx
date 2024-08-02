@@ -14,7 +14,7 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import ConfirmDialog from '@/components/shared/confirm';
 import { PiFestJson } from '@/constants/demoAPI';
 import Skeleton from '@/components/skeleton/skeleton';
-import { fetchSingleSeller } from '@/services/api';
+import { fetchSingleSeller } from '@/services/sellerApi';
 
 export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -34,6 +34,12 @@ export default function Page({ params }: { params: { id: string } }) {
   const { currentUser, autoLoginUser, registerUser } = useContext(AppContext);
 
   useEffect(() => {
+    // try re-login user if not current user auth
+    if (!currentUser) {
+      console.log("Not logged in; pending login attempt..");
+      autoLoginUser();
+    };
+    
     const getSellerData = async () => {
       try {
         const data = await fetchSingleSeller(sellerId); //'testme'
@@ -46,19 +52,8 @@ export default function Page({ params }: { params: { id: string } }) {
     };
     getSellerData();
 
-    // try re-login user if not current user auth
-    const token = localStorage.getItem('mapOfPiToken');
-    if (!token) {
-      console.log("Not logged in; pending login..");
-      registerUser();
-    } else {
-      if (!currentUser) {
-        autoLoginUser();
-        console.log("Logged in");
-      }
-    }
-
-  }, [currentUser]);
+    
+  }, []);
 
   const handleNavigation = (route: string) => {
     if (isSaveEnabled) {

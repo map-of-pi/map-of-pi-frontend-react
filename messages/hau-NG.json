@@ -8,6 +8,7 @@
     },
     "AUTHENTICATION": {
       "SUCCESSFUL_LOGIN_MESSAGE": "Shiga cikin nasara",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Shiga ya kasa",
       "PI_INFORMATION_NOT_FOUND_MESSAGE": "Bayanin Pi ba a samu ba"
     }
   },
@@ -22,7 +23,11 @@
       "PRIVACY_POLICY": "Takardar Kebantawa",
       "TERMS_OF_SERVICE": "Sharuɗɗan Sabis"
     },
-    "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi"
+    "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Sabunta zaɓuɓɓukan mai amfani ya yi nasara",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Sabuntawar zaɓuɓɓukan mai amfani ta gaza"
+    }
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
@@ -45,6 +50,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Bayyana wurin da kuke siyarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
       "VALIDATION": {
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rijista ta sayarwa ta samu nasara",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Rijista ta gaza saboda mai amfani ba a tantance shi ba"
       }
     },
@@ -188,6 +194,9 @@
         "SELECT_EMOJI_EXPRESSION": "Da fatan za a zaɓi emoji mai bayyana rai"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Ana ɗaukar bayanai..."
+    "LOADING_SCREEN_MESSAGE": "Ana ɗaukar bayanai...",
+    "VALIDATION": {
+      "UNEXPECTED_ERROR_MESSAGE": "An samu kuskure da ba a zata ba"
+    }
   }
 }

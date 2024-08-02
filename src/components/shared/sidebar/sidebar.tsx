@@ -6,8 +6,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import {
@@ -19,6 +20,9 @@ import { menu } from '@/constants/menu';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
+import { IUserSettings } from '@/constants/types';
+import { createUserSettings } from '@/services/userSettingsApi';
+import { AppContext } from '../../../../context/AppContextProvider';
 
 // type definitions for menu items
 interface MenuItem {
@@ -53,6 +57,13 @@ function Sidebar(props: any) {
     Themes: false,
     Languages: false,
   });
+  const { currentUser, autoLoginUser } = useContext(AppContext);
+
+  useEffect(()=>{
+    if (!currentUser){
+      autoLoginUser;
+    }
+  })
 
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
   const handlePhoneNumberChange = (value: string | undefined) => {
@@ -115,6 +126,37 @@ function Sidebar(props: any) {
     }
   };
 
+ // Function to submit user preference settings to the database
+const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  let inputName = e.target.name;
+  let inputValue = e.target.value;
+  let searchCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null'); // Provide default value
+
+  if (inputValue !== "") {
+    const userSettingsData: IUserSettings = {
+      [inputName]: inputValue,
+    };
+
+    if (searchCenter) {
+      userSettingsData.search_map_center = {
+        type: 'Point' as const,
+        coordinates: [searchCenter[0], searchCenter[1]] as [number, number]
+      };
+    }
+
+    try {
+      const settings = await createUserSettings(userSettingsData);
+      if (settings) {
+        toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
+      }
+    } catch (error: any) {
+      toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
+    }
+  } else {
+    return null;
+  }
+};
+
   const translateMenuTitle = (title: string): string => {
     switch (title) {
       case 'Languages':
@@ -157,11 +199,15 @@ function Sidebar(props: any) {
               label={t('SIDE_NAVIGATION.EMAIL_ADDRESS_FIELD')}
               placeholder="mapofpi@mapofpi.com"
               type="email"
+              name="email"
+              onBlur={handleFocusChange}
             />
             <TelephoneInput
               label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
               value={phoneNumber}
+              name="phone_number"
               onChange={handlePhoneNumberChange}
+              onBlur={handleFocusChange}
             />
             <div className="pt-2 flex flex-col gap-5">
               <Button
@@ -178,7 +224,7 @@ function Sidebar(props: any) {
                   props.setToggleDis(false); // Close sidebar on click
                 }}
               />
-              <Link href="/seller/reviews/userid">
+              <Link href={ currentUser? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
                 <Button
                   label={t('SHARED.CHECK_REVIEWS')}
                   styles={{

@@ -8,6 +8,7 @@
     },
     "AUTHENTICATION": {
       "SUCCESSFUL_LOGIN_MESSAGE": "Inicio de sesión exitoso",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Inicio de sesión fallido",
       "PI_INFORMATION_NOT_FOUND_MESSAGE": "Información de Pi no encontrada"
     }
   },
@@ -22,7 +23,11 @@
       "PRIVACY_POLICY": "Política de Privacidad",
       "TERMS_OF_SERVICE": "Términos de Servicio"
     },
-    "CONTACT_MAP_OF_PI": "Contactar a Map of Pi"
+    "CONTACT_MAP_OF_PI": "Contactar a Map of Pi",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Actualización de preferencias del usuario exitosa",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "La actualización de las preferencias del usuario falló"
+    }
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
@@ -45,6 +50,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe la ubicación desde donde estás vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "VALIDATION": {
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro de vendedor enviado con éxito",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "El registro falló porque el usuario no está autenticado"
       }
     },
@@ -187,6 +193,9 @@
         "SELECT_EMOJI_EXPRESSION": "Por favor, selecciona una expresión con emoji"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Cargando datos..."
+    "LOADING_SCREEN_MESSAGE": "Cargando datos...",
+    "VALIDATION": {
+      "UNEXPECTED_ERROR_MESSAGE": "Ocurrió un error inesperado"
+    }
   }
 }
