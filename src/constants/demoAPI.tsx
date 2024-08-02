@@ -10,7 +10,7 @@ export const itemData = {
     description: "Discover handcrafted jewelry and artisanal candles, available for purchase using Pi cryptocurrency. Elevate your space and style with our unique offerings today.",
     sale_items: "seller items placeholder",
     average_rating: 5.0,
-    trust_meter_rating: 5.0,
+    trust_meter_rating: 100,
     type: "pioneer",
     coordinates: [],
     order_online_enabled_pref: false,
@@ -32,7 +32,6 @@ export const PiFestJson = {
     comment: "I am happy to let you all know that consumer to seller relationship is good.",
     image: "/images/shared/upload.png",
     review_date: "23 Oct. 2023 01:00pm",
-      
   },
 
   Seller: {

@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react';
 
 import { TextArea } from '../Forms/Inputs/Inputs';
 import { FileInput } from '../Forms/Inputs/Inputs';
-import { createReview } from '@/services/reviewsAPI';
+import { createReview } from '@/services/reviewsApi';
+import { toast } from 'react-toastify';
 
 interface Emoji {
   name: string;
@@ -32,7 +33,6 @@ export default function EmojiPicker(props: any) {
   const [reviewEmoji, setReviewEmoji] = useState<number | null>(null);
   const [isSaveActive, setIsSaveActive] = useState<boolean>(false);
 
-
   // function preview image upload
   useEffect(() => {
     if (files.length === 0) return;
@@ -42,7 +42,6 @@ export default function EmojiPicker(props: any) {
       objectUrls.forEach((url) => URL.revokeObjectURL(url));
     };
   }, [files]);
-
 
   // function to toggle save button
   useEffect(() => {
@@ -74,11 +73,8 @@ export default function EmojiPicker(props: any) {
   }
 
   const handleSave = async () => {
-    const token = localStorage.getItem('mapOfPiToken');
-    const currentUser = props.currentUser;
-
     try {
-      if (currentUser && token) {
+      if (props.currentUser) {
         if (reviewEmoji === null) {
           return window.alert(t('SHARED.REACTION_RATING.VALIDATION.SELECT_EMOJI_EXPRESSION'));
         } else {
@@ -86,26 +82,27 @@ export default function EmojiPicker(props: any) {
           formData.append('comment', comments);
           formData.append('rating', reviewEmoji.toString());
           formData.append('review_receiver_id', props.sellerId);
-          formData.append('review_giver_id', currentUser.pi_uid);
           files.forEach((file) => formData.append('image', file));
           formData.append('reply_to_review_id', props.replyToReviewId || '');
 
           console.log('Form Data:', formData);
 
-          await createReview(formData, token);
-
-          window.alert(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
+          const newReview = await createReview(formData);
+          if (newReview) {
+            toast.success(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
+          }
           resetReview();
         }
       } else {
         console.log('Unable to submit review; user not authenticated.');
-        window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
+        toast.error(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
       }
     } catch (error) {
       console.error('Error saving review:', error);
-      window.alert(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
+      // toast.error(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
     }
   };
+  
   // Function to handle the click of an emoji
   const handleEmojiClick = (emojiValue: number) => {
     if (selectedEmoji === emojiValue) {

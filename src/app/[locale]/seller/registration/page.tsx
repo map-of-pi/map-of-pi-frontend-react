@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { useState, useEffect, useContext } from 'react';
+import { toast } from 'react-toastify';
 
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
@@ -16,8 +17,11 @@ import {
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
+import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
-import { fetchSingleSeller, registerNewSeller } from '@/services/api';
+import { SellerType } from '@/constants/types';
+import { sellerPrompt } from '@/constants/placeholders';
+import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 
@@ -33,9 +37,9 @@ interface Seller {
   average_rating: number;
   trust_meter_rating: number;
   type: string;
-  coordinates: number [];
+  coordinates: number[];
   order_online_enabled_pref: boolean;
-};
+}
 
 const SellerRegistrationForm = () => {
   const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
@@ -49,59 +53,65 @@ const SellerRegistrationForm = () => {
     itemsForSale: '',
     sellerName: '',
     sellerType: 'Pioneer',
-    businessName: '',
     sellerDescription: '',
     sellerAddress: '',
   });
-  const [dbSeller, setDbSeller] = useState<Seller>(placeholderSeller);
-  const [isSellerExist, setSellerExist] = useState<boolean>(false)
+  const [dbSeller, setDbSeller] = useState<SellerType | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [previewImage, setPreviewImage] = useState<string[]>([]);
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-  const { currentUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
+    if (!currentUser) {
+      console.log("Not logged in; pending login attempt..");
+      autoLoginUser();
+    }
+
     const getSellerData = async () => {
-      // Check if user is authenticated
-      if (currentUser) {
-        try {
-          const data = await fetchSingleSeller(currentUser.pi_uid);
-          if (data) {
-            console.log('Seller data:', data);
-            setDbSeller(data); // Ensure this is a single object, not an array
-            setSellerExist(true)
-          } else {
-            // Seller not found scenario
-            console.log('Seller not found');
-            setDbSeller(placeholderSeller); // Set placeholder seller
-            setSellerExist(false)
-          }
-        } catch (error) {
-          console.error('Error fetching seller data: ', error);
-          setError('Error fetching seller data');
-        } finally {
-          setLoading(false);
+      try {
+        const data = await fetchSellerRegistration();
+        if (data) {
+          console.log('Seller data:', data);
+          setDbSeller(data); // Ensure this is a single object, not an array
+        } else {
+          console.log('Seller not found');
+          setDbSeller(null); // Set placeholder seller
         }
-      } else {
-        console.log('No current user found');
-        setDbSeller(placeholderSeller); // Set placeholder seller if no user is authenticated
+      } catch (error) {
+        console.error('Error fetching seller data: ', error);
+        setError('Error fetching seller data');
+      } finally {
         setLoading(false);
       }
     };
 
     getSellerData();
-  }, [currentUser]); // Dependency array to rerun effect when currentUser changes
+  }, [currentUser]);
+
+  // Initialize formData with dbSeller values if available
+  useEffect(() => {
+    if (dbSeller) {
+      setFormData({
+        sellerName: dbSeller.name || '',
+        sellerDescription: dbSeller.description || '',
+        sellerAddress: dbSeller.address || '',
+        itemsForSale: dbSeller.sale_items || '',
+        sellerType: dbSeller.seller_type || '',
+      });
+    }
+  }, [dbSeller]);
 
   useEffect(() => {
     const {
       itemsForSale,
       sellerName,
-      businessName,
       sellerDescription,
       sellerAddress,
     } = formData;
@@ -109,12 +119,21 @@ const SellerRegistrationForm = () => {
       !!(
         itemsForSale &&
         sellerName &&
-        businessName &&
         sellerDescription &&
         sellerAddress
       ),
     );
   }, [formData]);
+
+  // function preview image upload
+  useEffect(() => {
+    if (files.length === 0) return;
+    const objectUrls = files.map((file) => URL.createObjectURL(file));
+    setPreviewImage(objectUrls);
+    return () => {
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [files]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -122,7 +141,11 @@ const SellerRegistrationForm = () => {
     >,
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+    
     if (value !== '' && formData) {
       setIsSaveEnabled(true);
     } else {
@@ -130,53 +153,60 @@ const SellerRegistrationForm = () => {
     }
   };
 
-  const handleAddImages = () => {};
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-    }
-  };
-
-  const handleNavigation = (route: string) => {
-    if (isSaveEnabled) {
-      setLinkUrl(route);
-      setShowConfirmDialog(true);
-    } else {
-      router.push(`/${route}`);
+  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = e.target.files;
+    if (selectedFiles && selectedFiles.length > 0) {
+      setFiles(Array.from(selectedFiles));
     }
   };
 
   // Function to save data to the database
-  const handleSave = () => {  
-    // signup or login current user
-    const token = localStorage.getItem('mapOfPiToken');
+  const handleSave = async () => {  
+    // check if user is authenticated and form is valid
+    if (!currentUser || !isFormValid) {
+      console.log('Form submission failed');
+      return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
+    }
+    
+    const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
+    console.log('coordinates', sellCenter);
+    console.log('form data:', formData);
+
+    const regForm = {
+      name: formData.sellerName,
+      description: formData.sellerDescription,
+      address: formData.sellerAddress,
+      sale_items: formData.itemsForSale,
+      seller_type: formData.sellerType,
+    } as {
+      name: string;
+      description: string;
+      address: string;
+      sale_items: string;
+      seller_type: string;
+      sell_map_center?: {
+        type: 'Point';
+        coordinates: [number, number];
+      };
+    };  
+
+    // Add sell_map_center field only if sellCenter is available
+    if (sellCenter) {
+      regForm.sell_map_center = {
+        type: 'Point' as const,
+        coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
+      };
+    }  
+    console.log('registration form', regForm);
 
     try {
-      if (currentUser && token && isFormValid) {
-        let regForm = {
-          seller_id: currentUser.pi_uid,
-          name: formData.businessName,
-          description: formData.sellerDescription,
-          image: '',
-          address: formData.sellerAddress,
-          sale_items: formData.itemsForSale,
-          average_rating: {
-            $numberDecimal: '5.0'
-          },
-          trust_meter_rating: 100,
-          coordinates: [0, 0] as [number, number], // TODO: pass in sell center coordinates.
-          order_online_enabled_pref: false
-        }
-        registerNewSeller(regForm, token);
-      } else { 
-        console.log('Registration failed; User is not authenticated')
-        return window.alert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
-      }
+      const seller = await registerSeller(regForm);
+      setDbSeller(seller)
+      seller ? toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION')) : null;
     } catch (error) {
-        console.error('Error saving review:', error);
+      console.error('Error saving seller registration: ', error);
     }
-  };
+  }
 
   const translateSellerCategory = (category: string): string => {
     switch (category) {
@@ -193,6 +223,13 @@ const SellerRegistrationForm = () => {
     }
   };
 
+  // loading condition
+  if (loading) {
+    return (
+      <Skeleton type='seller_registration' />
+    );
+  }
+
   return (
     <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
@@ -207,12 +244,10 @@ const SellerRegistrationForm = () => {
           <div className="mb-2">
             <TextArea
               name="itemsForSale"
-              placeholder={t(
-                'SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_PLACEHOLDER',
-              )}
+              placeholder={sellerPrompt.sale_items}
               value={formData.itemsForSale}
               onChange={handleChange}
-              styles={{height: '200px'}}
+              styles={{ height: '200px' }}
             />
           </div>
         </div>
@@ -241,17 +276,17 @@ const SellerRegistrationForm = () => {
         </div>
         <ToggleCollapse
           header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
-          <TrustMeter ratings={dbSeller.trust_meter_rating} />
+          <TrustMeter ratings={dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating} />
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm">
               {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
-                seller_review_rating: dbSeller.trust_meter_rating,
+                seller_review_rating: dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating,
               })}
             </p>
-            <Link href="/seller/reviews/userid">
+            <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#'}>
               <OutlineBtn
+                disabled={!currentUser}
                 label={t('SHARED.CHECK_REVIEWS')}
-                onClick={() => handleNavigation('seller/reviews')}
               />
             </Link>
           </div>
@@ -268,102 +303,83 @@ const SellerRegistrationForm = () => {
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ': '}
             </span>
-            <span>{dbSeller.phone}</span>
+            <span>{dbSeller ? dbSeller.name : placeholderSeller.phone}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ': '}
             </span>
-            <span>{dbSeller.email}</span>
+            <span>{dbSeller ? dbSeller.name : placeholderSeller.email}</span>
           </div>
         </ToggleCollapse>
         <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}>
-        <div className="mb-4">
-          <Input
-            label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
-            name="sellerName"
-            placeholder="peejen"
-            type="text"
-            value={formData.sellerName}
-            onChange={handleChange}
-          />
+          <div className="mb-4">
+            <Input
+              label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
+              name="sellerName"
+              placeholder={sellerPrompt.name}
+              type="text"
+              value={formData.sellerName}
+              onChange={handleChange}
+            />
 
-          <Select
-            label={t(
-              'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL',
+            <Select
+              label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
+              name="sellerType"
+              value={translateSellerCategory(formData.sellerType)}
+              onChange={handleChange}
+              options={[
+                {
+                  value: 'Pioneer',
+                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
+                },
+                {
+                  value: 'Other',
+                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'),
+                },
+              ]}
+            />
+
+            <TextArea
+              label={t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')}
+              name="sellerDescription"
+              placeholder={sellerPrompt.description}
+              value={formData.sellerDescription}
+              onChange={handleChange}
+            />
+
+            <TextArea
+              label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
+              name="sellerAddress"
+              placeholder={sellerPrompt.address}
+              value={formData.sellerAddress}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-4">
+            <FileInput
+              label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+              images={[]}
+              handleAddImages={handleAddImages}
+            />
+            {previewImage && (
+              <div className="mt-2">
+                <p className="text-sm text-zinc-600">{previewImage}</p>
+              </div>
             )}
-            name="sellerType"
-            value={translateSellerCategory(formData.sellerType)}
-            onChange={handleChange}
-            options={[
-              {
-                value: t(
-                  'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER',
-                ),
-                name: 'Pioneer',
-              },
-              {
-                value: t(
-                  'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER',
-                ),
-                name: 'Other',
-              },
-            ]}
-          />
-
-          <Input
-            label={t('SCREEN.SELLER_REGISTRATION.SELLER_BUSINESS_NAME')}
-            name="businessName"
-            placeholder="M & M Restaurant"
-            type="text"
-            value={formData.businessName}
-            onChange={handleChange}
-          />
-
-          <TextArea
-            label={t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')}
-            name="sellerDescription"
-            placeholder="I sell test items for pay with Pi"
-            value={formData.sellerDescription}
-            onChange={handleChange}
-          />
-
-          <TextArea
-            label={t(
-              'SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL',
-            )}
-            name="sellerAddress"
-            placeholder={t(
-              'SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER',
-            )}
-            value={formData.sellerAddress}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-4">
-          <FileInput
-            label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
-            images={[]}
-            handleAddImages={handleAddImages}
-          />
-          {selectedFile && (
-            <div className="mt-2">
-              <p className="text-sm text-zinc-600">{selectedFile.name}</p>
-            </div>
-          )}
-        </div>
-        <div className="mb-4 mt-3 ml-auto w-min">
-          <Button
-            label={t('SHARED.SAVE')}
-            disabled={!isSaveEnabled}
-            styles={{
-              color: '#ffc153',
-              height: '40px',
-              padding: '10px 15px',
-            }}
-            onClick={handleSave}
-          />
-        </div>
+          </div>
+          <div className="mb-4 mt-3 ml-auto w-min">
+            <Button
+              label={t('SHARED.SAVE')}
+              disabled={!isSaveEnabled}
+              styles={{
+                color: '#ffc153',
+                height: '40px',
+                padding: '10px 15px',
+              }}
+              onClick={handleSave}
+            />
+          </div>
         </ToggleCollapse>
 
         <ConfirmDialog

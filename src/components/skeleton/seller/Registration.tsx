@@ -1,7 +1,6 @@
 import '../skeleton.css';
 
-
-export const SkeletonSellerReg = () => {
+export const SkeletonSellerRegistration = () => {
     return (
       <>
         <div className="w-full md:w-[500px] md:mx-auto p-4 skeleton">

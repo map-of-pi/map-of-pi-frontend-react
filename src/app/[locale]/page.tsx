@@ -38,15 +38,14 @@ export default function Index() {
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
   const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
-  const { registerUser, autoLoginUser } = useContext(AppContext);
+  const { registerUser, autoLoginUser, currentUser } = useContext(AppContext);
 
   // Default map center (example: New York City)
   const defaultMapCenter = { lat: 20, lng: -74.0060 };
 
   useEffect(() => {
     // signup or login user
-    const token = localStorage.getItem('mapOfPiToken');
-    if (!token) {
+    if (!currentUser) {
       registerUser();
     } else {
       autoLoginUser();
