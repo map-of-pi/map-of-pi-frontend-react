@@ -1,7 +1,3 @@
-import axiosClient from "@/config/client";
-import axios from "axios";
-
-
 interface PaymentDTO {
   amount: number,
   user_uid: string,
@@ -28,5 +24,3 @@ export const onIncompletePaymentFound = (payment: PaymentDTO) => {
   console.log("onIncompletePaymentFound", payment);
   // return axiosClient.post('/payments/incomplete', {payment});
 }
-
-
