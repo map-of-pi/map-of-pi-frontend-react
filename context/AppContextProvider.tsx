@@ -58,7 +58,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     if (isInitiated) {
       console.log('in isInitiated');
       try {
-        const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);       
+        const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);
+        console.log('Pioneer Auth:', pioneerAuth);
         const res = await axiosClient.post("/users/authenticate", {pioneerAuth});
 
         if (res.status === 200) {
