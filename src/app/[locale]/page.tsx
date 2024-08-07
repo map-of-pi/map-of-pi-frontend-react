@@ -45,11 +45,12 @@ export default function Index() {
 
   useEffect(() => {
     // signup or login user
-    if (!currentUser) {
-      registerUser();
-    } else {
-      autoLoginUser();
-    }
+    registerUser();
+    // if (!currentUser) {
+    //   registerUser();
+    // } else {
+    //   autoLoginUser();
+    // }
 
     const fetchLocationOnLoad = async () => {
       try {
