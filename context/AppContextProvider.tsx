@@ -13,8 +13,17 @@ import { toast } from 'react-toastify';
 
 import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
-import { onIncompletePaymentFound, PiAuthentication } from '@/util/auth';
+import { onIncompletePaymentFound } from '@/util/auth';
 import { IUser } from '@/constants/types';
+
+
+type AuthResult = {
+  accessToken: string,
+  user: {
+    uid: string,
+    username: string
+  }
+};
 
 interface IAppContextProps {
   currentUser: IUser | null;
@@ -41,19 +50,14 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
   const registerUser = async () => {
-    const isInitiated= await Pi.initialized;
+    await Pi.init({version: '2.0', sandbox: process.env.NODE_ENV === 'development' });
+
+    let isInitiated = Pi.initialized;
 
     if (isInitiated) {  
       try {
-        const pioneerAuth = await Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);       
-        const authResult = await PiAuthentication(pioneerAuth.accessToken);
-        console.log('Authenticated Pioneer ID: ', authResult.username);
-        const user: IUser = {
-          pi_username: authResult.username,
-          pi_uid: authResult.uid,
-          user_name: authResult.username,
-        }
-        const res = await axiosClient.post("/users/authenticate", {user}) 
+        const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);       
+        const res = await axiosClient.post("/users/authenticate", {pioneerAuth});
 
         if (res.status === 200) {
           console.log('Signup response', res);
