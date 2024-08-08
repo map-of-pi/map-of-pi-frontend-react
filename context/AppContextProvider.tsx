@@ -51,7 +51,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
 
   const registerUser = async () => {
     console.log('in registerUser()');
-    await Pi.init({version: '2.0', sandbox: process.env.NODE_ENV === 'development' });
+    await Pi.init({version: '2.0', sandbox: true });
 
     let isInitiated = Pi.initialized;
 
