@@ -95,11 +95,13 @@ const SellerRegistrationForm = () => {
     getSellerData();
   }, [currentUser]);
 
+
+  const defaultSellerName = currentUser? currentUser?.user_name : '';
   // Initialize formData with dbSeller values if available
   useEffect(() => {
     if (dbSeller) {
       setFormData({
-        sellerName: dbSeller.name || '',
+        sellerName: dbSeller.name || defaultSellerName,
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
         itemsForSale: dbSeller.sale_items || '',
@@ -111,16 +113,12 @@ const SellerRegistrationForm = () => {
   useEffect(() => {
     const {
       itemsForSale,
-      sellerName,
-      sellerDescription,
-      sellerAddress,
+      sellerName
     } = formData;
     setIsFormValid(
       !!(
         itemsForSale &&
-        sellerName &&
-        sellerDescription &&
-        sellerAddress
+        sellerName
       ),
     );
   }, [formData]);
@@ -196,12 +194,12 @@ const SellerRegistrationForm = () => {
         type: 'Point' as const,
         coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
       };
-    }  
+    }; 
     console.log('registration form', regForm);
 
     try {
       const seller = await registerSeller(regForm);
-      setDbSeller(seller)
+      setDbSeller(seller);
       seller ? toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION')) : null;
     } catch (error) {
       console.error('Error saving seller registration: ', error);
@@ -253,7 +251,7 @@ const SellerRegistrationForm = () => {
         </div>
         <Link href="/map-center">
           <Button
-            label={t('SHARED.SEARCH_CENTER')}
+            label={'Set Sell Center'}
             styles={{
               color: '#ffc153',
               height: '40px',
