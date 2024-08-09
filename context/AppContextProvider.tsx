@@ -8,6 +8,7 @@ import {
   useState,
   SetStateAction,
   ReactNode,
+  useEffect
 } from 'react';
 import { toast } from 'react-toastify';
 
@@ -92,6 +93,15 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       await registerUser();
     }
   }
+
+  useEffect(() => {
+    // signup or login user
+    if (!currentUser) {
+      registerUser();
+    } else {
+      autoLoginUser();
+    }
+  }, []);
 
   return (
     <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser}}>

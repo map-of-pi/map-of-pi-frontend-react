@@ -21,7 +21,7 @@ import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
 import { IUserSettings } from '@/constants/types';
-import { createUserSettings } from '@/services/userSettingsApi';
+import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
 import { AppContext } from '../../../../context/AppContextProvider';
 
 // type definitions for menu items
@@ -58,24 +58,69 @@ function Sidebar(props: any) {
     Languages: false,
   });
   const { currentUser, autoLoginUser } = useContext(AppContext);
-
-  useEffect(()=>{
-    if (!currentUser){
-      autoLoginUser;
-    }
-  })
-
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
+  const [email, setEmail] = useState<string | undefined>();
+  const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
+  const [showInfoModel, setShowInfoModel] = useState(false);
+  const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
+  const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
+
+  useEffect(() => {
+    if (!currentUser) {
+      autoLoginUser();
+    }
+
+    const getUserSettings = async () => {
+      const settings = await fetchUserSettings();
+      console.log("user settings", settings);
+      if (settings) {
+        setUserSettings(settings);
+        setPhoneNumber(settings.phone_number?.toString()); // Set phone number
+        setEmail(settings.email || ''); // Set email
+      } else {
+        setUserSettings(null);
+      }
+    };
+    getUserSettings();
+  }, []);
+
   const handlePhoneNumberChange = (value: string | undefined) => {
     setPhoneNumber(value);
   };
 
-  const [showInfoModel, setShowInfoModel] = useState(false);
-  const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
-  const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const handleAddImages = () => {};
+
+  const handleMenu = (title: any, url: string) => {
+    if (
+      title !== 'Themes' &&
+      title !== 'Languages' &&
+      title !== 'About Map of Pi'
+    ) {
+      router.push(url);
+      props.setToggleDis(false);
+    }
+  
+    if (
+      title === 'Themes' ||
+      title === 'Languages' ||
+      title === 'About Map of Pi'
+    ) {
+      setToggle({ ...toggle, [title]: !toggle[title] });
+      
+    }
+    if (toggle[title] === false) {
+      setTimeout(() => {
+        bottomRef.current!.scrollIntoView({ behavior: 'smooth' });
+      }, 90);
+    }
+  };
+  
 
   const handleChildMenu = (title: any, code: string) => {
     if (title === 'Languages') {
@@ -101,61 +146,37 @@ function Sidebar(props: any) {
     }
   };
 
-  const handleMenu = (title: any, url: string) => {
-    if (
-      title !== 'Themes' &&
-      title !== 'Languages' &&
-      title !== 'About Map of Pi'
-    ) {
-      router.push(url);
-      props.setToggleDis(false);
-    }
+  // Function to submit user preference settings to the database
+  const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    let inputName = e.target.name;
+    let inputValue = e.target.value;
+    let searchCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null'); // Provide default value
 
-    if (
-      title === 'Themes' ||
-      title === 'Languages' ||
-      title === 'About Map of Pi'
-    ) {
-      setToggle({ ...toggle, [title]: !toggle[title] });
-      
-    }
-    if (toggle[title] === false) {
-      setTimeout(() => {
-        bottomRef.current!.scrollIntoView({ behavior: 'smooth' });
-      }, 90);
+    if (inputValue !== "") {
+      const userSettingsData: IUserSettings = {
+        [inputName]: inputValue,
+      };
+
+      if (searchCenter) {
+        userSettingsData.search_map_center = {
+          type: 'Point' as const,
+          coordinates: [searchCenter[0], searchCenter[1]] as [number, number]
+        };
+      }
+
+      try {
+        const data = await createUserSettings(userSettingsData);
+        console.log('Side Nav:', data.settings);
+        if (data.settings) {
+          toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
+        }
+      } catch (error: any) {
+        toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
+      }
+    } else {
+      return null;
     }
   };
-
- // Function to submit user preference settings to the database
-const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-  let inputName = e.target.name;
-  let inputValue = e.target.value;
-  let searchCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null'); // Provide default value
-
-  if (inputValue !== "") {
-    const userSettingsData: IUserSettings = {
-      [inputName]: inputValue,
-    };
-
-    if (searchCenter) {
-      userSettingsData.search_map_center = {
-        type: 'Point' as const,
-        coordinates: [searchCenter[0], searchCenter[1]] as [number, number]
-      };
-    }
-
-    try {
-      const settings = await createUserSettings(userSettingsData);
-      if (settings) {
-        toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
-      }
-    } catch (error: any) {
-      toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
-    }
-  } else {
-    return null;
-  }
-};
 
   const translateMenuTitle = (title: string): string => {
     switch (title) {
@@ -200,6 +221,8 @@ const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLText
               placeholder="mapofpi@mapofpi.com"
               type="email"
               name="email"
+              value={email} // Prepopulate email field
+              onChange={handleEmailChange}
               onBlur={handleFocusChange}
             />
             <TelephoneInput
@@ -224,7 +247,7 @@ const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLText
                   props.setToggleDis(false); // Close sidebar on click
                 }}
               />
-              <Link href={ currentUser? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
+              <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
                 <Button
                   label={t('SHARED.CHECK_REVIEWS')}
                   styles={{
@@ -276,41 +299,39 @@ const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLText
                     )}
                   </div>
                   {/* MENU WITH CHILDREN */}
-                  {menu.children && 
-                    (
-                      toggle[menu.title] &&
-                      menu.children.map((child) => (
-                        <div key={child.id} className="ml-6">
-                          <div
-                            className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
-                            onClick={() =>
-                              handleChildMenu(menu.title, child.code)
-                            }>
-                            {child.icon && ( // conditional rendering
-                              <Image
-                                src={child.icon}
-                                alt={child.title}
-                                width={17}
-                                height={17}
-                                className={styles.lng_img}
-                              />
-                            )}
-                            {menu.title === 'Languages' &&
-                            isLanguageMenuItem(child) ? (
-                              <div className="ml-2 text-[14px] flex">
-                                <div className="font-bold">{child.label}</div>
-                                <div className="mx-1"> - </div>
-                                <div>{child.translation}</div>
-                              </div>
-                            ) : (
-                              <span className="ml-2 text-[14px]">
-                                {translateChildMenuTitle(child.title)}
-                              </span>
-                            )}
-                          </div>
+                  {menu.children &&
+                    toggle[menu.title] &&
+                    menu.children.map((child) => (
+                      <div key={child.id} className="ml-6">
+                        <div
+                          className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
+                          onClick={() =>
+                            handleChildMenu(menu.title, child.code)
+                          }>
+                          {child.icon && ( // conditional rendering
+                            <Image
+                              src={child.icon}
+                              alt={child.title}
+                              width={17}
+                              height={17}
+                              className={styles.lng_img}
+                            />
+                          )}
+                          {menu.title === 'Languages' &&
+                          isLanguageMenuItem(child) ? (
+                            <div className="ml-2 text-[14px] flex">
+                              <div className="font-bold">{child.label}</div>
+                              <div className="mx-1"> - </div>
+                              <div>{child.translation}</div>
+                            </div>
+                          ) : (
+                            <span className="ml-2 text-[14px]">
+                              {translateChildMenuTitle(child.title)}
+                            </span>
+                          )}
                         </div>
-                      )))
-                    }
+                      </div>
+                    ))}
                 </div>
               </>
             ))}

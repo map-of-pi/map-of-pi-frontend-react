@@ -19,11 +19,12 @@ import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
-import { SellerType } from '@/constants/types';
+import { IUserSettings, SellerType } from '@/constants/types';
 import { sellerPrompt } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
+import { fetchUserSettings } from '@/services/userSettingsApi';
 
 interface Seller {
   seller_id: string;
@@ -57,6 +58,7 @@ const SellerRegistrationForm = () => {
     sellerAddress: '',
   });
   const [dbSeller, setDbSeller] = useState<SellerType | null>(null);
+  const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -92,7 +94,18 @@ const SellerRegistrationForm = () => {
       }
     };
 
+    const getUserSettings = async () => {
+      const settings = await fetchUserSettings();
+      console.log("user settings", settings);
+      if(settings) {
+        setUserSettings(settings);
+      } else {
+        setUserSettings(null);
+      }
+    };
+
     getSellerData();
+    getUserSettings();
   }, [currentUser]);
 
 
@@ -161,7 +174,7 @@ const SellerRegistrationForm = () => {
   // Function to save data to the database
   const handleSave = async () => {  
     // check if user is authenticated and form is valid
-    if (!currentUser || !isFormValid) {
+    if (!currentUser) {
       console.log('Form submission failed');
       return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
     }
@@ -198,9 +211,9 @@ const SellerRegistrationForm = () => {
     console.log('registration form', regForm);
 
     try {
-      const seller = await registerSeller(regForm);
-      setDbSeller(seller);
-      seller ? toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION')) : null;
+      const data = await registerSeller(regForm);
+      setDbSeller(data.seller);
+      data.seller ? toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION')) : null;
     } catch (error) {
       console.error('Error saving seller registration: ', error);
     }
@@ -295,19 +308,19 @@ const SellerRegistrationForm = () => {
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ': '}
             </span>
-            <span>{dbSeller ? dbSeller.seller_id : ''}</span>
+            <span>{dbSeller ? dbSeller.name : ''}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ': '}
             </span>
-            <span>{dbSeller ? dbSeller.name : placeholderSeller.phone}</span>
+            <span>{userSettings ? userSettings.phone_number : ""}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ': '}
             </span>
-            <span>{dbSeller ? dbSeller.name : placeholderSeller.email}</span>
+            <span>{ userSettings ? userSettings.email : ""}</span>
           </div>
         </ToggleCollapse>
         <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}>
