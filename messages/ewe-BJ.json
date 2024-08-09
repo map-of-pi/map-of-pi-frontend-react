@@ -8,6 +8,7 @@
     },
     "AUTHENTICATION": {
       "SUCCESSFUL_LOGIN_MESSAGE": "Dzo le gbɔŋɔ le asi kplɔe",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Dɔ wòkplɔ nye",
       "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi ƒe nusia tɔ dɔ aɖe ma va dɔ o"
     }
   },
@@ -22,7 +23,11 @@
       "PRIVACY_POLICY": "Ameŋunyatakakawo Ŋuti Ðoɖo",
       "TERMS_OF_SERVICE": "Ɖoɖo ƒe tɔtrɔ"
     },
-    "CONTACT_MAP_OF_PI": "Wò Map of Pi me"
+    "CONTACT_MAP_OF_PI": "Wò Map of Pi me",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nuŋlɔdodoawo ƒe se se yia ɖe asi me",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Nusrɔkɔdɔ togbɔna mewɔna o"
+    }
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
@@ -45,6 +50,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Xɔ le ɖe fɔlɔ le wo ɖe wo dzidzakpɔtɔ gblɔ",
       "SELLER_SETTINGS_LABEL": "Ɖe le Adesɔ",
       "VALIDATION": {
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Nyatakɔɖu nàtsoɖe tɔ wòɖé yèna nyuie",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nɔviɖewɔwɔ na mi kplɔ nɛ ƒe viwo nɔ anyi nyɔnu ƒe ŋu nɔ anyi"
       }
     },
@@ -182,11 +188,19 @@
         "DELIGHT": "Ʋɔ ɖo"
       },
       "VALIDATION": {
-        "SUCCESSFUL_RATING_SUBMISSION": "Esi ka vɔ̃ le",
-        "UNSUCCESSFUL_RATING_SUBMISSION": "Esiɖeɖe aɖe nɔe",
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Nugɔgbeame sia nyui",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Nugɔgbeame sia megblɔ alo",
         "SELECT_EMOJI_EXPRESSION": "Mɛdɔ dzi emoji la ƒe agblɔɖeɖe"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Ɣe siwo..."
+    "MAP_CENTER": {
+      "VALIDATION": {
+        "SEARCH_CENTER_SUCCESS_MESSAGE": "Wòɖeɖeɖe gbãtɔwo le mɔ be yé kpɔ̃ nɔ"
+      }
+    },
+    "LOADING_SCREEN_MESSAGE": "Ɣe siwo...",
+    "VALIDATION": {
+      "UNEXPECTED_ERROR_MESSAGE": "Nuxlɔ̃sia na mi ɖe mɔ o"
+    }
   }
 }

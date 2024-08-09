@@ -8,6 +8,7 @@
     },
     "AUTHENTICATION": {
       "SUCCESSFUL_LOGIN_MESSAGE": "Successful login",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Login failed",
       "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi information not found"
     }
   },
@@ -22,7 +23,11 @@
       "PRIVACY_POLICY": "Privacy Policy",
       "TERMS_OF_SERVICE": "Terms of Service"
     },
-    "CONTACT_MAP_OF_PI": "Contact Map of Pi"
+    "CONTACT_MAP_OF_PI": "Contact Map of Pi",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "User Preferences update successful",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "User Preferences update failed"
+    }
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
@@ -45,6 +50,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe location where you are selling from",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "VALIDATION": {
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Seller Registration submitted successfully",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated"
       }
     },
@@ -183,11 +189,19 @@
         "DELIGHT": "Delight"
       },
       "VALIDATION": {
-        "SUCCESSFUL_RATING_SUBMISSION": "Rating submitted successfully",
-        "UNSUCCESSFUL_RATING_SUBMISSION": "Rating submitted unsuccessfully",
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Review submitted successfully",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Review failed to submit",
         "SELECT_EMOJI_EXPRESSION": "Please select emoji expression"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Loading data..."
+    "MAP_CENTER": {
+      "VALIDATION": {
+        "SEARCH_CENTER_SUCCESS_MESSAGE": "Your Search Centre has been saved successfully"
+      }
+    },
+    "LOADING_SCREEN_MESSAGE": "Loading data...",
+    "VALIDATION": {
+      "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  
+    }
   }
 }

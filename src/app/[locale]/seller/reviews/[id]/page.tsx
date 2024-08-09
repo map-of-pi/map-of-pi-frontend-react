@@ -7,8 +7,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
+import Skeleton from '@/components/skeleton/skeleton';
 import { ReviewFeedbackType } from '@/constants/types';
-import { fetchReviews } from '@/services/reviewsAPI';
+import { fetchReviews } from '@/services/reviewsApi'
 import { resolveDate } from '@/util/date';
 import { resolveRating } from '../util/ratingUtils';
 
@@ -50,7 +51,7 @@ function SellerReviews({
             date: resolveDate(feedback.review_date).date,
             time: resolveDate(feedback.review_date).time,
             user: feedback.review_giver_id,
-            reviewId: feedback.review_id,
+            reviewId: feedback._id,
             reaction: resolveRating(feedback.rating)?.reaction,
             unicode: resolveRating(feedback.rating)?.unicode
           }
@@ -83,6 +84,13 @@ function SellerReviews({
     }
   };
 
+  // loading condition
+  if (loading) {
+    return (
+      <Skeleton type='seller_review' />
+    );
+  }
+
   return (
     sellerReviews?.length===0 ? 
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto">
@@ -91,7 +99,6 @@ function SellerReviews({
         </h1>
       </div> :
     <>
-      {loading && <div className="loading">Loading...</div>}
       {error && <div className="error">{error}</div>}
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <h1 className="text-[#333333] text-lg font-semibold md:font-bold md:text-2xl mb-1">

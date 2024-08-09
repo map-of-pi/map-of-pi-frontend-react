@@ -3,6 +3,8 @@
 import 'leaflet/dist/leaflet.css';
 import './MapCenter.css';
 
+import { useTranslations } from 'next-intl';
+
 import { useState, useEffect, useContext } from 'react';
 import {
   MapContainer,
@@ -14,7 +16,7 @@ import L from 'leaflet';
 import { Button } from '../Forms/Buttons/Buttons';
 import RecenterAutomatically from './RecenterAutomatically';
 import { ConfirmDialogX } from '../confirm';
-import { fetchMapCenter, saveMapCenter } from '@/services/api'; // Import the API functions
+import { fetchMapCenter, saveMapCenter } from '@/services/mapCenterApi';
 import { AppContext } from '../../../../context/AppContextProvider';
 
 // Define the crosshair icon for the center of the map
@@ -32,6 +34,8 @@ const pinIcon = new L.Icon({
 });
 
 const MapCenter = () => {
+  const t = useTranslations();
+
   const [showPopup, setShowPopup] = useState(false);
   const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
   const { currentUser } = useContext(AppContext); // Get currentUser from context
@@ -49,7 +53,6 @@ const MapCenter = () => {
         }
       }
     };
-
     getMapCenter();
   }, [currentUser]);
 
@@ -69,10 +72,8 @@ const MapCenter = () => {
   };
 
   const handleSetCenter = async () => {
-    console.log('handleSetCenter called');
     if (center !== null && currentUser?.pi_uid) {
       console.log(center);
-      console.log('Current User ID:', currentUser.pi_uid);
       localStorage.setItem('mapCenter', JSON.stringify([center.lat, center.lng]));
 
       try {
@@ -119,7 +120,7 @@ const MapCenter = () => {
         />
       </div>
       {showPopup && (
-        <ConfirmDialogX message="Your search center has been saved successfully" toggle={() => setShowPopup(false)} handleClicked={handleClickDialog} />
+        <ConfirmDialogX message={t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')} toggle={() => setShowPopup(false)} handleClicked={handleClickDialog} />
       )}
     </div>
   );

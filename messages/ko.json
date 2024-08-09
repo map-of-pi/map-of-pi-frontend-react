@@ -8,6 +8,7 @@
     },
     "AUTHENTICATION": {
       "SUCCESSFUL_LOGIN_MESSAGE": "성공적으로 로그인했습니다",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "로그인 실패",
       "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi 정보를 찾을 수 없습니다"
     }
   },
@@ -22,7 +23,11 @@
       "PRIVACY_POLICY": "개인정보 보호정책",
       "TERMS_OF_SERVICE": "서비스 약관"
     },
-    "CONTACT_MAP_OF_PI": "Map of Pi에 문의"
+    "CONTACT_MAP_OF_PI": "Map of Pi에 문의",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "사용자 환경 설정 업데이트 성공",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "사용자 환경 설정 업데이트 실패"
+    }
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
@@ -45,6 +50,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "판매 위치를 설명하세요",
       "SELLER_SETTINGS_LABEL": "판매자 설정",
       "VALIDATION": {
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "판매자 등록이 성공적으로 제출되었습니다",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "사용자가 인증되지 않아 등록에 실패했습니다"
       }
     },
@@ -182,11 +188,19 @@
         "DELIGHT": "기쁨"
       },
       "VALIDATION": {
-        "SUCCESSFUL_RATING_SUBMISSION": "평가가 성공적으로 제출되었습니다",
-        "UNSUCCESSFUL_RATING_SUBMISSION": "평가 제출에 실패했습니다",
+        "SUCCESSFUL_REVIEW_SUBMISSION": "리뷰가 성공적으로 제출되었습니다",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "리뷰 제출에 실패했습니다",
         "SELECT_EMOJI_EXPRESSION": "이모지 표현을 선택해 주세요" 
       }
     },
-    "LOADING_SCREEN_MESSAGE": "데이터 로딩 중..."
+    "MAP_CENTER": {
+      "VALIDATION": {
+        "SEARCH_CENTER_SUCCESS_MESSAGE": "검색 센터가 성공적으로 저장되었습니다"
+      }
+    },
+    "LOADING_SCREEN_MESSAGE": "데이터 로딩 중...",
+    "VALIDATION": {
+      "UNEXPECTED_ERROR_MESSAGE": "예기치 않은 오류가 발생했습니다"
+    }
   }
 }
