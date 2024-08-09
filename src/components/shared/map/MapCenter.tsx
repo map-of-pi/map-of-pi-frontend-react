@@ -44,7 +44,7 @@ const MapCenter = () => {
     const getMapCenter = async () => {
       if (currentUser?.pi_uid) {
         try {
-          const mapCenter = await fetchMapCenter(currentUser.pi_uid);
+          const mapCenter = await fetchMapCenter();
           if (mapCenter) {
             setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
           }
@@ -77,7 +77,7 @@ const MapCenter = () => {
       localStorage.setItem('mapCenter', JSON.stringify([center.lat, center.lng]));
 
       try {
-        const response = await saveMapCenter(currentUser.pi_uid, center.lat, center.lng);
+        const response = await saveMapCenter(center.lat, center.lng);
         console.log('Map center saved successfully', response);
         setShowPopup(true);
       } catch (error) {

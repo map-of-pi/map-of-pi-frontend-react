@@ -2,9 +2,9 @@ import axiosClient from "@/config/client";
 import { handleAxiosError } from "@/util/error";
 
 // Function to Fetch Map Center
-export const fetchMapCenter = async (userId: string) => {
+export const fetchMapCenter = async () => {
   try {
-    const response = await axiosClient.get(`/map-center/${userId}`);
+    const response = await axiosClient.get('/map-center');
     if (response.status === 200) {
       return response.data;
     } else {
@@ -18,10 +18,9 @@ export const fetchMapCenter = async (userId: string) => {
 };
 
 // Function to Save Map Center
-export const saveMapCenter = async (userId: string, latitude: number, longitude: number) => {
+export const saveMapCenter = async (latitude: number, longitude: number) => {
   try {
-    const response = await axiosClient.post(`/api/v1/map-center`, {
-      pi_uid: userId,
+    const response = await axiosClient.put(`/api/v1/map-center/save`, {
       latitude,
       longitude
     });
