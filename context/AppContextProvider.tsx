@@ -50,20 +50,16 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
   const registerUser = async () => {
-    console.log('in registerUser()');
     await Pi.init({ version: '2.0', sandbox: process.env.NODE_ENV === 'development' });
 
     let isInitiated = Pi.initialized;
 
     if (isInitiated) {
-      console.log('in isInitiated');
       try {
         const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);
-        console.log('Pioneer Auth:', pioneerAuth);
         const res = await axiosClient.post("/users/authenticate", {pioneerAuth});
 
         if (res.status === 200) {
-          console.log('Signup response', res);
           setAuthToken(res.data?.token)
           setCurrentUser(res.data.user);
           toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data?.user?.user_name}`);
