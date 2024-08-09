@@ -193,6 +193,11 @@
         "SELECT_EMOJI_EXPRESSION": "Mɛdɔ dzi emoji la ƒe agblɔɖeɖe"
       }
     },
+    "MAP_CENTER": {
+      "VALIDATION": {
+        "SEARCH_CENTER_SUCCESS_MESSAGE": "Wòɖeɖeɖe gbãtɔwo le mɔ be yé kpɔ̃ nɔ"
+      }
+    },
     "LOADING_SCREEN_MESSAGE": "Ɣe siwo...",
     "VALIDATION": {
       "UNEXPECTED_ERROR_MESSAGE": "Nuxlɔ̃sia na mi ɖe mɔ o"
