@@ -193,6 +193,11 @@
         "SELECT_EMOJI_EXPRESSION": "이모지 표현을 선택해 주세요" 
       }
     },
+    "MAP_CENTER": {
+      "VALIDATION": {
+        "SEARCH_CENTER_SUCCESS_MESSAGE": "검색 센터가 성공적으로 저장되었습니다"
+      }
+    },
     "LOADING_SCREEN_MESSAGE": "데이터 로딩 중...",
     "VALIDATION": {
       "UNEXPECTED_ERROR_MESSAGE": "예기치 않은 오류가 발생했습니다"

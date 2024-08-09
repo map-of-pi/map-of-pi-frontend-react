@@ -194,6 +194,11 @@
         "SELECT_EMOJI_EXPRESSION": "Please select emoji expression"
       }
     },
+    "MAP_CENTER": {
+      "VALIDATION": {
+        "SEARCH_CENTER_SUCCESS_MESSAGE": "Your Search Centre has been saved successfully"
+      }
+    },
     "LOADING_SCREEN_MESSAGE": "Loading data...",
     "VALIDATION": {
       "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  
