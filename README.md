@@ -45,6 +45,7 @@ The Map of Pi Front End is a [Next.js](https://nextjs.org/) project bootstrapped
 
 ### Execute the Development Server
 
+- Create .env file from the .env.development template.
 - Execute `npm run dev` to spin up a dev server.
 - Navigate to http://localhost:4200/ in your browser.
 - Execute **[Backend Local Execution](https://github.com/map-of-pi/map-of-pi-backend-react/blob/dev/README.md#backend-local-execution)** for integration testing. 
