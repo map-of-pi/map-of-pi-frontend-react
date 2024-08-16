@@ -49,6 +49,7 @@
       "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o Ubicación del Vendedor",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe la ubicación desde donde estás vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
+      "SELLER_SELL_CENTER": "Establecer Centro de Venta",
       "VALIDATION": {
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro de vendedor enviado con éxito",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "El registro falló porque el usuario no está autenticado"

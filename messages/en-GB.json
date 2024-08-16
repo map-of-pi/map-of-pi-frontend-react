@@ -49,6 +49,7 @@
       "SELLER_ADDRESS_LOCATION_LABEL": "Seller Address or Location",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe location where you are selling from",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
+      "SELLER_SELL_CENTER": "Set Sell Centre",
       "VALIDATION": {
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Seller Registration submitted successfully",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated"

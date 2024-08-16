@@ -22,25 +22,9 @@ import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, SellerType } from '@/constants/types';
 import { sellerPrompt } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
-
-import { AppContext } from '../../../../../context/AppContextProvider';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 
-interface Seller {
-  seller_id: string;
-  name: string;
-  description: string;
-  image: string;
-  address: string;
-  phone: string;
-  email: string;
-  sale_items: string;
-  average_rating: number;
-  trust_meter_rating: number;
-  type: string;
-  coordinates: number[];
-  order_online_enabled_pref: boolean;
-}
+import { AppContext } from '../../../../../context/AppContextProvider';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
@@ -96,8 +80,8 @@ const SellerRegistrationForm = () => {
 
     const getUserSettings = async () => {
       const settings = await fetchUserSettings();
-      console.log("user settings", settings);
-      if(settings) {
+      console.log("User settings:", settings);
+      if (settings) {
         setUserSettings(settings);
       } else {
         setUserSettings(null);
@@ -264,7 +248,7 @@ const SellerRegistrationForm = () => {
         </div>
         <Link href="/map-center">
           <Button
-            label={'Set Sell Center'}
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
             styles={{
               color: '#ffc153',
               height: '40px',

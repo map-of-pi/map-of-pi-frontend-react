@@ -49,6 +49,7 @@
       "SELLER_ADDRESS_LOCATION_LABEL": "판매자 주소 또는 위치",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "판매 위치를 설명하세요",
       "SELLER_SETTINGS_LABEL": "판매자 설정",
+      "SELLER_SELL_CENTER": "판매 센터 설정",
       "VALIDATION": {
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "판매자 등록이 성공적으로 제출되었습니다",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "사용자가 인증되지 않아 등록에 실패했습니다"

@@ -75,8 +75,8 @@ function Sidebar(props: any) {
       console.log("user settings", settings);
       if (settings) {
         setUserSettings(settings);
-        setPhoneNumber(settings.phone_number?.toString()); // Set phone number
-        setEmail(settings.email || ''); // Set email
+        setPhoneNumber(settings.phone_number?.toString());
+        setEmail(settings.email || '');
       } else {
         setUserSettings(null);
       }
@@ -121,7 +121,6 @@ function Sidebar(props: any) {
     }
   };
   
-
   const handleChildMenu = (title: any, code: string) => {
     if (title === 'Languages') {
       const slipPathname = pathname.split('/').slice(2);
@@ -221,7 +220,7 @@ function Sidebar(props: any) {
               placeholder="mapofpi@mapofpi.com"
               type="email"
               name="email"
-              value={email} // Prepopulate email field
+              value={email}
               onChange={handleEmailChange}
               onBlur={handleFocusChange}
             />

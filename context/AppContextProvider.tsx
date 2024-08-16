@@ -17,7 +17,6 @@ import axiosClient, {setAuthToken} from '@/config/client';
 import { onIncompletePaymentFound } from '@/util/auth';
 import { IUser } from '@/constants/types';
 
-
 type AuthResult = {
   accessToken: string,
   user: {
@@ -95,7 +94,6 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }
 
   useEffect(() => {
-    // signup or login user
     if (!currentUser) {
       registerUser();
     } else {
