@@ -126,12 +126,16 @@ const SellerRegistrationForm = () => {
   useEffect(() => {
     const {
       itemsForSale,
-      sellerName
+      sellerName,
+      sellerType,
+      sellerAddress
     } = formData;
     setIsFormValid(
       !!(
         itemsForSale &&
-        sellerName
+        sellerName &&
+        sellerType &&
+        sellerAddress
       ),
     );
   }, [formData]);
@@ -157,7 +161,8 @@ const SellerRegistrationForm = () => {
       [name]: value,
     }));
     
-    if (value !== '' && formData) {
+    if (value !== '' || name==='sellerType') {
+      console.log(name)
       setIsSaveEnabled(true);
     } else {
       setIsSaveEnabled(false);
@@ -245,7 +250,7 @@ const SellerRegistrationForm = () => {
     <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
         <h1 className={HEADER}>
-          {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
+          {'Seller Registration'}
         </h1>
 
         <div className="mb-4">
@@ -345,6 +350,14 @@ const SellerRegistrationForm = () => {
                   name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
                 },
                 {
+                  value: 'Currently not selling',
+                  name: 'Currently not selling',
+                },
+                {
+                  value: 'TEST',
+                  name: 'TEST',
+                },
+                {
                   value: 'Other',
                   name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'),
                 },
@@ -352,7 +365,7 @@ const SellerRegistrationForm = () => {
             />
 
             <TextArea
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')}
+              label={"Seller Details"}
               name="sellerDescription"
               placeholder={sellerPrompt.description}
               value={formData.sellerDescription}
