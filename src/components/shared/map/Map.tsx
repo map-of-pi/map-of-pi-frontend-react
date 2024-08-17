@@ -6,7 +6,7 @@ import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
 import _ from 'lodash';
 
 import { fetchSellers } from '@/services/sellerApi';
-import { SellerType } from '@/constants/types';
+import { ISeller } from '@/constants/types';
 import { toLatLngLiteral } from '@/util/map';
 
 import MapMarkerPopup from './MapMarkerPopup';
@@ -19,7 +19,7 @@ const sanitizeCoordinates = (lat: number, lng: number) => {
 };
 
 // Function to fetch seller coordinates based on origin and radius
-const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Promise<SellerType[]> => {
+const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Promise<ISeller[]> => {
   const { lat, lng } = sanitizeCoordinates(origin[0], origin[1]);
   const formattedOrigin = toLatLngLiteral([lat, lng]);
 
@@ -46,8 +46,8 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Prom
 };
 
 // Function to remove duplicate sellers based on seller_id
-const removeDuplicates = (sellers: SellerType[]): SellerType[] => {
-  const uniqueSellers: { [key: string]: SellerType } = {};
+const removeDuplicates = (sellers: ISeller[]): ISeller[] => {
+  const uniqueSellers: { [key: string]: ISeller } = {};
   sellers.forEach(seller => {
     uniqueSellers[seller.seller_id] = seller;
   });
@@ -65,7 +65,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
   });
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
-  const [sellers, setSellers] = useState<SellerType[]>([]);
+  const [sellers, setSellers] = useState<ISeller[]>([]);
   const [origin, setOrigin] = useState(center);
   const [radius, setRadius] = useState(10);
   const [loading, setLoading] = useState(false);

@@ -10,7 +10,7 @@ import { AppContext } from '../../../../../../../context/AppContextProvider';
 import ConfirmDialog from '@/components/shared/confirm';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import Skeleton from '@/components/skeleton/skeleton';
-import { ReviewFeedbackType } from '@/constants/types';
+import { IReviewFeedback } from '@/constants/types';
 import { fetchSingleReview } from '@/services/reviewsApi';
 import { resolveDate } from '@/util/date';
 import { resolveRating } from '../../util/ratingUtils';
@@ -40,7 +40,7 @@ export default function ReplyToReviewPage({
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
-  const [reviewData, setReviewData] = useState<ReviewFeedbackType | null>(null);
+  const [reviewData, setReviewData] = useState<IReviewFeedback | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

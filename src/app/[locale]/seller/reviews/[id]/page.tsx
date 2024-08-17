@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import Skeleton from '@/components/skeleton/skeleton';
-import { ReviewFeedbackType } from '@/constants/types';
+import { IReviewFeedback } from '@/constants/types';
 import { fetchReviews } from '@/services/reviewsApi'
 import { resolveDate } from '@/util/date';
 import { resolveRating } from '../util/ratingUtils';
@@ -45,7 +45,7 @@ function SellerReviews({
       try {
         const data = await fetchReviews(sellerId);
 
-        const reviewFeedback = data.map((feedback: ReviewFeedbackType) =>{
+        const reviewFeedback = data.map((feedback: IReviewFeedback) =>{
           return {
             heading: feedback.comment,
             date: resolveDate(feedback.review_date).date,
