@@ -31,7 +31,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Añadir/ Editar Registro de Vendedor",
+      "SELLER_REGISTRATION_HEADER": "Registro de Vendedor",
       "SELLER_SALE_ITEMS_LABEL": "Artículos del vendedor en venta",
       "SELLER_SALE_ITEMS_PLACEHOLDER": "Describe tus artículos en venta, precio, etc.",
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
@@ -41,14 +41,17 @@
         "SELLER_TYPE_LABEL": "Tipo de Vendedor",
         "SELLER_TYPE_OPTIONS": {
           "PIONEER": "Pionero",
-          "OTHER": "Otro"
+          "OTHER": "Otro",
+          "CURRENTLY_NOT_SELLING": "Actualmente No Está Vendiendo",
+          "TEST_SELLER": "Vendedor de Prueba"
         }
       },
       "SELLER_BUSINESS_NAME": "Nombre del Negocio del Vendedor",
-      "SELLER_DESCRIPTION": "Descripción del Vendedor",
+      "SELLER_DETAILS": "Detalles del Vendedor",
       "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o Ubicación del Vendedor",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe la ubicación desde donde estás vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
+      "SELLER_SELL_CENTER": "Establecer Centro de Venta",
       "VALIDATION": {
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro de vendedor enviado con éxito",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "El registro falló porque el usuario no está autenticado"

@@ -31,7 +31,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Ƙara/ Gyara  Ragistar Mai Sayarwa",
+      "SELLER_REGISTRATION_HEADER": "Rajistar Mai Sayarwa",
       "SELLER_SALE_ITEMS_LABEL": "Abubuwan masu Siyarwa don siyarwa",
       "SELLER_SALE_ITEMS_PLACEHOLDER": "Bayyana abubuwanku na siyarwa, farashi, da sauransu.",
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayani",
@@ -41,14 +41,17 @@
         "SELLER_TYPE_LABEL": "Nau'in Mai Sayarwa",
         "SELLER_TYPE_OPTIONS": {
           "PIONEER": "Pioneer",
-          "OTHER": "sauran"
+          "OTHER": "sauran",
+          "CURRENTLY_NOT_SELLING": "A Halin Yanzu Ba A Sayarwa",
+          "TEST_SELLER": "Mai Sayarwa Gwaji"
         }
       },
       "SELLER_BUSINESS_NAME": "Sunan Kasuwanci Mai Sayarwa",
-      "SELLER_DESCRIPTION": "Bayanin Mai Sayarwa",
+      "SELLER_DETAILS": "Bayanin Mai Sayarwa",
       "SELLER_ADDRESS_LOCATION_LABEL": "Adireshin Mai Siyarwa ko Wuri",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Bayyana wurin da kuke siyarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
+      "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
       "VALIDATION": {
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rijista ta sayarwa ta samu nasara",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Rijista ta gaza saboda mai amfani ba a tantance shi ba"

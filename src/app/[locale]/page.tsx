@@ -44,14 +44,6 @@ export default function Index() {
   const defaultMapCenter = { lat: 20, lng: -74.0060 };
 
   useEffect(() => {
-    // signup or login user
-    registerUser();
-    // if (!currentUser) {
-    //   registerUser();
-    // } else {
-    //   autoLoginUser();
-    // }
-
     const fetchLocationOnLoad = async () => {
       try {
         const location = await getDeviceLocation();

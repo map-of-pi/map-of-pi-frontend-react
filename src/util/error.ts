@@ -5,7 +5,7 @@ export const handleAxiosError = (error: any) => {
     if (error.response) {
       // server responded with a status code out of the range of 2xx
       console.error(`Error status: ${error.response.status}`);
-      console.error(`Error data: ${JSON.stringify(error.response.data)}`);
+      console.error(`Error data: ${error.response.data}`);
       throw new Error(error.response.data.message || 'Error processing request');
     } else if (error.request) {
       // no response was received from server

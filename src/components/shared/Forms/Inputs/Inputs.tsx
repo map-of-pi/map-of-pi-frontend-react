@@ -152,7 +152,12 @@ export const Select = (props: any) => {
       {props.label && (
         <label className="block text-xl text-[#333333] ">{props.label}</label>
       )}
-      <select className="mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] text-[#333333] outline-0 bg-transparent border-[2px] focus:border-[#1d724b] mb-3">
+      <select 
+        name={props.name} 
+        value={props.value}
+        onChange={props.onChange} 
+        className="mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] text-[#333333] outline-0 bg-transparent border-[2px] focus:border-[#1d724b] mb-3"
+      >
         {props.options.map((option: any) => (
           <option key={option.value} value={option.value}>
             {option.name}

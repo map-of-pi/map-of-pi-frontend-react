@@ -8,6 +8,7 @@ import {
   useState,
   SetStateAction,
   ReactNode,
+  useEffect
 } from 'react';
 import { toast } from 'react-toastify';
 
@@ -15,7 +16,6 @@ import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
 import { onIncompletePaymentFound } from '@/util/auth';
 import { IUser } from '@/constants/types';
-
 
 type AuthResult = {
   accessToken: string,
@@ -92,6 +92,14 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       await registerUser();
     }
   }
+
+  useEffect(() => {
+    if (!currentUser) {
+      registerUser();
+    } else {
+      autoLoginUser();
+    }
+  }, []);
 
   return (
     <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser}}>

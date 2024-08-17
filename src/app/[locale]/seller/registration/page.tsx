@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
@@ -19,34 +18,18 @@ import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
-import { SellerType } from '@/constants/types';
+import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerPrompt } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
+import { fetchUserSettings } from '@/services/userSettingsApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
-
-interface Seller {
-  seller_id: string;
-  name: string;
-  description: string;
-  image: string;
-  address: string;
-  phone: string;
-  email: string;
-  sale_items: string;
-  average_rating: number;
-  trust_meter_rating: number;
-  type: string;
-  coordinates: number[];
-  order_online_enabled_pref: boolean;
-}
 
 const SellerRegistrationForm = () => {
   const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
   const SUBHEADER = 'font-bold mb-2';
 
   const t = useTranslations();
-  const router = useRouter();
   const placeholderSeller = itemData.seller;
 
   const [formData, setFormData] = useState({
@@ -56,7 +39,8 @@ const SellerRegistrationForm = () => {
     sellerDescription: '',
     sellerAddress: '',
   });
-  const [dbSeller, setDbSeller] = useState<SellerType | null>(null);
+  const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
+  const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -92,14 +76,27 @@ const SellerRegistrationForm = () => {
       }
     };
 
+    const getUserSettings = async () => {
+      const settings = await fetchUserSettings();
+      console.log("User settings:", settings);
+      if (settings) {
+        setUserSettings(settings);
+      } else {
+        setUserSettings(null);
+      }
+    };
+
     getSellerData();
+    getUserSettings();
   }, [currentUser]);
 
+
+  const defaultSellerName = currentUser? currentUser?.user_name : '';
   // Initialize formData with dbSeller values if available
   useEffect(() => {
     if (dbSeller) {
       setFormData({
-        sellerName: dbSeller.name || '',
+        sellerName: dbSeller.name || defaultSellerName,
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
         itemsForSale: dbSeller.sale_items || '',
@@ -112,14 +109,14 @@ const SellerRegistrationForm = () => {
     const {
       itemsForSale,
       sellerName,
-      sellerDescription,
-      sellerAddress,
+      sellerType,
+      sellerAddress
     } = formData;
     setIsFormValid(
       !!(
         itemsForSale &&
         sellerName &&
-        sellerDescription &&
+        sellerType &&
         sellerAddress
       ),
     );
@@ -146,11 +143,9 @@ const SellerRegistrationForm = () => {
       [name]: value,
     }));
     
-    if (value !== '' && formData) {
-      setIsSaveEnabled(true);
-    } else {
-      setIsSaveEnabled(false);
-    }
+    // enable or disable save button based on form inputs
+    const isFormFilled = Object.values(formData).some(v => v !== '');
+    setIsSaveEnabled(isFormFilled);
   };
 
   const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -163,7 +158,7 @@ const SellerRegistrationForm = () => {
   // Function to save data to the database
   const handleSave = async () => {  
     // check if user is authenticated and form is valid
-    if (!currentUser || !isFormValid) {
+    if (!currentUser) {
       console.log('Form submission failed');
       return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
     }
@@ -196,32 +191,36 @@ const SellerRegistrationForm = () => {
         type: 'Point' as const,
         coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
       };
-    }  
+    }; 
     console.log('registration form', regForm);
 
     try {
-      const seller = await registerSeller(regForm);
-      setDbSeller(seller)
-      seller ? toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION')) : null;
+      const data = await registerSeller(regForm);
+      setDbSeller(data.seller);
+      data.seller ? toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION')) : null;
     } catch (error) {
       console.error('Error saving seller registration: ', error);
     }
   }
 
-  const translateSellerCategory = (category: string): string => {
-    switch (category) {
-      case 'Pioneer':
-        return t(
-          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER',
-        );
-      case 'Other':
-        return t(
-          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER',
-        );
-      default:
-        return category;
-    }
-  };
+  const translatedSellerTypeOptions = [
+    {
+      value: 'Pioneer',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
+    },
+    {
+      value: 'CurrentlyNotSelling',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.CURRENTLY_NOT_SELLING'),
+    },
+    {
+      value: 'TestSeller',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER'),
+    },
+    {
+      value: 'Other',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'),
+    },
+  ];
 
   // loading condition
   if (loading) {
@@ -253,7 +252,7 @@ const SellerRegistrationForm = () => {
         </div>
         <Link href="/map-center">
           <Button
-            label={t('SHARED.SEARCH_CENTER')}
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
             styles={{
               color: '#ffc153',
               height: '40px',
@@ -297,19 +296,19 @@ const SellerRegistrationForm = () => {
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ': '}
             </span>
-            <span>{dbSeller ? dbSeller.seller_id : ''}</span>
+            <span>{dbSeller ? dbSeller.name : ''}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ': '}
             </span>
-            <span>{dbSeller ? dbSeller.name : placeholderSeller.phone}</span>
+            <span>{userSettings ? userSettings.phone_number : ""}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
               {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ': '}
             </span>
-            <span>{dbSeller ? dbSeller.name : placeholderSeller.email}</span>
+            <span>{ userSettings ? userSettings.email : ""}</span>
           </div>
         </ToggleCollapse>
         <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}>
@@ -326,22 +325,13 @@ const SellerRegistrationForm = () => {
             <Select
               label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
               name="sellerType"
-              value={translateSellerCategory(formData.sellerType)}
+              value={formData.sellerType}
               onChange={handleChange}
-              options={[
-                {
-                  value: 'Pioneer',
-                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
-                },
-                {
-                  value: 'Other',
-                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'),
-                },
-              ]}
+              options={translatedSellerTypeOptions}
             />
 
             <TextArea
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_DESCRIPTION')}
+              label={t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS')}
               name="sellerDescription"
               placeholder={sellerPrompt.description}
               value={formData.sellerDescription}
