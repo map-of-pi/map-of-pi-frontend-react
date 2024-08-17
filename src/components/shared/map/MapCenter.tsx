@@ -26,13 +26,6 @@ const crosshairIcon = new L.Icon({
   iconAnchor: [40, 40],
 });
 
-// Define the pin icon for the saved location
-const pinIcon = new L.Icon({
-  iconUrl: '/images/icons/map_of_pi_logo.jpeg',
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-});
-
 const MapCenter = () => {
   const t = useTranslations();
 
@@ -92,17 +85,28 @@ const MapCenter = () => {
     setShowPopup(false);
   };
 
+  // define map boundaries
+  const bounds = L.latLngBounds(
+    L.latLng(-90, -180), // SW corner
+    L.latLng(90, 180)  // NE corner
+  );
+
   return (
     <div>
       <MapContainer
-        zoomControl={false}
         center={center}
-        zoom={13}
+        zoom={2}
+        zoomControl={false}
+        minZoom={2}
+        maxZoom={18}
+        maxBounds={bounds}
+        maxBoundsViscosity={1.0}
         className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="Map data © OpenStreetMap contributors"
+          noWrap={true}
         />
         <CenterMarker />
         <RecenterAutomatically position={center} />
