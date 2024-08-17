@@ -23,11 +23,8 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Prom
   const { lat, lng } = sanitizeCoordinates(origin[0], origin[1]);
   const formattedOrigin = toLatLngLiteral([lat, lng]);
 
-  console.log('Fetching seller coordinates with origin:', JSON.stringify(formattedOrigin), 'and radius:', radius);
-
   try {
     const sellersData = await fetchSellers(formattedOrigin, radius);
-
     const sellersWithCoordinates = sellersData.map((seller: any) => {
       const [lng, lat] = seller.sell_map_center.coordinates;
       return {
@@ -229,6 +226,12 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
     );
   }
 
+  // define map boundaries
+  const bounds = L.latLngBounds(
+    L.latLng(-90, -180), // SW corner
+    L.latLng(90, 180)  // NE corner
+  );
+
   return (
     <>
       {loading && <div className="loading">Loading...</div>}
@@ -257,10 +260,15 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
         center={isLocationAvailable ? origin : [0, 0]}
         zoom={isLocationAvailable ? zoom : 2}
         zoomControl={false}
+        minZoom={2}
+        maxZoom={18}
+        maxBounds={bounds}
+        maxBoundsViscosity={1.0}
         className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          noWrap={true}
         />
         <LocationMarker />
         {sellers.map((seller) => (
