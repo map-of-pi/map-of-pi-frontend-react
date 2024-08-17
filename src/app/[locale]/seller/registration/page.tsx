@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
@@ -31,7 +30,6 @@ const SellerRegistrationForm = () => {
   const SUBHEADER = 'font-bold mb-2';
 
   const t = useTranslations();
-  const router = useRouter();
   const placeholderSeller = itemData.seller;
 
   const [formData, setFormData] = useState({
@@ -145,12 +143,9 @@ const SellerRegistrationForm = () => {
       [name]: value,
     }));
     
-    if (value !== '' || name === 'sellerType') {
-      console.log(name)
-      setIsSaveEnabled(true);
-    } else {
-      setIsSaveEnabled(false);
-    }
+    // enable or disable save button based on form inputs
+    const isFormFilled = Object.values(formData).some(v => v !== '');
+    setIsSaveEnabled(isFormFilled);
   };
 
   const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -208,20 +203,24 @@ const SellerRegistrationForm = () => {
     }
   }
 
-  const translateSellerCategory = (category: string): string => {
-    switch (category) {
-      case 'Pioneer':
-        return t(
-          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER',
-        );
-      case 'Other':
-        return t(
-          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER',
-        );
-      default:
-        return category;
-    }
-  };
+  const translatedSellerTypeOptions = [
+    {
+      value: 'Pioneer',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
+    },
+    {
+      value: 'CurrentlyNotSelling',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.CURRENTLY_NOT_SELLING'),
+    },
+    {
+      value: 'TestSeller',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER'),
+    },
+    {
+      value: 'Other',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'),
+    },
+  ];
 
   // loading condition
   if (loading) {
@@ -326,26 +325,9 @@ const SellerRegistrationForm = () => {
             <Select
               label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
               name="sellerType"
-              value={translateSellerCategory(formData.sellerType)}
+              value={formData.sellerType}
               onChange={handleChange}
-              options={[
-                {
-                  value: 'Pioneer',
-                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
-                },
-                {
-                  value: 'Currently not selling',
-                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.CURRENTLY_NOT_SELLING'),
-                },
-                {
-                  value: 'TEST',
-                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER'),
-                },
-                {
-                  value: 'Other',
-                  name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'),
-                },
-              ]}
+              options={translatedSellerTypeOptions}
             />
 
             <TextArea
