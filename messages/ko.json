@@ -31,7 +31,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "판매자 등록 추가/ 편집",
+      "SELLER_REGISTRATION_HEADER": "판매자 등록",
       "SELLER_SALE_ITEMS_LABEL": "판매자의 판매 항목",
       "SELLER_SALE_ITEMS_PLACEHOLDER": "판매 항목, 가격 등을 설명하세요.",
       "REVIEWS_SUMMARY_LABEL": "리뷰 요약",
@@ -41,11 +41,13 @@
         "SELLER_TYPE_LABEL": "판매자 유형",
         "SELLER_TYPE_OPTIONS": {
           "PIONEER": "선구자",
-          "OTHER": "기타"
+          "OTHER": "기타",
+          "CURRENTLY_NOT_SELLING": "현재 판매 중 아님",
+          "TEST_SELLER": "테스트 판매자"
         }
       },
       "SELLER_BUSINESS_NAME": "판매자 사업 이름",
-      "SELLER_DESCRIPTION": "판매자 설명",
+      "SELLER_DETAILS": "판매자 세부 정보",
       "SELLER_ADDRESS_LOCATION_LABEL": "판매자 주소 또는 위치",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "판매 위치를 설명하세요",
       "SELLER_SETTINGS_LABEL": "판매자 설정",
