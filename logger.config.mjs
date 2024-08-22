@@ -1,33 +1,24 @@
-import { createLogger, format, transports } from "winston";
-import { SentryTransport } from "./sentry.client.config.mjs";
+import log from 'loglevel';
+import { logToSentry } from './sentry.client.config.mjs';
 
-// define the logging configuration logic
-export const getLoggerConfig = () => {
-  let logLevel = '';
-  let logFormat;
-  const loggerTransports = [];
+export const configureLogger = () => {
+  if (process.env.NODE_ENV === 'production') {
+    // Production: Log only errors and send them to Sentry
+    log.setLevel('error');
 
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'sandbox') {
-    logLevel = 'info';
-    logFormat = format.combine(format.colorize(), format.simple());
-    loggerTransports.push(new transports.Console({ format: logFormat }));
-  } else if (process.env.NODE_ENV === 'production') {
-    logLevel = 'error';
-    logFormat = format.combine(format.timestamp(), format.json());
-    loggerTransports.push(new SentryTransport());
-  } 
+    const originalErrorMethod = log.error;
+    log.error = (...args) => {
+      originalErrorMethod(...args);  // Log the error to the console
+      logToSentry(args.join(' '));  // Send the error to Sentry
+    };
 
-  return { level: logLevel, format: logFormat, transports: loggerTransports };
+  } else if (process.env.NODE_ENV === 'development') {
+    // Development: Log at the info level to the console
+    log.setLevel('info');
+  }
 };
 
-// Create the logger using the configuration
-const loggerConfig = getLoggerConfig();
+// Initialize the logger configuration
+configureLogger();
 
-// set up Winston logger accordingly
-const logger = createLogger({
-  level: loggerConfig.level,
-  format: loggerConfig.format,
-  transports: loggerConfig.transports
-});
-
-export default logger;
+export default log;

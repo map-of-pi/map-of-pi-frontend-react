@@ -1,8 +1,7 @@
 import * as Sentry from "@sentry/nextjs";
 import { replayIntegration } from '@sentry/browser';
-import { transports } from 'winston';
 
-// initiailize Sentry only in production environment
+// initialize Sentry only in production environment
 if (process.env.NODE_ENV === 'production') {
   try {
     Sentry.init({
@@ -21,17 +20,6 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
-// create a custom Sentry transport for Winston in production
-class SentryTransport extends transports.Stream {
-  log(info, callback) {
-    setImmediate(() => this.emit('logged', info));
-
-    if (info.level === 'error') {
-      Sentry.captureMessage(info.message, 'error');
-    }
-    callback();
-    return true;
-  }
-}
-
-export { SentryTransport };
+export const logToSentry = (message) => {
+  Sentry.captureMessage(message, 'error');
+};
