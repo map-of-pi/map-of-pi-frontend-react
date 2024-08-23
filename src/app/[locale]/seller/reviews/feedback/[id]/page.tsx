@@ -84,6 +84,7 @@ export default function ReplyToReviewPage({
         return reaction;
     }
   };
+  const SUBHEADER = "font-bold mb-2";
 
   // loading condition
   if (loading) {
@@ -110,7 +111,7 @@ export default function ReplyToReviewPage({
             </div>
           </div>
         )}
-
+        <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.LEAVE_A_REVIEW_MESSAGE')}</h2>
         <div>
           <EmojiPicker
           sellerId={reviewData?.review_receiver_id} 
