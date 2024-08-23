@@ -12,9 +12,11 @@ import TrustMeter from '@/components/shared/Review/TrustMeter';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import ConfirmDialog from '@/components/shared/confirm';
-import { PiFestJson } from '@/constants/demoAPI';
 import Skeleton from '@/components/skeleton/skeleton';
 import { fetchSingleSeller } from '@/services/sellerApi';
+import { ISeller, IUserSettings, IUser } from '@/constants/types';
+import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
+import { fetchSellerSettings } from '@/services/userSettingsApi';
 
 export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -28,10 +30,12 @@ export default function Page({ params }: { params: { id: string } }) {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
-  const [seller, setSeller] = useState(PiFestJson.Seller);
+  const [seller, setSeller] = useState<ISeller | null>(null);
+  const [sellerSettings, setSellerSettings] = useState<IUserSettings | null>(null);
+  const [sellerUser, setSellerUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { currentUser, autoLoginUser, registerUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
     // try re-login user if not current user auth
@@ -43,14 +47,32 @@ export default function Page({ params }: { params: { id: string } }) {
     const getSellerData = async () => {
       try {
         const data = await fetchSingleSeller(sellerId); //'testme'
-        setSeller(data);  // Ensure this is a single object, not an array
+        setSeller(data.business_info);  // Ensure this is a single object, not an array
+        if (data.seller_settings) {
+          setSellerSettings(data.seller_settings);
+        } else {
+          setSellerSettings(null);
+        }
+        if (data.user) {
+          setSellerUser(data.user);
+        } else {
+          setSellerUser(null);
+        }
       } catch (error) {
         setError('Error fetching seller data');
       } finally {
         setLoading(false);
       }
     };
+
+    const getSellerSettings = async () => {
+      const settings = await fetchSellerSettings(sellerId);
+      console.log("User settings:", settings);
+      
+    };
+
     getSellerData();
+    getSellerSettings();
 
     
   }, []);
@@ -85,7 +107,7 @@ export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
     <div className="w-full md:w-[500px] md:mx-auto p-4">
-      <h1 className="mb-5 font-bold text-lg md:text-2xl">{t('SCREEN.BUY_FROM_SELLER.BUY_FROM_SELLER_HEADER')}</h1>
+      <h1 className="mb-5 text-center font-bold text-lg md:text-2xl">{t('SCREEN.BUY_FROM_SELLER.BUY_FROM_SELLER_HEADER')}</h1>
 
       {seller && (<div>
         {/* Seller Profile */}
@@ -95,41 +117,30 @@ export default function Page({ params }: { params: { id: string } }) {
           </div>
           <div className="my-auto">
             <h2 className="font-bold mb-2">{seller.name}</h2>
-            <p className="text-sm">{translateSellerCategory('Pioneer')}</p>
+            <p className="text-sm">{translateSellerCategory(seller.seller_type)}</p>
           </div>
         </div>
 
         {/* Seller Description */}
-        <div className="mb-5">
-          <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.SELLER_DESCRIPTION_LABEL')}</h2>
-          <p className="">{seller.description}</p>
-        </div>
-
-        {/* Items List */}
-        <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.SELLER_SALE_ITEMS_LABEL')}</h2>
-        <div className="seller_item_container mb-6">
-          <p>{seller.sale_items}</p>
+        <h2 className={SUBHEADER}>{t('Seller Details')}</h2>
+        <div className="seller_item_container mb-5">          
+          <p className="mb-3">{seller.description}</p>
         </div>
 
         {/* Seller Location */}
-        <div className="mb-6">
-          <h2 className={`SUBHEADER`}>{t('SCREEN.BUY_FROM_SELLER.SELLER_ADDRESS_LOCATION_LABEL')}</h2>
-          <p className="mb-3">{seller.address}</p>
-          <OutlineBtn label={t('SHARED.NAVIGATE')} onClick={() => handleNavigation('')} />
+        <h2 className={SUBHEADER}>{t('Seller Address or Whereabout')}</h2>
+        <div className="seller_item_container mb-5">          
+          <p className="mb-3">{seller.address}</p>          
         </div>
 
-        <div>
-          <EmojiPicker sellerId={sellerId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} />
-        </div>
-
-        {/* Summary of Reviews */}
-        <div className="mb-7">
+          {/* Summary of Reviews */}
+        <div className="mb-7 mt-5">
           <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SUMMARY_LABEL')}</h2>
           {/* Trust-O-meter */}
           <div>
             <TrustMeter ratings={seller.trust_meter_rating} />
           </div>
-          <div className="flex items-center justify-between mt-3">
+          <div className="flex items-center justify-between">
             <p className="text-sm">
               {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: seller.average_rating.$numberDecimal})}
             </p>
@@ -138,21 +149,43 @@ export default function Page({ params }: { params: { id: string } }) {
             </Link>
           </div>
         </div>
-        <div className="mb-7">
-          <h2 className={`${SUBHEADER} mb-4`}>{t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}</h2>
+
+        <ToggleCollapse
+          header={t('SCREEN.BUY_FROM_SELLER.LEAVE_A_REVIEW_MESSAGE')}>
+            {/* <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.LEAVE_A_REVIEW_MESSAGE')}</h2> */}
+          <div>
+            <EmojiPicker sellerId={sellerId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} />
+          </div>
+        </ToggleCollapse>
+
+          
+        <ToggleCollapse
+          header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
           <div className="text-sm mb-3">
-            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ": "}</span>
-            <span>{seller.seller_id}</span>
+            <span className="font-bold">
+              {t('Username') + ': '}
+            </span>
+            <span>{sellerUser ? sellerUser.user_name : ''}</span>
           </div>
           <div className="text-sm mb-3">
-            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ": "}</span>
-            <span>{seller.phone}</span>
+            <span className="font-bold">
+              {t('Pioneer Name') + ': '}
+            </span>
+            <span>{sellerUser ? sellerUser.pi_username: ''}</span>
           </div>
           <div className="text-sm mb-3">
-            <span className="font-bold">{t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ": "}</span>
-            <span>{seller.email}</span>
+            <span className="font-bold">
+              {t('Phone') + ': '}
+            </span>
+            <span>{sellerSettings ? sellerSettings.phone_number : ""}</span>
           </div>
-        </div>
+          <div className="text-sm mb-3">
+            <span className="font-bold">
+              {t('Email') + ': '}
+            </span>
+            <span>{ sellerSettings ? sellerSettings.email : ""}</span>
+          </div>
+        </ToggleCollapse>
         
         <ConfirmDialog
           show={showConfirmDialog}

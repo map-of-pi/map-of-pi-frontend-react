@@ -124,7 +124,6 @@ export default function EmojiPicker(props: any) {
   const SUBHEADER = "font-bold mb-2";
   return (
     <div className="mb-3">
-        <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.LEAVE_A_REVIEW_MESSAGE')}</h2>
         <p>{t('SCREEN.BUY_FROM_SELLER.FACE_SELECTION_REVIEW_MESSAGE')}</p>
       <div className='flex sm:overflow-hidden overflow-auto gap-3 w-full text-center justify-center my-2'>
         <div className='bg-[#DF2C2C33] flex-grow-[0.5] rounded-md p-2'>
