@@ -18,14 +18,14 @@ export const fetchUserSettings = async () => {
   }
 };
 
-// Create new or update existing user settings
-export const createUserSettings = async (formData: IUserSettings) => {
+// Fetch a single pioneer user settings
+export const fetchSingleUserSettings = async (sellerId: String) => {
   try {
-    const response = await axiosClient.put('/user-preferences/add', {json: JSON.stringify(formData)});
+    const response = await axiosClient.post(`/user-preferences/${sellerId}`);
     if (response.status === 200) {
       return response.data;
     } else {
-      console.error(`Create user settings failed: ${response.status}`);
+      console.error(`Fetch seller settings failed: ${response.status}`);
       return null;
     }
   } catch (error: any) {
@@ -34,14 +34,14 @@ export const createUserSettings = async (formData: IUserSettings) => {
   }
 };
 
-// Fetch a single pioneer user settings
-export const fetchSellerSettings = async (sellerId: String) => {
+// Create new or update existing user settings
+export const createUserSettings = async (formData: IUserSettings) => {
   try {
-    const response = await axiosClient.post(`/user-preferences/${sellerId}`);
+    const response = await axiosClient.put('/user-preferences/add', {json: JSON.stringify(formData)});
     if (response.status === 200) {
       return response.data;
     } else {
-      console.error(`Fetch seller settings failed: ${response.status}`);
+      console.error(`Create user settings failed: ${response.status}`);
       return null;
     }
   } catch (error: any) {

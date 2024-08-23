@@ -32,7 +32,7 @@ function SellerReviews({
   searchParams: any;
 }) {
   const t = useTranslations();
-  const  sellerName  = searchParams.seller_name;
+  const sellerName  = searchParams.seller_name;
   const isbuyer = searchParams.buyer;
   const sellerId = params.id;
 
@@ -95,7 +95,9 @@ function SellerReviews({
     sellerReviews?.length===0 ? 
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <h1 className="text-[#333333] text-lg font-semibold md:font-bold md:text-2xl mb-1">
-         No reviews for {sellerName}
+          {t('SCREEN.CHECK_REVIEWS_FEEDBACK.CHECK_REVIEWS_NO_FEEDBACK_HEADER', {
+            seller_id: searchParams.seller_name,
+          })}
         </h1>
       </div> :
     <>
