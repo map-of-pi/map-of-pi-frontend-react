@@ -36,23 +36,27 @@ export default function Index() {
   const t = useTranslations();
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), { ssr: false });
 
-  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
-  const [zoomLevel, setZoomLevel] = useState(2);
+  // Explicitly type the map center to ensure type safety for the `type` field
+  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number; type: 'search' | 'sell' }>({
+    lat: 20,
+    lng: -74.0060,
+    type: 'search'  // Ensure type is either 'search' or 'sell'
+  });  const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
 
   // Default map center (example: New York City)
-  const defaultMapCenter = { lat: 20, lng: -74.0060 };
+  const defaultMapCenter = { lat: 20, lng: -74.0060, type: 'search' as 'search' | 'sell'  };
 
   useEffect(() => {
     const fetchLocationOnLoad = async () => {
       try {
         const location = await getDeviceLocation();
-        setMapCenter(location);
+        setMapCenter({ ...location, type: 'search' }); // Ensure the type is either 'search' or 'sell'
         setZoomLevel(13);
         logger.info('User location obtained successfully on initial load:', { location });
       } catch (error) {
         logger.error('Error getting location on initial load.', { error });
-        setMapCenter(defaultMapCenter);
+        setMapCenter(defaultMapCenter);  // Use the default map center
         setZoomLevel(2);
       }
     };
@@ -63,7 +67,7 @@ export default function Index() {
   const handleLocationButtonClick = async () => {
     try {
       const location = await getDeviceLocation();
-      setMapCenter(location);
+      setMapCenter({ ...location, type: 'search' }); // Ensure type is 'search'
       setZoomLevel(15);
       setLocationError(null);
       logger.info('User location obtained successfully on button click:', { location });
@@ -71,7 +75,7 @@ export default function Index() {
       logger.error('Error getting location on button click.', { error });
       setLocationError(t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'));
     }
-  };
+  }
 
   return (
     <>

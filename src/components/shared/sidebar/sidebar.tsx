@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './sidebar.module.css';
 
 import { useTranslations } from 'next-intl';
@@ -9,6 +11,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
+import MapCenter from '../map/MapCenter';
 
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
@@ -52,40 +55,20 @@ function Sidebar(props: any) {
   const pathname = usePathname();
   const router = useRouter();
 
+  
   const { resolvedTheme, setTheme } = useTheme();
   const [toggle, setToggle] = useState<any>({
     Themes: false,
     Languages: false,
   });
+
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
   const [email, setEmail] = useState<string | undefined>();
-  const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
+  // const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
-
-  useEffect(() => {
-    if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
-      autoLoginUser();
-    }
-
-    const getUserSettings = async () => {
-      logger.debug('Fetching user settings..');
-      const settings = await fetchUserSettings();
-      if (settings) {
-        setUserSettings(settings);
-        setPhoneNumber(settings.phone_number?.toString());
-        setEmail(settings.email || '');
-        logger.info('User settings fetched successfully.');
-      } else {
-        setUserSettings(null);
-        logger.warn('User settings not found.');
-      }
-    };
-    getUserSettings();
-  }, []);
 
   const handlePhoneNumberChange = (value: string | undefined) => {
     setPhoneNumber(value);
@@ -214,7 +197,7 @@ function Sidebar(props: any) {
         return title;
     }
   };
-
+  
   return (
     <>
       <div className="w-full h-[calc(100vh-74px)] fixed bottom-0 bg-transparent right-0 z-[70]">
@@ -222,7 +205,8 @@ function Sidebar(props: any) {
           className="absolute w-full h-full bg-[#82828284]"
           onClick={() => props.setToggleDis(false)}></div>
         <div
-          className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
+          className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}
+        >
           <div className="text-2xl font-bold mb-2 pb-3">
             {t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}
           </div>
@@ -258,24 +242,23 @@ function Sidebar(props: any) {
                 props.setToggleDis(false); // Close sidebar on click
               }}
             />
-            
-            <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
-              <Button
-                label={t('SHARED.CHECK_REVIEWS')}
-                styles={{
-                  background: '#fff',
-                  color: '#ffc153',
-                  width: '100%',
-                  padding: '8px',
-                  borderColor: 'var(--default-primary-color)',
-                  borderWidth: '2px',
-                  borderRadius: '10px',
-                  fontSize: '18px',
-                }}
-                onClick={() => props.setToggleDis(false)} // Close sidebar on click
-              />
-            </Link>
-          </div>
+              <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
+                <Button
+                  label={t('SHARED.CHECK_REVIEWS')}
+                  styles={{
+                    background: '#fff',
+                    color: '#ffc153',
+                    width: '100%',
+                    padding: '8px',
+                    borderColor: 'var(--default-primary-color)',
+                    borderWidth: '2px',
+                    borderRadius: '10px',
+                    fontSize: '18px',
+                  }}
+                  onClick={() => props.setToggleDis(false)}  // Close sidebar on click
+                />
+              </Link>
+            </div>
             <div className="pt-5">
               <FileInput
                 label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
@@ -286,66 +269,60 @@ function Sidebar(props: any) {
           </div>
           <div className="pt-5">
             {menu.map((menu) => (
-              <>
-                <div key={menu.id} className="">
-                  <div
-                    className={`${styles.slide_content} hover:bg-[#424242] hover:text-white`}
-                    onClick={() => handleMenu(menu.title, menu.url)}>
-                    <Image
-                      src={menu.icon}
-                      alt={menu.title}
-                      width={22}
-                      height={22}
-                      className=""
-                    />
-                    <span className="ml-2">
-                      {translateMenuTitle(menu.title)}
-                    </span>
-                    {menu.children && (
-                      <div className="ml-4">
-                        <FaChevronDown
-                          size={13}
-                          className={`text-[#000000] ${toggle[menu.title] && 'rotate-90'}`}
-                        />
-                      </div>
-                    )}
-                  </div>
-                  {/* MENU WITH CHILDREN */}
-                  {menu.children &&
-                    toggle[menu.title] &&
-                    menu.children.map((child) => (
-                      <div key={child.id} className="ml-6">
-                        <div
-                          className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
-                          onClick={() =>
-                            handleChildMenu(menu.title, child.code)
-                          }>
-                          {child.icon && ( // conditional rendering
-                            <Image
-                              src={child.icon}
-                              alt={child.title}
-                              width={17}
-                              height={17}
-                              className={styles.lng_img}
-                            />
-                          )}
-                          {menu.title === 'Languages' &&
-                          isLanguageMenuItem(child) ? (
-                            <div className="ml-2 text-[14px] flex">
-                              <div className="font-bold">{child.label}</div>
-                              <div className="mx-1"> - </div>
-                              <div>{child.translation}</div>
-                            </div>
-                          ) : (
-                            <span className="ml-2 text-[14px]">
-                              {translateChildMenuTitle(child.title)}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    ))}
+              <div key={menu.id} className="">
+                <div
+                  className={`${styles.slide_content} hover:bg-[#424242] hover:text-white`}
+                  onClick={() => handleMenu(menu.title, menu.url)}
+                >
+                  <Image
+                    src={menu.icon}
+                    alt={menu.title}
+                    width={22}
+                    height={22}
+                    className=""
+                  />
+                  <span className="ml-2">
+                    {translateMenuTitle(menu.title)}
+                  </span>
+                  {menu.children && (
+                    <div className="ml-4">
+                      <FaChevronDown
+                        size={13}
+                        className={`text-[#000000] ${toggle[menu.title] && 'rotate-90'}`}
+                      />
+                    </div>
+                  )}
                 </div>
-              </>
+                {menu.children && toggle[menu.title] && menu.children.map((child) => (
+                  <div key={child.id} className="ml-6">
+                    <div
+                      className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white`}
+                      onClick={() => handleChildMenu(menu.title, child.code)}
+                    >
+                      {child.icon && (
+                        <Image
+                          src={child.icon}
+                          alt={child.title}
+                          width={17}
+                          height={17}
+                          className={styles.lng_img}
+                        />
+                      )}
+                      {menu.title === 'Languages' && isLanguageMenuItem(child) ? (
+                        <div className="ml-2 text-[14px] flex">
+                          <div className="font-bold">{child.label}</div>
+                          <div className="mx-1"> - </div>
+                          <div>{child.translation}</div>
+                        </div>
+                      ) : (
+                        <span className="ml-2 text-[14px]">
+                          {translateChildMenuTitle(child.title)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             ))}
           </div>
           <div ref={bottomRef}></div>

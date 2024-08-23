@@ -171,6 +171,8 @@
     "BUY": "Buy",
     "NAVIGATE": "Navigate",
     "SEARCH_CENTER": "Set Search Center",
+    "SELL_CENTER": "Set Sell Center",
+    "NO_SEARCH_CENTER_SET": "No search center set",
     "CHECK_REVIEWS": "Check Reviews",
     "REPLY": "Reply",
     "SAVE": "Save",
