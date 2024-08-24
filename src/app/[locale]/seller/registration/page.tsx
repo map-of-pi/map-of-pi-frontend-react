@@ -24,6 +24,7 @@ import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
+import logger from '../../../../../logger.config.mjs';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
@@ -54,7 +55,7 @@ const SellerRegistrationForm = () => {
 
   useEffect(() => {
     if (!currentUser) {
-      console.log("Not logged in; pending login attempt..");
+      logger.info("User not logged in; attempting auto-login..");
       autoLoginUser();
     }
 
@@ -62,15 +63,15 @@ const SellerRegistrationForm = () => {
       try {
         const data = await fetchSellerRegistration();
         if (data) {
-          console.log('Seller data:', data);
-          setDbSeller(data); // Ensure this is a single object, not an array
+          logger.info(`Fetched seller data successfully: ${data}`);
+          setDbSeller(data);
         } else {
-          console.log('Seller not found');
-          setDbSeller(null); // Set placeholder seller
+          logger.warn('Seller not found.');
+          setDbSeller(null);
         }
       } catch (error) {
-        console.error('Error fetching seller data: ', error);
-        setError('Error fetching seller data');
+        logger.error(`Error fetching seller data: ${error}`);
+        setError('Error fetching seller data.');
       } finally {
         setLoading(false);
       }
@@ -78,10 +79,11 @@ const SellerRegistrationForm = () => {
 
     const getUserSettings = async () => {
       const settings = await fetchUserSettings();
-      console.log("User settings:", settings);
       if (settings) {
+        logger.info(`Fetched user settings successfully: ${settings}`);
         setUserSettings(settings);
       } else {
+        logger.info('User settings not found.');
         setUserSettings(null);
       }
     };
@@ -152,6 +154,7 @@ const SellerRegistrationForm = () => {
     const selectedFiles = e.target.files;
     if (selectedFiles && selectedFiles.length > 0) {
       setFiles(Array.from(selectedFiles));
+      logger.info('Images selected for upload:', {files: selectedFiles});
     }
   };
 
@@ -159,13 +162,12 @@ const SellerRegistrationForm = () => {
   const handleSave = async () => {  
     // check if user is authenticated and form is valid
     if (!currentUser) {
-      console.log('Form submission failed');
+      logger.warn('Form submission failed: User not authenticated.');
       return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
     }
     
     const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
-    console.log('coordinates', sellCenter);
-    console.log('form data:', formData);
+    logger.info('Saving form data:', { formData, sellCenter });
 
     const regForm = {
       name: formData.sellerName,
@@ -197,9 +199,12 @@ const SellerRegistrationForm = () => {
     try {
       const data = await registerSeller(regForm);
       setDbSeller(data.seller);
-      data.seller ? toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION')) : null;
+      if (data.seller) {
+        toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
+        logger.info(`Seller registration saved successfully: ${data}`);
+      }
     } catch (error) {
-      console.error('Error saving seller registration: ', error);
+      logger.error(`Error saving seller registration: ${error}`);
     }
   }
 
@@ -222,8 +227,8 @@ const SellerRegistrationForm = () => {
     },
   ];
 
-  // loading condition
   if (loading) {
+    logger.info('Loading Seller Registration Form.');
     return (
       <Skeleton type='seller_registration' />
     );
