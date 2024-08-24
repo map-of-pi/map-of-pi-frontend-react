@@ -59,9 +59,8 @@
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Comprar del Vendedor",
-      "SELLER_DESCRIPTION_LABEL": "Descripción del Vendedor",
-      "SELLER_SALE_ITEMS_LABEL": "Artículos del vendedor en venta",
-      "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o Ubicación del Vendedor",
+      "SELLER_DETAILS_LABEL": "Detalles del Vendedor",
+      "SELLER_ADDRESS_POSITION_LABEL": "Dirección o Posición del Vendedor",
       "LEAVE_A_REVIEW_MESSAGE": "Deja una reseña",
       "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes sobre el vendedor anterior",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
@@ -74,6 +73,7 @@
       "SELLER_EMAIL_LABEL": "Correo electrónico del vendedor"
     },
     "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No hay reseñas para {seller_id}",
       "CHECK_REVIEWS_FEEDBACK_HEADER": "Lista de Reseñas dejadas para {seller_id}",
       "BY_REVIEWER": "Por {buyer_id}"
     },
