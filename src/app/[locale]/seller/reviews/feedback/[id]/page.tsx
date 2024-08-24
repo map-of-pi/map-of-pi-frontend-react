@@ -29,6 +29,7 @@ export default function ReplyToReviewPage({
   searchParams,
 }: ReplyToReviewPageProps) {
   const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
+  const SUBHEADER = "font-bold mb-2";
 
   const t = useTranslations();
   const router = useRouter();
@@ -84,7 +85,6 @@ export default function ReplyToReviewPage({
         return reaction;
     }
   };
-  const SUBHEADER = "font-bold mb-2";
 
   // loading condition
   if (loading) {
