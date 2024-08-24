@@ -59,9 +59,8 @@
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Buy from Seller",
-      "SELLER_DESCRIPTION_LABEL": "Seller Description",
-      "SELLER_SALE_ITEMS_LABEL": "Seller items for sale",
-      "SELLER_ADDRESS_LOCATION_LABEL": "Seller Address or Location",
+      "SELLER_DETAILS_LABEL": "Seller Details",
+      "SELLER_ADDRESS_POSITION_LABEL": "Seller Address or Position",
       "LEAVE_A_REVIEW_MESSAGE": "Leave a review",
       "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above seller",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
@@ -74,6 +73,7 @@
       "SELLER_EMAIL_LABEL": "Seller email" 
     },
     "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No reviews for {seller_id}",
       "CHECK_REVIEWS_FEEDBACK_HEADER": "List of Reviews left for {seller_id}",
       "BY_REVIEWER": "By {buyer_id}"
     },
