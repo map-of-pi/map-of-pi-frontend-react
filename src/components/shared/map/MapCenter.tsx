@@ -17,7 +17,9 @@ import { Button } from '../Forms/Buttons/Buttons';
 import RecenterAutomatically from './RecenterAutomatically';
 import { ConfirmDialogX } from '../confirm';
 import { fetchMapCenter, saveMapCenter } from '@/services/mapCenterApi';
+
 import { AppContext } from '../../../../context/AppContextProvider';
+import logger from '../../../../logger.config.mjs';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -40,9 +42,10 @@ const MapCenter = () => {
           const mapCenter = await fetchMapCenter();
           if (mapCenter) {
             setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
+            logger.info(`Map center set to latitude: ${mapCenter.latitude}, longitude: ${mapCenter.longitude}`);
           }
         } catch (error) {
-          console.error('Error fetching map center:', error);
+          logger.error(`Error fetching map center: ${error}`);
         }
       }
     };
@@ -53,9 +56,11 @@ const MapCenter = () => {
     const map = useMapEvents({
       moveend() {
         setCenter(map.getCenter());
+        logger.info(`Map center updated to: ${map.getCenter().toString()}`);
       },
       load() {
         setCenter(map.getCenter());
+        logger.info(`Map loaded with center: ${map.getCenter().toString()}`);
       },
     });
 
@@ -66,18 +71,18 @@ const MapCenter = () => {
 
   const handleSetCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
-      console.log(center);
+      logger.info(`Setting map center to: ${JSON.stringify(center)}`);
       localStorage.setItem('mapCenter', JSON.stringify([center.lat, center.lng]));
 
       try {
         const response = await saveMapCenter(center.lat, center.lng);
-        console.log('Map center saved successfully', response);
+        logger.info(`Map center saved successfully: ${response}`);
         setShowPopup(true);
       } catch (error) {
-        console.error('Error saving map center:', error);
+        logger.error(`Error saving map center: ${error}`);
       }
     } else {
-      console.log('Center or currentUser.pi_uid is null');
+      logger.warn('Center or PI_UID is null.');
     }
   };
 
