@@ -1,17 +1,27 @@
 import axiosClient from "@/config/client";
 import { handleAxiosError } from "@/util/error";
 
+import logger from '../../logger.config.mjs';
+
 // Fetch a single review for a seller
 export const fetchSingleReview = async (reviewID: string) => {
   try {
+    logger.info(`Fetching single review with ID: ${reviewID}`);
     const response = await axiosClient.get(`/review-feedback/single/${reviewID}`);
     if (response.status === 200) {
+      logger.info(`Fetch single review successful with Status ${response.status}`, {
+        data: response.data
+      });
       return response.data;
     } else {
-      console.error(`Fetch single review failed: ${response.status}`);
+      logger.error(`Fetch single review failed with Status ${response.status}`);
       return null;
     }
   } catch (error: any) {
+    logger.error(`Fetch single review encountered an error: ${error.message}`, {
+      error: error.toString(),
+      reviewID
+    });
     handleAxiosError(error);
     throw error;
   }
@@ -20,14 +30,22 @@ export const fetchSingleReview = async (reviewID: string) => {
 // Fetch reviews for a seller
 export const fetchReviews = async (sellerId:string) => {
   try {
+    logger.info(`Fetching reviews for seller with ID: ${sellerId}`);
     const response = await axiosClient.get(`/review-feedback/${sellerId}`);
     if (response.status === 200) {
+      logger.info(`Fetch reviews successful with Status ${response.status}`, {
+        data: response.data
+      });
       return response.data;
     } else {
-      console.error(`Fetch reviews failed: ${response.status}`);
+      logger.error(`Fetch reviews failed with Status ${response.status}`);
       return null;
     }
   } catch (error: any) {
+    logger.error(`Fetch reviews encountered an error: ${error.message}`, {
+      error: error.toString(),
+      sellerId
+    });
     handleAxiosError(error);
     throw error;
   }
@@ -36,14 +54,21 @@ export const fetchReviews = async (sellerId:string) => {
 // Create a new review
 export const createReview = async (formData: FormData) => {
   try {
+    logger.info('Creating a new review..');
     const response = await axiosClient.post('/review-feedback/add', formData);
     if (response.status === 200) {
+      logger.info(`Create review successful with Status ${response.status}`, {
+        data: response.data
+      });
       return response.data;
     } else {
-      console.error(`Create review failed: ${response.status}`);
+      logger.error(`Create review failed with Status ${response.status}`);
       return null;
     }
   } catch (error: any) {
+    logger.error(`Create review encountered an error: ${error.message}`, {
+      error: error.toString()
+    });
     handleAxiosError(error);
     throw error;
   }
