@@ -5,6 +5,8 @@ import { Providers } from '../providers';
 
 import Navbar from '@/components/shared/navbar/Navbar';
 
+import logger from '../../../logger.config.mjs';
+
 const lato = Lato({ weight: '400', subsets: ['latin'], display: 'swap' });
 
 export default function LocaleLayout({
@@ -16,6 +18,14 @@ export default function LocaleLayout({
 }) {
   // Receive messages provided in `i18n.ts`
   const messages = useMessages();
+
+  // log the locale and messages loading
+  logger.info(`Rendering LocaleLayout for locale: ${locale}`);
+  if (messages) {
+    logger.info('Messages loaded successfully.');
+  } else {
+    logger.warn('No messages found for the given locale.');
+  }
 
   return (
     <html lang={locale} suppressHydrationWarning={true}>
@@ -64,10 +74,6 @@ export default function LocaleLayout({
           sizes="16x16"
           href="/favicon-16x16.png"
         />
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
-          rel="stylesheet"
-        /> */}
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
