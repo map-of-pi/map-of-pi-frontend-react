@@ -15,6 +15,8 @@ import { fetchSingleReview } from '@/services/reviewsApi';
 import { resolveDate } from '@/util/date';
 import { resolveRating } from '../../util/ratingUtils';
 
+import logger from '../../../../../../../logger.config.mjs';
+
 interface ReplyToReviewPageProps {
   params: {
     id: string;
@@ -50,16 +52,23 @@ export default function ReplyToReviewPage({
   useEffect(() => {
     // try re-login user if not current user auth
     if (!currentUser) {
-      console.log("Not logged in; pending login attempt..");
+      logger.info('User not logged in; attempting auto-login..');
       autoLoginUser();
     };
 
     const getReviewData = async () => {      
       try {
-        console.log('Review ID: ', reviewId);
+        logger.info(`Fetching review data for review ID: ${reviewId}`);
         const data = await fetchSingleReview(reviewId);
         setReviewData(data);
+
+        if (data) {
+          logger.info(`Fetched review data successfully for review ID: ${reviewId}`);
+        } else {
+          logger.warn(`No review data found for review ID: ${reviewId}`);
+        }
       } catch (error) {
+        logger.error(`Error fetching review data for review ID: ${reviewId}`, error);
         setError('Error fetching review data');
       } finally {
         setLoading(false);
@@ -88,6 +97,7 @@ export default function ReplyToReviewPage({
 
   // loading condition
   if (loading) {
+    logger.info('Loading review data..');
     return (
       <Skeleton type='seller_review' />
     );
