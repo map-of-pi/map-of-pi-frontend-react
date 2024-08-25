@@ -9,7 +9,9 @@ import { fetchSellers } from '@/services/sellerApi';
 import { ISeller } from '@/constants/types';
 import { toLatLngLiteral } from '@/util/map';
 
-import MapMarkerPopup from './MapMarkerPopup';
+import MapMarkerPopup from './MapMarkerPopup'
+
+import logger from '../../../../logger.config.mjs';
 
 // Utility function to ensure coordinates are within valid ranges
 const sanitizeCoordinates = (lat: number, lng: number) => {
@@ -33,11 +35,11 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Prom
       };
     });
 
-    console.log('Fetched sellers data:', sellersWithCoordinates);
+    logger.info(`Fetched sellers data: ${JSON.stringify(sellersWithCoordinates)}`);
 
     return sellersWithCoordinates;
   } catch (error) {
-    console.error('Error fetching seller coordinates:', error);
+    logger.error(`Error fetching seller coordinates: ${error}`);
     throw error;
   }
 };
@@ -73,7 +75,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
 
   // Fetch initial seller coordinates when component mounts
   useEffect(() => {
-    console.log('Component mounted, fetching initial coordinates..');
+    logger.info('Component mounted, fetching initial coordinates..');
     fetchInitialCoordinates();
     requestLocation();
   }, []);
@@ -87,7 +89,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
 
   // Log sellers array for debugging
   useEffect(() => {
-    console.log('Sellers Array:', sellers);
+    logger.debug(`Sellers Array: ${JSON.stringify(sellers)}`);
   }, [sellers]);
 
   // Function to fetch initial coordinates
@@ -100,8 +102,8 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
       let sellersData = await fetchSellerCoordinates(originLatLngTuple, radius);
       sellersData = removeDuplicates(sellersData);
       setSellers(sellersData);
-    } catch (err) {
-      console.error('Failed to fetch initial coordinates: ', err);
+    } catch (error) {
+      logger.error(`Failed to fetch initial coordinates: ${error}`);
       setError('Failed to fetch initial coordinates');
     } finally {
       setLoading(false);
@@ -114,7 +116,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
     const newRadius = calculateRadius(newBounds, mapInstance);
     const largerRadius = newRadius * 2; // Increase radius by 100% for fetching
 
-    console.log('Handling map interaction with new center: ', newCenter, 'and radius: ', newRadius);
+    logger.info(`Handling map interaction with new center: ${newCenter.toString()} and radius: ${newRadius}`);
     setLoading(true);
     setError(null);
 
@@ -122,22 +124,22 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
       let additionalSellers = await fetchSellerCoordinates([newCenter.lat, newCenter.lng], largerRadius);
       additionalSellers = removeDuplicates(additionalSellers);
 
-      console.log('Fetched additional sellers:', additionalSellers);
+      logger.info(`Fetched additional sellers: ${JSON.stringify(additionalSellers)}`);
 
       // Filter sellers within the new bounds
       const filteredSellers = additionalSellers.filter(seller => newBounds.contains([seller.coordinates[0], seller.coordinates[1]]));
-      console.log('Filtered sellers within bounds:', filteredSellers);
+      logger.info(`Filtered sellers within bounds: ${JSON.stringify(filteredSellers)}`);
 
       // Filter out sellers that are not within the new bounds from the existing sellers
       const remainingSellers = sellers.filter(seller => newBounds.contains([seller.coordinates[0], seller.coordinates[1]]));
-      console.log('Remaining sellers within bounds:', remainingSellers);
+      logger.info(`Remaining sellers within bounds: ${JSON.stringify(remainingSellers)}`);
 
       const updatedSellers = removeDuplicates([...remainingSellers, ...filteredSellers]);
-      console.log('Updated sellers array:', updatedSellers);
+      logger.info(`Updated sellers array: ${JSON.stringify(updatedSellers)}`);
 
       setSellers(updatedSellers);
-    } catch (err) {
-      console.error('Failed to fetch additional data:', err);
+    } catch (erroe) {
+      logger.error(`Failed to fetch additional data: ${error}`);
       setError('Failed to fetch additional data');
     } finally {
       setLoading(false);
@@ -146,7 +148,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
 
   // Function to calculate radius from bounds
   const calculateRadius = (bounds: L.LatLngBounds, mapInstance: L.Map) => {
-    console.log('Calculating radius for bounds:', bounds);
+    logger.info(`Calculating radius for bounds: ${bounds.toBBoxString()}`);
     const northEast = bounds.getNorthEast();
     const southWest = bounds.getSouthWest();
     const distance = mapInstance.distance(northEast, southWest) / 2;
@@ -168,19 +170,19 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
         (position) => {
           const { latitude, longitude } = position.coords;
           const newLatLng = L.latLng(latitude, longitude);
-          console.log('Real-time location updated: ', newLatLng);
+          logger.info(`Real-time location updated: ${newLatLng.toString()}`);
           setPosition(newLatLng);
           setOrigin(newLatLng);
           setIsLocationAvailable(true);
         },
         (error) => {
-          console.log('Location not found: ', error);
+          logger.warn(`Location not found: ${error.message}`);
           setLocationError(true);
           setTimeout(() => setLocationError(false), 3000);
         }
       );
     } else {
-      console.log('Geolocation is not supported by this browser');
+      logger.warn('Geolocation is not supported by this browser.');
       setLocationError(true);
       setTimeout(() => setLocationError(false), 3000);
     }
@@ -190,7 +192,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
   function LocationMarker() {
     const map = useMapEvents({
       locationfound(e) {
-        console.log('Location found: ', e.latlng);
+        logger.info(`Location found: ${e.latlng.toString()}`);
         setPosition(e.latlng);
         setLocationError(false);
         if (!initialLocationSet) {
@@ -199,7 +201,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
         }
       },
       locationerror() {
-        console.log('Location not found');
+        logger.warn('Location not found');
         setLocationError(true);
         setTimeout(() => setLocationError(false), 3000);
       },

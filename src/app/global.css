@@ -5,15 +5,15 @@
 @import '~react-phone-number-input/style.css';
 
 :root {
-    --default-primary-color: #386F4F;
-    --default-secondary-color: #F6C367;
-    --default-bg-color: #EBF1ED;
+  --default-primary-color: #386F4F;
+  --default-secondary-color: #F6C367;
+  --default-bg-color: #EBF1ED;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* remove leaflet attribution control */
@@ -22,34 +22,34 @@
 }
 
 .seller_item_container{
-    background: #E0E0E066;
-    border: 1px solid #BDBDBD4D;
-    width: Fill (335px)px;
-    height: Hug (94px)px;
-    padding: 8px 16px 8px 16px;
-    gap: 12px;
-    border-radius: 10px 10px 10px 10px;
+  background: #E0E0E066;
+  border: 1px solid #BDBDBD4D;
+  width: Fill (335px)px;
+  height: Hug (94px)px;
+  padding: 8px 16px 8px 16px;
+  gap: 12px;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .subheader_text{
-    font-family: Lato;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 18px;
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18px;
 }
 
 .normal_btn{
-    border: 1px solid var(--default-primary-color);
-    width: Fixed (122px)px;
-    height: Fixed (38px)px;
-    padding: var(--space-0) var(--space-8) var(--space-0) var(--space-8);
-    gap: var(--space-3);
-    border-radius: 6px;
-    border: 1px;
+  border: 1px solid var(--default-primary-color);
+  width: Fixed (122px)px;
+  height: Fixed (38px)px;
+  padding: var(--space-0) var(--space-8) var(--space-0) var(--space-8);
+  gap: var(--space-3);
+  border-radius: 6px;
+  border: 1px;
 }
 
 .disabled {
-    pointer-events: none;
-    /* opacity: 0.5; */
-    color: grey
+  pointer-events: none;
+  /* opacity: 0.5; */
+  color: grey
 }

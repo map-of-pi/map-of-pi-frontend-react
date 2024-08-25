@@ -2,17 +2,26 @@ import axiosClient from "@/config/client";
 import { IUserSettings } from "@/constants/types";
 import { handleAxiosError } from "@/util/error";
 
+import logger from '../../logger.config.mjs';
+
 // Fetch the user settings of the user
 export const fetchUserSettings = async () => {
   try {
+    logger.info('Fetching user settings..');
     const response = await axiosClient.post(`/user-preferences/me`);
     if (response.status === 200) {
+      logger.info(`Fetch user settings successful with Status ${response.status}`, {
+        data: response.data
+      });
       return response.data;
     } else {
-      console.error(`Fetch user settings failed: ${response.status}`);
+      logger.error(`Fetch user settings failed with Status ${response.status}`);
       return null;
     }
   } catch (error: any) {
+    logger.error(`Fetch user settings encountered an error: ${error.message}`, {
+      error: error.toString()
+    });
     handleAxiosError(error);
     throw error;
   }
@@ -21,14 +30,22 @@ export const fetchUserSettings = async () => {
 // Fetch a single pioneer user settings
 export const fetchSingleUserSettings = async (sellerId: String) => {
   try {
+    logger.info(`Fetching user settings for seller ID: ${sellerId}`);
     const response = await axiosClient.get(`/user-preferences/${sellerId}`);
     if (response.status === 200) {
+      logger.info(`Fetch single user settings successful with Status ${response.status}`, {
+        data: response.data
+      });
       return response.data;
     } else {
-      console.error(`Fetch seller settings failed: ${response.status}`);
+      logger.error(`Fetch single user settings failed with Status ${response.status}`);
       return null;
     }
   } catch (error: any) {
+    logger.error(`Fetch single user settings encountered an error: ${error.message}`, {
+      error: error.toString(),
+      sellerId
+    });
     handleAxiosError(error);
     throw error;
   }
@@ -37,14 +54,22 @@ export const fetchSingleUserSettings = async (sellerId: String) => {
 // Create new or update existing user settings
 export const createUserSettings = async (formData: IUserSettings) => {
   try {
+    logger.info('Creating or updating user settings with formData..');
     const response = await axiosClient.put('/user-preferences/add', {json: JSON.stringify(formData)});
     if (response.status === 200) {
+      logger.info(`Create user settings successful with Status ${response.status}`, {
+        data: response.data
+      });
       return response.data;
     } else {
-      console.error(`Create user settings failed: ${response.status}`);
+      logger.error(`Create user settings failed with Status ${response.status}`);
       return null;
     }
   } catch (error: any) {
+    logger.error(`Create user settings encountered an error: ${error.message}`, {
+      error: error.toString(),
+      formData: JSON.stringify(formData)
+    });
     handleAxiosError(error);
     throw error;
   }

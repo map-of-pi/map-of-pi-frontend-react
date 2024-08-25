@@ -1,18 +1,18 @@
 .nav_item {
-    width: 35px;
-    height: 35px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 35px;
+  height: 35px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav_item:active {
-    width: 35px;
-    height: 35px;
-    border: none;
-    border-radius: 50%;
-    background-color: #d0d0d086;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  background-color: #d0d0d086;
 }
