@@ -8,6 +8,8 @@ import { FileInput } from '../Forms/Inputs/Inputs';
 import { createReview } from '@/services/reviewsApi';
 import { toast } from 'react-toastify';
 
+import logger from '../../../../logger.config.mjs';
+
 interface Emoji {
   name: string;
   unicode: string;
@@ -76,6 +78,7 @@ export default function EmojiPicker(props: any) {
     try {
       if (props.currentUser) {
         if (reviewEmoji === null) {
+          logger.warn('Attempted to save review without selecting an emoji.');
           return window.alert(t('SHARED.REACTION_RATING.VALIDATION.SELECT_EMOJI_EXPRESSION'));
         } else {
           const formData = new FormData();
@@ -85,21 +88,19 @@ export default function EmojiPicker(props: any) {
           files.forEach((file) => formData.append('image', file));
           formData.append('reply_to_review_id', props.replyToReviewId || '');
 
-          console.log('Form Data:', formData);
-
           const newReview = await createReview(formData);
           if (newReview) {
             toast.success(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
+            logger.info('Review submitted successfully');
           }
           resetReview();
         }
       } else {
-        console.log('Unable to submit review; user not authenticated.');
+        logger.warn('Unable to submit review; user not authenticated.');
         toast.error(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
       }
     } catch (error) {
-      console.error('Error saving review:', error);
-      // toast.error(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
+      logger.error(`Error saving review: ${error}`);
     }
   };
   
@@ -121,7 +122,6 @@ export default function EmojiPicker(props: any) {
     return undefined;
   };
   const emojiBtnClass = 'rounded-md w-full outline outline-[0.5px] flex justify-center items-center cursor-pointer p-1'
-  const SUBHEADER = "font-bold mb-2";
   return (
     <div className="mb-3">
         <p>{t('SCREEN.BUY_FROM_SELLER.FACE_SELECTION_REVIEW_MESSAGE')}</p>
