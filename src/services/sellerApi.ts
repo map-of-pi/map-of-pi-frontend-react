@@ -6,7 +6,7 @@ import logger from '../../logger.config.mjs';
 // Fetch all sellers or within bounds
 export const fetchSellers = async (origin: any, radius: number) => {
   try {
-    logger.info(`Fetching sellers with origin: ${JSON.stringify(origin)}, radius: ${radius}`);
+    logger.info('Fetching sellers with origin and radius:', { origin, radius });
     const response = await axiosClient.post('/sellers/fetch', {
       origin,
       radius
@@ -21,11 +21,7 @@ export const fetchSellers = async (origin: any, radius: number) => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Fetch sellers encountered an error: ${error.message}`, {
-      error: error.toString(),
-      origin,
-      radius
-    });
+    logger.error('Fetch sellers encountered an error:', { error, origin, radius });
     handleAxiosError(error);
     throw error;
   }
@@ -45,10 +41,7 @@ export const fetchSingleSeller = async (sellerId: string) => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Fetch single seller encountered an error: ${error.message}`, {
-      error: error.toString(),
-      sellerId
-    });
+    logger.error('Fetch single seller encountered an error:', { error, sellerId });
     handleAxiosError(error);
     throw error;
   }
@@ -56,24 +49,8 @@ export const fetchSingleSeller = async (sellerId: string) => {
 
 export const fetchSellerRegistration = async () => {
   try {
-    const response = await axiosClient.post('/sellers/me');
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      console.error(`Fetch seller registration failed: ${response.status}`);
-      return null;
-    }
-  } catch (error: any) {
-    handleAxiosError(error);
-    throw error;
-  }
-};
-
-// Register or update seller
-export const registerSeller = async (formData: any) => {
-  try {
     logger.info('Fetching seller registration info..');
-    const response = await axiosClient.put('/sellers/register', {json: JSON.stringify(formData)});
+    const response = await axiosClient.post('/sellers/me');
     if (response.status === 200) {
       logger.info(`Fetch seller registration successful with Status ${response.status}`, {
         data: response.data
@@ -84,9 +61,28 @@ export const registerSeller = async (formData: any) => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Fetch seller registration encountered an error: ${error.message}`, {
-      error: error.toString()
-    });
+    logger.error('Fetch seller registration encountered an error:', { error });
+    handleAxiosError(error);
+    throw error;
+  }
+};
+
+// Register or update seller
+export const registerSeller = async (formData: any) => {
+  try {
+    logger.info('Creating or updating seller registration with formData..');
+    const response = await axiosClient.put('/sellers/register', {json: JSON.stringify(formData)});
+    if (response.status === 200) {
+      logger.info(`Create or update seller registration successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Create or update seller registration failed with Status ${response.status}`);
+      return null;
+    }
+  } catch (error: any) {
+    logger.error('Create or update seller registration encountered an error:', { error, formData });
     handleAxiosError(error);
     throw error;
   }

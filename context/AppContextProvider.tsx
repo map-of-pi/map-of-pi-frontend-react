@@ -74,7 +74,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           logger.error('User authentication failed.');
         }        
       } catch (error: any) {
-        logger.error(`Error during user registration: ${error}`);
+        logger.error('Error during user registration:', { error });
         toast.info(t('HOME.AUTHENTICATION.PI_INFORMATION_NOT_FOUND_MESSAGE'));
       }
     } else {
@@ -96,7 +96,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         logger.warn('Auto-login failed.');
       }
     } catch (error: any) {
-      logger.error(`Auto login unresolved; attempting Pi SDK authentication: ${error}`);
+      logger.error('Auto login unresolved; attempting Pi SDK authentication:', { error });
       await registerUser();
     }
   }

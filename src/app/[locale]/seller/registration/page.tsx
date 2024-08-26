@@ -63,14 +63,14 @@ const SellerRegistrationForm = () => {
       try {
         const data = await fetchSellerRegistration();
         if (data) {
-          logger.info(`Fetched seller data successfully: ${data}`);
+          logger.info('Fetched seller data successfully:', { data });
           setDbSeller(data);
         } else {
           logger.warn('Seller not found.');
           setDbSeller(null);
         }
       } catch (error) {
-        logger.error(`Error fetching seller data: ${error}`);
+        logger.error('Error fetching seller data:', { error });
         setError('Error fetching seller data.');
       } finally {
         setLoading(false);
@@ -80,7 +80,7 @@ const SellerRegistrationForm = () => {
     const getUserSettings = async () => {
       const settings = await fetchUserSettings();
       if (settings) {
-        logger.info(`Fetched user settings successfully: ${settings}`);
+        logger.info('Fetched user settings successfully:', {settings});
         setUserSettings(settings);
       } else {
         logger.info('User settings not found.');
@@ -154,7 +154,7 @@ const SellerRegistrationForm = () => {
     const selectedFiles = e.target.files;
     if (selectedFiles && selectedFiles.length > 0) {
       setFiles(Array.from(selectedFiles));
-      logger.info('Images selected for upload:', {files: selectedFiles});
+      logger.info('Images selected for upload:', { selectedFiles });
     }
   };
 
@@ -201,10 +201,10 @@ const SellerRegistrationForm = () => {
       setDbSeller(data.seller);
       if (data.seller) {
         toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
-        logger.info(`Seller registration saved successfully: ${data}`);
+        logger.info('Seller registration saved successfully:', { data });
       }
     } catch (error) {
-      logger.error(`Error saving seller registration: ${error}`);
+      logger.error('Error saving seller registration:', { error });
     }
   }
 

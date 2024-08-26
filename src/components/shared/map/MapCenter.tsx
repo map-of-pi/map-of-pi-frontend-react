@@ -45,7 +45,7 @@ const MapCenter = () => {
             logger.info(`Map center set to latitude: ${mapCenter.latitude}, longitude: ${mapCenter.longitude}`);
           }
         } catch (error) {
-          logger.error(`Error fetching map center: ${error}`);
+          logger.error('Error fetching map center:', { error });
         }
       }
     };
@@ -71,15 +71,15 @@ const MapCenter = () => {
 
   const handleSetCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
-      logger.info(`Setting map center to: ${JSON.stringify(center)}`);
+      logger.info('Setting map center to:', { center });
       localStorage.setItem('mapCenter', JSON.stringify([center.lat, center.lng]));
 
       try {
         const response = await saveMapCenter(center.lat, center.lng);
-        logger.info(`Map center saved successfully: ${response}`);
+        logger.info('Map center saved successfully:', { response });
         setShowPopup(true);
       } catch (error) {
-        logger.error(`Error saving map center: ${error}`);
+        logger.error('Error saving map center:', { error });
       }
     } else {
       logger.warn('Center or PI_UID is null.');

@@ -18,9 +18,7 @@ export const fetchMapCenter = async () => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Fetch map center encountered an error: ${error.message}`, {
-      error: error.toString()
-    });
+    logger.error('Fetch map center encountered an error:', { error });
     handleAxiosError(error);
     throw error;
   }
@@ -44,9 +42,7 @@ export const saveMapCenter = async (latitude: number, longitude: number) => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Save map center encountered an error: ${error.message}`, {
-      error: error.toString()
-    });
+    logger.error('Save map center encountered an error:', { error });
     handleAxiosError(error);
     throw error;
   }

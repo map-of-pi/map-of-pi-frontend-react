@@ -23,5 +23,5 @@ interface PaymentDTO {
 };
 
 export const onIncompletePaymentFound = (payment: PaymentDTO) => {
-  logger.info(`onIncompletePaymentFound: ${payment}`);
+  logger.info('onIncompletePaymentFound:', { payment });
 }

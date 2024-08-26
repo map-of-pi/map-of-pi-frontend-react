@@ -176,12 +176,12 @@ function Sidebar(props: any) {
 
       try {
         const data = await createUserSettings(userSettingsData);
-        logger.info(`User settings submitted successfully: ${data.settings}`);
+        logger.info('User settings submitted successfully:', { data });
         if (data.settings) {
           toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
         }
       } catch (error: any) {
-        logger.error(`Error submitting user settings: ${error}`);
+        logger.error('Error submitting user settings:', { error });
         toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
       }
     } else {
