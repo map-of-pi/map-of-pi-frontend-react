@@ -33,3 +33,19 @@ export const createUserSettings = async (formData: IUserSettings) => {
     throw error;
   }
 };
+
+// Fetch a single pioneer user settings
+export const fetchSellerSettings = async (sellerId: String) => {
+  try {
+    const response = await axiosClient.post(`/user-preferences/${sellerId}`);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      console.error(`Fetch seller settings failed: ${response.status}`);
+      return null;
+    }
+  } catch (error: any) {
+    handleAxiosError(error);
+    throw error;
+  }
+};
