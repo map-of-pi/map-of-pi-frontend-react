@@ -17,7 +17,7 @@ import { ConfirmDialogX } from '../confirm';
 import RecenterAutomatically from './RecenterAutomatically';
 import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
 import { AppContext } from '../../../../context/AppContextProvider';
-// import logger from '../../../../../logger.config.mjs';
+import logger from '../../../../../logger.config.mjs';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
