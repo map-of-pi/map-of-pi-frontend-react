@@ -1,9 +1,7 @@
 export interface IUser {
-  _id: string; 
   pi_uid: string;
   pi_username: string;
   user_name: string;
-  token: string;
 }
 
 export interface IUserSettings {

@@ -1,5 +1,6 @@
 import axiosClient from "@/config/client";
 import { handleAxiosError } from "@/util/error";
+
 import logger from '../../logger.config.mjs';
 
 // Function to Fetch Map Center
@@ -31,7 +32,6 @@ export const saveMapCenter = async (latitude: number, longitude: number) => {
       latitude,
       longitude
     });
-    
     if (response.status === 200) {
       logger.info(`Save map center successful with Status ${response.status}`, {
         data: response.data

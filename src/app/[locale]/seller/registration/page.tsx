@@ -92,7 +92,6 @@ const SellerRegistrationForm = () => {
     getUserSettings();
   }, [currentUser]);
 
-
   const defaultSellerName = currentUser? currentUser?.user_name : '';
   // Initialize formData with dbSeller values if available
   useEffect(() => {

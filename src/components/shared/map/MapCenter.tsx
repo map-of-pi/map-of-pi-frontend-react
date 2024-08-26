@@ -27,22 +27,17 @@ const crosshairIcon = new L.Icon({
 });
 
 const MapCenter = () => {
-  const t = useTranslations(); // Hook for internationalization
+  const t = useTranslations();
   const [showPopup, setShowPopup] = useState(false); // State for controlling the visibility of the confirmation popup
-  const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 }); // State for storing the map center coordinates
-  const { currentUser } = useContext(AppContext); // Get the current user from context
+  const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
+  const { currentUser, autoLoginUser } = useContext(AppContext);
 
-  // Effect to handle user authentication state
   useEffect(() => {
     if (!currentUser) {
-      console.log("User is not logged in, redirecting or triggering login...");
-      // Implement login or redirect logic here if needed
-    } else {
-      console.log("User is logged in:", currentUser);
+      logger.info("User not logged in; attempting auto-login..");
+      autoLoginUser();
     }
-  }, [currentUser]);
 
-  useEffect(() => {
     const getMapCenter = async () => {
       if (currentUser?.pi_uid) {
         try {
@@ -91,7 +86,7 @@ const MapCenter = () => {
         logger.error('Error saving map center:', { error });
       }
     } else {
-      console.log('User not authenticated or center coordinates are null'); // Handle the case where the user is not authenticated or coordinates are null
+      logger.warn('User not authenticated or center coordinates are null'); // Handle the case where the user is not authenticated or coordinates are null
     }
   };
 
@@ -100,25 +95,36 @@ const MapCenter = () => {
     setShowPopup(false);
   };
 
+  // define map boundaries
+  const bounds = L.latLngBounds(
+    L.latLng(-90, -180), // SW corner
+    L.latLng(90, 180)  // NE corner
+  );
+
   return (
     <div>
       <MapContainer
-        zoomControl={false}
         center={center}
-        zoom={13}
+        zoom={2}
+        zoomControl={false}
+        minZoom={2}
+        maxZoom={18}
+        maxBounds={bounds}
+        maxBoundsViscosity={1.0}
         className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="Map data © OpenStreetMap contributors"
+          noWrap={true}
         />
-        <CenterMarker /> {/* Renders the crosshair marker at the map's center */}
-        <RecenterAutomatically position={center} /> {/* Component to handle automatic recentering */}
+        <CenterMarker />
+        <RecenterAutomatically position={center} />
       </MapContainer>
       <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
         <Button
           label="Set Map Center"
-          onClick={setMapCenter} // Handles saving the map center when the button is clicked
+          onClick={setMapCenter}
           styles={{
             borderRadius: '10px',
             color: '#ffc153',
