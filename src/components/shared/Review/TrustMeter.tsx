@@ -4,7 +4,6 @@ type TrustMeterProps = {
   ratings: number;
 };
 
-
 const TrustMeter: React.FC<TrustMeterProps> = ({ ratings }) => {
   // const maxRating = 5.0; 
   // const percentageRating = (ratings / maxRating * 100).toString();
@@ -20,7 +19,6 @@ const TrustMeter: React.FC<TrustMeterProps> = ({ ratings }) => {
       <div className='flex-1'>
 
         <div className="flex w-full">          
-          {/* ball */}
           <div className={`${condition ? 'bg-red-700' : 'bg-green-700'} rounded-full p-3 w-[5px] h-[5px]`}></div>
           
           {/* Primary indicator */}

@@ -1,4 +1,5 @@
 import createNextIntlPlugin from 'next-intl/plugin';
+import { withSentryConfig } from "@sentry/nextjs";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -39,4 +40,12 @@ const nextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+const sentryWebpackPluginOptions = {
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: true, // suppress Sentry errors during the build process
+};
+
+// wrap existing configuration with Sentry
+const configWithSentry = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
+
+export default withNextIntl(configWithSentry);

@@ -10,6 +10,9 @@ import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 
+import InfoModel from '@/components/shared/About/Info/Info';
+import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
+import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import {
   FileInput,
@@ -17,12 +20,11 @@ import {
   TelephoneInput,
 } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
-import InfoModel from '@/components/shared/About/Info/Info';
-import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
-import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
 import { IUserSettings } from '@/constants/types';
 import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+
 import { AppContext } from '../../../../context/AppContextProvider';
+import logger from '../../../../logger.config.mjs';
 
 // type definitions for menu items
 interface MenuItem {
@@ -48,9 +50,7 @@ function isLanguageMenuItem(item: MenuItem): item is LanguageMenuItem {
 function Sidebar(props: any) {
   const t = useTranslations();
   const pathname = usePathname();
-  const params = useParams();
   const router = useRouter();
-  const locale = 'en';
 
   const { resolvedTheme, setTheme } = useTheme();
   const [toggle, setToggle] = useState<any>({
@@ -67,18 +67,21 @@ function Sidebar(props: any) {
 
   useEffect(() => {
     if (!currentUser) {
+      logger.info("User not logged in; attempting auto-login..");
       autoLoginUser();
     }
 
     const getUserSettings = async () => {
+      logger.debug('Fetching user settings..');
       const settings = await fetchUserSettings();
-      console.log("user settings", settings);
       if (settings) {
         setUserSettings(settings);
         setPhoneNumber(settings.phone_number?.toString());
         setEmail(settings.email || '');
+        logger.info('User settings fetched successfully.');
       } else {
         setUserSettings(null);
+        logger.warn('User settings not found.');
       }
     };
     getUserSettings();
@@ -86,17 +89,22 @@ function Sidebar(props: any) {
 
   const handlePhoneNumberChange = (value: string | undefined) => {
     setPhoneNumber(value);
+    logger.debug(`Phone number changed to: ${value}`);
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    logger.debug(`Email changed to: ${e.target.value}`);
   };
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  const handleAddImages = () => {};
+  const handleAddImages = () => {
+    logger.debug('Add images handler triggered.');
+  };
 
   const handleMenu = (title: any, url: string) => {
+    logger.debug(`Menu item selected: ${title}, URL: ${url}`);
     if (
       title !== 'Themes' &&
       title !== 'Languages' &&
@@ -122,6 +130,7 @@ function Sidebar(props: any) {
   };
   
   const handleChildMenu = (title: any, code: string) => {
+    logger.debug(`Child menu item selected: ${title}, Code: ${code}`);
     if (title === 'Languages') {
       const slipPathname = pathname.split('/').slice(2);
       slipPathname.unshift(code);
@@ -151,6 +160,8 @@ function Sidebar(props: any) {
     let inputValue = e.target.value;
     let searchCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null'); // Provide default value
 
+    logger.debug(`Input field blurred: ${inputName}, Value: ${inputValue}`);
+
     if (inputValue !== "") {
       const userSettingsData: IUserSettings = {
         [inputName]: inputValue,
@@ -165,11 +176,12 @@ function Sidebar(props: any) {
 
       try {
         const data = await createUserSettings(userSettingsData);
-        console.log('Side Nav:', data.settings);
+        logger.info(`User settings submitted successfully: ${data.settings}`);
         if (data.settings) {
           toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
         }
       } catch (error: any) {
+        logger.error(`Error submitting user settings: ${error}`);
         toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
       }
     } else {

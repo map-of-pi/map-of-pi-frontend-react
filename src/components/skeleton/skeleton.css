@@ -1,17 +1,17 @@
 .skeleton {
-    animation: skeleton 1s ease infinite alternate;
+  animation: skeleton 1s ease infinite alternate;
 }
 
 @keyframes skeleton {
-    to {
-        opacity: 0.5;
-    }
+  to {
+    opacity: 0.5;
+  }
 }
 
 .skeleton div {
-    background-color: #c6c6c6;
+  background-color: #c6c6c6;
 }
 
 .my-bg-trans {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }

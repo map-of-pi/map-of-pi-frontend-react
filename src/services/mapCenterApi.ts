@@ -51,4 +51,3 @@ export const fetchMapCenter = async () => {
     throw error;
   }
 };
-
