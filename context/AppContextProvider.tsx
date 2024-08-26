@@ -17,6 +17,8 @@ import axiosClient, {setAuthToken} from '@/config/client';
 import { onIncompletePaymentFound } from '@/util/auth';
 import { IUser } from '@/constants/types';
 
+import logger from '../logger.config.mjs';
+
 type AuthResult = {
   accessToken: string,
   user: {
@@ -50,9 +52,11 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
   const registerUser = async () => {
+    logger.info('Initializing Pi SDK for user registration.');
     await Pi.init({ version: '2.0', sandbox: process.env.NODE_ENV === 'development' });
 
     let isInitiated = Pi.initialized;
+    logger.info(`Pi SDK initialized: ${isInitiated}`);
 
     if (isInitiated) {
       try {
@@ -63,37 +67,42 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           setAuthToken(res.data?.token)
           setCurrentUser(res.data.user);
           toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data?.user?.user_name}`);
+          logger.info('User authenticated successfully.');
         } else if (res.status === 500) {
           setCurrentUser(null);
           toast.error(`${t('HOME.AUTHENTICATION.UNSUCCESSFUL_LOGIN_MESSAGE')}`);
+          logger.error('User authentication failed.');
         }        
       } catch (error: any) {
-        console.log(error);
+        logger.error(`Error during user registration: ${error}`);
         toast.info(t('HOME.AUTHENTICATION.PI_INFORMATION_NOT_FOUND_MESSAGE'));
       }
     } else {
-      console.log("PI SDK failed to initialize.");
+      logger.error('PI SDK failed to initialize.');
     }
   };
 
   const autoLoginUser = async () => {
+    logger.info('Attempting to auto-login user.');
     try {
       const res = await axiosClient.get('/users/me');
 
       if (res.status === 200) {
-        console.log('Login result from autoSigninUser: ', res.data);
+        logger.info('Auto-login successful.');
         setCurrentUser(res.data);
         toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data.user_name}`);
       } else {
         setCurrentUser(null);
+        logger.warn('Auto-login failed.');
       }
     } catch (error: any) {
-      console.log('Auto login unresolved; attempting Pi SDK authentication', error);
+      logger.error(`Auto login unresolved; attempting Pi SDK authentication: ${error}`);
       await registerUser();
     }
   }
 
   useEffect(() => {
+    logger.info('AppContextProvider mounted.');
     if (!currentUser) {
       registerUser();
     } else {

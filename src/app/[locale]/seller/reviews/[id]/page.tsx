@@ -13,6 +13,8 @@ import { fetchReviews } from '@/services/reviewsApi'
 import { resolveDate } from '@/util/date';
 import { resolveRating } from '../util/ratingUtils';
 
+import logger from '../../../../../../logger.config.mjs';
+
 interface ReviewInt {
   heading: string;
   date: string;
@@ -43,7 +45,14 @@ function SellerReviews({
   useEffect(() => {
     const getSellerData = async () => {
       try {
+        logger.info(`Fetching reviews for seller ID: ${sellerId}`);
+
         const data = await fetchReviews(sellerId);
+        if (data && data.length > 0) {
+          logger.info(`Fetched ${data.length} reviews for seller ID: ${sellerId}`);
+        } else {
+          logger.warn(`No reviews found for seller ID: ${sellerId}`);
+        }
 
         const reviewFeedback = data.map((feedback: IReviewFeedback) =>{
           return {
@@ -58,6 +67,7 @@ function SellerReviews({
         })
         setSellerReviews(reviewFeedback);  // Ensure this is a single object, not an array
       } catch (error) {
+        logger.error(`Error fetching seller reviews for ID: ${sellerId}`, error);
         setError('Error fetching seller data');
       } finally {
         setLoading(false);
@@ -86,6 +96,7 @@ function SellerReviews({
 
   // loading condition
   if (loading) {
+    logger.info('Loading seller reviews..');
     return (
       <Skeleton type='seller_review' />
     );
@@ -95,7 +106,9 @@ function SellerReviews({
     sellerReviews?.length===0 ? 
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto">
         <h1 className="text-[#333333] text-lg font-semibold md:font-bold md:text-2xl mb-1">
-         No reviews for {sellerName}
+          {t('SCREEN.CHECK_REVIEWS_FEEDBACK.CHECK_REVIEWS_NO_FEEDBACK_HEADER', {
+            seller_id: searchParams.seller_name,
+          })}
         </h1>
       </div> :
     <>

@@ -8,9 +8,10 @@ import { useState, useRef, ChangeEvent, FormEvent } from 'react';
 
 import { FormControl } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
 import Snackbar from '@mui/material/Snackbar';
 import TextField from '@mui/material/TextField';
+
+import logger from '../../../../logger.config.mjs';
 
 const SearchBar: React.FC = () => {
   const t = useTranslations();
@@ -20,19 +21,14 @@ const SearchBar: React.FC = () => {
   const [message, setMessage] = useState('');
 
   const handleSearchBarChange = (event: ChangeEvent<HTMLInputElement>) => {
+    logger.debug(`Search bar value changed: ${event.target.value}`);
     setSearchBarValue(event.target.value);
   };
   
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleIconClick = () => {
-    // Move the placeholder text up
-    if(inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
   const fetchSearchResults = async (query: string, searchType: string):Promise<any[]> => {
+    logger.info(`Fetching search results for query: ${query}, searchType: ${searchType}`);
     // fetch logic to be defined here
     // For now, it returns an empty array
     return new Promise((resolve) => resolve([]));
@@ -47,13 +43,15 @@ const SearchBar: React.FC = () => {
     const query = searchBarValue;
     if (query) {
       const searchType = isBusinessSearchType ? 'business' : 'product';
-      console.info(`Search query emitted for ${searchType}: `, query);
+      logger.info(`Search query emitted for ${searchType}: ${query}`);
 
       const searchResults = await fetchSearchResults(query, searchType);
       setSearchQuery( query, searchType );
 
       setMessage(`Your search found ${searchResults.length} shops. Please zoom out to view all shop markers.`); 
-      console.log(message);
+      logger.info(message);
+    } else {
+      logger.warn('Search query is empty.');
     }
   };
 
@@ -95,6 +93,3 @@ const SearchBar: React.FC = () => {
 };
 
 export default SearchBar;
-
-
-
