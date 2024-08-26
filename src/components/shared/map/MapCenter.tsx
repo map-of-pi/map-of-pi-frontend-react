@@ -4,7 +4,6 @@ import 'leaflet/dist/leaflet.css';
 import './MapCenter.css';
 
 import { useTranslations } from 'next-intl';
-
 import { useState, useEffect, useContext } from 'react';
 import {
   MapContainer,
@@ -14,10 +13,9 @@ import {
 } from 'react-leaflet';
 import L from 'leaflet';
 import { Button } from '../Forms/Buttons/Buttons';
-import RecenterAutomatically from './RecenterAutomatically';
 import { ConfirmDialogX } from '../confirm';
-import { fetchMapCenter, saveMapCenter } from '@/services/mapCenterApi';
-
+import RecenterAutomatically from './RecenterAutomatically';
+import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
 
@@ -30,37 +28,44 @@ const crosshairIcon = new L.Icon({
 
 const MapCenter = () => {
   const t = useTranslations();
-
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false); // State for controlling the visibility of the confirmation popup
   const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
-  const { currentUser } = useContext(AppContext); // Get currentUser from context
+  const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
+    if (!currentUser) {
+      logger.info("User not logged in; attempting auto-login..");
+      autoLoginUser();
+    }
+
     const getMapCenter = async () => {
       if (currentUser?.pi_uid) {
         try {
           const mapCenter = await fetchMapCenter();
-          if (mapCenter) {
+          if (mapCenter?.latitude !== undefined && mapCenter.longitude !== undefined) {
             setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
             logger.info(`Map center set to latitude: ${mapCenter.latitude}, longitude: ${mapCenter.longitude}`);
+          } else {
+            logger.warn("Map center is undefined, falling back to default coordinates");
+            setCenter({ lat: 50.064192, lng: 19.944544 });
           }
         } catch (error) {
           logger.error('Error fetching map center:', { error });
         }
       }
     };
+  
     getMapCenter();
   }, [currentUser]);
-
+  
+  // Component to handle map events and update the center state
   const CenterMarker = () => {
     const map = useMapEvents({
       moveend() {
-        setCenter(map.getCenter());
-        logger.info(`Map center updated to: ${map.getCenter().toString()}`);
+        setCenter(map.getCenter()); // Update center state when the map stops moving
       },
       load() {
-        setCenter(map.getCenter());
-        logger.info(`Map loaded with center: ${map.getCenter().toString()}`);
+        setCenter(map.getCenter()); // Set initial center when the map loads
       },
     });
 
@@ -69,11 +74,10 @@ const MapCenter = () => {
     ) : null;
   };
 
-  const handleSetCenter = async () => {
+  // Function to save the map center directly to the backend
+  const setMapCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
       logger.info('Setting map center to:', { center });
-      localStorage.setItem('mapCenter', JSON.stringify([center.lat, center.lng]));
-
       try {
         const response = await saveMapCenter(center.lat, center.lng);
         logger.info('Map center saved successfully:', { response });
@@ -82,10 +86,11 @@ const MapCenter = () => {
         logger.error('Error saving map center:', { error });
       }
     } else {
-      logger.warn('Center or PI_UID is null.');
+      logger.warn('User not authenticated or center coordinates are null'); // Handle the case where the user is not authenticated or coordinates are null
     }
   };
 
+  // Function to handle the closing of the confirmation popup
   const handleClickDialog = () => {
     setShowPopup(false);
   };
@@ -119,7 +124,7 @@ const MapCenter = () => {
       <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
         <Button
           label="Set Map Center"
-          onClick={handleSetCenter}
+          onClick={setMapCenter}
           styles={{
             borderRadius: '10px',
             color: '#ffc153',
@@ -129,7 +134,11 @@ const MapCenter = () => {
         />
       </div>
       {showPopup && (
-        <ConfirmDialogX message={t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')} toggle={() => setShowPopup(false)} handleClicked={handleClickDialog} />
+        <ConfirmDialogX
+          message={t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')}
+          toggle={() => setShowPopup(false)}
+          handleClicked={handleClickDialog} // Handles closing the confirmation popup
+        />
       )}
     </div>
   );

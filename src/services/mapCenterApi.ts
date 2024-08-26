@@ -28,7 +28,7 @@ export const fetchMapCenter = async () => {
 export const saveMapCenter = async (latitude: number, longitude: number) => {
   try {
     logger.info(`Saving map center with coordinates: latitude ${latitude}, longitude ${longitude}`);
-    const response = await axiosClient.put(`/api/v1/map-center/save`, {
+    const response = await axiosClient.put('/api/v1/map-center/save', {
       latitude,
       longitude
     });
