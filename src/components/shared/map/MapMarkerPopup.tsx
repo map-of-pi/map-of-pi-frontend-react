@@ -11,7 +11,7 @@ const MapMarkerPopup = ({ seller }:any) => {
   const t = useTranslations();
   const SUBHEADER = 'font-bold mb-2';
 
-  logger.info(`Rendering MapMarkerPopup for seller: ${JSON.stringify(seller)}`);
+  logger.info('Rendering MapMarkerPopup for seller:', { seller });
 
   return (
     <>

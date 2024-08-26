@@ -35,11 +35,11 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Prom
       };
     });
 
-    logger.info(`Fetched sellers data: ${JSON.stringify(sellersWithCoordinates)}`);
+    logger.info('Fetched sellers data:', { sellersWithCoordinates });
 
     return sellersWithCoordinates;
   } catch (error) {
-    logger.error(`Error fetching seller coordinates: ${error}`);
+    logger.error('Error fetching seller coordinates:', { error });
     throw error;
   }
 };
@@ -89,7 +89,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
 
   // Log sellers array for debugging
   useEffect(() => {
-    logger.debug(`Sellers Array: ${JSON.stringify(sellers)}`);
+    logger.debug('Sellers Array:', { sellers });
   }, [sellers]);
 
   // Function to fetch initial coordinates
@@ -103,7 +103,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
       sellersData = removeDuplicates(sellersData);
       setSellers(sellersData);
     } catch (error) {
-      logger.error(`Failed to fetch initial coordinates: ${error}`);
+      logger.error('Failed to fetch initial coordinates:', { error });
       setError('Failed to fetch initial coordinates');
     } finally {
       setLoading(false);
@@ -116,7 +116,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
     const newRadius = calculateRadius(newBounds, mapInstance);
     const largerRadius = newRadius * 2; // Increase radius by 100% for fetching
 
-    logger.info(`Handling map interaction with new center: ${newCenter.toString()} and radius: ${newRadius}`);
+    logger.info('Handling map interaction with new center and radius:', { newCenter, newRadius });
     setLoading(true);
     setError(null);
 
@@ -124,22 +124,22 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
       let additionalSellers = await fetchSellerCoordinates([newCenter.lat, newCenter.lng], largerRadius);
       additionalSellers = removeDuplicates(additionalSellers);
 
-      logger.info(`Fetched additional sellers: ${JSON.stringify(additionalSellers)}`);
+      logger.info('Fetched additional sellers:', { additionalSellers });
 
       // Filter sellers within the new bounds
       const filteredSellers = additionalSellers.filter(seller => newBounds.contains([seller.coordinates[0], seller.coordinates[1]]));
-      logger.info(`Filtered sellers within bounds: ${JSON.stringify(filteredSellers)}`);
+      logger.info('Filtered sellers within bounds', { filteredSellers });
 
       // Filter out sellers that are not within the new bounds from the existing sellers
       const remainingSellers = sellers.filter(seller => newBounds.contains([seller.coordinates[0], seller.coordinates[1]]));
-      logger.info(`Remaining sellers within bounds: ${JSON.stringify(remainingSellers)}`);
+      logger.info('Remaining sellers within bounds:', { remainingSellers });
 
       const updatedSellers = removeDuplicates([...remainingSellers, ...filteredSellers]);
-      logger.info(`Updated sellers array: ${JSON.stringify(updatedSellers)}`);
+      logger.info('Updated sellers array:', { updatedSellers});
 
       setSellers(updatedSellers);
     } catch (erroe) {
-      logger.error(`Failed to fetch additional data: ${error}`);
+      logger.error('Failed to fetch additional data:', { error });
       setError('Failed to fetch additional data');
     } finally {
       setLoading(false);
@@ -176,7 +176,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
           setIsLocationAvailable(true);
         },
         (error) => {
-          logger.warn(`Location not found: ${error.message}`);
+          logger.warn('Location not found:', { error });
           setLocationError(true);
           setTimeout(() => setLocationError(false), 3000);
         }

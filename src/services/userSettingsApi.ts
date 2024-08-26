@@ -19,9 +19,7 @@ export const fetchUserSettings = async () => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Fetch user settings encountered an error: ${error.message}`, {
-      error: error.toString()
-    });
+    logger.error('Fetch user settings encountered an error:', { error });
     handleAxiosError(error);
     throw error;
   }
@@ -42,10 +40,7 @@ export const fetchSingleUserSettings = async (sellerId: String) => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Fetch single user settings encountered an error: ${error.message}`, {
-      error: error.toString(),
-      sellerId
-    });
+    logger.error('Fetch single user settings encountered an error:', { error, sellerId });
     handleAxiosError(error);
     throw error;
   }
@@ -57,19 +52,16 @@ export const createUserSettings = async (formData: IUserSettings) => {
     logger.info('Creating or updating user settings with formData..');
     const response = await axiosClient.put('/user-preferences/add', {json: JSON.stringify(formData)});
     if (response.status === 200) {
-      logger.info(`Create user settings successful with Status ${response.status}`, {
+      logger.info(`Create or update user settings successful with Status ${response.status}`, {
         data: response.data
       });
       return response.data;
     } else {
-      logger.error(`Create user settings failed with Status ${response.status}`);
+      logger.error(`Create or update user settings failed with Status ${response.status}`);
       return null;
     }
   } catch (error: any) {
-    logger.error(`Create user settings encountered an error: ${error.message}`, {
-      error: error.toString(),
-      formData: JSON.stringify(formData)
-    });
+    logger.error('Create or update user settings encountered an error:', { error, formData });
     handleAxiosError(error);
     throw error;
   }
