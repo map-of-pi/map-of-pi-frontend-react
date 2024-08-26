@@ -15,7 +15,7 @@ import L from 'leaflet';
 import { Button } from '../Forms/Buttons/Buttons';
 import { ConfirmDialogX } from '../confirm';
 import RecenterAutomatically from './RecenterAutomatically';
-import { saveMapCenter } from '@/services/mapCenterApi';
+import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
 import { AppContext } from '../../../../context/AppContextProvider';
 
 // Define the crosshair icon for the center of the map
@@ -25,12 +25,6 @@ const crosshairIcon = new L.Icon({
   iconAnchor: [40, 40],
 });
 
-// Define the pin icon for the saved location
-const pinIcon = new L.Icon({
-  iconUrl: '/images/icons/map_of_pi_logo.jpeg',
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-});
 
 const MapCenter = () => {
   const t = useTranslations(); // Hook for internationalization
@@ -46,6 +40,19 @@ const MapCenter = () => {
     } else {
       console.log("User is logged in:", currentUser);
     }
+  }, [currentUser]);
+
+  useEffect(() => {
+    const loadMapCenter = async () => {
+      if (currentUser) {
+        const mapCenter = await fetchMapCenter();
+        if (mapCenter) {
+          setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
+        }
+      }
+    };
+  
+    loadMapCenter();
   }, [currentUser]);
 
   // Component to handle map events and update the center state
