@@ -17,6 +17,7 @@ import { ConfirmDialogX } from '../confirm';
 import RecenterAutomatically from './RecenterAutomatically';
 import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
 import { AppContext } from '../../../../context/AppContextProvider';
+// import logger from '../../../../../logger.config.mjs';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -24,7 +25,6 @@ const crosshairIcon = new L.Icon({
   iconSize: [80, 80],
   iconAnchor: [40, 40],
 });
-
 
 const MapCenter = () => {
   const t = useTranslations(); // Hook for internationalization
@@ -46,11 +46,12 @@ const MapCenter = () => {
     const loadMapCenter = async () => {
       if (currentUser) {
         const mapCenter = await fetchMapCenter();
-        console.log("Fetched map center:", mapCenter);
+        logger.info("Fetched map center:", mapCenter);
         if (mapCenter && mapCenter.latitude !== undefined && mapCenter.longitude !== undefined) {
           setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
+          logger.info(`Map center set to latitude: ${mapCenter.latitude}, longitude: ${mapCenter.longitude}`);
         } else {
-          console.warn("Map center is undefined, falling back to default coordinates");
+          logger.warn("Map center is undefined, falling back to default coordinates");
           setCenter({ lat: 50.064192, lng: 19.944544 }); // Default coordinates
         }
       }
@@ -59,7 +60,6 @@ const MapCenter = () => {
     loadMapCenter();
   }, [currentUser]);
   
-
   // Component to handle map events and update the center state
   const CenterMarker = () => {
     const map = useMapEvents({
