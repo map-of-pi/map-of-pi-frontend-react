@@ -43,21 +43,24 @@ const MapCenter = () => {
   }, [currentUser]);
 
   useEffect(() => {
-    const loadMapCenter = async () => {
-      if (currentUser) {
-        const mapCenter = await fetchMapCenter();
-        logger.info("Fetched map center:", mapCenter);
-        if (mapCenter && mapCenter.latitude !== undefined && mapCenter.longitude !== undefined) {
-          setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
-          logger.info(`Map center set to latitude: ${mapCenter.latitude}, longitude: ${mapCenter.longitude}`);
-        } else {
-          logger.warn("Map center is undefined, falling back to default coordinates");
-          setCenter({ lat: 50.064192, lng: 19.944544 }); // Default coordinates
+    const getMapCenter = async () => {
+      if (currentUser?.pi_uid) {
+        try {
+          const mapCenter = await fetchMapCenter();
+          if (mapCenter?.latitude !== undefined && mapCenter.longitude !== undefined) {
+            setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
+            logger.info(`Map center set to latitude: ${mapCenter.latitude}, longitude: ${mapCenter.longitude}`);
+          } else {
+            logger.warn("Map center is undefined, falling back to default coordinates");
+            setCenter({ lat: 50.064192, lng: 19.944544 });
+          }
+        } catch (error) {
+          logger.error('Error fetching map center:', { error });
         }
       }
     };
   
-    loadMapCenter();
+    getMapCenter();
   }, [currentUser]);
   
   // Component to handle map events and update the center state
@@ -77,16 +80,15 @@ const MapCenter = () => {
   };
 
   // Function to save the map center directly to the backend
-  const handleSetCenter = async () => {
+  const setMapCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
-      console.log(center); // Log the center coordinates for debugging
-
+      logger.info('Setting map center to:', { center });
       try {
-        const response = await saveMapCenter(center.lat, center.lng); // Save the map center to the backend
-        console.log('Map center saved successfully', response); // Log success response
-        setShowPopup(true); // Show the confirmation popup
+        const response = await saveMapCenter(center.lat, center.lng);
+        logger.info('Map center saved successfully:', { response });
+        setShowPopup(true);
       } catch (error) {
-        console.error('Error saving map center:', error); // Log any errors during the save process
+        logger.error('Error saving map center:', { error });
       }
     } else {
       console.log('User not authenticated or center coordinates are null'); // Handle the case where the user is not authenticated or coordinates are null
@@ -116,7 +118,7 @@ const MapCenter = () => {
       <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
         <Button
           label="Set Map Center"
-          onClick={handleSetCenter} // Handles saving the map center when the button is clicked
+          onClick={setMapCenter} // Handles saving the map center when the button is clicked
           styles={{
             borderRadius: '10px',
             color: '#ffc153',

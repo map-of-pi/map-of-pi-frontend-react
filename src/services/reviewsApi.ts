@@ -18,10 +18,7 @@ export const fetchSingleReview = async (reviewID: string) => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Fetch single review encountered an error: ${error.message}`, {
-      error: error.toString(),
-      reviewID
-    });
+    logger.error('Fetch single review encountered an error:', { error, reviewID });
     handleAxiosError(error);
     throw error;
   }
@@ -42,10 +39,7 @@ export const fetchReviews = async (sellerId:string) => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Fetch reviews encountered an error: ${error.message}`, {
-      error: error.toString(),
-      sellerId
-    });
+    logger.error('Fetch reviews encountered an error:', { error, sellerId });
     handleAxiosError(error);
     throw error;
   }
@@ -66,9 +60,7 @@ export const createReview = async (formData: FormData) => {
       return null;
     }
   } catch (error: any) {
-    logger.error(`Create review encountered an error: ${error.message}`, {
-      error: error.toString()
-    });
+    logger.error('Create review encountered an error:', { error });
     handleAxiosError(error);
     throw error;
   }

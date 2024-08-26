@@ -100,7 +100,7 @@ export default function EmojiPicker(props: any) {
         toast.error(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
       }
     } catch (error) {
-      logger.error(`Error saving review: ${error}`);
+      logger.error('Error saving review:', { error });
     }
   };
   
