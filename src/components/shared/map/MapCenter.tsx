@@ -46,14 +46,19 @@ const MapCenter = () => {
     const loadMapCenter = async () => {
       if (currentUser) {
         const mapCenter = await fetchMapCenter();
-        if (mapCenter) {
+        console.log("Fetched map center:", mapCenter);
+        if (mapCenter && mapCenter.latitude !== undefined && mapCenter.longitude !== undefined) {
           setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
+        } else {
+          console.warn("Map center is undefined, falling back to default coordinates");
+          setCenter({ lat: 50.064192, lng: 19.944544 }); // Default coordinates
         }
       }
     };
   
     loadMapCenter();
   }, [currentUser]);
+  
 
   // Component to handle map events and update the center state
   const CenterMarker = () => {
