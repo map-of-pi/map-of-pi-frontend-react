@@ -3,15 +3,15 @@ import { logToSentry } from './sentry.client.config.mjs';
 
 export const configureLogger = () => {
   if (process.env.NODE_ENV === 'production') {
-    log.setLevel('error');
+    // In production, we want to log only to Sentry
+    log.setLevel('silent');
 
-    const originalErrorMethod = log.error;
     log.error = (...args) => {
-      originalErrorMethod(...args);  // log the error to the console
-      logToSentry(args.join(' '));  // send the error to Sentry
+      logToSentry(args.join(' '));
     };
 
   } else if (process.env.NODE_ENV === 'development') {
+    // In development, we want to log only to the console
     log.setLevel('info');
   }
 };
