@@ -41,7 +41,6 @@ const nextConfig = {
 };
 
 const sentryWebpackPluginOptions = {
-  authToken: process.env.SENTRY_AUTH_TOKEN,
   silent: true, // suppress Sentry errors during the build process
 };
 
