@@ -60,6 +60,8 @@ export const TextArea = (props: any) => {
 
 export const FileInput = (props: any) => {
   const t = useTranslations();
+  const imageUrl = props.imageUrl || "/images/shared/upload.png";
+
   return (
     <div className="">
       {props.label && (
@@ -67,7 +69,7 @@ export const FileInput = (props: any) => {
       )}
       <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative border-dashed border-[2px] border-green-700">
         <Image
-          src="/images/shared/upload.png"
+          src={imageUrl}
           alt="Upload image"
           width={85}
           height={85}

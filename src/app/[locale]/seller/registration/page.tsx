@@ -22,7 +22,6 @@ import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerPrompt } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
-import { convertImageToBase64 } from '@/utils/image';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
@@ -40,14 +39,15 @@ const SellerRegistrationForm = () => {
     sellerType: 'Pioneer',
     sellerDescription: '',
     sellerAddress: '',
+    image: ''
   });
   const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
   const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [files, setFiles] = useState<File[]>([]);
-  const [previewImage, setPreviewImage] = useState<string[]>([]);
+  const [file, setFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -103,6 +103,7 @@ const SellerRegistrationForm = () => {
         sellerAddress: dbSeller.address || '',
         itemsForSale: dbSeller.sale_items || '',
         sellerType: dbSeller.seller_type || '',
+        image: dbSeller.image || ''
       });
     }
   }, [dbSeller]);
@@ -126,13 +127,13 @@ const SellerRegistrationForm = () => {
 
   // function preview image upload
   useEffect(() => {
-    if (files.length === 0) return;
-    const objectUrl = URL.createObjectURL(files[0]); // only use the first file
-    setPreviewImage([objectUrl]);
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewImage(objectUrl);
     return () => {
       URL.revokeObjectURL(objectUrl);
     };
-  }, [files]);
+  }, [file]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -146,14 +147,17 @@ const SellerRegistrationForm = () => {
     }));
     
     // enable or disable save button based on form inputs
-    const isFormFilled = Object.values(formData).some(v => v !== '');
+    const isFormFilled = Object.values(formData).some(v => v !== '') || !!file;
     setIsSaveEnabled(isFormFilled);
   };
 
   const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]; // only take the first file
     if (selectedFile) {
-      setFiles([selectedFile]);
+      setFile(selectedFile);
+
+      const objectUrl = URL.createObjectURL(selectedFile);
+      setPreviewImage(objectUrl);
       logger.info('Image selected for upload:', { selectedFile });
     }
   };
@@ -169,48 +173,30 @@ const SellerRegistrationForm = () => {
     const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
     logger.info('Saving form data:', { formData, sellCenter });
 
-    let imageBase64 = '';
-    if (files.length > 0) {
-      try {
-        imageBase64 = await convertImageToBase64(files[0]);
-      } catch (error) {
-        logger.error('Error converting image to Base64:', { error });
-        return toast.error(t('SHARED.PHOTO.IMAGE_PROCESSING_FAILURE'));
-      }
-    }
-
-    const regForm = {
-      name: formData.sellerName,
-      description: formData.sellerDescription,
-      address: formData.sellerAddress,
-      sale_items: formData.itemsForSale,
-      seller_type: formData.sellerType,
-      image: imageBase64
-    } as {
-      name: string;
-      description: string;
-      address: string;
-      sale_items: string;
-      seller_type: string;
-      image?: string;
-      sell_map_center?: {
-        type: 'Point';
-        coordinates: [number, number];
-      };
-    };  
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.sellerName);
+    formDataToSend.append('seller_type', formData.sellerType);
+    formDataToSend.append('description', formData.sellerDescription);
+    formDataToSend.append('address', formData.sellerAddress);
+    formDataToSend.append('sale_items', formData.itemsForSale);
 
     // Add sell_map_center field only if sellCenter is available
     if (sellCenter) {
-      regForm.sell_map_center = {
-        type: 'Point' as const,
-        coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
-      };
-    }; 
+      formDataToSend.append('sell_map_center', JSON.stringify({
+        type: 'Point',
+        coordinates: [sellCenter[0], sellCenter[1]]
+      }));
+    };
+    
+    // add the image if it exists
+    if (formData.image) {
+      formDataToSend.append('image', formData.image);
+    }
 
-    logger.info('Registration form:', regForm);
+    logger.info('Registration form data:', formDataToSend);
 
     try {
-      const data = await registerSeller(regForm);
+      const data = await registerSeller(formDataToSend);
       setDbSeller(data.seller);
       if (data.seller) {
         toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
@@ -367,13 +353,9 @@ const SellerRegistrationForm = () => {
           <div className="mb-4">
             <FileInput
               label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+              imageUrl={ previewImage }
               handleAddImage={handleAddImage}
             />
-            {previewImage && (
-              <div className="mt-2">
-                <p className="text-sm text-zinc-600">{previewImage}</p>
-              </div>
-            )}
           </div>
           <div className="mb-4 mt-3 ml-auto w-min">
             <Button
