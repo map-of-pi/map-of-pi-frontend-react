@@ -22,6 +22,7 @@ import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerPrompt } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
+import { convertImageToBase64 } from '@/utils/image';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
@@ -126,10 +127,10 @@ const SellerRegistrationForm = () => {
   // function preview image upload
   useEffect(() => {
     if (files.length === 0) return;
-    const objectUrls = files.map((file) => URL.createObjectURL(file));
-    setPreviewImage(objectUrls);
+    const objectUrl = URL.createObjectURL(files[0]); // only use the first file
+    setPreviewImage([objectUrl]);
     return () => {
-      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+      URL.revokeObjectURL(objectUrl);
     };
   }, [files]);
 
@@ -149,11 +150,11 @@ const SellerRegistrationForm = () => {
     setIsSaveEnabled(isFormFilled);
   };
 
-  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files;
-    if (selectedFiles && selectedFiles.length > 0) {
-      setFiles(Array.from(selectedFiles));
-      logger.info('Images selected for upload:', { selectedFiles });
+  const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0]; // only take the first file
+    if (selectedFile) {
+      setFiles([selectedFile]);
+      logger.info('Image selected for upload:', { selectedFile });
     }
   };
 
@@ -168,18 +169,30 @@ const SellerRegistrationForm = () => {
     const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
     logger.info('Saving form data:', { formData, sellCenter });
 
+    let imageBase64 = '';
+    if (files.length > 0) {
+      try {
+        imageBase64 = await convertImageToBase64(files[0]);
+      } catch (error) {
+        logger.error('Error converting image to Base64:', { error });
+        return toast.error(t('SHARED.PHOTO.IMAGE_PROCESSING_FAILURE'));
+      }
+    }
+
     const regForm = {
       name: formData.sellerName,
       description: formData.sellerDescription,
       address: formData.sellerAddress,
       sale_items: formData.itemsForSale,
       seller_type: formData.sellerType,
+      image: imageBase64
     } as {
       name: string;
       description: string;
       address: string;
       sale_items: string;
       seller_type: string;
+      image?: string;
       sell_map_center?: {
         type: 'Point';
         coordinates: [number, number];
@@ -193,7 +206,8 @@ const SellerRegistrationForm = () => {
         coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
       };
     }; 
-    console.log('registration form', regForm);
+
+    logger.info('Registration form:', regForm);
 
     try {
       const data = await registerSeller(regForm);
@@ -353,8 +367,7 @@ const SellerRegistrationForm = () => {
           <div className="mb-4">
             <FileInput
               label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
-              images={[]}
-              handleAddImages={handleAddImages}
+              handleAddImage={handleAddImage}
             />
             {previewImage && (
               <div className="mt-2">

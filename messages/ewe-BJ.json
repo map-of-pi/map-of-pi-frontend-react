@@ -178,7 +178,8 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Ɖe ŋutɔ Vinyo",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Kpɔ siwo be ɖe ƒe ɣe ŋutɔ foto alo tɔkɔ",
-      "SUPPORTS_FILE_MESSAGE": "Ɖe vɔ: PNG, JPG, JPEG, WEBP"
+      "SUPPORTS_FILE_MESSAGE": "Ɖe vɔ: PNG, JPG, JPEG, WEBP",
+      "IMAGE_PROCESSING_FAILURE": "Mèkpɔ image o"
     },
     "REACTION_RATING": {
       "UNSAFE": "Fɛgblɔ",

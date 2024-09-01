@@ -68,7 +68,7 @@ export const FileInput = (props: any) => {
       <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative border-dashed border-[2px] border-green-700">
         <Image
           src="/images/shared/upload.png"
-          alt="upload image"
+          alt="Upload image"
           width={85}
           height={85}
         />
@@ -81,9 +81,8 @@ export const FileInput = (props: any) => {
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"
-          multiple
           className={`absolute scale-[5] opacity-0 cursor-pointer`}
-          onChange={(e) => props.handleAddImages(e)}
+          onChange={(e) => props.handleAddImage(e)}
         />
       </div>
     </div>

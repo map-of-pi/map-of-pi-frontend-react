@@ -178,7 +178,8 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Upload Photo",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
-      "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP"
+      "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
+      "IMAGE_PROCESSING_FAILURE": "Image failed to process"
     },
     "REACTION_RATING": {
       "UNSAFE": "Unsafe",

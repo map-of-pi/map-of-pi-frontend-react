@@ -178,7 +178,8 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Subir Foto",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Suelta tu imagen aquí o busca",
-      "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP"
+      "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP",
+      "IMAGE_PROCESSING_FAILURE": "La imagen no se pudo procesar"
     },
     "REACTION_RATING": {
       "UNSAFE": "Inseguro",
