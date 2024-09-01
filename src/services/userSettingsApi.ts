@@ -1,6 +1,6 @@
 import axiosClient from "@/config/client";
 import { IUserSettings } from "@/constants/types";
-import { handleAxiosError } from "@/util/error";
+import { handleAxiosError } from "@/utils/error";
 
 import logger from '../../logger.config.mjs';
 

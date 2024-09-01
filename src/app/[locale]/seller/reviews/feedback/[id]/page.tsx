@@ -12,7 +12,7 @@ import EmojiPicker from '@/components/shared/Review/emojipicker';
 import Skeleton from '@/components/skeleton/skeleton';
 import { IReviewFeedback } from '@/constants/types';
 import { fetchSingleReview } from '@/services/reviewsApi';
-import { resolveDate } from '@/util/date';
+import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../../util/ratingUtils';
 
 import logger from '../../../../../../../logger.config.mjs';
