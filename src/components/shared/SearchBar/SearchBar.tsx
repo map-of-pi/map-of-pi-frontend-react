@@ -13,7 +13,14 @@ import TextField from '@mui/material/TextField';
 
 import logger from '../../../../logger.config.mjs';
 
-const SearchBar: React.FC = () => {
+// Define the props that can be passed to searchBar component.
+// onSearch: Optional callback from the parent for custom search handling.
+interface searchBarprops {
+  onSearch?:(query:string) => void;
+  placeholder?: string; 
+}
+
+const SearchBar: React.FC<searchBarprops> = ({onSearch}) => { // Update the component definition to accept props
   const t = useTranslations();
 
   const [searchBarValue, setSearchBarValue] = useState('');
@@ -44,11 +51,17 @@ const SearchBar: React.FC = () => {
     if (query) {
       const searchType = isBusinessSearchType ? 'business' : 'product';
       logger.info(`Search query emitted for ${searchType}: ${query}`);
-
-      const searchResults = await fetchSearchResults(query, searchType);
-      setSearchQuery( query, searchType );
-
-      setMessage(`Your search found ${searchResults.length} shops. Please zoom out to view all shop markers.`); 
+      
+      if (onSearch) {
+        // Use custom search handler if provided via props
+        onSearch(query);
+        setMessage(`Search submitted for: ${query}`);
+      } else {
+        // Default search handling
+        const searchResults = await fetchSearchResults(query, searchType);
+        setSearchQuery(query, searchType);
+        setMessage(`Your search found ${searchResults.length} shops. Please zoom out to view all shop markers.`);
+      }
       logger.info(message);
     } else {
       logger.warn('Search query is empty.');
@@ -73,7 +86,6 @@ const SearchBar: React.FC = () => {
               variant="outlined"
               color="success"
               className="bg-white hover:bg-gray-100 w-full rounded"
-              label={t('HOME.SEARCH_BAR_PLACEHOLDER')}
               value={searchBarValue} 
               onChange={handleSearchBarChange}
               ref={inputRef}
