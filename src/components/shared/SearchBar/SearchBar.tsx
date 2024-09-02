@@ -20,7 +20,7 @@ interface searchBarprops {
   placeholder?: string; 
 }
 
-const SearchBar: React.FC<searchBarprops> = ({onSearch}) => { // Update the component definition to accept props
+const SearchBar: React.FC<searchBarprops> = ({onSearch, placeholder}) => { // Update the component definition to accept props
   const t = useTranslations();
 
   const [searchBarValue, setSearchBarValue] = useState('');
@@ -68,6 +68,8 @@ const SearchBar: React.FC<searchBarprops> = ({onSearch}) => { // Update the comp
     }
   };
 
+  const searchPlaceholder = placeholder || 'Search for sellers or items'; 
+
   return (
     <div className="w-[90%] m-auto left-0 right-0 max-w-[504px] fixed top-[120px] z-10 flex">
        <Snackbar
@@ -86,6 +88,7 @@ const SearchBar: React.FC<searchBarprops> = ({onSearch}) => { // Update the comp
               variant="outlined"
               color="success"
               className="bg-white hover:bg-gray-100 w-full rounded"
+              label={ searchPlaceholder }
               value={searchBarValue} 
               onChange={handleSearchBarChange}
               ref={inputRef}
