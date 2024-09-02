@@ -147,8 +147,8 @@ const MapCenter = () => {
           maxBounds={bounds}
           maxBoundsViscosity={1.0}
           className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
-          whenReady={(mapInstance) => {
-            mapRef.current = mapInstance.target;  // Set the map reference when the map is created
+          whenCreated={(mapInstance: L.Map) => {
+            mapRef.current = mapInstance;  // Correctly set the map reference when the map is created
           }}
         >
         <TileLayer
