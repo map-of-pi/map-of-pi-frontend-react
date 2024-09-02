@@ -1,3 +1,4 @@
+
 'use client';
 
 import 'leaflet/dist/leaflet.css';
@@ -18,7 +19,7 @@ import RecenterAutomatically from './RecenterAutomatically';
 import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
-import SearchBar from '../SearchBar/SearchBar'; // Import the SearchBar component
+import SearchBar from '../SearchBar/SearchBar'; 
 import 'leaflet-control-geocoder';
 
 
@@ -132,9 +133,10 @@ const MapCenter = () => {
 
   return (
     <div className="search-container">
-    <p className="search-text">Search a location, city, or address</p>
+    <p className="search-text">{t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER')}</p>
     <SearchBar 
       onSearch={handleSearch}
+      placeholder={t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER')} 
     />
           <MapContainer
           center={center}
@@ -171,9 +173,9 @@ const MapCenter = () => {
       </div>
       {showPopup && (
         <ConfirmDialogX
-          message={t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')}
           toggle={() => setShowPopup(false)}
-          handleClicked={handleClickDialog} 
+          handleClicked={handleClickDialog} // Handles closing the confirmation popup
+          message={t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')}
         />
       )}
     </div>
