@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import './MapCenter.css';
 
 import { useTranslations } from 'next-intl';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -18,6 +18,9 @@ import RecenterAutomatically from './RecenterAutomatically';
 import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
+import SearchBar from '../SearchBar/SearchBar'; // Import the SearchBar component
+import 'leaflet-control-geocoder';
+
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -28,9 +31,11 @@ const crosshairIcon = new L.Icon({
 
 const MapCenter = () => {
   const t = useTranslations();
+
   const [showPopup, setShowPopup] = useState(false); // State for controlling the visibility of the confirmation popup
   const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
   const { currentUser, autoLoginUser } = useContext(AppContext);
+  const mapRef = useRef<L.Map | null>(null); // Reference to the map instance
 
   useEffect(() => {
     if (!currentUser) {
@@ -54,10 +59,33 @@ const MapCenter = () => {
         }
       }
     };
-  
+
     getMapCenter();
   }, [currentUser]);
-  
+
+  // Handle search query to update map center and zoom level
+  const handleSearch = async (query: string) => {
+    try {
+      const geocoder = new (L.Control as any).Geocoder.nominatim();  // Initialize the Geocoder
+      geocoder.geocode(query, (results: any) => {
+        if (results.length > 0) {
+          const { center: resultCenter } = results[0];
+          setCenter({ lat: resultCenter.lat, lng: resultCenter.lng });  // Update map center
+          if (mapRef.current) {
+            mapRef.current.setView([resultCenter.lat, resultCenter.lng], 13);  // Set the view and zoom level
+            logger.info(`Map center updated and zoomed to: ${resultCenter.lat}, ${resultCenter.lng}`);
+          } else {
+            logger.warn('Map reference is not set.');
+          }
+        } else {
+          logger.warn(`No result found for the query: ${query}`);
+        }
+      });
+    } catch (error) {
+      logger.error('Error during geocoding:', error);
+    }
+  };
+
   // Component to handle map events and update the center state
   const CenterMarker = () => {
     const map = useMapEvents({
@@ -66,6 +94,7 @@ const MapCenter = () => {
       },
       load() {
         setCenter(map.getCenter()); // Set initial center when the map loads
+        mapRef.current = map; // Assign the map instance to the ref
       },
     });
 
@@ -102,17 +131,24 @@ const MapCenter = () => {
   );
 
   return (
-    <div>
-      <MapContainer
-        center={center}
-        zoom={2}
-        zoomControl={false}
-        minZoom={2}
-        maxZoom={18}
-        maxBounds={bounds}
-        maxBoundsViscosity={1.0}
-        className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
-      >
+    <div className="search-container">
+    <p className="search-text">Search a location, city, or address</p>
+    <SearchBar 
+      onSearch={handleSearch}
+    />
+          <MapContainer
+          center={center}
+          zoom={2}
+          zoomControl={false}
+          minZoom={2}
+          maxZoom={18}
+          maxBounds={bounds}
+          maxBoundsViscosity={1.0}
+          className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
+          whenReady={(mapInstance) => {
+            mapRef.current = mapInstance.target;  // Set the map reference when the map is created
+          }}
+        >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="Map data © OpenStreetMap contributors"
@@ -137,7 +173,7 @@ const MapCenter = () => {
         <ConfirmDialogX
           message={t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')}
           toggle={() => setShowPopup(false)}
-          handleClicked={handleClickDialog} // Handles closing the confirmation popup
+          handleClicked={handleClickDialog} 
         />
       )}
     </div>
