@@ -47,7 +47,7 @@ const SellerRegistrationForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   const [file, setFile] = useState<File | null>(null);
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState<string>(dbSeller?.image || '');
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -135,6 +135,13 @@ const SellerRegistrationForm = () => {
     };
   }, [file]);
 
+  // set the preview image if dbSeller changes
+  useEffect(() => {
+    if (dbSeller?.image) {
+      setPreviewImage(dbSeller.image);
+    }
+  }, [dbSeller]);
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -147,7 +154,7 @@ const SellerRegistrationForm = () => {
     }));
     
     // enable or disable save button based on form inputs
-    const isFormFilled = Object.values(formData).some(v => v !== '') || !!file;
+    const isFormFilled = Object.values(formData).some(v => v !== '');
     setIsSaveEnabled(isFormFilled);
   };
 
@@ -159,6 +166,8 @@ const SellerRegistrationForm = () => {
       const objectUrl = URL.createObjectURL(selectedFile);
       setPreviewImage(objectUrl);
       logger.info('Image selected for upload:', { selectedFile });
+
+      setIsSaveEnabled(true);
     }
   };
 
@@ -189,8 +198,8 @@ const SellerRegistrationForm = () => {
     };
     
     // add the image if it exists
-    if (formData.image) {
-      formDataToSend.append('image', formData.image);
+    if (file) {
+      formDataToSend.append('image', file);
     }
 
     logger.info('Registration form data:', formDataToSend);
