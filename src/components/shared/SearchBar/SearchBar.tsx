@@ -13,19 +13,26 @@ import TextField from '@mui/material/TextField';
 
 import logger from '../../../../logger.config.mjs';
 
-// Define the props that can be passed to searchBar component.
-// onSearch: Optional callback from the parent for custom search handling.
-interface searchBarprops {
+interface searchBarProps {
   onSearch?:(query:string) => void;
-  placeholder?: string; 
+  page: 'map_center' | 'default'; 
 }
 
-const SearchBar: React.FC<searchBarprops> = ({onSearch, placeholder}) => { // Update the component definition to accept props
+const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
   const t = useTranslations();
-
   const [searchBarValue, setSearchBarValue] = useState('');
-  const [isBusinessSearchType, setIsBusinessSearchType] = useState(true);
   const [message, setMessage] = useState('');
+
+  // function to get the placeholder text based on the screen
+  const getPlaceholderText = (page: 'map_center' | 'default'): string => {
+    switch (page) {
+      case 'map_center':
+        return t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER');
+      default:
+        return t('HOME.SEARCH_BAR_PLACEHOLDER');
+    }
+  };
+  const placeholder = getPlaceholderText(page);
 
   const handleSearchBarChange = (event: ChangeEvent<HTMLInputElement>) => {
     logger.debug(`Search bar value changed: ${event.target.value}`);
@@ -34,14 +41,14 @@ const SearchBar: React.FC<searchBarprops> = ({onSearch, placeholder}) => { // Up
   
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const fetchSearchResults = async (query: string, searchType: string):Promise<any[]> => {
-    logger.info(`Fetching search results for query: ${query}, searchType: ${searchType}`);
+  const fetchSearchResults = async (query: string): Promise<any[]> => {
+    logger.debug(`Fetching search results for query: "${query}"`);
     // fetch logic to be defined here
     // For now, it returns an empty array
     return new Promise((resolve) => resolve([]));
   };
 
-  const setSearchQuery = (query: string, searchType: string) => {
+  const setSearchQuery = (query: string) => {
     // setSearchQuery logic here
   };
   
@@ -49,26 +56,20 @@ const SearchBar: React.FC<searchBarprops> = ({onSearch, placeholder}) => { // Up
     event.preventDefault();
     const query = searchBarValue;
     if (query) {
-      const searchType = isBusinessSearchType ? 'business' : 'product';
-      logger.info(`Search query emitted for ${searchType}: ${query}`);
+      logger.info(`Search query submitted: ${query}`);
       
       if (onSearch) {
-        // Use custom search handler if provided via props
         onSearch(query);
-        setMessage(`Search submitted for: ${query}`);
       } else {
         // Default search handling
-        const searchResults = await fetchSearchResults(query, searchType);
-        setSearchQuery(query, searchType);
-        setMessage(`Your search found ${searchResults.length} shops. Please zoom out to view all shop markers.`);
+        const searchResults = await fetchSearchResults(query);
+        setSearchQuery(query);
+        logger.info(`Your search found ${searchResults.length} shops`);
       }
-      logger.info(message);
     } else {
-      logger.warn('Search query is empty.');
+      logger.warn('Search query is empty');
     }
   };
-
-  const searchPlaceholder = placeholder || 'Search for sellers or items'; 
 
   return (
     <div className="w-[90%] m-auto left-0 right-0 max-w-[504px] fixed top-[120px] z-10 flex">
@@ -88,7 +89,7 @@ const SearchBar: React.FC<searchBarprops> = ({onSearch, placeholder}) => { // Up
               variant="outlined"
               color="success"
               className="bg-white hover:bg-gray-100 w-full rounded"
-              label={ searchPlaceholder }
+              label={ placeholder }
               value={searchBarValue} 
               onChange={handleSearchBarChange}
               ref={inputRef}

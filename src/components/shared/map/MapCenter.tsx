@@ -13,15 +13,16 @@ import {
   useMapEvents,
 } from 'react-leaflet';
 import L from 'leaflet';
-import { Button } from '../Forms/Buttons/Buttons';
-import { ConfirmDialogX } from '../confirm';
-import RecenterAutomatically from './RecenterAutomatically';
-import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
-import { AppContext } from '../../../../context/AppContextProvider';
-import logger from '../../../../logger.config.mjs';
-import SearchBar from '../SearchBar/SearchBar'; 
 import 'leaflet-control-geocoder';
 
+import { ConfirmDialogX } from '../confirm';
+import { Button } from '../Forms/Buttons/Buttons';
+import RecenterAutomatically from './RecenterAutomatically';
+import SearchBar from '../SearchBar/SearchBar'; 
+import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
+
+import { AppContext } from '../../../../context/AppContextProvider';
+import logger from '../../../../logger.config.mjs';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -36,7 +37,7 @@ const MapCenter = () => {
   const [showPopup, setShowPopup] = useState(false); // State for controlling the visibility of the confirmation popup
   const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
   const { currentUser, autoLoginUser } = useContext(AppContext);
-  const mapRef = useRef<L.Map | null>(null); // Reference to the map instance
+  const mapRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
     if (!currentUser) {
@@ -67,16 +68,16 @@ const MapCenter = () => {
   // Handle search query to update map center and zoom level
   const handleSearch = async (query: string) => {
     try {
-      const geocoder = new (L.Control as any).Geocoder.nominatim();  // Initialize the Geocoder
+      const geocoder = new (L.Control as any).Geocoder.nominatim();
       geocoder.geocode(query, (results: any) => {
         if (results.length > 0) {
           const { center: resultCenter } = results[0];
           setCenter({ lat: resultCenter.lat, lng: resultCenter.lng });  // Update map center
           if (mapRef.current) {
-            mapRef.current.setView([resultCenter.lat, resultCenter.lng], 13);  // Set the view and zoom level
+            mapRef.current.setView([resultCenter.lat, resultCenter.lng], 13);
             logger.info(`Map center updated and zoomed to: ${resultCenter.lat}, ${resultCenter.lng}`);
           } else {
-            logger.warn('Map reference is not set.');
+            logger.warn('Map reference is not set');
           }
         } else {
           logger.warn(`No result found for the query: ${query}`);
@@ -95,7 +96,7 @@ const MapCenter = () => {
       },
       load() {
         setCenter(map.getCenter()); // Set initial center when the map loads
-        mapRef.current = map; // Assign the map instance to the ref
+        mapRef.current = map;
       },
     });
 
@@ -136,8 +137,7 @@ const MapCenter = () => {
     <p className="search-text">{t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER')}</p>
     <SearchBar 
       onSearch={handleSearch}
-      placeholder={t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER')} 
-    />
+      page={'map_center'} />
           <MapContainer
           center={center}
           zoom={2}
