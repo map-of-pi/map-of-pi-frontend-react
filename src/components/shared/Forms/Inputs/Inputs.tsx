@@ -61,25 +61,39 @@ export const TextArea = (props: any) => {
 export const FileInput = (props: any) => {
   const t = useTranslations();
   const imageUrl = props.imageUrl || "/images/shared/upload.png";
+  const isImageUploaded = imageUrl !== "/images/shared/upload.png"; // Check if an image has been uploaded
 
   return (
     <div className="">
       {props.label && (
-        <label className="block pb-3 font-medium text-gray-700">{props.label}</label>
+        <label className="block pb-3 font-medium text-gray-700">
+          {props.label}
+        </label>
       )}
-      <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative border-dashed border-[2px] border-green-700">
-        <Image
-          src={imageUrl}
-          alt="Upload image"
-          width={85}
-          height={85}
-        />
-        <div className="mt-5 text-center text-[#828282]">
-          {t('SHARED.PHOTO.IMAGE_DROP_UPLOAD_MESSAGE')}
+      <div 
+        className={`flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative 
+          ${isImageUploaded ? '' : "border-dashed border-[2px] border-green-700"
+        }`}
+      >
+        <div className="w-full h-[200px] relative mb-4">
+          <Image
+            src={imageUrl}
+            alt="Upload image"
+            layout="fill"
+            objectFit="contain"
+            style={{ maxHeight: '200px', maxWidth: '100%' }}
+          />
         </div>
-        <span className="text-[#828282] text-[11px] mt-1">
-        {t('SHARED.PHOTO.SUPPORTS_FILE_MESSAGE')}
-        </span>
+        {!isImageUploaded && (
+          <div className="text-center text-[#828282]">
+            <div>
+              {t('SHARED.PHOTO.IMAGE_DROP_UPLOAD_MESSAGE')}
+            </div>
+            <span className="text-[11px] mt-1">
+              {t('SHARED.PHOTO.SUPPORTS_FILE_MESSAGE')}
+            </span>
+          </div>
+        )}
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"
