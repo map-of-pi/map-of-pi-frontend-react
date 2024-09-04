@@ -27,14 +27,13 @@ import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
 const SellerRegistrationForm = () => {
-  const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
+  const HEADER = 'font-bold text-lg md:text-2xl';
   const SUBHEADER = 'font-bold mb-2';
 
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
 
   const [formData, setFormData] = useState({
-    itemsForSale: '',
     sellerName: '',
     sellerType: 'Pioneer',
     sellerDescription: '',
@@ -100,7 +99,6 @@ const SellerRegistrationForm = () => {
         sellerName: dbSeller.name || defaultSellerName,
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        itemsForSale: dbSeller.sale_items || '',
         sellerType: dbSeller.seller_type || '',
       });
     }
@@ -108,14 +106,12 @@ const SellerRegistrationForm = () => {
 
   useEffect(() => {
     const {
-      itemsForSale,
       sellerName,
       sellerType,
       sellerAddress
     } = formData;
     setIsFormValid(
       !!(
-        itemsForSale &&
         sellerName &&
         sellerType &&
         sellerAddress
@@ -172,13 +168,11 @@ const SellerRegistrationForm = () => {
       name: formData.sellerName,
       description: formData.sellerDescription,
       address: formData.sellerAddress,
-      sale_items: formData.itemsForSale,
       seller_type: formData.sellerType,
     } as {
       name: string;
       description: string;
       address: string;
-      sale_items: string;
       seller_type: string;
       sell_map_center?: {
         type: 'Point';
@@ -236,19 +230,24 @@ const SellerRegistrationForm = () => {
   return (
     <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
-        <h1 className={HEADER}>
-          {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
-        </h1>
-
+        <div className='text-center mb-5'>          
+          <h3 className='text-gray-400 text-sm'>{dbSeller? dbSeller.name : ""}</h3>
+          <h1 className={HEADER}>
+            {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
+          </h1>
+          <p className='text-gray-400 text-sm'>{dbSeller? dbSeller.seller_type: ""}</p>
+        </div>
+        
         <div className="mb-4">
           <h2 className={SUBHEADER}>
-            {t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_LABEL')}
+            {t('Seller details')}
           </h2>
+          <p className='text-gray-400 text-sm'>Description of seller, & items for sale with pi price, etc.</p>
           <div className="mb-2">
             <TextArea
-              name="itemsForSale"
-              placeholder={sellerPrompt.sale_items}
-              value={formData.itemsForSale}
+              name="sellerDescription"
+              placeholder={sellerPrompt.description}
+              value={formData.sellerDescription}
               onChange={handleChange}
               styles={{ height: '200px' }}
             />
@@ -277,105 +276,108 @@ const SellerRegistrationForm = () => {
             onClick={handleSave}
           />
         </div>
-        <ToggleCollapse
-          header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
-          <TrustMeter ratings={dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating} />
-          <div className="flex items-center justify-between mt-3">
-            <p className="text-sm">
-              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
-                seller_review_rating: dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating,
-              })}
-            </p>
-            <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#'}>
-              <OutlineBtn
-                disabled={!currentUser}
-                label={t('SHARED.CHECK_REVIEWS')}
-              />
-            </Link>
-          </div>
-        </ToggleCollapse>
-        <ToggleCollapse
-          header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ': '}
-            </span>
-            <span>{dbSeller ? dbSeller.name : ''}</span>
-          </div>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ': '}
-            </span>
-            <span>{userSettings ? userSettings.phone_number : ""}</span>
-          </div>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ': '}
-            </span>
-            <span>{ userSettings ? userSettings.email : ""}</span>
-          </div>
-        </ToggleCollapse>
-        <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}>
-          <div className="mb-4">
-            <Input
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
-              name="sellerName"
-              placeholder={sellerPrompt.name}
-              type="text"
-              value={formData.sellerName}
-              onChange={handleChange}
-            />
-
-            <Select
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
-              name="sellerType"
-              value={formData.sellerType}
-              onChange={handleChange}
-              options={translatedSellerTypeOptions}
-            />
-
-            <TextArea
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS')}
-              name="sellerDescription"
-              placeholder={sellerPrompt.description}
-              value={formData.sellerDescription}
-              onChange={handleChange}
-            />
-
-            <TextArea
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
-              name="sellerAddress"
-              placeholder={sellerPrompt.address}
-              value={formData.sellerAddress}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-4">
-            <FileInput
-              label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
-              images={[]}
-              handleAddImages={handleAddImages}
-            />
-            {previewImage && (
-              <div className="mt-2">
-                <p className="text-sm text-zinc-600">{previewImage}</p>
+        <div className='spacing-7'>
+          <ToggleCollapse
+            header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
+            <TrustMeter ratings={dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating} />
+            <div className="flex items-center justify-between mt-3 mb-5">
+              <p className="text-sm">
+                {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
+                  seller_review_rating: dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating,
+                })}
+              </p>
+              <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#'}>
+                <OutlineBtn
+                  disabled={!currentUser}
+                  label={t('SHARED.CHECK_REVIEWS')}
+                />
+              </Link>
+            </div>
+          </ToggleCollapse>
+          <ToggleCollapse
+            header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
+            <div className="text-sm mb-7 text-gray-500">
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('Pi username') + ': '}
+                </span>
+                <span>{currentUser ? currentUser.pi_username : ''}</span>
               </div>
-            )}
-          </div>
-          <div className="mb-4 mt-3 ml-auto w-min">
-            <Button
-              label={t('SHARED.SAVE')}
-              disabled={!isSaveEnabled}
-              styles={{
-                color: '#ffc153',
-                height: '40px',
-                padding: '10px 15px',
-              }}
-              onClick={handleSave}
-            />
-          </div>
-        </ToggleCollapse>
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('Name') + ': '}
+                </span>
+                <span>{dbSeller ? dbSeller.name : ''}</span>
+              </div>
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('Phone number') + ': '}
+                </span>
+                <span>{userSettings ? userSettings.phone_number : ""}</span>
+              </div>
+              <div className="text-sm mb-5">
+                <span className="font-bold">
+                  {t('Email') + ': '}
+                </span>
+                <span>{ userSettings ? userSettings.email : ""}</span>
+              </div>
+            </div>
+          </ToggleCollapse>
+          <ToggleCollapse header={t('Advance seller settings')}>
+            <div className="mb-4">
+              <Input
+                label={t('Retail outlet name')}
+                name="sellerName"
+                placeholder={sellerPrompt.name}
+                type="text"
+                value={formData.sellerName}
+                onChange={handleChange}
+              />
 
+              <Select
+                label={t('Seller type')}
+                name="sellerType"
+                value={formData.sellerType}
+                onChange={handleChange}
+                options={translatedSellerTypeOptions}
+              />
+
+              <TextArea
+                label={t('Address or where selling')}
+                describe="Help your buyers find you by adding address or a description of where you are selling."
+                name="sellerAddress"
+                placeholder={sellerPrompt.address}
+                value={formData.sellerAddress}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <FileInput
+                label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+                describe={`Upload image to help attract buyers. (PNG, JPG, JPEG, WEBP)`}
+                images={[]}
+                handleAddImages={handleAddImages}
+              />
+              {previewImage && (
+                <div className="mt-2">
+                  <p className="text-sm text-zinc-600">{previewImage}</p>
+                </div>
+              )}
+            </div>
+            <div className="mb-5 mt-3 ml-auto w-min">
+              <Button
+                label={t('SHARED.SAVE')}
+                disabled={!isSaveEnabled}
+                styles={{
+                  color: '#ffc153',
+                  height: '40px',
+                  padding: '10px 15px',
+                }}
+                onClick={handleSave}
+              />
+            </div>
+          </ToggleCollapse>
+        </div>
         <ConfirmDialog
           show={showConfirmDialog}
           onClose={() => setShowConfirmDialog(false)}
