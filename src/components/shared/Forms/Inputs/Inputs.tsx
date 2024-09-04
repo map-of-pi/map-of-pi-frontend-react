@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 
 import React from 'react';
 import PhoneInput from 'react-phone-number-input'
+import { describe } from 'node:test';
 
 export const Input = (props: any) => {
   const { label, icon, ...input } = props;
@@ -42,11 +43,14 @@ export const TelephoneInput = (props: any) => {
 };
 
 export const TextArea = (props: any) => {
-  const { label, ...input } = props;
+  const { label, describe, ...input } = props;
   return (
     <div className="">
       {label && (
         <label className=" block text-[17px] text-[#333333]">{label}</label>
+      )}
+      {describe && (
+        <label className=" block text-sm text-gray-400">{describe}</label>
       )}
       <textarea
         placeholder={props.placeholder}
@@ -63,11 +67,14 @@ export const FileInput = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block pb-3 font-medium text-gray-700">{props.label}</label>
+        <label className="block font-medium text-gray-700">{props.label}</label>
+      )}
+      {props.describe && (
+        <label className="block pb-3 text-sm text-gray-400">{props.describe}</label>
       )}
       <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative border-dashed border-[2px] border-green-700">
         <Image
-          src="/images/shared/upload.png"
+          src="/images/logo.svg"
           alt="upload image"
           width={85}
           height={85}
