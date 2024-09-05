@@ -240,9 +240,9 @@ const SellerRegistrationForm = () => {
         
         <div className="mb-4">
           <h2 className={SUBHEADER}>
-            {t('Seller details')}
+            {t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_LABEL')}
           </h2>
-          <p className='text-gray-400 text-sm'>Description of seller, & items for sale with pi price, etc.</p>
+          <p className='text-gray-400 text-sm'>{t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER')}</p>
           <div className="mb-2">
             <TextArea
               name="sellerDescription"
@@ -299,34 +299,34 @@ const SellerRegistrationForm = () => {
             <div className="text-sm mb-7 text-gray-500">
               <div className="text-sm mb-3">
                 <span className="font-bold">
-                  {t('Pi username') + ': '}
+                  {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
                 </span>
                 <span>{currentUser ? currentUser.pi_username : ''}</span>
               </div>
               <div className="text-sm mb-3">
                 <span className="font-bold">
-                  {t('Name') + ': '}
+                  {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
                 </span>
                 <span>{dbSeller ? dbSeller.name : ''}</span>
               </div>
               <div className="text-sm mb-3">
                 <span className="font-bold">
-                  {t('Phone number') + ': '}
+                  {t('SHARED.USER_INFORMATION.PHONE_NUMBER_LABEL') + ': '}
                 </span>
                 <span>{userSettings ? userSettings.phone_number : ""}</span>
               </div>
               <div className="text-sm mb-5">
                 <span className="font-bold">
-                  {t('Email') + ': '}
+                  {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
                 </span>
                 <span>{ userSettings ? userSettings.email : ""}</span>
               </div>
             </div>
           </ToggleCollapse>
-          <ToggleCollapse header={t('Advance seller settings')}>
+          <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}>
             <div className="mb-4">
               <Input
-                label={t('Retail outlet name')}
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_NAME')}
                 name="sellerName"
                 placeholder={sellerPrompt.name}
                 type="text"
@@ -335,7 +335,7 @@ const SellerRegistrationForm = () => {
               />
 
               <Select
-                label={t('Seller type')}
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
                 name="sellerType"
                 value={formData.sellerType}
                 onChange={handleChange}
@@ -343,8 +343,8 @@ const SellerRegistrationForm = () => {
               />
 
               <TextArea
-                label={t('Address or where selling')}
-                describe="Help your buyers find you by adding address or a description of where you are selling."
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
+                describe={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER')}
                 name="sellerAddress"
                 placeholder={sellerPrompt.address}
                 value={formData.sellerAddress}
@@ -354,7 +354,7 @@ const SellerRegistrationForm = () => {
             <div className="mb-4">
               <FileInput
                 label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
-                describe={`Upload image to help attract buyers. (PNG, JPG, JPEG, WEBP)`}
+                describe={t('SHARED.PHOTO.UPLOAD_PHOTO_PLACEHOLDER')}
                 images={[]}
                 handleAddImages={handleAddImages}
               />
