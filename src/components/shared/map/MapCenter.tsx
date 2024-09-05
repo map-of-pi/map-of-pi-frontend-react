@@ -73,13 +73,12 @@ const MapCenter = () => {
       geocoder.geocode(query, (results: any) => {
         if (results.length > 0) {
           const { center: resultCenter } = results[0];
-          setCenter({ lat: resultCenter.lat, lng: resultCenter.lng });
-          logger.info(`Result center: ${resultCenter.lat}, ${resultCenter.lng}`);
-          if (mapRef.current) {
-            mapRef.current.setView([resultCenter.lat, resultCenter.lng], 13);
-            logger.info(`Map center updated and zoomed to: ${resultCenter.lat}, ${resultCenter.lng}`);
-          } else {
-            logger.warn('Map reference is not set');
+          // Check if the new center is different from the current center before setting it
+          if (resultCenter.lat !== center.lat || resultCenter.lng !== center.lng) {
+            setCenter({ lat: resultCenter.lat, lng: resultCenter.lng });
+            if (mapRef.current) {
+              mapRef.current.setView([resultCenter.lat, resultCenter.lng], 13);
+            }
           }
         } else {
           logger.warn(`No result found for the query: ${query}`);
