@@ -1,8 +1,8 @@
-
 'use client';
 
 import 'leaflet/dist/leaflet.css';
 import './MapCenter.css';
+// import { Map as LeafletMap, } from 'leaflet';
 
 import { useTranslations } from 'next-intl';
 import { useState, useEffect, useContext, useRef } from 'react';
@@ -11,6 +11,7 @@ import {
   TileLayer,
   Marker,
   useMapEvents,
+  useMap,
 } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-control-geocoder';
@@ -33,18 +34,18 @@ const crosshairIcon = new L.Icon({
 
 const MapCenter = () => {
   const t = useTranslations();
-
-  const [showPopup, setShowPopup] = useState(false); // State for controlling the visibility of the confirmation popup
+  const [showPopup, setShowPopup] = useState(false);
   const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const mapRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
     if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
+      logger.info("User not logged in; attempting auto-login.");
       autoLoginUser();
     }
 
+    // Fetch the map center from the backend if the user is authenticated
     const getMapCenter = async () => {
       if (currentUser?.pi_uid) {
         try {
@@ -57,7 +58,7 @@ const MapCenter = () => {
             setCenter({ lat: 50.064192, lng: 19.944544 });
           }
         } catch (error) {
-          logger.error('Error fetching map center:', { error });
+          logger.error('Error fetching map center:', error);
         }
       }
     };
@@ -65,14 +66,15 @@ const MapCenter = () => {
     getMapCenter();
   }, [currentUser]);
 
-  // Handle search query to update map center and zoom level
+  // Geocode the query and update the map center
   const handleSearch = async (query: string) => {
     try {
       const geocoder = new (L.Control as any).Geocoder.nominatim();
       geocoder.geocode(query, (results: any) => {
         if (results.length > 0) {
           const { center: resultCenter } = results[0];
-          setCenter({ lat: resultCenter.lat, lng: resultCenter.lng });  // Update map center
+          setCenter({ lat: resultCenter.lat, lng: resultCenter.lng });
+          logger.info(`Result center: ${resultCenter.lat}, ${resultCenter.lng}`);
           if (mapRef.current) {
             mapRef.current.setView([resultCenter.lat, resultCenter.lng], 13);
             logger.info(`Map center updated and zoomed to: ${resultCenter.lat}, ${resultCenter.lng}`);
@@ -88,95 +90,90 @@ const MapCenter = () => {
     }
   };
 
-  // Component to handle map events and update the center state
+  // Access the map instance and set initial center without causing an infinite loop
+  const MapHandler = () => {
+    const map = useMap();
+
+    useEffect(() => {
+      if (mapRef.current !== map) {
+        mapRef.current = map; // Set map reference only once
+        setCenter(map.getCenter()); // Set the center once when the map is ready
+        logger.info('Map instance and reference set on load.');
+      }
+    }, [map]);
+
+    return null;
+  };
+
+  // Component to handle map events without triggering infinite loops
   const CenterMarker = () => {
-    const map = useMapEvents({
+    useMapEvents({
       moveend() {
-        setCenter(map.getCenter()); // Update center state when the map stops moving
-      },
-      load() {
-        setCenter(map.getCenter()); // Set initial center when the map loads
-        mapRef.current = map;
+        const newCenter = mapRef.current?.getCenter();
+        if (newCenter && (newCenter.lat !== center.lat || newCenter.lng !== center.lng)) {
+          setCenter(newCenter); // Update center state when the map stops moving
+          logger.info(`Map center updated to: ${newCenter.lat}, ${newCenter.lng}`);
+        }
       },
     });
 
-    return center ? (
-      <Marker position={center} icon={crosshairIcon}></Marker>
-    ) : null;
+    return center ? <Marker position={center} icon={crosshairIcon}></Marker> : null;
   };
 
-  // Function to save the map center directly to the backend
+  // Save the map center to the backend
   const setMapCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
-      logger.info('Setting map center to:', { center });
       try {
-        const response = await saveMapCenter(center.lat, center.lng);
-        logger.info('Map center saved successfully:', { response });
+        await saveMapCenter(center.lat, center.lng);
         setShowPopup(true);
+        logger.info('Map center successfully saved.');
       } catch (error) {
-        logger.error('Error saving map center:', { error });
+        logger.error('Error saving map center:', error);
       }
-    } else {
-      logger.warn('User not authenticated or center coordinates are null'); // Handle the case where the user is not authenticated or coordinates are null
     }
   };
 
-  // Function to handle the closing of the confirmation popup
+  // Handle the closing of the confirmation popup
   const handleClickDialog = () => {
     setShowPopup(false);
   };
 
-  // define map boundaries
-  const bounds = L.latLngBounds(
-    L.latLng(-90, -180), // SW corner
-    L.latLng(90, 180)  // NE corner
-  );
+  const bounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
 
   return (
     <div className="search-container">
-    <p className="search-text">{t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER')}</p>
-    <SearchBar 
-      onSearch={handleSearch}
-      page={'map_center'} />
-          <MapContainer
-          center={center}
-          zoom={2}
-          zoomControl={false}
-          minZoom={2}
-          maxZoom={18}
-          maxBounds={bounds}
-          maxBoundsViscosity={1.0}
-          className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
-          whenReady={() => {
-            if (mapRef.current) {
-              // Perform actions if mapRef.current is already set
-            }
-          }}        
-        >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="Map data © OpenStreetMap contributors"
-          noWrap={true}
-        />
+      <p className="search-text">{t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER')}</p>
+      <SearchBar onSearch={handleSearch} page={'map_center'} />
+      <MapContainer
+        center={center}
+        zoom={2}
+        zoomControl={false}
+        minZoom={2}
+        maxZoom={18}
+        maxBounds={bounds}
+        maxBoundsViscosity={1.0}
+        className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
+        whenReady={(mapInstance) => {
+          mapRef.current = mapInstance; // Correctly set the map reference when the map is created
+          logger.info('Map instance set during map container ready state.');
+        }}
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="Map data © OpenStreetMap contributors" noWrap={true} />
         <CenterMarker />
+        <MapHandler />
         <RecenterAutomatically position={center} />
       </MapContainer>
       <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
         <Button
           label="Set Map Center"
           onClick={setMapCenter}
-          styles={{
-            borderRadius: '10px',
-            color: '#ffc153',
-            paddingLeft: '50px',
-            paddingRight: '50px',
-          }}
+          styles={{ borderRadius: '10px', color: '#ffc153', paddingLeft: '50px', paddingRight: '50px' }}
         />
       </div>
       {showPopup && (
         <ConfirmDialogX
           toggle={() => setShowPopup(false)}
-          handleClicked={handleClickDialog} // Handles closing the confirmation popup
+          handleClicked={handleClickDialog}
           message={t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')}
         />
       )}
