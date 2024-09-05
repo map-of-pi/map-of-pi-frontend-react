@@ -152,9 +152,11 @@ const MapCenter = () => {
         maxBounds={bounds}
         maxBoundsViscosity={1.0}
         className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
-        whenReady={(mapInstance) => {
-          mapRef.current = mapInstance; // Correctly set the map reference when the map is created
-          logger.info('Map instance set during map container ready state.');
+        whenReady={() => {
+          const mapInstance: any = mapRef.current;
+          if (mapInstance) {
+            logger.info('Map instance set during map container ready state.');
+          }
         }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="Map data © OpenStreetMap contributors" noWrap={true} />
