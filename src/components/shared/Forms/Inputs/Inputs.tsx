@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 
 import React from 'react';
 import PhoneInput from 'react-phone-number-input'
-import { describe } from 'node:test';
 
 export const Input = (props: any) => {
   const { label, icon, ...input } = props;
@@ -157,7 +156,7 @@ export const Select = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block text-xl text-[#333333] ">{props.label}</label>
+        <label className="block text-[17px] text-[#333333] ">{props.label}</label>
       )}
       <select 
         name={props.name} 
