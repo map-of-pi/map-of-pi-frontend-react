@@ -197,8 +197,9 @@
       }
     },
     "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Nemo wuri, gari ko adireshi",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "Wòɖeɖeɖe gbãtɔwo le mɔ be yé kpɔ̃ nɔ"
+        "SEARCH_CENTER_SUCCESS_MESSAGE": "Nye dzi tsɔtɔ wɔm o"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Ɣe siwo...",
