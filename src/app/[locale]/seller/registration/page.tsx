@@ -254,7 +254,12 @@ const SellerRegistrationForm = () => {
             />
           </div>
         </div>
-        <Link href="/map-center">
+        <Link
+          href={{
+            pathname: "/map-center", // Path to MapCenter component
+            query: { entryType: 'sell' } // Passing 'sell' as entryType
+          }}
+        >
           <Button
             label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
             styles={{
