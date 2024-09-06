@@ -19,6 +19,7 @@
     "@mui/icons-material": "^5.15.16",
     "@mui/material": "^5.15.16",
     "@pinetwork-js/sdk": "^0.7.0",
+    "@reduxjs/toolkit": "^2.2.7",
     "@sentry/browser": "^8.26.0",
     "@sentry/nextjs": "^8.26.0",
     "@sentry/node": "^8.27.0",
@@ -46,8 +47,10 @@
     "react-leaflet": "^4.2.1",
     "react-logger": "^1.1.0",
     "react-phone-number-input": "^3.4.3",
+    "react-redux": "^9.1.2",
     "react-switch": "^7.0.0",
     "react-toastify": "^10.0.5",
+    "redux-persist": "^6.0.0",
     "sass": "^1.77.0",
     "sharp": "^0.33.3",
     "zod": "^3.23.8"

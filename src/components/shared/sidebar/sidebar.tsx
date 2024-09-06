@@ -21,7 +21,10 @@ import {
 } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
-import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import {
+  createUserSettings,
+  fetchUserSettings,
+} from '@/services/userSettingsApi';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
@@ -67,7 +70,7 @@ function Sidebar(props: any) {
 
   useEffect(() => {
     if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
+      logger.info('User not logged in; attempting auto-login..');
       autoLoginUser();
     }
 
@@ -113,14 +116,13 @@ function Sidebar(props: any) {
       router.push(url);
       props.setToggleDis(false);
     }
-  
+
     if (
       title === 'Themes' ||
       title === 'Languages' ||
       title === 'About Map of Pi'
     ) {
       setToggle({ ...toggle, [title]: !toggle[title] });
-      
     }
     if (toggle[title] === false) {
       setTimeout(() => {
@@ -128,7 +130,7 @@ function Sidebar(props: any) {
       }, 90);
     }
   };
-  
+
   const handleChildMenu = (title: any, code: string) => {
     logger.debug(`Child menu item selected: ${title}, Code: ${code}`);
     if (title === 'Languages') {
@@ -155,14 +157,18 @@ function Sidebar(props: any) {
   };
 
   // Function to submit user preference settings to the database
-  const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleFocusChange = async (
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     let inputName = e.target.name;
     let inputValue = e.target.value;
     let searchCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null'); // Provide default value
 
     logger.debug(`Input field blurred: ${inputName}, Value: ${inputValue}`);
 
-    if (inputValue !== "") {
+    if (inputValue !== '') {
       const userSettingsData: IUserSettings = {
         [inputName]: inputValue,
       };
@@ -170,7 +176,7 @@ function Sidebar(props: any) {
       if (searchCenter) {
         userSettingsData.search_map_center = {
           type: 'Point' as const,
-          coordinates: [searchCenter[0], searchCenter[1]] as [number, number]
+          coordinates: [searchCenter[0], searchCenter[1]] as [number, number],
         };
       }
 
@@ -178,11 +184,15 @@ function Sidebar(props: any) {
         const data = await createUserSettings(userSettingsData);
         logger.info('User settings submitted successfully:', { data });
         if (data.settings) {
-          toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
+          toast.success(
+            t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'),
+          );
         }
       } catch (error: any) {
         logger.error('Error submitting user settings:', { error });
-        toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
+        toast.error(
+          t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'),
+        );
       }
     } else {
       return null;
@@ -258,7 +268,10 @@ function Sidebar(props: any) {
                   props.setToggleDis(false); // Close sidebar on click
                 }}
               />
-              <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
+              <Link
+                href={
+                  currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'
+                }>
                 <Button
                   label={t('SHARED.CHECK_REVIEWS')}
                   styles={{
@@ -281,6 +294,7 @@ function Sidebar(props: any) {
                 images={[]}
                 handleAddImages={handleAddImages}
               />
+              p
             </div>
           </div>
           <div className="pt-5">
