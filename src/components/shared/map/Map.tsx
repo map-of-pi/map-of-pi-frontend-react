@@ -264,8 +264,8 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
         zoomControl={false}
         minZoom={2}
         maxZoom={18}
-        maxBounds={bounds}
-        maxBoundsViscosity={1.0}
+        // maxBounds={bounds}
+        // maxBoundsViscosity={1.0}
         className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

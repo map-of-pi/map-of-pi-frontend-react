@@ -2,7 +2,6 @@
 
 import 'leaflet/dist/leaflet.css';
 import './MapCenter.css';
-// import { Map as LeafletMap, } from 'leaflet';
 
 import { useTranslations } from 'next-intl';
 import { useState, useEffect, useContext, useRef } from 'react';
@@ -41,7 +40,7 @@ const MapCenter = () => {
 
   useEffect(() => {
     if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login.");
+      logger.info("User not logged in; attempting auto-login..");
       autoLoginUser();
     }
 
@@ -58,7 +57,7 @@ const MapCenter = () => {
             setCenter({ lat: 50.064192, lng: 19.944544 });
           }
         } catch (error) {
-          logger.error('Error fetching map center:', error);
+          logger.error('Error fetching map center:', { error });
         }
       }
     };
@@ -97,7 +96,7 @@ const MapCenter = () => {
       if (mapRef.current !== map) {
         mapRef.current = map; // Set map reference only once
         setCenter(map.getCenter()); // Set the center once when the map is ready
-        logger.info('Map instance and reference set on load.');
+        logger.debug('Map instance and reference set on load.');
       }
     }, [map]);
 
@@ -111,7 +110,7 @@ const MapCenter = () => {
         const newCenter = mapRef.current?.getCenter();
         if (newCenter && (newCenter.lat !== center.lat || newCenter.lng !== center.lng)) {
           setCenter(newCenter); // Update center state when the map stops moving
-          logger.info(`Map center updated to: ${newCenter.lat}, ${newCenter.lng}`);
+          logger.debug(`Map center updated to: ${newCenter.lat}, ${newCenter.lng}`);
         }
       },
     });
@@ -119,7 +118,6 @@ const MapCenter = () => {
     return center ? <Marker position={center} icon={crosshairIcon}></Marker> : null;
   };
 
-  // Save the map center to the backend
   const setMapCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
       try {
@@ -132,7 +130,6 @@ const MapCenter = () => {
     }
   };
 
-  // Handle the closing of the confirmation popup
   const handleClickDialog = () => {
     setShowPopup(false);
   };
@@ -149,8 +146,8 @@ const MapCenter = () => {
         zoomControl={false}
         minZoom={2}
         maxZoom={18}
-        maxBounds={bounds}
-        maxBoundsViscosity={1.0}
+        // maxBounds={bounds}
+        // maxBoundsViscosity={1.0}
         className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
         whenReady={() => {
           const mapInstance: any = mapRef.current;
@@ -159,7 +156,11 @@ const MapCenter = () => {
           }
         }}
       >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="Map data © OpenStreetMap contributors" noWrap={true} />
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="Map data © OpenStreetMap contributors"
+          noWrap={true}
+        />
         <CenterMarker />
         <MapHandler />
         <RecenterAutomatically position={center} />
