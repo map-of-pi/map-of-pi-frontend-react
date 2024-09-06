@@ -244,37 +244,38 @@ function Sidebar(props: any) {
               onBlur={handleFocusChange}
             />
             <div className="pt-2 flex flex-col gap-5">
+            <Button
+              label={t('SHARED.SEARCH_CENTER')}
+              styles={{
+                color: '#ffc153',
+                width: '100%',
+                padding: '10px',
+                borderRadius: '10px',
+                fontSize: '18px',
+              }}
+              onClick={() => {
+                router.push(`/map-center?entryType=search`);  // Construct the URL string directly
+                props.setToggleDis(false); // Close sidebar on click
+              }}
+            />
+            
+            <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
               <Button
-                label={t('SHARED.SEARCH_CENTER')}
+                label={t('SHARED.CHECK_REVIEWS')}
                 styles={{
+                  background: '#fff',
                   color: '#ffc153',
                   width: '100%',
-                  padding: '10px',
+                  padding: '8px',
+                  borderColor: 'var(--default-primary-color)',
+                  borderWidth: '2px',
                   borderRadius: '10px',
                   fontSize: '18px',
                 }}
-                onClick={() => {
-                  router.push('/map-center');
-                  props.setToggleDis(false); // Close sidebar on click
-                }}
+                onClick={() => props.setToggleDis(false)} // Close sidebar on click
               />
-              <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
-                <Button
-                  label={t('SHARED.CHECK_REVIEWS')}
-                  styles={{
-                    background: '#fff',
-                    color: '#ffc153',
-                    width: '100%',
-                    padding: '8px',
-                    borderColor: 'var(--default-primary-color)',
-                    borderWidth: '2px',
-                    borderRadius: '10px',
-                    fontSize: '18px',
-                  }}
-                  onClick={() => props.setToggleDis(false)} // Close sidebar on click
-                />
-              </Link>
-            </div>
+            </Link>
+          </div>
             <div className="pt-5">
               <FileInput
                 label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
