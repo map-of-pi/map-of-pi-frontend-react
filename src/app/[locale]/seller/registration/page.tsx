@@ -19,12 +19,13 @@ import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
-import { sellerPrompt } from '@/constants/placeholders';
+import { sellerDefault } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
+import UrlsRemoval from '../../../../util/urlsRemoval';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -108,12 +109,14 @@ const SellerRegistrationForm = () => {
     const {
       sellerName,
       sellerType,
+      sellerDescription,
       sellerAddress
     } = formData;
     setIsFormValid(
       !!(
         sellerName &&
         sellerType &&
+        sellerDescription &&
         sellerAddress
       ),
     );
@@ -155,7 +158,7 @@ const SellerRegistrationForm = () => {
 
   // Function to save data to the database
   const handleSave = async () => {  
-    // check if user is authenticated and form is valid
+    // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
       return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
@@ -164,10 +167,19 @@ const SellerRegistrationForm = () => {
     const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
     logger.info('Saving form data:', { formData, sellCenter });
 
+    // Trim and clean the sellerAddress and sellerDescription fields
+    let sellerAddress = formData.sellerAddress.trim() === "" 
+      ? sellerDefault.address 
+      : UrlsRemoval(formData.sellerAddress);
+
+    let sellerDescription = formData.sellerDescription.trim() === "" 
+      ? sellerDefault.description 
+      : UrlsRemoval(formData.sellerDescription);
+
     const regForm = {
       name: formData.sellerName,
-      description: formData.sellerDescription,
-      address: formData.sellerAddress,
+      description: sellerDescription,
+      address: sellerAddress,
       seller_type: formData.sellerType,
     } as {
       name: string;
@@ -178,7 +190,7 @@ const SellerRegistrationForm = () => {
         type: 'Point';
         coordinates: [number, number];
       };
-    };  
+    };
 
     // Add sell_map_center field only if sellCenter is available
     if (sellCenter) {
@@ -186,8 +198,9 @@ const SellerRegistrationForm = () => {
         type: 'Point' as const,
         coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
       };
-    }; 
-    console.log('registration form', regForm);
+    }
+
+    console.log('Registration form', regForm);
 
     try {
       const data = await registerSeller(regForm);
@@ -199,7 +212,9 @@ const SellerRegistrationForm = () => {
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
     }
-  }
+  };
+
+
 
   const translatedSellerTypeOptions = [
     {
@@ -246,7 +261,6 @@ const SellerRegistrationForm = () => {
           <div className="mb-2">
             <TextArea
               name="sellerDescription"
-              placeholder={sellerPrompt.description}
               value={formData.sellerDescription}
               onChange={handleChange}
               styles={{ height: '200px' }}
@@ -277,6 +291,7 @@ const SellerRegistrationForm = () => {
           />
         </div>
         <div className='spacing-7'>
+          {/* seller review toggle */}
           <ToggleCollapse
             header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
             <TrustMeter ratings={dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating} />
@@ -294,6 +309,8 @@ const SellerRegistrationForm = () => {
               </Link>
             </div>
           </ToggleCollapse>
+          
+          {/* user settings info toggle */}
           <ToggleCollapse
             header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
             <div className="text-sm mb-7 text-gray-500">
@@ -323,12 +340,13 @@ const SellerRegistrationForm = () => {
               </div>
             </div>
           </ToggleCollapse>
+          
+          {/* seller registration form fields toggle */}
           <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}>
             <div className="mb-4">
               <Input
                 label={t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_NAME')}
-                name="sellerName"
-                placeholder={sellerPrompt.name}
+                name="sellerName"                
                 type="text"
                 value={formData.sellerName}
                 onChange={handleChange}
@@ -345,8 +363,7 @@ const SellerRegistrationForm = () => {
               <TextArea
                 label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
                 describe={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER')}
-                name="sellerAddress"
-                placeholder={sellerPrompt.address}
+                name="sellerAddress"                
                 value={formData.sellerAddress}
                 onChange={handleChange}
               />
