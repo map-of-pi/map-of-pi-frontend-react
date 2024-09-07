@@ -2,9 +2,10 @@ import React from 'react';
 
 type TrustMeterProps = {
   ratings: number;
+  hideLabel?: boolean;
 };
 
-const TrustMeter: React.FC<TrustMeterProps> = ({ ratings }) => {
+const TrustMeter: React.FC<TrustMeterProps> = ({ ratings, hideLabel}) => {
   // const maxRating = 5.0; 
   // const percentageRating = (ratings / maxRating * 100).toString();
   const percentageRating = ratings.toString();
@@ -15,7 +16,7 @@ const TrustMeter: React.FC<TrustMeterProps> = ({ ratings }) => {
 
   return (
     <div className='w-full flex'>
-      <h3 className='font-bold text-sm text-nowrap pe-2'>Trust-o-meter</h3>
+      <h3 className={`font-bold text-sm text-nowrap pe-2 ${hideLabel? 'hidden': 'block'}`}>Trust-o-meter</h3>
       <div className='flex-1'>
 
         <div className="flex w-full">          
