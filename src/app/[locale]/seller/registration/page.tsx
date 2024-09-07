@@ -2,10 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 import { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
-
+// import Router from 'next/router';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
 import {
@@ -14,7 +14,7 @@ import {
   Input,
   Select,
 } from '@/components/shared/Forms/Inputs/Inputs';
-import ConfirmDialog from '@/components/shared/confirm';
+// import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
@@ -26,11 +26,13 @@ import { fetchUserSettings } from '@/services/userSettingsApi';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 import UrlsRemoval from '../../../../util/urlsRemoval';
+import ConfirmDialog from '@/components/shared/confirm';
+
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
   const SUBHEADER = 'font-bold mb-2';
-
+  const router = useRouter();
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
 
@@ -204,8 +206,9 @@ const SellerRegistrationForm = () => {
 
     try {
       const data = await registerSeller(regForm);
-      setDbSeller(data.seller);
       if (data.seller) {
+        setIsSaveEnabled(false);
+        setDbSeller(data.seller);
         toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
         logger.info('Seller registration saved successfully:', { data });
       }
@@ -214,6 +217,15 @@ const SellerRegistrationForm = () => {
     }
   };
 
+  const handleNavigation = (nextLink: string)=> {
+    setLinkUrl(nextLink);
+  
+    if (isSaveEnabled) {
+      setShowConfirmDialog(true); // Show confirm dialog when save is enabled
+    } else {
+      router.push(nextLink); // Direct navigation if save is not enabled
+    }
+  }
 
 
   const translatedSellerTypeOptions = [
@@ -267,17 +279,16 @@ const SellerRegistrationForm = () => {
             />
           </div>
         </div>
-        <Link href="/map-center">
-          <Button
-            label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
-            styles={{
-              color: '#ffc153',
-              height: '40px',
-              padding: '10px',
-              marginLeft: 'auto',
-            }}
-          />
-        </Link>
+        <Button
+          label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
+          onClick={() => handleNavigation("/map-center")}
+          styles={{
+            color: '#ffc153',
+            height: '40px',
+            padding: '10px',
+            marginLeft: 'auto',
+          }}
+        />
         <div className="mb-4 mt-3 ml-auto w-min">
           <Button
             label={t('SHARED.SAVE')}
@@ -301,12 +312,19 @@ const SellerRegistrationForm = () => {
                   seller_review_rating: dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating,
                 })}
               </p>
-              <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#'}>
-                <OutlineBtn
-                  disabled={!currentUser}
-                  label={t('SHARED.CHECK_REVIEWS')}
-                />
-              </Link>
+              { !isSaveEnabled ? (
+                <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#'}>
+                  <OutlineBtn
+                    disabled={!currentUser}
+                    label={t('SHARED.CHECK_REVIEWS')}
+                  />
+                </Link> ) : (
+                  <OutlineBtn
+                    disabled={!currentUser}
+                    label={t('SHARED.CHECK_REVIEWS')}
+                    onClick={()=>handleNavigation(dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#')}
+                  /> )
+              }
             </div>
           </ToggleCollapse>
           
