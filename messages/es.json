@@ -185,7 +185,10 @@
       "UPLOAD_PHOTO_LABEL": "Subir Foto",
       "UPLOAD_PHOTO_PLACEHOLDER": "Sube una imagen para ayudar a atraer compradores (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Suelta tu imagen aquí o busca",
-      "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP"
+      "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP",
+      "MISC_LABELS": {
+        "SELLER_IMAGE_LABEL": "Imagen del vendedor"
+      }
     },
     "REACTION_RATING": {
       "UNSAFE": "Inseguro",
