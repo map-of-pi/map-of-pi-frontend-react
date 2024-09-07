@@ -6,7 +6,7 @@ const ConfirmDialog = ({ show, onClose, setConfirm, message, url }:any) => {
   const router = useRouter();
     
   const handleClicked = () => {
-    router.push(`/${url}`)
+    router.push(url)
   }
 
   if (!show) return null;
