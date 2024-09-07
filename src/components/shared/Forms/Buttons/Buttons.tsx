@@ -40,6 +40,20 @@ export const OutlineBtn = (props: any) => {
   );
 };
 
+export const OutlineBtn2 = (props: any) => {
+  const { styles, icon, label, disabled, onClick } = props;
+  return (
+    <button
+      className={`px-4 py-1 gap-1 cursor-pointer items-center justify-center outline outline-primary outline-[1.5px] hover:bg-primary hover:text-[#ffc153] text-primary rounded-md flex mx-auto`}
+      style={styles}
+      disabled={disabled}
+      onClick={onClick}>
+      {icon && icon}
+      {label && label}
+    </button>
+  );
+};
+
 export const YellowBtn = (props: any) => {
   return (
     <div>
