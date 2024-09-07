@@ -185,7 +185,10 @@
       "UPLOAD_PHOTO_LABEL": "사진 업로드",
       "UPLOAD_PHOTO_PLACEHOLDER": "구매자의 관심을 끌기 위해 이미지를 업로드하세요 (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "여기에 이미지를 드롭하거나 찾아보기",
-      "SUPPORTS_FILE_MESSAGE": "지원: PNG, JPG, JPEG, WEBP"
+      "SUPPORTS_FILE_MESSAGE": "지원: PNG, JPG, JPEG, WEBP",
+      "MISC_LABELS": {
+        "SELLER_IMAGE_LABEL": "판매자 이미지"
+      }
     },
     "REACTION_RATING": {
       "UNSAFE": "안전하지 않음",
