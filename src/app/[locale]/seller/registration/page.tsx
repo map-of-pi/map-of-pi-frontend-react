@@ -32,7 +32,8 @@ const SellerRegistrationForm = () => {
 
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
-
+  
+  const { currentUser, autoLoginUser } = useContext(AppContext);
   const [formData, setFormData] = useState({
     itemsForSale: '',
     sellerName: '',
@@ -52,7 +53,6 @@ const SellerRegistrationForm = () => {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-  const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
     if (!currentUser) {
@@ -188,6 +188,8 @@ const SellerRegistrationForm = () => {
     formDataToSend.append('description', formData.sellerDescription);
     formDataToSend.append('address', formData.sellerAddress);
     formDataToSend.append('sale_items', formData.itemsForSale);
+    // hardcode the value until the form element is built
+    formDataToSend.append('order_online_enabled_pref', 'false');
 
     // Add sell_map_center field only if sellCenter is available
     if (sellCenter) {
@@ -208,8 +210,8 @@ const SellerRegistrationForm = () => {
       const data = await registerSeller(formDataToSend);
       setDbSeller(data.seller);
       if (data.seller) {
-        toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
         logger.info('Seller registration saved successfully:', { data });
+        toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
       }
     } catch (error) {
       logger.error('Error saving seller registration:', { error });

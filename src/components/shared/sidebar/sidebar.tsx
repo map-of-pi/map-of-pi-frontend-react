@@ -20,8 +20,8 @@ import {
   TelephoneInput,
 } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
-import { IUserSettings } from '@/constants/types';
 import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import { IUserSettings } from '@/constants/types';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
@@ -52,18 +52,25 @@ function Sidebar(props: any) {
   const pathname = usePathname();
   const router = useRouter();
 
+  const { currentUser, autoLoginUser } = useContext(AppContext);
+  const [formData, setFormData] = useState({
+    email: '',
+    phone_number: '',
+    image: ''
+  });
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const { resolvedTheme, setTheme } = useTheme();
   const [toggle, setToggle] = useState<any>({
     Themes: false,
     Languages: false,
   });
-  const { currentUser, autoLoginUser } = useContext(AppContext);
-  const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
-  const [email, setEmail] = useState<string | undefined>();
-  const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string>(dbUserSettings?.image || '');
+  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!currentUser) {
@@ -71,36 +78,65 @@ function Sidebar(props: any) {
       autoLoginUser();
     }
 
-    const getUserSettings = async () => {
-      logger.debug('Fetching user settings..');
-      const settings = await fetchUserSettings();
-      if (settings) {
-        setUserSettings(settings);
-        setPhoneNumber(settings.phone_number?.toString());
-        setEmail(settings.email || '');
-        logger.info('User settings fetched successfully.');
-      } else {
-        setUserSettings(null);
-        logger.warn('User settings not found.');
+    const getUserSettingsData = async () => {
+      try {
+        const data = await fetchUserSettings();
+        if (data) {
+          logger.info('Fetched user settings data successfully:', { data });
+          setDbUserSettings(data);
+        } else {
+          logger.warn('User Settings not found.');
+          setDbUserSettings(null);
+        }
+      } catch (error) {
+        logger.error('Error fetching user settings data:', { error });
+        setError('Error fetching user settings data.');
       }
     };
-    getUserSettings();
-  }, []);
+    getUserSettingsData();
+  }, [currentUser]);
 
-  const handlePhoneNumberChange = (value: string | undefined) => {
-    setPhoneNumber(value);
-    logger.debug(`Phone number changed to: ${value}`);
-  };
+  // Initialize formData with dbUserSettings values if available
+  useEffect(() => {
+    if (dbUserSettings) {
+      setFormData({
+        email: dbUserSettings.email || '',
+        phone_number: dbUserSettings.phone_number?.toString() || '',
+        image: dbUserSettings.image || ''
+      });
+    }
+  }, [dbUserSettings]);
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    logger.debug(`Email changed to: ${e.target.value}`);
-  };
+  // function preview image upload
+  useEffect(() => {
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewImage(objectUrl);
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+    };
+  }, [file]);
+
+  // set the preview image if dbUserSettings changes
+  useEffect(() => {
+    if (dbUserSettings?.image) {
+      setPreviewImage(dbUserSettings.image);
+    }
+  }, [dbUserSettings]);
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  const handleAddImages = () => {
-    logger.debug('Add images handler triggered.');
+  const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0]; // only take the first file
+    if (selectedFile) {
+      setFile(selectedFile);
+
+      const objectUrl = URL.createObjectURL(selectedFile);
+      setPreviewImage(objectUrl);
+      logger.info('Image selected for upload:', { selectedFile });
+
+      setIsSaveEnabled(true);
+    }
   };
 
   const handleMenu = (title: any, url: string) => {
@@ -154,40 +190,50 @@ function Sidebar(props: any) {
     }
   };
 
-  // Function to submit user preference settings to the database
-  const handleFocusChange = async (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    let inputName = e.target.name;
-    let inputValue = e.target.value;
-    let searchCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null'); // Provide default value
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
 
-    logger.debug(`Input field blurred: ${inputName}, Value: ${inputValue}`);
-
-    if (inputValue !== "") {
-      const userSettingsData: IUserSettings = {
-        [inputName]: inputValue,
-      };
-
-      if (searchCenter) {
-        userSettingsData.search_map_center = {
-          type: 'Point' as const,
-          coordinates: [searchCenter[0], searchCenter[1]] as [number, number]
-        };
-      }
-
-      try {
-        const data = await createUserSettings(userSettingsData);
-        logger.info('User settings submitted successfully:', { data });
-        if (data.settings) {
-          toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
-        }
-      } catch (error: any) {
-        logger.error('Error submitting user settings:', { error });
-        toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
-      }
-    } else {
-      return null;
-    }
+    // enable or disable save button based on form inputs
+    const isFormFilled = Object.values(formData).some(v => v !== '');
+    setIsSaveEnabled(isFormFilled);
   };
+
+  // Function to save data to the database
+  const handleSave = async () => { 
+     // check if user is authenticated and form is valid
+    if (!currentUser) {
+      logger.warn('Form submission failed: User not authenticated.');
+      // TODO: add toast.error w/ language translation            
+    }
+    logger.info('Saving form data:', { formData });
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('phone_number', formData.phone_number);
+
+    // add the image if it exists
+    if (file) {
+      formDataToSend.append('image', file);
+    }
+
+    logger.info('User Settings form data:', formDataToSend);
+
+    try {
+      const data = await createUserSettings(formDataToSend);
+      setDbUserSettings(data.settings);
+      if (data.settings) {
+        logger.info('User Settings saved successfully:', { data });
+        toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
+      }
+    } catch (error) {
+      logger.error('Error saving user settings:', { error });
+      toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
+    }
+  }
 
   const translateMenuTitle = (title: string): string => {
     switch (title) {
@@ -232,16 +278,14 @@ function Sidebar(props: any) {
               placeholder="mapofpi@mapofpi.com"
               type="email"
               name="email"
-              value={email}
-              onChange={handleEmailChange}
-              onBlur={handleFocusChange}
+              value={formData.email}
+              onChange={handleChange}
             />
             <TelephoneInput
               label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
-              value={phoneNumber}
               name="phone_number"
-              onChange={handlePhoneNumberChange}
-              onBlur={handleFocusChange}
+              value={formData.phone_number}
+              onChange={handleChange}
             />
             <div className="pt-2 flex flex-col gap-5">
               <Button
@@ -278,8 +322,20 @@ function Sidebar(props: any) {
             <div className="pt-5">
               <FileInput
                 label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
-                images={[]}
-                handleAddImages={handleAddImages}
+                imageUrl={ previewImage }
+                handleAddImage={handleAddImage}
+              />
+            </div>
+            <div className="mb-4 mt-3 flex justify-center">
+              <Button
+                label={t('SHARED.SAVE')}
+                disabled={!isSaveEnabled}
+                styles={{
+                  color: '#ffc153',
+                  height: '40px',
+                  padding: '10px 15px',
+                }}
+                onClick={handleSave}
               />
             </div>
           </div>
