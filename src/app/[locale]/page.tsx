@@ -76,7 +76,7 @@ export default function Index() {
   return (
     <>
       <DynamicMap center={[mapCenter.lat, mapCenter.lng]} zoom={zoomLevel} />
-      <SearchBar />
+      <SearchBar page={'default'} />
       <div className="absolute bottom-8 z-10 flex justify-between gap-[22px] px-6 right-0 left-0 m-auto">
         <Link href="/seller/registration">
           <Button

@@ -10,7 +10,7 @@ export const handleAxiosError = (error: any) => {
         data: error.response.data,
         headers: error.response.headers
       });
-      throw new Error(error.response.data.message || 'Error processing request.');
+      throw new Error(error.response.data?.message || 'Error processing request.');
     } else if (error.request) {
       // no response was received from server
       logger.error('No response received from server', {

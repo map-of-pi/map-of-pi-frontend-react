@@ -198,8 +198,9 @@
       }
     },
     "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Buscar una ubicación, ciudad o dirección",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "Tu Centro de Búsqueda se ha guardado exitosamente"
+        "SEARCH_CENTER_SUCCESS_MESSAGE": "Tu centro de búsqueda se ha guardado correctamente"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Cargando datos...",

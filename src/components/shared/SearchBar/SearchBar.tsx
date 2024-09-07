@@ -13,12 +13,26 @@ import TextField from '@mui/material/TextField';
 
 import logger from '../../../../logger.config.mjs';
 
-const SearchBar: React.FC = () => {
-  const t = useTranslations();
+interface searchBarProps {
+  onSearch?:(query:string) => void;
+  page: 'map_center' | 'default'; 
+}
 
+const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
+  const t = useTranslations();
   const [searchBarValue, setSearchBarValue] = useState('');
-  const [isBusinessSearchType, setIsBusinessSearchType] = useState(true);
   const [message, setMessage] = useState('');
+
+  // function to get the placeholder text based on the screen
+  const getPlaceholderText = (page: 'map_center' | 'default'): string => {
+    switch (page) {
+      case 'map_center':
+        return t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER');
+      default:
+        return t('HOME.SEARCH_BAR_PLACEHOLDER');
+    }
+  };
+  const placeholder = getPlaceholderText(page);
 
   const handleSearchBarChange = (event: ChangeEvent<HTMLInputElement>) => {
     logger.debug(`Search bar value changed: ${event.target.value}`);
@@ -27,14 +41,14 @@ const SearchBar: React.FC = () => {
   
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const fetchSearchResults = async (query: string, searchType: string):Promise<any[]> => {
-    logger.info(`Fetching search results for query: ${query}, searchType: ${searchType}`);
+  const fetchSearchResults = async (query: string): Promise<any[]> => {
+    logger.debug(`Fetching search results for query: "${query}"`);
     // fetch logic to be defined here
     // For now, it returns an empty array
     return new Promise((resolve) => resolve([]));
   };
 
-  const setSearchQuery = (query: string, searchType: string) => {
+  const setSearchQuery = (query: string) => {
     // setSearchQuery logic here
   };
   
@@ -42,16 +56,18 @@ const SearchBar: React.FC = () => {
     event.preventDefault();
     const query = searchBarValue;
     if (query) {
-      const searchType = isBusinessSearchType ? 'business' : 'product';
-      logger.info(`Search query emitted for ${searchType}: ${query}`);
-
-      const searchResults = await fetchSearchResults(query, searchType);
-      setSearchQuery( query, searchType );
-
-      setMessage(`Your search found ${searchResults.length} shops. Please zoom out to view all shop markers.`); 
-      logger.info(message);
+      logger.info(`Search query submitted: ${query}`);
+      
+      if (onSearch) {
+        onSearch(query);
+      } else {
+        // Default search handling
+        const searchResults = await fetchSearchResults(query);
+        setSearchQuery(query);
+        logger.info(`Your search found ${searchResults.length} shops`);
+      }
     } else {
-      logger.warn('Search query is empty.');
+      logger.warn('Search query is empty');
     }
   };
 
@@ -73,7 +89,7 @@ const SearchBar: React.FC = () => {
               variant="outlined"
               color="success"
               className="bg-white hover:bg-gray-100 w-full rounded"
-              label={t('HOME.SEARCH_BAR_PLACEHOLDER')}
+              label={ placeholder }
               value={searchBarValue} 
               onChange={handleSearchBarChange}
               ref={inputRef}
