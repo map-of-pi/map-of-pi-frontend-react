@@ -211,8 +211,8 @@ const SellerRegistrationForm = () => {
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
     }
-  };
-
+  }  
+  
   const handleNavigation = (nextLink: string)=> {
     setLinkUrl(nextLink);
   
@@ -353,8 +353,6 @@ const SellerRegistrationForm = () => {
               </div>
             </div>
           </ToggleCollapse>
-          
-          {/* seller registration form fields toggle */}
           <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}>
             <div className="mb-4">
               <Input
