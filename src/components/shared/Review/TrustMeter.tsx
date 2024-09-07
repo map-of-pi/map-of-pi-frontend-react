@@ -5,9 +5,7 @@ type TrustMeterProps = {
   hideLabel?: boolean;
 };
 
-const TrustMeter: React.FC<TrustMeterProps> = ({ ratings, hideLabel}) => {
-  // const maxRating = 5.0; 
-  // const percentageRating = (ratings / maxRating * 100).toString();
+const TrustMeter: React.FC<TrustMeterProps> = ({ ratings }) => {
   const percentageRating = ratings.toString();
   const average = 50; // this can be adjusted
   const condition = ratings < average
