@@ -14,8 +14,8 @@
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "User Preferences",
-    "EMAIL_ADDRESS_FIELD": "Your Email Address",
-    "PHONE_NUMBER_FIELD": "Your Phone Number",
+    "EMAIL_ADDRESS_FIELD": "Your email address",
+    "PHONE_NUMBER_FIELD": "Your phone number",
     "LANGUAGES": "Languages",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "About Map of Pi",
@@ -32,13 +32,13 @@
   "SCREEN": {
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Seller Registration",
-      "SELLER_SALE_ITEMS_LABEL": "Seller items for sale",
-      "SELLER_SALE_ITEMS_PLACEHOLDER": "Describe your items for sale, price, etc.",
+      "SELLER_DETAILS_LABEL": "Seller Details",
+      "SELLER_DETAILS_PLACEHOLDER": "Description of seller & items for sale with pi price, etc.",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_LABEL": "Reviews Score",
       "SELLER_NAME": "Seller Name",
       "SELLER_TYPE": {
-        "SELLER_TYPE_LABEL": "Seller Type",
+        "SELLER_TYPE_LABEL": "Seller type",
         "SELLER_TYPE_OPTIONS": {
           "PIONEER": "Pioneer",
           "OTHER": "Other",
@@ -46,10 +46,10 @@
           "TEST_SELLER": "Test Seller"
         }
       },
-      "SELLER_BUSINESS_NAME": "Seller Business Name",
-      "SELLER_DETAILS": "Seller Details",
-      "SELLER_ADDRESS_LOCATION_LABEL": "Seller Address or Location",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe location where you are selling from",
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
+      "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Help your buyers find you by adding address or a description of where you are selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
       "VALIDATION": {
@@ -67,7 +67,7 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
-      "SELLER_CONTACT_DETAILS_LABEL": "Seller contact details",
+      "SELLER_CONTACT_DETAILS_LABEL": "Seller Contact Details",
       "SELLER_PI_ID_LABEL": "Seller pioneer ID",
       "SELLER_PHONE_LABEL": "Seller phone number", 
       "SELLER_EMAIL_LABEL": "Seller email" 
@@ -175,11 +175,21 @@
     "REPLY": "Reply",
     "SAVE": "Save",
     "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Pi username",
+      "NAME_LABEL": "Name",
+      "PHONE_NUMBER_LABEL": "Phone number",
+      "EMAIL_LABEL": "Email" 
+    },
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Upload Photo",
+      "UPLOAD_PHOTO_PLACEHOLDER": "Upload image to help attract buyers (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
       "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
-      "SINGLE_PHOTO_MESSAGE": "One Photo Only"
+      "MISC_LABELS": {
+        "USER_PREFERENCES_LABEL": "User preferences image",
+        "SELLER_IMAGE_LABEL": "Profile image"
+      }
     },
     "REACTION_RATING": {
       "UNSAFE": "Unsafe",
