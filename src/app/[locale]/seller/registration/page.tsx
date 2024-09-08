@@ -342,7 +342,7 @@ const SellerRegistrationForm = () => {
                 <span className="font-bold">
                   {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
                 </span>
-                <span>{dbSeller ? dbSeller.name : ''}</span>
+                <span>{currentUser ? currentUser.user_name : ''}</span>
               </div>
               <div className="text-sm mb-3">
                 <span className="font-bold">
