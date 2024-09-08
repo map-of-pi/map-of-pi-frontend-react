@@ -14,8 +14,8 @@
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Preferencias del Usuario",
-    "EMAIL_ADDRESS_FIELD": "Tu Dirección de Correo Electrónico",
-    "PHONE_NUMBER_FIELD": "Tu Número de Teléfono",
+    "EMAIL_ADDRESS_FIELD": "Tu dirección de correo electrónico",
+    "PHONE_NUMBER_FIELD": "Tu número de teléfono",
     "LANGUAGES": "Idiomas",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "Acerca de Map of Pi",
@@ -32,13 +32,13 @@
   "SCREEN": {
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Registro de Vendedor",
-      "SELLER_SALE_ITEMS_LABEL": "Artículos del vendedor en venta",
-      "SELLER_SALE_ITEMS_PLACEHOLDER": "Describe tus artículos en venta, precio, etc.",
+      "SELLER_DETAILS_LABEL": "Detalles del vendedor",
+      "SELLER_DETAILS_PLACEHOLDER": "Descripción del vendedor y artículos en venta con precio pi, etc.",
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
       "REVIEWS_SCORE_LABEL": "Puntuación de Reseñas",
       "SELLER_NAME": "Nombre del Vendedor",
       "SELLER_TYPE": {
-        "SELLER_TYPE_LABEL": "Tipo de Vendedor",
+        "SELLER_TYPE_LABEL": "Tipo de vendedor",
         "SELLER_TYPE_OPTIONS": {
           "PIONEER": "Pionero",
           "OTHER": "Otro",
@@ -46,10 +46,10 @@
           "TEST_SELLER": "Vendedor de Prueba"
         }
       },
-      "SELLER_BUSINESS_NAME": "Nombre del Negocio del Vendedor",
-      "SELLER_DETAILS": "Detalles del Vendedor",
-      "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o Ubicación del Vendedor",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Describe la ubicación desde donde estás vendiendo",
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",
+      "SELLER_RETAIL_OUTLET_NAME": "Nombre del punto de venta",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o lugar de venta",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Ayuda a tus compradores a encontrarte agregando una dirección o una descripción de dónde estás vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
       "VALIDATION": {
@@ -67,7 +67,7 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
       "REVIEWS_SCORE_MESSAGE": "Puntuación de Reseñas: {seller_review_rating} de 5.0",
-      "SELLER_CONTACT_DETAILS_LABEL": "Detalles de contacto del vendedor",
+      "SELLER_CONTACT_DETAILS_LABEL": "Detalles de Contacto del Vendedor",
       "SELLER_PI_ID_LABEL": "ID de pionero del vendedor",
       "SELLER_PHONE_LABEL": "Número de teléfono del vendedor",
       "SELLER_EMAIL_LABEL": "Correo electrónico del vendedor"
@@ -175,10 +175,20 @@
     "REPLY": "Responder",
     "SAVE": "Guardar",
     "CONFIRM_DIALOG": "Tienes cambios sin guardar. ¿Realmente quieres salir?",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Nombre de usuario Pi",
+      "NAME_LABEL": "Nombre",
+      "PHONE_NUMBER_LABEL": "Número de teléfono",
+      "EMAIL_LABEL": "Correo electrónico"
+    },
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Subir Foto",
+      "UPLOAD_PHOTO_PLACEHOLDER": "Sube una imagen para ayudar a atraer compradores (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Suelta tu imagen aquí o busca",
-      "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP"
+      "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP",
+      "MISC_LABELS": {
+        "SELLER_IMAGE_LABEL": "Imagen del vendedor"
+      }
     },
     "REACTION_RATING": {
       "UNSAFE": "Inseguro",
@@ -197,8 +207,9 @@
       }
     },
     "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Buscar una ubicación, ciudad o dirección",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "Tu Centro de Búsqueda se ha guardado exitosamente"
+        "SEARCH_CENTER_SUCCESS_MESSAGE": "Tu centro de búsqueda se ha guardado correctamente"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Cargando datos...",

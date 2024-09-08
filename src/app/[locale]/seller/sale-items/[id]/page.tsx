@@ -17,6 +17,8 @@ import { ISeller, IUserSettings, IUser } from '@/constants/types';
 import { fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 
+import logger from '../../../../../../logger.config.mjs';
+
 export default function Page({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
 
@@ -36,19 +38,26 @@ export default function Page({ params }: { params: { id: string } }) {
   const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
-    // try re-login user if not current user auth
     if (!currentUser) {
-      console.log("Not logged in; pending login attempt..");
+      logger.info("User not logged in; attempting auto-login..");
       autoLoginUser();
     };
     
     const getSellerData = async () => {
       try {
+        logger.info(`Fetching seller data for seller ID: ${sellerId}`);
         const data = await fetchSingleSeller(sellerId);
         setSellerShopInfo(data.sellerShopInfo);
         setSellerSettings(data.sellerSettings);
         setSellerInfo(data.sellerInfo);
+
+        if (data.sellerShopInfo) {
+          logger.info(`Fetched seller shop info successfully for seller ID: ${sellerId}`);
+        } else {
+          logger.warn(`No seller shop info found for seller ID: ${sellerId}`);
+        }
       } catch (error) {
+        logger.error(`Error fetching seller data for seller ID: ${sellerId}`, error);
         setError('Error fetching seller data');
       } finally {
         setLoading(false);
@@ -56,13 +65,24 @@ export default function Page({ params }: { params: { id: string } }) {
     };
 
     const getSellerSettings = async () => {
-      const settings = await fetchSingleUserSettings(sellerId);
-      console.log("User settings:", settings);
+      try {
+        logger.info(`Fetching seller settings for seller ID: ${sellerId}`);
+        const settings = await fetchSingleUserSettings(sellerId);
+
+        if (settings) {
+          logger.info(`Fetched seller settings successfully for seller ID: ${sellerId}`);
+        } else {
+          logger.warn(`No seller settings found for seller ID: ${sellerId}`);
+        }
+      } catch (error) {
+        logger.error(`Error fetching seller settings for seller ID: ${sellerId}`, error);
+        setError('Error fetching seller settings');
+      }
     };
 
     getSellerData();
     getSellerSettings();
-
+    
   }, []);
 
   const translateSellerCategory = (category: string): string => {
@@ -78,6 +98,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   // loading condition
   if (loading) {
+    logger.info('Loading seller data..');
     return (
       <Skeleton type="seller_item" />
     );
@@ -136,6 +157,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </div>
         </ToggleCollapse>
 
+          
         <ToggleCollapse
           header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
           <div className="text-sm mb-3">

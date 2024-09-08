@@ -1,5 +1,5 @@
-export const menu = [
-  {
+export const menu = {
+  Languages: {
     id: 1,
     title: 'Languages',
     icon: `/images/shared/sidebar/language.svg`,
@@ -55,7 +55,8 @@ export const menu = [
       }
     ],
   },
-  {
+  
+  about: {
     id: 2,
     title: 'About Map of Pi',
     icon: `/images/shared/sidebar/info.svg`,
@@ -81,4 +82,4 @@ export const menu = [
       },
     ],
   },
-];
+};

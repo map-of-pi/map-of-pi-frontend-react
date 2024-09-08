@@ -1,3 +1,5 @@
+import logger from '../../logger.config.mjs';
+
 interface PaymentDTO {
   amount: number,
   user_uid: string,
@@ -21,6 +23,5 @@ interface PaymentDTO {
 };
 
 export const onIncompletePaymentFound = (payment: PaymentDTO) => {
-  console.log("onIncompletePaymentFound", payment);
-  // return axiosClient.post('/payments/incomplete', {payment});
+  logger.info('onIncompletePaymentFound:', { payment });
 }
