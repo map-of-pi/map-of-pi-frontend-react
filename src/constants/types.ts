@@ -8,7 +8,7 @@ export interface IUserSettings {
   user_settings_id?: string | null;
   user_name?: string;
   email?: string;
-  phone_number?: number;
+  phone_number?: string;
   image?: string; 
   findme?: string;
   search_map_center?: {
