@@ -190,8 +190,11 @@ function Sidebar(props: any) {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | { name: string; value: string }) => {
+    // handle such scenarios where the event might not have the typical e.target structure i.e., PhoneInput.
+    const name = 'target' in e ? e.target.name : e.name;
+    const value = 'target' in e ? e.target.value : e.value;
+
     setFormData(prevFormData => ({
       ...prevFormData,
       [name]: value,
@@ -285,7 +288,7 @@ function Sidebar(props: any) {
               label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
               name="phone_number"
               value={formData.phone_number}
-              onChange={handleChange}
+              onChange={(value: any) => handleChange({ name: 'phone_number', value })}
             />
             <div className="pt-2 flex flex-col gap-5">
               <Button
@@ -321,7 +324,7 @@ function Sidebar(props: any) {
             </div>
             <div className="pt-5">
               <FileInput
-                label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+                label={t('SHARED.PHOTO.MISC_LABELS.USER_PREFERENCES_LABEL')}
                 imageUrl={ previewImage }
                 handleAddImage={handleAddImage}
               />

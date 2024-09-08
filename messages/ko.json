@@ -187,7 +187,9 @@
       "IMAGE_DROP_UPLOAD_MESSAGE": "여기에 이미지를 드롭하거나 찾아보기",
       "SUPPORTS_FILE_MESSAGE": "지원: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
-        "SELLER_IMAGE_LABEL": "판매자 이미지"
+        "USER_PREFERENCES_LABEL": "프로필 이미지",
+        "SELLER_IMAGE_LABEL": "판매자 이미지",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "리뷰 이미지"
       }
     },
     "REACTION_RATING": {

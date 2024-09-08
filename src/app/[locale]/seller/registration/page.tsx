@@ -396,7 +396,7 @@ const SellerRegistrationForm = () => {
             </div>
             <div className="mb-4">
               <FileInput
-                label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+                label={t('SHARED.PHOTO.MISC_LABELS.SELLER_IMAGE_LABEL')}
                 imageUrl={ previewImage }
                 handleAddImage={handleAddImage}
               />

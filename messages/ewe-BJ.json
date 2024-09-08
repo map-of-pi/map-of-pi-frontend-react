@@ -187,7 +187,9 @@
       "IMAGE_DROP_UPLOAD_MESSAGE": "Kpɔ siwo be ɖe ƒe ɣe ŋutɔ foto alo tɔkɔ",
       "SUPPORTS_FILE_MESSAGE": "Ɖe vɔ: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
-        "SELLER_IMAGE_LABEL": "Eƒe ɖeka ƒe anyi"
+        "USER_PREFERENCES_LABEL": "Nutsɛnu wɔwɔme",
+        "SELLER_IMAGE_LABEL": "Eƒe ɖeka ƒe anyi",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Nuŋlɔm wɔwɔme"
       }
     },
     "REACTION_RATING": {

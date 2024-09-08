@@ -65,11 +65,12 @@ export const FileInput = (props: any) => {
   const t = useTranslations();
   const imageUrl = props.imageUrl || "/images/shared/upload.png";
   const isImageUploaded = imageUrl !== "/images/shared/upload.png"; // Check if an image has been uploaded
+  const imageLabel = isImageUploaded ? props.label : t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL');
 
   return (
     <div className="">
       {props.label && (
-        <label className="block font-medium text-gray-700">{props.label}</label>
+        <label className="block font-medium text-gray-700">{imageLabel}</label>
       )}
       {props.describe && (
         <label className="block pb-3 text-sm text-gray-400">{props.describe}</label>

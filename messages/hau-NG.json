@@ -187,7 +187,9 @@
       "IMAGE_DROP_UPLOAD_MESSAGE": "Ajiye hotonku anan ko shiga yanar gizo",
       "SUPPORTS_FILE_MESSAGE": "Goyon baya: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
-        "SELLER_IMAGE_LABEL": "Hoton mai sayarwa"
+        "USER_PREFERENCES_LABEL": "Hoton bayanin martaba",
+        "SELLER_IMAGE_LABEL": "Hoton mai sayarwa",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Hoton bita"
       }
     },
     "REACTION_RATING": {

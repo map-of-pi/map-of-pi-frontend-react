@@ -187,8 +187,9 @@
       "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
       "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
-        "USER_PREFERENCES_LABEL": "User preferences image",
-        "SELLER_IMAGE_LABEL": "Profile image"
+        "USER_PREFERENCES_LABEL": "Profile image",
+        "SELLER_IMAGE_LABEL": "Seller image",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Review image"
       }
     },
     "REACTION_RATING": {
