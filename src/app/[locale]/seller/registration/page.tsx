@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
-// import Router from 'next/router';
+
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
 import {
@@ -14,7 +14,7 @@ import {
   Input,
   Select,
 } from '@/components/shared/Forms/Inputs/Inputs';
-// import ConfirmDialog from '@/components/shared/confirm';
+import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
@@ -22,12 +22,10 @@ import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerDefault } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
+import UrlsRemoval from '../../../../util/urlsRemoval';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
-import UrlsRemoval from '../../../../util/urlsRemoval';
-import ConfirmDialog from '@/components/shared/confirm';
-
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -202,8 +200,6 @@ const SellerRegistrationForm = () => {
       };
     }
 
-    console.log('Registration form', regForm);
-
     try {
       const data = await registerSeller(regForm);
       if (data.seller) {
@@ -226,7 +222,6 @@ const SellerRegistrationForm = () => {
       router.push(nextLink); // Direct navigation if save is not enabled
     }
   }
-
 
   const translatedSellerTypeOptions = [
     {
@@ -309,7 +304,7 @@ const SellerRegistrationForm = () => {
             <div className="flex items-center justify-between mt-3 mb-5">
               <p className="text-sm">
                 {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
-                  seller_review_rating: dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating,
+                  seller_review_rating: dbSeller ? dbSeller.average_rating.$numberDecimal : placeholderSeller.average_rating
                 })}
               </p>
               { !isSaveEnabled ? (
@@ -388,7 +383,7 @@ const SellerRegistrationForm = () => {
             </div>
             <div className="mb-4">
               <FileInput
-                label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+                label={t('SHARED.PHOTO.MISC_LABELS.SELLER_IMAGE_LABEL')}
                 describe={t('SHARED.PHOTO.UPLOAD_PHOTO_PLACEHOLDER')}
                 images={[]}
                 handleAddImages={handleAddImages}
