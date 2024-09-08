@@ -62,15 +62,13 @@ function Sidebar(props: any) {
   });
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
-  const [email, setEmail] = useState<string | undefined>();
-  const [userName, setUserName] = useState<string | undefined>();
   const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [formData, setFormData] = useState({
-    user_name: currentUser?.pi_username,
+    user_name: '',
     email: '',
     phone_number: '',
     findme: '',
@@ -88,7 +86,6 @@ function Sidebar(props: any) {
       if (settings) {
         setUserSettings(settings);
         setPhoneNumber(settings.phone_number?.toString());
-        setEmail(settings.email || '');
         logger.info('User settings fetched successfully.');
       } else {
         setUserSettings(null);
@@ -97,6 +94,17 @@ function Sidebar(props: any) {
     };
     getUserSettings();
   }, []);
+
+  useEffect(() => {
+    if (userSettings) {
+      setFormData({
+        user_name: userSettings.user_name || '',
+        email: userSettings.email || '',
+        phone_number: userSettings.phone_number || '',
+        findme: userSettings.findme || 'Use my device GPS',
+      });
+    }
+  }, [userSettings]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -177,20 +185,12 @@ function Sidebar(props: any) {
   };
 
   // Function to submit user preference settings to the database
-  const handleSave = async (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleSave = async () => {
     
-    let inputName = e.target.name;
-    let inputValue = e.target.value;
     // let searchCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null'); // Provide default value
 
-    logger.debug(`Input field blurred: ${inputName}, Value: ${inputValue}`);
-
-    if (inputValue.trim() !== "") {
-      const userSettingsData: IUserSettings = {
-        [inputName]: inputValue,
-        phone_number: phoneNumber,
-      };
-
+    if (formData) {    
+      formData.phone_number = phoneNumber as string;
       // if (searchCenter) {
       //   userSettingsData.search_map_center = {
       //     type: 'Point' as const,
@@ -199,7 +199,7 @@ function Sidebar(props: any) {
       // }
 
       try {
-        const data = await createUserSettings(userSettingsData);
+        const data = await createUserSettings(formData);
         logger.info('User settings submitted successfully:', { data });
         if (data.settings) {
           setIsSaveEnabled(false)
@@ -288,14 +288,12 @@ function Sidebar(props: any) {
           <div className="flex flex-col justify-items-center mx-auto text-center gap-1">
             <Input
               label={t('Name')}
-              placeholder={currentUser?.user_name}
               type="text"
               name="user_name"
               style={{
                 textAlign: 'center'
               }}
-              default={currentUser?.user_name}
-              value={userSettings?.user_name? userSettings?.user_name: currentUser?.user_name}
+              value={formData.user_name? formData.user_name: ''}
               onChange={handleChange}
             />
             <Input
@@ -306,12 +304,12 @@ function Sidebar(props: any) {
               style={{
                 textAlign: 'center'
               }}
-              value={userSettings?.email? userSettings?.email: ""}
+              value={formData.email? formData.email: ""}
               onChange={handleChange}
             />
             <TelephoneInput
               label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
-              value={userSettings?.phone_number? userSettings?.phone_number: ""}
+              value={phoneNumber}
               name="phone_number"
               onChange={handlePhoneNumberChange}
               style={{
@@ -366,69 +364,82 @@ function Sidebar(props: any) {
                 <Select
                   label={t('FindMe Preference')}
                   name="findme"
-                  value={userSettings?.findme? userSettings.findme: "Use my device GPS"}
+                  value={formData.findme? formData.findme: "Use my device GPS"}
                   onChange={handleChange}
                   options={translatedFindMeOptions}
                 />
                 <div key={menu.Languages.id} className="">
-                      <div
-                        className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] w-full mb-3`}
-                        onClick={() => handleMenu(menu.Languages.title, menu.Languages.url)}>
-                        <Image
-                          src={menu.Languages.icon}
-                          alt={menu.Languages.title}
-                          width={22}
-                          height={22}
-                          className=""
+                  <div
+                    className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] w-full mb-3`}
+                    onClick={() => handleMenu(menu.Languages.title, menu.Languages.url)}>
+                    <Image
+                      src={menu.Languages.icon}
+                      alt={menu.Languages.title}
+                      width={22}
+                      height={22}
+                      className=""
+                    />
+                    <span className="ml-3">
+                      {translateMenuTitle(menu.Languages.title)}
+                    </span>
+                    {menu.Languages.children && (
+                      <div className="ml-4">
+                        <FaChevronDown
+                          size={13}
+                          className={`text-[#000000] ${toggle[menu.Languages.title] && 'rotate-90'}`}
                         />
-                        <span className="ml-3">
-                          {translateMenuTitle(menu.Languages.title)}
-                        </span>
-                        {menu.Languages.children && (
-                          <div className="ml-4">
-                            <FaChevronDown
-                              size={13}
-                              className={`text-[#000000] ${toggle[menu.Languages.title] && 'rotate-90'}`}
-                            />
-                          </div>
-                        )}
                       </div>
-                      {/* MENU WITH CHILDREN */}
-                      {menu.Languages.children &&
-                        toggle[menu.Languages.title] &&
-                        menu.Languages.children.map((child) => (
-                          <div key={child.id} className="mx-auto">
-                            <div
-                              className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
-                              onClick={() =>
-                                handleChildMenu(menu.Languages.title, child.code)
-                              }>
-                              {child.icon && ( // conditional rendering
-                                <Image
-                                  src={child.icon}
-                                  alt={child.title}
-                                  width={17}
-                                  height={17}
-                                  className={styles.lng_img}
-                                />
-                              )}
-                              {menu.Languages.title === 'Languages' &&
-                              isLanguageMenuItem(child) ? (
-                                <div className="ml-2 text-[14px] flex">
-                                  <div className="font-bold">{child.label}</div>
-                                  <div className="mx-1"> - </div>
-                                  <div>{child.translation}</div>
-                                </div>
-                              ) : (
-                                <span className="ml-2 text-[14px]">
-                                  {translateChildMenuTitle(child.title)}
-                                </span>
-                              )}
+                    )}
+                  </div>
+                  {/* MENU WITH CHILDREN */}
+                  {menu.Languages.children &&
+                    toggle[menu.Languages.title] &&
+                    menu.Languages.children.map((child) => (
+                      <div key={child.id} className="mx-auto">
+                        <div
+                          className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
+                          onClick={() =>
+                            handleChildMenu(menu.Languages.title, child.code)
+                          }>
+                          {child.icon && ( // conditional rendering
+                            <Image
+                              src={child.icon}
+                              alt={child.title}
+                              width={17}
+                              height={17}
+                              className={styles.lng_img}
+                            />
+                          )}
+                          {menu.Languages.title === 'Languages' &&
+                          isLanguageMenuItem(child) ? (
+                            <div className="ml-2 text-[14px] flex">
+                              <div className="font-bold">{child.label}</div>
+                              <div className="mx-1"> - </div>
+                              <div>{child.translation}</div>
                             </div>
-                          </div>
-                      ))}
-                           
+                          ) : (
+                            <span className="ml-2 text-[14px]">
+                              {translateChildMenuTitle(child.title)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                  ))}
+                       
                 </div>
+                <Button
+                  label={t('SHARED.SAVE')}
+                  disabled={!isSaveEnabled}
+                  styles={{
+                    color: '#ffc153',
+                    height: '40px',
+                    width: '80px',
+                    padding: '10px 15px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                  }}
+                  onClick={handleSave}
+                />
               </ToggleCollapse>              
             </div>
             <div className='flex flex-col justify-items-center mx-auto text-center'>
