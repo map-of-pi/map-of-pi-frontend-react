@@ -16,6 +16,7 @@ import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
 import { onIncompletePaymentFound } from '@/util/auth';
 import { IUser } from '@/constants/types';
+import { UserSettingsProvider } from './UserSettingsContext';
 
 import logger from '../logger.config.mjs';
 
@@ -31,14 +32,14 @@ interface IAppContextProps {
   currentUser: IUser | null;
   setCurrentUser: React.Dispatch<SetStateAction<IUser | null>>;
   registerUser: () => void;
-  autoLoginUser:()=> void,
+  autoLoginUser: () => void;
 }
 
 const initialState: IAppContextProps = {
   currentUser: null,
   setCurrentUser: () => {},
   registerUser: () => { },
-  autoLoginUser:()=> {},
+  autoLoginUser: () => {},
 };
 
 export const AppContext = createContext<IAppContextProps>(initialState);
@@ -64,7 +65,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         const res = await axiosClient.post("/users/authenticate", {pioneerAuth});
 
         if (res.status === 200) {
-          setAuthToken(res.data?.token)
+          setAuthToken(res.data?.token);
           setCurrentUser(res.data.user);
           toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data?.user?.user_name}`);
           logger.info('User authenticated successfully.');
@@ -72,7 +73,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           setCurrentUser(null);
           toast.error(`${t('HOME.AUTHENTICATION.UNSUCCESSFUL_LOGIN_MESSAGE')}`);
           logger.error('User authentication failed.');
-        }        
+        }
       } catch (error: any) {
         logger.error('Error during user registration:', { error });
         toast.info(t('HOME.AUTHENTICATION.PI_INFORMATION_NOT_FOUND_MESSAGE'));
@@ -99,7 +100,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       logger.error('Auto login unresolved; attempting Pi SDK authentication:', { error });
       await registerUser();
     }
-  }
+  };
 
   useEffect(() => {
     logger.info('AppContextProvider mounted.');
@@ -111,9 +112,11 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser}}>
-      {children}
-    </AppContext.Provider>
+    <UserSettingsProvider> {/* Wrap with UserSettingsProvider */}
+      <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser }}>
+        {children}
+      </AppContext.Provider>
+    </UserSettingsProvider>
   );
 };
 
