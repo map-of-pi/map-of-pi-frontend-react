@@ -14,6 +14,7 @@
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Nutifafa le Mawuwo",
+    "PERSONALIZATION_SUBHEADER": "Trɔtrɔnye",
     "EMAIL_ADDRESS_FIELD": "Wò email adrɛs",
     "PHONE_NUMBER_FIELD": "Wò telefɔn numɔ",
     "LANGUAGES": "Ɖe ŋutɔ",
@@ -22,6 +23,11 @@
       "APP_VERSION": "App ƒe tɔtrɔ",
       "PRIVACY_POLICY": "Ameŋunyatakakawo Ŋuti Ðoɖo",
       "TERMS_OF_SERVICE": "Ɖoɖo ƒe tɔtrɔ"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "FindMe la wɔ nu si",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_DEVICE_GPS": "Ne míetsɔ nyɔnu tɔn wɔ mí geɖeŋu me",
+      "PREFERRED_SEARCH_CENTER": "Ne míetsɔ Gbesɔsɔmesi"
     },
     "CONTACT_MAP_OF_PI": "Wò Map of Pi me",
     "VALIDATION": {
