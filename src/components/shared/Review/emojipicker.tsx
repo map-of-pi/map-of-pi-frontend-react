@@ -9,6 +9,7 @@ import { createReview } from '@/services/reviewsApi';
 import { toast } from 'react-toastify';
 
 import logger from '../../../../logger.config.mjs';
+import { IReviewFeedback } from '@/constants/types';
 
 interface Emoji {
   name: string;
@@ -28,39 +29,53 @@ export default function EmojiPicker(props: any) {
     { name: t('SHARED.REACTION_RATING.EMOTIONS.DELIGHT'), unicode: "😍", code: ":delight_face:", value: 5 }
   ];
 
-  const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null);
-  const [files, setFiles] = useState<File[]>([]);
-  const [previewImage, setPreviewImage] = useState<string[]>([]);
+  const [dbReviewFeedback, setDbReviewFeedback] = useState<IReviewFeedback | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string>(dbReviewFeedback?.image || '');
+  const [isSaveEnabled, setIsSaveEnabled] = useState<boolean>(false);
   const [comments, setComments] = useState('');
   const [reviewEmoji, setReviewEmoji] = useState<number | null>(null);
-  const [isSaveActive, setIsSaveActive] = useState<boolean>(false);
+  const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null);
 
   // function preview image upload
   useEffect(() => {
-    if (files.length === 0) return;
-    const objectUrls = files.map((file) => URL.createObjectURL(file));
-    setPreviewImage(objectUrls);
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewImage(objectUrl);
     return () => {
-      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+      URL.revokeObjectURL(objectUrl);
     };
-  }, [files]);
+  }, [file]);
+
+  // set the preview image if dbUserSettings changes
+  useEffect(() => {
+    if (dbReviewFeedback?.image) {
+      setPreviewImage(dbReviewFeedback.image);
+    }
+  }, [dbReviewFeedback]);
 
   // function to toggle save button
   useEffect(() => {
-    const noReview = comments === '' && reviewEmoji === null && files.length === 0;
-    setIsSaveActive(!noReview);
+    const noReview = comments === '' && reviewEmoji === null && file === null;
+    setIsSaveEnabled(!noReview);
     props.setIsSaveEnabled(!noReview)
-  }, [comments, reviewEmoji, files]);
+  }, [comments, reviewEmoji, file]);
 
 
   const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComments(e.target.value);
   };
 
-  const handleAddImages = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files;
-    if (selectedFiles && selectedFiles.length > 0) {
-      setFiles(Array.from(selectedFiles));
+  const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0]; // only take the first file
+    if (selectedFile) {
+      setFile(selectedFile);
+
+      const objectUrl = URL.createObjectURL(selectedFile);
+      setPreviewImage(objectUrl);
+      logger.info('Image selected for upload:', { selectedFile });
+
+      setIsSaveEnabled(true);
     }
   };
 
@@ -68,9 +83,9 @@ export default function EmojiPicker(props: any) {
     setSelectedEmoji(null)
     setReviewEmoji(null)
     setComments('');
-    setPreviewImage([]);
-    setFiles([]);
-    setIsSaveActive(false);
+    setPreviewImage('');
+    setFile(null);
+    setIsSaveEnabled(false);
     props.setIsSaveEnabled(false)
   }
 
@@ -81,14 +96,20 @@ export default function EmojiPicker(props: any) {
           logger.warn('Attempted to save review without selecting an emoji.');
           return window.alert(t('SHARED.REACTION_RATING.VALIDATION.SELECT_EMOJI_EXPRESSION'));
         } else {
-          const formData = new FormData();
-          formData.append('comment', comments);
-          formData.append('rating', reviewEmoji.toString());
-          formData.append('review_receiver_id', props.sellerId);
-          files.forEach((file) => formData.append('image', file));
-          formData.append('reply_to_review_id', props.replyToReviewId || '');
+          const formDataToSend = new FormData();
+          formDataToSend.append('comment', comments);
+          formDataToSend.append('rating', reviewEmoji.toString());
+          formDataToSend.append('review_receiver_id', props.sellerId);
+          formDataToSend.append('reply_to_review_id', props.replyToReviewId || '');
 
-          const newReview = await createReview(formData);
+          // add the image if it exists
+          if (file) {
+            formDataToSend.append('image', file);
+          }
+
+          logger.info('Review Feedback form data:', { formDataToSend });
+
+          const newReview = await createReview(formDataToSend);
           if (newReview) {
             toast.success(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
             logger.info('Review submitted successfully');
@@ -170,18 +191,22 @@ export default function EmojiPicker(props: any) {
         />
       </div>
       <div className="mb-2">
-          <FileInput label={t('SCREEN.BUY_FROM_SELLER.FEEDBACK_PHOTO_UPLOAD_LABEL')} handleAddImages={handleAddImages} images={previewImage} />
-        </div>
+        <FileInput 
+          label={t('SCREEN.BUY_FROM_SELLER.FEEDBACK_PHOTO_UPLOAD_LABEL')} 
+          imageUrl={previewImage} 
+          handleAddImage={handleAddImage} 
+        />
+      </div>
 
-        {/* Save Button */}
-        <div className="mb-7">
-          <button
-            onClick={handleSave}
-            disabled={!isSaveActive}
-            className={`${isSaveActive ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
-            {t('SHARED.SAVE')}
-          </button>
-        </div>
+      {/* Save Button */}
+      <div className="mb-7">
+        <button
+          onClick={handleSave}
+          disabled={!isSaveEnabled}
+          className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
+          {t('SHARED.SAVE')}
+        </button>
+      </div>
     </div>
   );  
 }

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
@@ -207,7 +207,7 @@ function Sidebar(props: any) {
 
   // Function to save data to the database
   const handleSave = async () => { 
-     // check if user is authenticated and form is valid
+    // check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
       // TODO: add toast.error w/ language translation            
@@ -223,7 +223,7 @@ function Sidebar(props: any) {
       formDataToSend.append('image', file);
     }
 
-    logger.info('User Settings form data:', formDataToSend);
+    logger.info('User Settings form data:', { formDataToSend });
 
     try {
       const data = await createUserSettings(formDataToSend);

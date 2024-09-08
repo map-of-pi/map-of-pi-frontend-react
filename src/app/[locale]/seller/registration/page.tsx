@@ -212,7 +212,7 @@ const SellerRegistrationForm = () => {
       formDataToSend.append('image', file);
     }
 
-    logger.info('Registration form data:', formDataToSend);
+    logger.info('Registration form data:', { formDataToSend });
 
     try {
       const data = await registerSeller(formDataToSend);
