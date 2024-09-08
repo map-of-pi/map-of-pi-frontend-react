@@ -185,7 +185,10 @@
       "UPLOAD_PHOTO_LABEL": "Ɖe ŋutɔ Vinyo",
       "UPLOAD_PHOTO_PLACEHOLDER": "Zu fɛnyɔwo kple vɔs ɖe amegãwo me fia wò (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Kpɔ siwo be ɖe ƒe ɣe ŋutɔ foto alo tɔkɔ",
-      "SUPPORTS_FILE_MESSAGE": "Ɖe vɔ: PNG, JPG, JPEG, WEBP"
+      "SUPPORTS_FILE_MESSAGE": "Ɖe vɔ: PNG, JPG, JPEG, WEBP",
+      "MISC_LABELS": {
+        "SELLER_IMAGE_LABEL": "Eƒe ɖeka ƒe anyi"
+      }
     },
     "REACTION_RATING": {
       "UNSAFE": "Fɛgblɔ",
