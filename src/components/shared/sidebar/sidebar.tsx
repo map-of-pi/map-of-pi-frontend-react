@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
@@ -16,23 +16,22 @@ import MapCenter from '../map/MapCenter';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
-import { Button, OutlineBtn2 } from '@/components/shared/Forms/Buttons/Buttons';
+import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import {
   FileInput,
   Input,
+  Select,
   TelephoneInput,
 } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
 import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import TrustMeter from '../Review/TrustMeter';
+import ToggleCollapse from '../Seller/ToggleCollapse';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
-import TrustMeter from '../Review/TrustMeter';
-import ToggleCollapse from '../Seller/ToggleCollapse';
-import { Select } from '@/components/shared/Forms/Inputs/Inputs';
 
-// type definitions for menu items
 interface MenuItem {
   id: number;
   title: string;
@@ -68,7 +67,6 @@ function Sidebar(props: any) {
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
   const [email, setEmail] = useState<string | undefined>();
-  const [userName, setUserName] = useState<string | undefined>();
   const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
@@ -196,13 +194,6 @@ function Sidebar(props: any) {
         phone_number: phoneNumber,
       };
 
-      // if (searchCenter) {
-      //   userSettingsData.search_map_center = {
-      //     type: 'Point' as const,
-      //     coordinates: [searchCenter[0], searchCenter[1]] as [number, number]
-      //   };
-      // }
-
       try {
         const data = await createUserSettings(userSettingsData);
         logger.info('User settings submitted successfully:', { data });
@@ -245,14 +236,14 @@ function Sidebar(props: any) {
     }
   };
 
-  const translatedFindMeOptions = [
+  const translateFindMeOptions = [
     {
       value: 'deviceGPS',
-      name: t('Use my device GPS'),
+      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
     },
     {
       value: 'searchCenter',
-      name: t('Use Search Center'),
+      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_SEARCH_CENTER'),
     },
   ];
 
@@ -292,7 +283,7 @@ function Sidebar(props: any) {
           {/* user settings form fields */}
           <div className="flex flex-col justify-items-center mx-auto text-center gap-1">
             <Input
-              label={t('Name')}
+              label={t('SHARED.USER_INFORMATION.NAME_LABEL')}
               placeholder={currentUser?.user_name}
               type="text"
               name="user_name"
@@ -344,7 +335,7 @@ function Sidebar(props: any) {
               <TrustMeter ratings={currentUser ? 50 : 100} hideLabel={true} />
             </div>             
             <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
-              <OutlineBtn2
+              <OutlineBtn
                 label={t('SHARED.CHECK_REVIEWS')}
                 styles={{
                   width: '80%',
@@ -359,7 +350,7 @@ function Sidebar(props: any) {
 
             <div className='flex flex-col justify-items-center text-center mx-auto gap-2 my-4'>
               <ToggleCollapse
-                header={t('Personalization')}>
+                header={t('SIDE_NAVIGATION.PERSONALIZATION_SUBHEADER')}>
                 <div className="mb-2">
                   <FileInput
                     label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
@@ -369,11 +360,11 @@ function Sidebar(props: any) {
                 </div>
 
                 <Select
-                  label={t('FindMe Preference')}
+                  label={t('SIDE_NAVIGATION.FIND_ME_PREFERENCE_LABEL')}
                   name="findme"
                   value={userSettings?.findme? userSettings.findme: "Use my device GPS"}
                   onChange={handleChange}
-                  options={translatedFindMeOptions}
+                  options={translateFindMeOptions}
                 />
                 <div key={menu.Languages.id} className="">
                       <div
@@ -437,7 +428,7 @@ function Sidebar(props: any) {
               </ToggleCollapse>              
             </div>
             <div className='flex flex-col justify-items-center mx-auto text-center'>
-              <ToggleCollapse header={t('About Map of Pi')}>
+              <ToggleCollapse header={t('SIDE_NAVIGATION.ABOUT.ABOUT_MAP_OF_PI')}>
                   {menu.about.children.map((menuItem) => (
                     <div key={menuItem.id} className="">
                       <div
