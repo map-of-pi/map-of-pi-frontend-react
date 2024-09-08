@@ -70,7 +70,7 @@ function Sidebar(props: any) {
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [formData, setFormData] = useState({
-    user_name: '',
+    user_name: currentUser?.pi_username,
     email: '',
     phone_number: '',
     findme: '',
@@ -181,26 +181,28 @@ function Sidebar(props: any) {
     
     let inputName = e.target.name;
     let inputValue = e.target.value;
-    let searchCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null'); // Provide default value
+    // let searchCenter = JSON.parse(localStorage.getItem('mapCenter') || 'null'); // Provide default value
 
     logger.debug(`Input field blurred: ${inputName}, Value: ${inputValue}`);
 
     if (inputValue.trim() !== "") {
       const userSettingsData: IUserSettings = {
         [inputName]: inputValue,
+        phone_number: phoneNumber,
       };
 
-      if (searchCenter) {
-        userSettingsData.search_map_center = {
-          type: 'Point' as const,
-          coordinates: [searchCenter[0], searchCenter[1]] as [number, number]
-        };
-      }
+      // if (searchCenter) {
+      //   userSettingsData.search_map_center = {
+      //     type: 'Point' as const,
+      //     coordinates: [searchCenter[0], searchCenter[1]] as [number, number]
+      //   };
+      // }
 
       try {
         const data = await createUserSettings(userSettingsData);
         logger.info('User settings submitted successfully:', { data });
         if (data.settings) {
+          setIsSaveEnabled(false)
           toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
         }
       } catch (error: any) {
@@ -293,7 +295,7 @@ function Sidebar(props: any) {
                 textAlign: 'center'
               }}
               default={currentUser?.user_name}
-              value={userSettings?.user_name? userSettings?.user_name: ""}
+              value={userSettings?.user_name? userSettings?.user_name: currentUser?.user_name}
               onChange={handleChange}
             />
             <Input
@@ -319,7 +321,7 @@ function Sidebar(props: any) {
 
             <Button
               label={t('SHARED.SAVE')}
-              // disabled={!isSaveEnabled}
+              disabled={!isSaveEnabled}
               styles={{
                 color: '#ffc153',
                 height: '40px',
