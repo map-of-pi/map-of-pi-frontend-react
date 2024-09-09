@@ -221,6 +221,8 @@ function Sidebar(props: any) {
     // add the image if it exists
     if (file) {
       formDataToSend.append('image', file);
+    } else {
+      formDataToSend.append('image', '');
     }
 
     logger.info('User Settings form data:', { formDataToSend });

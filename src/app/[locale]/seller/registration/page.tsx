@@ -210,6 +210,8 @@ const SellerRegistrationForm = () => {
     // add the image if it exists
     if (file) {
       formDataToSend.append('image', file);
+    } else {
+      formDataToSend.append('image', '');
     }
 
     logger.info('Registration form data:', { formDataToSend });
