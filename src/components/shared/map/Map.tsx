@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
 import _ from 'lodash';
@@ -12,6 +12,7 @@ import { toLatLngLiteral } from '@/util/map';
 import MapMarkerPopup from './MapMarkerPopup'
 
 import logger from '../../../../logger.config.mjs';
+import { AppContext } from '../../../../context/AppContextProvider';
 
 // Utility function to ensure coordinates are within valid ranges
 const sanitizeCoordinates = (lat: number, lng: number) => {
@@ -55,6 +56,7 @@ const removeDuplicates = (sellers: ISeller[]): ISeller[] => {
 
 const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
   const t = useTranslations();
+  const {isSigningInUser} = useContext(AppContext)
 
   const customIcon = L.icon({
     iconUrl: '/favicon-32x32.png',
@@ -258,7 +260,13 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
           {t('HOME.LOCATION_SERVICES.DISABLED_LOCATION_SERVICES_MESSAGE')}
         </div>
       )}
-      <MapContainer
+      {isSigningInUser ?
+        <div className='w-full flex-1  fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0 bg-[#f5f1e6] '>
+          <div className="flex justify-center items-center w-full h-full">
+           <img src="/default.png" width={120} height={140} alt="defal "/>
+          </div>
+        </div> :
+        <MapContainer
         center={isLocationAvailable ? origin : [0, 0]}
         zoom={isLocationAvailable ? zoom : 2}
         zoomControl={false}
@@ -280,7 +288,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
             </Popup>
           </Marker>
         ))}
-      </MapContainer>
+      </MapContainer>}
     </>
   );
 };
