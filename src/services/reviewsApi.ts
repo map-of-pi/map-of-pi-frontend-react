@@ -1,4 +1,5 @@
 import axiosClient from "@/config/client";
+import { getMultipartFormDataHeaders } from "@/utils/api";
 import { handleAxiosError } from "@/utils/error";
 
 import logger from '../../logger.config.mjs';
@@ -48,8 +49,11 @@ export const fetchReviews = async (sellerId:string) => {
 // Create a new review
 export const createReview = async (formData: FormData) => {
   try {
-    logger.info('Creating a new review..');
-    const response = await axiosClient.post('/review-feedback/add', formData);
+    logger.info('Creating a new review with formData..');
+    const headers = getMultipartFormDataHeaders();
+
+    const response = await axiosClient.post('/review-feedback/add', formData, { headers });
+    
     if (response.status === 200) {
       logger.info(`Create review successful with Status ${response.status}`, {
         data: response.data

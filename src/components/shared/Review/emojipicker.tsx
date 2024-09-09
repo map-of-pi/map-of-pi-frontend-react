@@ -18,6 +18,7 @@ interface Emoji {
   value: number;
 }
 
+// TODO - Isolate EmojiPicker component; move page processing to sale-items\[id]\page.tsx.
 export default function EmojiPicker(props: any) {
   const t = useTranslations();
 
@@ -192,7 +193,7 @@ export default function EmojiPicker(props: any) {
       </div>
       <div className="mb-2">
         <FileInput 
-          label={t('SCREEN.BUY_FROM_SELLER.FEEDBACK_PHOTO_UPLOAD_LABEL')} 
+          label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')} 
           imageUrl={previewImage} 
           handleAddImage={handleAddImage} 
         />

@@ -63,8 +63,7 @@ export const TextArea = (props: any) => {
 
 export const FileInput = (props: any) => {
   const t = useTranslations();
-  const imageUrl = props.imageUrl || "/images/shared/upload.png";
-  const isImageUploaded = imageUrl !== "/images/shared/upload.png"; // Check if an image has been uploaded
+  const isImageUploaded = props.imageUrl !== null; // Check if an image has been uploaded
   const imageLabel = isImageUploaded ? props.label : t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL');
 
   return (
@@ -82,7 +81,7 @@ export const FileInput = (props: any) => {
       >
         <div className="w-full h-[200px] relative mb-4">
           <Image
-            src={imageUrl}
+            src={props.imageUrl}
             alt="Upload image"
             layout="fill"
             objectFit="contain"

@@ -10,7 +10,9 @@ import logger from '../../../../logger.config.mjs';
 const MapMarkerPopup = ({ seller }:any) => {
   const t = useTranslations();
   const SUBHEADER = 'font-bold mb-2';
-
+  
+  const imageUrl = seller.image !== null ? seller.image : '/images/shared/upload.png'
+  
   logger.info('Rendering MapMarkerPopup for seller:', { seller });
 
   return (
@@ -25,7 +27,7 @@ const MapMarkerPopup = ({ seller }:any) => {
           <div className="relative w-[50px] h-[50px] min-w-[50px] min-h-[50px]">
             <Image
               alt="seller logo"
-              src={seller.image}
+              src={imageUrl}
               fill={true}
               className="rounded-lg m-0 my-auto"
             />

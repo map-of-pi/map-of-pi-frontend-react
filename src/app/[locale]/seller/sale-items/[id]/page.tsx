@@ -19,7 +19,7 @@ import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 
 import logger from '../../../../../../logger.config.mjs';
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
 
   const t = useTranslations();
@@ -113,7 +113,7 @@ export default function Page({ params }: { params: { id: string } }) {
         {/* Seller Profile */}
         <div className="flex gap-4 align-center mb-6 relative">
           <div className="rounded-[50%] w-[65px] h-[65px] relative">
-            <Image alt="seller logo" src={sellerShopInfo.image} fill={true} className="rounded-[50%]" />
+            <Image alt="seller logo" src={sellerShopInfo.image !== null ? sellerShopInfo.image : '/images/shared/upload.png'} fill={true} className="rounded-[50%]" />
           </div>
           <div className="my-auto">
             <h2 className="font-bold mb-2">{sellerShopInfo.name}</h2>
