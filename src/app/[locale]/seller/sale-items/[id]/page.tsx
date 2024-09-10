@@ -156,6 +156,7 @@ export default function Page({ params }: { params: { id: string } }) {
             <EmojiPicker sellerId={sellerId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} />
           </div>
         </ToggleCollapse>
+
           
         <ToggleCollapse
           header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>

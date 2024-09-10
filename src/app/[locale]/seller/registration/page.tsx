@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 import { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 
@@ -19,22 +19,22 @@ import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
-import { sellerPrompt } from '@/constants/placeholders';
+import { sellerDefault } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
+import UrlsRemoval from '../../../../util/urlsRemoval';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
 const SellerRegistrationForm = () => {
-  const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
+  const HEADER = 'font-bold text-lg md:text-2xl';
   const SUBHEADER = 'font-bold mb-2';
-
+  const router = useRouter();
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
 
   const [formData, setFormData] = useState({
-    itemsForSale: '',
     sellerName: '',
     sellerType: 'Pioneer',
     sellerDescription: '',
@@ -100,7 +100,6 @@ const SellerRegistrationForm = () => {
         sellerName: dbSeller.name || defaultSellerName,
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        itemsForSale: dbSeller.sale_items || '',
         sellerType: dbSeller.seller_type || '',
       });
     }
@@ -108,16 +107,16 @@ const SellerRegistrationForm = () => {
 
   useEffect(() => {
     const {
-      itemsForSale,
       sellerName,
       sellerType,
+      sellerDescription,
       sellerAddress
     } = formData;
     setIsFormValid(
       !!(
-        itemsForSale &&
         sellerName &&
         sellerType &&
+        sellerDescription &&
         sellerAddress
       ),
     );
@@ -159,7 +158,7 @@ const SellerRegistrationForm = () => {
 
   // Function to save data to the database
   const handleSave = async () => {  
-    // check if user is authenticated and form is valid
+    // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
       return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
@@ -168,23 +167,30 @@ const SellerRegistrationForm = () => {
     const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
     logger.info('Saving form data:', { formData, sellCenter });
 
+    // Trim and clean the sellerAddress and sellerDescription fields
+    let sellerAddress = formData.sellerAddress.trim() === "" 
+      ? sellerDefault.address 
+      : UrlsRemoval(formData.sellerAddress);
+
+    let sellerDescription = formData.sellerDescription.trim() === "" 
+      ? sellerDefault.description 
+      : UrlsRemoval(formData.sellerDescription);
+
     const regForm = {
       name: formData.sellerName,
-      description: formData.sellerDescription,
-      address: formData.sellerAddress,
-      sale_items: formData.itemsForSale,
+      description: sellerDescription,
+      address: sellerAddress,
       seller_type: formData.sellerType,
     } as {
       name: string;
       description: string;
       address: string;
-      sale_items: string;
       seller_type: string;
       sell_map_center?: {
         type: 'Point';
         coordinates: [number, number];
       };
-    };  
+    };
 
     // Add sell_map_center field only if sellCenter is available
     if (sellCenter) {
@@ -192,18 +198,28 @@ const SellerRegistrationForm = () => {
         type: 'Point' as const,
         coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
       };
-    }; 
-    console.log('registration form', regForm);
+    }
 
     try {
       const data = await registerSeller(regForm);
-      setDbSeller(data.seller);
       if (data.seller) {
+        setIsSaveEnabled(false);
+        setDbSeller(data.seller);
         toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
         logger.info('Seller registration saved successfully:', { data });
       }
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
+    }
+  };
+
+  const handleNavigation = (nextLink: string)=> {
+    setLinkUrl(nextLink);
+  
+    if (isSaveEnabled) {
+      setShowConfirmDialog(true); // Show confirm dialog when save is enabled
+    } else {
+      router.push(nextLink); // Direct navigation if save is not enabled
     }
   }
 
@@ -236,35 +252,38 @@ const SellerRegistrationForm = () => {
   return (
     <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
-        <h1 className={HEADER}>
-          {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
-        </h1>
-
+        <div className='text-center mb-5'>          
+          <h3 className='text-gray-400 text-sm'>{dbSeller? dbSeller.name : ""}</h3>
+          <h1 className={HEADER}>
+            {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
+          </h1>
+          <p className='text-gray-400 text-sm'>{dbSeller? dbSeller.seller_type: ""}</p>
+        </div>
+        
         <div className="mb-4">
           <h2 className={SUBHEADER}>
-            {t('SCREEN.SELLER_REGISTRATION.SELLER_SALE_ITEMS_LABEL')}
+            {t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_LABEL')}
           </h2>
+          <p className='text-gray-400 text-sm'>{t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER')}</p>
           <div className="mb-2">
             <TextArea
-              name="itemsForSale"
-              placeholder={sellerPrompt.sale_items}
-              value={formData.itemsForSale}
+              name="sellerDescription"
+              value={formData.sellerDescription}
               onChange={handleChange}
               styles={{ height: '200px' }}
             />
           </div>
         </div>
-        <Link href="/map-center">
-          <Button
-            label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
-            styles={{
-              color: '#ffc153',
-              height: '40px',
-              padding: '10px',
-              marginLeft: 'auto',
-            }}
-          />
-        </Link>
+        <Button
+          label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
+          onClick={() => handleNavigation("/map-center")}
+          styles={{
+            color: '#ffc153',
+            height: '40px',
+            padding: '10px',
+            marginLeft: 'auto',
+          }}
+        />
         <div className="mb-4 mt-3 ml-auto w-min">
           <Button
             label={t('SHARED.SAVE')}
@@ -277,105 +296,118 @@ const SellerRegistrationForm = () => {
             onClick={handleSave}
           />
         </div>
-        <ToggleCollapse
-          header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
-          <TrustMeter ratings={dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating} />
-          <div className="flex items-center justify-between mt-3">
-            <p className="text-sm">
-              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
-                seller_review_rating: dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating,
-              })}
-            </p>
-            <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#'}>
-              <OutlineBtn
-                disabled={!currentUser}
-                label={t('SHARED.CHECK_REVIEWS')}
-              />
-            </Link>
-          </div>
-        </ToggleCollapse>
-        <ToggleCollapse
-          header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_PI_ID_LABEL') + ': '}
-            </span>
-            <span>{dbSeller ? dbSeller.name : ''}</span>
-          </div>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_LABEL') + ': '}
-            </span>
-            <span>{userSettings ? userSettings.phone_number : ""}</span>
-          </div>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_LABEL') + ': '}
-            </span>
-            <span>{ userSettings ? userSettings.email : ""}</span>
-          </div>
-        </ToggleCollapse>
-        <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}>
-          <div className="mb-4">
-            <Input
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_NAME')}
-              name="sellerName"
-              placeholder={sellerPrompt.name}
-              type="text"
-              value={formData.sellerName}
-              onChange={handleChange}
-            />
-
-            <Select
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
-              name="sellerType"
-              value={formData.sellerType}
-              onChange={handleChange}
-              options={translatedSellerTypeOptions}
-            />
-
-            <TextArea
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS')}
-              name="sellerDescription"
-              placeholder={sellerPrompt.description}
-              value={formData.sellerDescription}
-              onChange={handleChange}
-            />
-
-            <TextArea
-              label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
-              name="sellerAddress"
-              placeholder={sellerPrompt.address}
-              value={formData.sellerAddress}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-4">
-            <FileInput
-              label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
-              images={[]}
-              handleAddImages={handleAddImages}
-            />
-            {previewImage && (
-              <div className="mt-2">
-                <p className="text-sm text-zinc-600">{previewImage}</p>
+        <div className='spacing-7'>
+          {/* seller review toggle */}
+          <ToggleCollapse
+            header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
+            <TrustMeter ratings={dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating} />
+            <div className="flex items-center justify-between mt-3 mb-5">
+              <p className="text-sm">
+                {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
+                  seller_review_rating: dbSeller ? dbSeller.average_rating.$numberDecimal : placeholderSeller.average_rating
+                })}
+              </p>
+              { !isSaveEnabled ? (
+                <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#'}>
+                  <OutlineBtn
+                    disabled={!currentUser}
+                    label={t('SHARED.CHECK_REVIEWS')}
+                  />
+                </Link> ) : (
+                  <OutlineBtn
+                    disabled={!currentUser}
+                    label={t('SHARED.CHECK_REVIEWS')}
+                    onClick={()=>handleNavigation(dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#')}
+                  /> )
+              }
+            </div>
+          </ToggleCollapse>
+          
+          {/* user settings info toggle */}
+          <ToggleCollapse
+            header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
+            <div className="text-sm mb-7 text-gray-500">
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
+                </span>
+                <span>{currentUser ? currentUser.pi_username : ''}</span>
               </div>
-            )}
-          </div>
-          <div className="mb-4 mt-3 ml-auto w-min">
-            <Button
-              label={t('SHARED.SAVE')}
-              disabled={!isSaveEnabled}
-              styles={{
-                color: '#ffc153',
-                height: '40px',
-                padding: '10px 15px',
-              }}
-              onClick={handleSave}
-            />
-          </div>
-        </ToggleCollapse>
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
+                </span>
+                <span>{currentUser ? currentUser.user_name : ''}</span>
+              </div>
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('SHARED.USER_INFORMATION.PHONE_NUMBER_LABEL') + ': '}
+                </span>
+                <span>{userSettings ? userSettings.phone_number : ""}</span>
+              </div>
+              <div className="text-sm mb-5">
+                <span className="font-bold">
+                  {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
+                </span>
+                <span>{ userSettings ? userSettings.email : ""}</span>
+              </div>
+            </div>
+          </ToggleCollapse>
+          
+          {/* seller registration form fields toggle */}
+          <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}>
+            <div className="mb-4">
+              <Input
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_NAME')}
+                name="sellerName"                
+                type="text"
+                value={formData.sellerName}
+                onChange={handleChange}
+              />
 
+              <Select
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
+                name="sellerType"
+                value={formData.sellerType}
+                onChange={handleChange}
+                options={translatedSellerTypeOptions}
+              />
+
+              <TextArea
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
+                describe={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER')}
+                name="sellerAddress"                
+                value={formData.sellerAddress}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <FileInput
+                label={t('SHARED.PHOTO.MISC_LABELS.SELLER_IMAGE_LABEL')}
+                describe={t('SHARED.PHOTO.UPLOAD_PHOTO_PLACEHOLDER')}
+                images={[]}
+                handleAddImages={handleAddImages}
+              />
+              {previewImage && (
+                <div className="mt-2">
+                  <p className="text-sm text-zinc-600">{previewImage}</p>
+                </div>
+              )}
+            </div>
+            <div className="mb-5 mt-3 ml-auto w-min">
+              <Button
+                label={t('SHARED.SAVE')}
+                disabled={!isSaveEnabled}
+                styles={{
+                  color: '#ffc153',
+                  height: '40px',
+                  padding: '10px 15px',
+                }}
+                onClick={handleSave}
+              />
+            </div>
+          </ToggleCollapse>
+        </div>
         <ConfirmDialog
           show={showConfirmDialog}
           onClose={() => setShowConfirmDialog(false)}
