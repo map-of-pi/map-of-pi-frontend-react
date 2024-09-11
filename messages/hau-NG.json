@@ -14,14 +14,20 @@
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Zaɓin mai amfani",
+    "PERSONALIZATION_SUBHEADER": "Keɓancewa",
     "EMAIL_ADDRESS_FIELD": "Adireshin i-mel dinka",
-    "PHONE_NUMBER_FIELD": "Lambar Wayarka",
+    "PHONE_NUMBER_FIELD": "Lambar wayarka",
     "LANGUAGES": "Harsuna",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "Game da Map of Pi",
       "APP_VERSION": "Sigar manhaja",
       "PRIVACY_POLICY": "Takardar Kebantawa",
       "TERMS_OF_SERVICE": "Sharuɗɗan Sabis"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "Zaɓin FindMe",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_DEVICE_GPS": "Yi amfani da GPS na na'urar",
+      "PREFERRED_SEARCH_CENTER": "Yi amfani da Cibiyar Bincike"
     },
     "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
     "VALIDATION": {
@@ -32,13 +38,13 @@
   "SCREEN": {
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Rajistar Mai Sayarwa",
-      "SELLER_SALE_ITEMS_LABEL": "Abubuwan masu Siyarwa don siyarwa",
-      "SELLER_SALE_ITEMS_PLACEHOLDER": "Bayyana abubuwanku na siyarwa, farashi, da sauransu.",
+      "SELLER_DETAILS_LABEL": "Bayanin mai sayarwa",
+      "SELLER_DETAILS_PLACEHOLDER": "Bayani game da mai sayarwa da kayayyakin da ake sayarwa tare da farashin pi, da sauransu.",
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayani",
       "REVIEWS_SCORE_LABEL": "Maki Sake Dubawa",
       "SELLER_NAME": "Sunan Mai Sayarwa",
       "SELLER_TYPE": {
-        "SELLER_TYPE_LABEL": "Nau'in Mai Sayarwa",
+        "SELLER_TYPE_LABEL": "Nau'in mai sayarwa",
         "SELLER_TYPE_OPTIONS": {
           "PIONEER": "Pioneer",
           "OTHER": "sauran",
@@ -46,10 +52,10 @@
           "TEST_SELLER": "Mai Sayarwa Gwaji"
         }
       },
-      "SELLER_BUSINESS_NAME": "Sunan Kasuwanci Mai Sayarwa",
-      "SELLER_DETAILS": "Bayanin Mai Sayarwa",
-      "SELLER_ADDRESS_LOCATION_LABEL": "Adireshin Mai Siyarwa ko Wuri",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Bayyana wurin da kuke siyarwa",
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
+      "SELLER_RETAIL_OUTLET_NAME": "Sunan mashaya",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Adireshi ko inda kake siyarwa",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Taimaka wa masu saye su same ka ta hanyar ƙara adireshi ko bayanin inda kake siyarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
       "VALIDATION": {
@@ -67,7 +73,7 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayanin Sake Dubawa",
       "REVIEWS_SCORE_MESSAGE": "Makin Sake Dubawa: {seller_review_rating} cikin 5.0",
-      "SELLER_CONTACT_DETAILS_LABEL": "Bayanan Tuntubar Mai Siyarwa",
+      "SELLER_CONTACT_DETAILS_LABEL": "Bayanin Tuntuɓar Mai Siyarwa",
       "SELLER_PI_ID_LABEL": "ID pioneer Mai Sayarwa",
       "SELLER_PHONE_LABEL": "Lambar wayar Mai Sayarwa", 
       "SELLER_EMAIL_LABEL": "Imel na Mai Sayarwa" 
@@ -175,11 +181,20 @@
     "REPLY": "Amsa",
     "SAVE": "Ajiye",
     "CONFIRM_DIALOG": "Kuna da canje-canje marasa ajiya. Da gaske kuna son barin?",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Sunan mai amfani na Pi",
+      "NAME_LABEL": "Suna",
+      "PHONE_NUMBER_LABEL": "Lambar wayar",
+      "EMAIL_LABEL": "Imel"
+    },
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Loda Hoto",
+      "UPLOAD_PHOTO_PLACEHOLDER": "Dora hoto don taimakawa jan hankalin masu saye (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Ajiye hotonku anan ko shiga yanar gizo",
       "SUPPORTS_FILE_MESSAGE": "Goyon baya: PNG, JPG, JPEG, WEBP",
-      "SINGLE_PHOTO_MESSAGE": "Hoto Guda Kawai"
+      "MISC_LABELS": {
+        "SELLER_IMAGE_LABEL": "Hoton mai sayarwa"
+      }
     },
     "REACTION_RATING": {
       "UNSAFE": "Akwai Haɗari",

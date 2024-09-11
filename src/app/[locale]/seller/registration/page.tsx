@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 import { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 
@@ -19,22 +19,22 @@ import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
-import { sellerPrompt } from '@/constants/placeholders';
+import { sellerDefault } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
+import UrlsRemoval from '../../../../util/urlsRemoval';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
 const SellerRegistrationForm = () => {
-  const HEADER = 'mb-5 font-bold text-lg md:text-2xl';
+  const HEADER = 'font-bold text-lg md:text-2xl';
   const SUBHEADER = 'font-bold mb-2';
-
+  const router = useRouter();
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
 
   const [formData, setFormData] = useState({
-    itemsForSale: '',
     sellerName: '',
     sellerType: 'Pioneer',
     sellerDescription: '',
@@ -100,7 +100,6 @@ const SellerRegistrationForm = () => {
         sellerName: dbSeller.name || defaultSellerName,
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        itemsForSale: dbSeller.sale_items || '',
         sellerType: dbSeller.seller_type || '',
       });
     }
@@ -108,16 +107,16 @@ const SellerRegistrationForm = () => {
 
   useEffect(() => {
     const {
-      itemsForSale,
       sellerName,
       sellerType,
+      sellerDescription,
       sellerAddress
     } = formData;
     setIsFormValid(
       !!(
-        itemsForSale &&
         sellerName &&
         sellerType &&
+        sellerDescription &&
         sellerAddress
       ),
     );
@@ -159,7 +158,7 @@ const SellerRegistrationForm = () => {
 
   // Function to save data to the database
   const handleSave = async () => {  
-    // check if user is authenticated and form is valid
+    // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
       return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
@@ -168,23 +167,30 @@ const SellerRegistrationForm = () => {
     const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
     logger.info('Saving form data:', { formData, sellCenter });
 
+    // Trim and clean the sellerAddress and sellerDescription fields
+    let sellerAddress = formData.sellerAddress.trim() === "" 
+      ? sellerDefault.address 
+      : UrlsRemoval(formData.sellerAddress);
+
+    let sellerDescription = formData.sellerDescription.trim() === "" 
+      ? sellerDefault.description 
+      : UrlsRemoval(formData.sellerDescription);
+
     const regForm = {
       name: formData.sellerName,
-      description: formData.sellerDescription,
-      address: formData.sellerAddress,
-      sale_items: formData.itemsForSale,
+      description: sellerDescription,
+      address: sellerAddress,
       seller_type: formData.sellerType,
     } as {
       name: string;
       description: string;
       address: string;
-      sale_items: string;
       seller_type: string;
       sell_map_center?: {
         type: 'Point';
         coordinates: [number, number];
       };
-    };  
+    };
 
     // Add sell_map_center field only if sellCenter is available
     if (sellCenter) {
@@ -192,18 +198,28 @@ const SellerRegistrationForm = () => {
         type: 'Point' as const,
         coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
       };
-    }; 
-    console.log('registration form', regForm);
+    }
 
     try {
       const data = await registerSeller(regForm);
-      setDbSeller(data.seller);
       if (data.seller) {
+        setIsSaveEnabled(false);
+        setDbSeller(data.seller);
         toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
         logger.info('Seller registration saved successfully:', { data });
       }
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
+    }
+  };
+
+  const handleNavigation = (nextLink: string)=> {
+    setLinkUrl(nextLink);
+  
+    if (isSaveEnabled) {
+      setShowConfirmDialog(true); // Show confirm dialog when save is enabled
+    } else {
+      router.push(nextLink); // Direct navigation if save is not enabled
     }
   }
 
