@@ -16,7 +16,7 @@ import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
 import { onIncompletePaymentFound } from '@/util/auth';
 import { IUser } from '@/constants/types';
-import { UserSettingsProvider } from './UserSettingsContext';
+import { UserSettingsProvider } from '../context/UserSettingsContext';
 
 import logger from '../logger.config.mjs';
 
@@ -112,7 +112,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }, []);
 
   return (
-    <UserSettingsProvider> {/* Wrap with UserSettingsProvider */}
+    <UserSettingsProvider> /* Wrap with UserSettingsProvider */
       <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser }}>
         {children}
       </AppContext.Provider>
