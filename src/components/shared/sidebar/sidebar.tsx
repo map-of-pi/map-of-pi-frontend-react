@@ -242,153 +242,240 @@ function Sidebar(props: any) {
     },
   ];
 
- return (
-  <>
-    <div className="w-full h-[calc(100vh-74px)] fixed bottom-0 bg-transparent right-0 z-[70]">
-      <div className="absolute w-full h-full bg-[#82828284]" onClick={() => props.setToggleDis(false)}></div>
-      <div className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
-        
-        {/* header title */}
-        <div className="mb-1 pb-3 text-center">
-          <p className="text-sm text-gray-400">{currentUser ? currentUser.pi_username : ""}</p>
-          <h1 className="text-2xl font-bold">{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</h1>
-        </div>
+  return (
+    <>
+      <div className="w-full h-[calc(100vh-74px)] fixed bottom-0 bg-transparent right-0 z-[70]">
+        <div
+          className="absolute w-full h-full bg-[#82828284]"
+          onClick={() => props.setToggleDis(false)}></div>
+        <div
+          className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
+          
+          {/* header title */}
+          <div className="mb-1 pb-3 text-center">
+            <p className='text-sm text-gray-400'>{currentUser? currentUser.pi_username : ""}</p>
+            <h1 className='text-2xl font-bold'>{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</h1>
+          </div>
 
-        {/* set search center button */}
-        <div className="mb-2">
-          <Button
-            label={t('SHARED.SEARCH_CENTER')}
-            styles={{
-              color: '#ffc153',
-              width: '100%',
-              padding: '10px',
-              borderRadius: '10px',
-              fontSize: '18px',
-            }}
-            onClick={() => {
-              router.push(`/map-center?entryType=search`);  // Use entryType=search
-              props.setToggleDis(false);  // Close sidebar on click
-            }}
-          />
-        </div>
-
-        {/* user settings form fields */}
-        <div className="flex flex-col justify-items-center mx-auto text-center gap-1">
-          <Input
-            label={t('SHARED.USER_INFORMATION.NAME_LABEL')}
-            placeholder={currentUser?.user_name}
-            type="text"
-            name="user_name"
-            style={{ textAlign: 'center' }}
-            value={formData.user_name ? formData.user_name : ''}
-            onChange={handleChange}
-          />
-          <Input
-            label={t('SIDE_NAVIGATION.EMAIL_ADDRESS_FIELD')}
-            placeholder="mapofpi@mapofpi.com"
-            type="email"
-            name="email"
-            style={{ textAlign: 'center' }}
-            value={formData.email ? formData.email : ""}
-            onChange={handleChange}
-          />
-          <TelephoneInput
-            label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
-            value={phoneNumber}
-            name="phone_number"
-            onChange={handlePhoneNumberChange}
-            style={{ textAlign: 'center' }}
-          />
-
-          {/* Check reviews button */}
-          <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
+          {/* set search center button */}
+          <div className='mb-2'>
             <Button
-              label={t('SHARED.CHECK_REVIEWS')}
-              styles={{
-                background: '#fff',
-                color: '#ffc153',
-                width: '100%',
-                padding: '8px',
-                borderColor: 'var(--default-primary-color)',
-                borderWidth: '2px',
-                borderRadius: '10px',
-                fontSize: '18px',
+                label={t('SHARED.SEARCH_CENTER')}
+                styles={{
+                  color: '#ffc153',
+                  width: '100%',
+                  padding: '10px',
+                  borderRadius: '10px',
+                  fontSize: '18px',
+                }}
+                onClick={() => {
+                  router.push('/map-center');
+                  props.setToggleDis(false); // Close sidebar on click
+                }}
+              />
+          </div>
+
+          {/* user settings form fields */}
+          <div className="flex flex-col justify-items-center mx-auto text-center gap-1">
+            <Input
+              label={t('SHARED.USER_INFORMATION.NAME_LABEL')}
+              placeholder={currentUser?.user_name}
+              type="text"
+              name="user_name"
+              style={{
+                textAlign: 'center'
               }}
-              onClick={() => props.setToggleDis(false)}  // Close sidebar on click
+              value={formData.user_name? formData.user_name: ''}
+              onChange={handleChange}
             />
-          </Link>
-        </div>
+            <Input
+              label={t('SIDE_NAVIGATION.EMAIL_ADDRESS_FIELD')}
+              placeholder="mapofpi@mapofpi.com"
+              type="email"
+              name="email"
+              style={{
+                textAlign: 'center'
+              }}
+              value={formData.email? formData.email: ""}
+              onChange={handleChange}
+            />
+            <TelephoneInput
+              label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
+              value={phoneNumber}
+              name="phone_number"
+              onChange={handlePhoneNumberChange}
+              style={{
+                textAlign: 'center'
+              }}
+            />
 
-        {/* Save button and Trust-o-meter */}
-        <Button
-          label={t('SHARED.SAVE')}
-          disabled={!isSaveEnabled}
-          styles={{
-            color: '#ffc153',
-            height: '40px',
-            width: '80px',
-            padding: '10px 15px',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-          onClick={handleSave}
-        />
+            <Button
+              label={t('SHARED.SAVE')}
+              disabled={!isSaveEnabled}
+              styles={{
+                color: '#ffc153',
+                height: '40px',
+                width: '80px',
+                padding: '10px 15px',
+                marginLeft: 'auto',
+                marginRight: 'auto'
+              }}
+              onClick={handleSave}
+            />
 
-        <div className="my-2">
-          <h3 className="font-bold text-sm text-nowrap">Trust-o-meter</h3>
-          <TrustMeter ratings={currentUser ? 50 : 100} hideLabel={true} />
-        </div>
+            {/* user review */}
+            <div className='my-2'>
+              <h3 className={`font-bold text-sm text-nowrap`}>Trust-o-meter</h3>
+              <TrustMeter ratings={currentUser ? 50 : 100} hideLabel={true} />
+            </div>             
+            <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
+              <OutlineBtn
+                label={t('SHARED.CHECK_REVIEWS')}
+                styles={{
+                  width: '80%',
+                  padding: '8px',
+                  borderWidth: '2px',
+                  borderRadius: '10px',
+                  fontSize: '18px',
+                }}
+                onClick={() => props.setToggleDis(false)} // Close sidebar on click
+              />
+            </Link>
 
-        {/* Photo upload */}
-        <div className="pt-5">
-          <FileInput
-            label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
-            images={[]}
-            handleAddImages={handleAddImages}
-          />
-        </div>
-
-        {/* Menu and other components */}
-        <div className="pt-5">
-          {menu.map((menu) => (
-            <div key={menu.id}>
-              <div
-                className="hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] w-full mb-3"
-                onClick={() => handleMenu(menu.title, menu.url)}
-              >
-                <Image src={menu.icon} alt={menu.title} width={22} height={22} />
-                <span className="ml-3">{translateMenuTitle(menu.title)}</span>
-                {menu.children && (
-                  <div className="ml-4">
-                    <FaChevronDown size={13} className={`text-[#000000] ${toggle[menu.title] && 'rotate-90'}`} />
-                  </div>
-                )}
-              </div>
-              {menu.children && toggle[menu.title] && menu.children.map((child) => (
-                <div key={child.id} className="ml-6">
-                  <div
-                    className="hover:bg-[#424242] hover:text-white"
-                    onClick={() => handleChildMenu(menu.title, child.code)}
-                  >
-                    {child.icon && (
-                      <Image src={child.icon} alt={child.title} width={17} height={17} />
-                    )}
-                    <span className="ml-2">{translateChildMenuTitle(child.title)}</span>
-                  </div>
+            <div className='flex flex-col justify-items-center text-center mx-auto gap-2 my-4'>
+              <ToggleCollapse
+                header={t('SIDE_NAVIGATION.PERSONALIZATION_SUBHEADER')}>
+                <div className="mb-2">
+                  <FileInput
+                    label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+                    images={[]}
+                    handleAddImages={handleAddImages}
+                  />
                 </div>
-              ))}
-            </div>
-          ))}
-        </div>
 
-        <div ref={bottomRef}></div>
+                <Select
+                  label={t('SIDE_NAVIGATION.FIND_ME_PREFERENCE_LABEL')}
+                  name="findme"
+                  value={formData.findme? formData.findme: "Use my device GPS"}
+                  onChange={handleChange}
+                  options={translateFindMeOptions}
+                />
+                <div key={menu.Languages.id} className="">
+                  <div
+                    className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] w-full mb-3`}
+                    onClick={() => handleMenu(menu.Languages.title, menu.Languages.url)}>
+                    <Image
+                      src={menu.Languages.icon}
+                      alt={menu.Languages.title}
+                      width={22}
+                      height={22}
+                      className=""
+                    />
+                    <span className="ml-3">
+                      {translateMenuTitle(menu.Languages.title)}
+                    </span>
+                    {menu.Languages.children && (
+                      <div className="ml-4">
+                        <FaChevronDown
+                          size={13}
+                          className={`text-[#000000] ${toggle[menu.Languages.title] && 'rotate-90'}`}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  {/* MENU WITH CHILDREN */}
+                  {menu.Languages.children &&
+                    toggle[menu.Languages.title] &&
+                    menu.Languages.children.map((child) => (
+                      <div key={child.id} className="mx-auto">
+                        <div
+                          className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
+                          onClick={() =>
+                            handleChildMenu(menu.Languages.title, child.code)
+                          }>
+                          {child.icon && ( // conditional rendering
+                            <Image
+                              src={child.icon}
+                              alt={child.title}
+                              width={17}
+                              height={17}
+                              className={styles.lng_img}
+                            />
+                          )}
+                          {menu.Languages.title === 'Languages' &&
+                          isLanguageMenuItem(child) ? (
+                            <div className="ml-2 text-[14px] flex">
+                              <div className="font-bold">{child.label}</div>
+                              <div className="mx-1"> - </div>
+                              <div>{child.translation}</div>
+                            </div>
+                          ) : (
+                            <span className="ml-2 text-[14px]">
+                              {translateChildMenuTitle(child.title)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                  ))}
+                       
+                </div>
+                <Button
+                  label={t('SHARED.SAVE')}
+                  disabled={!isSaveEnabled}
+                  styles={{
+                    color: '#ffc153',
+                    height: '40px',
+                    width: '80px',
+                    padding: '10px 15px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                  }}
+                  onClick={handleSave}
+                />
+              </ToggleCollapse>              
+            </div>
+            <div className='flex flex-col justify-items-center mx-auto text-center'>
+              <ToggleCollapse header={t('SIDE_NAVIGATION.ABOUT.ABOUT_MAP_OF_PI')}>
+                  {menu.about.children.map((menuItem) => (
+                    <div key={menuItem.id} className="">
+                      <div
+                        className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] mb-3`}
+                        onClick={() => handleChildMenu(menu.about.title, menuItem.code)}
+                      >
+                        {/* Conditionally render icon only if it exists */}
+                        {menuItem.icon && (
+                          <Image
+                            src={menuItem.icon}
+                            alt={menuItem.title}
+                            width={22}
+                            height={22}
+                            className=""
+                          />
+                        )}
+                        <span className="">{translateMenuTitle(menuItem.title)}</span>
+                      </div>
+                    </div>
+                  ))}
+              </ToggleCollapse>
+            </div>
+            
+          </div>
+
+          
+          <div ref={bottomRef}></div>
+        </div>
       </div>
-    </div>
-    <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel} />
-    <PrivacyPolicyModel togglePrivacyPolicy={showPrivacyPolicyModel} setTogglePrivacyPolicy={setShowPrivacyPolicyModel} />
-    <TermsOfServiceModel toggleTermsOfService={showTermsOfServiceModel} setToggleTermsOfService={setShowTermsOfServiceModel} />
-  </>
-);
+      <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel} />
+      <PrivacyPolicyModel
+        togglePrivacyPolicy={showPrivacyPolicyModel}
+        setTogglePrivacyPolicy={setShowPrivacyPolicyModel}
+      />
+      <TermsOfServiceModel
+        toggleTermsOfService={showTermsOfServiceModel}
+        setToggleTermsOfService={setShowTermsOfServiceModel}
+      />
+    </>
+  );
+}
 
 export default Sidebar;
-
