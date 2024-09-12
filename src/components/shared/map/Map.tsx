@@ -27,7 +27,7 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number, searc
 
   try {
     const sellersData = await fetchSellers(formattedOrigin, radius, searchQuery);
-    const sellersWithCoordinates = sellersData.map((seller: any) => {
+    const sellersWithCoordinates = sellersData?.map((seller: any) => {
       const [lng, lat] = seller.sell_map_center.coordinates;
       return {
         ...seller,
@@ -53,7 +53,7 @@ const removeDuplicates = (sellers: ISeller[]): ISeller[] => {
   return Object.values(uniqueSellers);
 };
 
-const Map = ({ center, zoom, searchQuery }: { center: LatLngExpression, zoom: number, searchQuery: string }) => {
+const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpression, zoom: number, searchQuery: string, searchResults: ISeller[] }) => {
   const t = useTranslations();
 
   const customIcon = L.icon({
@@ -87,12 +87,27 @@ const Map = ({ center, zoom, searchQuery }: { center: LatLngExpression, zoom: nu
     }
   }, [center]);
 
-  // Update map markers when searchQuery prop changes
   useEffect(() => {
     if (searchQuery) {
-      fetchInitialCoordinates();
+      setLoading(true);
+  
+      const sellersWithCoordinates = searchResults
+        .map((seller: any) => {
+          const [lng, lat] = seller.sell_map_center.coordinates;
+          return {
+            ...seller,
+            coordinates: [lat, lng] as LatLngTuple
+          };
+        });
+            
+      // Remove duplicates
+      const uniqueSellers = removeDuplicates(sellersWithCoordinates);
+  
+      // Update the sellers state
+      setSellers(uniqueSellers);
+      setLoading(false);
     }
-  }, [searchQuery, origin, radius]);
+  }, [searchQuery, searchResults]);
 
   // Log sellers array for debugging
   useEffect(() => {
@@ -117,7 +132,7 @@ const Map = ({ center, zoom, searchQuery }: { center: LatLngExpression, zoom: nu
     }
   };
 
-  // Function to handle map interactions (zoom and move)
+  // Function to handle map interactions (zoom and move); lazy-loading implementation
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
     const newCenter = newBounds.getCenter();
     const newRadius = calculateRadius(newBounds, mapInstance);

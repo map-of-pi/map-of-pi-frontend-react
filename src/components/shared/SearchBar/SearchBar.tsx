@@ -11,7 +11,7 @@ import { fetchSellers } from '@/services/sellerApi';
 import logger from '../../../../logger.config.mjs';
 
 interface searchBarProps {
-  onSearch?: (query: string) => void;
+  onSearch?: (query: string, results: any[]) => void;
   page: 'map_center' | 'default';
 }
 
@@ -53,15 +53,10 @@ const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
   const handleSubmitSearch = async (event: FormEvent) => {
     event.preventDefault();
     const query = searchBarValue.trim();
-
-    if (query) {
-      logger.debug(`Search query submitted: ${query}`);
-      const results = await fetchSearchResults(query);
-      if (onSearch) {
-        onSearch(query);  // notify parent of the search query to update map
-      }
-    } else {
-      logger.warn('Search query is empty');
+    logger.debug(`Search query submitted: ${query}`);
+    const results = await fetchSearchResults(query);
+    if (onSearch) {
+      onSearch(query, results);  // notify parent of the search query to update map
     }
   };
 
