@@ -46,7 +46,7 @@ export interface IReviewFeedback {
 
 // Interface representing the selected fields from IUserSettings
 export interface PartialUserSettings {
-  user_name: string;
+  set_name: string;
   email?: string;
   phone_number?: string;
   findme: string;
