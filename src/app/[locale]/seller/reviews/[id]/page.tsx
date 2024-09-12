@@ -34,7 +34,7 @@ function SellerReviews({
   searchParams: any;
 }) {
   const t = useTranslations();
-  const  sellerName  = searchParams.seller_name;
+  const sellerName  = searchParams.seller_name;
   const isbuyer = searchParams.buyer;
   const sellerId = params.id;
 
