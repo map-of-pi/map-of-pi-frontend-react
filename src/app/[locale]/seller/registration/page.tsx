@@ -211,8 +211,8 @@ const SellerRegistrationForm = () => {
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
     }
-  }  
-  
+  };
+
   const handleNavigation = (nextLink: string)=> {
     setLinkUrl(nextLink);
   
