@@ -66,8 +66,8 @@ function Sidebar(props: any) {
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
-  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [formData, setFormData] = useState({
+    trust_meter_rating: 100,
     user_name: '',
     email: '',
     phone_number: '',
@@ -98,6 +98,7 @@ function Sidebar(props: any) {
   useEffect(() => {
     if (userSettings) {
       setFormData({
+        trust_meter_rating: userSettings.trust_meter_rating,
         user_name: userSettings.user_name || '',
         email: userSettings.email || '',
         phone_number: userSettings.phone_number || '',
@@ -119,7 +120,6 @@ function Sidebar(props: any) {
     
     // enable or disable save button based on form inputs
     const isFormFilled = Object.values(formData).some(v => v !== '');
-    setIsSaveEnabled(isFormFilled);
   };
 
   const handlePhoneNumberChange = (value: string | undefined) => {
@@ -202,7 +202,6 @@ function Sidebar(props: any) {
         const data = await createUserSettings(formData);
         logger.info('User settings submitted successfully:', { data });
         if (data.settings) {
-          setIsSaveEnabled(false)
           toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
         }
       } catch (error: any) {
@@ -319,7 +318,6 @@ function Sidebar(props: any) {
 
             <Button
               label={t('SHARED.SAVE')}
-              disabled={!isSaveEnabled}
               styles={{
                 color: '#ffc153',
                 height: '40px',
@@ -334,7 +332,7 @@ function Sidebar(props: any) {
             {/* user review */}
             <div className='my-2'>
               <h3 className={`font-bold text-sm text-nowrap`}>Trust-o-meter</h3>
-              <TrustMeter ratings={currentUser ? 50 : 100} hideLabel={true} />
+              <TrustMeter ratings={userSettings ? userSettings.trust_meter_rating : 100} hideLabel={true} />
             </div>             
             <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
               <OutlineBtn2
@@ -429,7 +427,6 @@ function Sidebar(props: any) {
                 </div>
                 <Button
                   label={t('SHARED.SAVE')}
-                  disabled={!isSaveEnabled}
                   styles={{
                     color: '#ffc153',
                     height: '40px',

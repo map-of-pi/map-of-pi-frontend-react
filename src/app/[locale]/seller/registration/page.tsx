@@ -300,7 +300,7 @@ const SellerRegistrationForm = () => {
           {/* seller review toggle */}
           <ToggleCollapse
             header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
-            <TrustMeter ratings={dbSeller ? dbSeller.trust_meter_rating : placeholderSeller.trust_meter_rating} />
+            <TrustMeter ratings={userSettings ? userSettings.trust_meter_rating : placeholderSeller.trust_meter_rating} />
             <div className="flex items-center justify-between mt-3 mb-5">
               <p className="text-sm">
                 {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {

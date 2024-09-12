@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { fetchSellers } from '@/services/sellerApi';
 import { ISeller } from '@/constants/types';
 import { toLatLngLiteral } from '@/util/map';
+import { ISellerWithSettings } from '@/constants/types';
 
 import MapMarkerPopup from './MapMarkerPopup'
 
@@ -21,12 +22,13 @@ const sanitizeCoordinates = (lat: number, lng: number) => {
 };
 
 // Function to fetch seller coordinates based on origin and radius
-const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Promise<ISeller[]> => {
+const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Promise<ISellerWithSettings[]> => {
   const { lat, lng } = sanitizeCoordinates(origin[0], origin[1]);
   const formattedOrigin = toLatLngLiteral([lat, lng]);
 
   try {
     const sellersData = await fetchSellers(formattedOrigin, radius);
+    console.log('Fetched sellers data:', { sellersData });
     const sellersWithCoordinates = sellersData.map((seller: any) => {
       const [lng, lat] = seller.sell_map_center.coordinates;
       return {
@@ -36,7 +38,7 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Prom
     });
 
     logger.info('Fetched sellers data:', { sellersWithCoordinates });
-
+    
     return sellersWithCoordinates;
   } catch (error) {
     logger.error('Error fetching seller coordinates:', { error });
@@ -45,8 +47,8 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Prom
 };
 
 // Function to remove duplicate sellers based on seller_id
-const removeDuplicates = (sellers: ISeller[]): ISeller[] => {
-  const uniqueSellers: { [key: string]: ISeller } = {};
+const removeDuplicates = (sellers: ISellerWithSettings[]): ISellerWithSettings[] => {
+  const uniqueSellers: { [key: string]: ISellerWithSettings } = {};
   sellers.forEach(seller => {
     uniqueSellers[seller.seller_id] = seller;
   });
@@ -64,7 +66,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
   });
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
-  const [sellers, setSellers] = useState<ISeller[]>([]);
+  const [sellers, setSellers] = useState<ISellerWithSettings[]>([]);
   const [origin, setOrigin] = useState(center);
   const [radius, setRadius] = useState(10);
   const [loading, setLoading] = useState(false);

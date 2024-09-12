@@ -6,7 +6,7 @@ type TrustMeterProps = {
 };
 
 const TrustMeter: React.FC<TrustMeterProps> = ({ ratings, hideLabel}) => {
-  const percentageRating = ratings.toString();
+  const percentageRating = ratings;
   const average = 50; // this can be adjusted
   const condition = ratings < average
 

@@ -11,6 +11,7 @@ export interface IUserSettings {
   phone_number?: string;
   image?: string; 
   findme?: string;
+  trust_meter_rating: number;
   search_map_center?: {
     type: 'Point';
     coordinates: [number, number];
@@ -24,11 +25,9 @@ export interface ISeller {
   seller_type: string;
   image: string;
   address: string;
-  sale_items: string;
   average_rating: {
     $numberDecimal: string;
   };
-  trust_meter_rating: number;
   coordinates: [number, number];
   order_online_enabled_pref: boolean;
 };
@@ -43,3 +42,16 @@ export interface IReviewFeedback {
   image: string;
   review_date: string;
 }
+
+
+// Interface representing the selected fields from IUserSettings
+export interface PartialUserSettings {
+  user_name: string;
+  email?: string;
+  phone_number?: string;
+  findme: string;
+  trust_meter_rating: number;
+}
+
+// Combined interface representing a seller with selected user settings
+export interface ISellerWithSettings extends ISeller, PartialUserSettings {}
