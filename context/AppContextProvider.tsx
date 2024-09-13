@@ -10,7 +10,6 @@ import {
   ReactNode,
   useEffect
 } from 'react';
-import { toast } from 'react-toastify';
 
 import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
@@ -70,18 +69,17 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         if (res.status === 200) {
           setAuthToken(res.data?.token)
           setCurrentUser(res.data.user);
-          toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data?.user?.user_name}`);
           logger.info('User authenticated successfully.');
-          setIsSigningInUser(false)
+          setTimeout(() => {
+            setIsSigningInUser(false); // hide the splash screen after the delay
+          }, 5000);
         } else if (res.status === 500) {
           setCurrentUser(null);
-          toast.error(`${t('HOME.AUTHENTICATION.UNSUCCESSFUL_LOGIN_MESSAGE')}`);
           logger.error('User authentication failed.');
           setIsSigningInUser(false)
         }        
       } catch (error: any) {
         logger.error('Error during user registration:', { error });
-        toast.info(t('HOME.AUTHENTICATION.PI_INFORMATION_NOT_FOUND_MESSAGE'));
         setIsSigningInUser(false)
       }
     } else {
@@ -98,8 +96,9 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       if (res.status === 200) {
         logger.info('Auto-login successful.');
         setCurrentUser(res.data);
-        toast.success(`${t('HOME.AUTHENTICATION.SUCCESSFUL_LOGIN_MESSAGE')}: ${res.data.user_name}`);
-        setIsSigningInUser(false)
+        setTimeout(() => {
+          setIsSigningInUser(false); // hide the splash screen after the delay
+        }, 5000);
       } else {
         setCurrentUser(null);
         logger.warn('Auto-login failed.');
@@ -121,7 +120,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser,isSigningInUser}}>
+    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser}}>
       {children}
     </AppContext.Provider>
   );

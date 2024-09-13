@@ -11,8 +11,8 @@ import { toLatLngLiteral } from '@/util/map';
 
 import MapMarkerPopup from './MapMarkerPopup'
 
-import logger from '../../../../logger.config.mjs';
 import { AppContext } from '../../../../context/AppContextProvider';
+import logger from '../../../../logger.config.mjs';
 
 // Utility function to ensure coordinates are within valid ranges
 const sanitizeCoordinates = (lat: number, lng: number) => {
@@ -284,34 +284,35 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
         </div>
       )}
       {isSigningInUser ?
-        <div className='w-full flex-1  fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0 bg-[#f5f1e6] '>
+        <div className='w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0 bg-[#f5f1e6] '>
           <div className="flex justify-center items-center w-full h-full">
-           <img src="/default.png" width={120} height={140} alt="defal "/>
+           <img src="/default.png" width={120} height={140} alt="splashscreen"/>
           </div>
         </div> :
         <MapContainer
-        center={isLocationAvailable ? origin : [0, 0]}
-        zoom={isLocationAvailable ? zoom : 2}
-        zoomControl={false}
-        minZoom={2}
-        maxZoom={18}
-        // maxBounds={bounds}
-        // maxBoundsViscosity={1.0}
-        className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0">
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          noWrap={true}
-        />
-        <LocationMarker />
-        {sellers.map((seller) => (
-          <Marker position={seller.coordinates as LatLngExpression} key={seller.seller_id} icon={customIcon}>
-            <Popup closeButton={false} minWidth={300}>
-              <MapMarkerPopup seller={seller} />
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>}
+          center={isLocationAvailable ? origin : [0, 0]}
+          zoom={isLocationAvailable ? zoom : 2}
+          zoomControl={false}
+          minZoom={2}
+          maxZoom={18}
+          // maxBounds={bounds}
+          // maxBoundsViscosity={1.0}
+          className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0">
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            noWrap={true}
+          />
+          <LocationMarker />
+          {sellers.map((seller) => (
+            <Marker position={seller.coordinates as LatLngExpression} key={seller.seller_id} icon={customIcon}>
+              <Popup closeButton={false} minWidth={300}>
+                <MapMarkerPopup seller={seller} />
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      }
     </>
   );
 };
