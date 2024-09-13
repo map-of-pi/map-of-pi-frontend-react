@@ -4,11 +4,12 @@ import { useLocale } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { IoMdArrowBack, IoMdClose } from 'react-icons/io';
 import { MdHome } from 'react-icons/md';
 
+import { AppContext } from '../../../../context/AppContextProvider';
 import Sidebar from '../sidebar/sidebar';
 import styles from './Navbar.module.css';
 
@@ -18,6 +19,8 @@ function Navbar() {
   const local = useLocale();
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [checkHomePage, setCheckHomePage] = useState(true);
+
+  const {isSigningInUser} = useContext(AppContext)
 
   // check if the current page is the homepage
   useEffect(() => {
@@ -45,7 +48,7 @@ function Navbar() {
       <div
         className={`w-full h-[76.19px] z-500 px-[16px] py-[5px] bg-primary fixed top-0 left-0 right-0 `}>
         <div className="text-center text-secondary text-[1.3rem] whitespace-nowrap">
-          Map of Pi
+          { isSigningInUser ? "Loading...": "Map of Pi"}
         </div>
         <div
           className="flex justify-between">

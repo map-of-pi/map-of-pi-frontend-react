@@ -43,6 +43,8 @@ export default function Index() {
     type: 'search'  // Ensure type is either 'search' or 'sell'
   });  const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<any[]>([]);
 
   // Default map center (example: New York City)
   const defaultMapCenter = { lat: 20, lng: -74.0060, type: 'search' as 'search' | 'sell'  };
@@ -77,10 +79,16 @@ export default function Index() {
     }
   }
 
+  // handle search query update from SearchBar and associated results
+  const handleSearch = (query: string, results: any[]) => {
+    setSearchQuery(query);
+    setSearchResults(results);
+  }
+
   return (
     <>
-      <DynamicMap center={[mapCenter.lat, mapCenter.lng]} zoom={zoomLevel} />
-      <SearchBar page={'default'} />
+      <DynamicMap center={[mapCenter.lat, mapCenter.lng]} zoom={zoomLevel} searchQuery={searchQuery} searchResults={searchResults || []} />
+      <SearchBar page={'default'} onSearch={handleSearch} />
       <div className="absolute bottom-8 z-10 flex justify-between gap-[22px] px-6 right-0 left-0 m-auto">
         <Link href="/seller/registration">
           <Button

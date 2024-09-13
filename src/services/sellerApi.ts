@@ -3,14 +3,23 @@ import { handleAxiosError } from "@/util/error";
 
 import logger from '../../logger.config.mjs';
 
-// Fetch all sellers or within bounds
-export const fetchSellers = async (origin: any, radius: number) => {
+// Fetch all sellers or sellers within bounds and/ or matching search criteria
+export const fetchSellers = async (origin: any, radius: number | undefined, searchQuery?: string) => {
   try {
-    logger.info('Fetching sellers with origin and radius:', { origin, radius });
-    const response = await axiosClient.post('/sellers/fetch', {
+    logger.debug('Fetching sellers with origin, radius, and search query:', { origin, radius, searchQuery });
+    
+    // prepare the request payload accordingly
+    const requestPayload: any = {
       origin,
       radius
-    });
+    };
+    
+    if (searchQuery) {
+      requestPayload.search_query = searchQuery;
+    }
+    
+    const response = await axiosClient.post('/sellers/fetch', requestPayload);
+    
     if (response.status === 200) {
       logger.info(`Fetch sellers successful with Status ${response.status}`, {
         data: response.data
