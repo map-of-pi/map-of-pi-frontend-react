@@ -20,14 +20,14 @@ const sanitizeCoordinates = (lat: number, lng: number) => {
   return { lat: sanitizedLat, lng: sanitizedLng };
 };
 
-// Function to fetch seller coordinates based on origin and radius
-const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number): Promise<ISeller[]> => {
+// Function to fetch seller coordinates based on origin, radius, and optional search query
+const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number, searchQuery?: string): Promise<ISeller[]> => {
   const { lat, lng } = sanitizeCoordinates(origin[0], origin[1]);
   const formattedOrigin = toLatLngLiteral([lat, lng]);
 
   try {
-    const sellersData = await fetchSellers(formattedOrigin, radius);
-    const sellersWithCoordinates = sellersData.map((seller: any) => {
+    const sellersData = await fetchSellers(formattedOrigin, radius, searchQuery);
+    const sellersWithCoordinates = sellersData?.map((seller: any) => {
       const [lng, lat] = seller.sell_map_center.coordinates;
       return {
         ...seller,
@@ -53,7 +53,7 @@ const removeDuplicates = (sellers: ISeller[]): ISeller[] => {
   return Object.values(uniqueSellers);
 };
 
-const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
+const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpression, zoom: number, searchQuery: string, searchResults: ISeller[] }) => {
   const t = useTranslations();
 
   const customIcon = L.icon({
@@ -72,7 +72,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
   const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
-
+  
   // Fetch initial seller coordinates when component mounts
   useEffect(() => {
     logger.info('Component mounted, fetching initial coordinates..');
@@ -87,6 +87,28 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
     }
   }, [center]);
 
+  useEffect(() => {
+    if (searchQuery) {
+      setLoading(true);
+  
+      const sellersWithCoordinates = searchResults
+        .map((seller: any) => {
+          const [lng, lat] = seller.sell_map_center.coordinates;
+          return {
+            ...seller,
+            coordinates: [lat, lng] as LatLngTuple
+          };
+        });
+            
+      // Remove duplicates
+      const uniqueSellers = removeDuplicates(sellersWithCoordinates);
+  
+      // Update the sellers state
+      setSellers(uniqueSellers);
+      setLoading(false);
+    }
+  }, [searchQuery, searchResults]);
+
   // Log sellers array for debugging
   useEffect(() => {
     logger.debug('Sellers Array:', { sellers });
@@ -99,7 +121,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
     try {
       const originLiteral = toLatLngLiteral(origin);
       const originLatLngTuple: LatLngTuple = [originLiteral.lat, originLiteral.lng];
-      let sellersData = await fetchSellerCoordinates(originLatLngTuple, radius);
+      let sellersData = await fetchSellerCoordinates(originLatLngTuple, radius, searchQuery);
       sellersData = removeDuplicates(sellersData);
       setSellers(sellersData);
     } catch (error) {
@@ -110,7 +132,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
     }
   };
 
-  // Function to handle map interactions (zoom and move)
+  // Function to handle map interactions (zoom and move); lazy-loading implementation
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
     const newCenter = newBounds.getCenter();
     const newRadius = calculateRadius(newBounds, mapInstance);
@@ -121,7 +143,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
     setError(null);
 
     try {
-      let additionalSellers = await fetchSellerCoordinates([newCenter.lat, newCenter.lng], largerRadius);
+      let additionalSellers = await fetchSellerCoordinates([newCenter.lat, newCenter.lng], largerRadius, searchQuery);
       additionalSellers = removeDuplicates(additionalSellers);
 
       logger.info('Fetched additional sellers:', { additionalSellers });
@@ -196,6 +218,7 @@ const Map = ({ center, zoom }: { center: LatLngExpression, zoom: number }) => {
         setPosition(e.latlng);
         setLocationError(false);
         if (!initialLocationSet) {
+          console.log('in location');
           map.setView(e.latlng, zoom, { animate: false });
           setInitialLocationSet(true);
         }
