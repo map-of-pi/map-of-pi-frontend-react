@@ -14,7 +14,7 @@ const MapCenterPage = () => {
 
   return (
     <>
-      <MapCenter entryType={entryType as 'search' | 'sell'} /> {/* Pass entryType as a prop */}
+      <MapCenter entryType={entryType as 'search' | 'sell'} />
     </>
   );
 };

@@ -17,6 +17,7 @@
     "PERSONALIZATION_SUBHEADER": "Personalization",
     "EMAIL_ADDRESS_FIELD": "Your email address",
     "PHONE_NUMBER_FIELD": "Your phone number",
+    "USER_SEARCH_CENTER": "Set Search Center",
     "LANGUAGES": "Languages",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "About Map of Pi",
@@ -177,7 +178,6 @@
     "BUY": "Buy",
     "NAVIGATE": "Navigate",
     "SEARCH_CENTER": "Set Search Center",
-    "SELL_CENTER": "Set Sell Center",
     "NO_SEARCH_CENTER_SET": "No search center set",
     "CHECK_REVIEWS": "Check Reviews",
     "REPLY": "Reply",

@@ -47,7 +47,7 @@ export default function Index() {
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
   // Default map center (example: New York City)
-  const defaultMapCenter = { lat: 20, lng: -74.0060, type: 'search' as 'search' | 'sell'  };
+  const defaultMapCenter = { lat: 20, lng: -74.0060, type: 'search' as 'search' | 'sell' };
 
   useEffect(() => {
     const fetchLocationOnLoad = async () => {
@@ -58,7 +58,7 @@ export default function Index() {
         logger.info('User location obtained successfully on initial load:', { location });
       } catch (error) {
         logger.error('Error getting location on initial load.', { error });
-        setMapCenter(defaultMapCenter);  // Use the default map center
+        setMapCenter(defaultMapCenter);
         setZoomLevel(2);
       }
     };
@@ -69,7 +69,7 @@ export default function Index() {
   const handleLocationButtonClick = async () => {
     try {
       const location = await getDeviceLocation();
-      setMapCenter({ ...location, type: 'search' }); // Ensure type is 'search'
+      setMapCenter({ ...location, type: 'search' });
       setZoomLevel(15);
       setLocationError(null);
       logger.info('User location obtained successfully on button click:', { location });

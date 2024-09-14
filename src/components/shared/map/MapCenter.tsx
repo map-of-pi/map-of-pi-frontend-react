@@ -41,7 +41,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
 
   useEffect(() => {
     if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login.");
+      logger.info("User not logged in; attempting auto-login..");
       autoLoginUser();
     }
 
@@ -57,7 +57,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
             setCenter({ lat: 50.064192, lng: 19.944544 });
           }
         } catch (error) {
-          logger.error('Error fetching map center:', error);
+        logger.error('Error fetching map center:', { error });
         }
       }
     };
@@ -82,7 +82,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         }
       });
     } catch (error) {
-      logger.error('Error during geocoding:', error);
+      logger.error('Error during geocoding:', { error });
     }
   };
 
@@ -121,7 +121,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         setShowPopup(true);
         logger.info('Map center successfully saved.');
       } catch (error) {
-        logger.error('Error saving map center:', error);
+        logger.error('Error saving map center:', { error });
       }
     }
   };
@@ -159,7 +159,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
       </MapContainer>
       <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
         <Button
-          label={entryType === 'search' ? t('SHARED.SEARCH_CENTER') : t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
+          label={entryType === 'search' ? t('SIDE_NAVIGATION.USER_SEARCH_CENTER') : t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
           onClick={setMapCenter}
           styles={{ borderRadius: '10px', color: '#ffc153', paddingLeft: '50px', paddingRight: '50px' }}
         />

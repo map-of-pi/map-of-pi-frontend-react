@@ -260,7 +260,7 @@ function Sidebar(props: any) {
           {/* set search center button */}
           <div className='mb-2'>
             <Button
-                label={t('SHARED.SEARCH_CENTER')}
+                label={t('SIDE_NAVIGATION.USER_SEARCH_CENTER')}
                 styles={{
                   color: '#ffc153',
                   width: '100%',

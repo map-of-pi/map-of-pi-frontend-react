@@ -4,4 +4,3 @@ export default function UrlsRemoval(text: string) {
     const urlPattern = /((https?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,})(\/[^\s]*)?)/g;
     return text.replace(urlPattern, '');
   };
-

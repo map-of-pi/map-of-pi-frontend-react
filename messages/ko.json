@@ -17,6 +17,7 @@
     "PERSONALIZATION_SUBHEADER": "개인화",
     "EMAIL_ADDRESS_FIELD": "이메일 주소",
     "PHONE_NUMBER_FIELD": "전화번호",
+    "USER_SEARCH_CENTER": "검색 센터 설정",
     "LANGUAGES": "언어",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "Map of Pi에 대해",
@@ -176,7 +177,6 @@
   "SHARED": {
     "BUY": "구매",
     "NAVIGATE": "탐색",
-    "SEARCH_CENTER": "검색 센터 설정",
     "CHECK_REVIEWS": "리뷰 확인",
     "REPLY": "답장",
     "SAVE": "저장",
