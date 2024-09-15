@@ -116,9 +116,6 @@ function Sidebar(props: any) {
       ...prevFormData,
       [name]: value,
     }));
-    
-    // enable or disable save button based on form inputs
-    const isFormFilled = Object.values(formData).some(v => v !== '');
   };
 
   const handlePhoneNumberChange = (value: string | undefined) => {
@@ -455,10 +452,7 @@ function Sidebar(props: any) {
                   ))}
               </ToggleCollapse>
             </div>
-            
           </div>
-
-          
           <div ref={bottomRef}></div>
         </div>
       </div>

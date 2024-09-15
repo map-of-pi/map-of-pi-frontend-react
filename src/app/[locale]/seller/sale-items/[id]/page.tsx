@@ -142,7 +142,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </div>
           <div className="flex items-center justify-between">
             <p className="text-sm">
-              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: sellerSettings?.trust_meter_rating})}
+              {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: sellerShopInfo.average_rating.$numberDecimal})}
             </p>
             <Link href={`/seller/reviews/${sellerId}?buyer=true&seller_name=${sellerShopInfo.name}`}>
             <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} />

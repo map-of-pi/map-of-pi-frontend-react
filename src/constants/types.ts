@@ -43,15 +43,8 @@ export interface IReviewFeedback {
   review_date: string;
 }
 
-
-// Interface representing the selected fields from IUserSettings
-export interface PartialUserSettings {
-  set_name: string;
-  email?: string;
-  phone_number?: string;
-  findme: string;
-  trust_meter_rating: number;
-}
+// Select specific fields from IUserSettings
+export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'email' | 'phone_number' | 'findme' | 'trust_meter_rating'>;
 
 // Combined interface representing a seller with selected user settings
 export interface ISellerWithSettings extends ISeller, PartialUserSettings {}

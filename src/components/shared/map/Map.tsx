@@ -5,10 +5,9 @@ import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaf
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
 import _ from 'lodash';
 
+import { ISeller, ISellerWithSettings } from '@/constants/types';
 import { fetchSellers } from '@/services/sellerApi';
-import { ISeller } from '@/constants/types';
 import { toLatLngLiteral } from '@/util/map';
-import { ISellerWithSettings } from '@/constants/types';
 
 import MapMarkerPopup from './MapMarkerPopup'
 
