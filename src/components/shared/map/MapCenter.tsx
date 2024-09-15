@@ -31,7 +31,12 @@ const crosshairIcon = new L.Icon({
   iconAnchor: [40, 40],
 });
 
-const MapCenter = () => {
+
+interface MapCenterProps {
+  entryType: 'search' | 'sell'; // Define prop type for entryType
+}
+
+const MapCenter = ({ entryType }: MapCenterProps) => {
   const t = useTranslations();
   const [showPopup, setShowPopup] = useState(false);
   const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
@@ -40,7 +45,7 @@ const MapCenter = () => {
 
   useEffect(() => {
     if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
+      logger.info("User not logged in; attempting auto-login.");
       autoLoginUser();
     }
 
@@ -57,7 +62,7 @@ const MapCenter = () => {
             setCenter({ lat: 50.064192, lng: 19.944544 });
           }
         } catch (error) {
-          logger.error('Error fetching map center:', { error });
+          logger.error('Error fetching map center:', error);
         }
       }
     };
@@ -121,7 +126,8 @@ const MapCenter = () => {
   const setMapCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
       try {
-        await saveMapCenter(center.lat, center.lng);
+        // Pass the entryType as the third argument to the saveMapCenter function
+        await saveMapCenter(center.lat, center.lng, entryType);
         setShowPopup(true);
         logger.info('Map center successfully saved.');
       } catch (error) {
@@ -129,6 +135,7 @@ const MapCenter = () => {
       }
     }
   };
+  
 
   const handleClickDialog = () => {
     setShowPopup(false);
@@ -167,7 +174,7 @@ const MapCenter = () => {
       </MapContainer>
       <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
         <Button
-          label="Set Map Center"
+          label={entryType === 'search' ? t('SHARED.SEARCH_CENTER') : t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
           onClick={setMapCenter}
           styles={{ borderRadius: '10px', color: '#ffc153', paddingLeft: '50px', paddingRight: '50px' }}
         />
