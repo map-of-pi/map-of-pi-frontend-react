@@ -25,13 +25,16 @@ export const fetchMapCenter = async () => {
 };
 
 // Function to Save Map Center
-export const saveMapCenter = async (latitude: number, longitude: number) => {
+export const saveMapCenter = async (latitude: number, longitude: number, type: 'search' | 'sell') => {
   try {
-    logger.info(`Saving map center with coordinates: latitude ${latitude}, longitude ${longitude}`);
+    logger.info(`Sending map center with coordinates: latitude ${latitude}, longitude ${longitude}, type: ${type}`);
+    
     const response = await axiosClient.put('/map-center/save', {
       latitude,
-      longitude
+      longitude,
+      type
     });
+    
     if (response.status === 200) {
       logger.info(`Save map center successful with Status ${response.status}`, {
         data: response.data
@@ -47,3 +50,4 @@ export const saveMapCenter = async (latitude: number, longitude: number) => {
     throw error;
   }
 };
+
