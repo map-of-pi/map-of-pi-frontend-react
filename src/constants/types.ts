@@ -30,8 +30,13 @@ export interface ISeller {
   };
   trust_meter_rating: number;
   coordinates: [number, number];
+  sell_map_center: {
+    type: 'Point';
+    coordinates: [number, number];
+  };
   order_online_enabled_pref: boolean;
-};
+}
+
 
 export interface IReviewFeedback {
   _id: string;
