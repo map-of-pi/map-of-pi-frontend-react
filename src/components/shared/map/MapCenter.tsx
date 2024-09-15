@@ -135,7 +135,6 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
       }
     }
   };
-  
 
   const handleClickDialog = () => {
     setShowPopup(false);
@@ -153,8 +152,8 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         zoomControl={false}
         minZoom={2}
         maxZoom={18}
-        // maxBounds={bounds}
-        // maxBoundsViscosity={1.0}
+        maxBounds={bounds}
+        maxBoundsViscosity={1.0}
         className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
         whenReady={() => {
           const mapInstance: any = mapRef.current;
@@ -178,12 +177,15 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
           onClick={setMapCenter}
           styles={{ borderRadius: '10px', color: '#ffc153', paddingLeft: '50px', paddingRight: '50px' }}
         />
-      </div>
+     </div>
       {showPopup && (
         <ConfirmDialogX
           toggle={() => setShowPopup(false)}
           handleClicked={handleClickDialog}
-          message={t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')}
+          // Dynamically set the message based on entryType
+          message={entryType === 'sell'
+            ? t('SHARED.MAP_CENTER.VALIDATION.SELL_CENTER_SUCCESS_MESSAGE')
+            : t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')}
         />
       )}
     </div>
