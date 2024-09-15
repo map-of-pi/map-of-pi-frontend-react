@@ -5,6 +5,7 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import MapCenter from '../map/MapCenter';
 
 import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
@@ -65,6 +66,7 @@ function Sidebar(props: any) {
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
+  const [showMapCenter, setShowMapCenter] = useState(false);  // New state to toggle the MapCenter display
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [formData, setFormData] = useState({
     user_name: '',
@@ -266,10 +268,10 @@ function Sidebar(props: any) {
                   width: '100%',
                   padding: '10px',
                   borderRadius: '10px',
-                  fontSize: '18px',
+                  fontSize: '18px', 
                 }}
                 onClick={() => {
-                  router.push('/map-center');
+                  router.push(`/map-center?entryType=search`); // Show the MapCenter component
                   props.setToggleDis(false); // Close sidebar on click
                 }}
               />
@@ -458,13 +460,16 @@ function Sidebar(props: any) {
                   ))}
               </ToggleCollapse>
             </div>
-            
           </div>
-
-          
           <div ref={bottomRef}></div>
         </div>
       </div>
+      {/* Conditionally render MapCenter */}
+      {showMapCenter && (
+        <MapCenter
+          entryType="search"
+        />
+      )}
       <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel} />
       <PrivacyPolicyModel
         togglePrivacyPolicy={showPrivacyPolicyModel}
