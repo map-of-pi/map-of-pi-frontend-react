@@ -19,7 +19,7 @@ const MapMarkerPopup = ({ seller }:any) => {
         {/* Seller Profile */}
         <div className="font-bold text-base mb-2">
           {seller.name}
-          <span className="ps-2">({seller.average_rating.$numberDecimal}/5.0)</span>
+          <span className="ps-2">({seller.trust_meter_rating}%)</span>
         </div>
         <div className="flex gap-2 mb-2 items-center">
           <div className="relative w-[50px] h-[50px] min-w-[50px] min-h-[50px]">
