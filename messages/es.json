@@ -14,6 +14,7 @@
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Preferencias del Usuario",
+    "PERSONALIZATION_SUBHEADER": "Personalización",
     "EMAIL_ADDRESS_FIELD": "Tu dirección de correo electrónico",
     "PHONE_NUMBER_FIELD": "Tu número de teléfono",
     "LANGUAGES": "Idiomas",
@@ -22,6 +23,11 @@
       "APP_VERSION": "Versión de la App",
       "PRIVACY_POLICY": "Política de Privacidad",
       "TERMS_OF_SERVICE": "Términos de Servicio"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "Preferencia de FindMe",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_DEVICE_GPS": "Usar el GPS de mi dispositivo",
+      "PREFERRED_SEARCH_CENTER": "Usar el Centro de Búsqueda"
     },
     "CONTACT_MAP_OF_PI": "Contactar a Map of Pi",
     "VALIDATION": {

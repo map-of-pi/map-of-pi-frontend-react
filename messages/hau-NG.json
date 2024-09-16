@@ -14,6 +14,7 @@
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Zaɓin mai amfani",
+    "PERSONALIZATION_SUBHEADER": "Keɓancewa",
     "EMAIL_ADDRESS_FIELD": "Adireshin i-mel dinka",
     "PHONE_NUMBER_FIELD": "Lambar wayarka",
     "LANGUAGES": "Harsuna",
@@ -22,6 +23,11 @@
       "APP_VERSION": "Sigar manhaja",
       "PRIVACY_POLICY": "Takardar Kebantawa",
       "TERMS_OF_SERVICE": "Sharuɗɗan Sabis"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "Zaɓin FindMe",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_DEVICE_GPS": "Yi amfani da GPS na na'urar",
+      "PREFERRED_SEARCH_CENTER": "Yi amfani da Cibiyar Bincike"
     },
     "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
     "VALIDATION": {

@@ -14,6 +14,7 @@
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "사용자 설정",
+    "PERSONALIZATION_SUBHEADER": "개인화",
     "EMAIL_ADDRESS_FIELD": "이메일 주소",
     "PHONE_NUMBER_FIELD": "전화번호",
     "LANGUAGES": "언어",
@@ -22,6 +23,11 @@
       "APP_VERSION": "앱 버전",
       "PRIVACY_POLICY": "개인정보 보호정책",
       "TERMS_OF_SERVICE": "서비스 약관"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "FindMe 선호",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_DEVICE_GPS": "내 기기의 GPS 사용",
+      "PREFERRED_SEARCH_CENTER": "검색 센터 사용"
     },
     "CONTACT_MAP_OF_PI": "Map of Pi에 문의",
     "VALIDATION": {

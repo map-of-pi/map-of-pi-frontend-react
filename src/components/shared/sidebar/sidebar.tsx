@@ -13,20 +13,22 @@ import { toast } from 'react-toastify';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
-import { Button } from '@/components/shared/Forms/Buttons/Buttons';
+import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import {
   FileInput,
   Input,
+  Select,
   TelephoneInput,
 } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
-import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
 import { IUserSettings } from '@/constants/types';
+import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import TrustMeter from '../Review/TrustMeter';
+import ToggleCollapse from '../Seller/ToggleCollapse';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
 
-// type definitions for menu items
 interface MenuItem {
   id: number;
   title: string;
@@ -53,24 +55,26 @@ function Sidebar(props: any) {
   const router = useRouter();
 
   const { currentUser, autoLoginUser } = useContext(AppContext);
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const [formData, setFormData] = useState({
+    user_name: '',
     email: '',
     phone_number: '',
-    image: ''
+    image: '',
+    findme: '',
+    trust_meter_rating: 100,
   });
-  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const { resolvedTheme, setTheme } = useTheme();
   const [toggle, setToggle] = useState<any>({
     Themes: false,
     Languages: false,
   });
+  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>(dbUserSettings?.image || '');
-  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!currentUser) {
@@ -90,19 +94,21 @@ function Sidebar(props: any) {
         }
       } catch (error) {
         logger.error('Error fetching user settings data:', { error });
-        setError('Error fetching user settings data.');
       }
     };
     getUserSettingsData();
-  }, [currentUser]);
+  }, []);
 
   // Initialize formData with dbUserSettings values if available
   useEffect(() => {
     if (dbUserSettings) {
       setFormData({
+        user_name: dbUserSettings.user_name || '',
         email: dbUserSettings.email || '',
         phone_number: dbUserSettings.phone_number?.toString() || '',
-        image: dbUserSettings.image || ''
+        image: dbUserSettings.image || '',
+        findme: dbUserSettings.findme || t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
+        trust_meter_rating: dbUserSettings.trust_meter_rating
       });
     }
   }, [dbUserSettings]);
@@ -190,7 +196,10 @@ function Sidebar(props: any) {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | { name: string; value: string }) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    > | { name: string; value: string }) => {
     // handle such scenarios where the event might not have the typical e.target structure i.e., PhoneInput.
     const name = 'target' in e ? e.target.name : e.name;
     const value = 'target' in e ? e.target.value : e.value;
@@ -266,6 +275,17 @@ function Sidebar(props: any) {
     }
   };
 
+  const translateFindMeOptions = [
+    {
+      value: 'deviceGPS',
+      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
+    },
+    {
+      value: 'searchCenter',
+      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_SEARCH_CENTER'),
+    },
+  ];
+
   return (
     <>
       <div className="w-full h-[calc(100vh-74px)] fixed bottom-0 bg-transparent right-0 z-[70]">
@@ -274,26 +294,16 @@ function Sidebar(props: any) {
           onClick={() => props.setToggleDis(false)}></div>
         <div
           className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
-          <div className="text-2xl font-bold mb-2 pb-3">
-            {t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}
+          
+          {/* header title */}
+          <div className="mb-1 pb-3 text-center">
+            <p className='text-sm text-gray-400'>{currentUser? currentUser.pi_username : ""}</p>
+            <h1 className='text-2xl font-bold'>{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</h1>
           </div>
-          <div className="">
-            <Input
-              label={t('SIDE_NAVIGATION.EMAIL_ADDRESS_FIELD')}
-              placeholder="mapofpi@mapofpi.com"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            <TelephoneInput
-              label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={(value: any) => handleChange({ name: 'phone_number', value })}
-            />
-            <div className="pt-2 flex flex-col gap-5">
-              <Button
+
+          {/* set search center button */}
+          <div className='mb-2'>
+            <Button
                 label={t('SHARED.SEARCH_CENTER')}
                 styles={{
                   color: '#ffc153',
@@ -307,78 +317,125 @@ function Sidebar(props: any) {
                   props.setToggleDis(false); // Close sidebar on click
                 }}
               />
-              <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
-                <Button
-                  label={t('SHARED.CHECK_REVIEWS')}
-                  styles={{
-                    background: '#fff',
-                    color: '#ffc153',
-                    width: '100%',
-                    padding: '8px',
-                    borderColor: 'var(--default-primary-color)',
-                    borderWidth: '2px',
-                    borderRadius: '10px',
-                    fontSize: '18px',
-                  }}
-                  onClick={() => props.setToggleDis(false)} // Close sidebar on click
-                />
-              </Link>
-            </div>
-            <div className="pt-5">
-              <FileInput
-                label={t('SHARED.PHOTO.MISC_LABELS.USER_PREFERENCES_LABEL')}
-                imageUrl={ previewImage }
-                handleAddImage={handleAddImage}
-              />
-            </div>
-            <div className="mb-4 mt-3 flex justify-center">
-              <Button
-                label={t('SHARED.SAVE')}
-                disabled={!isSaveEnabled}
-                styles={{
-                  color: '#ffc153',
-                  height: '40px',
-                  padding: '10px 15px',
-                }}
-                onClick={handleSave}
-              />
-            </div>
           </div>
-          <div className="pt-5">
-            {menu.map((menu) => (
-              <>
-                <div key={menu.id} className="">
+
+          {/* user settings form fields */}
+          <div className="flex flex-col justify-items-center mx-auto text-center gap-1">
+            <Input
+              label={t('SHARED.USER_INFORMATION.NAME_LABEL')}
+              placeholder={currentUser?.user_name}
+              type="text"
+              name="user_name"
+              style={{
+                textAlign: 'center'
+              }}
+              value={formData.user_name? formData.user_name: ''}
+              onChange={handleChange}
+            />
+            <Input
+              label={t('SIDE_NAVIGATION.EMAIL_ADDRESS_FIELD')}
+              placeholder="mapofpi@mapofpi.com"
+              type="email"
+              name="email"
+              style={{
+                textAlign: 'center'
+              }}
+              value={formData.email? formData.email: ""}
+              onChange={handleChange}
+            />
+            <TelephoneInput
+              label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
+              value={formData.phone_number}
+              name="phone_number"
+              onChange={(value: any) => handleChange({ name: 'phone_number', value })}
+              style={{
+                textAlign: 'center'
+              }}
+            />
+
+            <Button
+              label={t('SHARED.SAVE')}
+              disabled={!isSaveEnabled}
+              styles={{
+                color: '#ffc153',
+                height: '40px',
+                width: '80px',
+                padding: '10px 15px',
+                marginLeft: 'auto',
+                marginRight: 'auto'
+              }}
+              onClick={handleSave}
+            />
+
+            {/* user review */}
+            <div className='my-2'>
+              <h3 className={`font-bold text-sm text-nowrap`}>Trust-o-meter</h3>
+              <TrustMeter ratings={dbUserSettings ? dbUserSettings.trust_meter_rating : 100} hideLabel={true} />
+            </div>             
+            <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
+              <OutlineBtn
+                label={t('SHARED.CHECK_REVIEWS')}
+                styles={{
+                  width: '80%',
+                  padding: '8px',
+                  borderWidth: '2px',
+                  borderRadius: '10px',
+                  fontSize: '18px',
+                }}
+                onClick={() => props.setToggleDis(false)} // Close sidebar on click
+              />
+            </Link>
+
+            <div className='flex flex-col justify-items-center text-center mx-auto gap-2 my-4'>
+              <ToggleCollapse
+                header={t('SIDE_NAVIGATION.PERSONALIZATION_SUBHEADER')}>
+                <div className="mb-2">
+                  <FileInput
+                    label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+                    imageUrl={ previewImage }
+                    handleAddImage={handleAddImage}
+                  />
+                </div>
+
+                <Select
+                  label={t('SIDE_NAVIGATION.FIND_ME_PREFERENCE_LABEL')}
+                  name="findme"
+                  value={ formData.findme }
+                  onChange={handleChange}
+                  options={translateFindMeOptions}
+                />
+                <div key={menu.Languages.id} className="">
                   <div
-                    className={`${styles.slide_content} hover:bg-[#424242] hover:text-white`}
-                    onClick={() => handleMenu(menu.title, menu.url)}>
+                    className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] w-full mb-3`}
+                    onClick={() => handleMenu(menu.Languages.title, menu.Languages.url)}>
                     <Image
-                      src={menu.icon}
-                      alt={menu.title}
+                      src={menu.Languages.icon}
+                      alt={menu.Languages.title}
                       width={22}
                       height={22}
                       className=""
                     />
-                    <span className="ml-2">
-                      {translateMenuTitle(menu.title)}
+                    <span className="ml-3">
+                      {translateMenuTitle(menu.Languages.title)}
                     </span>
-                    {menu.children && (
+                    {menu.Languages.children && (
                       <div className="ml-4">
                         <FaChevronDown
                           size={13}
-                          className={`text-[#000000] ${toggle[menu.title] && 'rotate-90'}`}
+                          className={`text-[#000000] ${toggle[menu.Languages.title] && 'rotate-90'}`}
                         />
                       </div>
                     )}
                   </div>
                   {/* MENU WITH CHILDREN */}
-                  {menu.children &&
-                    toggle[menu.title] &&
-                    menu.children.map((child) => (
-                      <div key={child.id} className="ml-6">
+                  {menu.Languages.children &&
+                    toggle[menu.Languages.title] &&
+                    menu.Languages.children.map((child) => (
+                      <div key={child.id} className="mx-auto">
                         <div
                           className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
                           onClick={() =>
-                            handleChildMenu(menu.title, child.code)
+                            handleChildMenu(menu.Languages.title, child.code)
                           }>
                           {child.icon && ( // conditional rendering
                             <Image
@@ -389,7 +446,7 @@ function Sidebar(props: any) {
                               className={styles.lng_img}
                             />
                           )}
-                          {menu.title === 'Languages' &&
+                          {menu.Languages.title === 'Languages' &&
                           isLanguageMenuItem(child) ? (
                             <div className="ml-2 text-[14px] flex">
                               <div className="font-bold">{child.label}</div>
@@ -403,10 +460,47 @@ function Sidebar(props: any) {
                           )}
                         </div>
                       </div>
-                    ))}
+                  ))}
+                       
                 </div>
-              </>
-            ))}
+                <Button
+                  label={t('SHARED.SAVE')}
+                  styles={{
+                    color: '#ffc153',
+                    height: '40px',
+                    width: '80px',
+                    padding: '10px 15px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                  }}
+                  onClick={handleSave}
+                />
+              </ToggleCollapse>              
+            </div>
+            <div className='flex flex-col justify-items-center mx-auto text-center'>
+              <ToggleCollapse header={t('SIDE_NAVIGATION.ABOUT.ABOUT_MAP_OF_PI')}>
+                  {menu.about.children.map((menuItem) => (
+                    <div key={menuItem.id} className="">
+                      <div
+                        className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] mb-3`}
+                        onClick={() => handleChildMenu(menu.about.title, menuItem.code)}
+                      >
+                        {/* Conditionally render icon only if it exists */}
+                        {menuItem.icon && (
+                          <Image
+                            src={menuItem.icon}
+                            alt={menuItem.title}
+                            width={22}
+                            height={22}
+                            className=""
+                          />
+                        )}
+                        <span className="">{translateMenuTitle(menuItem.title)}</span>
+                      </div>
+                    </div>
+                  ))}
+              </ToggleCollapse>
+            </div>
           </div>
           <div ref={bottomRef}></div>
         </div>
