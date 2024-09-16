@@ -164,8 +164,7 @@ const SellerRegistrationForm = () => {
       return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
     }
     
-    const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
-    logger.info('Saving form data:', { formData, sellCenter });
+    logger.info('Saving form data:', { formData });
 
     // Trim and clean the sellerAddress and sellerDescription fields
     let sellerAddress = formData.sellerAddress.trim() === "" 
@@ -191,14 +190,6 @@ const SellerRegistrationForm = () => {
         coordinates: [number, number];
       };
     };
-
-    // Add sell_map_center field only if sellCenter is available
-    if (sellCenter) {
-      regForm.sell_map_center = {
-        type: 'Point' as const,
-        coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
-      };
-    }
 
     try {
       const data = await registerSeller(regForm);
