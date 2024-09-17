@@ -46,9 +46,9 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "Seller type",
         "SELLER_TYPE_OPTIONS": {
-          "PIONEER": "Pioneer",
-          "CURRENTLY_NOT_SELLING": "Currently Not Selling",
-          "TEST_SELLER": "Test Seller",
+          "PIONEER": "Real merchant - actively selling", 
+          "CURRENTLY_NOT_SELLING": "Real merchant - not currently selling", 
+          "TEST_SELLER": "Test seller", 
           "OTHER": "Other"
         }
       },

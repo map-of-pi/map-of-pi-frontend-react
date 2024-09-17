@@ -27,6 +27,12 @@ import UrlsRemoval from '../../../../util/urlsRemoval';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
+const sellerTypeOptions = [
+  { value: 'active', label: 'Real merchant - actively selling' },
+  { value: 'inactive', label: 'Real merchant - not currently selling' },
+  { value: 'test', label: 'Test seller' },
+];
+
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
   const SUBHEADER = 'font-bold mb-2';
@@ -34,9 +40,10 @@ const SellerRegistrationForm = () => {
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
 
+  
   const [formData, setFormData] = useState({
     sellerName: '',
-    sellerType: 'Pioneer',
+    sellerType: 'Test seller',
     sellerDescription: '',
     sellerAddress: '',
   });
@@ -100,7 +107,7 @@ const SellerRegistrationForm = () => {
         sellerName: dbSeller.name || defaultSellerName,
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        sellerType: dbSeller.seller_type || '',
+        sellerType: dbSeller.seller_type || 'Test seller',
       });
     }
   }, [dbSeller]);
@@ -225,15 +232,15 @@ const SellerRegistrationForm = () => {
 
   const translatedSellerTypeOptions = [
     {
-      value: 'Pioneer',
+      value: 'active',
       name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
     },
     {
-      value: 'CurrentlyNotSelling',
+      value: 'inactive',
       name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.CURRENTLY_NOT_SELLING'),
     },
     {
-      value: 'TestSeller',
+      value: 'test',
       name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER'),
     },
     {
