@@ -14,7 +14,7 @@
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "User Preferences",
-    "PERSONALIZATION_SUBHEADER": "Personalisationn",
+    "PERSONALIZATION_SUBHEADER": "Personalisation",
     "EMAIL_ADDRESS_FIELD": "Your email address",
     "PHONE_NUMBER_FIELD": "Your phone number",
     "LANGUAGES": "Languages",
@@ -189,7 +189,7 @@
       "EMAIL_LABEL": "Email" 
     },
     "PHOTO": {
-      "UPLOAD_PHOTO_LABEL": "Upload Photo",
+      "UPLOAD_PHOTO_LABEL": "Upload photo",
       "UPLOAD_PHOTO_PLACEHOLDER": "Upload image to help attract buyers (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
       "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
@@ -223,6 +223,7 @@
     },
     "LOADING_SCREEN_MESSAGE": "Loading data...",
     "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Submission failed because user is not authenticated",
       "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  
     }
   }

@@ -170,12 +170,23 @@ const SellerRegistrationForm = () => {
     }
   };
 
+  
+  const handleNavigation = (nextLink: string)=> {
+    setLinkUrl(nextLink);
+    
+    if (isSaveEnabled) {
+      setShowConfirmDialog(true); // Show confirm dialog when save is enabled
+    } else {
+      router.push(nextLink); // Direct navigation if save is not enabled
+    }
+  }
+
   // Function to save data to the database
   const handleSave = async () => {  
     // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
-      return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.REGISTRATION_FAILED_USER_NOT_AUTHENTICATED'));            
+      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));            
     }
     
     const sellCenter = JSON.parse(localStorage.getItem('mapCenter') as string);
@@ -214,13 +225,13 @@ const SellerRegistrationForm = () => {
       formDataToSend.append('image', '');
     }
 
-    logger.info('Registration form data:', { formDataToSend });
+    logger.info('Registration form data:', JSON.stringify({ formDataToSend }));
 
     try {
       const data = await registerSeller(formDataToSend);
       if (data.seller) {
-        setIsSaveEnabled(false);
         setDbSeller(data.seller);
+        setIsSaveEnabled(false);
         logger.info('Seller registration saved successfully:', { data });
         toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
       }
@@ -228,17 +239,7 @@ const SellerRegistrationForm = () => {
       logger.error('Error saving seller registration:', { error });
     }
   };
-
-  const handleNavigation = (nextLink: string)=> {
-    setLinkUrl(nextLink);
   
-    if (isSaveEnabled) {
-      setShowConfirmDialog(true); // Show confirm dialog when save is enabled
-    } else {
-      router.push(nextLink); // Direct navigation if save is not enabled
-    }
-  }
-
   const translatedSellerTypeOptions = [
     {
       value: 'Pioneer',
@@ -342,31 +343,29 @@ const SellerRegistrationForm = () => {
           {/* user settings info toggle */}
           <ToggleCollapse
             header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
-            <div className="text-sm mb-7 text-gray-500">
-              <div className="text-sm mb-3">
-                <span className="font-bold">
-                  {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
-                </span>
-                <span>{currentUser ? currentUser.pi_username : ''}</span>
-              </div>
-              <div className="text-sm mb-3">
-                <span className="font-bold">
-                  {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
-                </span>
-                <span>{currentUser ? currentUser.user_name : ''}</span>
-              </div>
-              <div className="text-sm mb-3">
-                <span className="font-bold">
-                  {t('SHARED.USER_INFORMATION.PHONE_NUMBER_LABEL') + ': '}
-                </span>
-                <span>{userSettings ? userSettings.phone_number : ""}</span>
-              </div>
-              <div className="text-sm mb-5">
-                <span className="font-bold">
-                  {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
-                </span>
-                <span>{ userSettings ? userSettings.email : ""}</span>
-              </div>
+            <div className="text-sm mb-3">
+              <span className="font-bold">
+                {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
+              </span>
+              <span>{currentUser ? currentUser.pi_username : ''}</span>
+            </div>
+            <div className="text-sm mb-3">
+              <span className="font-bold">
+                {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
+              </span>
+              <span>{currentUser ? currentUser.user_name : ''}</span>
+            </div>
+            <div className="text-sm mb-3">
+              <span className="font-bold">
+                {t('SHARED.USER_INFORMATION.PHONE_NUMBER_LABEL') + ': '}
+              </span>
+              <span>{userSettings ? userSettings.phone_number : ""}</span>
+            </div>
+            <div className="text-sm mb-5">
+              <span className="font-bold">
+                {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
+              </span>
+              <span>{ userSettings ? userSettings.email : ""}</span>
             </div>
           </ToggleCollapse>
           

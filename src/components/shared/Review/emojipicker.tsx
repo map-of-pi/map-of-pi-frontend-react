@@ -121,7 +121,7 @@ export default function EmojiPicker(props: any) {
         }
       } else {
         logger.warn('Unable to submit review; user not authenticated.');
-        toast.error(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
+        toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
       }
     } catch (error) {
       logger.error('Error saving review:', { error });

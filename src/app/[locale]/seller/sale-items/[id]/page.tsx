@@ -114,7 +114,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         <div className="flex gap-4 align-center mb-6 relative">
           <div className="rounded-[50%] w-[65px] h-[65px] relative">
             <Image alt="seller logo" 
-              src={sellerShopInfo.image !== null ? sellerShopInfo.image : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png'} 
+              src={sellerShopInfo.image && sellerShopInfo.image.trim() !== "" ? sellerShopInfo.image : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png'} 
               fill={true} 
               className="rounded-[50%]" 
             />
@@ -166,25 +166,25 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
           <div className="text-sm mb-3">
             <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_USERNAME_LABEL') + ': '}
-            </span>
-            <span>{sellerInfo ? sellerInfo.user_name : ''}</span>
-          </div>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_PIONEER_ID_LABEL') + ': '}
+              {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
             </span>
             <span>{sellerInfo ? sellerInfo.pi_username: ''}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_NUMBER_LABEL') + ': '}
+              {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
+            </span>
+            <span>{sellerInfo ? sellerInfo.user_name : ''}</span>
+          </div>
+          <div className="text-sm mb-3">
+            <span className="font-bold">
+              {t('SHARED.USER_INFORMATION.PHONE_NUMBER_LABEL') + ': '}
             </span>
             <span>{sellerSettings ? sellerSettings.phone_number : ""}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_ADDRESS_LABEL') + ': '}
+              {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
             </span>
             <span>{ sellerSettings ? sellerSettings.email : ""}</span>
           </div>

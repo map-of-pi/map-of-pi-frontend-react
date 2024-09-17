@@ -219,9 +219,8 @@ function Sidebar(props: any) {
     // check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
-      // TODO: add toast.error w/ language translation            
+      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
     }
-    logger.info('Saving form data:', { formData });
 
     const formDataToSend = new FormData();
     formDataToSend.append('email', formData.email);
@@ -234,12 +233,13 @@ function Sidebar(props: any) {
       formDataToSend.append('image', '');
     }
 
-    logger.info('User Settings form data:', { formDataToSend });
+    logger.info('User Settings form data:', JSON.stringify({ formDataToSend }));
 
     try {
       const data = await createUserSettings(formDataToSend);
-      setDbUserSettings(data.settings);
       if (data.settings) {
+        setDbUserSettings(data.settings);
+        setIsSaveEnabled(false);
         logger.info('User Settings saved successfully:', { data });
         toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
       }

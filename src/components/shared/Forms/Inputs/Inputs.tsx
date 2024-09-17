@@ -46,10 +46,10 @@ export const TextArea = (props: any) => {
   return (
     <div className="">
       {label && (
-        <label className=" block text-[17px] text-[#333333]">{label}</label>
+        <label className="block text-[17px] text-[#333333]">{label}</label>
       )}
       {describe && (
-        <label className=" block text-sm text-gray-400">{describe}</label>
+        <label className="block text-sm text-gray-400">{describe}</label>
       )}
       <textarea
         placeholder={props.placeholder}
@@ -69,16 +69,12 @@ export const FileInput = (props: any) => {
   return (
     <div className="">
       {props.label && (
-        <label className="block font-medium text-gray-700">{imageLabel}</label>
+        <label className="block text-[17px] text-[#333333]">{imageLabel}</label>
       )}
       {props.describe && (
         <label className="block pb-3 text-sm text-gray-400">{props.describe}</label>
       )}
-      <div 
-        className={`flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative 
-          ${isImageUploaded ? '' : "border-dashed border-[2px] border-green-700"
-        }`}
-      >
+      <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative">
         <div className="w-full h-[200px] relative mb-4">
           <Image
             src={isImageUploaded ? props.imageUrl : '/images/shared/upload.png'}

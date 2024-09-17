@@ -189,7 +189,7 @@
       "EMAIL_LABEL": "Emɛl nɔfɛ" 
     },
     "PHOTO": {
-      "UPLOAD_PHOTO_LABEL": "Ɖe ŋutɔ Vinyo",
+      "UPLOAD_PHOTO_LABEL": "Ɖe ŋutɔ vinyo",
       "UPLOAD_PHOTO_PLACEHOLDER": "Zu fɛnyɔwo kple vɔs ɖe amegãwo me fia wò (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Kpɔ siwo be ɖe ƒe ɣe ŋutɔ foto alo tɔkɔ",
       "SUPPORTS_FILE_MESSAGE": "Ɖe vɔ: PNG, JPG, JPEG, WEBP",
@@ -223,6 +223,7 @@
     },
     "LOADING_SCREEN_MESSAGE": "Ɣe siwo...",
     "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Nɔvia míaɖu abe nu wò ye mele wònu o le fifiawo nyo",
       "UNEXPECTED_ERROR_MESSAGE": "Nuxlɔ̃sia na mi ɖe mɔ o"
     }
   }

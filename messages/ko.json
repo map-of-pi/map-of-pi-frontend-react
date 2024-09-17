@@ -223,6 +223,7 @@
     },
     "LOADING_SCREEN_MESSAGE": "데이터 로딩 중...",
     "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "제출이 실패했습니다; 사용자가 인증되지 않았습니다",
       "UNEXPECTED_ERROR_MESSAGE": "예기치 않은 오류가 발생했습니다"
     }
   }
