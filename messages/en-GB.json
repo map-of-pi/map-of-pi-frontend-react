@@ -74,9 +74,10 @@
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Seller Contact Details",
-      "SELLER_PI_ID_LABEL": "Seller pioneer ID",
-      "SELLER_PHONE_LABEL": "Seller phone number", 
-      "SELLER_EMAIL_LABEL": "Seller email" 
+      "SELLER_USERNAME_LABEL": "Username",
+      "SELLER_PIONEER_ID_LABEL": "Pioneer ID", 
+      "SELLER_PHONE_NUMBER_LABEL": "Phone number",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email address" 
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No reviews for {seller_id}",

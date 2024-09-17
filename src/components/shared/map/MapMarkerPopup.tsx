@@ -11,10 +11,9 @@ const MapMarkerPopup = ({ seller }:any) => {
   const t = useTranslations();
   const SUBHEADER = 'font-bold mb-2';
   
-  const imageUrl = seller.image !== null ? seller.image : '/images/shared/upload.png'
+  const imageUrl = seller.image && seller.image.trim() !== "" ? seller.image : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png'
   
   logger.info('Rendering MapMarkerPopup for seller:', { seller });
-
   return (
     <>
       <div className="min-w-sm rounded-md justify-center mx-auto">

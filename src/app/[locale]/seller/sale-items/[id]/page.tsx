@@ -166,25 +166,25 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
           <div className="text-sm mb-3">
             <span className="font-bold">
-              {t('Username') + ': '}
+              {t('SCREEN.BUY_FROM_SELLER.SELLER_USERNAME_LABEL') + ': '}
             </span>
             <span>{sellerInfo ? sellerInfo.user_name : ''}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
-              {t('Pioneer Name') + ': '}
+              {t('SCREEN.BUY_FROM_SELLER.SELLER_PIONEER_ID_LABEL') + ': '}
             </span>
             <span>{sellerInfo ? sellerInfo.pi_username: ''}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
-              {t('Phone') + ': '}
+              {t('SCREEN.BUY_FROM_SELLER.SELLER_PHONE_NUMBER_LABEL') + ': '}
             </span>
             <span>{sellerSettings ? sellerSettings.phone_number : ""}</span>
           </div>
           <div className="text-sm mb-3">
             <span className="font-bold">
-              {t('Email') + ': '}
+              {t('SCREEN.BUY_FROM_SELLER.SELLER_EMAIL_ADDRESS_LABEL') + ': '}
             </span>
             <span>{ sellerSettings ? sellerSettings.email : ""}</span>
           </div>

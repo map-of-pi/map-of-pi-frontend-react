@@ -74,9 +74,10 @@
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayanin Sake Dubawa",
       "REVIEWS_SCORE_MESSAGE": "Makin Sake Dubawa: {seller_review_rating} cikin 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Bayanin Tuntuɓar Mai Siyarwa",
-      "SELLER_PI_ID_LABEL": "ID pioneer Mai Sayarwa",
-      "SELLER_PHONE_LABEL": "Lambar wayar Mai Sayarwa", 
-      "SELLER_EMAIL_LABEL": "Imel na Mai Sayarwa" 
+      "SELLER_USERNAME_LABEL": "Sunan mai amfani",
+      "SELLER_PIONEER_ID_LABEL": "ID na Pioneer", 
+      "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Babu bita don {seller_id}",

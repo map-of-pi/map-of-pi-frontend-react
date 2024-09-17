@@ -63,7 +63,7 @@ export const TextArea = (props: any) => {
 
 export const FileInput = (props: any) => {
   const t = useTranslations();
-  const isImageUploaded = props.imageUrl !== null; // Check if an image has been uploaded
+  const isImageUploaded = props.imageUrl && props.imageUrl.trim() !== ""; // Check if an image has been uploaded
   const imageLabel = isImageUploaded ? props.label : t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL');
 
   return (
@@ -81,11 +81,11 @@ export const FileInput = (props: any) => {
       >
         <div className="w-full h-[200px] relative mb-4">
           <Image
-            src={props.imageUrl}
+            src={isImageUploaded ? props.imageUrl : '/images/shared/upload.png'}
             alt="Upload image"
-            layout="fill"
-            objectFit="contain"
-            style={{ maxHeight: '200px', maxWidth: '100%' }}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: 'contain', maxHeight: '200px', maxWidth: '100%' }}
           />
         </div>
         {!isImageUploaded && (
@@ -105,62 +105,6 @@ export const FileInput = (props: any) => {
           onChange={(e) => props.handleAddImage(e)}
         />
       </div>
-    </div>
-  );
-};
-
-export const FileInput2 = (props: any) => {
-  const t = useTranslations();
-  return (
-    <div className="">
-      {props.label && (
-        <label className="block font-medium text-gray-700">{props.label}</label>
-      )}
-
-      {!props.image && (
-        <div className="flex justify-center relative overflow-hidden w-[80%] left-0 right-0 m-auto gap-2 items-center mb-3">
-          <Image
-            src="/images/business/add-item-button.png"
-            alt=""
-            width={60}
-            height={60}
-            className="rounded-md"
-          />
-          <span>
-            {t('BUSINESS.CONFIGURATION.ADD_PRODUCT_MENU.LABELS.ADD_IMAGE')}
-          </span>
-          <input
-            type="file"
-            name=""
-            id=""
-            className="absolute scale-[3] left-0 right-0 opacity-0"
-            onChange={(e) => props.handleAddImage(e)}
-          />
-        </div>
-      )}
-      {props.image && (
-        <div className="flex justify-between items-center">
-          <Image
-            src={props.image}
-            alt="image"
-            width={70}
-            height={62}
-            objectFit="cover"
-          />
-          <Image
-            src={props.image}
-            alt="image"
-            width={60}
-            height={60}
-            objectFit="contain"
-          />
-          <div
-            className="text-red-700 self-start text-3xl cursor-pointer"
-            onClick={props.handleDeleteImage}>
-            ×
-          </div>
-        </div>
-      )}
     </div>
   );
 };

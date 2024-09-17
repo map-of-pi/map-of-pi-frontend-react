@@ -74,9 +74,10 @@
       "REVIEWS_SUMMARY_LABEL": "Sɔlɔɖe ɖe do",
       "REVIEWS_SCORE_MESSAGE": "Sɔlɔɖe mɔkpla: {seller_review_rating} ɖe ame sia 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Nuɖoɖoɖo aɖeƒe ƒe Tsiteyɔnu",
-      "SELLER_PI_ID_LABEL": "Adesɔviwo ɖe piunivi ID",
-      "SELLER_PHONE_LABEL": "Adesɔviwo telefɔn nam",
-      "SELLER_EMAIL_LABEL": "Adesɔviwo email" 
+      "SELLER_USERNAME_LABEL": "Nuɖuiwɔafɔ",
+      "SELLER_PIONEER_ID_LABEL": "Pioneer ID", 
+      "SELLER_PHONE_NUMBER_LABEL": "Ɖeɖekɔaɖe",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email gɔme"
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Mèkpɔ dzudzɔkpɔkpɔ ƒe {seller_id} o",

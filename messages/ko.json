@@ -74,9 +74,10 @@
       "REVIEWS_SUMMARY_LABEL": "리뷰 요약",
       "REVIEWS_SCORE_MESSAGE": "리뷰 점수: {seller_review_rating} / 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "판매자 연락처 정보",
-      "SELLER_PI_ID_LABEL": "판매자 선구자 ID",
-      "SELLER_PHONE_LABEL": "판매자 전화번호",
-      "SELLER_EMAIL_LABEL": "판매자 이메일"
+      "SELLER_USERNAME_LABEL": "사용자 이름",
+      "SELLER_PIONEER_ID_LABEL": "파이오니어 ID", 
+      "SELLER_PHONE_NUMBER_LABEL": "전화번호",
+      "SELLER_EMAIL_ADDRESS_LABEL": "이메일 주소"
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "{seller_id}에 대한 리뷰가 없습니다",

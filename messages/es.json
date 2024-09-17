@@ -74,9 +74,10 @@
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
       "REVIEWS_SCORE_MESSAGE": "Puntuación de Reseñas: {seller_review_rating} de 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Detalles de Contacto del Vendedor",
-      "SELLER_PI_ID_LABEL": "ID de pionero del vendedor",
-      "SELLER_PHONE_LABEL": "Número de teléfono del vendedor",
-      "SELLER_EMAIL_LABEL": "Correo electrónico del vendedor"
+      "SELLER_USERNAME_LABEL": "Nombre de usuario",
+      "SELLER_PIONEER_ID_LABEL": "ID de Pionero", 
+      "SELLER_PHONE_NUMBER_LABEL": "Número de teléfono",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico" 
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No hay reseñas para {seller_id}",

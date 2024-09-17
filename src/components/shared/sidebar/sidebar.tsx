@@ -391,7 +391,7 @@ function Sidebar(props: any) {
                 header={t('SIDE_NAVIGATION.PERSONALIZATION_SUBHEADER')}>
                 <div className="mb-2">
                   <FileInput
-                    label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
+                    label={t('SHARED.PHOTO.MISC_LABELS.USER_PREFERENCES_LABEL')}
                     imageUrl={ previewImage }
                     handleAddImage={handleAddImage}
                   />
