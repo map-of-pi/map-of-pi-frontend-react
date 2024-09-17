@@ -149,14 +149,6 @@ export default function Page({ params }: { params: { id: string } }) {
             </Link>
           </div>
         </div>
-
-        <ToggleCollapse
-          header={t('SCREEN.BUY_FROM_SELLER.LEAVE_A_REVIEW_MESSAGE')}>
-          <div>
-            <EmojiPicker sellerId={sellerId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} />
-          </div>
-        </ToggleCollapse>
-
           
         <ToggleCollapse
           header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
