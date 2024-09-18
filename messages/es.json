@@ -67,16 +67,17 @@
       "BUY_FROM_SELLER_HEADER": "Comprar del Vendedor",
       "SELLER_DETAILS_LABEL": "Detalles del Vendedor",
       "SELLER_ADDRESS_POSITION_LABEL": "Dirección o Posición del Vendedor",
-      "LEAVE_A_REVIEW_MESSAGE": "Deja una reseña",
+      "LEAVE_A_REVIEW_MESSAGE": "Dejar una Reseña",
       "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes sobre el vendedor anterior",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
       "REVIEWS_SCORE_MESSAGE": "Puntuación de Reseñas: {seller_review_rating} de 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Detalles de Contacto del Vendedor",
-      "SELLER_PI_ID_LABEL": "ID de pionero del vendedor",
-      "SELLER_PHONE_LABEL": "Número de teléfono del vendedor",
-      "SELLER_EMAIL_LABEL": "Correo electrónico del vendedor"
+      "SELLER_USERNAME_LABEL": "Nombre de usuario",
+      "SELLER_PIONEER_ID_LABEL": "ID de Pionero", 
+      "SELLER_PHONE_NUMBER_LABEL": "Número de teléfono",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico" 
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No hay reseñas para {seller_id}",
@@ -89,7 +90,10 @@
       "REPLY_TO_REVIEW_MESSAGE": "Deja tu respuesta a la reseña anterior",
       "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes sobre la reseña anterior",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación"
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
+      "VALIDATION": {
+        "SELF_REVIEW_PROHIBITED": "La autoevaluación está prohibida"
+      }
     }
   },
   "POPUP": {
@@ -188,12 +192,14 @@
       "EMAIL_LABEL": "Correo electrónico"
     },
     "PHOTO": {
-      "UPLOAD_PHOTO_LABEL": "Subir Foto",
+      "UPLOAD_PHOTO_LABEL": "Subir foto",
       "UPLOAD_PHOTO_PLACEHOLDER": "Sube una imagen para ayudar a atraer compradores (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Suelta tu imagen aquí o busca",
       "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
-        "SELLER_IMAGE_LABEL": "Imagen del vendedor"
+        "USER_PREFERENCES_LABEL": "Imagen de perfil",
+        "SELLER_IMAGE_LABEL": "Imagen del vendedor",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Imagen de reseña"
       }
     },
     "REACTION_RATING": {
@@ -220,6 +226,7 @@
     },
     "LOADING_SCREEN_MESSAGE": "Cargando datos...",
     "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "El envío falló porque el usuario no está autenticado",
       "UNEXPECTED_ERROR_MESSAGE": "Ocurrió un error inesperado"
     }
   }
