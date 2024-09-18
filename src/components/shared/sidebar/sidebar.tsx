@@ -55,17 +55,28 @@ function Sidebar(props: any) {
   const pathname = usePathname();
   const router = useRouter();
 
+  const { currentUser, autoLoginUser } = useContext(AppContext);
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
+  const [formData, setFormData] = useState({
+    user_name: '',
+    email: '',
+    phone_number: '',
+    image: '',
+    findme: '',
+    trust_meter_rating: 100,
+  });
   const { resolvedTheme, setTheme } = useTheme();
   const [toggle, setToggle] = useState<any>({
     Themes: false,
     Languages: false,
   });
-  const { currentUser, autoLoginUser } = useContext(AppContext);
-  const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
-  const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
+  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string>(dbUserSettings?.image || '');
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
+
   const [showMapCenter] = useState(false);  // New state to toggle the MapCenter display
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [formData, setFormData] = useState({
@@ -81,57 +92,67 @@ function Sidebar(props: any) {
       autoLoginUser();
     }
 
-    const getUserSettings = async () => {
-      logger.debug('Fetching user settings..');
-      const settings = await fetchUserSettings();
-      if (settings) {
-        setUserSettings(settings);
-        setPhoneNumber(settings.phone_number?.toString());
-        logger.info('User settings fetched successfully.');
-      } else {
-        setUserSettings(null);
-        logger.warn('User settings not found.');
+    const getUserSettingsData = async () => {
+      try {
+        const data = await fetchUserSettings();
+        if (data) {
+          logger.info('Fetched user settings data successfully:', { data });
+          setDbUserSettings(data);
+        } else {
+          logger.warn('User Settings not found.');
+          setDbUserSettings(null);
+        }
+      } catch (error) {
+        logger.error('Error fetching user settings data:', { error });
       }
     };
-    getUserSettings();
+    getUserSettingsData();
   }, []);
 
+  // Initialize formData with dbUserSettings values if available
   useEffect(() => {
-    if (userSettings) {
+    if (dbUserSettings) {
       setFormData({
-        user_name: userSettings.user_name || '',
-        email: userSettings.email || '',
-        phone_number: userSettings.phone_number || '',
-        findme: userSettings.findme || 'Use my device GPS',
+        user_name: dbUserSettings.user_name || '',
+        email: dbUserSettings.email || '',
+        phone_number: dbUserSettings.phone_number?.toString() || '',
+        image: dbUserSettings.image || '',
+        findme: dbUserSettings.findme || t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
+        trust_meter_rating: dbUserSettings.trust_meter_rating
       });
     }
-  }, [userSettings]);
+  }, [dbUserSettings]);
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    const { name, value } = e.target;
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-    
-    // enable or disable save button based on form inputs
-    const isFormFilled = Object.values(formData).some(v => v !== '');
-    setIsSaveEnabled(isFormFilled);
-  };
+  // function preview image upload
+  useEffect(() => {
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewImage(objectUrl);
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+    };
+  }, [file]);
 
-  const handlePhoneNumberChange = (value: string | undefined) => {
-    setPhoneNumber(value);
-    logger.debug(`Phone number changed to: ${value}`);
-  };
-  
+  // set the preview image if dbUserSettings changes
+  useEffect(() => {
+    if (dbUserSettings?.image) {
+      setPreviewImage(dbUserSettings.image);
+    }
+  }, [dbUserSettings]);
+
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  const handleAddImages = () => {
-    logger.debug('Add images handler triggered.');
+  const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0]; // only take the first file
+    if (selectedFile) {
+      setFile(selectedFile);
+
+      const objectUrl = URL.createObjectURL(selectedFile);
+      setPreviewImage(objectUrl);
+      logger.info('Image selected for upload:', { selectedFile });
+
+      setIsSaveEnabled(true);
+    }
   };
 
   const handleMenu = (title: any, url: string) => {
@@ -185,27 +206,60 @@ function Sidebar(props: any) {
     }
   };
 
-  // Function to submit user preference settings to the database
-  const handleSave = async () => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    > | { name: string; value: string }) => {
+    // handle such scenarios where the event might not have the typical e.target structure i.e., PhoneInput.
+    const name = 'target' in e ? e.target.name : e.name;
+    const value = 'target' in e ? e.target.value : e.value;
 
-    if (formData) {    
-      formData.phone_number = phoneNumber as string;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
 
-      try {
-        const data = await createUserSettings(formData);
-        logger.info('User settings submitted successfully:', { data });
-        if (data.settings) {
-          setIsSaveEnabled(false)
-          toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
-        }
-      } catch (error: any) {
-        logger.error('Error submitting user settings:', { error });
-        toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
-      }
-    } else {
-      return null;
-    }
+    // enable or disable save button based on form inputs
+    const isFormFilled = Object.values(formData).some(v => v !== '');
+    setIsSaveEnabled(isFormFilled);
   };
+
+  // Function to save data to the database
+  const handleSave = async () => { 
+    // check if user is authenticated and form is valid
+    if (!currentUser) {
+      logger.warn('Form submission failed: User not authenticated.');
+      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
+    }
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('user_name', formData.user_name);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('phone_number', formData.phone_number);
+    formDataToSend.append('findme', formData.findme);
+
+    // add the image if it exists
+    if (file) {
+      formDataToSend.append('image', file);
+    } else {
+      formDataToSend.append('image', '');
+    }
+
+    logger.info('User Settings form data:', Object.fromEntries(formDataToSend.entries()));
+
+    try {
+      const data = await createUserSettings(formDataToSend);
+      if (data.settings) {
+        setDbUserSettings(data.settings);
+        setIsSaveEnabled(false);
+        logger.info('User Settings saved successfully:', { data });
+        toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
+      }
+    } catch (error) {
+      logger.error('Error saving user settings:', { error });
+      toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
+    }
+  }
 
   const translateMenuTitle = (title: string): string => {
     switch (title) {
@@ -303,9 +357,9 @@ function Sidebar(props: any) {
             />
             <TelephoneInput
               label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
-              value={phoneNumber}
+              value={formData.phone_number}
               name="phone_number"
-              onChange={handlePhoneNumberChange}
+              onChange={(value: any) => handleChange({ name: 'phone_number', value })}
               style={{
                 textAlign: 'center'
               }}
@@ -328,7 +382,7 @@ function Sidebar(props: any) {
             {/* user review */}
             <div className='my-2'>
               <h3 className={`font-bold text-sm text-nowrap`}>Trust-o-meter</h3>
-              <TrustMeter ratings={currentUser ? 50 : 100} hideLabel={true} />
+              <TrustMeter ratings={dbUserSettings ? dbUserSettings.trust_meter_rating : 100} hideLabel={true} />
             </div>             
             <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
               <OutlineBtn
@@ -349,16 +403,16 @@ function Sidebar(props: any) {
                 header={t('SIDE_NAVIGATION.PERSONALIZATION_SUBHEADER')}>
                 <div className="mb-2">
                   <FileInput
-                    label={t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL')}
-                    images={[]}
-                    handleAddImages={handleAddImages}
+                    label={t('SHARED.PHOTO.MISC_LABELS.USER_PREFERENCES_LABEL')}
+                    imageUrl={ previewImage }
+                    handleAddImage={handleAddImage}
                   />
                 </div>
 
                 <Select
                   label={t('SIDE_NAVIGATION.FIND_ME_PREFERENCE_LABEL')}
                   name="findme"
-                  value={formData.findme? formData.findme: "Use my device GPS"}
+                  value={ formData.findme }
                   onChange={handleChange}
                   options={translateFindMeOptions}
                 />
@@ -423,7 +477,6 @@ function Sidebar(props: any) {
                 </div>
                 <Button
                   label={t('SHARED.SAVE')}
-                  disabled={!isSaveEnabled}
                   styles={{
                     color: '#ffc153',
                     height: '40px',
