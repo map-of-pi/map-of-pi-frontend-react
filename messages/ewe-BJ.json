@@ -46,10 +46,9 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "Ɖe le adesɔ",
         "SELLER_TYPE_OPTIONS": {
-          "PIONEER": "Pioneer",
-          "OTHER": "Ɖe ŋutɔ",
-          "CURRENTLY_NOT_SELLING": "Mègãƒé ƒédu Náƒé",
-          "TEST_SELLER": "Nàƒé Wòkpɔ̃nɔ Nye Sɔ Nu ƒé"
+          "ACTIVE_SELLER": "Trɔtrɔlɔ ame si nya nɔ",
+          "INACTIVE_SELLER": "Trɔtrɔlɔ ame si le hã",
+          "TEST_SELLER": "Trɔtrɔlɔ ame si nye nyatsɔ"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Tsiteyɔnu Nusrɔ̃ Me ɖoɖo",

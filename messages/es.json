@@ -46,10 +46,9 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "Tipo de vendedor",
         "SELLER_TYPE_OPTIONS": {
-          "PIONEER": "Pionero",
-          "OTHER": "Otro",
-          "CURRENTLY_NOT_SELLING": "Actualmente No Está Vendiendo",
-          "TEST_SELLER": "Vendedor de Prueba"
+          "ACTIVE_SELLER": "Vendedor activo",
+          "INACTIVE_SELLER": "Vendedor inactivo",
+          "TEST_SELLER": "Vendedor de prueba"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",

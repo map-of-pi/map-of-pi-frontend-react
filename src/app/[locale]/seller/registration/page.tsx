@@ -37,7 +37,7 @@ const SellerRegistrationForm = () => {
   const {currentUser, autoLoginUser} = useContext(AppContext);
   const [formData, setFormData] = useState({
     sellerName: '',
-    sellerType: 'Pioneer',
+    sellerType: 'Test seller',
     sellerDescription: '',
     sellerAddress: '',
     image: ''
@@ -101,7 +101,7 @@ const SellerRegistrationForm = () => {
         sellerName: dbSeller.name || defaultSellerName,
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        sellerType: dbSeller.seller_type || '',
+        sellerType: dbSeller.seller_type || 'Test seller',
         image: dbSeller.image || ''
       });
     }
@@ -242,21 +242,17 @@ const SellerRegistrationForm = () => {
   
   const translatedSellerTypeOptions = [
     {
-      value: 'Pioneer',
-      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
+      value: 'activeSeller',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER'),
     },
     {
-      value: 'CurrentlyNotSelling',
-      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.CURRENTLY_NOT_SELLING'),
+      value: 'inactiveSeller',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER'),
     },
     {
-      value: 'TestSeller',
+      value: 'testSeller',
       name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER'),
-    },
-    {
-      value: 'Other',
-      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'),
-    },
+    }
   ];
 
   if (loading) {
