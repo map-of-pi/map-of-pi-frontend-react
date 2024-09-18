@@ -70,7 +70,7 @@ function Sidebar(props: any) {
     Themes: false,
     Languages: false,
   });
-  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+ 
   const [file, setFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>(dbUserSettings?.image || '');
   const [showInfoModel, setShowInfoModel] = useState(false);
@@ -79,12 +79,6 @@ function Sidebar(props: any) {
 
   const [showMapCenter] = useState(false);  // New state to toggle the MapCenter display
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-  const [formData, setFormData] = useState({
-    user_name: '',
-    email: '',
-    phone_number: '',
-    findme: '',
-  });
 
   useEffect(() => {
     if (!currentUser) {

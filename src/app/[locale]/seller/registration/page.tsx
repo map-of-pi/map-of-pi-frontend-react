@@ -212,12 +212,6 @@ const SellerRegistrationForm = () => {
 
     // Add sell_map_center field only if sellCenter is available
     if (sellCenter) {
-      console.log('sellCenter:', sellCenter);
-      regForm.sell_map_center = {
-        type: 'Point' as const,
-        coordinates: [sellCenter[0], sellCenter[1]] as [number, number]
-      };
-    }
       formDataToSend.append('sell_map_center', JSON.stringify({
         type: 'Point',
         coordinates: [sellCenter[0], sellCenter[1]]
@@ -293,22 +287,16 @@ const SellerRegistrationForm = () => {
             />
           </div>
         </div>
-        <Link
-          href={{
-            pathname: "/map-center", // Path to MapCenter component
-            query: { entryType: 'sell' } // Passing 'sell' as entryType
+        <Button
+          label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
+          onClick={() => handleNavigation("/map-center")}
+          styles={{
+            color: '#ffc153',
+            height: '40px',
+            padding: '10px',
+            marginLeft: 'auto',
           }}
-        >
-          <Button
-            label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
-            styles={{
-              color: '#ffc153',
-              height: '40px',
-              padding: '10px',
-              marginLeft: 'auto',
-            }}
-          />
-        </Link>
+        />
         <div className="mb-4 mt-3 ml-auto w-min">
           <Button
             label={t('SHARED.SAVE')}
