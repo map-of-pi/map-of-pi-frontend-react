@@ -25,10 +25,12 @@ const MapMarkerPopup = ({ seller }:any) => {
         <div className="flex gap-2 mb-2 items-center">
           <div className="relative w-[50px] h-[50px] min-w-[50px] min-h-[50px]">
             <Image
-              alt="seller logo"
-              src={imageUrl}
-              fill={true}
               className="rounded-lg m-0 my-auto"
+              src={imageUrl}
+              alt="seller logo"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: 'contain', maxHeight: '200px', maxWidth: '100%' }}
             />
           </div>
           <div className="font-bold line-clamp-3 m-0 p-0">

@@ -90,7 +90,10 @@
       "REPLY_TO_REVIEW_MESSAGE": "위 리뷰에 대한 답장을 남기세요",
       "FACE_SELECTION_REVIEW_MESSAGE": "위 리뷰에 대한 느낌을 나타내는 얼굴을 선택하세요",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "추가 의견을 입력하세요",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "피드백 사진 업로드"
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "피드백 사진 업로드",
+      "VALIDATION": {
+        "SELF_REVIEW_PROHIBITED": "자기 평가는 금지되어 있습니다"
+      }
     }
   },
   "POPUP": {

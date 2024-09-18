@@ -90,7 +90,10 @@
       "REPLY_TO_REVIEW_MESSAGE": "Xɔ le ŋutɔ sia sɔlɔɖe ɖe doaɖe lɔme",
       "FACE_SELECTION_REVIEW_MESSAGE": "Dzi le vavaŋuto ɖe ŋutɔ le wo ɖe sɔlɔɖe ɖe lɔme dziwo",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Xɔ le vavaŋuto ŋutɔ kple kple",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Photo na vovɔ"
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Photo na vovɔ",
+      "VALIDATION": {
+        "SELF_REVIEW_PROHIBITED": "Wòdzɔ wò nɔnɔ kple wòkplɔ míaɖu o"
+      }
     }
   },
   "POPUP": {

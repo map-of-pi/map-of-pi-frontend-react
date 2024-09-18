@@ -225,7 +225,7 @@ const SellerRegistrationForm = () => {
       formDataToSend.append('image', '');
     }
 
-    logger.info('Registration form data:', JSON.stringify({ formDataToSend }));
+    logger.info('Registration form data:', Object.fromEntries(formDataToSend.entries()));
 
     try {
       const data = await registerSeller(formDataToSend);

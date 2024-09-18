@@ -90,7 +90,10 @@
       "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
       "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above review",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload"
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
+      "VALIDATION": {
+        "SELF_REVIEW_PROHIBITED": "Self-review is prohibited"
+      }
     }
   },
   "POPUP": {

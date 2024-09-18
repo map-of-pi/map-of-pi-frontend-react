@@ -113,10 +113,13 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         {/* Seller Profile */}
         <div className="flex gap-4 align-center mb-6 relative">
           <div className="rounded-[50%] w-[65px] h-[65px] relative">
-            <Image alt="seller logo" 
-              src={sellerShopInfo.image && sellerShopInfo.image.trim() !== "" ? sellerShopInfo.image : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png'} 
-              fill={true} 
+            <Image 
               className="rounded-[50%]" 
+              src={sellerShopInfo.image && sellerShopInfo.image.trim() !== "" ? sellerShopInfo.image : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png'} 
+              alt="seller logo" 
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: 'cover', maxHeight: '200px', maxWidth: '100%' }}
             />
           </div>
           <div className="my-auto">

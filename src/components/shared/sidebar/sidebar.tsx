@@ -223,8 +223,10 @@ function Sidebar(props: any) {
     }
 
     const formDataToSend = new FormData();
+    formDataToSend.append('user_name', formData.user_name);
     formDataToSend.append('email', formData.email);
     formDataToSend.append('phone_number', formData.phone_number);
+    formDataToSend.append('findme', formData.findme);
 
     // add the image if it exists
     if (file) {
@@ -233,7 +235,7 @@ function Sidebar(props: any) {
       formDataToSend.append('image', '');
     }
 
-    logger.info('User Settings form data:', JSON.stringify({ formDataToSend }));
+    logger.info('User Settings form data:', Object.fromEntries(formDataToSend.entries()));
 
     try {
       const data = await createUserSettings(formDataToSend);

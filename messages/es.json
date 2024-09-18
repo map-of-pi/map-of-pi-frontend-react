@@ -90,7 +90,10 @@
       "REPLY_TO_REVIEW_MESSAGE": "Deja tu respuesta a la reseña anterior",
       "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes sobre la reseña anterior",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación"
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
+      "VALIDATION": {
+        "SELF_REVIEW_PROHIBITED": "La autoevaluación está prohibida"
+      }
     }
   },
   "POPUP": {

@@ -128,9 +128,9 @@ function SellerReviews({
               <Image
                 src={item.image}
                 alt="emoji image"
-                layout="fill"
-                objectFit="cover"
-                sizes="(max-width: 768px) 100vw, 64px"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                style={{ objectFit: 'contain', maxHeight: '200px', maxWidth: '100%' }}
               />
             </div>
             <div className="flex gap-3 text-[#828282]">

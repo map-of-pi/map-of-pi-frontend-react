@@ -90,7 +90,10 @@
       "REPLY_TO_REVIEW_MESSAGE": "Bar amsar ku ga bita ta sama",
       "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kuke ji game da mai siyarwa da ke sama",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Shigar da karin sharhi a nan",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani"
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
+      "VALIDATION": {
+        "SELF_REVIEW_PROHIBITED": "Binciken kai an hana"
+      }
     }
   },
   "POPUP": {
