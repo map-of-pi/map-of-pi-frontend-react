@@ -13,7 +13,7 @@ import {
 
 import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
-import { onIncompletePaymentFound } from '@/util/auth';
+import { onIncompletePaymentFound } from '@/utils/auth';
 import { IUser } from '@/constants/types';
 
 import logger from '../logger.config.mjs';

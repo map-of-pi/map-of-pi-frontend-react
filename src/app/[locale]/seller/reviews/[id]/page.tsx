@@ -10,7 +10,7 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import Skeleton from '@/components/skeleton/skeleton';
 import { IReviewFeedback } from '@/constants/types';
 import { fetchReviews } from '@/services/reviewsApi'
-import { resolveDate } from '@/util/date';
+import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../util/ratingUtils';
 
 import logger from '../../../../../../logger.config.mjs';
@@ -23,6 +23,7 @@ interface ReviewInt {
   reviewId: string;
   reaction: string;
   unicode: string;
+  image: string;
 }
 [];
 
@@ -62,7 +63,8 @@ function SellerReviews({
             user: feedback.review_giver_id,
             reviewId: feedback._id,
             reaction: resolveRating(feedback.rating)?.reaction,
-            unicode: resolveRating(feedback.rating)?.unicode
+            unicode: resolveRating(feedback.rating)?.unicode,
+            image: feedback.image
           }
         })
         setSellerReviews(reviewFeedback);  // Ensure this is a single object, not an array
@@ -122,6 +124,15 @@ function SellerReviews({
         {sellerReviews.map((item, index) => (
           <div key={index} className="border-b border-[#D9D9D9] py-4">
             <p className="text-lg mb-2">{item.heading}</p>
+            <div className="relative w-16 h-16">
+              <Image
+                src={item.image}
+                alt="emoji image"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                style={{ objectFit: 'contain', maxHeight: '200px', maxWidth: '100%' }}
+              />
+            </div>
             <div className="flex gap-3 text-[#828282]">
               <p>{item.date}</p>
               <p>{item.time}</p>
@@ -140,7 +151,7 @@ function SellerReviews({
                   </span>
                 </div>
                 <Image
-                  src="/images/business/product.png"
+                  src={"/images/business/product.png"}
                   alt="emoji image"
                   width={60}
                   height={60}

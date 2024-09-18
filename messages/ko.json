@@ -74,9 +74,10 @@
       "REVIEWS_SUMMARY_LABEL": "리뷰 요약",
       "REVIEWS_SCORE_MESSAGE": "리뷰 점수: {seller_review_rating} / 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "판매자 연락처 정보",
-      "SELLER_PI_ID_LABEL": "판매자 선구자 ID",
-      "SELLER_PHONE_LABEL": "판매자 전화번호",
-      "SELLER_EMAIL_LABEL": "판매자 이메일"
+      "SELLER_USERNAME_LABEL": "사용자 이름",
+      "SELLER_PIONEER_ID_LABEL": "파이오니어 ID", 
+      "SELLER_PHONE_NUMBER_LABEL": "전화번호",
+      "SELLER_EMAIL_ADDRESS_LABEL": "이메일 주소"
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "{seller_id}에 대한 리뷰가 없습니다",
@@ -89,7 +90,10 @@
       "REPLY_TO_REVIEW_MESSAGE": "위 리뷰에 대한 답장을 남기세요",
       "FACE_SELECTION_REVIEW_MESSAGE": "위 리뷰에 대한 느낌을 나타내는 얼굴을 선택하세요",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "추가 의견을 입력하세요",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "피드백 사진 업로드"
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "피드백 사진 업로드",
+      "VALIDATION": {
+        "SELF_REVIEW_PROHIBITED": "자기 평가는 금지되어 있습니다"
+      }
     }
   },
   "POPUP": {
@@ -193,7 +197,9 @@
       "IMAGE_DROP_UPLOAD_MESSAGE": "여기에 이미지를 드롭하거나 찾아보기",
       "SUPPORTS_FILE_MESSAGE": "지원: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
-        "SELLER_IMAGE_LABEL": "판매자 이미지"
+        "USER_PREFERENCES_LABEL": "프로필 이미지",
+        "SELLER_IMAGE_LABEL": "판매자 이미지",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "리뷰 이미지"
       }
     },
     "REACTION_RATING": {
@@ -220,6 +226,7 @@
     },
     "LOADING_SCREEN_MESSAGE": "데이터 로딩 중...",
     "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "제출이 실패했습니다; 사용자가 인증되지 않았습니다",
       "UNEXPECTED_ERROR_MESSAGE": "예기치 않은 오류가 발생했습니다"
     }
   }
