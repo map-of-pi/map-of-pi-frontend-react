@@ -66,7 +66,7 @@ function Sidebar(props: any) {
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
-  const [showMapCenter, setShowMapCenter] = useState(false);  // New state to toggle the MapCenter display
+  const [showMapCenter] = useState(false);  // New state to toggle the MapCenter display
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [formData, setFormData] = useState({
     user_name: '',
