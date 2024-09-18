@@ -27,12 +27,6 @@ import UrlsRemoval from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
-const sellerTypeOptions = [
-  { value: 'active', label: 'Real merchant - actively selling' },
-  { value: 'inactive', label: 'Real merchant - not currently selling' },
-  { value: 'test', label: 'Test seller' },
-];
-
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
   const SUBHEADER = 'font-bold mb-2';
@@ -248,21 +242,17 @@ const SellerRegistrationForm = () => {
   
   const translatedSellerTypeOptions = [
     {
-      value: 'active',
-      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER'),
+      value: 'activeSeller',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER'),
     },
     {
-      value: 'inactive',
-      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.CURRENTLY_NOT_SELLING'),
+      value: 'inactiveSeller',
+      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER'),
     },
     {
-      value: 'test',
+      value: 'testSeller',
       name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER'),
-    },
-    {
-      value: 'Other',
-      name: t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER'),
-    },
+    }
   ];
 
   if (loading) {

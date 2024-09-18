@@ -46,9 +46,8 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "판매자 유형",
         "SELLER_TYPE_OPTIONS": {
-          "PIONEER": "선구자",
-          "OTHER": "기타",
-          "CURRENTLY_NOT_SELLING": "현재 판매 중 아님",
+          "ACTIVE_SELLER": "활성 판매자",
+          "INACTIVE_SELLER": "비활성 판매자",
           "TEST_SELLER": "테스트 판매자"
         }
       },

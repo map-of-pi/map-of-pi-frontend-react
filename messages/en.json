@@ -46,10 +46,9 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "Seller type",
         "SELLER_TYPE_OPTIONS": {
-          "PIONEER": "Real merchant - actively selling", 
-          "CURRENTLY_NOT_SELLING": "Real merchant - not currently selling", 
-          "TEST_SELLER": "Test seller", 
-          "OTHER": "Other"
+          "ACTIVE_SELLER": "Active seller", 
+          "INACTIVE_SELLER": "Inactive seller", 
+          "TEST_SELLER": "Test seller"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",

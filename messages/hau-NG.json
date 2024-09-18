@@ -46,10 +46,9 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "Nau'in mai sayarwa",
         "SELLER_TYPE_OPTIONS": {
-          "PIONEER": "Pioneer",
-          "OTHER": "sauran",
-          "CURRENTLY_NOT_SELLING": "A Halin Yanzu Ba A Sayarwa",
-          "TEST_SELLER": "Mai Sayarwa Gwaji"
+          "ACTIVE_SELLER": "Mai siyarwa mai aiki",
+          "INACTIVE_SELLER": "Mai siyarwa mara aiki",
+          "TEST_SELLER": "Mai siyarwa gwaji"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
