@@ -1,6 +1,6 @@
 import axiosClient from "@/config/client";
-import { IUserSettings } from "@/constants/types";
-import { handleAxiosError } from "@/util/error";
+import { handleAxiosError } from "@/utils/error";
+import { getMultipartFormDataHeaders } from "@/utils/api";
 
 import logger from '../../logger.config.mjs';
 
@@ -47,10 +47,13 @@ export const fetchSingleUserSettings = async (sellerId: String) => {
 };
 
 // Create new or update existing user settings
-export const createUserSettings = async (formData: IUserSettings) => {
+export const createUserSettings = async (formData: FormData) => {
   try {
     logger.info('Creating or updating user settings with formData..');
-    const response = await axiosClient.put('/user-preferences/add', {json: JSON.stringify(formData)});
+    const headers = getMultipartFormDataHeaders();
+    
+    const response = await axiosClient.put('/user-preferences/add', formData, { headers });
+    
     if (response.status === 200) {
       logger.info(`Create or update user settings successful with Status ${response.status}`, {
         data: response.data

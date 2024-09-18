@@ -14,7 +14,7 @@
   },
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "User Preferences",
-    "PERSONALIZATION_SUBHEADER": "Personalisationn",
+    "PERSONALIZATION_SUBHEADER": "Personalisation",
     "EMAIL_ADDRESS_FIELD": "Your email address",
     "PHONE_NUMBER_FIELD": "Your phone number",
     "LANGUAGES": "Languages",
@@ -46,10 +46,9 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "Seller type",
         "SELLER_TYPE_OPTIONS": {
-          "PIONEER": "Pioneer",
-          "OTHER": "Other",
-          "CURRENTLY_NOT_SELLING": "Currently Not Selling",
-          "TEST_SELLER": "Test Seller"
+          "ACTIVE_SELLER": "Active seller", 
+          "INACTIVE_SELLER": "Inactive seller", 
+          "TEST_SELLER": "Test seller"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
@@ -67,16 +66,17 @@
       "BUY_FROM_SELLER_HEADER": "Buy from Seller",
       "SELLER_DETAILS_LABEL": "Seller Details",
       "SELLER_ADDRESS_POSITION_LABEL": "Seller Address or Position",
-      "LEAVE_A_REVIEW_MESSAGE": "Leave a review",
+      "LEAVE_A_REVIEW_MESSAGE": "Leave a Review",
       "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above seller",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Seller Contact Details",
-      "SELLER_PI_ID_LABEL": "Seller pioneer ID",
-      "SELLER_PHONE_LABEL": "Seller phone number", 
-      "SELLER_EMAIL_LABEL": "Seller email" 
+      "SELLER_USERNAME_LABEL": "Username",
+      "SELLER_PIONEER_ID_LABEL": "Pioneer ID", 
+      "SELLER_PHONE_NUMBER_LABEL": "Phone number",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email address" 
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No reviews for {seller_id}",
@@ -89,7 +89,10 @@
       "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
       "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above review",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload"
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
+      "VALIDATION": {
+        "SELF_REVIEW_PROHIBITED": "Self-review is prohibited"
+      }
     }
   },
   "POPUP": {
@@ -188,13 +191,14 @@
       "EMAIL_LABEL": "Email" 
     },
     "PHOTO": {
-      "UPLOAD_PHOTO_LABEL": "Upload Photo",
+      "UPLOAD_PHOTO_LABEL": "Upload photo",
       "UPLOAD_PHOTO_PLACEHOLDER": "Upload image to help attract buyers (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
       "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
-        "USER_PREFERENCES_LABEL": "User preferences image",
-        "SELLER_IMAGE_LABEL": "Profile image"
+        "USER_PREFERENCES_LABEL": "Profile image",
+        "SELLER_IMAGE_LABEL": "Seller image",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Review image"
       }
     },
     "REACTION_RATING": {
@@ -221,6 +225,7 @@
     },
     "LOADING_SCREEN_MESSAGE": "Loading data...",
     "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Submission failed because user is not authenticated",
       "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  
     }
   }

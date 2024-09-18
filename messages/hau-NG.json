@@ -46,10 +46,9 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "Nau'in mai sayarwa",
         "SELLER_TYPE_OPTIONS": {
-          "PIONEER": "Pioneer",
-          "OTHER": "sauran",
-          "CURRENTLY_NOT_SELLING": "A Halin Yanzu Ba A Sayarwa",
-          "TEST_SELLER": "Mai Sayarwa Gwaji"
+          "ACTIVE_SELLER": "Mai siyarwa mai aiki",
+          "INACTIVE_SELLER": "Mai siyarwa mara aiki",
+          "TEST_SELLER": "Mai siyarwa gwaji"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
@@ -67,16 +66,17 @@
       "BUY_FROM_SELLER_HEADER": "Saya daga Mai Sayarwa",
       "SELLER_DETAILS_LABEL": "Bayanin Mai Sayarwa",
       "SELLER_ADDRESS_POSITION_LABEL": "Adireshin Ko Matsayin Mai Sayarwa",
-      "LEAVE_A_REVIEW_MESSAGE": "Bar bita",
+      "LEAVE_A_REVIEW_MESSAGE": "Bar Saƙon Bita",
       "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kuke ji game da mai siyarwa da ke sama",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Shigar da karin sharhi a nan",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayanin Sake Dubawa",
       "REVIEWS_SCORE_MESSAGE": "Makin Sake Dubawa: {seller_review_rating} cikin 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Bayanin Tuntuɓar Mai Siyarwa",
-      "SELLER_PI_ID_LABEL": "ID pioneer Mai Sayarwa",
-      "SELLER_PHONE_LABEL": "Lambar wayar Mai Sayarwa", 
-      "SELLER_EMAIL_LABEL": "Imel na Mai Sayarwa" 
+      "SELLER_USERNAME_LABEL": "Sunan mai amfani",
+      "SELLER_PIONEER_ID_LABEL": "ID na Pioneer", 
+      "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Babu bita don {seller_id}",
@@ -89,7 +89,10 @@
       "REPLY_TO_REVIEW_MESSAGE": "Bar amsar ku ga bita ta sama",
       "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kuke ji game da mai siyarwa da ke sama",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Shigar da karin sharhi a nan",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani"
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
+      "VALIDATION": {
+        "SELF_REVIEW_PROHIBITED": "Binciken kai an hana"
+      }
     }
   },
   "POPUP": {
@@ -188,12 +191,14 @@
       "EMAIL_LABEL": "Imel"
     },
     "PHOTO": {
-      "UPLOAD_PHOTO_LABEL": "Loda Hoto",
+      "UPLOAD_PHOTO_LABEL": "Loda hoto",
       "UPLOAD_PHOTO_PLACEHOLDER": "Dora hoto don taimakawa jan hankalin masu saye (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Ajiye hotonku anan ko shiga yanar gizo",
       "SUPPORTS_FILE_MESSAGE": "Goyon baya: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
-        "SELLER_IMAGE_LABEL": "Hoton mai sayarwa"
+        "USER_PREFERENCES_LABEL": "Hoton bayanin martaba",
+        "SELLER_IMAGE_LABEL": "Hoton mai sayarwa",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Hoton bita"
       }
     },
     "REACTION_RATING": {
@@ -219,6 +224,7 @@
     },
     "LOADING_SCREEN_MESSAGE": "Ana ɗaukar bayanai...",
     "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Aika ya kasa saboda mai amfani ba a tabbatar da shi ba",
       "UNEXPECTED_ERROR_MESSAGE": "An samu kuskure da ba a zata ba"
     }
   }

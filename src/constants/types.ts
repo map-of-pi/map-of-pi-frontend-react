@@ -11,6 +11,7 @@ export interface IUserSettings {
   phone_number?: string;
   image?: string; 
   findme?: string;
+  trust_meter_rating: number;
   search_map_center?: {
     type: 'Point';
     coordinates: [number, number];
@@ -24,11 +25,9 @@ export interface ISeller {
   seller_type: string;
   image: string;
   address: string;
-  sale_items: string;
   average_rating: {
     $numberDecimal: string;
   };
-  trust_meter_rating: number;
   coordinates: [number, number];
   sell_map_center: {
     type: 'Point';
@@ -48,3 +47,9 @@ export interface IReviewFeedback {
   image: string;
   review_date: string;
 }
+
+// Select specific fields from IUserSettings
+export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'email' | 'phone_number' | 'findme' | 'trust_meter_rating'>;
+
+// Combined interface representing a seller with selected user settings
+export interface ISellerWithSettings extends ISeller, PartialUserSettings {}
