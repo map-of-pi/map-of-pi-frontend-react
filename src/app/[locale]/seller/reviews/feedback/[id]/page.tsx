@@ -50,7 +50,6 @@ export default function ReplyToReviewPage({
   const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
-    // try re-login user if not current user auth
     if (!currentUser) {
       logger.info('User not logged in; attempting auto-login..');
       autoLoginUser();
