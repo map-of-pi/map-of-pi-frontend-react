@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 import { ISeller, ISellerWithSettings } from '@/constants/types';
 import { fetchSellers } from '@/services/sellerApi';
-import { toLatLngLiteral } from '@/util/map';
+import { toLatLngLiteral } from '@/utils/map';
 
 import MapMarkerPopup from './MapMarkerPopup'
 

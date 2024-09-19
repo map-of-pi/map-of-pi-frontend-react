@@ -1,5 +1,6 @@
 import axiosClient from "@/config/client";
-import { handleAxiosError } from "@/util/error";
+import { handleAxiosError } from "@/utils/error";
+import { getMultipartFormDataHeaders } from '@/utils/api';
 
 import logger from '../../logger.config.mjs';
 
@@ -77,10 +78,13 @@ export const fetchSellerRegistration = async () => {
 };
 
 // Register or update seller
-export const registerSeller = async (formData: any) => {
+export const registerSeller = async (formData: FormData) => {
   try {
     logger.info('Creating or updating seller registration with formData..');
-    const response = await axiosClient.put('/sellers/register', {json: JSON.stringify(formData)});
+    const headers = getMultipartFormDataHeaders();
+
+    const response = await axiosClient.put('/sellers/register', formData, { headers });
+
     if (response.status === 200) {
       logger.info(`Create or update seller registration successful with Status ${response.status}`, {
         data: response.data

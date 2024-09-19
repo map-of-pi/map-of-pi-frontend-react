@@ -46,10 +46,10 @@ export const TextArea = (props: any) => {
   return (
     <div className="">
       {label && (
-        <label className=" block text-[17px] text-[#333333]">{label}</label>
+        <label className="block text-[17px] text-[#333333]">{label}</label>
       )}
       {describe && (
-        <label className=" block text-sm text-gray-400">{describe}</label>
+        <label className="block text-sm text-gray-400">{describe}</label>
       )}
       <textarea
         placeholder={props.placeholder}
@@ -63,91 +63,44 @@ export const TextArea = (props: any) => {
 
 export const FileInput = (props: any) => {
   const t = useTranslations();
+  const isImageUploaded = props.imageUrl && props.imageUrl.trim() !== ""; // Check if an image has been uploaded
+  const imageLabel = isImageUploaded ? props.label : t('SHARED.PHOTO.UPLOAD_PHOTO_LABEL');
+
   return (
     <div className="">
       {props.label && (
-        <label className="block font-medium text-gray-700">{props.label}</label>
+        <label className="block text-[17px] text-[#333333]">{imageLabel}</label>
       )}
       {props.describe && (
         <label className="block pb-3 text-sm text-gray-400">{props.describe}</label>
       )}
-      <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative border-dashed border-[2px] border-green-700">
-        <Image
-          src="/images/logo.svg"
-          alt="upload image"
-          width={85}
-          height={85}
-        />
-        <div className="mt-5 text-center text-[#828282]">
-          {t('SHARED.PHOTO.IMAGE_DROP_UPLOAD_MESSAGE')}
+      <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative">
+        <div className="w-full h-[200px] relative mb-4">
+          <Image
+            src={isImageUploaded ? props.imageUrl : '/images/shared/upload.png'}
+            alt="Upload image"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: 'contain', maxHeight: '200px', maxWidth: '100%' }}
+          />
         </div>
-        <span className="text-[#828282] text-[11px] mt-1">
-        {t('SHARED.PHOTO.SUPPORTS_FILE_MESSAGE')}
-        </span>
+        {!isImageUploaded && (
+          <div className="text-center text-[#828282]">
+            <div>
+              {t('SHARED.PHOTO.IMAGE_DROP_UPLOAD_MESSAGE')}
+            </div>
+            <span className="text-[11px] mt-1">
+              {t('SHARED.PHOTO.SUPPORTS_FILE_MESSAGE')}
+            </span>
+          </div>
+        )}
         <input
           type="file"
           accept="image/png, image/jpeg, image/jpg"
-          multiple
           className={`absolute scale-[5] opacity-0 cursor-pointer`}
-          onChange={(e) => props.handleAddImages(e)}
+          onChange={(e) => props.handleAddImage(e)}
         />
       </div>
-    </div>
-  );
-};
-
-export const FileInput2 = (props: any) => {
-  const t = useTranslations();
-  return (
-    <div className="">
-      {props.label && (
-        <label className="block font-medium text-gray-700">{props.label}</label>
-      )}
-
-      {!props.image && (
-        <div className="flex justify-center relative overflow-hidden w-[80%] left-0 right-0 m-auto gap-2 items-center mb-3">
-          <Image
-            src="/images/business/add-item-button.png"
-            alt=""
-            width={60}
-            height={60}
-            className="rounded-md"
-          />
-          <span>
-            {t('BUSINESS.CONFIGURATION.ADD_PRODUCT_MENU.LABELS.ADD_IMAGE')}
-          </span>
-          <input
-            type="file"
-            name=""
-            id=""
-            className="absolute scale-[3] left-0 right-0 opacity-0"
-            onChange={(e) => props.handleAddImage(e)}
-          />
-        </div>
-      )}
-      {props.image && (
-        <div className="flex justify-between items-center">
-          <Image
-            src={props.image}
-            alt="image"
-            width={70}
-            height={62}
-            objectFit="cover"
-          />
-          <Image
-            src={props.image}
-            alt="image"
-            width={60}
-            height={60}
-            objectFit="contain"
-          />
-          <div
-            className="text-red-700 self-start text-3xl cursor-pointer"
-            onClick={props.handleDeleteImage}>
-            ×
-          </div>
-        </div>
-      )}
     </div>
   );
 };
