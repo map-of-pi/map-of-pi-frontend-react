@@ -32,6 +32,7 @@ export interface ISeller {
     type: 'Point';
     coordinates: [number, number];
   };
+  coordinates: [number, number];
   order_online_enabled_pref: boolean;
 }
 
