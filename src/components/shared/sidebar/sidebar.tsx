@@ -5,12 +5,12 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import MapCenter from '../map/MapCenter';
 
 import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 
+import MapCenter from '../map/MapCenter';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
@@ -73,11 +73,10 @@ function Sidebar(props: any) {
  
   const [file, setFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>(dbUserSettings?.image || '');
+  const [showMapCenter] = useState(false);
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
-
-  const [showMapCenter] = useState(false);  // New state to toggle the MapCenter display
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
   useEffect(() => {
@@ -316,10 +315,10 @@ function Sidebar(props: any) {
                   width: '100%',
                   padding: '10px',
                   borderRadius: '10px',
-                  fontSize: '18px', 
+                  fontSize: '18px' 
                 }}
                 onClick={() => {
-                  router.push(`/map-center?entryType=search`); // Show the MapCenter component
+                  router.push(`/map-center?entryType=search`);
                   props.setToggleDis(false); // Close sidebar on click
                 }}
               />

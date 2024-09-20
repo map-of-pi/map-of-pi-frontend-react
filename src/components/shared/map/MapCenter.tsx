@@ -31,9 +31,8 @@ const crosshairIcon = new L.Icon({
   iconAnchor: [40, 40],
 });
 
-
 interface MapCenterProps {
-  entryType: 'search' | 'sell'; // Define prop type for entryType
+  entryType: 'search' | 'sell';
 }
 
 const MapCenter = ({ entryType }: MapCenterProps) => {
@@ -45,7 +44,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
 
   useEffect(() => {
     if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login.");
+      logger.info("User not logged in; attempting auto-login..");
       autoLoginUser();
     }
 
@@ -62,7 +61,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
             setCenter({ lat: 50.064192, lng: 19.944544 });
           }
         } catch (error) {
-          logger.error('Error fetching map center:', error);
+          logger.error('Error fetching map center:', { error });
         }
       }
     };
@@ -89,7 +88,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         }
       });
     } catch (error) {
-      logger.error('Error during geocoding:', error);
+      logger.error('Error during geocoding:', { error });
     }
   };
 
@@ -126,12 +125,11 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
   const setMapCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
       try {
-        // Pass the entryType as the third argument to the saveMapCenter function
         await saveMapCenter(center.lat, center.lng, entryType);
         setShowPopup(true);
         logger.info('Map center successfully saved.');
       } catch (error) {
-        logger.error('Error saving map center:', error);
+        logger.error('Error saving map center:', { error });
       }
     }
   };
@@ -152,8 +150,8 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         zoomControl={false}
         minZoom={2}
         maxZoom={18}
-        maxBounds={bounds}
-        maxBoundsViscosity={1.0}
+        // maxBounds={bounds}
+        // maxBoundsViscosity={1.0}
         className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
         whenReady={() => {
           const mapInstance: any = mapRef.current;

@@ -28,7 +28,6 @@ export interface ISeller {
   average_rating: {
     $numberDecimal: string;
   };
-  coordinates: [number, number];
   sell_map_center: {
     type: 'Point';
     coordinates: [number, number];
