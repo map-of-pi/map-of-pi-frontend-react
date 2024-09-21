@@ -71,4 +71,3 @@ export const saveMapCenter = async (latitude: number, longitude: number, type: '
     throw error;
   }
 };
-
