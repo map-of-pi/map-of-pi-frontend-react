@@ -287,16 +287,22 @@ const SellerRegistrationForm = () => {
             />
           </div>
         </div>
-        <Button
-          label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
-          onClick={() => handleNavigation("/map-center")}
-          styles={{
-            color: '#ffc153',
-            height: '40px',
-            padding: '10px',
-            marginLeft: 'auto',
+        <Link
+          href={{
+            pathname: "/map-center", // Path to MapCenter component
+            query: { entryType: 'sell' } // Passing 'sell' as entryType
           }}
-        />
+        >
+          <Button
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
+            styles={{
+              color: '#ffc153',
+              height: '40px',
+              padding: '10px',
+              marginLeft: 'auto',
+            }}
+          />
+        </Link>
         <div className="mb-4 mt-3 ml-auto w-min">
           <Button
             label={t('SHARED.SAVE')}
