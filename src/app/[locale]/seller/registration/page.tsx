@@ -124,7 +124,7 @@ const defaultSellerName = currentUser? currentUser?.user_name : '';
 useEffect(() => {
   if (dbSeller) {
     setFormData({
-      sellerName: dbSeller.name || defaultSellerName,
+      sellerName: dbSeller.name || currentUser?.user_name || '',
       sellerDescription: dbSeller.description || '',
       sellerAddress: dbSeller.address || '',
       sellerType: dbSeller.seller_type || 'Test seller',
