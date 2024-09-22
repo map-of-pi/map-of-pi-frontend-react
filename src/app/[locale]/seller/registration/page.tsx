@@ -65,6 +65,7 @@ useEffect(() => {
         const { latitude, longitude } = mapCenterData;
         if (latitude !== undefined && longitude !== undefined) {
           setSellCenter({ lat: latitude, lng: longitude });
+          
         } else {
         }
       } else {
@@ -247,10 +248,6 @@ const handleSave = async () => {
   } else {
     formDataToSend.append('image', '');
   }
-
-
-  
-
   try {
     const data = await registerSeller(formDataToSend);
     if (data.seller) {
