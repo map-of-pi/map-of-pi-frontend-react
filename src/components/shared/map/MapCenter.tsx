@@ -18,7 +18,7 @@ import 'leaflet-control-geocoder';
 import { ConfirmDialogX } from '../confirm';
 import { Button } from '../Forms/Buttons/Buttons';
 import RecenterAutomatically from './RecenterAutomatically';
-import SearchBar from '../SearchBar/SearchBar'; 
+import SearchBar from '../SearchBar/SearchBar';
 import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
 
 import { AppContext } from '../../../../context/AppContextProvider';
@@ -32,19 +32,22 @@ const crosshairIcon = new L.Icon({
 });
 
 interface MapCenterProps {
-  entryType: 'search' | 'sell';
+  entryType: 'search' | 'sell'; // Define prop type for entryType
 }
 
 const MapCenter = ({ entryType }: MapCenterProps) => {
   const t = useTranslations();
   const [showPopup, setShowPopup] = useState(false);
-  const [center, setCenter] = useState<{ lat: number; lng: number }>({ lat: 50.064192, lng: 19.944544 });
+  const [center, setCenter] = useState<{ lat: number; lng: number }>({
+    lat: 50.064192,
+    lng: 19.944544,
+  });
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const mapRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
     if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
+      logger.info("User not logged in; attempting auto-login.");
       autoLoginUser();
     }
 
@@ -53,19 +56,24 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
       if (currentUser?.pi_uid) {
         try {
           const mapCenter = await fetchMapCenter();
-          if (mapCenter?.latitude !== undefined && mapCenter.longitude !== undefined) {
+          if (
+            mapCenter?.latitude !== undefined &&
+            mapCenter.longitude !== undefined
+          ) {
             setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
-            logger.info(`Map center set to latitude: ${mapCenter.latitude}, longitude: ${mapCenter.longitude}`);
+            logger.info(`Map center set to latitude: ${mapCenter.latitude}, longitude: ${mapCenter.longitude}`
+            );
           } else {
-            logger.warn("Map center is undefined, falling back to default coordinates");
+            logger.warn(
+              'Map center is undefined, falling back to default coordinates'
+            );
             setCenter({ lat: 50.064192, lng: 19.944544 });
           }
         } catch (error) {
-          logger.error('Error fetching map center:', { error });
+          logger.error('Error fetching map center:', error);
         }
       }
     };
-
     getMapCenter();
   }, [currentUser]);
 
@@ -77,10 +85,16 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         if (results.length > 0) {
           const { center: resultCenter } = results[0];
           // Check if the new center is different from the current center before setting it
-          if (resultCenter.lat !== center.lat || resultCenter.lng !== center.lng) {
+          if (
+            resultCenter.lat !== center.lat ||
+            resultCenter.lng !== center.lng
+          ) {
             setCenter({ lat: resultCenter.lat, lng: resultCenter.lng });
             if (mapRef.current) {
-              mapRef.current.setView([resultCenter.lat, resultCenter.lng], 13);
+              mapRef.current.setView(
+                [resultCenter.lat, resultCenter.lng],
+                13
+              );
             }
           }
         } else {
@@ -88,7 +102,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         }
       });
     } catch (error) {
-      logger.error('Error during geocoding:', { error });
+      logger.error('Error during geocoding:', error);
     }
   };
 
@@ -98,8 +112,9 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
 
     useEffect(() => {
       if (mapRef.current !== map) {
-        mapRef.current = map; // Set map reference only once
-        setCenter(map.getCenter()); // Set the center once when the map is ready
+        mapRef.current = map;
+        const initialCenter = map.getCenter();
+        setCenter({ lat: initialCenter.lat, lng: initialCenter.lng });
         logger.debug('Map instance and reference set on load.');
       }
     }, [map]);
@@ -112,28 +127,33 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
     useMapEvents({
       moveend() {
         const newCenter = mapRef.current?.getCenter();
-        if (newCenter && (newCenter.lat !== center.lat || newCenter.lng !== center.lng)) {
-          setCenter(newCenter); // Update center state when the map stops moving
-          logger.debug(`Map center updated to: ${newCenter.lat}, ${newCenter.lng}`);
+        if (
+          newCenter &&
+          (newCenter.lat !== center.lat || newCenter.lng !== center.lng)
+        ) {
+          setCenter({ lat: newCenter.lat, lng: newCenter.lng }); // Update local center state
+          logger.debug(`Map center updated to: ${newCenter.lat}, ${newCenter.lng}`
+          );
         }
       },
     });
 
-    return center ? <Marker position={center} icon={crosshairIcon}></Marker> : null;
+    return center ? <Marker position={center} icon={crosshairIcon} /> : null;
   };
 
   const setMapCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
       try {
+        // Pass the entryType as the third argument to the saveMapCenter function
         await saveMapCenter(center.lat, center.lng, entryType);
         setShowPopup(true);
         logger.info('Map center successfully saved.');
       } catch (error) {
-        logger.error('Error saving map center:', { error });
+        logger.error('Error saving map center:', error);
       }
     }
   };
-
+  
   const handleClickDialog = () => {
     setShowPopup(false);
   };
@@ -142,7 +162,9 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
 
   return (
     <div className="search-container">
-      <p className="search-text">{t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER')}</p>
+      <p className="search-text">
+        {t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER')}
+      </p>
       <SearchBar onSearch={handleSearch} page={'map_center'} />
       <MapContainer
         center={center}
@@ -156,7 +178,8 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         whenReady={() => {
           const mapInstance: any = mapRef.current;
           if (mapInstance) {
-            logger.info('Map instance set during map container ready state.');
+            logger.info('Map instance set during map container ready state.'
+            );
           }
         }}
       >
@@ -171,19 +194,30 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
       </MapContainer>
       <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
         <Button
-          label={entryType === 'search' ? t('SHARED.SEARCH_CENTER') : t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
+          label={
+            entryType === 'search'
+              ? t('SHARED.SEARCH_CENTER')
+              : t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')
+          }
           onClick={setMapCenter}
-          styles={{ borderRadius: '10px', color: '#ffc153', paddingLeft: '50px', paddingRight: '50px' }}
+          styles={{
+            borderRadius: '10px',
+            color: '#ffc153',
+            paddingLeft: '50px',
+            paddingRight: '50px',
+          }}
         />
-     </div>
+      </div>
       {showPopup && (
         <ConfirmDialogX
           toggle={() => setShowPopup(false)}
           handleClicked={handleClickDialog}
           // Dynamically set the message based on entryType
-          message={entryType === 'sell'
-            ? t('SHARED.MAP_CENTER.VALIDATION.SELL_CENTER_SUCCESS_MESSAGE')
-            : t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')}
+          message={
+            entryType === 'sell'
+              ? t('SHARED.MAP_CENTER.VALIDATION.SELL_CENTER_SUCCESS_MESSAGE')
+              : t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')
+          }
         />
       )}
     </div>
