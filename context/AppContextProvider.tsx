@@ -11,20 +11,12 @@ import {
   useEffect
 } from 'react';
 
-import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
-import { onIncompletePaymentFound } from '@/util/auth';
+import { onIncompletePaymentFound } from '@/utils/auth';
+import { AuthResult } from '@/constants/pi';
 import { IUser } from '@/constants/types';
 
 import logger from '../logger.config.mjs';
-
-type AuthResult = {
-  accessToken: string,
-  user: {
-    uid: string,
-    username: string
-  }
-};
 
 interface IAppContextProps {
   currentUser: IUser | null;
@@ -120,7 +112,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser}}>
+    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser }}>
       {children}
     </AppContext.Provider>
   );

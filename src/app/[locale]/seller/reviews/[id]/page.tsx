@@ -9,7 +9,7 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import Skeleton from '@/components/skeleton/skeleton';
 import { IReviewOutput } from '@/constants/types';
 import { fetchReviews } from '@/services/reviewsApi';
-import { resolveDate } from '@/util/date';
+import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../util/ratingUtils';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import { FormControl, TextField } from '@mui/material';
@@ -28,6 +28,7 @@ interface ReviewInt {
   giverId: string;
   reaction: string;
   unicode: string;
+  image: string;
 }
 
 function SellerReviews({

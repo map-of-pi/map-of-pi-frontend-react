@@ -12,7 +12,7 @@ import EmojiPicker from '@/components/shared/Review/emojipicker';
 import Skeleton from '@/components/skeleton/skeleton';
 import { IReviewFeedback } from '@/constants/types';
 import { fetchSingleReview } from '@/services/reviewsApi';
-import { resolveDate } from '@/util/date';
+import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../../util/ratingUtils';
 
 import logger from '../../../../../../../logger.config.mjs';
@@ -50,7 +50,6 @@ export default function ReplyToReviewPage({
   const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
-    // try re-login user if not current user auth
     if (!currentUser) {
       logger.info('User not logged in; attempting auto-login..');
       autoLoginUser();
