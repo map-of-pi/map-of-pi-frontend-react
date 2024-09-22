@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useTranslations } from 'next-intl';
@@ -64,12 +65,9 @@ useEffect(() => {
         const { latitude, longitude } = mapCenterData;
         if (latitude !== undefined && longitude !== undefined) {
           setSellCenter({ lat: latitude, lng: longitude });
-          logger.info('Fetched sellCenter from backend:', { lat: latitude, lng: longitude });
         } else {
-          logger.warn('Latitude or longitude is undefined in mapCenterData.');
         }
       } else {
-        logger.warn('No sell_map_center found for the user.');
       }
     } catch (error) {
       logger.error('Error fetching sellCenter from backend:', error);
@@ -90,10 +88,8 @@ useEffect(() => {
     try {
       const data = await fetchSellerRegistration();
       if (data) {
-        logger.info('Fetched seller data successfully:', { data });
         setDbSeller(data);
       } else {
-        logger.warn('Seller not found.');
         setDbSeller(null);
       }
     } catch (error) {
@@ -107,7 +103,6 @@ useEffect(() => {
   const getUserSettings = async () => {
     const settings = await fetchUserSettings();
     if (settings) {
-      logger.info('Fetched user settings successfully:', {settings});
       setUserSettings(settings);
     } else {
       logger.info('User settings not found.');
@@ -120,6 +115,7 @@ useEffect(() => {
 }, [currentUser]);
 
 const defaultSellerName = currentUser? currentUser?.user_name : '';
+
 // Initialize formData with dbSeller values if available
 useEffect(() => {
   if (dbSeller) {
@@ -218,7 +214,6 @@ const handleSave = async () => {
     return toast.error('Please select a sell location before saving.');
   }
 
-  logger.info('Saving form data:', { formData, sellCenter });
 
   // Trim and clean the sellerAddress and sellerDescription fields
   let sellerAddress = formData.sellerAddress.trim() === ""
@@ -229,8 +224,7 @@ const handleSave = async () => {
     ? sellerDefault.description
     : UrlsRemoval(formData.sellerDescription);
 
-  logger.info('Initial formData:', formData);
-  logger.info('Current sellCenter:', sellCenter);
+
   const formDataToSend = new FormData();
   formDataToSend.append('name', formData.sellerName);
   formDataToSend.append('seller_type', formData.sellerType);
@@ -244,7 +238,6 @@ const handleSave = async () => {
       type: 'Point',
       coordinates: [sellCenter.lng, sellCenter.lat], // Correct order: [longitude, latitude]
     };
-    logger.info('Appending sell_map_center:', sellMapCenter);
     formDataToSend.append('sell_map_center', JSON.stringify(sellMapCenter));
   }
 
@@ -255,11 +248,8 @@ const handleSave = async () => {
     formDataToSend.append('image', '');
   }
 
-  logger.info('Registration form data:', Object.fromEntries(Array.from(formDataToSend.entries())));
 
-  for (let [key, value] of Array.from(formDataToSend.entries())) {
-    console.log(`${key}: ${value}`);
-  }
+  
 
   try {
     const data = await registerSeller(formDataToSend);
