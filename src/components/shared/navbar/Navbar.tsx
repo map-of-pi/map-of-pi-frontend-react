@@ -54,27 +54,41 @@ function Navbar() {
           className="flex justify-between">
           <div className={`${styles.nav_item} ${checkHomePage && 'disabled'}`}>
             <Link href="/" onClick={handleBackBtn}>
-              <IoMdArrowBack size={26} className={`${checkHomePage ? 'grey' : 'text-secondary'}`} />
+              <IoMdArrowBack size={26} className={`${checkHomePage ? 'text-tertiary' : 'text-secondary'}`} />
             </Link>
           </div>
 
             <div className={`${styles.nav_item} ${checkHomePage && 'disabled'}`}>
               <Link href="/">
-                <MdHome size={24} className={`${checkHomePage ? 'grey' : 'text-secondary'}`} />
+                <MdHome size={24} className={`${checkHomePage ? 'text-tertiary' : 'text-secondary'}`} />
               </Link>
             </div>
           <div className={`${styles.nav_item}`}>
-            <Link href="" onClick={handleMenu}>
-              {sidebarToggle ? (
-                <IoMdClose size={24} className="text-secondary" />
-              ) : (
-                <FiMenu size={24} className="text-secondary" />
-              )}
-            </Link>
+          <Link
+            href=""
+            onClick={(e) => {
+              if (isSigningInUser) {
+                e.preventDefault();
+              } else {
+                handleMenu();
+              }
+            }}
+          >
+            {sidebarToggle && !isSigningInUser ? (
+              <IoMdClose size={24} className="text-secondary" />
+            ) : (
+              <FiMenu
+                size={24}
+                className={`${
+                  isSigningInUser ? 'text-tertiary cursor-not-allowed' : 'text-secondary'
+                }`}
+              />
+            )}
+          </Link>
           </div>
         </div>
       </div>
-      {sidebarToggle && (
+      {sidebarToggle && !isSigningInUser && (
         <Sidebar toggle={sidebarToggle} setToggleDis={setSidebarToggle} />
       )}
     </>

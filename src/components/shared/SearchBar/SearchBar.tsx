@@ -3,12 +3,13 @@
 import './SearchBar.scss';
 
 import { useTranslations } from 'next-intl';
-import { useState, useRef, ChangeEvent, FormEvent } from 'react';
+import { useContext, useState, useRef, ChangeEvent, FormEvent } from 'react';
 import { FormControl, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { fetchSellers } from '@/services/sellerApi';
 
 import logger from '../../../../logger.config.mjs';
+import { AppContext } from '../../../../context/AppContextProvider';
 
 interface searchBarProps {
   onSearch?: (query: string, results: any[]) => void;
@@ -20,6 +21,8 @@ const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
 
   const [searchBarValue, setSearchBarValue] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const { isSigningInUser } = useContext(AppContext);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -70,17 +73,20 @@ const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
               type="text"
               variant="outlined"
               color="success"
-              className="bg-white hover:bg-gray-100 w-full rounded"
-              label={placeholder}
+              className={`w-full rounded ${isSigningInUser ? 'bg-gray-200' : 'bg-white hover:bg-gray-100'}`}
+              label={`${isSigningInUser ? '' : placeholder}`}
               value={searchBarValue}
               onChange={handleSearchBarChange}
               ref={inputRef}
+              disabled={isSigningInUser}
             />
           </FormControl>
           <button
             aria-label="search"
             type="submit"
-            className="bg-primary rounded h-full w-15 p-[15.5px] flex items-center justify-center hover:bg-gray-600"
+            className={`rounded h-full w-15 p-[15.5px] flex items-center justify-center 
+              ${isSigningInUser ? 'bg-tertiary' : 'bg-primary hover:bg-gray-500'}`}
+            disabled={isSigningInUser}
           >
             <SearchIcon className="text-[#ffc153]" />
           </button>

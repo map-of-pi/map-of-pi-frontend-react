@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         primary: 'var(--default-primary-color)',
         secondary: 'var(--default-secondary-color)',
+        tertiary: 'var(--default-tertiary-color)',
         background: 'var(--default-bg-color)'  
       },
       height: {
