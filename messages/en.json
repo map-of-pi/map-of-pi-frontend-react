@@ -59,7 +59,8 @@
       "SELLER_SELL_CENTER": "Set Sell Center",
       "VALIDATION": {
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Seller Registration submitted successfully",
-        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated"
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated",
+        "UNINITIALIZED_SELL_CENTER": "Please set your Sell Center"
       }
     },
     "BUY_FROM_SELLER": {

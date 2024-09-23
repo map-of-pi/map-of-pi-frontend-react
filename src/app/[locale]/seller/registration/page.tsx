@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useTranslations } from 'next-intl';
@@ -21,13 +20,13 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerDefault } from '@/constants/placeholders';
+import { fetchMapCenter } from '@/services/mapCenterApi';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import UrlsRemoval from '../../../../utils/sanitize';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
-import { fetchMapCenter } from '@/services/mapCenterApi';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -38,228 +37,228 @@ const SellerRegistrationForm = () => {
   
   const {currentUser, autoLoginUser} = useContext(AppContext);
   
-const [sellCenter, setSellCenter] = useState<{ lat: number; lng: number } | null>(null);
-const [formData, setFormData] = useState({
-  sellerName: '',
-  sellerType: 'Test seller',
-  sellerDescription: '',
-  sellerAddress: '',
-  image: ''
-});
-const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
-const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
-const [loading, setLoading] = useState<boolean>(true);
-const [error, setError] = useState<string | null>(null);
-const [file, setFile] = useState<File | null>(null);
-const [previewImage, setPreviewImage] = useState<string>(dbSeller?.image || '');
-const [isFormValid, setIsFormValid] = useState(false);
-const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-const [linkUrl, setLinkUrl] = useState('');
+  const [formData, setFormData] = useState({
+    sellerName: '',
+    sellerType: 'Test seller',
+    sellerDescription: '',
+    sellerAddress: '',
+    image: ''
+  });
+  const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
+  const [sellCenter, setSellCenter] = useState<{ lng: number; lat: number } | null>(null);
+  const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string>(dbSeller?.image || '');
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [linkUrl, setLinkUrl] = useState('');
 
-useEffect(() => {
-  const fetchSellCenter = async () => {
-    try {
-      const mapCenterData = await fetchMapCenter(); // Function to fetch map center from backend
-      if (mapCenterData) {
+  useEffect(() => {
+    const fetchSellCenter = async () => {
+      try {
+        const mapCenterData = await fetchMapCenter(); // Function to fetch map center from backend
+        if (mapCenterData) {
         const { latitude, longitude } = mapCenterData;
         if (latitude !== undefined && longitude !== undefined) {
           setSellCenter({ lat: latitude, lng: longitude });
-          
+            
+          } else {
+          }
         } else {
         }
-      } else {
+      } catch (error) {
+        logger.error('Error fetching sellCenter from backend:', error);
       }
-    } catch (error) {
-      logger.error('Error fetching sellCenter from backend:', error);
-    }
-  };
-
-  fetchSellCenter();
-}, [currentUser]);
-
-// Fetch seller data and user settings on component mount
-useEffect(() => {
-  if (!currentUser) {
-    logger.info("User not logged in; attempting auto-login..");
-    autoLoginUser();
-  }
-
-  const getSellerData = async () => {
-    try {
-      const data = await fetchSellerRegistration();
-      if (data) {
-        setDbSeller(data);
-      } else {
-        setDbSeller(null);
-      }
-    } catch (error) {
-      logger.error('Error fetching seller data:', { error });
-      setError('Error fetching seller data.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getUserSettings = async () => {
-    const settings = await fetchUserSettings();
-    if (settings) {
-      setUserSettings(settings);
-    } else {
-      logger.info('User settings not found.');
-      setUserSettings(null);
-    }
-  };
-
-  getSellerData();
-  getUserSettings();
-}, [currentUser]);
-
-const defaultSellerName = currentUser? currentUser?.user_name : '';
-
-// Initialize formData with dbSeller values if available
-useEffect(() => {
-  if (dbSeller) {
-    setFormData({
-      sellerName: dbSeller.name || currentUser?.user_name || '',
-      sellerDescription: dbSeller.description || '',
-      sellerAddress: dbSeller.address || '',
-      sellerType: dbSeller.seller_type || 'Test seller',
-      image: dbSeller.image || ''
-    });
-  }
-}, [dbSeller]);
-
-// Handle form changes
-useEffect(() => {
-  const {
-    sellerName,
-    sellerType,
-    sellerDescription,
-    sellerAddress
-  } = formData;
-  setIsFormValid(
-    !!(
-      sellerName &&
-      sellerType &&
-      sellerDescription &&
-      sellerAddress
-    ),
-  );
-}, [formData]);
- // function preview image upload
- useEffect(() => {
-  if (!file) return;
-  const objectUrl = URL.createObjectURL(file);
-  setPreviewImage(objectUrl);
-  return () => {
-    URL.revokeObjectURL(objectUrl);
-  };
-}, [file]);
-
-// set the preview image if dbSeller changes
-useEffect(() => {
-  if (dbSeller?.image) {
-    setPreviewImage(dbSeller.image);
-  }
-}, [dbSeller]);
-const handleChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-) => {
-  const { name, value } = e.target;
-  setFormData(prevFormData => ({
-    ...prevFormData,
-    [name]: value,
-  }));
-
-  // Enable or disable save button based on form inputs
-  const isFormFilled = Object.values(formData).some(v => v !== '');
-  setIsSaveEnabled(isFormFilled);
-};
-
-// Handle image upload
-const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const selectedFile = e.target.files?.[0]; // only take the first file
-  if (selectedFile) {
-    setFile(selectedFile);
-
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreviewImage(objectUrl);
-    logger.info('Image selected for upload:', { selectedFile });
-
-    setIsSaveEnabled(true);
-  }
-};
-
-const handleNavigation = (nextLink: string)=> {
-  setLinkUrl(nextLink);
-  
-  if (isSaveEnabled) {
-    setShowConfirmDialog(true); // Show confirm dialog when save is enabled
-  } else {
-    router.push(nextLink); // Direct navigation if save is not enabled
-  }
-}
-
-// Save function with integrated sellCenter handling
-const handleSave = async () => {
-  // Check if user is authenticated and form is valid
-  if (!currentUser) {
-    logger.warn('Form submission failed: User not authenticated.');
-    return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
-  }
-
-  // Ensure sellCenter is defined and valid
-  if (!sellCenter || !sellCenter.lat || !sellCenter.lng) {
-    logger.warn('Sell Center is not defined or incomplete.');
-    return toast.error('Please select a sell location before saving.');
-  }
-
-
-  // Trim and clean the sellerAddress and sellerDescription fields
-  let sellerAddress = formData.sellerAddress.trim() === ""
-    ? sellerDefault.address
-    : UrlsRemoval(formData.sellerAddress);
-
-  let sellerDescription = formData.sellerDescription.trim() === ""
-    ? sellerDefault.description
-    : UrlsRemoval(formData.sellerDescription);
-
-
-  const formDataToSend = new FormData();
-  formDataToSend.append('name', formData.sellerName);
-  formDataToSend.append('seller_type', formData.sellerType);
-  formDataToSend.append('description', sellerDescription);
-  formDataToSend.append('address', sellerAddress);
-  formDataToSend.append('order_online_enabled_pref', 'false');
-
-  // Add sell_map_center field only if sellCenter is available
-  if (sellCenter) {
-    const sellMapCenter = {
-      type: 'Point',
-      coordinates: [sellCenter.lng, sellCenter.lat], // Correct order: [longitude, latitude]
     };
-    formDataToSend.append('sell_map_center', JSON.stringify(sellMapCenter));
+
+    fetchSellCenter();
+  }, [currentUser]);
+
+  // Fetch seller data and user settings on component mount
+  useEffect(() => {
+    if (!currentUser) {
+      logger.info("User not logged in; attempting auto-login..");
+      autoLoginUser();
+    }
+
+    const getSellerData = async () => {
+      try {
+        const data = await fetchSellerRegistration();
+        if (data) {
+          setDbSeller(data);
+        } else {
+          setDbSeller(null);
+        }
+      } catch (error) {
+        logger.error('Error fetching seller data:', { error });
+        setError('Error fetching seller data.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const getUserSettings = async () => {
+      const settings = await fetchUserSettings();
+      if (settings) {
+        setUserSettings(settings);
+      } else {
+        logger.info('User settings not found.');
+        setUserSettings(null);
+      }
+    };
+
+    getSellerData();
+    getUserSettings();
+  }, [currentUser]);
+
+  const defaultSellerName = currentUser? currentUser?.user_name : '';
+
+  // Initialize formData with dbSeller values if available
+  useEffect(() => {
+    if (dbSeller) {
+      setFormData({
+        sellerName: dbSeller.name || currentUser?.user_name || '',
+        sellerDescription: dbSeller.description || '',
+        sellerAddress: dbSeller.address || '',
+        sellerType: dbSeller.seller_type || 'Test seller',
+        image: dbSeller.image || ''
+      });
+    }
+  }, [dbSeller]);
+
+  // Handle form changes
+  useEffect(() => {
+    const {
+      sellerName,
+      sellerType,
+      sellerDescription,
+      sellerAddress
+    } = formData;
+    setIsFormValid(
+      !!(
+        sellerName &&
+        sellerType &&
+        sellerDescription &&
+        sellerAddress
+      ),
+    );
+  }, [formData]);
+
+  // function preview image upload
+  useEffect(() => {
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewImage(objectUrl);
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+    };
+  }, [file]);
+
+  // set the preview image if dbSeller changes
+  useEffect(() => {
+    if (dbSeller?.image) {
+      setPreviewImage(dbSeller.image);
+    }
+  }, [dbSeller]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+
+    // Enable or disable save button based on form inputs
+    const isFormFilled = Object.values(formData).some(v => v !== '');
+    setIsSaveEnabled(isFormFilled);
+  };
+
+  // Handle image upload
+  const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0]; // only take the first file
+    if (selectedFile) {
+      setFile(selectedFile);
+
+      const objectUrl = URL.createObjectURL(selectedFile);
+      setPreviewImage(objectUrl);
+      logger.info('Image selected for upload:', { selectedFile });
+
+      setIsSaveEnabled(true);
+    }
+  };
+
+  const handleNavigation = (nextLink: string)=> {
+    setLinkUrl(nextLink);
+    
+    if (isSaveEnabled) {
+      setShowConfirmDialog(true); // Show confirm dialog when save is enabled
+    } else {
+      router.push(nextLink); // Direct navigation if save is not enabled
+    }
   }
 
-  // Add the image if it exists
-  if (file) {
-    formDataToSend.append('image', file);
-  } else {
-    formDataToSend.append('image', '');
-  }
-  try {
-    const data = await registerSeller(formDataToSend);
-    if (data.seller) {
-      setDbSeller(data.seller);
-      setIsSaveEnabled(false);
-      logger.info('Seller registration saved successfully:', { data });
-      toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
+  // Save function with integrated sellCenter handling
+  const handleSave = async () => {
+    // Check if user is authenticated and form is valid
+    if (!currentUser) {
+      logger.warn('Form submission failed: User not authenticated.');
+      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
     }
-  } catch (error) {
-    logger.error('Error saving seller registration:', { error });
-  }
-};
+
+    // Ensure sellCenter is defined and valid
+    if (!sellCenter || !sellCenter.lng || !sellCenter.lat) {
+      logger.warn('Sell Center is not defined or incomplete.');
+      return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.UNINITIALIZED_SELL_CENTER'));
+    }
+
+    // Trim and clean the sellerAddress and sellerDescription fields
+    let sellerAddress = formData.sellerAddress.trim() === ""
+      ? sellerDefault.address
+      : UrlsRemoval(formData.sellerAddress);
+
+    let sellerDescription = formData.sellerDescription.trim() === ""
+      ? sellerDefault.description
+      : UrlsRemoval(formData.sellerDescription);
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.sellerName);
+    formDataToSend.append('seller_type', formData.sellerType);
+    formDataToSend.append('description', sellerDescription);
+    formDataToSend.append('address', sellerAddress);
+    formDataToSend.append('order_online_enabled_pref', 'false');
+
+    // Add sell_map_center field only if sellCenter is available
+    if (sellCenter) {
+      const sellMapCenter = {
+        type: 'Point',
+        coordinates: [sellCenter.lng, sellCenter.lat],
+      };
+      formDataToSend.append('sell_map_center', JSON.stringify(sellMapCenter));
+    }
+
+    // Add the image if it exists
+    if (file) {
+      formDataToSend.append('image', file);
+    } else {
+      formDataToSend.append('image', '');
+    }
+    try {
+      const data = await registerSeller(formDataToSend);
+      if (data.seller) {
+        setDbSeller(data.seller);
+        setIsSaveEnabled(false);
+        logger.info('Seller registration saved successfully:', { data });
+        toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
+      }
+    } catch (error) {
+      logger.error('Error saving seller registration:', { error });
+    }
+  };
   
   const translatedSellerTypeOptions = [
     {

@@ -59,7 +59,8 @@
       "SELLER_SELL_CENTER": "Nàƒé Wòkpɔ̃nɔnyewo",
       "VALIDATION": {
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Nyatakɔɖu nàtsoɖe tɔ wòɖé yèna nyuie",
-        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nɔviɖewɔwɔ na mi kplɔ nɛ ƒe viwo nɔ anyi nyɔnu ƒe ŋu nɔ anyi"
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nɔviɖewɔwɔ na mi kplɔ nɛ ƒe viwo nɔ anyi nyɔnu ƒe ŋu nɔ anyi",
+        "UNINITIALIZED_SELL_CENTER": "Mɛnya ɖe gbe na wo trɔtrɔ wo fiawo tso me"
       }
     },
     "BUY_FROM_SELLER": {
