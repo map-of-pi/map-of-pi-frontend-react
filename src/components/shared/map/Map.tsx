@@ -24,7 +24,7 @@ const sanitizeCoordinates = (lat: number, lng: number) => {
 // Function to fetch seller coordinates based on origin, radius, and optional search query
 const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number, searchQuery?: string): Promise<ISellerWithSettings[]> => {
   const { lat, lng } = sanitizeCoordinates(origin[0], origin[1]);
-  const formattedOrigin = toLatLngLiteral([lng, lat]);
+  const formattedOrigin = toLatLngLiteral([lat, lng]);
 
   try {
     const sellersData = await fetchSellers(formattedOrigin, radius, searchQuery);
@@ -32,7 +32,7 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number, searc
       const [lng, lat] = seller.sell_map_center.coordinates;
       return {
         ...seller,
-        coordinates: [lng, lat] as LatLngTuple
+        coordinates: [lat, lng] as LatLngTuple
       };
     });
 
@@ -98,7 +98,7 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
           const [lng, lat] = seller.sell_map_center.coordinates;
           return {
             ...seller,
-            coordinates: [lng, lat] as LatLngTuple
+            coordinates: [lat, lng] as LatLngTuple
           };
         });
             

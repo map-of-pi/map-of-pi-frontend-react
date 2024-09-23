@@ -39,8 +39,8 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
   const t = useTranslations();
   const [showPopup, setShowPopup] = useState(false);
   const [center, setCenter] = useState<{ lat: number; lng: number }>({
-    lat: 50.064192,
     lng: 19.944544,
+    lat: 50.064192,
   });
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const mapRef = useRef<L.Map | null>(null);
@@ -58,7 +58,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
           const mapCenter = await fetchMapCenter();
           if (mapCenter?.latitude !== undefined && mapCenter.longitude !== undefined) {
             setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
-            logger.info(`Map center set to latitude: ${mapCenter.latitude}, longitude: ${mapCenter.longitude}`
+            logger.info(`Map center set to longitude: ${mapCenter.longitude}, latitude: ${mapCenter.latitude}}`
             );
           } else {
             logger.warn('Map center is undefined, falling back to default coordinates');

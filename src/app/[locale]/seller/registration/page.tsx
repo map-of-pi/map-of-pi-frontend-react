@@ -61,13 +61,10 @@ const SellerRegistrationForm = () => {
       try {
         const mapCenterData = await fetchMapCenter(); // Function to fetch map center from backend
         if (mapCenterData) {
-        const { latitude, longitude } = mapCenterData;
-        if (latitude !== undefined && longitude !== undefined) {
-          setSellCenter({ lat: latitude, lng: longitude });
-            
-          } else {
+          const { longitude, latitude } = mapCenterData;
+          if (longitude !== undefined && latitude !== undefined) {
+            setSellCenter({ lng: longitude, lat: latitude });
           }
-        } else {
         }
       } catch (error) {
         logger.error('Error fetching sellCenter from backend:', error);

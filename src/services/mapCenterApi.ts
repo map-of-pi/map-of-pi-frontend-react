@@ -21,15 +21,15 @@ export const fetchMapCenter = async () => {
       logger.info('Fetched map center details:', mapCenter);
 
       // Access coordinates based on the actual response structure
-      const latitude = mapCenter?.sell_map_center?.coordinates?.[1] ?? mapCenter?.search_map_center?.coordinates?.[1];
       const longitude = mapCenter?.sell_map_center?.coordinates?.[0] ?? mapCenter?.search_map_center?.coordinates?.[0];
+      const latitude = mapCenter?.sell_map_center?.coordinates?.[1] ?? mapCenter?.search_map_center?.coordinates?.[1];
       const type = mapCenter?.sell_map_center?.type ?? mapCenter?.search_map_center?.type;
 
       // Verify extracted values
-      logger.info('Extracted coordinates:', { latitude, longitude, type });
+      logger.info('Extracted coordinates:', { longitude, latitude, type });
 
       if (latitude !== undefined && longitude !== undefined) {
-        return { latitude, longitude, type };
+        return { longitude, latitude, type };
       } else {
         logger.warn('Fetched map center has undefined coordinates, returning default.');
         return null;
@@ -48,11 +48,11 @@ export const fetchMapCenter = async () => {
 // Function to Save Map Center
 export const saveMapCenter = async (latitude: number, longitude: number, type: 'search' | 'sell') => {
   try {
-    logger.info(`Sending map center with coordinates: latitude ${latitude}, longitude ${longitude}, type: ${type}`);
+    logger.info(`Sending map center with coordinates: longitude ${longitude}, latitude ${latitude}, type: ${type}`);
     
     const response = await axiosClient.put('/map-center/save', {
-      latitude,
       longitude,
+      latitude,
       type
     });
     
