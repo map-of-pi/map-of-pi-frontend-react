@@ -28,9 +28,14 @@ export interface ISeller {
   average_rating: {
     $numberDecimal: string;
   };
+  sell_map_center: {
+    type: 'Point';
+    coordinates: [number, number];
+  };
   coordinates: [number, number];
   order_online_enabled_pref: boolean;
-};
+}
+
 
 export interface IReviewFeedback {
   _id: string;

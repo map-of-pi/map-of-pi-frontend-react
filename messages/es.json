@@ -59,7 +59,8 @@
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
       "VALIDATION": {
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro de vendedor enviado con éxito",
-        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "El registro falló porque el usuario no está autenticado"
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "El registro falló porque el usuario no está autenticado",
+        "UNINITIALIZED_SELL_CENTER": "Por favor, establezca su Centro de Venta"
       }
     },
     "BUY_FROM_SELLER": {

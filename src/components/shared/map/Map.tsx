@@ -135,40 +135,45 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
   };
 
   // Function to handle map interactions (zoom and move); lazy-loading implementation
-  const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
-    const newCenter = newBounds.getCenter();
-    const newRadius = calculateRadius(newBounds, mapInstance);
-    const largerRadius = newRadius * 2; // Increase radius by 100% for fetching
+const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
+  const newCenter = newBounds.getCenter();
+  const newRadius = calculateRadius(newBounds, mapInstance);
+  const largerRadius = newRadius * 2; // Increase radius by 100% for fetching
 
-    logger.info('Handling map interaction with new center and radius:', { newCenter, newRadius });
-    setLoading(true);
-    setError(null);
+  logger.info('Handling map interaction with new center and radius:', { newCenter, newRadius });
+  setLoading(true);
+  setError(null);
 
-    try {
-      let additionalSellers = await fetchSellerCoordinates([newCenter.lat, newCenter.lng], largerRadius, searchQuery);
-      additionalSellers = removeDuplicates(additionalSellers);
+  try {
+    let additionalSellers = await fetchSellerCoordinates([newCenter.lat, newCenter.lng], largerRadius, searchQuery);
+    additionalSellers = removeDuplicates(additionalSellers);
 
-      logger.info('Fetched additional sellers:', { additionalSellers });
+    logger.info('Fetched additional sellers:', { additionalSellers });
 
-      // Filter sellers within the new bounds
-      const filteredSellers = additionalSellers.filter(seller => newBounds.contains([seller.coordinates[0], seller.coordinates[1]]));
-      logger.info('Filtered sellers within bounds', { filteredSellers });
+    // Filter sellers within the new bounds, checking if coordinates are defined
+    const filteredSellers = additionalSellers.filter(
+      seller => seller.coordinates && newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
+    );
+    logger.info('Filtered sellers within bounds', { filteredSellers });
 
-      // Filter out sellers that are not within the new bounds from the existing sellers
-      const remainingSellers = sellers.filter(seller => newBounds.contains([seller.coordinates[0], seller.coordinates[1]]));
-      logger.info('Remaining sellers within bounds:', { remainingSellers });
+    // Filter out sellers that are not within the new bounds from the existing sellers, checking if coordinates are defined
+    const remainingSellers = sellers.filter(
+      seller => seller.coordinates && newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
+    );
+    logger.info('Remaining sellers within bounds:', { remainingSellers });
 
-      const updatedSellers = removeDuplicates([...remainingSellers, ...filteredSellers]);
-      logger.info('Updated sellers array:', { updatedSellers});
+    const updatedSellers = removeDuplicates([...remainingSellers, ...filteredSellers]);
+    logger.info('Updated sellers array:', { updatedSellers });
 
-      setSellers(updatedSellers);
-    } catch (erroe) {
-      logger.error('Failed to fetch additional data:', { error });
-      setError('Failed to fetch additional data');
-    } finally {
-      setLoading(false);
-    }
-  };
+    setSellers(updatedSellers);
+  } catch (error) {
+    logger.error('Failed to fetch additional data:', { error });
+    setError('Failed to fetch additional data');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   // Function to calculate radius from bounds
   const calculateRadius = (bounds: L.LatLngBounds, mapInstance: L.Map) => {

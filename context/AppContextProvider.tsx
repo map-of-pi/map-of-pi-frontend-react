@@ -11,6 +11,7 @@ import {
   useEffect
 } from 'react';
 
+import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
 import { onIncompletePaymentFound } from '@/utils/auth';
 import { AuthResult } from '@/constants/pi';
