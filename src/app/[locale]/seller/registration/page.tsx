@@ -57,59 +57,55 @@ const SellerRegistrationForm = () => {
   const [linkUrl, setLinkUrl] = useState('');
 
   useEffect(() => {
-    const fetchSellCenter = async () => {
+    const fetchData = async () => {
+      if (!currentUser) {
+        logger.info('User not logged in; attempting auto-login..');
+        autoLoginUser();
+        return;
+      }
+  
       try {
-        const mapCenterData = await fetchMapCenter(); // Function to fetch map center from backend
-        if (mapCenterData) {
-          const { longitude, latitude } = mapCenterData;
-          if (longitude !== undefined && latitude !== undefined) {
-            setSellCenter({ lng: longitude, lat: latitude });
+        // Fetch Sell Center
+        if (!sellCenter) {
+          const mapCenterData = await fetchMapCenter();
+          if (mapCenterData) {
+            const { longitude, latitude } = mapCenterData;
+            if (latitude !== undefined && longitude !== undefined) {
+              setSellCenter({ lng: longitude, lat: latitude });
+            }
+          }
+        }
+  
+        // Fetch Seller Data
+        if (!dbSeller) {
+          const data = await fetchSellerRegistration();
+          if (data) {
+            setDbSeller(data);
+          } else {
+            setDbSeller(null);
+          }
+        }
+  
+        // Fetch User Settings
+        if (!userSettings) {
+          const settings = await fetchUserSettings();
+          if (settings) {
+            setUserSettings(settings);
+          } else {
+            setUserSettings(null);
           }
         }
       } catch (error) {
-        logger.error('Error fetching sellCenter from backend:', error);
-      }
-    };
-
-    fetchSellCenter();
-  }, [currentUser]);
-
-  // Fetch seller data and user settings on component mount
-  useEffect(() => {
-    if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
-      autoLoginUser();
-    }
-
-    const getSellerData = async () => {
-      try {
-        const data = await fetchSellerRegistration();
-        if (data) {
-          setDbSeller(data);
-        } else {
-          setDbSeller(null);
-        }
-      } catch (error) {
-        logger.error('Error fetching seller data:', { error });
-        setError('Error fetching seller data.');
+        logger.error('Error fetching data:', error);
+        toast.error('Error fetching data. Please try again.');
       } finally {
         setLoading(false);
       }
     };
-
-    const getUserSettings = async () => {
-      const settings = await fetchUserSettings();
-      if (settings) {
-        setUserSettings(settings);
-      } else {
-        logger.info('User settings not found.');
-        setUserSettings(null);
-      }
-    };
-
-    getSellerData();
-    getUserSettings();
-  }, [currentUser]);
+  
+    fetchData();
+  }, [currentUser, sellCenter, dbSeller, userSettings]);
+  
 
   const defaultSellerName = currentUser? currentUser?.user_name : '';
 
