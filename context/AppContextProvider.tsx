@@ -8,10 +8,10 @@ import {
   useState,
   SetStateAction,
   ReactNode,
-  useEffect
+  useEffect,
+  useRef
 } from 'react';
 
-import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
 import { onIncompletePaymentFound } from '@/utils/auth';
 import { AuthResult } from '@/constants/pi';
@@ -42,21 +42,32 @@ interface AppContextProviderProps {
 }
 
 const AppContextProvider = ({ children }: AppContextProviderProps) => {
+  const piRef = useRef<any>(null);
+  
   const t = useTranslations();
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
-  const [isSigningInUser,setIsSigningInUser] = useState(false)
+  const [isSigningInUser,setIsSigningInUser] = useState(false);
+
+  const initializePiSDK = async () => {
+    if (!piRef.current) {
+      const { Pi } = await import('@pinetwork-js/sdk');
+      await Pi.init({ version: '2.0', sandbox: process.env.NODE_ENV === 'development' });
+      piRef.current = Pi;
+    }
+  };
 
   const registerUser = async () => {
-    logger.info('Initializing Pi SDK for user registration.');
-    await Pi.init({ version: '2.0', sandbox: process.env.NODE_ENV === 'development' });
+    if (!piRef.current) {
+      return;
+    }
 
-    let isInitiated = Pi.initialized;
+    const isInitiated = piRef.current.initialized;
     logger.info(`Pi SDK initialized: ${isInitiated}`);
 
     if (isInitiated) {
       try {
         setIsSigningInUser(true)
-        const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);
+        const pioneerAuth: AuthResult = await piRef.current.authenticate(['username', 'payments'], onIncompletePaymentFound);
         const res = await axiosClient.post("/users/authenticate", {pioneerAuth});
 
         if (res.status === 200) {
@@ -102,6 +113,12 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       await registerUser();
     }
   }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      initializePiSDK();
+    }
+  }, []);
 
   useEffect(() => {
     logger.info('AppContextProvider mounted.');
