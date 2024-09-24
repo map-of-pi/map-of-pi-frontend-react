@@ -59,7 +59,8 @@
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
       "VALIDATION": {
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rijista ta sayarwa ta samu nasara",
-        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Rijista ta gaza saboda mai amfani ba a tantance shi ba"
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Rijista ta gaza saboda mai amfani ba a tantance shi ba",
+        "UNINITIALIZED_SELL_CENTER": "Da fatan za ku saita cibiyar sayarwarku"
       }
     },
     "BUY_FROM_SELLER": {

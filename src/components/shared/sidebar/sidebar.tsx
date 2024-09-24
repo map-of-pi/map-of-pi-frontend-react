@@ -10,6 +10,7 @@ import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 
+import MapCenter from '../map/MapCenter';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
@@ -69,12 +70,14 @@ function Sidebar(props: any) {
     Themes: false,
     Languages: false,
   });
-  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+ 
   const [file, setFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>(dbUserSettings?.image || '');
+  const [showMapCenter] = useState(false);
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
+  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
   useEffect(() => {
     if (!currentUser) {
@@ -312,10 +315,10 @@ function Sidebar(props: any) {
                   width: '100%',
                   padding: '10px',
                   borderRadius: '10px',
-                  fontSize: '18px',
+                  fontSize: '18px' 
                 }}
                 onClick={() => {
-                  router.push('/map-center');
+                  router.push(`/map-center?entryType=search`);
                   props.setToggleDis(false); // Close sidebar on click
                 }}
               />
@@ -507,6 +510,12 @@ function Sidebar(props: any) {
           <div ref={bottomRef}></div>
         </div>
       </div>
+      {/* Conditionally render MapCenter */}
+      {showMapCenter && (
+        <MapCenter
+          entryType="search"
+        />
+      )}
       <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel} />
       <PrivacyPolicyModel
         togglePrivacyPolicy={showPrivacyPolicyModel}
