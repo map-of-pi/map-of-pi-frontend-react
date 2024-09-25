@@ -42,6 +42,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
     lng: 19.944544,
     lat: 50.064192,
   });
+  const [zoom, setZoom] = useState<number>(2);
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const mapRef = useRef<L.Map | null>(null);
 
@@ -55,11 +56,16 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
     const getMapCenter = async () => {
       if (currentUser?.pi_uid) {
         try {
-          const mapCenter = await fetchMapCenter();
+          const mapCenter = await fetchMapCenter(entryType); // Pass the type explicitly as 'search' or 'sell'
           if (mapCenter?.latitude !== undefined && mapCenter.longitude !== undefined) {
             setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
-            logger.info(`Map center set to longitude: ${mapCenter.longitude}, latitude: ${mapCenter.latitude}}`
-            );
+            setZoom(13); // Set the desired zoom level on revisit
+            logger.info(`Map center set to longitude: ${mapCenter.longitude}, latitude: ${mapCenter.latitude}`);
+
+            // Ensure map view is set correctly
+            if (mapRef.current) {
+              mapRef.current.setView([mapCenter.latitude, mapCenter.longitude], 13);
+            }
           } else {
             logger.warn('Map center is undefined, falling back to default coordinates');
             setCenter({ lat: 50.064192, lng: 19.944544 });
@@ -69,6 +75,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         }
       }
     };
+
     getMapCenter();
   }, [currentUser]);
 
