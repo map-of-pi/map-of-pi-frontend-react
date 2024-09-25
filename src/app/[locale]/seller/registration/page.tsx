@@ -20,6 +20,7 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerDefault } from '@/constants/placeholders';
+import { fetchMapCenter } from '@/services/mapCenterApi';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import UrlsRemoval from '../../../../utils/sanitize';
@@ -35,6 +36,7 @@ const SellerRegistrationForm = () => {
   const placeholderSeller = itemData.seller;
   
   const {currentUser, autoLoginUser} = useContext(AppContext);
+  
   const [formData, setFormData] = useState({
     sellerName: '',
     sellerType: 'Test seller',
@@ -43,10 +45,10 @@ const SellerRegistrationForm = () => {
     image: ''
   });
   const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
+  const [sellCenter, setSellCenter] = useState<{ lng: number; lat: number } | null>(null);
   const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
   const [file, setFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>(dbSeller?.image || '');
   const [isFormValid, setIsFormValid] = useState(false);
@@ -54,6 +56,25 @@ const SellerRegistrationForm = () => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
+  useEffect(() => {
+    const fetchSellCenter = async () => {
+      try {
+        const mapCenterData = await fetchMapCenter(); // Function to fetch map center from backend
+        if (mapCenterData) {
+          const { longitude, latitude } = mapCenterData;
+          if (longitude !== undefined && latitude !== undefined) {
+            setSellCenter({ lng: longitude, lat: latitude });
+          }
+        }
+      } catch (error) {
+        logger.error('Error fetching sellCenter from backend:', error);
+      }
+    };
+
+    fetchSellCenter();
+  }, [currentUser]);
+
+  // Fetch seller data and user settings on component mount
   useEffect(() => {
     if (!currentUser) {
       logger.info("User not logged in; attempting auto-login..");
@@ -64,10 +85,8 @@ const SellerRegistrationForm = () => {
       try {
         const data = await fetchSellerRegistration();
         if (data) {
-          logger.info('Fetched seller data successfully:', { data });
           setDbSeller(data);
         } else {
-          logger.warn('Seller not found.');
           setDbSeller(null);
         }
       } catch (error) {
@@ -81,7 +100,6 @@ const SellerRegistrationForm = () => {
     const getUserSettings = async () => {
       const settings = await fetchUserSettings();
       if (settings) {
-        logger.info('Fetched user settings successfully:', {settings});
         setUserSettings(settings);
       } else {
         logger.info('User settings not found.');
@@ -94,11 +112,12 @@ const SellerRegistrationForm = () => {
   }, [currentUser]);
 
   const defaultSellerName = currentUser? currentUser?.user_name : '';
+
   // Initialize formData with dbSeller values if available
   useEffect(() => {
     if (dbSeller) {
       setFormData({
-        sellerName: dbSeller.name || defaultSellerName,
+        sellerName: dbSeller.name || currentUser?.user_name || '',
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
         sellerType: dbSeller.seller_type || 'Test seller',
@@ -107,6 +126,7 @@ const SellerRegistrationForm = () => {
     }
   }, [dbSeller]);
 
+  // Handle form changes
   useEffect(() => {
     const {
       sellerName,
@@ -142,21 +162,20 @@ const SellerRegistrationForm = () => {
   }, [dbSeller]);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData(prevFormData => ({
       ...prevFormData,
       [name]: value,
     }));
-    
-    // enable or disable save button based on form inputs
+
+    // Enable or disable save button based on form inputs
     const isFormFilled = Object.values(formData).some(v => v !== '');
     setIsSaveEnabled(isFormFilled);
   };
 
+  // Handle image upload
   const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]; // only take the first file
     if (selectedFile) {
@@ -170,7 +189,6 @@ const SellerRegistrationForm = () => {
     }
   };
 
-  
   const handleNavigation = (nextLink: string)=> {
     setLinkUrl(nextLink);
     
@@ -181,42 +199,51 @@ const SellerRegistrationForm = () => {
     }
   }
 
-  // Function to save data to the database
-  const handleSave = async () => {  
+  // Save function with integrated sellCenter handling
+  const handleSave = async () => {
     // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
-      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));            
+      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
     }
-    
-    logger.info('Saving form data:', { formData });
+
+    // Ensure sellCenter is defined and valid
+    if (!sellCenter || !sellCenter.lng || !sellCenter.lat) {
+      logger.warn('Sell Center is not defined or incomplete.');
+      return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.UNINITIALIZED_SELL_CENTER'));
+    }
 
     // Trim and clean the sellerAddress and sellerDescription fields
-    let sellerAddress = formData.sellerAddress.trim() === "" 
-      ? sellerDefault.address 
+    let sellerAddress = formData.sellerAddress.trim() === ""
+      ? sellerDefault.address
       : UrlsRemoval(formData.sellerAddress);
 
-    let sellerDescription = formData.sellerDescription.trim() === "" 
-      ? sellerDefault.description 
+    let sellerDescription = formData.sellerDescription.trim() === ""
+      ? sellerDefault.description
       : UrlsRemoval(formData.sellerDescription);
 
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', formData.sellerName);
-      formDataToSend.append('seller_type', formData.sellerType);
-      formDataToSend.append('description', sellerDescription);
-      formDataToSend.append('address', sellerAddress);
-      // hardcode the value until the form element is built
-      formDataToSend.append('order_online_enabled_pref', 'false');
-    
-    // add the image if it exists
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.sellerName);
+    formDataToSend.append('seller_type', formData.sellerType);
+    formDataToSend.append('description', sellerDescription);
+    formDataToSend.append('address', sellerAddress);
+    formDataToSend.append('order_online_enabled_pref', 'false');
+
+    // Add sell_map_center field only if sellCenter is available
+    if (sellCenter) {
+      const sellMapCenter = {
+        type: 'Point',
+        coordinates: [sellCenter.lng, sellCenter.lat],
+      };
+      formDataToSend.append('sell_map_center', JSON.stringify(sellMapCenter));
+    }
+
+    // Add the image if it exists
     if (file) {
       formDataToSend.append('image', file);
     } else {
       formDataToSend.append('image', '');
     }
-
-    logger.info('Registration form data:', Object.fromEntries(formDataToSend.entries()));
-
     try {
       const data = await registerSeller(formDataToSend);
       if (data.seller) {
@@ -277,16 +304,22 @@ const SellerRegistrationForm = () => {
             />
           </div>
         </div>
-        <Button
-          label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
-          onClick={() => handleNavigation("/map-center")}
-          styles={{
-            color: '#ffc153',
-            height: '40px',
-            padding: '10px',
-            marginLeft: 'auto',
+        <Link
+          href={{
+            pathname: "/map-center", // Path to MapCenter component
+            query: { entryType: 'sell' } // Passing 'sell' as entryType
           }}
-        />
+        >
+          <Button
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
+            styles={{
+              color: '#ffc153',
+              height: '40px',
+              padding: '10px',
+              marginLeft: 'auto',
+            }}
+          />
+        </Link>
         <div className="mb-4 mt-3 ml-auto w-min">
           <Button
             label={t('SHARED.SAVE')}

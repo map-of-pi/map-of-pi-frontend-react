@@ -46,7 +46,7 @@ const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
       const data = await fetchSellers(undefined, undefined, query);
       return data || []; // Return response.data or empty array if undefined
     } catch (error) {
-      logger.error(`Error fetching search results: ${error}`);
+      logger.error(`Error fetching search results: ${ error }`);
       return [];
     } finally {
       setLoading(false);
