@@ -59,7 +59,7 @@ const SellerRegistrationForm = () => {
   useEffect(() => {
     const fetchSellCenter = async () => {
       try {
-        const mapCenterData = await fetchMapCenter(); // Function to fetch map center from backend
+        const mapCenterData = await fetchMapCenter('sell'); // Specify type as 'sell'
         if (mapCenterData) {
           const { longitude, latitude } = mapCenterData;
           if (longitude !== undefined && latitude !== undefined) {
@@ -70,9 +70,9 @@ const SellerRegistrationForm = () => {
         logger.error('Error fetching sellCenter from backend:', error);
       }
     };
-
+  
     fetchSellCenter();
-  }, [currentUser]);
+  }, [currentUser]);  
 
   // Fetch seller data and user settings on component mount
   useEffect(() => {
