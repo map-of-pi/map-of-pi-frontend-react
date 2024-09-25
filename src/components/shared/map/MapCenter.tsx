@@ -42,6 +42,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
     lng: 19.944544,
     lat: 50.064192,
   });
+  const [zoom, setZoom] = useState<number>(2); // Introduce zoom state
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const mapRef = useRef<L.Map | null>(null);
 
@@ -58,11 +59,17 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
           const mapCenter = await fetchMapCenter();
           if (mapCenter?.latitude !== undefined && mapCenter.longitude !== undefined) {
             setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
-            logger.info(`Map center set to longitude: ${mapCenter.longitude}, latitude: ${mapCenter.latitude}}`
+            setZoom(13); // Set the desired zoom level on revisit
+            logger.info(
+              `Map center set to longitude: ${mapCenter.longitude}, latitude: ${mapCenter.latitude}}`
             );
+            if (mapRef.current) {
+              mapRef.current.setView([mapCenter.latitude, mapCenter.longitude], 13); // Ensure map view is set correctly
+            }
           } else {
             logger.warn('Map center is undefined, falling back to default coordinates');
             setCenter({ lat: 50.064192, lng: 19.944544 });
+            setZoom(2); // Default zoom level
           }
         } catch (error) {
           logger.error('Error fetching map center:', { error });
@@ -137,12 +144,12 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
       }
     }
   };
-  
+
   const handleClickDialog = () => {
     setShowPopup(false);
   };
 
-  const bounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
+  // const bounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180)); //Use this later if map bounds in needed
 
   return (
     <div className="search-container">
@@ -152,7 +159,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
       <SearchBar onSearch={handleSearch} page={'map_center'} />
       <MapContainer
         center={center}
-        zoom={2}
+        zoom={zoom}
         zoomControl={false}
         minZoom={2}
         maxZoom={18}
@@ -179,8 +186,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <Button
           label={entryType === 'sell'
             ? t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')
-            : t('SHARED.SEARCH_CENTER')
-          }
+            : t('SHARED.SEARCH_CENTER')}
           onClick={setMapCenter}
           styles={{
             borderRadius: '10px',
