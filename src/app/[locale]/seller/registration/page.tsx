@@ -227,16 +227,8 @@ const SellerRegistrationForm = () => {
     formDataToSend.append('seller_type', formData.sellerType);
     formDataToSend.append('description', sellerDescription);
     formDataToSend.append('address', sellerAddress);
+    // hardcode the value until the form element is built
     formDataToSend.append('order_online_enabled_pref', 'false');
-
-    // Add sell_map_center field only if sellCenter is available
-    if (sellCenter) {
-      const sellMapCenter = {
-        type: 'Point',
-        coordinates: [sellCenter.lng, sellCenter.lat],
-      };
-      formDataToSend.append('sell_map_center', JSON.stringify(sellMapCenter));
-    }
 
     // Add the image if it exists
     if (file) {
