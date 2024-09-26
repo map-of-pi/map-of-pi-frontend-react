@@ -91,7 +91,7 @@ function SellerReviews({
         setGiverReviews(giverReviews);
         setReciverReviews(receiverReviews);
       } catch (error) {
-        logger.error(`Error fetching seller reviews for ID: ${userId}`, error);
+        logger.error(`Error fetching seller reviews for ID: ${ userId }`, { error });
         setError('Error fetching seller data');
       } finally {
         setLoading(false);

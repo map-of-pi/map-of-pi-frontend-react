@@ -67,7 +67,7 @@ export default function ReplyToReviewPage({
           logger.warn(`No review data found for review ID: ${reviewId}`);
         }
       } catch (error) {
-        logger.error(`Error fetching review data for review ID: ${reviewId}`, error);
+        logger.error(`Error fetching review data for review ID: ${ reviewId }`, { error });
         setError('Error fetching review data');
       } finally {
         setLoading(false);
