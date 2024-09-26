@@ -5,16 +5,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef, useContext } from 'react';
 import { AppContext } from '../../../../../../context/AppContextProvider';
+import { resolveRating } from '../util/ratingUtils';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
+import EmojiPicker from '@/components/shared/Review/emojipicker';
+import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { IReviewOutput } from '@/constants/types';
+import SearchIcon from '@mui/icons-material/Search';
+import { FormControl, TextField } from '@mui/material';
 import { fetchReviews } from '@/services/reviewsApi';
 import { resolveDate } from '@/utils/date';
-import { resolveRating } from '../util/ratingUtils';
-import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
-import { FormControl, TextField } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import EmojiPicker from '@/components/shared/Review/emojipicker';
 import logger from '../../../../../../logger.config.mjs';
 
 interface ReviewInt {
@@ -40,7 +40,6 @@ function SellerReviews({
 }) {
   const t = useTranslations();
   const userName = searchParams.seller_name;
-  const isbuyer = searchParams.buyer;
   const userId = params.id;
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
@@ -100,7 +99,7 @@ function SellerReviews({
     };
 
     getSellerData();
-  }, [userId, currentUser]); // Include dependencies like userId and currentUser
+  }, [userId, currentUser]);
 
   const handleSearch = () => {
     // Implement search logic here
@@ -123,7 +122,6 @@ function SellerReviews({
     }
   };
 
-  // Loading condition
   if (loading) {
     logger.info('Loading seller reviews..');
     return <Skeleton type='seller_review' />;
@@ -141,7 +139,7 @@ function SellerReviews({
 
         {/* Search area */}
         <div className='flex gap-3 items-center justify-items-center py-3'>
-          <span>Pioneer</span>
+          <span>{t('SHARED.PIONEER_LABEL')}</span>
           <FormControl className="flex-grow mr-2">
             <TextField
               id="search-input"
@@ -149,7 +147,7 @@ function SellerReviews({
               variant="outlined"
               color="success"
               className="bg-none hover:bg-gray-100 w-full rounded-lg"
-              label={"search reviews"}
+              label={t('SHARED.SEARCH_REVIEWS')}
               value={""}
               onChange={handleSearch}
               ref={inputRef}
@@ -164,13 +162,13 @@ function SellerReviews({
           </button>
         </div>
 
-        <ToggleCollapse header={t('Give review to this pioneer')}>
+        <ToggleCollapse header={t('SCREEN.REVIEWS.GIVE_REVIEW_SECTION_HEADER')}>
           <div>
             <EmojiPicker sellerId={userId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} />
           </div>
         </ToggleCollapse>
 
-        <ToggleCollapse header={'Review given by this pioneer'}>
+        <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
           {giverReviews && giverReviews.map((item, index) => (
             <div key={index} className="seller_item_container mb-5">
               <div className='flex'>
@@ -203,7 +201,7 @@ function SellerReviews({
 
                   <div className="flex justify-between items-center">
                     <Link href={`/seller/reviews/feedback/${item.reviewId}?seller_name=${item.receiver}`}>
-                      <OutlineBtn label={t('Reply')} />
+                      <OutlineBtn label={t('SHARED.REPLY')} />
                     </Link>
                   </div>
                 </div>
@@ -212,7 +210,7 @@ function SellerReviews({
           ))}
         </ToggleCollapse>
 
-        <ToggleCollapse header={'Reviews received by this pioneer'}>
+        <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_RECEIVED_SECTION_HEADER')}>
           {receiverReviews && receiverReviews.map((item, index) => (
             <div key={index} className="seller_item_container mb-5">
               <div className='flex'>
@@ -245,7 +243,7 @@ function SellerReviews({
 
                   <div className="flex justify-end items-center w-full">
                     <Link href={`/seller/reviews/feedback/${item.reviewId}?seller_name=${userName}`}>
-                      <OutlineBtn label={t('Reply')} />
+                      <OutlineBtn label={t('SHARED.REPLY')} />
                     </Link>
                   </div>
                 </div>

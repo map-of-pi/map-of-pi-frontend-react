@@ -79,6 +79,11 @@
       "SELLER_PHONE_NUMBER_LABEL": "Número de teléfono",
       "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico" 
     },
+    "REVIEWS": {
+      "GIVE_REVIEW_SECTION_HEADER": "Dar una reseña a este pionero",
+      "REVIEWS_GIVEN_SECTION_HEADER": "Reseñas dadas por este pionero",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Reseñas recibidas por este pionero"
+    },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No hay reseñas para {seller_id}",
       "CHECK_REVIEWS_FEEDBACK_HEADER": "Lista de Reseñas dejadas para {seller_id}",
@@ -88,7 +93,7 @@
       "REPLY_TO_REVIEW_HEADER": "Responder a la reseña dejada para {seller_id}",
       "BY_REVIEWER": "Por {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Deja tu respuesta a la reseña anterior",
-      "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes sobre la reseña anterior",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Seleccione la cara que muestre cómo se siente acerca de su interacción con este pionero",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
       "VALIDATION": {
@@ -178,10 +183,12 @@
     }
   },
   "SHARED": {
+    "PIONEER_LABEL": "Pionero",
     "BUY": "Comprar",
     "NAVIGATE": "Navegar",
     "SEARCH_CENTER": "Establecer Centro de Búsqueda",
     "CHECK_REVIEWS": "Ver Reseñas",
+    "SEARCH_REVIEWS": "Buscar reseñas",
     "REPLY": "Responder",
     "SAVE": "Guardar",
     "CONFIRM_DIALOG": "Tienes cambios sin guardar. ¿Realmente quieres salir?",
