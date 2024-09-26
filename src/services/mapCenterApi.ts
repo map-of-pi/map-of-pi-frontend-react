@@ -1,6 +1,4 @@
 import axiosClient from "@/config/client";
-import { handleAxiosError } from "@/utils/error";
-
 import logger from '../../logger.config.mjs';
 
 // Function to Fetch Map Center
@@ -39,9 +37,12 @@ export const fetchMapCenter = async () => {
       return null;
     }
   } catch (error: any) {
-    logger.error('Fetch map center encountered an error:', { error });
-    handleAxiosError(error);
-    throw error;
+    logger.error('Fetch map center encountered an error:', { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw new Error('Failed to fetch map center. Please try again later.');
   }
 };
 
@@ -66,8 +67,11 @@ export const saveMapCenter = async (latitude: number, longitude: number, type: '
       return null;
     }
   } catch (error: any) {
-    logger.error('Save map center encountered an error:', { error });
-    handleAxiosError(error);
-    throw error;
+    logger.error('Save map center encountered an error:', { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw new Error('Failed to save map center. Please try again later.');
   }
 };
