@@ -67,7 +67,7 @@ const SellerRegistrationForm = () => {
           }
         }
       } catch (error) {
-        logger.error('Error fetching sellCenter from backend:', error);
+        logger.error('Error fetching sellCenter from backend:', { error });
       }
     };
 

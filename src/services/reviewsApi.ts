@@ -1,7 +1,5 @@
 import axiosClient from "@/config/client";
 import { getMultipartFormDataHeaders } from "@/utils/api";
-import { handleAxiosError } from "@/utils/error";
-
 import logger from '../../logger.config.mjs';
 
 // Fetch a single review for a seller
@@ -19,9 +17,12 @@ export const fetchSingleReview = async (reviewID: string) => {
       return null;
     }
   } catch (error: any) {
-    logger.error('Fetch single review encountered an error:', { error, reviewID });
-    handleAxiosError(error);
-    throw error;
+    logger.error(`Fetch single review for ${ reviewID } encountered an error:`, { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw new Error('Failed to fetch single review. Please try again later.');
   }
 };
   
@@ -40,9 +41,12 @@ export const fetchReviews = async (userId:string) => {
       return null;
     }
   } catch (error: any) {
-    logger.error('Fetch reviews encountered an error:', { error, userId });
-    handleAxiosError(error);
-    throw error;
+    logger.error(`Fetch reviews for ${ userId } encountered an error:`, { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw new Error('Failed to fetch reviews. Please try again later.');
   }
 };
   
@@ -64,8 +68,11 @@ export const createReview = async (formData: FormData) => {
       return null;
     }
   } catch (error: any) {
-    logger.error('Create review encountered an error:', { error });
-    handleAxiosError(error);
-    throw error;
+    logger.error('Create review encountered an error:', { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw new Error('Failed to create review. Please try again later.');
   }
 };

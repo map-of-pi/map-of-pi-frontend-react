@@ -1,7 +1,5 @@
 import axiosClient from "@/config/client";
-import { handleAxiosError } from "@/utils/error";
 import { getMultipartFormDataHeaders } from '@/utils/api';
-
 import logger from '../../logger.config.mjs';
 
 // Fetch all sellers or sellers within bounds and/ or matching search criteria
@@ -31,9 +29,12 @@ export const fetchSellers = async (origin: any, radius: number | undefined, sear
       return null;
     }
   } catch (error: any) {
-    logger.error('Fetch sellers encountered an error:', { error, origin, radius });
-    handleAxiosError(error);
-    throw error;
+    logger.error('Fetch sellers encountered an error:', { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw new Error('Failed to fetch sellers. Please try again later.');
   }
 };
   
@@ -51,9 +52,12 @@ export const fetchSingleSeller = async (sellerId: string) => {
       return null;
     }
   } catch (error: any) {
-    logger.error('Fetch single seller encountered an error:', { error, sellerId });
-    handleAxiosError(error);
-    throw error;
+    logger.error('Fetch single seller encountered an error:', { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw new Error('Failed to fetch single seller. Please try again later.');
   }
 };
 
@@ -71,9 +75,12 @@ export const fetchSellerRegistration = async () => {
       return null;
     }
   } catch (error: any) {
-    logger.error('Fetch seller registration encountered an error:', { error });
-    handleAxiosError(error);
-    throw error;
+    logger.error('Fetch seller registration encountered an error:', { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw new Error('Failed to fetch seller registration. Please try again later.');
   }
 };
 
@@ -95,9 +102,12 @@ export const registerSeller = async (formData: FormData) => {
       return null;
     }
   } catch (error: any) {
-    logger.error('Create or update seller registration encountered an error:', { error, formData });
-    handleAxiosError(error);
-    throw error;
+    logger.error('Create or update seller registration encountered an error:', { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw new Error('Failed to register seller. Please try again later.');
   }
 };
   
