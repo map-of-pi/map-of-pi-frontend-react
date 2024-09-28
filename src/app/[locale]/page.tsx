@@ -13,27 +13,6 @@ import logger from '../../../logger.config.mjs';
 import { AppContext } from '../../../context/AppContextProvider';
 import { fetchUserLocation } from '@/services/userSettingsApi';
 
-const getDeviceLocation = async (): Promise<{ lat: number; lng: number }> => {
-  return new Promise((resolve, reject) => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          resolve({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {
-          reject(error);
-        },
-        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
-      );
-    } else {
-      reject(new Error('Geolocation is not supported by this browser.'));
-    }
-  });
-};
-
 export default function Index() {
   const t = useTranslations();
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), {

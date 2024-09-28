@@ -235,7 +235,7 @@ function Sidebar(props: any) {
     if (file) {
       formDataToSend.append('image', file);
     } else {
-      formDataToSend.append('image', '');
+      formDataToSend.append('image', '');  // set to previous image url if no upload
     }
 
     logger.info('User Settings form data:', Object.fromEntries(formDataToSend.entries()));
@@ -244,7 +244,7 @@ function Sidebar(props: any) {
       const data = await createUserSettings(formDataToSend);
       if (data.settings) {
         setDbUserSettings(data.settings);
-        setIsSaveEnabled(false);
+        setIsSaveEnabled(false);        
         logger.info('User Settings saved successfully:', { data });
         toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
       }
@@ -284,10 +284,6 @@ function Sidebar(props: any) {
     {
       value: 'auto',
       name: t('Auto'),
-    },
-    {
-      value: 'deviceGPS',
-      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
     },
     {
       value: 'searchCenter',

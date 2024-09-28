@@ -4,10 +4,10 @@ import { handleAxiosError } from "@/utils/error";
 import logger from '../../logger.config.mjs';
 
 // Function to Fetch Map Center
-export const fetchMapCenter = async () => {
+export const fetchMapCenter = async (type: 'search' | 'sell') => {
   try {
     logger.info('Fetching map center...');
-    const response = await axiosClient.get('/map-center');
+    const response = await axiosClient.get(`/map-center/${type}`);
 
     if (response.status === 200) {
       logger.info(`Fetch map center successful with Status ${response.status}`, {
