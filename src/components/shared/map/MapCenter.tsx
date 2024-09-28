@@ -175,20 +175,23 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <MapHandler />
         <RecenterAutomatically position={center} />
       </MapContainer>
-      <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto">
-        <Button
-          label={entryType === 'sell'
-            ? t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')
-            : t('SHARED.SEARCH_CENTER')
-          }
-          onClick={setMapCenter}
-          styles={{
-            borderRadius: '10px',
-            color: '#ffc153',
-            paddingLeft: '50px',
-            paddingRight: '50px',
-          }}
-        />
+      <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto pointer-events-none">
+        {/* Add Set Map Center Button */}
+        <div className="pointer-events-auto">
+          <Button
+            label={entryType === 'sell'
+              ? t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')
+              : t('SHARED.SEARCH_CENTER')
+            }
+            onClick={setMapCenter}
+            styles={{
+              borderRadius: '10px',
+              color: '#ffc153',
+              paddingLeft: '50px',
+              paddingRight: '50px'
+            }}
+          />
+        </div>
       </div>
       {showPopup && (
         <ConfirmDialogX
