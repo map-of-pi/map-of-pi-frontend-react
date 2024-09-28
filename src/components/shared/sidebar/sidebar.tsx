@@ -282,6 +282,10 @@ function Sidebar(props: any) {
 
   const translateFindMeOptions = [
     {
+      value: 'auto',
+      name: t('Auto'),
+    },
+    {
       value: 'deviceGPS',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
     },

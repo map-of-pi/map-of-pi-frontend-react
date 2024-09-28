@@ -69,3 +69,24 @@ export const createUserSettings = async (formData: FormData) => {
     throw error;
   }
 };
+
+// Fetch the user location of the user
+export const fetchUserLocation = async () => {
+  try {
+    logger.info('Fetching user location..');
+    const response = await axiosClient.get(`/user-preferences/location`);
+    if (response.status === 200) {
+      logger.info(`Fetch user location successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Fetch user location failed with Status ${response.status}`);
+      return null;
+    }
+  } catch (error: any) {
+    logger.error('Fetch user location encountered an error:', { error });
+    handleAxiosError(error);
+    throw error;
+  }
+};
