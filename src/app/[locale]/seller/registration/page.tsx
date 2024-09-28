@@ -327,7 +327,8 @@ const SellerRegistrationForm = () => {
         <div className='spacing-7'>
           {/* seller review toggle */}
           <ToggleCollapse
-            header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
+            header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}
+            defaultOpen={false}>
             <TrustMeter ratings={userSettings ? userSettings.trust_meter_rating : placeholderSeller.trust_meter_rating} />
             <div className="flex items-center justify-between mt-3 mb-5">
               <p className="text-sm">
@@ -353,7 +354,8 @@ const SellerRegistrationForm = () => {
           
           {/* user settings info toggle */}
           <ToggleCollapse
-            header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
+            header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
+              defaultOpen={false}>
             <div className="text-sm mb-3">
               <span className="font-bold">
                 {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
@@ -381,7 +383,8 @@ const SellerRegistrationForm = () => {
           </ToggleCollapse>
           
           {/* seller registration form fields toggle */}
-          <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}>
+          <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}
+            defaultOpen={true}>
             <div className="mb-4">
               <Input
                 label={t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_NAME')}
