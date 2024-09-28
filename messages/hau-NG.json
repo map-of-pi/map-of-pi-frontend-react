@@ -79,6 +79,11 @@
       "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
       "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
     },
+    "REVIEWS": {
+      "GIVE_REVIEW_SECTION_HEADER": "Ba wa wannan jagora sharhi",
+      "REVIEWS_GIVEN_SECTION_HEADER": "Sharhi da aka ba wannan jagora",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Sharhi da wannan jagora ya samu"
+    },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Babu bita don {seller_id}",
       "CHECK_REVIEWS_FEEDBACK_HEADER": "Jerin Ra'ayoyin da aka bari na {seller_id}",
@@ -88,7 +93,7 @@
       "REPLY_TO_REVIEW_HEADER": "Amsa wa bita",
       "BY_REVIEWER": "Ta {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Bar amsar ku ga bita ta sama",
-      "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kuke ji game da mai siyarwa da ke sama",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kake ji game da mu'amalarka da wannan jagora",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Shigar da karin sharhi a nan",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
       "VALIDATION": {
@@ -178,10 +183,12 @@
     }
   },
   "SHARED": {
+    "PIONEER_LABEL": "Pione",
     "BUY": "Saya",
     "NAVIGATE": "Kewaya",
     "SEARCH_CENTER": "Saita Cibiyar Bincike",
     "CHECK_REVIEWS": "Duba Sake Dubawa",
+    "SEARCH_REVIEWS": "Binciken sharhi",
     "REPLY": "Amsa",
     "SAVE": "Ajiye",
     "CONFIRM_DIALOG": "Kuna da canje-canje marasa ajiya. Da gaske kuna son barin?",

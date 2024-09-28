@@ -6,10 +6,8 @@ import Link from 'next/link';
 
 import React, { useEffect, useState, useContext } from 'react';
 
-import { AppContext } from '../../../../../../context/AppContextProvider';
 import ConfirmDialog from '@/components/shared/confirm';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
-import EmojiPicker from '@/components/shared/Review/emojipicker';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
@@ -17,6 +15,7 @@ import { ISeller, IUserSettings, IUser } from '@/constants/types';
 import { fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 
+import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
@@ -26,10 +25,8 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
 
   const sellerId = params.id; 
 
-  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-
   const [sellerShopInfo, setSellerShopInfo] = useState<ISeller | null>(null);
   const [sellerSettings, setSellerSettings] = useState<IUserSettings | null>(null);
   const [sellerInfo, setSellerInfo] = useState<IUser | null>(null);
@@ -57,7 +54,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           logger.warn(`No seller shop info found for seller ID: ${sellerId}`);
         }
       } catch (error) {
-        logger.error(`Error fetching seller data for seller ID: ${sellerId}`, error);
+        logger.error(`Error fetching seller data for seller ID: ${ sellerId }`, { error });
         setError('Error fetching seller data');
       } finally {
         setLoading(false);
@@ -75,7 +72,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           logger.warn(`No seller settings found for seller ID: ${sellerId}`);
         }
       } catch (error) {
-        logger.error(`Error fetching seller settings for seller ID: ${sellerId}`, error);
+        logger.error(`Error fetching seller settings for seller ID: ${ sellerId }`, { error });
         setError('Error fetching seller settings');
       }
     };
@@ -87,12 +84,14 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
 
   const translateSellerCategory = (category: string): string => {
     switch (category) {
-      case 'Pioneer':
-        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.PIONEER');
-      case 'Other':
-        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.OTHER');
+      case 'activeSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER');
+      case 'inactiveSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER');
+      case 'testSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER');
       default:
-        return category;
+        return '';
     }
   };
 

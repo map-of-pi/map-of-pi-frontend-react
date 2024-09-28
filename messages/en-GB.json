@@ -79,6 +79,11 @@
       "SELLER_PHONE_NUMBER_LABEL": "Phone number",
       "SELLER_EMAIL_ADDRESS_LABEL": "Email address" 
     },
+    "REVIEWS": {
+      "GIVE_REVIEW_SECTION_HEADER": "Give review to this pioneer",
+      "REVIEWS_GIVEN_SECTION_HEADER": "Reviews given by this pioneer",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Reviews received by this pioneer"
+    },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No reviews for {seller_id}",
       "CHECK_REVIEWS_FEEDBACK_HEADER": "List of Reviews left for {seller_id}",
@@ -88,7 +93,7 @@
       "REPLY_TO_REVIEW_HEADER": "Reply to Review left for {seller_id}",
       "BY_REVIEWER": "By {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
-      "FACE_SELECTION_REVIEW_MESSAGE": "Select the face which shows how you feel about the above review",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Select the face that shows how you feel about your interaction with this pioneer",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
       "VALIDATION": {
@@ -178,10 +183,12 @@
     }
   },
   "SHARED": {
+    "PIONEER_LABEL": "Pioneer",
     "BUY": "Buy",
     "NAVIGATE": "Navigate",
     "SEARCH_CENTER": "Set Search Centre",
     "CHECK_REVIEWS": "Check Reviews",
+    "SEARCH_REVIEWS": "Search Reviews",
     "REPLY": "Reply",
     "SAVE": "Save",
     "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",

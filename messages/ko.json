@@ -79,6 +79,11 @@
       "SELLER_PHONE_NUMBER_LABEL": "전화번호",
       "SELLER_EMAIL_ADDRESS_LABEL": "이메일 주소"
     },
+    "REVIEWS": {
+      "GIVE_REVIEW_SECTION_HEADER": "이 개척자에게 리뷰 남기기",
+      "REVIEWS_GIVEN_SECTION_HEADER": "이 개척자가 남긴 리뷰",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "이 개척자가 받은 리뷰"
+    },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "{seller_id}에 대한 리뷰가 없습니다",
       "CHECK_REVIEWS_FEEDBACK_HEADER": "{seller_id}에 대한 리뷰 목록",
@@ -88,7 +93,7 @@
       "REPLY_TO_REVIEW_HEADER": "{seller_id}에 남긴 리뷰에 답장하기",
       "BY_REVIEWER": "{buyer_id}에 의해",
       "REPLY_TO_REVIEW_MESSAGE": "위 리뷰에 대한 답장을 남기세요",
-      "FACE_SELECTION_REVIEW_MESSAGE": "위 리뷰에 대한 느낌을 나타내는 얼굴을 선택하세요",
+      "FACE_SELECTION_REVIEW_MESSAGE": "이 개척자와의 상호작용에 대한 기분을 나타내는 얼굴을 선택하세요",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "추가 의견을 입력하세요",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "피드백 사진 업로드",
       "VALIDATION": {
@@ -178,10 +183,12 @@
     }
   },
   "SHARED": {
+    "PIONEER_LABEL": "개척자",
     "BUY": "구매",
     "NAVIGATE": "탐색",
     "SEARCH_CENTER": "검색 센터 설정",
     "CHECK_REVIEWS": "리뷰 확인",
+    "SEARCH_REVIEWS": "리뷰 검색",
     "REPLY": "답장",
     "SAVE": "저장",
     "CONFIRM_DIALOG": "저장되지 않은 변경 사항이 있습니다. 정말 나가시겠습니까?",
