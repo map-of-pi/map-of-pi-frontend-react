@@ -82,7 +82,7 @@ export const fetchUserLocation = async () => {
   try {
     logger.info('Fetching user location..');
     const headers = getMultipartFormDataHeaders();
-    const response = await axiosClient.post(`/user-preferences/location`, { headers });
+    const response = await axiosClient.get(`/user-preferences/location/me`, { headers });
     if (response.status === 200) {
       logger.info(`Fetch user location successful with Status ${response.status}`, {
         data: response.data

@@ -37,7 +37,7 @@ export default function Index() {
     const fetchLocationOnLoad = async () => {
       try {
         const location = await fetchUserLocation();
-        console.log('user location', location)
+        console.log('user location////////////////', location.origin)
         setMapCenter(location.origin);
         setZoomLevel(location.radius);
         logger.info('User location obtained successfully on initial load:', {
@@ -51,14 +51,13 @@ export default function Index() {
     };
 
     fetchLocationOnLoad();
-  }, []);
+  }, [isSigningInUser]);
 
   const handleLocationButtonClick = async () => {
     try {
       const location = await fetchUserLocation();
-      console.log('user location', location)
       setMapCenter(location.origin);
-      setZoomLevel(15);
+      setZoomLevel(location.radius);
       setLocationError(null);
       logger.info('User location obtained successfully on button click:', {
         location,
