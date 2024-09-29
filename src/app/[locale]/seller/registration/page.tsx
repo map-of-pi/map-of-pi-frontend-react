@@ -45,7 +45,6 @@ const SellerRegistrationForm = () => {
     image: ''
   });
   const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
-  const [sellCenter, setSellCenter] = useState<{ lng: number; lat: number } | null>(null);
   const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -56,23 +55,6 @@ const SellerRegistrationForm = () => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
-  useEffect(() => {
-    const fetchSellCenter = async () => {
-      try {
-        const mapCenterData = await fetchMapCenter(); // Function to fetch map center from backend
-        if (mapCenterData) {
-          const { longitude, latitude } = mapCenterData;
-          if (longitude !== undefined && latitude !== undefined) {
-            setSellCenter({ lng: longitude, lat: latitude });
-          }
-        }
-      } catch (error) {
-        logger.error('Error fetching sellCenter from backend:', { error });
-      }
-    };
-
-    fetchSellCenter();
-  }, [currentUser]);
 
   // Fetch seller data and user settings on component mount
   useEffect(() => {
@@ -120,7 +102,7 @@ const SellerRegistrationForm = () => {
         sellerName: dbSeller.name || currentUser?.user_name || '',
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        sellerType: dbSeller.seller_type || 'Test seller',
+        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].name,
         image: dbSeller.image || ''
       });
     }
@@ -199,18 +181,11 @@ const SellerRegistrationForm = () => {
     }
   }
 
-  // Save function with integrated sellCenter handling
   const handleSave = async () => {
     // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
       return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
-    }
-
-    // Ensure sellCenter is defined and valid
-    if (!sellCenter || !sellCenter.lng || !sellCenter.lat) {
-      logger.warn('Sell Center is not defined or incomplete.');
-      return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.UNINITIALIZED_SELL_CENTER'));
     }
 
     // Trim and clean the sellerAddress and sellerDescription fields
@@ -233,8 +208,6 @@ const SellerRegistrationForm = () => {
     // Add the image if it exists
     if (file) {
       formDataToSend.append('image', file);
-    } else {
-      formDataToSend.append('image', '');
     }
     try {
       const data = await registerSeller(formDataToSend);

@@ -94,7 +94,11 @@ export const fetchUserLocation = async () => {
     }
   } catch (error: any) {
     logger.error('Fetch user location encountered an error:', { error });
-    handleAxiosError(error);
+    logger.error('Create or update user settings encountered an error:', { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
     throw error;
   }
 };
