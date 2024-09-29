@@ -26,6 +26,7 @@
     },
     "FIND_ME_PREFERENCE_LABEL": "Zaɓin FindMe",
     "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Atomatik",
       "PREFERRED_DEVICE_GPS": "Yi amfani da GPS na na'urar",
       "PREFERRED_SEARCH_CENTER": "Yi amfani da Cibiyar Bincike"
     },
