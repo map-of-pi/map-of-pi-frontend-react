@@ -65,35 +65,33 @@ const SellerRegistrationForm = () => {
       }
   
       try {
-        // Fetch Sell Center
-        if (!sellCenter) {
-          const mapCenterData = await fetchMapCenter();
-          if (mapCenterData) {
-            const { longitude, latitude } = mapCenterData;
-            if (latitude !== undefined && longitude !== undefined) {
-              setSellCenter({ lng: longitude, lat: latitude });
-            }
+        // Fetch Map Center, Seller Data, and User Settings simultaneously
+        const [mapCenterData, sellerData, userSettingsData] = await Promise.all([
+          fetchMapCenter(),           // Correct function for fetching map center
+          fetchSellerRegistration(),  // Correct function for fetching seller registration
+          fetchUserSettings()         // Correct function for fetching user settings
+        ]);
+  
+        // Set sell center if map center data is available
+        if (mapCenterData) {
+          const { longitude, latitude } = mapCenterData;
+          if (longitude !== undefined && latitude !== undefined) {
+            setSellCenter({ lng: longitude, lat: latitude });
           }
         }
   
-        // Fetch Seller Data
-        if (!dbSeller) {
-          const data = await fetchSellerRegistration();
-          if (data) {
-            setDbSeller(data);
-          } else {
-            setDbSeller(null);
-          }
+        // Set seller data if available
+        if (sellerData) {
+          setDbSeller(sellerData);
+        } else {
+          setDbSeller(null);
         }
   
-        // Fetch User Settings
-        if (!userSettings) {
-          const settings = await fetchUserSettings();
-          if (settings) {
-            setUserSettings(settings);
-          } else {
-            setUserSettings(null);
-          }
+        // Set user settings if available
+        if (userSettingsData) {
+          setUserSettings(userSettingsData);
+        } else {
+          setUserSettings(null);
         }
       } catch (error) {
         logger.error('Error fetching data:', error);
@@ -104,8 +102,7 @@ const SellerRegistrationForm = () => {
     };
   
     fetchData();
-  }, [currentUser, sellCenter, dbSeller, userSettings]);
-  
+  }, [currentUser]);   
 
   const defaultSellerName = currentUser? currentUser?.user_name : '';
 
@@ -197,35 +194,28 @@ const SellerRegistrationForm = () => {
 
   // Save function with integrated sellCenter handling
   const handleSave = async () => {
-    // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
       return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
     }
-
-    // Ensure sellCenter is defined and valid
+  
     if (!sellCenter || !sellCenter.lng || !sellCenter.lat) {
       logger.warn('Sell Center is not defined or incomplete.');
       return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.UNINITIALIZED_SELL_CENTER'));
     }
-
+  
     // Trim and clean the sellerAddress and sellerDescription fields
-    let sellerAddress = formData.sellerAddress.trim() === ""
-      ? sellerDefault.address
-      : UrlsRemoval(formData.sellerAddress);
-
-    let sellerDescription = formData.sellerDescription.trim() === ""
-      ? sellerDefault.description
-      : UrlsRemoval(formData.sellerDescription);
-
+    let sellerAddress = formData.sellerAddress.trim() === "" ? sellerDefault.address : UrlsRemoval(formData.sellerAddress);
+    let sellerDescription = formData.sellerDescription.trim() === "" ? sellerDefault.description : UrlsRemoval(formData.sellerDescription);
+  
     const formDataToSend = new FormData();
     formDataToSend.append('name', formData.sellerName);
     formDataToSend.append('seller_type', formData.sellerType);
     formDataToSend.append('description', sellerDescription);
     formDataToSend.append('address', sellerAddress);
     formDataToSend.append('order_online_enabled_pref', 'false');
-
-    // Add sell_map_center field only if sellCenter is available
+  
+    // Add the sell map center if available
     if (sellCenter) {
       const sellMapCenter = {
         type: 'Point',
@@ -233,13 +223,14 @@ const SellerRegistrationForm = () => {
       };
       formDataToSend.append('sell_map_center', JSON.stringify(sellMapCenter));
     }
-
+  
     // Add the image if it exists
     if (file) {
       formDataToSend.append('image', file);
     } else {
       formDataToSend.append('image', '');
     }
+  
     try {
       const data = await registerSeller(formDataToSend);
       if (data.seller) {
@@ -251,7 +242,7 @@ const SellerRegistrationForm = () => {
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
     }
-  };
+  };  
   
   const translatedSellerTypeOptions = [
     {
