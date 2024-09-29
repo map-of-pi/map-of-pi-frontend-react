@@ -62,7 +62,7 @@ function Sidebar(props: any) {
     email: '',
     phone_number: '',
     image: '',
-    findme: '',
+    findme: 'auto',
     trust_meter_rating: 100,
   });
   const { resolvedTheme, setTheme } = useTheme();
@@ -110,7 +110,7 @@ function Sidebar(props: any) {
         email: dbUserSettings.email || '',
         phone_number: dbUserSettings.phone_number?.toString() || '',
         image: dbUserSettings.image || '',
-        findme: dbUserSettings.findme || t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
+        findme: dbUserSettings.findme || t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
         trust_meter_rating: dbUserSettings.trust_meter_rating
       });
     }

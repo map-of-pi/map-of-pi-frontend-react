@@ -37,7 +37,7 @@ const SellerRegistrationForm = () => {
   
   const [formData, setFormData] = useState({
     sellerName: '',
-    sellerType: 'Test seller',
+    sellerType: 'testSeller',
     sellerDescription: '',
     sellerAddress: '',
     image: ''
