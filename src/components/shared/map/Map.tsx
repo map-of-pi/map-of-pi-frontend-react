@@ -79,7 +79,6 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
   useEffect(() => {
     logger.info('Component mounted, fetching initial coordinates..');
     fetchInitialCoordinates();
-    requestLocation();
   }, []);
 
   // Update origin when center prop changes
@@ -191,31 +190,6 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
     [sellers] // Dependency array ensures the debounced function is updated with the latest sellers
   );
 
-  // Request user location
-  const requestLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          const newLatLng = L.latLng(latitude, longitude);
-          logger.info(`Real-time location updated: ${newLatLng.toString()}`);
-          setPosition(newLatLng);
-          setOrigin(newLatLng);
-          setIsLocationAvailable(true);
-        },
-        (error) => {
-          logger.warn('Location not found:', { error });
-          setLocationError(true);
-          setTimeout(() => setLocationError(false), 3000);
-        }
-      );
-    } else {
-      logger.warn('Geolocation is not supported by this browser.');
-      setLocationError(true);
-      setTimeout(() => setLocationError(false), 3000);
-    }
-  };
-
   // Component to handle location and map events
   function LocationMarker() {
     const map = useMapEvents({
@@ -227,6 +201,7 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
           console.log('in location');
           map.setView(e.latlng, zoom, { animate: false });
           setInitialLocationSet(true);
+          setIsLocationAvailable(true);
         }
       },
       locationerror() {
@@ -249,6 +224,7 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
       if (position && !initialLocationSet) {
         map.setView(position, zoom, { animate: false });
         setInitialLocationSet(true); // Prevent further automatic view resets
+        setIsLocationAvailable(true);
       }
     }, [position, map, initialLocationSet]);
 
