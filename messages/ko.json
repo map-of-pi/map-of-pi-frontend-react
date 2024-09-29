@@ -26,7 +26,7 @@
     },
     "FIND_ME_PREFERENCE_LABEL": "FindMe 선호",
     "FIND_ME_OPTIONS": {
-      "PREFERRED_AUTO": "자동으로 나를 찾아줘",
+      "PREFERRED_AUTO": "자동",
       "PREFERRED_DEVICE_GPS": "내 기기의 GPS 사용",
       "PREFERRED_SEARCH_CENTER": "검색 센터 사용"
     },
