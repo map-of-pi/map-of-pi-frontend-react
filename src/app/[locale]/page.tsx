@@ -8,10 +8,10 @@ import { useContext, useEffect, useState } from 'react';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
-
-import logger from '../../../logger.config.mjs';
-import { AppContext } from '../../../context/AppContextProvider';
 import { fetchUserLocation } from '@/services/userSettingsApi';
+
+import { AppContext } from '../../../context/AppContextProvider';
+import logger from '../../../logger.config.mjs';
 
 export default function Index() {
   const t = useTranslations();
@@ -37,7 +37,6 @@ export default function Index() {
     const fetchLocationOnLoad = async () => {
       try {
         const location = await fetchUserLocation();
-        console.log('user location', location)
         setMapCenter(location.origin);
         setZoomLevel(location.radius);
         logger.info('User location obtained successfully on initial load:', {
@@ -56,7 +55,6 @@ export default function Index() {
   const handleLocationButtonClick = async () => {
     try {
       const location = await fetchUserLocation();
-      console.log('user location', location)
       setMapCenter(location.origin);
       setZoomLevel(15);
       setLocationError(null);

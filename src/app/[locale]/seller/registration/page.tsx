@@ -20,11 +20,9 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerDefault } from '@/constants/placeholders';
-import { fetchMapCenter } from '@/services/mapCenterApi';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import UrlsRemoval from '../../../../utils/sanitize';
-
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
@@ -92,8 +90,6 @@ const SellerRegistrationForm = () => {
     getSellerData();
     getUserSettings();
   }, [currentUser]);
-
-  const defaultSellerName = currentUser? currentUser?.user_name : '';
 
   // Initialize formData with dbSeller values if available
   useEffect(() => {

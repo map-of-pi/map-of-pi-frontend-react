@@ -26,6 +26,7 @@
     },
     "FIND_ME_PREFERENCE_LABEL": "FindMe la wɔ nu si",
     "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Ne ɖe gaɖu nyo tso gbegbɔme",
       "PREFERRED_DEVICE_GPS": "Ne míetsɔ nyɔnu tɔn wɔ mí geɖeŋu me",
       "PREFERRED_SEARCH_CENTER": "Ne míetsɔ Gbesɔsɔmesi"
     },
