@@ -55,7 +55,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
     const getMapCenter = async () => {
       if (currentUser?.pi_uid) {
         try {
-          const mapCenter = await fetchMapCenter();
+          const mapCenter = await fetchMapCenter(entryType);
           if (mapCenter?.latitude !== undefined && mapCenter.longitude !== undefined) {
             setCenter({ lat: mapCenter.latitude, lng: mapCenter.longitude });
             logger.info(`Map center set to longitude: ${mapCenter.longitude}, latitude: ${mapCenter.latitude}}`

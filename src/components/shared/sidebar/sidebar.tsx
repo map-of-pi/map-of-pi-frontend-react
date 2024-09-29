@@ -62,7 +62,7 @@ function Sidebar(props: any) {
     email: '',
     phone_number: '',
     image: '',
-    findme: '',
+    findme: 'auto',
     trust_meter_rating: 100,
   });
   const { resolvedTheme, setTheme } = useTheme();
@@ -110,7 +110,7 @@ function Sidebar(props: any) {
         email: dbUserSettings.email || '',
         phone_number: dbUserSettings.phone_number?.toString() || '',
         image: dbUserSettings.image || '',
-        findme: dbUserSettings.findme || t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
+        findme: dbUserSettings.findme || t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
         trust_meter_rating: dbUserSettings.trust_meter_rating
       });
     }
@@ -235,7 +235,7 @@ function Sidebar(props: any) {
     if (file) {
       formDataToSend.append('image', file);
     } else {
-      formDataToSend.append('image', '');
+      formDataToSend.append('image', '');  // set to previous image url if no upload
     }
 
     logger.info('User Settings form data:', Object.fromEntries(formDataToSend.entries()));
@@ -244,7 +244,7 @@ function Sidebar(props: any) {
       const data = await createUserSettings(formDataToSend);
       if (data.settings) {
         setDbUserSettings(data.settings);
-        setIsSaveEnabled(false);
+        setIsSaveEnabled(false);        
         logger.info('User Settings saved successfully:', { data });
         toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
       }
@@ -282,13 +282,17 @@ function Sidebar(props: any) {
 
   const translateFindMeOptions = [
     {
+      value: 'auto',
+      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
+    },
+    {
       value: 'deviceGPS',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
     },
     {
       value: 'searchCenter',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_SEARCH_CENTER'),
-    },
+    }
   ];
 
   return (

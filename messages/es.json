@@ -26,6 +26,7 @@
     },
     "FIND_ME_PREFERENCE_LABEL": "Preferencia de FindMe",
     "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Automático",
       "PREFERRED_DEVICE_GPS": "Usar el GPS de mi dispositivo",
       "PREFERRED_SEARCH_CENTER": "Usar el Centro de Búsqueda"
     },
