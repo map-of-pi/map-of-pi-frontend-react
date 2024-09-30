@@ -110,7 +110,7 @@ function Sidebar(props: any) {
         email: dbUserSettings.email || '',
         phone_number: dbUserSettings.phone_number?.toString() || '',
         image: dbUserSettings.image || '',
-        findme: dbUserSettings.findme || t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
+        findme: dbUserSettings.findme || translateFindMeOptions[0].value,
         trust_meter_rating: dbUserSettings.trust_meter_rating
       });
     }
@@ -262,11 +262,18 @@ function Sidebar(props: any) {
         return t('SIDE_NAVIGATION.ABOUT.ABOUT_MAP_OF_PI');
       case 'Contact Map of Pi':
         return t('SIDE_NAVIGATION.CONTACT_MAP_OF_PI');
+      case 'App Version':
+        return t('SIDE_NAVIGATION.ABOUT.APP_VERSION');
+      case 'Privacy Policy':
+        return t('SIDE_NAVIGATION.ABOUT.PRIVACY_POLICY');
+      case 'Terms of Service':
+        return t('SIDE_NAVIGATION.ABOUT.TERMS_OF_SERVICE');
       default:
         return title;
     }
   };
 
+  // TODO: investigate if this child menu is needed or needs to be modified
   const translateChildMenuTitle = (title: string): string => {
     switch (title) {
       case 'App Version':
