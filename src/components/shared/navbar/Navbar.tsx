@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -17,6 +17,7 @@ function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const local = useLocale();
+  const t = useTranslations();
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [checkHomePage, setCheckHomePage] = useState(true);
 
@@ -48,7 +49,7 @@ function Navbar() {
       <div
         className={`w-full h-[76.19px] z-500 px-[16px] py-[5px] bg-primary fixed top-0 left-0 right-0 `}>
         <div className="text-center text-secondary text-[1.3rem] whitespace-nowrap">
-          { isSigningInUser ? "Loading...": "Map of Pi"}
+          { isSigningInUser ? t('SHARED.LOADING_SCREEN_MESSAGE'): "Map of Pi"}
         </div>
         <div
           className="flex justify-between">

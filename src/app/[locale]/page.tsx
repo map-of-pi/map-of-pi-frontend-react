@@ -26,6 +26,7 @@ export default function Index() {
   const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
   const { isSigningInUser } = useContext(AppContext);
@@ -72,6 +73,7 @@ export default function Index() {
   // handle search query update from SearchBar and associated results
   const handleSearch = (query: string, results: any[]) => {
     setSearchQuery(query);
+    setSearchClicked(true);
     setSearchResults(results);
   };
 
@@ -81,6 +83,7 @@ export default function Index() {
         center={[mapCenter.lat, mapCenter.lng]}
         zoom={zoomLevel}
         searchQuery={searchQuery}
+        isSearchClicked={isSearchClicked}
         searchResults={searchResults || []}
       />
       <SearchBar page={'default'} onSearch={handleSearch} />
