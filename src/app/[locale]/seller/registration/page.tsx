@@ -217,6 +217,19 @@ const SellerRegistrationForm = () => {
       logger.error('Error saving seller registration:', { error });
     }
   };
+
+  const translateSellerCategory = (category: string): string => {
+    switch (category) {
+      case 'activeSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER');
+      case 'inactiveSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER');
+      case 'testSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER');
+      default:
+        return '';
+    }
+  };
   
   const translatedSellerTypeOptions = [
     {
@@ -248,7 +261,7 @@ const SellerRegistrationForm = () => {
           <h1 className={HEADER}>
             {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
           </h1>
-          <p className='text-gray-400 text-sm'>{dbSeller? dbSeller.seller_type: ""}</p>
+          <p className='text-gray-400 text-sm'>{dbSeller? translateSellerCategory(dbSeller.seller_type): ""}</p>
         </div>
         
         <div className="mb-4">
