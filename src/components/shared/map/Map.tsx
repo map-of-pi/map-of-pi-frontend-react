@@ -310,7 +310,7 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
           <LocationMarker />
           {sellers.map((seller) => (
             <Marker position={seller.coordinates as LatLngExpression} key={seller.seller_id} icon={customIcon}>
-              <Popup closeButton={false} minWidth={300}>
+              <Popup closeButton={false} maxWidth={200} style={{ maxHeight: 20 }}>
                 <MapMarkerPopup seller={seller} />
               </Popup>
             </Marker>
