@@ -26,6 +26,7 @@
     },
     "FIND_ME_PREFERENCE_LABEL": "FindMe la wɔ nu si",
     "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Auto",
       "PREFERRED_DEVICE_GPS": "Ne míetsɔ nyɔnu tɔn wɔ mí geɖeŋu me",
       "PREFERRED_SEARCH_CENTER": "Ne míetsɔ Gbesɔsɔmesi"
     },
@@ -80,6 +81,7 @@
       "SELLER_EMAIL_ADDRESS_LABEL": "Email gɔme"
     },
     "REVIEWS": {
+      "REVIEWS_HEADER": "Nenyíawo",
       "GIVE_REVIEW_SECTION_HEADER": "No wo review kplii ame siaa",
       "REVIEWS_GIVEN_SECTION_HEADER": "Reviewwo kplii ame siaa",
       "REVIEWS_RECEIVED_SECTION_HEADER": "Reviewwo yi le ame siaa"
@@ -189,6 +191,7 @@
     "SEARCH_CENTER": "Fetɔ ƒe Gbɔtɔwo",
     "CHECK_REVIEWS": "Vɔ si ɖe tsoɖe",
     "SEARCH_REVIEWS": "Dii reviewwo",
+    "SEARCH_LOADING": "Gɔgɔme nyateƒe kplɔ...",
     "REPLY": "Ɖe si",
     "SAVE": "Ŋutɔ",
     "CONFIRM_DIALOG": "Ɖe si kple alo ɖe be si ɖe ɖe ɖe siaɖiwo. Wò be wo kple agbe?",

@@ -26,6 +26,7 @@
     },
     "FIND_ME_PREFERENCE_LABEL": "Preferencia de FindMe",
     "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Automático",
       "PREFERRED_DEVICE_GPS": "Usar el GPS de mi dispositivo",
       "PREFERRED_SEARCH_CENTER": "Usar el Centro de Búsqueda"
     },
@@ -80,6 +81,7 @@
       "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico" 
     },
     "REVIEWS": {
+      "REVIEWS_HEADER": "Reseñas",
       "GIVE_REVIEW_SECTION_HEADER": "Dar una reseña a este pionero",
       "REVIEWS_GIVEN_SECTION_HEADER": "Reseñas dadas por este pionero",
       "REVIEWS_RECEIVED_SECTION_HEADER": "Reseñas recibidas por este pionero"
@@ -189,6 +191,7 @@
     "SEARCH_CENTER": "Establecer Centro de Búsqueda",
     "CHECK_REVIEWS": "Ver Reseñas",
     "SEARCH_REVIEWS": "Buscar reseñas",
+    "SEARCH_LOADING": "Cargando búsqueda...",
     "REPLY": "Responder",
     "SAVE": "Guardar",
     "CONFIRM_DIALOG": "Tienes cambios sin guardar. ¿Realmente quieres salir?",

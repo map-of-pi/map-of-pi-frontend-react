@@ -20,11 +20,9 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerDefault } from '@/constants/placeholders';
-import { fetchMapCenter } from '@/services/mapCenterApi';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import UrlsRemoval from '../../../../utils/sanitize';
-
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
@@ -39,13 +37,12 @@ const SellerRegistrationForm = () => {
   
   const [formData, setFormData] = useState({
     sellerName: '',
-    sellerType: 'Test seller',
+    sellerType: 'testSeller',
     sellerDescription: '',
     sellerAddress: '',
     image: ''
   });
   const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
-  const [sellCenter, setSellCenter] = useState<{ lng: number; lat: number } | null>(null);
   const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -56,23 +53,6 @@ const SellerRegistrationForm = () => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
-  useEffect(() => {
-    const fetchSellCenter = async () => {
-      try {
-        const mapCenterData = await fetchMapCenter(); // Function to fetch map center from backend
-        if (mapCenterData) {
-          const { longitude, latitude } = mapCenterData;
-          if (longitude !== undefined && latitude !== undefined) {
-            setSellCenter({ lng: longitude, lat: latitude });
-          }
-        }
-      } catch (error) {
-        logger.error('Error fetching sellCenter from backend:', { error });
-      }
-    };
-
-    fetchSellCenter();
-  }, [currentUser]);
 
   // Fetch seller data and user settings on component mount
   useEffect(() => {
@@ -111,8 +91,6 @@ const SellerRegistrationForm = () => {
     getUserSettings();
   }, [currentUser]);
 
-  const defaultSellerName = currentUser? currentUser?.user_name : '';
-
   // Initialize formData with dbSeller values if available
   useEffect(() => {
     if (dbSeller) {
@@ -120,7 +98,7 @@ const SellerRegistrationForm = () => {
         sellerName: dbSeller.name || currentUser?.user_name || '',
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        sellerType: dbSeller.seller_type || 'Test seller',
+        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].value,
         image: dbSeller.image || ''
       });
     }
@@ -199,18 +177,11 @@ const SellerRegistrationForm = () => {
     }
   }
 
-  // Save function with integrated sellCenter handling
   const handleSave = async () => {
     // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
       return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
-    }
-
-    // Ensure sellCenter is defined and valid
-    if (!sellCenter || !sellCenter.lng || !sellCenter.lat) {
-      logger.warn('Sell Center is not defined or incomplete.');
-      return toast.error(t('SCREEN.SELLER_REGISTRATION.VALIDATION.UNINITIALIZED_SELL_CENTER'));
     }
 
     // Trim and clean the sellerAddress and sellerDescription fields
@@ -233,8 +204,6 @@ const SellerRegistrationForm = () => {
     // Add the image if it exists
     if (file) {
       formDataToSend.append('image', file);
-    } else {
-      formDataToSend.append('image', '');
     }
     try {
       const data = await registerSeller(formDataToSend);
@@ -246,6 +215,19 @@ const SellerRegistrationForm = () => {
       }
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
+    }
+  };
+
+  const translateSellerCategory = (category: string): string => {
+    switch (category) {
+      case 'activeSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER');
+      case 'inactiveSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER');
+      case 'testSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER');
+      default:
+        return '';
     }
   };
   
@@ -279,7 +261,7 @@ const SellerRegistrationForm = () => {
           <h1 className={HEADER}>
             {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
           </h1>
-          <p className='text-gray-400 text-sm'>{dbSeller? dbSeller.seller_type: ""}</p>
+          <p className='text-gray-400 text-sm'>{dbSeller? translateSellerCategory(dbSeller.seller_type): ""}</p>
         </div>
         
         <div className="mb-4">
@@ -328,7 +310,7 @@ const SellerRegistrationForm = () => {
           {/* seller review toggle */}
           <ToggleCollapse
             header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}
-            defaultOpen={false}>
+            open={false}>
             <TrustMeter ratings={userSettings ? userSettings.trust_meter_rating : placeholderSeller.trust_meter_rating} />
             <div className="flex items-center justify-between mt-3 mb-5">
               <p className="text-sm">
@@ -355,7 +337,7 @@ const SellerRegistrationForm = () => {
           {/* user settings info toggle */}
           <ToggleCollapse
             header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
-              defaultOpen={false}>
+              open={false}>
             <div className="text-sm mb-3">
               <span className="font-bold">
                 {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
@@ -384,7 +366,7 @@ const SellerRegistrationForm = () => {
           
           {/* seller registration form fields toggle */}
           <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}
-            defaultOpen={true}>
+            open={true}>
             <div className="mb-4">
               <Input
                 label={t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_NAME')}

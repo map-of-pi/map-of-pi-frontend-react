@@ -76,3 +76,29 @@ export const createUserSettings = async (formData: FormData) => {
     throw new Error('Failed to create or update user settings. Please try again later.');
   }
 };
+
+// Fetch the user location of the user
+export const fetchUserLocation = async () => {
+  try {
+    logger.info('Fetching user location..');
+    const headers = getMultipartFormDataHeaders();
+    const response = await axiosClient.get(`/user-preferences/location/me`, { headers });
+    if (response.status === 200) {
+      logger.info(`Fetch user location successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Fetch user location failed with Status ${response.status}`);
+      return null;
+    }
+  } catch (error: any) {
+    logger.error('Fetch user location encountered an error:', { error });
+    logger.error('Create or update user settings encountered an error:', { 
+      message: error.message,
+      config: error.config,
+      stack: error.stack
+    });
+    throw error;
+  }
+};

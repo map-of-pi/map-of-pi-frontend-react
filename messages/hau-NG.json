@@ -26,6 +26,7 @@
     },
     "FIND_ME_PREFERENCE_LABEL": "Zaɓin FindMe",
     "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Atomatik",
       "PREFERRED_DEVICE_GPS": "Yi amfani da GPS na na'urar",
       "PREFERRED_SEARCH_CENTER": "Yi amfani da Cibiyar Bincike"
     },
@@ -80,6 +81,7 @@
       "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
     },
     "REVIEWS": {
+      "REVIEWS_HEADER": "Bita",
       "GIVE_REVIEW_SECTION_HEADER": "Ba wa wannan jagora sharhi",
       "REVIEWS_GIVEN_SECTION_HEADER": "Sharhi da aka ba wannan jagora",
       "REVIEWS_RECEIVED_SECTION_HEADER": "Sharhi da wannan jagora ya samu"
@@ -189,6 +191,7 @@
     "SEARCH_CENTER": "Saita Cibiyar Bincike",
     "CHECK_REVIEWS": "Duba Sake Dubawa",
     "SEARCH_REVIEWS": "Binciken sharhi",
+    "SEARCH_LOADING": "Ana ɗora bincike...",
     "REPLY": "Amsa",
     "SAVE": "Ajiye",
     "CONFIRM_DIALOG": "Kuna da canje-canje marasa ajiya. Da gaske kuna son barin?",
