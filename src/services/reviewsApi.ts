@@ -27,10 +27,12 @@ export const fetchSingleReview = async (reviewID: string) => {
 };
   
 // Fetch reviews for a seller
-export const fetchReviews = async (userId:string) => {
+export const fetchReviews = async (userId:string, searchQuery:string='') => {
   try {
     logger.info(`Fetching reviews for seller with ID: ${userId}`);
-    const response = await axiosClient.get(`/review-feedback/${userId}`);
+    const response = await axiosClient.get(`/review-feedback/${userId}`, {
+      params: { searchQuery },
+    });
     if (response.status === 200) {
       logger.info(`Fetch reviews successful with Status ${response.status}`, {
         data: response.data

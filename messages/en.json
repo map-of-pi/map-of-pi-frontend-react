@@ -81,6 +81,7 @@
       "SELLER_EMAIL_ADDRESS_LABEL": "Email address" 
     },
     "REVIEWS": {
+      "REVIEWS_HEADER": "Reviews",
       "GIVE_REVIEW_SECTION_HEADER": "Give review to this pioneer",
       "REVIEWS_GIVEN_SECTION_HEADER": "Reviews given by this pioneer",
       "REVIEWS_RECEIVED_SECTION_HEADER": "Reviews received by this pioneer"
@@ -190,6 +191,7 @@
     "SEARCH_CENTER": "Set Search Center",
     "CHECK_REVIEWS": "Check Reviews",
     "SEARCH_REVIEWS": "Search Reviews",
+    "SEARCH_LOADING": "Search Loading...",
     "REPLY": "Reply",
     "SAVE": "Save",
     "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",
