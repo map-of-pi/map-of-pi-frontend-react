@@ -265,47 +265,81 @@ const SellerRegistrationForm = () => {
         </div>
         
         <div className="mb-4">
-          <h2 className={SUBHEADER}>
-            {t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_LABEL')}
-          </h2>
-          <p className='text-gray-400 text-sm'>{t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER')}</p>
-          <div className="mb-2">
-            <TextArea
-              name="sellerDescription"
-              value={formData.sellerDescription}
-              onChange={handleChange}
-              styles={{ height: '200px' }}
-            />
-          </div>
+          {/* seller registration form fields toggle */}
+          <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}
+            open={true}>
+            <div className="mb-4">
+              <Input
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_NAME')}
+                name="sellerName"                
+                type="text"
+                value={formData.sellerName}
+                onChange={handleChange}
+              />
+
+              <Select
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
+                name="sellerType"
+                value={formData.sellerType}
+                onChange={handleChange}
+                options={translatedSellerTypeOptions}
+              />
+              <TextArea
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
+                describe={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER')}
+                name="sellerAddress"                
+                value={formData.sellerAddress}
+                onChange={handleChange}
+              />
+              <Link
+                href={{
+                  pathname: "/map-center", // Path to MapCenter component
+                  query: { entryType: 'sell' } // Passing 'sell' as entryType
+                }}
+              >
+                <Button
+                  label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
+                  styles={{
+                    color: '#ffc153',
+                    height: '40px',
+                    padding: '10px',
+                    marginLeft: 'auto',
+                  }}
+                />
+              </Link>
+              <div className="mb-2 mt-4">
+                <TextArea
+                  label={t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER')}
+                  describe={t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER')}
+                  name="sellerDescription"
+                  value={formData.sellerDescription}
+                  onChange={handleChange}
+                  styles={{ height: '200px' }}
+                />
+              </div>
+            </div>
+            <div className="mb-4">
+              <FileInput
+                label={t('SHARED.PHOTO.MISC_LABELS.SELLER_IMAGE_LABEL')}
+                imageUrl={ previewImage }
+                handleAddImage={handleAddImage}
+              />
+            </div>
+            <div className="mb-4 mt-3 ml-auto w-min">
+              <Button
+                label={t('SHARED.SAVE')}
+                disabled={!isSaveEnabled}
+                styles={{
+                  color: '#ffc153',
+                  height: '40px',
+                  padding: '10px 15px',
+                }}
+                onClick={handleSave}
+              />
+            </div>
+          </ToggleCollapse>
         </div>
-        <Link
-          href={{
-            pathname: "/map-center", // Path to MapCenter component
-            query: { entryType: 'sell' } // Passing 'sell' as entryType
-          }}
-        >
-          <Button
-            label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
-            styles={{
-              color: '#ffc153',
-              height: '40px',
-              padding: '10px',
-              marginLeft: 'auto',
-            }}
-          />
-        </Link>
-        <div className="mb-4 mt-3 ml-auto w-min">
-          <Button
-            label={t('SHARED.SAVE')}
-            disabled={!isSaveEnabled}
-            styles={{
-              color: '#ffc153',
-              height: '40px',
-              padding: '10px 15px',
-            }}
-            onClick={handleSave}
-          />
-        </div>
+
         <div className='spacing-7'>
           {/* seller review toggle */}
           <ToggleCollapse
@@ -364,53 +398,6 @@ const SellerRegistrationForm = () => {
             </div>
           </ToggleCollapse>
           
-          {/* seller registration form fields toggle */}
-          <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}
-            open={true}>
-            <div className="mb-4">
-              <Input
-                label={t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_NAME')}
-                name="sellerName"                
-                type="text"
-                value={formData.sellerName}
-                onChange={handleChange}
-              />
-
-              <Select
-                label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
-                name="sellerType"
-                value={formData.sellerType}
-                onChange={handleChange}
-                options={translatedSellerTypeOptions}
-              />
-              <TextArea
-                label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
-                describe={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER')}
-                name="sellerAddress"                
-                value={formData.sellerAddress}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-4">
-              <FileInput
-                label={t('SHARED.PHOTO.MISC_LABELS.SELLER_IMAGE_LABEL')}
-                imageUrl={ previewImage }
-                handleAddImage={handleAddImage}
-              />
-            </div>
-            <div className="mb-4 mt-3 ml-auto w-min">
-              <Button
-                label={t('SHARED.SAVE')}
-                disabled={!isSaveEnabled}
-                styles={{
-                  color: '#ffc153',
-                  height: '40px',
-                  padding: '10px 15px',
-                }}
-                onClick={handleSave}
-              />
-            </div>
-          </ToggleCollapse>
         </div>
         <ConfirmDialog
           show={showConfirmDialog}
