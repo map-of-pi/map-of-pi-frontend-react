@@ -20,11 +20,9 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerDefault } from '@/constants/placeholders';
-import { fetchMapCenter } from '@/services/mapCenterApi';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import UrlsRemoval from '../../../../utils/sanitize';
-
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
@@ -39,7 +37,7 @@ const SellerRegistrationForm = () => {
   
   const [formData, setFormData] = useState({
     sellerName: '',
-    sellerType: 'Test seller',
+    sellerType: 'testSeller',
     sellerDescription: '',
     sellerAddress: '',
     image: ''
@@ -93,8 +91,6 @@ const SellerRegistrationForm = () => {
     getUserSettings();
   }, [currentUser]);
 
-  const defaultSellerName = currentUser? currentUser?.user_name : '';
-
   // Initialize formData with dbSeller values if available
   useEffect(() => {
     if (dbSeller) {
@@ -102,7 +98,7 @@ const SellerRegistrationForm = () => {
         sellerName: dbSeller.name || currentUser?.user_name || '',
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].name,
+        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].value,
         image: dbSeller.image || ''
       });
     }
@@ -221,6 +217,19 @@ const SellerRegistrationForm = () => {
       logger.error('Error saving seller registration:', { error });
     }
   };
+
+  const translateSellerCategory = (category: string): string => {
+    switch (category) {
+      case 'activeSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER');
+      case 'inactiveSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER');
+      case 'testSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER');
+      default:
+        return '';
+    }
+  };
   
   const translatedSellerTypeOptions = [
     {
@@ -252,7 +261,7 @@ const SellerRegistrationForm = () => {
           <h1 className={HEADER}>
             {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
           </h1>
-          <p className='text-gray-400 text-sm'>{dbSeller? dbSeller.seller_type: ""}</p>
+          <p className='text-gray-400 text-sm'>{dbSeller? translateSellerCategory(dbSeller.seller_type): ""}</p>
         </div>
         
         <div className="mb-4">
