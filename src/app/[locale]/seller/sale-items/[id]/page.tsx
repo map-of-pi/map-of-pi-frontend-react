@@ -170,18 +170,6 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             </span>
             <span>{sellerInfo ? sellerInfo.user_name : ''}</span>
           </div>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SHARED.USER_INFORMATION.PHONE_NUMBER_LABEL') + ': '}
-            </span>
-            <span>{sellerSettings ? sellerSettings.phone_number : ""}</span>
-          </div>
-          <div className="text-sm mb-3">
-            <span className="font-bold">
-              {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
-            </span>
-            <span>{ sellerSettings ? sellerSettings.email : ""}</span>
-          </div>
         </ToggleCollapse>
         
         <ConfirmDialog
