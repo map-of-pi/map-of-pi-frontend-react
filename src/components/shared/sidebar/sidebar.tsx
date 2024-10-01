@@ -245,7 +245,7 @@ function Sidebar(props: any) {
       const data = await createUserSettings(formDataToSend);
       if (data.settings) {
         setDbUserSettings(data.settings);
-        setIsSaveEnabled(false);        
+        setIsSaveEnabled(false);
         logger.info('User Settings saved successfully:', { data });
         toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
       }
