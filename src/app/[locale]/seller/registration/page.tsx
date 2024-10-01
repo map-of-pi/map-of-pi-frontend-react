@@ -194,7 +194,7 @@ const SellerRegistrationForm = () => {
       : UrlsRemoval(formData.sellerDescription);
 
     const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.sellerName);
+    formDataToSend.append('name', UrlsRemoval(formData.sellerName));
     formDataToSend.append('seller_type', formData.sellerType);
     formDataToSend.append('description', sellerDescription);
     formDataToSend.append('address', sellerAddress);

@@ -29,6 +29,7 @@ import ToggleCollapse from '../Seller/ToggleCollapse';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
+import UrlsRemoval from "@/utils/sanitize";
 
 interface MenuItem {
   id: number;
@@ -226,7 +227,7 @@ function Sidebar(props: any) {
     }
 
     const formDataToSend = new FormData();
-    formDataToSend.append('user_name', formData.user_name);
+    formDataToSend.append('user_name', UrlsRemoval(formData.user_name));
     formDataToSend.append('email', formData.email);
     formDataToSend.append('phone_number', formData.phone_number);
     formDataToSend.append('findme', formData.findme);
