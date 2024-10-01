@@ -4,7 +4,7 @@ import { FaChevronDown } from 'react-icons/fa6';
 interface ToggleCollapseProps {
   children: React.ReactNode;
   header: string;
-  open?: boolean; // Optional with default value
+  open?: boolean;
 }
 
 function ToggleCollapse({ children, header, open = false }: ToggleCollapseProps) {
