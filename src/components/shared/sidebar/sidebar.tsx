@@ -57,14 +57,24 @@ function Sidebar(props: any) {
 
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
-  const [formData, setFormData] = useState({
+
+  // Initialize state with appropriate types
+  const [formData, setFormData] = useState<{
+    user_name: string;
+    email: string | null;
+    phone_number: string | null;
+    image: string;
+    findme: string;
+    trust_meter_rating: number;
+  }>({
     user_name: '',
-    email: '',
-    phone_number: '',
+    email: null,
+    phone_number: null,
     image: '',
     findme: 'auto',
     trust_meter_rating: 100,
   });
+
   const { resolvedTheme, setTheme } = useTheme();
   const [toggle, setToggle] = useState<any>({
     Themes: false,
@@ -107,8 +117,8 @@ function Sidebar(props: any) {
     if (dbUserSettings) {
       setFormData({
         user_name: dbUserSettings.user_name || '',
-        email: dbUserSettings.email || '',
-        phone_number: dbUserSettings.phone_number?.toString() || '',
+        email: dbUserSettings.email || null,
+        phone_number: dbUserSettings.phone_number?.toString() || null,
         image: dbUserSettings.image || '',
         findme: dbUserSettings.findme || translateFindMeOptions[0].value,
         trust_meter_rating: dbUserSettings.trust_meter_rating
@@ -227,8 +237,8 @@ function Sidebar(props: any) {
 
     const formDataToSend = new FormData();
     formDataToSend.append('user_name', formData.user_name);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('phone_number', formData.phone_number);
+    formDataToSend.append('email', formData.email ?? '');
+    formDataToSend.append('phone_number', formData.phone_number ?? '');
     formDataToSend.append('findme', formData.findme);
 
     // add the image if it exists
