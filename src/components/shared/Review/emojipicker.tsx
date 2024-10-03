@@ -2,14 +2,14 @@
 
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
-
-import { TextArea } from '../Forms/Inputs/Inputs';
-import { FileInput } from '../Forms/Inputs/Inputs';
-import { createReview } from '@/services/reviewsApi';
 import { toast } from 'react-toastify';
 
-import logger from '../../../../logger.config.mjs';
 import { IReviewFeedback } from '@/constants/types';
+import { FileInput, TextArea } from '../Forms/Inputs/Inputs';
+import { createReview } from '@/services/reviewsApi';
+import removeUrls from '@/utils/sanitize';
+
+import logger from '../../../../logger.config.mjs';
 
 interface Emoji {
   name: string;
@@ -102,7 +102,7 @@ export default function EmojiPicker(props: any) {
           return window.alert(t('SHARED.REACTION_RATING.VALIDATION.SELECT_EMOJI_EXPRESSION'));
         } else {
           const formDataToSend = new FormData();
-          formDataToSend.append('comment', comments);
+          formDataToSend.append('comment', removeUrls(comments));
           formDataToSend.append('rating', reviewEmoji.toString());
           formDataToSend.append('review_receiver_id', props.sellerId);
           formDataToSend.append('reply_to_review_id', props.replyToReviewId || '');

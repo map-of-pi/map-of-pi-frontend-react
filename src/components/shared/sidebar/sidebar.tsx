@@ -24,12 +24,12 @@ import {
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
 import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import removeUrls from "@/utils/sanitize";
 import TrustMeter from '../Review/TrustMeter';
 import ToggleCollapse from '../Seller/ToggleCollapse';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
-import UrlsRemoval from "@/utils/sanitize";
 
 interface MenuItem {
   id: number;
@@ -227,7 +227,7 @@ function Sidebar(props: any) {
     }
 
     const formDataToSend = new FormData();
-    formDataToSend.append('user_name', UrlsRemoval(formData.user_name));
+    formDataToSend.append('user_name', removeUrls(formData.user_name));
     formDataToSend.append('email', formData.email);
     formDataToSend.append('phone_number', formData.phone_number);
     formDataToSend.append('findme', formData.findme);
