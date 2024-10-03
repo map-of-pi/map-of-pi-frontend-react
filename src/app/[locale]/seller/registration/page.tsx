@@ -22,7 +22,7 @@ import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerDefault } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
-import UrlsRemoval from '../../../../utils/sanitize';
+import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
@@ -187,14 +187,14 @@ const SellerRegistrationForm = () => {
     // Trim and clean the sellerAddress and sellerDescription fields
     let sellerAddress = formData.sellerAddress.trim() === ""
       ? sellerDefault.address
-      : UrlsRemoval(formData.sellerAddress);
+      : removeUrls(formData.sellerAddress);
 
     let sellerDescription = formData.sellerDescription.trim() === ""
       ? sellerDefault.description
-      : UrlsRemoval(formData.sellerDescription);
+      : removeUrls(formData.sellerDescription);
 
     const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.sellerName);
+    formDataToSend.append('name', removeUrls(formData.sellerName));
     formDataToSend.append('seller_type', formData.sellerType);
     formDataToSend.append('description', sellerDescription);
     formDataToSend.append('address', sellerAddress);

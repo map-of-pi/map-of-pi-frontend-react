@@ -24,6 +24,7 @@ import {
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
 import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import removeUrls from "@/utils/sanitize";
 import TrustMeter from '../Review/TrustMeter';
 import ToggleCollapse from '../Seller/ToggleCollapse';
 
@@ -226,7 +227,7 @@ function Sidebar(props: any) {
     }
 
     const formDataToSend = new FormData();
-    formDataToSend.append('user_name', formData.user_name);
+    formDataToSend.append('user_name', removeUrls(formData.user_name));
     formDataToSend.append('email', formData.email);
     formDataToSend.append('phone_number', formData.phone_number);
     formDataToSend.append('findme', formData.findme);
