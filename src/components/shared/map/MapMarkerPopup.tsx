@@ -61,8 +61,8 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
       {/* Trust-o-meter label */}
       <p className="text-center font-bold text-xs mt-0.5 mb-0">Trust-o-meter</p>
 
-      {/* TrustMeter component */}
-      <TrustMeter ratings={seller.trust_meter_rating} className="mt-0.5 mb-1" />
+      {/* TrustMeter component without className */}
+      <TrustMeter ratings={seller.trust_meter_rating} />
 
       {/* Button link */}
       <Link href={`/seller/sale-items/${seller.seller_id}`} className="flex justify-center">
