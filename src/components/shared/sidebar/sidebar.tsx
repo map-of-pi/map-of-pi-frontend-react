@@ -24,6 +24,7 @@ import {
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
 import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import removeUrls from "@/utils/sanitize";
 import TrustMeter from '../Review/TrustMeter';
 import ToggleCollapse from '../Seller/ToggleCollapse';
 
@@ -62,7 +63,7 @@ function Sidebar(props: any) {
     email: '',
     phone_number: '',
     image: '',
-    findme: '',
+    findme: 'auto',
     trust_meter_rating: 100,
   });
   const { resolvedTheme, setTheme } = useTheme();
@@ -110,7 +111,7 @@ function Sidebar(props: any) {
         email: dbUserSettings.email || '',
         phone_number: dbUserSettings.phone_number?.toString() || '',
         image: dbUserSettings.image || '',
-        findme: dbUserSettings.findme || t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
+        findme: dbUserSettings.findme || translateFindMeOptions[0].value,
         trust_meter_rating: dbUserSettings.trust_meter_rating
       });
     }
@@ -226,7 +227,7 @@ function Sidebar(props: any) {
     }
 
     const formDataToSend = new FormData();
-    formDataToSend.append('user_name', formData.user_name);
+    formDataToSend.append('user_name', removeUrls(formData.user_name));
     formDataToSend.append('email', formData.email);
     formDataToSend.append('phone_number', formData.phone_number);
     formDataToSend.append('findme', formData.findme);
@@ -244,7 +245,7 @@ function Sidebar(props: any) {
       const data = await createUserSettings(formDataToSend);
       if (data.settings) {
         setDbUserSettings(data.settings);
-        setIsSaveEnabled(false);        
+        setIsSaveEnabled(false);
         logger.info('User Settings saved successfully:', { data });
         toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
       }
@@ -262,11 +263,18 @@ function Sidebar(props: any) {
         return t('SIDE_NAVIGATION.ABOUT.ABOUT_MAP_OF_PI');
       case 'Contact Map of Pi':
         return t('SIDE_NAVIGATION.CONTACT_MAP_OF_PI');
+      case 'App Version':
+        return t('SIDE_NAVIGATION.ABOUT.APP_VERSION');
+      case 'Privacy Policy':
+        return t('SIDE_NAVIGATION.ABOUT.PRIVACY_POLICY');
+      case 'Terms of Service':
+        return t('SIDE_NAVIGATION.ABOUT.TERMS_OF_SERVICE');
       default:
         return title;
     }
   };
 
+  // TODO: investigate if this child menu is needed or needs to be modified
   const translateChildMenuTitle = (title: string): string => {
     switch (title) {
       case 'App Version':
@@ -283,12 +291,16 @@ function Sidebar(props: any) {
   const translateFindMeOptions = [
     {
       value: 'auto',
-      name: t('Auto'),
+      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
+    },
+    {
+      value: 'deviceGPS',
+      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
     },
     {
       value: 'searchCenter',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_SEARCH_CENTER'),
-    },
+    }
   ];
 
   return (

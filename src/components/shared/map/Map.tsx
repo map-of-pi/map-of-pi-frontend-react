@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
 import _ from 'lodash';
@@ -45,7 +45,8 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number, searc
   }
 };
 
-// Function to remove duplicate sellers based on seller_id
+/* TODO: Analyze to see if we need this function to remove duplicates if sellers are already
+restricted to one shop at the time of registration. */
 const removeDuplicates = (sellers: ISellerWithSettings[]): ISellerWithSettings[] => {
   const uniqueSellers: { [key: string]: ISellerWithSettings } = {};
   sellers.forEach(seller => {
@@ -54,9 +55,16 @@ const removeDuplicates = (sellers: ISellerWithSettings[]): ISellerWithSettings[]
   return Object.values(uniqueSellers);
 };
 
-const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpression, zoom: number, searchQuery: string, searchResults: ISeller[] }) => {
+const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: { 
+  center: LatLngExpression, 
+  zoom: number, 
+  searchQuery: string, 
+  isSearchClicked: boolean, 
+  searchResults: ISeller[] 
+}) => {
   const t = useTranslations();
-  const {isSigningInUser} = useContext(AppContext)
+  const mapRef = useRef<L.Map | null>(null); // reference to hold the map instance
+  const {isSigningInUser} = useContext(AppContext);
 
   const customIcon = L.icon({
     iconUrl: '/favicon-32x32.png',
@@ -109,6 +117,14 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
       setLoading(false);
     }
   }, [searchQuery, searchResults]);
+
+  // Effect to zoom to fit all sellers when the search button is clicked
+  useEffect(() => {
+    if (isSearchClicked && searchResults.length > 0) {
+      const bounds = L.latLngBounds(searchResults.map(seller => seller.coordinates));
+      mapRef.current?.fitBounds(bounds, { padding: [50, 50] }); // zoom to fit all sellers
+    }
+  }, [isSearchClicked, searchResults]);
 
   // Log sellers array for debugging
   useEffect(() => {
@@ -198,7 +214,6 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
         setPosition(e.latlng);
         setLocationError(false);
         if (!initialLocationSet) {
-          console.log('in location');
           map.setView(e.latlng, zoom, { animate: false });
           setInitialLocationSet(true);
           setIsLocationAvailable(true);
@@ -218,6 +233,10 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
         debouncedHandleMapInteraction(bounds, map);
       },
     });
+
+    useEffect(() => {
+      mapRef.current = map;
+    }, [map]);
 
     // Initially set the view to user location without animation
     useEffect(() => {
@@ -241,7 +260,7 @@ const Map = ({ center, zoom, searchQuery, searchResults }: { center: LatLngExpre
 
   return (
     <>
-      {loading && <div className="loading">Loading...</div>}
+      {loading && <div className="loading">{t('SHARED.LOADING_SCREEN_MESSAGE')}</div>}
       {error && <div className="error">{error}</div>}
       {locationError && (
         <div

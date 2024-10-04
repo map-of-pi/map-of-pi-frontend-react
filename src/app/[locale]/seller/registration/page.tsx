@@ -20,11 +20,9 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
 import { sellerDefault } from '@/constants/placeholders';
-import { fetchMapCenter } from '@/services/mapCenterApi';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
-import UrlsRemoval from '../../../../utils/sanitize';
-
+import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
@@ -39,7 +37,7 @@ const SellerRegistrationForm = () => {
   
   const [formData, setFormData] = useState({
     sellerName: '',
-    sellerType: 'Test seller',
+    sellerType: 'testSeller',
     sellerDescription: '',
     sellerAddress: '',
     image: ''
@@ -93,8 +91,6 @@ const SellerRegistrationForm = () => {
     getUserSettings();
   }, [currentUser]);
 
-  const defaultSellerName = currentUser? currentUser?.user_name : '';
-
   // Initialize formData with dbSeller values if available
   useEffect(() => {
     if (dbSeller) {
@@ -102,7 +98,7 @@ const SellerRegistrationForm = () => {
         sellerName: dbSeller.name || currentUser?.user_name || '',
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].name,
+        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].value,
         image: dbSeller.image || ''
       });
     }
@@ -191,14 +187,14 @@ const SellerRegistrationForm = () => {
     // Trim and clean the sellerAddress and sellerDescription fields
     let sellerAddress = formData.sellerAddress.trim() === ""
       ? sellerDefault.address
-      : UrlsRemoval(formData.sellerAddress);
+      : removeUrls(formData.sellerAddress);
 
     let sellerDescription = formData.sellerDescription.trim() === ""
       ? sellerDefault.description
-      : UrlsRemoval(formData.sellerDescription);
+      : removeUrls(formData.sellerDescription);
 
     const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.sellerName);
+    formDataToSend.append('name', removeUrls(formData.sellerName));
     formDataToSend.append('seller_type', formData.sellerType);
     formDataToSend.append('description', sellerDescription);
     formDataToSend.append('address', sellerAddress);
@@ -219,6 +215,19 @@ const SellerRegistrationForm = () => {
       }
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
+    }
+  };
+
+  const translateSellerCategory = (category: string): string => {
+    switch (category) {
+      case 'activeSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER');
+      case 'inactiveSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER');
+      case 'testSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER');
+      default:
+        return '';
     }
   };
   
@@ -252,7 +261,7 @@ const SellerRegistrationForm = () => {
           <h1 className={HEADER}>
             {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
           </h1>
-          <p className='text-gray-400 text-sm'>{dbSeller? dbSeller.seller_type: ""}</p>
+          <p className='text-gray-400 text-sm'>{dbSeller? translateSellerCategory(dbSeller.seller_type): ""}</p>
         </div>
         
         <div className="mb-4">
@@ -300,7 +309,8 @@ const SellerRegistrationForm = () => {
         <div className='spacing-7'>
           {/* seller review toggle */}
           <ToggleCollapse
-            header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}>
+            header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}
+            open={false}>
             <TrustMeter ratings={userSettings ? userSettings.trust_meter_rating : placeholderSeller.trust_meter_rating} />
             <div className="flex items-center justify-between mt-3 mb-5">
               <p className="text-sm">
@@ -326,7 +336,8 @@ const SellerRegistrationForm = () => {
           
           {/* user settings info toggle */}
           <ToggleCollapse
-            header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>
+            header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
+            open={false}>
             <div className="text-sm mb-3">
               <span className="font-bold">
                 {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
@@ -354,7 +365,9 @@ const SellerRegistrationForm = () => {
           </ToggleCollapse>
           
           {/* seller registration form fields toggle */}
-          <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}>
+          <ToggleCollapse 
+            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}
+            open={true}>
             <div className="mb-4">
               <Input
                 label={t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_NAME')}
