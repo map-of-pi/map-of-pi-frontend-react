@@ -4,18 +4,17 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useContext } from 'react';
-import { AppContext } from '../../../../../../../context/AppContextProvider';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import ConfirmDialog from '@/components/shared/confirm';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import Skeleton from '@/components/skeleton/skeleton';
-import { IReviewFeedback, IReviewOutput } from '@/constants/types';
+import { IReviewOutput } from '@/constants/types';
 import { fetchSingleReview } from '@/services/reviewsApi';
 import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../../util/ratingUtils';
-import Link from 'next/link';
+import { AppContext } from '../../../../../../../context/AppContextProvider';
 import logger from '../../../../../../../logger.config.mjs';
 
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 interface ReplyToReviewPageProps {
   params: {
     id: string;
@@ -44,7 +43,6 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
   const router = useRouter();
 
   const reviewId = params.id;
-  const userName = searchParams.user_name;
 
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -63,7 +61,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
       const { reaction = 'No Reaction', unicode = '😐' } = resolveRating(feedback.rating) || {};
       
       return {
-        heading: feedback.comment || 'No comment provided',
+        heading: feedback.comment || t('SHARED.NO_COMMENT'),
         date,
         time,
         giver: feedback.giver,
@@ -97,11 +95,11 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
           const processedReplies = processReviews(reviewList);
           setReviews(processedReplies);
         } else {
-          logger.warn(`No reviews found for review ID: ${reviewId}`);
+          logger.warn(`No review data found for review ID: ${reviewId}`);
           setReviews([]);
         }
       } catch (error) {
-        logger.error(`Error fetching review for review ID: ${reviewId}`, { error });
+        logger.error(`Error fetching review data for review ID: ${reviewId}`, { error });
         setError('Error fetching review. Please try again later.');
       } finally {
         setLoading(false);
@@ -126,7 +124,6 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
     }
   };
 
-
   if (loading) {
     return <Skeleton type="seller_review" />;
   }
@@ -134,12 +131,12 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
   return (
     <div className="w-full md:w-[500px] md:mx-auto p-4">
       <h1 className="mb-5 font-bold text-lg md:text-2xl">
-        {t('Reply to a Review')}
+        {t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_STATIC_HEADER')}
       </h1>
-      {error && (<div className="text-red-700 text-center text-lg">Error loading review</div>)}
+      {error && (<div className="text-red-700 text-center text-lg">{t('SCREEN.REPLY_TO_REVIEW.VALIDATION.LOADING_REVIEW_FAILURE')}</div>)}
       {reviews && reviews.length > 0 && (
         <div className="mt-2">
-          <h2 className="font-bold mb-2">{t('The review you are replying to')}</h2>
+          <h2 className="font-bold mb-2">{t('SCREEN.REPLY_TO_REVIEW.REPLY_TO_REVIEW_SUBHEADER')}</h2>
 
           {/* Scrollable content */}
           <div className="relative overflow-hidden mb-5">
@@ -201,7 +198,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
             </div>
           </div>
 
-          <h2 className="font-bold">{t('Give reply review')}</h2>
+          <h2 className="font-bold">{t('SCREEN.REPLY_TO_REVIEW.GIVE_REPLY_TO_REVIEW_SUBHEADER')}</h2>
           <h2 className="text-[#828282]">
             {t('To')}: {currentUser?.user_name === reviews[currentIndex].giver
               ? reviews[currentIndex]?.receiver
@@ -219,7 +216,6 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
           />
         </div>
       )}
-
 
       <ConfirmDialog
         show={showConfirmDialog}

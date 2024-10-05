@@ -92,6 +92,9 @@
       "BY_REVIEWER": "Por {buyer_id}"
     },
     "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Responder a la reseña",
+      "REPLY_TO_REVIEW_SUBHEADER": "La reseña a la que estás respondiendo",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Dar respuesta a la reseña",
       "REPLY_TO_REVIEW_HEADER": "Responder a la reseña dejada para {seller_id}",
       "BY_REVIEWER": "Por {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Deja tu respuesta a la reseña anterior",
@@ -99,6 +102,7 @@
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
       "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "Error al cargar la reseña",
         "SELF_REVIEW_PROHIBITED": "La autoevaluación está prohibida"
       }
     }
@@ -188,6 +192,7 @@
     "PIONEER_LABEL": "Pionero",
     "BUY": "Comprar",
     "NAVIGATE": "Navegar",
+    "NO_COMMENT": "No se proporcionó comentario",
     "SEARCH_CENTER": "Establecer Centro de Búsqueda",
     "CHECK_REVIEWS": "Ver Reseñas",
     "SEARCH_REVIEWS": "Buscar reseñas",
@@ -204,6 +209,7 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Subir foto",
       "UPLOAD_PHOTO_PLACEHOLDER": "Sube una imagen para ayudar a atraer compradores (PNG, JPG, JPEG, WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Sube una imagen para respaldar tu reseña (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Suelta tu imagen aquí o busca",
       "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
