@@ -384,7 +384,7 @@ const SellerRegistrationForm = () => {
             </div>
           </ToggleCollapse>
           
-          {/* user settings info toggle */}
+          {/* contact details info toggle */}
           <ToggleCollapse
             header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
             open={false}>
@@ -411,6 +411,18 @@ const SellerRegistrationForm = () => {
                 {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
               </span>
               <span>{ userSettings ? userSettings.email : ""}</span>
+            </div>
+            <div className="mb-4 mt-3 ml-auto w-min">
+              <Button
+                label={t('SHARED.SAVE')}
+                disabled={!isSaveEnabled}
+                styles={{
+                  color: '#ffc153',
+                  height: '40px',
+                  padding: '10px 15px',
+                }}
+                onClick={handleSave}
+              />
             </div>
           </ToggleCollapse>
           
