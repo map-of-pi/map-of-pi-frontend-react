@@ -28,6 +28,7 @@ import logger from '../../../../../logger.config.mjs';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
+  const SUBHEADER = 'font-bold mb-2';
   const router = useRouter();
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
@@ -264,8 +265,52 @@ const SellerRegistrationForm = () => {
         </div>
         
         <div className="mb-4">
+          <h2 className={SUBHEADER}>
+            {t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_LABEL')}
+          </h2>
+          <p className='text-gray-400 text-sm'>{t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER')}</p>
+          <div className="mb-2">
+            <TextArea
+              name="sellerDescription"
+              value={formData.sellerDescription}
+              onChange={handleChange}
+              styles={{ height: '200px' }}
+            />
+          </div>
+        </div>
+        <Link
+          href={{
+            pathname: "/map-center", // Path to MapCenter component
+            query: { entryType: 'sell' } // Passing 'sell' as entryType
+          }}
+        >
+          <Button
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
+            styles={{
+              color: '#ffc153',
+              height: '40px',
+              padding: '10px',
+              marginLeft: 'auto',
+            }}
+          />
+        </Link>
+        <div className="mb-4 mt-3 ml-auto w-min">
+          <Button
+            label={t('SHARED.SAVE')}
+            disabled={!isSaveEnabled}
+            styles={{
+              color: '#ffc153',
+              height: '40px',
+              padding: '10px 15px',
+            }}
+            onClick={handleSave}
+          />
+        </div>
+        
+        <div className='spacing-7'>
           {/* seller registration form fields toggle */}
-          <ToggleCollapse header={t('SCREEN.SELLER_REGISTRATION.SELLER_SETTINGS_LABEL')}
+          <ToggleCollapse 
+            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}
             open={true}>
             <div className="mb-4">
               <Input
@@ -290,32 +335,6 @@ const SellerRegistrationForm = () => {
                 value={formData.sellerAddress}
                 onChange={handleChange}
               />
-              <Link
-                href={{
-                  pathname: "/map-center", // Path to MapCenter component
-                  query: { entryType: 'sell' } // Passing 'sell' as entryType
-                }}
-              >
-                <Button
-                  label={t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')}
-                  styles={{
-                    color: '#ffc153',
-                    height: '40px',
-                    padding: '10px',
-                    marginLeft: 'auto',
-                  }}
-                />
-              </Link>
-              <div className="mb-2 mt-4">
-                <TextArea
-                  label={t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER')}
-                  describe={t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER')}
-                  name="sellerDescription"
-                  value={formData.sellerDescription}
-                  onChange={handleChange}
-                  styles={{ height: '200px' }}
-                />
-              </div>
             </div>
             <div className="mb-4">
               <FileInput
@@ -337,9 +356,7 @@ const SellerRegistrationForm = () => {
               />
             </div>
           </ToggleCollapse>
-        </div>
 
-        <div className='spacing-7'>
           {/* seller review toggle */}
           <ToggleCollapse
             header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}
@@ -370,7 +387,7 @@ const SellerRegistrationForm = () => {
           {/* user settings info toggle */}
           <ToggleCollapse
             header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
-              open={false}>
+            open={false}>
             <div className="text-sm mb-3">
               <span className="font-bold">
                 {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
