@@ -7,8 +7,6 @@ export interface IUser {
 export interface IUserSettings {
   user_settings_id?: string | null;
   user_name?: string;
-  email?: string;
-  phone_number?: string;
   image?: string; 
   findme?: string;
   trust_meter_rating: number;
@@ -23,6 +21,8 @@ export interface ISeller {
   name: string;
   description: string;
   seller_type: string;
+  email?: string | null;
+  phone_number?: string | null;
   image: string;
   address: string;
   average_rating: {
@@ -49,7 +49,7 @@ export interface IReviewFeedback {
 }
 
 // Select specific fields from IUserSettings
-export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'email' | 'phone_number' | 'findme' | 'trust_meter_rating'>;
+export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'findme' | 'trust_meter_rating'>;
 
 // Combined interface representing a seller with selected user settings
 export interface ISellerWithSettings extends ISeller, PartialUserSettings {}
