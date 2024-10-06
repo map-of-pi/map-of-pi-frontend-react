@@ -24,7 +24,7 @@ interface ReviewInt {
   giver: string;
   receiver: string;
   reviewId: string;
-  reviewerId: string;
+  receiverId: string;
   giverId: string;
   reaction: string;
   unicode: string;
@@ -66,11 +66,11 @@ function SellerReviews({
             time,
             giver: feedback.giver,
             receiver: feedback.receiver,
-            reviewerId: feedback.review_giver_id,
-            giverId: feedback.review_receiver_id,
+            giverId: feedback.review_giver_id,
+            receiverId: feedback.review_receiver_id,
             reviewId: feedback._id,
             reaction,
-            unicode,
+            unicode
           };
         }
         return null; // Ignore irrelevant reviews
@@ -80,7 +80,7 @@ function SellerReviews({
     // Separate into giver and receiver reviews
     return {
       giverReviews: reviews.filter((review) => review.giverId === userId),
-      receiverReviews: reviews.filter((review) => review.reviewerId === userId),
+      receiverReviews: reviews.filter((review) => review.receiverId === userId)
     };
   };
 
@@ -137,7 +137,6 @@ function SellerReviews({
     }
   };
 
-  
   const handleSearchBarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     logger.debug(`Search bar value changed: ${event.target.value}`);
     setSearchBarValue(event.target.value);
@@ -193,37 +192,37 @@ function SellerReviews({
         </ToggleCollapse>
 
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
-          {giverReviews && giverReviews.map((item, index) => (
+          
+          {giverReviews && giverReviews.map((review, index) => (
             <div key={index} className="seller_item_container mb-5">
-              <div className='flex'>
+              <div className="flex justify-between items-start mb-3">
                 {/* Left content */}
-                <div className='mb-3 flex-grow'>
+                <div className="flex-grow">
                   <p className="text-primary text-sm">
-                    {item.giver} {' -> '}  
-                    <span className="text-primary text-sm">{item.receiver}</span>
+                    {review.giver} {' -> '}
+                    <span className="text-primary text-sm">{review.receiver}</span>
                   </p>
-                  <p className="text-lg">{item.heading}</p>
+                  <p className="text-md break-words">{review.heading}</p>
                 </div>
 
                 {/* Right content */}
-                <div className='flex flex-col items-end ml-auto'>
-                  <div className="text-[#828282] text-right">
-                    <p className='text-sm'>{item.date} <br /> {item.time}</p>
+                <div className="flex flex-col items-end space-y-2">
+                  <div className="text-[#828282] text-sm text-right whitespace-nowrap">
+                    <p>{review.date}</p>
+                    <p>{review.time}</p>
                   </div>
-                  <div className="flex gap-2 mb-3">
+                  <div className="flex gap-2 items-center">
                     <Image
-                      src="/images/business/product.png"
+                      src={review.image}
                       alt="emoji image"
-                      width={60}
-                      height={60}
+                      width={50}
+                      height={50}
+                      className="object-cover rounded-md"
                     />
-                    <div className="">
-                      <span>{item.unicode}</span>
-                    </div>
+                    <p className="text-xl max-w-[50px]">{review.unicode}</p>
                   </div>
-
                   <div className="flex justify-between items-center">
-                    <Link href={`/seller/reviews/feedback/${item.reviewId}?seller_name=${item.receiver}`}>
+                    <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
                       <OutlineBtn label={t('SHARED.REPLY')} />
                     </Link>
                   </div>
@@ -232,47 +231,45 @@ function SellerReviews({
             </div>
           ))}
         </ToggleCollapse>
-
+          
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_RECEIVED_SECTION_HEADER')} open={true}>
-          {receiverReviews && receiverReviews.map((item, index) => (
+        {receiverReviews && receiverReviews.map((review, index) => (
             <div key={index} className="seller_item_container mb-5">
-              <div className='flex'>
-                {/* Left content */}
-                <div className='mb-3 flex-grow'>
-                  <p className="text-primary text-sm">
-                    {item.giver} {' -> '}
-                    <span className="text-primary text-sm">{item.receiver}</span>
-                  </p>
-                  <p className="text-lg">{item.heading}</p>
-                </div>
+              <div className="flex justify-between items-start mb-3">
+                    {/* Left content */}
+                    <div className="flex-grow">
+                      <p className="text-primary text-sm">
+                        {review.giver} {' -> '}
+                        <span className="text-primary text-sm">{review.receiver}</span>
+                      </p>
+                      <p className="text-md break-words">{review.heading}</p>
+                    </div>
 
-                {/* Right content */}
-                <div className='flex flex-col items-end ml-auto'> 
-                  <div className="text-[#828282] text-right mb-2">
-                    <p className='text-sm'>{item.date} <br /> {item.time}</p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Image
-                      src="/images/business/product.png"
-                      alt="emoji image"
-                      width={60}
-                      height={60}
-                    />
-                    <div className="text-right">
-                      <span>{item.unicode}</span>
+                    {/* Right content */}
+                    <div className="flex flex-col items-end space-y-2">
+                      <div className="text-[#828282] text-sm text-right whitespace-nowrap">
+                        <p>{review.date}</p>
+                        <p>{review.time}</p>
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <Image
+                          src={review.image}
+                          alt="emoji image"
+                          width={50}
+                          height={50}
+                          className="object-cover rounded-md"
+                        />
+                        <p className="text-xl max-w-[50px]">{review.unicode}</p>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
+                          <OutlineBtn label={t('SHARED.REPLY')} />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="flex justify-end items-center w-full">
-                    <Link href={`/seller/reviews/feedback/${item.reviewId}?seller_name=${userName}`}>
-                      <OutlineBtn label={t('SHARED.REPLY')} />
-                    </Link>
-                  </div>
-                </div>
-              </div>
             </div>
           ))}
-
         </ToggleCollapse>
       </div>
     </>
