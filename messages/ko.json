@@ -92,6 +92,9 @@
       "BY_REVIEWER": "{buyer_id}에 의해"
     },
     "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "리뷰에 답글 달기",
+      "REPLY_TO_REVIEW_SUBHEADER": "답변 중인 리뷰",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "리뷰에 답변하기",
       "REPLY_TO_REVIEW_HEADER": "{seller_id}에 남긴 리뷰에 답장하기",
       "BY_REVIEWER": "{buyer_id}에 의해",
       "REPLY_TO_REVIEW_MESSAGE": "위 리뷰에 대한 답장을 남기세요",
@@ -99,6 +102,7 @@
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "추가 의견을 입력하세요",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "피드백 사진 업로드",
       "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "리뷰 로딩 오류",
         "SELF_REVIEW_PROHIBITED": "자기 평가는 금지되어 있습니다"
       }
     }
@@ -188,6 +192,7 @@
     "PIONEER_LABEL": "개척자",
     "BUY": "구매",
     "NAVIGATE": "탐색",
+    "NO_COMMENT": "댓글이 제공되지 않았습니다",
     "SEARCH_CENTER": "검색 센터 설정",
     "CHECK_REVIEWS": "리뷰 확인",
     "SEARCH_REVIEWS": "리뷰 검색",
@@ -204,6 +209,7 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "사진 업로드",
       "UPLOAD_PHOTO_PLACEHOLDER": "구매자의 관심을 끌기 위해 이미지를 업로드하세요 (PNG, JPG, JPEG, WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "리뷰를 지원하는 이미지를 업로드하세요 (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "여기에 이미지를 드롭하거나 찾아보기",
       "SUPPORTS_FILE_MESSAGE": "지원: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
