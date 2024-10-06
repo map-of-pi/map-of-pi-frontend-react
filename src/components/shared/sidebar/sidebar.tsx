@@ -60,8 +60,6 @@ function Sidebar(props: any) {
   const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const [formData, setFormData] = useState({
     user_name: '',
-    email: '',
-    phone_number: '',
     image: '',
     findme: 'auto',
     trust_meter_rating: 100,
@@ -108,8 +106,6 @@ function Sidebar(props: any) {
     if (dbUserSettings) {
       setFormData({
         user_name: dbUserSettings.user_name || '',
-        email: dbUserSettings.email || '',
-        phone_number: dbUserSettings.phone_number?.toString() || '',
         image: dbUserSettings.image || '',
         findme: dbUserSettings.findme || translateFindMeOptions[0].value,
         trust_meter_rating: dbUserSettings.trust_meter_rating
@@ -228,8 +224,6 @@ function Sidebar(props: any) {
 
     const formDataToSend = new FormData();
     formDataToSend.append('user_name', removeUrls(formData.user_name));
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('phone_number', formData.phone_number);
     formDataToSend.append('findme', formData.findme);
 
     // add the image if it exists
@@ -348,26 +342,6 @@ function Sidebar(props: any) {
               }}
               value={formData.user_name? formData.user_name: ''}
               onChange={handleChange}
-            />
-            <Input
-              label={t('SIDE_NAVIGATION.EMAIL_ADDRESS_FIELD')}
-              placeholder="mapofpi@mapofpi.com"
-              type="email"
-              name="email"
-              style={{
-                textAlign: 'center'
-              }}
-              value={formData.email? formData.email: ""}
-              onChange={handleChange}
-            />
-            <TelephoneInput
-              label={t('SIDE_NAVIGATION.PHONE_NUMBER_FIELD')}
-              value={formData.phone_number}
-              name="phone_number"
-              onChange={(value: any) => handleChange({ name: 'phone_number', value })}
-              style={{
-                textAlign: 'center'
-              }}
             />
 
             <Button
