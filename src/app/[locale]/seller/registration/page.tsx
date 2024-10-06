@@ -40,6 +40,8 @@ const SellerRegistrationForm = () => {
     sellerType: 'testSeller',
     sellerDescription: '',
     sellerAddress: '',
+    email: '',
+    phone_number: '',
     image: ''
   });
   const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
@@ -100,6 +102,8 @@ const SellerRegistrationForm = () => {
         sellerAddress: dbSeller.address || '',
         sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].value,
         image: dbSeller.image || ''
+        email: dbSeller.email || '',
+        phone_number: dbSeller.phone_number || '',
       });
     }
   }, [dbSeller]);
@@ -198,6 +202,8 @@ const SellerRegistrationForm = () => {
     formDataToSend.append('seller_type', formData.sellerType);
     formDataToSend.append('description', sellerDescription);
     formDataToSend.append('address', sellerAddress);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('phone_number', formData.phone_number );
     // hardcode the value until the form element is built
     formDataToSend.append('order_online_enabled_pref', 'false');
 
