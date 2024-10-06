@@ -101,7 +101,7 @@ const SellerRegistrationForm = () => {
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
         sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].value,
-        image: dbSeller.image || ''
+        image: dbSeller.image || '',
         email: dbSeller.email || '',
         phone_number: dbSeller.phone_number || '',
       });
@@ -334,6 +334,38 @@ const SellerRegistrationForm = () => {
                 onChange={handleChange}
                 options={translatedSellerTypeOptions}
               />
+
+              <div className="mb-4">
+                <label>
+                  {t('SCREEN.SELLER_REGISTRATION.EMAIL_LABEL')}
+                </label>
+                <p className="text-gray-400 text-sm mt-1">
+                  {t('SCREEN.SELLER_REGISTRATION.EMAIL_PUBLIC_NOTE')}
+                </p>
+                <Input
+                  name="email"
+                  type="text"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="mb-4">
+                {/* Phone input */}
+                <label>
+                  {t('SCREEN.SELLER_REGISTRATION.PHONE_NUMBER_LABEL')}
+                </label>
+                <p className="text-gray-400 text-sm mt-1"> {/* Note directly below the label */}
+                  {t('SCREEN.SELLER_REGISTRATION.PHONE_PUBLIC_NOTE')}
+                </p>
+                <Input
+                  name="phone_number"
+                  type="text"
+                  value={formData.phone_number}
+                  onChange={handleChange}
+                />
+              </div>
+
               <TextArea
                 label={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL')}
                 describe={t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER')}
@@ -410,13 +442,11 @@ const SellerRegistrationForm = () => {
               <span className="font-bold">
                 {t('SHARED.USER_INFORMATION.PHONE_NUMBER_LABEL') + ': '}
               </span>
-              <span>{userSettings ? userSettings.phone_number : ""}</span>
             </div>
             <div className="text-sm mb-5">
               <span className="font-bold">
                 {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
               </span>
-              <span>{ userSettings ? userSettings.email : ""}</span>
             </div>
             <div className="mb-4 mt-3 ml-auto w-min">
               <Button
