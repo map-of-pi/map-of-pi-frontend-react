@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
-import { Button } from '../Forms/Buttons/Buttons';
+import { Button, CloseButton } from '../Forms/Buttons/Buttons';
 import logger from '../../../../logger.config.mjs';
 
 const MapMarkerPopup = ({ seller }: { seller: any }) => {
@@ -27,19 +27,14 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
   }
 
   return (
-    <div className="relative z-20">
+    <div className="relative z-20 p-4 bg-white rounded-md shadow-lg">
       {/* Flex container for seller name and X button */}
-      <div className="flex justify-between items-center w-full px-2 mt-3">
-        {/* Seller name */}
-        <h2 className="font-bold text-sm text-center">{seller.name}</h2>
+      <div className="flex justify-between items-center w-full mb-2">
+        {/* Seller name with more margin to the right */}
+        <h2 className="font-bold text-sm">{seller.name}</h2>
 
-        {/* Close (X) button */}
-        <button
-          className="text-gray-400 hover:text-gray-600 focus:outline-none ml-2"
-          onClick={handleClose} // Close popup when clicked
-        >
-          ✕
-        </button>
+        {/* CloseButton positioned on the same level as seller name */}
+        <CloseButton onClick={handleClose} className="ml-4" />
       </div>
 
       {/* Seller type */}
@@ -55,7 +50,7 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
         alt="Seller Image"
         width={200}
         height={100}
-        className="rounded-md object-cover mb-0.5"
+        className="rounded-md object-cover mb-1 mx-auto"
       />
 
       {/* Trust-o-meter label */}
@@ -65,7 +60,7 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
       <TrustMeter ratings={seller.trust_meter_rating} />
 
       {/* Button link */}
-      <Link href={`/seller/sale-items/${seller.seller_id}`} className="flex justify-center">
+      <Link href={`/seller/sale-items/${seller.seller_id}`} className="flex justify-center mt-2">
         <Button
           label={t('SHARED.BUY')}
           styles={{
