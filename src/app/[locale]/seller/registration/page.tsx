@@ -401,6 +401,34 @@ const SellerRegistrationForm = () => {
           <ToggleCollapse
             header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
             open={false}>
+                <div className="mb-4">
+                <label>
+                  {t('SCREEN.SELLER_REGISTRATION.EMAIL_LABEL')}
+                </label>
+                <p className="text-gray-400 text-sm mt-1">
+                </p>
+                <Input
+                  name="email"
+                  type="text"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-4">
+                {/* Phone input */}
+                <label>
+                  {t('SCREEN.SELLER_REGISTRATION.PHONE_NUMBER_LABEL')}
+                </label>
+                <Input
+                  name="phone_number"
+                  type="text"
+                  value={formData.phone_number}
+                  onChange={handleChange}
+                />
+                <p className="text-gray-400 text-sm -mt-3 mb-5">
+                  {t('SCREEN.SELLER_REGISTRATION.CONTACT_PUBLIC_NOTE')}
+                </p>
+              </div>
             <div className="text-sm mb-3">
               <span className="font-bold">
                 {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
@@ -412,18 +440,6 @@ const SellerRegistrationForm = () => {
                 {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
               </span>
               <span>{currentUser ? currentUser.user_name : ''}</span>
-            </div>
-            <div className="text-sm mb-3">
-              <span className="font-bold">
-                {t('SHARED.USER_INFORMATION.PHONE_NUMBER_LABEL') + ': '}
-              </span>
-              <span>{userSettings ? userSettings.phone_number : ""}</span>
-            </div>
-            <div className="text-sm mb-5">
-              <span className="font-bold">
-                {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
-              </span>
-              <span>{ userSettings ? userSettings.email : ""}</span>
             </div>
             <div className="mb-4 mt-3 ml-auto w-min">
               <Button
