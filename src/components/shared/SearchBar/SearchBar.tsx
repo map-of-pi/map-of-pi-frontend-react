@@ -69,26 +69,27 @@ const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
         <form className="w-full flex items-center gap-2 justify-between" onSubmit={handleSubmitSearch}>
           <FormControl className="flex-grow mr-3">
             <TextField
-              id="search-input"
-              type="text"
-              variant="outlined"
-              color="success"
-              className={`w-full rounded ${isSigningInUser ? 'bg-gray-200' : 'bg-white hover:bg-gray-100'}`}
-              label={`${isSigningInUser ? '' : placeholder}`}
-              value={searchBarValue}
-              onChange={handleSearchBarChange}
-              ref={inputRef}
-              disabled={isSigningInUser}
+                id="search-input"
+                type="text"
+                variant="outlined"
+                color="success"
+                className={`w-full rounded ${isSigningInUser ? 'bg-gray-200' : 'bg-white hover:bg-gray-100'}`}
+                label={`${isSigningInUser ? '' : placeholder}`}
+                value={searchBarValue}
+                onChange={handleSearchBarChange}
+                ref={inputRef}
+                disabled={isSigningInUser}
+                InputLabelProps={{ className: 'custom-label' }}
             />
           </FormControl>
           <button
             aria-label="search"
             type="submit"
-            className={`rounded h-full w-15 p-[15.5px] flex items-center justify-center 
+            className={`rounded-[10px] h-[55px] w-[55px] flex items-center justify-center 
               ${isSigningInUser ? 'bg-tertiary' : 'bg-primary hover:bg-gray-500'}`}
             disabled={isSigningInUser}
           >
-            <SearchIcon className="text-[#ffc153]" />
+            <SearchIcon fontSize={"large"} className=" text-[#ffc153]" />
           </button>
         </form>
       </div>
