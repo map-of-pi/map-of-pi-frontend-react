@@ -40,10 +40,9 @@
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Seller Registration",
       "SELLER_DETAILS_LABEL": "Seller Details",
-      "EMAIL_LABEL": "Your email address",
-      "PHONE_NUMBER_LABEL": "Your phone number",
-      "EMAIL_PUBLIC_NOTE": "Note: Your email address will be publicly visible.",
-      "PHONE_PUBLIC_NOTE": "Note: Your phone number will be publicly visible.",
+      "EMAIL_LABEL": "Email address",
+      "PHONE_NUMBER_LABEL": "Phone number",
+      "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
       "SELLER_DETAILS_PLACEHOLDER": "Description of seller & items for sale with pi price, etc.",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_LABEL": "Reviews Score",
