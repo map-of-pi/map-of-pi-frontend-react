@@ -221,6 +221,10 @@ const SellerRegistrationForm = () => {
         setIsSaveEnabled(false);
         logger.info('Seller registration saved successfully:', { data });
         toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
+
+        // Fetch updated user settings
+        const updatedUserSettings = await fetchUserSettings();
+        setUserSettings(updatedUserSettings);
       }
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
