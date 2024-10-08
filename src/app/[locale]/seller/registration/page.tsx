@@ -147,16 +147,19 @@ const SellerRegistrationForm = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData(prevFormData => ({
-      ...prevFormData,
+  
+    // Create a new object with the updated form data
+    const updatedFormData = {
+      ...formData,
       [name]: value,
-    }));
-
-    // Enable or disable save button based on form inputs
-    const isFormFilled = Object.values(formData).some(v => v !== '');
+    };
+    setFormData(updatedFormData);
+  
+    // Use the updated form data to check if the form is filled
+    const isFormFilled = Object.values(updatedFormData).some(v => v !== '');
     setIsSaveEnabled(isFormFilled);
   };
-
+  
   // Handle image upload
   const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]; // only take the first file
