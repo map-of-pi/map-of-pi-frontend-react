@@ -106,7 +106,7 @@ const SellerRegistrationForm = () => {
         image: dbSeller.image || ''
       });
     }
-  }, [dbSeller]);
+  }, [dbSeller, userSettings]);
 
   // Handle form changes
   useEffect(() => {
