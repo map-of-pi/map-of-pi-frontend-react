@@ -67,8 +67,7 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   const {isSigningInUser} = useContext(AppContext);
 
   const customIcon = L.icon({
-    iconUrl: '/favicon-32x32.png',
-    iconSize: [32, 32],
+    iconUrl: 'images/icons/map-of-pi-icon.png',
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
   });
