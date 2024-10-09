@@ -230,7 +230,7 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
             setPosition(L.latLng(lat, lng)); // Create a LatLng instance
           } else {
             setPosition(e.latlng); // If it's already LatLng, just set it directly
-          }
+          }          
         }
       },
       
