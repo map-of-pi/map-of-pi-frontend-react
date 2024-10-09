@@ -46,7 +46,6 @@ export default function Index() {
   const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
   const { isSigningInUser } = useContext(AppContext);
