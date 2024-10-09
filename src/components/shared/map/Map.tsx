@@ -214,18 +214,35 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
     const map = useMapEvents({
       locationfound(e) {
         logger.info(`Location found: ${e.latlng.toString()}`);
-        setPosition(e.latlng);
-        setLocationError(false);
+        
+        if (!position || !position.equals(e.latlng)) {
+          setPosition(e.latlng);
+        }
+        
         if (!initialLocationSet) {
           map.setView(e.latlng, zoom, { animate: false });
           setInitialLocationSet(true);
           setIsLocationAvailable(true);
+          setHasMapZoomed(true); // Set hasMapZoomed to true after zoom
+  
+          if (Array.isArray(e.latlng)) {
+            const [lat, lng] = e.latlng;
+            setPosition(L.latLng(lat, lng)); // Create a LatLng instance
+          } else {
+            setPosition(e.latlng); // If it's already LatLng, just set it directly
+          }
         }
       },
+      
       locationerror() {
         logger.warn('Location not found');
         setLocationError(true);
         setTimeout(() => setLocationError(false), 3000);
+        // Set a default position
+        const defaultLatLng = L.latLng(0, 0);
+        setPosition(defaultLatLng);
+        setHasMapZoomed(true); // Ensure hasMapZoomed is true even with fallback position
+        setOrigin(defaultLatLng);
       },
       moveend() {
         const bounds = map.getBounds();
@@ -236,24 +253,24 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
         debouncedHandleMapInteraction(bounds, map);
       },
     });
-
+  
     useEffect(() => {
       mapRef.current = map;
-    }, [map]);
-
-    // Initially set the view to user location without animation
+    }, []);
+  
+    // Use a ref to ensure map.locate() is called only once
+    const locateCalledRef = useRef(false);
+  
     useEffect(() => {
-      if (position && !initialLocationSet) {
-        map.setView(position, zoom, { animate: false });
-        setInitialLocationSet(true); // Prevent further automatic view resets
-        setIsLocationAvailable(true);
+      if (!locateCalledRef.current) {
+        map.locate();
+        locateCalledRef.current = true;
       }
-    }, [position, map, initialLocationSet]);
-
-    return position === null ? null : (
-      <Marker position={position} />
-    );
+    }, []); // Empty dependency array to ensure this runs only once
+  
+    return position === null ? null : <Marker position={position} />;
   }
+  
 
   // define map boundaries
   const bounds = L.latLngBounds(
