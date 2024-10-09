@@ -57,9 +57,9 @@ export default function Index() {
   useEffect(() => {
     const fetchLocationOnLoad = async () => {
       try {
-        const location = await fetchUserLocation();
-        setMapCenter(location.origin);
-        setZoomLevel(location.radius);
+        const location = await getDeviceLocation();
+        setMapCenter(location);
+        setZoomLevel(13);
         logger.info('User location obtained successfully on initial load:', {
           location,
         });
@@ -69,9 +69,9 @@ export default function Index() {
         setZoomLevel(2);
       }
     };
-
+  
     fetchLocationOnLoad();
-  }, [isSigningInUser]);
+  }, []);  
 
   const handleLocationButtonClick = async () => {
     try {
