@@ -158,7 +158,7 @@ function SellerReviews({
 
         {/* Search area */}
         <div className='flex gap-3 items-center justify-items-center py-3'>
-          <span>{t('SHARED.PIONEER_LABEL')}</span>
+          <span>{userName}</span>
           <FormControl className="flex-grow mr-2">
             <TextField
               id="search-input"
@@ -166,7 +166,7 @@ function SellerReviews({
               variant="outlined"
               color="success"
               className="bg-none hover:bg-gray-100 w-full rounded-lg"
-              label={t('SHARED.SEARCH_REVIEWS')}
+              label={t('Search reviews by pioneer username')}
               value={searchBarValue}
               onChange={handleSearchBarChange}
               ref={inputRef}
@@ -197,38 +197,38 @@ function SellerReviews({
         {giverReviews && giverReviews.map((review, index) => (
             <div key={index} className="seller_item_container mb-5">
               <div className="flex justify-between items-start mb-3">
-                    {/* Left content */}
-                    <div className="flex-grow">
-                      <p className="text-primary text-sm">
-                        {review.giver} {' -> '}
-                        <span className="text-primary text-sm">{review.receiver}</span>
-                      </p>
-                      <p className="text-md break-words">{review.heading}</p>
-                    </div>
+                {/* Left content */}
+                <div className="flex-grow">
+                  <p className="text-primary text-sm">
+                    {review.giver} {' -> '}
+                    <span className="text-primary text-sm">{review.receiver}</span>
+                  </p>
+                  <p className="text-md break-words">{review.heading}</p>
+                </div>
 
-                    {/* Right content */}
-                    <div className="flex flex-col items-end space-y-2">
-                      <div className="text-[#828282] text-sm text-right whitespace-nowrap">
-                        <p>{review.date}</p>
-                        <p>{review.time}</p>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <Image
-                          src={review.image}
-                          alt="emoji image"
-                          width={50}
-                          height={50}
-                          className="object-cover rounded-md"
-                        />
-                        <p className="text-xl max-w-[50px]">{review.unicode}</p>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
-                          <OutlineBtn label={t('SHARED.REPLY')} />
-                        </Link>
-                      </div>
-                    </div>
+                {/* Right content */}
+                <div className="flex flex-col items-end space-y-2">
+                  <div className="text-[#828282] text-sm text-right whitespace-nowrap">
+                    <p>{review.date}</p>
+                    <p>{review.time}</p>
                   </div>
+                  <div className="flex gap-2 items-center">
+                    <Image
+                      src={review.image}
+                      alt="emoji image"
+                      width={50}
+                      height={50}
+                      className="object-cover rounded-md"
+                    />
+                    <p className="text-xl max-w-[50px]">{review.unicode}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
+                      <OutlineBtn label={t('SHARED.REPLY')} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
         </ToggleCollapse>
