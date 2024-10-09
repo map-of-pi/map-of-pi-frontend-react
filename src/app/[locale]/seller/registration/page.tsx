@@ -13,6 +13,8 @@ import {
   TextArea,
   Input,
   Select,
+  TelephoneInput,
+  EmailInput,
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
@@ -35,17 +37,27 @@ const SellerRegistrationForm = () => {
   
   const {currentUser, autoLoginUser} = useContext(AppContext);
   
-  const [formData, setFormData] = useState({
+  // Initialize state with appropriate types
+  const [formData, setFormData] = useState<{
+    sellerName: string;
+    sellerType: string;
+    sellerDescription: string;
+    sellerAddress: string;
+    email: string | null;
+    phone_number: string | null;
+    image: string;
+  }>({
     sellerName: '',
     sellerType: 'testSeller',
     sellerDescription: '',
     sellerAddress: '',
-    email: '',
-    phone_number: '',
-    image: ''
+    email: null,
+    phone_number: null,
+    image: '',
   });
+
   const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
-  const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -79,18 +91,23 @@ const SellerRegistrationForm = () => {
       }
     };
 
-    const getUserSettings = async () => {
-      const settings = await fetchUserSettings();
-      if (settings) {
-        setUserSettings(settings);
-      } else {
-        logger.info('User settings not found.');
-        setUserSettings(null);
+    const getUserSettingsData = async () => {
+      try {
+        const settings = await fetchUserSettings();
+        if (settings) {
+          logger.info('Fetched user settings data successfully:', { settings });
+          setDbUserSettings(settings);
+        } else {
+          logger.info('User settings not found.');
+          setDbUserSettings(null);
+        }
+      } catch (error) {
+        logger.error('Error fetching user settings data:', { error });
       }
     };
 
     getSellerData();
-    getUserSettings();
+    getUserSettingsData();
   }, [currentUser]);
 
   // Initialize formData with dbSeller values if available
@@ -98,15 +115,15 @@ const SellerRegistrationForm = () => {
     if (dbSeller) {
       setFormData({
         sellerName: dbSeller.name || currentUser?.user_name || '',
+        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].value,
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        email: userSettings?.email || '',
-        phone_number: userSettings?.phone_number || '',
-        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].value,
+        email: dbUserSettings?.email || '',
+        phone_number: dbUserSettings?.phone_number || '',
         image: dbSeller.image || ''
       });
     }
-  }, [dbSeller, userSettings]);
+  }, [dbSeller, dbUserSettings]);
 
   // Handle form changes
   useEffect(() => {
@@ -114,7 +131,7 @@ const SellerRegistrationForm = () => {
       sellerName,
       sellerType,
       sellerDescription,
-      sellerAddress
+      sellerAddress,
     } = formData;
     setIsFormValid(
       !!(
@@ -144,9 +161,12 @@ const SellerRegistrationForm = () => {
   }, [dbSeller]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    > | { name: string; value: string }) => {
+    // handle such scenarios where the event might not have the typical e.target structure i.e., PhoneInput.
+    const name = 'target' in e ? e.target.name : e.name;
+    const value = 'target' in e ? e.target.value : e.value;
   
     // Create a new object with the updated form data
     const updatedFormData = {
@@ -155,7 +175,7 @@ const SellerRegistrationForm = () => {
     };
     setFormData(updatedFormData);
   
-    // Use the updated form data to check if the form is filled
+    // enable or disable save button based on form inputs
     const isFormFilled = Object.values(updatedFormData).some(v => v !== '');
     setIsSaveEnabled(isFormFilled);
   };
@@ -205,8 +225,8 @@ const SellerRegistrationForm = () => {
     formDataToSend.append('seller_type', formData.sellerType);
     formDataToSend.append('description', sellerDescription);
     formDataToSend.append('address', sellerAddress);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('phone_number', formData.phone_number );
+    formDataToSend.append('email', formData.email ?? '');
+    formDataToSend.append('phone_number', formData.phone_number?.toString() ?? '');
     // hardcode the value until the form element is built
     formDataToSend.append('order_online_enabled_pref', 'false');
 
@@ -224,7 +244,7 @@ const SellerRegistrationForm = () => {
 
         // Fetch updated user settings
         const updatedUserSettings = await fetchUserSettings();
-        setUserSettings(updatedUserSettings);
+        setDbUserSettings(updatedUserSettings);
       }
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
@@ -374,7 +394,7 @@ const SellerRegistrationForm = () => {
           <ToggleCollapse
             header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}
             open={false}>
-            <TrustMeter ratings={userSettings ? userSettings.trust_meter_rating : placeholderSeller.trust_meter_rating} />
+            <TrustMeter ratings={dbUserSettings ? dbUserSettings.trust_meter_rating : placeholderSeller.trust_meter_rating} />
             <div className="flex items-center justify-between mt-3 mb-5">
               <p className="text-sm">
                 {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
@@ -401,58 +421,51 @@ const SellerRegistrationForm = () => {
           <ToggleCollapse
             header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
             open={false}>
-                <div className="mb-4">
-                <label>
-                  {t('SCREEN.SELLER_REGISTRATION.EMAIL_LABEL')}
-                </label>
-                <p className="text-gray-400 text-sm mt-1">
-                </p>
-                <Input
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
+                </span>
+                <span>{currentUser ? currentUser.pi_username : ''}</span>
+              </div>
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
+                </span>
+                <span>{currentUser ? currentUser.user_name : ''}</span>
+              </div>
+              <div className="mb-4">
+                <EmailInput
+                  label={t('SCREEN.SELLER_REGISTRATION.EMAIL_LABEL')}
+                  placeholder=""
+                  type="email"
                   name="email"
-                  type="text"
-                  value={formData.email}
+                  value={formData.email ? formData.email: ""}
                   onChange={handleChange}
                 />
               </div>
               <div className="mb-4">
-                {/* Phone input */}
-                <label>
-                  {t('SCREEN.SELLER_REGISTRATION.PHONE_NUMBER_LABEL')}
-                </label>
-                <Input
-                  name="phone_number"
-                  type="text"
+                <TelephoneInput
+                  label={t('SCREEN.SELLER_REGISTRATION.PHONE_NUMBER_LABEL')}
                   value={formData.phone_number}
-                  onChange={handleChange}
+                  name="phone_number"
+                  onChange={(value: any) => handleChange({ name: 'phone_number', value })}
                 />
-                <p className="text-gray-400 text-sm -mt-3 mb-5">
-                  {t('SCREEN.SELLER_REGISTRATION.CONTACT_PUBLIC_NOTE')}
-                </p>
               </div>
-            <div className="text-sm mb-3">
-              <span className="font-bold">
-                {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
-              </span>
-              <span>{currentUser ? currentUser.pi_username : ''}</span>
-            </div>
-            <div className="text-sm mb-3">
-              <span className="font-bold">
-                {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
-              </span>
-              <span>{currentUser ? currentUser.user_name : ''}</span>
-            </div>
-            <div className="mb-4 mt-3 ml-auto w-min">
-              <Button
-                label={t('SHARED.SAVE')}
-                disabled={!isSaveEnabled}
-                styles={{
-                  color: '#ffc153',
-                  height: '40px',
-                  padding: '10px 15px',
-                }}
-                onClick={handleSave}
-              />
-            </div>
+              <p className="text-gray-400 text-sm -mt-3 mb-5">
+                {t('SCREEN.SELLER_REGISTRATION.CONTACT_PUBLIC_NOTE')}
+              </p>
+              <div className="mb-4 mt-3 ml-auto w-min">
+                <Button
+                  label={t('SHARED.SAVE')}
+                  disabled={!isSaveEnabled}
+                  styles={{
+                    color: '#ffc153',
+                    height: '40px',
+                    padding: '10px 15px',
+                  }}
+                  onClick={handleSave}
+                />
+              </div>
           </ToggleCollapse>
           
         </div>

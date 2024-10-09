@@ -6,6 +6,7 @@ import PhoneInput from 'react-phone-number-input'
 
 export const Input = (props: any) => {
   const { label, icon, ...input } = props;
+
   return (
     <>
       <div className="relative">
@@ -18,9 +19,39 @@ export const Input = (props: any) => {
         />
         {icon && (
           <div className="absolute right-1 bottom-[4px]">
-            <Image src="/favicon-32x32.png" alt="icon" width={32} height={32} />
+            <Image src="/images/icons/map-of-pi-icon.png" alt="icon" />
           </div>
         )}
+      </div>
+    </>
+  );
+};
+
+export const EmailInput = (props: any) => {
+  const t = useTranslations();
+  const { label, icon, ...input } = props;
+  
+  const handleInvalid = (e: React.FormEvent<HTMLInputElement>) => {
+    const input = e.target as HTMLInputElement;
+    if (input.value && input.validity.typeMismatch) {
+      input.setCustomValidity(t('SCREEN.SELLER_REGISTRATION.VALIDATION.EMAIL_VALIDATION'));
+    } else {
+      input.setCustomValidity('');
+    }
+  };
+
+  return (
+    <>
+      <div className="relative">
+        {props.label && (
+          <label className="block text-[17px] text-[#333333]">{props.label}</label>
+        )}
+        <input
+          {...input}
+          className={`mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
+          onInvalid={handleInvalid}
+          onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
+        />
       </div>
     </>
   );

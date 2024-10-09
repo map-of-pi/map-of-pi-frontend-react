@@ -18,8 +18,7 @@ import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import {
   FileInput,
   Input,
-  Select,
-  TelephoneInput,
+  Select
 } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
@@ -61,15 +60,11 @@ function Sidebar(props: any) {
   // Initialize state with appropriate types
   const [formData, setFormData] = useState<{
     user_name: string;
-    email: string | null;
-    phone_number: string | null;
     image: string;
     findme: string;
     trust_meter_rating: number;
   }>({
     user_name: '',
-    email: null,
-    phone_number: null,
     image: '',
     findme: 'auto',
     trust_meter_rating: 100,
@@ -117,8 +112,6 @@ function Sidebar(props: any) {
     if (dbUserSettings) {
       setFormData({
         user_name: dbUserSettings.user_name || '',
-        email: dbUserSettings.email || null,
-        phone_number: dbUserSettings.phone_number?.toString() || null,
         image: dbUserSettings.image || '',
         findme: dbUserSettings.findme || translateFindMeOptions[0].value,
         trust_meter_rating: dbUserSettings.trust_meter_rating
@@ -237,10 +230,6 @@ function Sidebar(props: any) {
 
     const formDataToSend = new FormData();
     formDataToSend.append('user_name', removeUrls(formData.user_name));
-
-    // Check for null and use default empty strings if needed
-    formDataToSend.append('email', formData.email ?? '');
-    formDataToSend.append('phone_number', formData.phone_number?.toString() ?? '');
     formDataToSend.append('findme', formData.findme);
 
 
