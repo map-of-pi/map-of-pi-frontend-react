@@ -39,7 +39,7 @@ function SellerReviews({
   searchParams: any;
 }) {
   const t = useTranslations();
-  const userName = searchParams.seller_name;
+  const userName = searchParams.user_name;
   const userId = params.id;
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
