@@ -82,12 +82,15 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
+  const [hasMapZoomed, setHasMapZoomed] = useState(false);
   
-  // Fetch initial seller coordinates when component mounts
+  // Fetch initial seller coordinates when map has zoomed to user's location
   useEffect(() => {
-    logger.info('Component mounted, fetching initial coordinates..');
-    fetchInitialCoordinates();
-  }, []);
+    if (hasMapZoomed) {
+      logger.info('Map has zoomed to user location, fetching initial coordinates...');
+      fetchInitialCoordinates();
+    }
+  }, [hasMapZoomed]);
 
   // Update origin when center prop changes
   useEffect(() => {
@@ -203,7 +206,7 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
     _.debounce((bounds: LatLngBounds, mapInstance: L.Map) => {
       handleMapInteraction(bounds, mapInstance);
     }, 500),
-    [sellers] // Dependency array ensures the debounced function is updated with the latest sellers
+    [sellers, hasMapZoomed] // Dependency array ensures the debounced function is updated with the latest sellers
   );
 
   // Component to handle location and map events
