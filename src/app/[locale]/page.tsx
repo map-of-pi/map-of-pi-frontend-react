@@ -87,54 +87,46 @@ export default function Index() {
         searchResults={searchResults || []}
       />
       <SearchBar page={'default'} onSearch={handleSearch} />
-      <div className="absolute bottom-8 z-10 flex justify-between gap-[22px] px-6 right-0 left-0 m-auto pointer-events-none">
-        {/* Add Seller Button */}
-        <div className="pointer-events-auto">
-          {!isSigningInUser ? (
+      <div className="absolute bottom-8 z-10   right-0 left-0 m-auto pointer-events-none">
+        <div className="w-[90%] lg:w-full lg:px-6 mx-auto flex items-center justify-between">
+          {/* Add Seller Button */}
+          <div className="pointer-events-auto">
             <Link href="/seller/registration">
               <Button
                 label={'+ ' + t('HOME.ADD_SELLER')}
                 styles={{
+                  height: '55px',
+                  fontSize: '20px',
                   borderRadius: '10px',
                   color: '#ffc153',
-                  paddingLeft: '50px',
-                  paddingRight: '50px',
+                  paddingLeft: '45px',
+                  paddingRight: '45px',
                 }}
+                disabled={isSigningInUser}
               />
             </Link>
-          ) : (
+          </div>
+          {/* Location Button */}
+          <div className="pointer-events-auto">
             <Button
-              label={'+ ' + t('HOME.ADD_SELLER')}
+              icon={
+                <Image
+                  src="/images/shared/my_location.png"
+                  width={40}
+                  height={40}
+                  alt="my location"
+                />
+              }
               styles={{
-                borderRadius: '10px',
-                color: '#ffc153',
-                paddingLeft: '50px',
-                paddingRight: '50px',
+                borderRadius: '50%',
+                width: '55px',
+                height: '55px',
+                padding: '0px',
               }}
-              disabled
+              onClick={handleLocationButtonClick}
+              disabled={isSigningInUser}
             />
-          )}
-        </div>
-        {/* Location Button */}
-        <div className="pointer-events-auto">
-          <Button
-            icon={
-              <Image
-                src="/images/shared/my_location.png"
-                width={30}
-                height={30}
-                alt="my location"
-              />
-            }
-            styles={{
-              borderRadius: '50%',
-              width: '40px',
-              height: '40px',
-              padding: '0px',
-            }}
-            onClick={handleLocationButtonClick}
-            disabled={isSigningInUser}
-          />
+          </div>
         </div>
       </div>
     </>
