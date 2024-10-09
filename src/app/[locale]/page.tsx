@@ -75,9 +75,9 @@ export default function Index() {
 
   const handleLocationButtonClick = async () => {
     try {
-      const location = await fetchUserLocation();
-      setMapCenter(location.origin);
-      setZoomLevel(location.radius);
+      const location = await getDeviceLocation();
+      setMapCenter(location);
+      setZoomLevel(15);
       setLocationError(null);
       logger.info('User location obtained successfully on button click:', {
         location,
@@ -88,7 +88,7 @@ export default function Index() {
         t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'),
       );
     }
-  };
+  };  
 
   // handle search query update from SearchBar and associated results
   const handleSearch = (query: string, results: any[]) => {
