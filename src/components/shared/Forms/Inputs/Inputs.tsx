@@ -27,35 +27,6 @@ export const Input = (props: any) => {
   );
 };
 
-export const EmailInput = (props: any) => {
-  const t = useTranslations();
-  const { label, icon, ...input } = props;
-  
-  const handleInvalid = (e: React.FormEvent<HTMLInputElement>) => {
-    const input = e.target as HTMLInputElement;
-    if (input.value && input.validity.typeMismatch) {
-      input.setCustomValidity(t('SCREEN.SELLER_REGISTRATION.VALIDATION.EMAIL_VALIDATION'));
-    } else {
-      input.setCustomValidity('');
-    }
-  };
-
-  return (
-    <>
-      <div className="relative">
-        {props.label && (
-          <label className="block text-[17px] text-[#333333]">{props.label}</label>
-        )}
-        <input
-          {...input}
-          className={`mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
-          onInvalid={handleInvalid}
-          onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
-        />
-      </div>
-    </>
-  );
-};
 
 export const TelephoneInput = (props: any) => {
   const { label, ...input } = props;
@@ -66,7 +37,7 @@ export const TelephoneInput = (props: any) => {
       )}
       <PhoneInput 
         {...input}
-        className={`flex mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
+        className={`flex mt-1 p-[10px] w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
       />
     </div>
   );

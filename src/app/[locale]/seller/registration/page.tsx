@@ -13,8 +13,7 @@ import {
   TextArea,
   Input,
   Select,
-  TelephoneInput,
-  EmailInput,
+  TelephoneInput
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
@@ -434,12 +433,12 @@ const SellerRegistrationForm = () => {
                 <span>{currentUser ? currentUser.user_name : ''}</span>
               </div>
               <div className="mb-4">
-                <EmailInput
+                <Input
                   label={t('SCREEN.SELLER_REGISTRATION.EMAIL_LABEL')}
                   placeholder=""
                   type="email"
                   name="email"
-                  value={formData.email ? formData.email: ""}
+                  value={formData.email ? formData.email: ''}
                   onChange={handleChange}
                 />
               </div>
