@@ -433,6 +433,14 @@ const SellerRegistrationForm = () => {
                 <span>{currentUser ? currentUser.user_name : ''}</span>
               </div>
               <div className="mb-4">
+                <TelephoneInput
+                  label={t('SCREEN.SELLER_REGISTRATION.PHONE_NUMBER_LABEL')}
+                  value={formData.phone_number}
+                  name="phone_number"
+                  onChange={(value: any) => handleChange({ name: 'phone_number', value })}
+                />
+              </div>
+              <div className="mb-4">
                 <Input
                   label={t('SCREEN.SELLER_REGISTRATION.EMAIL_LABEL')}
                   placeholder=""
@@ -440,14 +448,6 @@ const SellerRegistrationForm = () => {
                   name="email"
                   value={formData.email ? formData.email: ''}
                   onChange={handleChange}
-                />
-              </div>
-              <div className="mb-4">
-                <TelephoneInput
-                  label={t('SCREEN.SELLER_REGISTRATION.PHONE_NUMBER_LABEL')}
-                  value={formData.phone_number}
-                  name="phone_number"
-                  onChange={(value: any) => handleChange({ name: 'phone_number', value })}
                 />
               </div>
               <p className="text-gray-400 text-sm -mt-3 mb-5">
