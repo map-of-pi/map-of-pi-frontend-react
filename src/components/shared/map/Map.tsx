@@ -81,12 +81,15 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
+  const [hasMapZoomed, setHasMapZoomed] = useState(false);
   
-  // Fetch initial seller coordinates when component mounts
+  // Fetch initial seller coordinates when map has zoomed to user's location
   useEffect(() => {
-    logger.info('Component mounted, fetching initial coordinates..');
-    fetchInitialCoordinates();
-  }, []);
+    if (hasMapZoomed) {
+      logger.info('Map has zoomed to user location, fetching initial coordinates...');
+      fetchInitialCoordinates();
+    }
+  }, [hasMapZoomed]);
 
   // Update origin when center prop changes
   useEffect(() => {
@@ -202,7 +205,7 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
     _.debounce((bounds: LatLngBounds, mapInstance: L.Map) => {
       handleMapInteraction(bounds, mapInstance);
     }, 500),
-    [sellers] // Dependency array ensures the debounced function is updated with the latest sellers
+    [sellers, hasMapZoomed] // Dependency array ensures the debounced function is updated with the latest sellers
   );
 
   // Component to handle location and map events
@@ -210,18 +213,35 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
     const map = useMapEvents({
       locationfound(e) {
         logger.info(`Location found: ${e.latlng.toString()}`);
-        setPosition(e.latlng);
-        setLocationError(false);
+        
+        if (!position || !position.equals(e.latlng)) {
+          setPosition(e.latlng);
+        }
+        
         if (!initialLocationSet) {
           map.setView(e.latlng, zoom, { animate: false });
           setInitialLocationSet(true);
           setIsLocationAvailable(true);
+          setHasMapZoomed(true); // Set hasMapZoomed to true after zoom
+  
+          if (Array.isArray(e.latlng)) {
+            const [lat, lng] = e.latlng;
+            setPosition(L.latLng(lat, lng)); // Create a LatLng instance
+          } else {
+            setPosition(e.latlng); // If it's already LatLng, just set it directly
+          }          
         }
       },
+      
       locationerror() {
         logger.warn('Location not found');
         setLocationError(true);
         setTimeout(() => setLocationError(false), 3000);
+        // Set a default position
+        const defaultLatLng = L.latLng(0, 0);
+        setPosition(defaultLatLng);
+        setHasMapZoomed(true); // Ensure hasMapZoomed is true even with fallback position
+        setOrigin(defaultLatLng);
       },
       moveend() {
         const bounds = map.getBounds();
@@ -232,24 +252,24 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
         debouncedHandleMapInteraction(bounds, map);
       },
     });
-
+  
     useEffect(() => {
       mapRef.current = map;
-    }, [map]);
-
-    // Initially set the view to user location without animation
+    }, []);
+  
+    // Use a ref to ensure map.locate() is called only once
+    const locateCalledRef = useRef(false);
+  
     useEffect(() => {
-      if (position && !initialLocationSet) {
-        map.setView(position, zoom, { animate: false });
-        setInitialLocationSet(true); // Prevent further automatic view resets
-        setIsLocationAvailable(true);
+      if (!locateCalledRef.current) {
+        map.locate();
+        locateCalledRef.current = true;
       }
-    }, [position, map, initialLocationSet]);
-
-    return position === null ? null : (
-      <Marker position={position} />
-    );
+    }, []); // Empty dependency array to ensure this runs only once
+  
+    return position === null ? null : <Marker position={position} />;
   }
+  
 
   // define map boundaries
   const bounds = L.latLngBounds(
