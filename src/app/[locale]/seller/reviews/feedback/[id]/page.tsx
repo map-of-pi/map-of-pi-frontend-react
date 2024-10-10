@@ -52,7 +52,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [direction, setDirection] = useState('');
-
+  const [reload, setReload] = useState<boolean>(false);
   const { currentUser, autoLoginUser } = useContext(AppContext);
 
   const processReviews = (data: IReviewOutput[]): ReviewInt[] => {
@@ -86,6 +86,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
       setLoading(true);
       try {
         logger.info(`Fetching review data for review ID: ${reviewId}`);
+        setReload(false)
         const data = await fetchSingleReview(reviewId);
 
         if (data.review) {
@@ -107,7 +108,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
     };
 
     getReviewData();
-  }, [reviewId, currentUser, reviews.length]);
+  }, [reviewId, currentUser, reload]);
 
   // Scroll functions
   const prevSlide = () => {
@@ -213,6 +214,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
             setIsSaveEnabled={setIsSaveEnabled}
             replyToReviewId={reviews[currentIndex]?.reviewId}
             currentUser={currentUser}
+            setReload={setReload}
           />
         </div>
       )}
