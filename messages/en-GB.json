@@ -15,8 +15,6 @@
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "User Preferences",
     "PERSONALIZATION_SUBHEADER": "Personalisation",
-    "EMAIL_ADDRESS_FIELD": "Your email address",
-    "PHONE_NUMBER_FIELD": "Your phone number",
     "LANGUAGES": "Languages",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "About Map of Pi",
@@ -40,6 +38,9 @@
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Seller Registration",
       "SELLER_DETAILS_LABEL": "Seller Details",
+      "EMAIL_LABEL": "Email address",
+      "PHONE_NUMBER_LABEL": "Phone number",
+      "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
       "SELLER_DETAILS_PLACEHOLDER": "Description of seller & items for sale with pi price, etc.",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_LABEL": "Reviews Score",
@@ -59,6 +60,7 @@
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
       "VALIDATION": {
+        "EMAIL_VALIDATION": "Please enter a valid email address",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Seller Registration submitted successfully",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated",
         "UNINITIALIZED_SELL_CENTER": "Please set your Sell Centre"
