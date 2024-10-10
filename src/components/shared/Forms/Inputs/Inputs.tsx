@@ -6,6 +6,7 @@ import PhoneInput from 'react-phone-number-input'
 
 export const Input = (props: any) => {
   const { label, icon, ...input } = props;
+
   return (
     <>
       <div className="relative">
@@ -18,13 +19,14 @@ export const Input = (props: any) => {
         />
         {icon && (
           <div className="absolute right-1 bottom-[4px]">
-            <Image src="/favicon-32x32.png" alt="icon" width={32} height={32} />
+            <Image src="/images/icons/map-of-pi-icon.png" alt="icon" />
           </div>
         )}
       </div>
     </>
   );
 };
+
 
 export const TelephoneInput = (props: any) => {
   const { label, ...input } = props;
@@ -35,7 +37,7 @@ export const TelephoneInput = (props: any) => {
       )}
       <PhoneInput 
         {...input}
-        className={`flex mt-1 p-[10px] block w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
+        className={`flex mt-1 p-[10px] w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
       />
     </div>
   );
