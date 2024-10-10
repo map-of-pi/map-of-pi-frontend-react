@@ -7,3 +7,16 @@ button {
   font-size: 25px !important;
   color: #1d724b; 
 }
+
+/* Styles for the TextField label */
+.custom-label {
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-label.Mui-focused,
+.custom-label.MuiInputLabel-shrink {
+  background-color: white;
+  padding: 0 8px;
+  border-radius: 8px;
+  transform: translate(10px, -6px) scale(0.75);
+}

@@ -15,8 +15,6 @@
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Nutifafa le Mawuwo",
     "PERSONALIZATION_SUBHEADER": "Trɔtrɔnye",
-    "EMAIL_ADDRESS_FIELD": "Wò email adrɛs",
-    "PHONE_NUMBER_FIELD": "Wò telefɔn numɔ",
     "LANGUAGES": "Ɖe ŋutɔ",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "Nudɔ Map of Pi",
@@ -40,6 +38,9 @@
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Nàƒé Wòkpɔ̃nɔnyewo",
       "SELLER_DETAILS_LABEL": "Nuxlɔ̃tɔ la gbɔgbɔmɛ",
+      "EMAIL_LABEL": "Nu kɔnta le ema",
+      "PHONE_NUMBER_LABEL": "Nɔ̃nyo ƒe dzesi",
+      "CONTACT_PUBLIC_NOTE": "Nu kɔnta le ema kple nɔ̃nyo ƒe dzesi wogbe na wo.",
       "SELLER_DETAILS_PLACEHOLDER": "Nuxlɔ̃tɔ kple nyateƒea ƒe agblewo tso pi gãwɔna dzi, etc.",
       "REVIEWS_SUMMARY_LABEL": "Sɔlɔɖe ɖe do",
       "REVIEWS_SCORE_LABEL": "Sɔlɔɖe mɔkpla",
@@ -59,6 +60,7 @@
       "SELLER_SETTINGS_LABEL": "Ɖe le Adesɔ",
       "SELLER_SELL_CENTER": "Nàƒé Wòkpɔ̃nɔnyewo",
       "VALIDATION": {
+        "EMAIL_VALIDATION": "Metsɔ ema aɖeke wɔna le ŋgɔ le eme",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Nyatakɔɖu nàtsoɖe tɔ wòɖé yèna nyuie",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nɔviɖewɔwɔ na mi kplɔ nɛ ƒe viwo nɔ anyi nyɔnu ƒe ŋu nɔ anyi",
         "UNINITIALIZED_SELL_CENTER": "Mɛnya ɖe gbe na wo trɔtrɔ wo fiawo tso me"

@@ -6,9 +6,9 @@ export interface IUser {
 
 export interface IUserSettings {
   user_settings_id?: string | null;
-  user_name?: string;
-  email?: string;
-  phone_number?: string;
+  user_name?: string | null;
+  email?: string | null;
+  phone_number?: string | null;
   image?: string; 
   findme?: string;
   trust_meter_rating: number;

@@ -39,7 +39,7 @@ function SellerReviews({
   searchParams: any;
 }) {
   const t = useTranslations();
-  const userName = searchParams.seller_name;
+  const userName = searchParams.user_name;
   const userId = params.id;
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
@@ -157,7 +157,7 @@ function SellerReviews({
 
         {/* Search area */}
         <div className='flex gap-3 items-center justify-items-center py-3'>
-          <span>{t('SHARED.PIONEER_LABEL')}</span>
+          <span>{userName}</span>
           <FormControl className="flex-grow mr-2">
             <TextField
               id="search-input"
@@ -165,7 +165,7 @@ function SellerReviews({
               variant="outlined"
               color="success"
               className="bg-none hover:bg-gray-100 w-full rounded-lg"
-              label={t('SHARED.SEARCH_REVIEWS')}
+              label={t('Search reviews by pioneer username')}
               value={searchBarValue}
               onChange={handleSearchBarChange}
               ref={inputRef}

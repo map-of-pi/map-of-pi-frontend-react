@@ -15,8 +15,6 @@
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Zaɓin mai amfani",
     "PERSONALIZATION_SUBHEADER": "Keɓancewa",
-    "EMAIL_ADDRESS_FIELD": "Adireshin i-mel dinka",
-    "PHONE_NUMBER_FIELD": "Lambar wayarka",
     "LANGUAGES": "Harsuna",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "Game da Map of Pi",
@@ -40,6 +38,9 @@
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Rajistar Mai Sayarwa",
       "SELLER_DETAILS_LABEL": "Bayanin mai sayarwa",
+      "EMAIL_LABEL": "Adireshin imel",
+      "PHONE_NUMBER_LABEL": "Lambar waya",
+      "CONTACT_PUBLIC_NOTE": "Adireshin imel da lambar waya za su kasance a bayyane ga kowa.",
       "SELLER_DETAILS_PLACEHOLDER": "Bayani game da mai sayarwa da kayayyakin da ake sayarwa tare da farashin pi, da sauransu.",
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayani",
       "REVIEWS_SCORE_LABEL": "Maki Sake Dubawa",
@@ -59,6 +60,7 @@
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
       "VALIDATION": {
+        "EMAIL_VALIDATION": "Don Allah shigar da ingantaccen adireshin imel",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rijista ta sayarwa ta samu nasara",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Rijista ta gaza saboda mai amfani ba a tantance shi ba",
         "UNINITIALIZED_SELL_CENTER": "Da fatan za ku saita cibiyar sayarwarku"

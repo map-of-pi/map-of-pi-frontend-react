@@ -15,8 +15,6 @@
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "사용자 설정",
     "PERSONALIZATION_SUBHEADER": "개인화",
-    "EMAIL_ADDRESS_FIELD": "이메일 주소",
-    "PHONE_NUMBER_FIELD": "전화번호",
     "LANGUAGES": "언어",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "Map of Pi에 대해",
@@ -40,6 +38,9 @@
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "판매자 등록",
       "SELLER_DETAILS_LABEL": "판매자 세부 정보",
+      "EMAIL_LABEL": "이메일 주소",
+      "PHONE_NUMBER_LABEL": "전화번호",
+      "CONTACT_PUBLIC_NOTE": "이메일 주소와 전화번호가 공개적으로 표시됩니다.",
       "SELLER_DETAILS_PLACEHOLDER": "판매자 및 판매 품목 설명, pi 가격 등",
       "REVIEWS_SUMMARY_LABEL": "리뷰 요약",
       "REVIEWS_SCORE_LABEL": "리뷰 점수",
@@ -59,6 +60,7 @@
       "SELLER_SETTINGS_LABEL": "판매자 설정",
       "SELLER_SELL_CENTER": "판매 센터 설정",
       "VALIDATION": {
+        "EMAIL_VALIDATION": "유효한 이메일 주소를 입력하세요",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "판매자 등록이 성공적으로 제출되었습니다",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "사용자가 인증되지 않아 등록에 실패했습니다",
         "UNINITIALIZED_SELL_CENTER": "판매 센터를 설정해주세요"
