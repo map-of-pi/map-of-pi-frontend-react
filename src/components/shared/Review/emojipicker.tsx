@@ -200,7 +200,7 @@ export default function EmojiPicker(props: any) {
       <div className="mb-2">
         <FileInput 
           label={t('SHARED.PHOTO.MISC_LABELS.REVIEW_FEEDBACK_IMAGE_LABEL')}
-          describe={t('Upload an image to illustrate your review (PNG, JPG, JPEG, WEBP)')} 
+          describe={t('SHARED.PHOTO.UPLOAD_PHOTO_REVIEW_PLACEHOLDER')} 
           imageUrl={previewImage} 
           handleAddImage={handleAddImage} 
         />

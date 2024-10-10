@@ -13,6 +13,7 @@ import {
   TextArea,
   Input,
   Select,
+  TelephoneInput
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
@@ -35,15 +36,27 @@ const SellerRegistrationForm = () => {
   
   const {currentUser, autoLoginUser} = useContext(AppContext);
   
-  const [formData, setFormData] = useState({
+  // Initialize state with appropriate types
+  const [formData, setFormData] = useState<{
+    sellerName: string;
+    sellerType: string;
+    sellerDescription: string;
+    sellerAddress: string;
+    email: string | null;
+    phone_number: string | null;
+    image: string;
+  }>({
     sellerName: '',
     sellerType: 'testSeller',
     sellerDescription: '',
     sellerAddress: '',
-    image: ''
+    email: null,
+    phone_number: null,
+    image: '',
   });
+
   const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
-  const [userSettings, setUserSettings] = useState<IUserSettings | null>(null);
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -77,18 +90,23 @@ const SellerRegistrationForm = () => {
       }
     };
 
-    const getUserSettings = async () => {
-      const settings = await fetchUserSettings();
-      if (settings) {
-        setUserSettings(settings);
-      } else {
-        logger.info('User settings not found.');
-        setUserSettings(null);
+    const getUserSettingsData = async () => {
+      try {
+        const settings = await fetchUserSettings();
+        if (settings) {
+          logger.info('Fetched user settings data successfully:', { settings });
+          setDbUserSettings(settings);
+        } else {
+          logger.info('User settings not found.');
+          setDbUserSettings(null);
+        }
+      } catch (error) {
+        logger.error('Error fetching user settings data:', { error });
       }
     };
 
     getSellerData();
-    getUserSettings();
+    getUserSettingsData();
   }, [currentUser]);
 
   // Initialize formData with dbSeller values if available
@@ -96,13 +114,15 @@ const SellerRegistrationForm = () => {
     if (dbSeller) {
       setFormData({
         sellerName: dbSeller.name || currentUser?.user_name || '',
+        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].value,
         sellerDescription: dbSeller.description || '',
         sellerAddress: dbSeller.address || '',
-        sellerType: dbSeller.seller_type || translatedSellerTypeOptions[2].value,
+        email: dbUserSettings?.email || '',
+        phone_number: dbUserSettings?.phone_number || '',
         image: dbSeller.image || ''
       });
     }
-  }, [dbSeller]);
+  }, [dbSeller, dbUserSettings]);
 
   // Handle form changes
   useEffect(() => {
@@ -110,7 +130,7 @@ const SellerRegistrationForm = () => {
       sellerName,
       sellerType,
       sellerDescription,
-      sellerAddress
+      sellerAddress,
     } = formData;
     setIsFormValid(
       !!(
@@ -140,19 +160,25 @@ const SellerRegistrationForm = () => {
   }, [dbSeller]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData(prevFormData => ({
-      ...prevFormData,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    > | { name: string; value: string }) => {
+    // handle such scenarios where the event might not have the typical e.target structure i.e., PhoneInput.
+    const name = 'target' in e ? e.target.name : e.name;
+    const value = 'target' in e ? e.target.value : e.value;
+  
+    // Create a new object with the updated form data
+    const updatedFormData = {
+      ...formData,
       [name]: value,
-    }));
-
-    // Enable or disable save button based on form inputs
-    const isFormFilled = Object.values(formData).some(v => v !== '');
+    };
+    setFormData(updatedFormData);
+  
+    // enable or disable save button based on form inputs
+    const isFormFilled = Object.values(updatedFormData).some(v => v !== '');
     setIsSaveEnabled(isFormFilled);
   };
-
+  
   // Handle image upload
   const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]; // only take the first file
@@ -198,6 +224,8 @@ const SellerRegistrationForm = () => {
     formDataToSend.append('seller_type', formData.sellerType);
     formDataToSend.append('description', sellerDescription);
     formDataToSend.append('address', sellerAddress);
+    formDataToSend.append('email', formData.email ?? '');
+    formDataToSend.append('phone_number', formData.phone_number?.toString() ?? '');
     // hardcode the value until the form element is built
     formDataToSend.append('order_online_enabled_pref', 'false');
 
@@ -212,6 +240,10 @@ const SellerRegistrationForm = () => {
         setIsSaveEnabled(false);
         logger.info('Seller registration saved successfully:', { data });
         toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
+
+        // Fetch updated user settings
+        const updatedUserSettings = await fetchUserSettings();
+        setDbUserSettings(updatedUserSettings);
       }
     } catch (error) {
       logger.error('Error saving seller registration:', { error });
@@ -306,64 +338,8 @@ const SellerRegistrationForm = () => {
             onClick={handleSave}
           />
         </div>
+        
         <div className='spacing-7'>
-          {/* seller review toggle */}
-          <ToggleCollapse
-            header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}
-            open={false}>
-            <TrustMeter ratings={userSettings ? userSettings.trust_meter_rating : placeholderSeller.trust_meter_rating} />
-            <div className="flex items-center justify-between mt-3 mb-5">
-              <p className="text-sm">
-                {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
-                  seller_review_rating: dbSeller ? dbSeller.average_rating.$numberDecimal : placeholderSeller.average_rating
-                })}
-              </p>
-              { !isSaveEnabled ? (
-                <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}?user_name=${dbSeller.name}` : '#'}>
-                  <OutlineBtn
-                    disabled={!currentUser}
-                    label={t('SHARED.CHECK_REVIEWS')}
-                  />
-                </Link> ) : (
-                  <OutlineBtn
-                    disabled={!currentUser}
-                    label={t('SHARED.CHECK_REVIEWS')}
-                    onClick={()=>handleNavigation(dbSeller ? `/seller/reviews/${dbSeller.seller_id}?user_name=${dbSeller.name}` : '#')}
-                  /> )
-              }
-            </div>
-          </ToggleCollapse>
-          
-          {/* user settings info toggle */}
-          <ToggleCollapse
-            header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
-            open={false}>
-            <div className="text-sm mb-3">
-              <span className="font-bold">
-                {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
-              </span>
-              <span>{currentUser ? currentUser.pi_username : ''}</span>
-            </div>
-            <div className="text-sm mb-3">
-              <span className="font-bold">
-                {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
-              </span>
-              <span>{currentUser ? currentUser.user_name : ''}</span>
-            </div>
-            <div className="text-sm mb-3">
-              <span className="font-bold">
-                {t('SHARED.USER_INFORMATION.PHONE_NUMBER_LABEL') + ': '}
-              </span>
-              <span>{userSettings ? userSettings.phone_number : ""}</span>
-            </div>
-            <div className="text-sm mb-5">
-              <span className="font-bold">
-                {t('SHARED.USER_INFORMATION.EMAIL_LABEL') + ': '}
-              </span>
-              <span>{ userSettings ? userSettings.email : ""}</span>
-            </div>
-          </ToggleCollapse>
-          
           {/* seller registration form fields toggle */}
           <ToggleCollapse 
             header={t('SCREEN.SELLER_REGISTRATION.SELLER_ADVANCED_SETTINGS_LABEL')}
@@ -412,6 +388,85 @@ const SellerRegistrationForm = () => {
               />
             </div>
           </ToggleCollapse>
+
+          {/* seller review toggle */}
+          <ToggleCollapse
+            header={t('SCREEN.SELLER_REGISTRATION.REVIEWS_SUMMARY_LABEL')}
+            open={false}>
+            <TrustMeter ratings={dbUserSettings ? dbUserSettings.trust_meter_rating : placeholderSeller.trust_meter_rating} />
+            <div className="flex items-center justify-between mt-3 mb-5">
+              <p className="text-sm">
+                {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {
+                  seller_review_rating: dbSeller ? dbSeller.average_rating.$numberDecimal : placeholderSeller.average_rating
+                })}
+              </p>
+              { !isSaveEnabled ? (
+                <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#'}>
+                  <OutlineBtn
+                    disabled={!currentUser}
+                    label={t('SHARED.CHECK_REVIEWS')}
+                  />
+                </Link> ) : (
+                  <OutlineBtn
+                    disabled={!currentUser}
+                    label={t('SHARED.CHECK_REVIEWS')}
+                    onClick={()=>handleNavigation(dbSeller ? `/seller/reviews/${dbSeller.seller_id}` : '#')}
+                  /> )
+              }
+            </div>
+          </ToggleCollapse>
+          
+          {/* contact details info toggle */}
+          <ToggleCollapse
+            header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
+            open={false}>
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
+                </span>
+                <span>{currentUser ? currentUser.pi_username : ''}</span>
+              </div>
+              <div className="text-sm mb-3">
+                <span className="font-bold">
+                  {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
+                </span>
+                <span>{currentUser ? currentUser.user_name : ''}</span>
+              </div>
+              <div className="mb-4">
+                <TelephoneInput
+                  label={t('SCREEN.SELLER_REGISTRATION.PHONE_NUMBER_LABEL')}
+                  value={formData.phone_number}
+                  name="phone_number"
+                  onChange={(value: any) => handleChange({ name: 'phone_number', value })}
+                />
+              </div>
+              <div className="mb-4">
+                <Input
+                  label={t('SCREEN.SELLER_REGISTRATION.EMAIL_LABEL')}
+                  placeholder=""
+                  type="email"
+                  name="email"
+                  value={formData.email ? formData.email: ''}
+                  onChange={handleChange}
+                />
+              </div>
+              <p className="text-gray-400 text-sm -mt-3 mb-5">
+                {t('SCREEN.SELLER_REGISTRATION.CONTACT_PUBLIC_NOTE')}
+              </p>
+              <div className="mb-4 mt-3 ml-auto w-min">
+                <Button
+                  label={t('SHARED.SAVE')}
+                  disabled={!isSaveEnabled}
+                  styles={{
+                    color: '#ffc153',
+                    height: '40px',
+                    padding: '10px 15px',
+                  }}
+                  onClick={handleSave}
+                />
+              </div>
+          </ToggleCollapse>
+          
         </div>
         <ConfirmDialog
           show={showConfirmDialog}

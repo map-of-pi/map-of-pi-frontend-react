@@ -25,7 +25,7 @@
 
 | App Logo  | App Icon |
 | ------------- |:-------------:|
-| <img src="https://i.ibb.co/GTRWzSb/map-of-pi-logo-revised-3.png" alt="map-of-pi-logo-revised-3" border="0">     | <img src="https://i.ibb.co/4FQqXTG/map-of-pi-app-icon-revised-3b-transparent.png" alt="map-of-pi-app-icon-revised-3b-transparent" border="0">
+| <img src="https://i.ibb.co/GTRWzSb/map-of-pi-logo-revised-3.png" alt="map-of-pi-logo-revised-3" border="0">     | <img src="https://i.ibb.co/q0XcWRb/map-of-pi-app-icon.png" alt="map-of-pi-app-icon-transparent" border="0">
 
 ## <a name='tech-stack'></a>Tech Stack 📊
 

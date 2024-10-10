@@ -15,8 +15,6 @@
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "User Preferences",
     "PERSONALIZATION_SUBHEADER": "Personalization",
-    "EMAIL_ADDRESS_FIELD": "Your email address",
-    "PHONE_NUMBER_FIELD": "Your phone number",
     "LANGUAGES": "Languages",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "About Map of Pi",
@@ -40,6 +38,9 @@
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Seller Registration",
       "SELLER_DETAILS_LABEL": "Seller Details",
+      "EMAIL_LABEL": "Email address",
+      "PHONE_NUMBER_LABEL": "Phone number",
+      "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
       "SELLER_DETAILS_PLACEHOLDER": "Description of seller & items for sale with pi price, etc.",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_LABEL": "Reviews Score",
@@ -59,6 +60,7 @@
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Center",
       "VALIDATION": {
+        "EMAIL_VALIDATION": "Please enter a valid email address",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Seller Registration submitted successfully",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated",
         "UNINITIALIZED_SELL_CENTER": "Please set your Sell Center"
@@ -92,6 +94,9 @@
       "BY_REVIEWER": "By {buyer_id}"
     },
     "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Reply to Review",
+      "REPLY_TO_REVIEW_SUBHEADER": "The review you are replying to",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Give reply to review",
       "REPLY_TO_REVIEW_HEADER": "Reply to Review left for {seller_id}",
       "BY_REVIEWER": "By {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
@@ -99,6 +104,7 @@
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
       "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "Error loading review",
         "SELF_REVIEW_PROHIBITED": "Self-review is prohibited"
       }
     }
@@ -188,10 +194,11 @@
     "PIONEER_LABEL": "Pioneer",
     "BUY": "Buy",
     "NAVIGATE": "Navigate",
+    "NO_COMMENT": "No comment provided",
     "SEARCH_CENTER": "Set Search Center",
     "CHECK_REVIEWS": "Check Reviews",
     "SEARCH_REVIEWS": "Search Reviews",
-    "SEARCH_LOADING": "Search Loading...",
+    "SEARCH_LOADING": "Search loading...",
     "REPLY": "Reply",
     "SAVE": "Save",
     "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",
@@ -204,6 +211,7 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Upload photo",
       "UPLOAD_PHOTO_PLACEHOLDER": "Upload image to help attract buyers (PNG, JPG, JPEG, WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Upload an image to support your review (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
       "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {

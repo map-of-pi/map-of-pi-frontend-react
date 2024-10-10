@@ -15,8 +15,6 @@
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Nutifafa le Mawuwo",
     "PERSONALIZATION_SUBHEADER": "Trɔtrɔnye",
-    "EMAIL_ADDRESS_FIELD": "Wò email adrɛs",
-    "PHONE_NUMBER_FIELD": "Wò telefɔn numɔ",
     "LANGUAGES": "Ɖe ŋutɔ",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "Nudɔ Map of Pi",
@@ -40,6 +38,9 @@
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Nàƒé Wòkpɔ̃nɔnyewo",
       "SELLER_DETAILS_LABEL": "Nuxlɔ̃tɔ la gbɔgbɔmɛ",
+      "EMAIL_LABEL": "Nu kɔnta le ema",
+      "PHONE_NUMBER_LABEL": "Nɔ̃nyo ƒe dzesi",
+      "CONTACT_PUBLIC_NOTE": "Nu kɔnta le ema kple nɔ̃nyo ƒe dzesi wogbe na wo.",
       "SELLER_DETAILS_PLACEHOLDER": "Nuxlɔ̃tɔ kple nyateƒea ƒe agblewo tso pi gãwɔna dzi, etc.",
       "REVIEWS_SUMMARY_LABEL": "Sɔlɔɖe ɖe do",
       "REVIEWS_SCORE_LABEL": "Sɔlɔɖe mɔkpla",
@@ -59,6 +60,7 @@
       "SELLER_SETTINGS_LABEL": "Ɖe le Adesɔ",
       "SELLER_SELL_CENTER": "Nàƒé Wòkpɔ̃nɔnyewo",
       "VALIDATION": {
+        "EMAIL_VALIDATION": "Metsɔ ema aɖeke wɔna le ŋgɔ le eme",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Nyatakɔɖu nàtsoɖe tɔ wòɖé yèna nyuie",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nɔviɖewɔwɔ na mi kplɔ nɛ ƒe viwo nɔ anyi nyɔnu ƒe ŋu nɔ anyi",
         "UNINITIALIZED_SELL_CENTER": "Mɛnya ɖe gbe na wo trɔtrɔ wo fiawo tso me"
@@ -92,6 +94,9 @@
       "BY_REVIEWER": "Dze {buyer_id}"
     },
     "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Nye anyi hã nu wò mli",
+      "REPLY_TO_REVIEW_SUBHEADER": "Nudɔla si wòyi dzudzɔmenyã gã eye wò woe vɔna",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Fia dzi yɔ nudɔla me",
       "REPLY_TO_REVIEW_HEADER": "Le ŋutɔ sia sɔlɔɖe ɖe doaɖe {seller_id}",
       "BY_REVIEWER": "Dze {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Xɔ le ŋutɔ sia sɔlɔɖe ɖe doaɖe lɔme",
@@ -99,6 +104,7 @@
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Xɔ le vavaŋuto ŋutɔ kple kple",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Photo na vovɔ",
       "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "Dzudzɔmenyã meyinaa nuwò dzi o",
         "SELF_REVIEW_PROHIBITED": "Wòdzɔ wò nɔnɔ kple wòkplɔ míaɖu o"
       }
     }
@@ -188,6 +194,7 @@
     "PIONEER_LABEL": "Pione",
     "BUY": "Gbe",
     "NAVIGATE": "Nyɔɖo",
+    "NO_COMMENT": "Mekɔme mɛkpɔ",
     "SEARCH_CENTER": "Fetɔ ƒe Gbɔtɔwo",
     "CHECK_REVIEWS": "Vɔ si ɖe tsoɖe",
     "SEARCH_REVIEWS": "Dii reviewwo",
@@ -204,6 +211,7 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Ɖe ŋutɔ vinyo",
       "UPLOAD_PHOTO_PLACEHOLDER": "Zu fɛnyɔwo kple vɔs ɖe amegãwo me fia wò (PNG, JPG, JPEG, WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Dɔ ƒe gbegblẽ nyuie si akpe vovovɔ (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Kpɔ siwo be ɖe ƒe ɣe ŋutɔ foto alo tɔkɔ",
       "SUPPORTS_FILE_MESSAGE": "Ɖe vɔ: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {

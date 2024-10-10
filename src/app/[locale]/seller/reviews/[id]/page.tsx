@@ -44,7 +44,7 @@ function SellerReviews({
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
   const [receiverReviews, setReciverReviews] = useState<ReviewInt[] | null>(null);
-   const [searchLoading, setSearchLoading] = useState<boolean>(false);
+  const [searchLoading, setSearchLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
@@ -70,7 +70,7 @@ function SellerReviews({
             receiverId: feedback.review_receiver_id,
             reviewId: feedback._id,
             reaction,
-            unicode,
+            unicode
           };
         }
         return null; // Ignore irrelevant reviews
@@ -80,13 +80,13 @@ function SellerReviews({
     // Separate into giver and receiver reviews
     return {
       giverReviews: reviews.filter((review) => review.giverId === userId),
-      receiverReviews: reviews.filter((review) => review.receiverId === userId),
+      receiverReviews: reviews.filter((review) => review.receiverId === userId)
     };
   };
 
   useEffect(() => {
     const fetchSellerReviews = async () => {
-      setLoading(true); // Show loader while fetching
+      setLoading(true);
       try {
         logger.info(`Fetching reviews for seller ID: ${userId}`);
         const data = await fetchReviews(userId);
@@ -105,16 +105,16 @@ function SellerReviews({
         logger.error(`Error fetching reviews for seller ID: ${userId}`, { error });
         setError('Error fetching reviews. Please try again later.');
       } finally {
-        setLoading(false); // Hide loader after fetch
+        setLoading(false);
       }
     };
 
     fetchSellerReviews();
-  }, [userId, currentUser]); // Dependencies
+  }, [userId, currentUser]);
 
   // Handle search logic
   const handleSearch = async () => {
-    setSearchLoading(true); // Show loader during search
+    setSearchLoading(true);
     try {
       logger.info(`Searching reviews for seller ID: ${userId} with query: ${searchBarValue}`);
       const data = await fetchReviews(userId, searchBarValue);
@@ -133,11 +133,10 @@ function SellerReviews({
       logger.error(`Error searching reviews for seller ID: ${userId}`, { error });
       setError('Error searching reviews. Please try again later.');
     } finally {
-      setSearchLoading(false); // Hide loader after search
+      setSearchLoading(false);
     }
   };
 
-  
   const handleSearchBarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     logger.debug(`Search bar value changed: ${event.target.value}`);
     setSearchBarValue(event.target.value);
@@ -153,7 +152,7 @@ function SellerReviews({
       {error && <div className="error">{error}</div>}
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto gap-5">
         <h1 className="text-[#333333] text-lg font-semibold md:font-bold md:text-2xl mb-1">
-          {t('Reviews')}
+          {t('SCREEN.REVIEWS.REVIEWS_HEADER')}
         </h1>
 
         {/* Search area */}
@@ -182,7 +181,7 @@ function SellerReviews({
         </div>
         
         {searchLoading && (<div className='text-center text-primary text-lg'>
-          Search Loading....
+          {t('SHARED.SEARCH_LOADING')}
         </div>)        
         }
 
@@ -194,7 +193,7 @@ function SellerReviews({
 
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
           
-        {giverReviews && giverReviews.map((review, index) => (
+          {giverReviews && giverReviews.map((review, index) => (
             <div key={index} className="seller_item_container mb-5">
               <div className="flex justify-between items-start mb-3">
                 {/* Left content */}

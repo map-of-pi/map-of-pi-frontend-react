@@ -15,8 +15,6 @@
   "SIDE_NAVIGATION": {
     "USER_PREFERENCES_HEADER": "Preferencias del Usuario",
     "PERSONALIZATION_SUBHEADER": "Personalización",
-    "EMAIL_ADDRESS_FIELD": "Tu dirección de correo electrónico",
-    "PHONE_NUMBER_FIELD": "Tu número de teléfono",
     "LANGUAGES": "Idiomas",
     "ABOUT": {
       "ABOUT_MAP_OF_PI": "Acerca de Map of Pi",
@@ -40,6 +38,9 @@
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "Registro de Vendedor",
       "SELLER_DETAILS_LABEL": "Detalles del vendedor",
+      "EMAIL_LABEL": "Dirección de correo electrónico",
+      "PHONE_NUMBER_LABEL": "Número de teléfono",
+      "CONTACT_PUBLIC_NOTE": "La dirección de correo electrónico y el número de teléfono serán visibles públicamente.",
       "SELLER_DETAILS_PLACEHOLDER": "Descripción del vendedor y artículos en venta con precio pi, etc.",
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
       "REVIEWS_SCORE_LABEL": "Puntuación de Reseñas",
@@ -59,6 +60,7 @@
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
       "VALIDATION": {
+        "EMAIL_VALIDATION": "Por favor, ingresa una dirección de correo electrónico válida",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro de vendedor enviado con éxito",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "El registro falló porque el usuario no está autenticado",
         "UNINITIALIZED_SELL_CENTER": "Por favor, establezca su Centro de Venta"
@@ -92,6 +94,9 @@
       "BY_REVIEWER": "Por {buyer_id}"
     },
     "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Responder a la reseña",
+      "REPLY_TO_REVIEW_SUBHEADER": "La reseña a la que estás respondiendo",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Dar respuesta a la reseña",
       "REPLY_TO_REVIEW_HEADER": "Responder a la reseña dejada para {seller_id}",
       "BY_REVIEWER": "Por {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Deja tu respuesta a la reseña anterior",
@@ -99,6 +104,7 @@
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
       "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "Error al cargar la reseña",
         "SELF_REVIEW_PROHIBITED": "La autoevaluación está prohibida"
       }
     }
@@ -188,6 +194,7 @@
     "PIONEER_LABEL": "Pionero",
     "BUY": "Comprar",
     "NAVIGATE": "Navegar",
+    "NO_COMMENT": "No se proporcionó comentario",
     "SEARCH_CENTER": "Establecer Centro de Búsqueda",
     "CHECK_REVIEWS": "Ver Reseñas",
     "SEARCH_REVIEWS": "Buscar reseñas",
@@ -204,6 +211,7 @@
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Subir foto",
       "UPLOAD_PHOTO_PLACEHOLDER": "Sube una imagen para ayudar a atraer compradores (PNG, JPG, JPEG, WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Sube una imagen para respaldar tu reseña (PNG, JPG, JPEG, WEBP)",
       "IMAGE_DROP_UPLOAD_MESSAGE": "Suelta tu imagen aquí o busca",
       "SUPPORTS_FILE_MESSAGE": "Soporta: PNG, JPG, JPEG, WEBP",
       "MISC_LABELS": {
