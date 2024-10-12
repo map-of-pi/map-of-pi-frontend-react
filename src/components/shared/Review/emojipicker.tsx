@@ -195,7 +195,7 @@ export default function EmojiPicker(props: any) {
         <TextArea placeholder={t('SCREEN.BUY_FROM_SELLER.ADDITIONAL_COMMENTS_PLACEHOLDER')} 
         value={comments} 
         onChange={handleCommentsChange} 
-        maxLength={100}
+        maxLength={250}
         />
       </div>
       <div className="mb-2">

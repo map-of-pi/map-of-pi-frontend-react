@@ -401,7 +401,7 @@ const SellerRegistrationForm = () => {
                 })}
               </p>
               { !isSaveEnabled ? (
-                <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}?user_name=${dbSeller.name}` : '#'}>
+                <Link href={dbSeller ? `/seller/reviews/${dbSeller.seller_id}?user_name=${currentUser?.pi_username}` : '#'}>
                   <OutlineBtn
                     disabled={!currentUser}
                     label={t('SHARED.CHECK_REVIEWS')}
@@ -410,7 +410,7 @@ const SellerRegistrationForm = () => {
                   <OutlineBtn
                     disabled={!currentUser}
                     label={t('SHARED.CHECK_REVIEWS')}
-                    onClick={()=>handleNavigation(dbSeller ? `/seller/reviews/${dbSeller.seller_id}?user_name=${dbSeller.name}` : '#')}
+                    onClick={()=>handleNavigation(dbSeller ? `/seller/reviews/${dbSeller.seller_id}?user_name=${currentUser?.pi_username}` : '#')}
                   /> )
               }
             </div>
