@@ -119,6 +119,7 @@ export default function EmojiPicker(props: any) {
           const newReview = await createReview(formDataToSend);
           if (newReview) {
             toast.success(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
+            props.setReload(true)
             logger.info('Review submitted successfully');
           }
           resetReview();
@@ -194,7 +195,7 @@ export default function EmojiPicker(props: any) {
         <TextArea placeholder={t('SCREEN.BUY_FROM_SELLER.ADDITIONAL_COMMENTS_PLACEHOLDER')} 
         value={comments} 
         onChange={handleCommentsChange} 
-        maxLength={100}
+        maxLength={250}
         />
       </div>
       <div className="mb-2">
