@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl';
-
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
@@ -9,10 +8,12 @@ import { ISeller, ISellerWithSettings } from '@/constants/types';
 import { fetchSellers } from '@/services/sellerApi';
 import { toLatLngLiteral } from '@/utils/map';
 
-import MapMarkerPopup from './MapMarkerPopup'
-
+import MapMarkerPopup from './MapMarkerPopup';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
+
+// Import the CloseButton
+import { CloseButton } from '../Forms/Buttons/Buttons';
 
 // Utility function to ensure coordinates are within valid ranges
 const sanitizeCoordinates = (lat: number, lng: number) => {
@@ -22,7 +23,11 @@ const sanitizeCoordinates = (lat: number, lng: number) => {
 };
 
 // Function to fetch seller coordinates based on origin, radius, and optional search query
-const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number, searchQuery?: string): Promise<ISellerWithSettings[]> => {
+const fetchSellerCoordinates = async (
+  origin: LatLngTuple,
+  radius: number,
+  searchQuery?: string
+): Promise<ISellerWithSettings[]> => {
   const { lat, lng } = sanitizeCoordinates(origin[0], origin[1]);
   const formattedOrigin = toLatLngLiteral([lat, lng]);
 
@@ -32,12 +37,11 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number, searc
       const [lng, lat] = seller.sell_map_center.coordinates;
       return {
         ...seller,
-        coordinates: [lat, lng] as LatLngTuple
+        coordinates: [lat, lng] as LatLngTuple,
       };
     });
 
     logger.info('Fetched sellers data:', { sellersWithCoordinates });
-    
     return sellersWithCoordinates;
   } catch (error) {
     logger.error('Error fetching seller coordinates:', { error });
@@ -45,29 +49,35 @@ const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number, searc
   }
 };
 
-/* TODO: Analyze to see if we need this function to remove duplicates if sellers are already
-restricted to one shop at the time of registration. */
+// Function to remove duplicate sellers
 const removeDuplicates = (sellers: ISellerWithSettings[]): ISellerWithSettings[] => {
   const uniqueSellers: { [key: string]: ISellerWithSettings } = {};
-  sellers.forEach(seller => {
+  sellers.forEach((seller) => {
     uniqueSellers[seller.seller_id] = seller;
   });
   return Object.values(uniqueSellers);
 };
 
-const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: { 
-  center: LatLngExpression, 
-  zoom: number, 
-  searchQuery: string, 
-  isSearchClicked: boolean, 
-  searchResults: ISeller[] 
+const Map = ({
+  center,
+  zoom,
+  searchQuery,
+  isSearchClicked,
+  searchResults,
+}: {
+  center: LatLngExpression;
+  zoom: number;
+  searchQuery: string;
+  isSearchClicked: boolean;
+  searchResults: ISeller[];
 }) => {
   const t = useTranslations();
   const mapRef = useRef<L.Map | null>(null); // reference to hold the map instance
-  const {isSigningInUser} = useContext(AppContext);
+  const { isSigningInUser } = useContext(AppContext);
 
   const customIcon = L.icon({
-    iconUrl: 'images/icons/map-of-pi-icon.png',
+    iconUrl: '/favicon-32x32.png',
+    iconSize: [32, 32],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
   });
@@ -81,7 +91,26 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
+
+  // Function to handle marker click and zoom in
+  const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
+    if (!mapRef.current) return;
   
+    const map = mapRef.current;
+    const currentZoom = map.getZoom();
+    const targetZoom = Math.max(currentZoom, 9); // Ensure a minimum zoom level
+  
+    // Center the map on the marker's coordinates first
+    map.setView(sellerCoordinates, targetZoom, { animate: true });
+  
+    // Immediately pan the map upwards by 150 pixels without animation after centering
+    const panOffset = L.point(0, -234); // Pan upwards by 150 pixels (negative value for upward movement)
+    map.panBy(panOffset, { animate: false }); // Disable animation to make the movement instant
+  };
+  
+
+  
+
   // Fetch initial seller coordinates when component mounts
   useEffect(() => {
     logger.info('Component mounted, fetching initial coordinates..');
@@ -98,19 +127,18 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   useEffect(() => {
     if (searchQuery) {
       setLoading(true);
-  
-      const sellersWithCoordinates = searchResults
-        .map((seller: any) => {
-          const [lng, lat] = seller.sell_map_center.coordinates;
-          return {
-            ...seller,
-            coordinates: [lat, lng] as LatLngTuple
-          };
-        });
-            
+
+      const sellersWithCoordinates = searchResults.map((seller: any) => {
+        const [lng, lat] = seller.sell_map_center.coordinates;
+        return {
+          ...seller,
+          coordinates: [lat, lng] as LatLngTuple,
+        };
+      });
+
       // Remove duplicates
       const uniqueSellers = removeDuplicates(sellersWithCoordinates);
-  
+
       // Update the sellers state
       setSellers(uniqueSellers);
       setLoading(false);
@@ -120,7 +148,7 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   // Effect to zoom to fit all sellers when the search button is clicked
   useEffect(() => {
     if (isSearchClicked && searchResults.length > 0) {
-      const bounds = L.latLngBounds(searchResults.map(seller => seller.coordinates));
+      const bounds = L.latLngBounds(searchResults.map((seller) => seller.coordinates));
       mapRef.current?.fitBounds(bounds, { padding: [50, 50] }); // zoom to fit all sellers
     }
   }, [isSearchClicked, searchResults]);
@@ -164,15 +192,13 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
 
       logger.info('Fetched additional sellers:', { additionalSellers });
 
-      // Filter sellers within the new bounds, checking if coordinates are defined
       const filteredSellers = additionalSellers.filter(
-        seller => seller.coordinates && newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
+        (seller) => seller.coordinates && newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
       );
       logger.info('Filtered sellers within bounds', { filteredSellers });
 
-      // Filter out sellers that are not within the new bounds from the existing sellers, checking if coordinates are defined
       const remainingSellers = sellers.filter(
-        seller => seller.coordinates && newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
+        (seller) => seller.coordinates && newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
       );
       logger.info('Remaining sellers within bounds:', { remainingSellers });
 
@@ -237,7 +263,6 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
       mapRef.current = map;
     }, [map]);
 
-    // Initially set the view to user location without animation
     useEffect(() => {
       if (position && !initialLocationSet) {
         map.setView(position, zoom, { animate: false });
@@ -246,16 +271,8 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
       }
     }, [position, map, initialLocationSet]);
 
-    return position === null ? null : (
-      <Marker position={position} />
-    );
+    return position === null ? null : <Marker position={position} />;
   }
-
-  // define map boundaries
-  const bounds = L.latLngBounds(
-    L.latLng(-90, -180), // SW corner
-    L.latLng(90, 180)  // NE corner
-  );
 
   return (
     <>
@@ -281,36 +298,70 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
           {t('HOME.LOCATION_SERVICES.DISABLED_LOCATION_SERVICES_MESSAGE')}
         </div>
       )}
-      {isSigningInUser ?
-        <div className='w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0 bg-[#f5f1e6] '>
+      {isSigningInUser ? (
+        <div className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0 bg-[#f5f1e6] ">
           <div className="flex justify-center items-center w-full h-full">
-           <img src="/default.png" width={120} height={140} alt="splashscreen"/>
+            <img src="/default.png" width={120} height={140} alt="splashscreen" />
           </div>
-        </div> :
+        </div>
+      ) : (
         <MapContainer
           center={isLocationAvailable ? origin : [0, 0]}
           zoom={isLocationAvailable ? zoom : 2}
           zoomControl={false}
           minZoom={2}
           maxZoom={18}
-          // maxBounds={bounds}
-          // maxBoundsViscosity={1.0}
-          className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0">
+          className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
+        >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             noWrap={true}
           />
           <LocationMarker />
-          {sellers.map((seller) => (
-            <Marker position={seller.coordinates as LatLngExpression} key={seller.seller_id} icon={customIcon}>
-              <Popup closeButton={false} minWidth={300}>
-                <MapMarkerPopup seller={seller} />
-              </Popup>
-            </Marker>
-          ))}
+          { sellers.map((seller) => (
+  <Marker
+    position={seller.coordinates as LatLngExpression}
+    key={seller.seller_id}
+    icon={customIcon}
+    eventHandlers={{
+      click: () => handleMarkerClick(seller.coordinates as LatLngTuple),
+    }}
+  >
+    <Popup
+      closeButton={false}
+      minWidth={200}
+      maxWidth={250}
+      className="custom-popup"
+      offset={L.point(0, -3)} // Ensures the popup is slightly lower than the marker
+    >
+      <div style={{ position: 'relative', padding: '0px', margin: '0px' }}>
+        {/* Close button */}
+        <button
+          onClick={() => mapRef.current?.closePopup()}
+          style={{
+            position: 'absolute',
+            top: '-15px',
+            right: '-15px',
+            backgroundColor: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '18px',
+            zIndex: 1000,
+          }}
+        >
+          ✕
+        </button>
+        <div style={{ marginTop: '0px', marginBottom: '0px', paddingTop: '5px' }}>
+          <MapMarkerPopup seller={seller} />
+        </div>
+      </div>
+    </Popup>
+  </Marker>
+))}
+
         </MapContainer>
-      }
+      )}
     </>
   );
 };
