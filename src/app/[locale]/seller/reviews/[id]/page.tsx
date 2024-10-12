@@ -48,6 +48,7 @@ function SellerReviews({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [reload, setReload] = useState<boolean>(false);
   const { currentUser } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchBarValue, setSearchBarValue] = useState('');
@@ -89,6 +90,7 @@ function SellerReviews({
       setLoading(true);
       try {
         logger.info(`Fetching reviews for seller ID: ${userId}`);
+        setReload(false)
         const data = await fetchReviews(userId);
 
         if (data && data.length > 0) {
@@ -110,7 +112,7 @@ function SellerReviews({
     };
 
     fetchSellerReviews();
-  }, [userId, currentUser]);
+  }, [userId, currentUser, reload]);
 
   // Handle search logic
   const handleSearch = async () => {
@@ -187,7 +189,7 @@ function SellerReviews({
 
         <ToggleCollapse header={t('SCREEN.REVIEWS.GIVE_REVIEW_SECTION_HEADER')}>
           <div>
-            <EmojiPicker sellerId={userId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} />
+            <EmojiPicker sellerId={userId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} setReload={setReload} />
           </div>
         </ToggleCollapse>
 
