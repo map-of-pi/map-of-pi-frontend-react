@@ -14,13 +14,6 @@ import MapMarkerPopup from './MapMarkerPopup'
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
 
-// Utility function to ensure coordinates are within valid ranges
-const sanitizeCoordinates = (lat: number, lng: number) => {
-  const sanitizedLat = Math.min(Math.max(lat, -90), 90);
-  const sanitizedLng = ((lng + 180) % 360 + 360) % 360 - 180; // Ensures -180 < lng <= 180
-  return { lat: sanitizedLat, lng: sanitizedLng };
-};
-
 // Function to fetch seller coordinates based on bounds and optional search query
 const fetchSellerCoordinates = async (bounds: L.LatLngBounds, searchQuery?: string): Promise<ISellerWithSettings[]> => {
   try {
@@ -188,15 +181,6 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
     } finally {
       setLoading(false);
     }
-  };
-
-  // Function to calculate radius from bounds
-  const calculateRadius = (bounds: L.LatLngBounds, mapInstance: L.Map) => {
-    logger.info(`Calculating radius for bounds: ${bounds.toBBoxString()}`);
-    const northEast = bounds.getNorthEast();
-    const southWest = bounds.getSouthWest();
-    const distance = mapInstance.distance(northEast, southWest) / 2;
-    return distance / 1000; // Convert to kilometers
   };
 
   // Debounced function to handle map interactions
