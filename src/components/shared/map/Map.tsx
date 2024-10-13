@@ -21,13 +21,12 @@ const sanitizeCoordinates = (lat: number, lng: number) => {
   return { lat: sanitizedLat, lng: sanitizedLng };
 };
 
-// Function to fetch seller coordinates based on origin, radius, and optional search query
-const fetchSellerCoordinates = async (origin: LatLngTuple, radius: number, searchQuery?: string): Promise<ISellerWithSettings[]> => {
-  const { lat, lng } = sanitizeCoordinates(origin[0], origin[1]);
-  const formattedOrigin = toLatLngLiteral([lat, lng]);
-
+// Function to fetch seller coordinates based on bounds and optional search query
+const fetchSellerCoordinates = async (bounds: L.LatLngBounds, searchQuery?: string): Promise<ISellerWithSettings[]> => {
   try {
-    const sellersData = await fetchSellers(formattedOrigin, radius, searchQuery);
+    const sellersData = await fetchSellers(bounds, searchQuery);
+
+    // Map the seller data to include coordinates in the desired format
     const sellersWithCoordinates = sellersData?.map((seller: any) => {
       const [lng, lat] = seller.sell_map_center.coordinates;
       return {
@@ -75,7 +74,6 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellers, setSellers] = useState<ISellerWithSettings[]>([]);
   const [origin, setOrigin] = useState(center);
-  const [radius, setRadius] = useState(10);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [locationError, setLocationError] = useState(false);
@@ -137,9 +135,15 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
     try {
       const originLiteral = toLatLngLiteral(origin);
       const originLatLngTuple: LatLngTuple = [originLiteral.lat, originLiteral.lng];
-      let sellersData = await fetchSellerCoordinates(originLatLngTuple, radius, searchQuery);
-      sellersData = removeDuplicates(sellersData);
-      setSellers(sellersData);
+
+      // Fetch the current map bounds
+      const bounds = mapRef.current?.getBounds();
+
+      if (bounds) {
+        let sellersData = await fetchSellerCoordinates(bounds, searchQuery);
+        sellersData = removeDuplicates(sellersData);
+        setSellers(sellersData);
+      }
     } catch (error) {
       logger.error('Failed to fetch initial coordinates:', { error });
       setError('Failed to fetch initial coordinates');
@@ -151,15 +155,13 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   // Function to handle map interactions (zoom and move); lazy-loading implementation
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
     const newCenter = newBounds.getCenter();
-    const newRadius = calculateRadius(newBounds, mapInstance);
-    const largerRadius = newRadius * 2; // Increase radius by 100% for fetching
 
-    logger.info('Handling map interaction with new center and radius:', { newCenter, newRadius });
+    logger.info('Handling map interaction with new center:', { newCenter });
     setLoading(true);
     setError(null);
 
     try {
-      let additionalSellers = await fetchSellerCoordinates([newCenter.lat, newCenter.lng], largerRadius, searchQuery);
+      let additionalSellers = await fetchSellerCoordinates(newBounds, searchQuery);
       additionalSellers = removeDuplicates(additionalSellers);
 
       logger.info('Fetched additional sellers:', { additionalSellers });
@@ -170,7 +172,7 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
       );
       logger.info('Filtered sellers within bounds', { filteredSellers });
 
-      // Filter out sellers that are not within the new bounds from the existing sellers, checking if coordinates are defined
+      // Filter out sellers that are not within the new bounds from the existing sellers
       const remainingSellers = sellers.filter(
         seller => seller.coordinates && newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
       );
