@@ -26,9 +26,9 @@ import logger from '../../../../logger.config.mjs';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
-  iconUrl: '/images/icons/crosshair.png',
-  iconSize: [80, 80],
-  iconAnchor: [40, 40],
+  iconUrl: '/images/icons/map_centers_crosshair.png',
+  iconSize: [100, 100],
+  iconAnchor: [60, 60],
 });
 
 interface MapCenterProps {
