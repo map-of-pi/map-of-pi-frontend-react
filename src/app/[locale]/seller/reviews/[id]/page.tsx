@@ -169,6 +169,7 @@ function SellerReviews({
               value={searchBarValue}
               onChange={handleSearchBarChange}
               ref={inputRef}
+              autoCorrect="off"
             />
           </FormControl>
           <button
