@@ -12,9 +12,6 @@ import MapMarkerPopup from './MapMarkerPopup';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
 
-// Import the CloseButton
-import { CloseButton } from '../Forms/Buttons/Buttons';
-
 // Utility function to ensure coordinates are within valid ranges
 const sanitizeCoordinates = (lat: number, lng: number) => {
   const sanitizedLat = Math.min(Math.max(lat, -90), 90);
@@ -49,6 +46,8 @@ const fetchSellerCoordinates = async (
   }
 };
 
+/* TODO: Analyze to see if we need this function to remove duplicates if sellers are already
+restricted to one shop at the time of registration. */
 // Function to remove duplicate sellers
 const removeDuplicates = (sellers: ISellerWithSettings[]): ISellerWithSettings[] => {
   const uniqueSellers: { [key: string]: ISellerWithSettings } = {};
@@ -76,8 +75,7 @@ const Map = ({
   const { isSigningInUser } = useContext(AppContext);
 
   const customIcon = L.icon({
-    iconUrl: '/favicon-32x32.png',
-    iconSize: [32, 32],
+    iconUrl: 'images/icons/map-of-pi-icon.png',
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
   });
@@ -92,25 +90,28 @@ const Map = ({
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
 
-  // Function to handle marker click and zoom in
+  // Function to handle marker click
   const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
     if (!mapRef.current) return;
   
     const map = mapRef.current;
     const currentZoom = map.getZoom();
-    const targetZoom = Math.max(currentZoom, 9); // Ensure a minimum zoom level
-  
-    // Center the map on the marker's coordinates first
-    map.setView(sellerCoordinates, targetZoom, { animate: true });
-  
-    // Immediately pan the map upwards by 150 pixels without animation after centering
-    const panOffset = L.point(0, -234); // Pan upwards by 150 pixels (negative value for upward movement)
+
+    // Set the view to the seller's coordinates
+    map.setView(sellerCoordinates, currentZoom, { animate: true });
+    // Get the position of the clicked marker
+    const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
+    // Get the width and height of the map container
+    const mapSize = map.getSize();
+    const mapWidth = mapSize.x;
+    const mapHeight = mapSize.y;
+    // Calculate the offsets to center the marker in the map view
+    const panOffset = L.point(mapWidth / 2 - markerPoint.x, mapHeight / 2 - markerPoint.y);
+
+    // Pan the map by the calculated offset
     map.panBy(panOffset, { animate: false }); // Disable animation to make the movement instant
   };
   
-
-  
-
   // Fetch initial seller coordinates when component mounts
   useEffect(() => {
     logger.info('Component mounted, fetching initial coordinates..');
@@ -329,33 +330,13 @@ const Map = ({
     }}
   >
     <Popup
-      closeButton={false}
+      closeButton={true}
       minWidth={200}
       maxWidth={250}
       className="custom-popup"
       offset={L.point(0, -3)} // Ensures the popup is slightly lower than the marker
     >
-      <div style={{ position: 'relative', padding: '0px', margin: '0px' }}>
-        {/* Close button */}
-        <button
-          onClick={() => mapRef.current?.closePopup()}
-          style={{
-            position: 'absolute',
-            top: '-15px',
-            right: '-15px',
-            backgroundColor: 'transparent',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '18px',
-            zIndex: 1000,
-          }}
-        >
-          ✕
-        </button>
-        <div style={{ marginTop: '0px', marginBottom: '0px', paddingTop: '5px' }}>
-          <MapMarkerPopup seller={seller} />
-        </div>
-      </div>
+      <MapMarkerPopup seller={seller} />
     </Popup>
   </Marker>
 ))}

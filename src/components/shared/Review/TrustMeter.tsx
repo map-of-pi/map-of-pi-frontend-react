@@ -26,7 +26,7 @@ const TrustMeter: React.FC<TrustMeterProps> = ({ ratings, hideLabel }) => {
         <div className="flex w-full">
           <Image 
             src={ratingImage} 
-            alt='Rating Image' 
+            alt='Trust-o-meter rating' 
             width={400} 
             height={3}
             className="w-full max-w-xs md:max-w-md lg:max-w-lg"

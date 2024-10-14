@@ -15,6 +15,19 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
       ? seller.image
       : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png';
 
+  const translateSellerCategory = (category: string): string => {
+    switch (category) {
+      case 'activeSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER');
+      case 'inactiveSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER');
+      case 'testSeller':
+        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER');
+      default:
+        return '';
+    }
+  };
+
   logger.info('Rendering MapMarkerPopup for seller:', { seller });
 
   return (
@@ -26,7 +39,7 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
         </h2>
         {seller.seller_type && (
           <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '0px', marginBottom: '4px' }}>
-            {seller.seller_type}
+            {translateSellerCategory(seller.seller_type)}
           </p>
         )}
       </div>
@@ -51,7 +64,6 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '8px' }}>
         <TrustMeter
           ratings={seller.trust_meter_rating}
-          styles={{ width: '40%', height: '60px' }}
         />
       </div>
 
