@@ -226,12 +226,12 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
     </div>
     
     {/* Static Scope - should always be centered */}
-    <div className="absolute z-10 pointer-events-none" style={{ top: '53.5%', left: '49%', transform: 'translate(-50%, -50%)' }}>
+    <div className="absolute z-10 pointer-events-none" style={{ top: '53.5%', left: '48.8%', transform: 'translate(-50%, -50%)' }}>
         <img
           src="/images/icons/scope.png"
           alt="Scope"
           style={{
-            width: '65px',  // Adjust the size of the scope as needed
+            width: '65px',
             height: '65px',
           }}
         />
