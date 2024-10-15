@@ -7,7 +7,6 @@ import { useContext, useState, useRef, ChangeEvent, FormEvent } from 'react';
 import { FormControl, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { fetchSellers } from '@/services/sellerApi';
-
 import logger from '../../../../logger.config.mjs';
 import { AppContext } from '../../../../context/AppContextProvider';
 
@@ -15,6 +14,8 @@ interface searchBarProps {
   onSearch?: (query: string, results: any[]) => void;
   page: 'map_center' | 'default';
 }
+
+const mapRef = useRef<L.Map | null>(null);
 
 const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
   const t = useTranslations();
@@ -43,15 +44,24 @@ const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
     setLoading(true);
     try {
       logger.debug(`Fetching search results for query: "${query}"`);
-      const data = await fetchSellers(undefined, undefined, query);
+      
+      // Get the current bounds from the map reference
+      const mapInstance = mapRef.current;
+      const bounds = mapInstance?.getBounds(); // Fetch bounds from map instance
+  
+      if (!bounds) {
+        throw new Error("Bounds are not available");
+      }
+  
+      const data = await fetchSellers(bounds, query); // Now passing bounds and query
       return data || []; // Return response.data or empty array if undefined
     } catch (error) {
-      logger.error(`Error fetching search results: ${ error }`);
+      logger.error(`Error fetching search results: ${error}`);
       return [];
     } finally {
       setLoading(false);
     }
-  };
+  };  
 
   const handleSubmitSearch = async (event: FormEvent) => {
     event.preventDefault();
