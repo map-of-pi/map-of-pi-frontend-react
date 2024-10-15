@@ -15,17 +15,17 @@ interface searchBarProps {
   page: 'map_center' | 'default';
 }
 
-const mapRef = useRef<L.Map | null>(null);
 
 const SearchBar: React.FC<searchBarProps> = ({ onSearch, page }) => {
   const t = useTranslations();
-
+  
   const [searchBarValue, setSearchBarValue] = useState('');
   const [loading, setLoading] = useState(false);
-
+  
   const { isSigningInUser } = useContext(AppContext);
-
+  
   const inputRef = useRef<HTMLInputElement>(null);
+  const mapRef = useRef<L.Map | null>(null);
 
   const getPlaceholderText = (page: 'map_center' | 'default'): string => {
     return page === 'map_center'
