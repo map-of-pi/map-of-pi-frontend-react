@@ -27,10 +27,11 @@ import logger from '../../../../logger.config.mjs';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
-  iconUrl: '/images/icons/map_centers_crosshair.png',
+  iconUrl: '/images/icons/crosshair.png',
   iconSize: [100, 100],
   iconAnchor: [60, 60],
 });
+
 
 interface MapCenterProps {
   entryType: 'search' | 'sell';
@@ -182,6 +183,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <MapHandler />
         <RecenterAutomatically position={center} />
       </MapContainer>
+      
     <div className="absolute bottom-8 z-10 flex justify-start px-6 right-0 left-0 m-auto pointer-events-none">
       {/* Add Set Map Center Button */}
       <div className="pointer-events-auto">
@@ -200,7 +202,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
       </div>
     </div>
     <div className="absolute bottom-8 z-10 flex justify-end px-6 right-0 left-0 m-auto pointer-events-none">
-    {/* Location Button */}
+    {/* Find Me Button */}
     <div className="pointer-events-auto">
       <Button
         icon={
@@ -222,6 +224,19 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
       />
     </div>
     </div>
+    
+    {/* Static Scope - should always be centered */}
+    <div className="absolute z-10 pointer-events-none" style={{ top: '53.5%', left: '49%', transform: 'translate(-50%, -50%)' }}>
+        <img
+          src="/images/icons/scope.png"
+          alt="Scope"
+          style={{
+            width: '65px',  // Adjust the size of the scope as needed
+            height: '65px',
+          }}
+        />
+      </div>
+
         {showPopup && (
           <ConfirmDialogX
             toggle={() => setShowPopup(false)}
