@@ -44,7 +44,6 @@ function SellerReviews({
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
   const [receiverReviews, setReciverReviews] = useState<ReviewInt[] | null>(null);
-  const [searchLoading, setSearchLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
@@ -111,11 +110,11 @@ function SellerReviews({
     };
 
     fetchSellerReviews();
-  }, [userId, currentUser, reload]);
+  }, [userId, currentUser]);
 
   // Handle search logic
   const handleSearch = async () => {
-    setSearchLoading(true);
+    setReload(true);
     try {
       logger.info(`Searching reviews for seller ID: ${userId} with query: ${searchBarValue}`);
       const data = await fetchReviews(userId, searchBarValue);
@@ -134,7 +133,7 @@ function SellerReviews({
       logger.error(`Error searching reviews for seller ID: ${userId}`, { error });
       setError('Error searching reviews. Please try again later.');
     } finally {
-      setSearchLoading(false);
+      setReload(false);
     }
   };
 
@@ -188,7 +187,7 @@ function SellerReviews({
           </div>
         </ToggleCollapse>      
           <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
-            {searchLoading 
+            {reload 
               ? <Skeleton type='seller_review' />
               : giverReviews && giverReviews.map((review, index) => (
                 <div key={index} className="seller_item_container mb-5">
@@ -233,7 +232,7 @@ function SellerReviews({
           </ToggleCollapse>
  
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_RECEIVED_SECTION_HEADER')} open={true}>
-        {searchLoading
+        {reload
           ? <Skeleton type='seller_review' />
           : receiverReviews && receiverReviews.map((review, index) => (
             <div key={index} className="seller_item_container mb-5">

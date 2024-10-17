@@ -21,7 +21,7 @@ function Navbar() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [checkHomePage, setCheckHomePage] = useState(true);
 
-  const {isSigningInUser} = useContext(AppContext)
+  const {isSigningInUser, reload} = useContext(AppContext)
 
   // check if the current page is the homepage
   useEffect(() => {
@@ -49,7 +49,7 @@ function Navbar() {
       <div
         className={`w-full h-[76.19px] z-500 px-[16px] py-[5px] bg-primary fixed top-0 left-0 right-0 `}>
         <div className="text-center text-secondary text-[1.3rem] whitespace-nowrap">
-          { isSigningInUser ? t('SHARED.LOADING_SCREEN_MESSAGE'): "Map of Pi"}
+          { isSigningInUser || reload ? t('SHARED.LOADING_SCREEN_MESSAGE'): "Map of Pi"}
         </div>
         <div
           className="flex justify-between">
@@ -61,7 +61,7 @@ function Navbar() {
 
             <div className={`${styles.nav_item} ${checkHomePage && 'disabled'}`}>
               <Link href="/">
-                <MdHome size={24} className={`${checkHomePage ? 'text-tertiary' : 'text-secondary'}`} />
+                <MdHome size={24} className={`${'text-tertiary' }`} />
               </Link>
             </div>
           <div className={`${styles.nav_item}`}>
