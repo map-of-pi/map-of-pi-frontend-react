@@ -20,7 +20,6 @@ import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
-import { sellerDefault } from '@/constants/placeholders';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import removeUrls from '../../../../utils/sanitize';
