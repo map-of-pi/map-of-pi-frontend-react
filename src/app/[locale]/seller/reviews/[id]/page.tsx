@@ -222,7 +222,9 @@ function SellerReviews({
                       height={50}
                       className="object-cover rounded-md"
                     />
-                    <p className="text-xl max-w-[50px]">{review.unicode}</p>
+                    <p className="text-xl max-w-[50px]" title={review.reaction}>
+                      {review.unicode}
+                    </p>
                   </div>
                   <div className="flex justify-between items-center">
                     <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
@@ -262,7 +264,9 @@ function SellerReviews({
                           height={50}
                           className="object-cover rounded-md"
                         />
-                        <p className="text-xl max-w-[50px]">{review.unicode}</p>
+                        <p className="text-xl max-w-[50px]" title={review.reaction}>
+                          {review.unicode}
+                        </p>
                       </div>
                       <div className="flex justify-between items-center">
                         <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
