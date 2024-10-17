@@ -150,7 +150,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             <p className="text-sm">
               {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: sellerShopInfo.average_rating.$numberDecimal})}
             </p>
-            <Link href={`/seller/reviews/${sellerId}?buyer=true&user_name=${sellerShopInfo.name}`}>
+            <Link href={`/seller/reviews/${sellerId}?buyer=true&user_name=${sellerInfo?.pi_username}`}>
             <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} />
             </Link>
           </div>

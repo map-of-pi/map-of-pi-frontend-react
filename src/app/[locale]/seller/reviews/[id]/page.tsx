@@ -159,7 +159,7 @@ function SellerReviews({
 
         {/* Search area */}
         <div className='flex gap-3 items-center justify-items-center py-3'>
-          <span>{userName}</span>
+        <span>{t('SHARED.PIONEER_LABEL')}</span>
           <FormControl className="flex-grow mr-2">
             <TextField
               id="search-input"
@@ -167,10 +167,11 @@ function SellerReviews({
               variant="outlined"
               color="success"
               className="bg-none hover:bg-gray-100 w-full rounded-lg"
-              label={t('Search reviews by pioneer username')}
+              placeholder={userName}
               value={searchBarValue}
               onChange={handleSearchBarChange}
               ref={inputRef}
+              autoCorrect="off"
             />
           </FormControl>
           <button
