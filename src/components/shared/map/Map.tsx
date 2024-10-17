@@ -167,8 +167,15 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
       );
       logger.info('Remaining sellers within bounds:', { remainingSellers });
 
+       // Combine remaining and filtered sellers, remove duplicates, and cap at 36 sellers
       const updatedSellers = removeDuplicates([...remainingSellers, ...filteredSellers]);
-      logger.info('Updated sellers array:', { updatedSellers });
+
+      // Log the combined sellers before slicing
+      logger.info('Combined sellers (before capping at 36):', { updatedSellers });
+
+      setSellers(updatedSellers.slice(0, 36)); // Cap the total sellers to 36
+
+      logger.info('Sellers after capping at 36:', { updatedSellers: updatedSellers.slice(0, 36) });
 
       setSellers(updatedSellers);
     } catch (error) {
