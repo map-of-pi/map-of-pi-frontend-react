@@ -53,6 +53,9 @@
           "TEST_SELLER": "Vendedor de prueba"
         }
       },
+      "PRE_FILLED_SELLER_RETAIL_OUTLET_NAME_TEXT": "Introduce el nombre de tu tienda",
+      "PRE_FILLED_SELLER_DESCRIPTION_TEXT": "Introduce una descripción de los artículos disponibles en tu tienda.",
+      "PRE_FILLED_SELLER_ADDRESS_TEXT": "Introduce la dirección de tu tienda",
       "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",
       "SELLER_RETAIL_OUTLET_NAME": "Nombre del punto de venta",
       "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o lugar de venta",
@@ -77,9 +80,9 @@
       "REVIEWS_SCORE_MESSAGE": "Puntuación de Reseñas: {seller_review_rating} de 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Detalles de Contacto del Vendedor",
       "SELLER_USERNAME_LABEL": "Nombre de usuario",
-      "SELLER_PIONEER_ID_LABEL": "ID de Pionero", 
+      "SELLER_PIONEER_ID_LABEL": "ID de Pionero",
       "SELLER_PHONE_NUMBER_LABEL": "Número de teléfono",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico" 
+      "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Reseñas",
@@ -123,7 +126,6 @@
       "SECTIONS": {
         "HEADER_1": "Introducción",
         "CONTENT_1": "Bienvenido a la app Map of Pi, desarrollada por el equipo de Map of Pi en colaboración con la Comunidad Pi. Esta Política de Privacidad describe cómo recopilamos, usamos, divulgamos y protegemos tu información personal cuando usas nuestra aplicación móvil.",
-        
         "HEADER_2": "Información que Recopilamos",
         "SUBHEADER_2_1": "Información del Usuario",
         "CONTENT_2_1_1": "Cuando te registras como usuario, podemos recopilar tu nombre, dirección de correo electrónico, nombre de usuario y otros detalles relevantes.",
@@ -131,7 +133,6 @@
         "SUBHEADER_2_2": "Información del Vendedor",
         "CONTENT_2_2_1": "Los vendedores que se registren en la plataforma pueden necesitar proporcionar información del Vendedor, incluyendo nombre del Vendedor, ubicación y detalles de contacto.",
         "CONTENT_2_2_2": "Un Vendedor puede ser un negocio o un individuo privado.",
-
         "HEADER_3": "Cómo Usamos Tu Información",
         "SUBHEADER_3_1": "Provisión de Servicios",
         "CONTENT_3_1_1": "Usamos tu información para proporcionar y mejorar los servicios de la app Map of Pi, incluyendo funcionalidades para usuarios y vendedores.",
@@ -139,22 +140,17 @@
         "CONTENT_3_2_1": "Podemos usar tu información de contacto para enviarte actualizaciones, notificaciones y mensajes promocionales relacionados con la app Map of Pi.",
         "SUBHEADER_3_3": "Análisis",
         "CONTENT_3_3_1": "Recopilamos y analizamos datos para mejorar el rendimiento, las características y la funcionalidad de la app.",
-
         "HEADER_4": "Compartir Tu Información",
         "SUBHEADER_4_1": "Con Vendedores",
         "CONTENT_4_1_1": "La información del usuario puede ser compartida con los vendedores para el cumplimiento de pedidos y propósitos de comunicación.",
         "SUBHEADER_4_2": "Con Terceros",
         "CONTENT_4_2_1": "Podemos compartir información con proveedores de servicios de terceros para la funcionalidad de la app, análisis y procesamiento de pagos.",
-
         "HEADER_5": "Medidas de Seguridad",
         "CONTENT_5_1": "Empleamos medidas de seguridad estándar de la industria para proteger tu información. Sin embargo, ningún método de transmisión por internet o almacenamiento electrónico es completamente seguro.",
-
         "HEADER_6": "Tus Opciones",
         "CONTENT_6_1": "Puedes actualizar la información de tu cuenta a través de la configuración de la app. Puedes eliminar tu cuenta de Map of Pi eliminando tu cuenta de Pi Network y luego eligiendo la opción de eliminar tus datos de Map of Pi cuando accedas a Map of Pi la próxima vez. Puedes optar por no recibir comunicaciones promocionales.",
-
         "HEADER_7": "Cambios en Esta Política de Privacidad",
         "CONTENT_7_1": "Podemos actualizar esta Política de Privacidad según sea necesario. La versión más reciente estará publicada en nuestro sitio web o dentro de la app.",
-
         "HEADER_8": "Contáctanos",
         "CONTENT_8_1": "Si tienes alguna pregunta o inquietud sobre esta Política de Privacidad, por favor contáctanos enviando un correo electrónico a"
       }
@@ -166,24 +162,18 @@
       "SECTIONS": {
         "HEADER_1": "Aceptación de los Términos",
         "CONTENT_1_1": "Bienvenido a la app Map of Pi, desarrollada por el equipo de Map of Pi en colaboración con la Comunidad Pi. Al usar esta app, aceptas cumplir con estos Términos de Servicio, así como con nuestra Política de Privacidad.",
-        
         "HEADER_2": "Uso de la App",
         "CONTENT_2_1": "Aceptas usar la app Map of Pi en cumplimiento con todas las leyes y regulaciones aplicables.",
-        "CONTENT_2_2": "No deberás usar la app para ningún propósito ilegal o prohibido, ni de ninguna manera que pueda dañar, deshabilitar, sobrecargar o deteriorar la app.", 
-        "CONTENT_2_3": "Para usar Map of Pi debes estar registrado como usuario pionero de la Pi Network.", 
-
+        "CONTENT_2_2": "No deberás usar la app para ningún propósito ilegal o prohibido, ni de ninguna manera que pueda dañar, deshabilitar, sobrecargar o deteriorar la app.",
+        "CONTENT_2_3": "Para usar Map of Pi debes estar registrado como usuario pionero de la Pi Network.",
         "HEADER_3": "Propiedad Intelectual",
         "CONTENT_3_1": "La app Map of Pi y todo el contenido, características y funcionalidades son propiedad de Map of Pi y están protegidos por derechos de autor, marcas comerciales y otras leyes de propiedad intelectual.",
-
         "HEADER_4": "Limitación de Responsabilidad",
         "CONTENT_4_1": "Map of Pi no será responsable por ningún daño directo, indirecto, incidental, especial o consecuente que surja de o en cualquier manera esté relacionado con el uso de la app Map of Pi.",
-
         "HEADER_5": "Indemnización",
         "CONTENT_5_1": "Aceptas indemnizar y mantener indemne a Map of Pi y sus afiliados, oficiales, directores, empleados y agentes de cualquier reclamo, responsabilidad, daño, pérdida o gasto (incluidos los honorarios de abogados) que surja de o esté relacionado de alguna manera con tu uso de la app Map of Pi.",
-
         "HEADER_6": "Ley Aplicable",
         "CONTENT_6_1": "Estos Términos de Servicio se regirán e interpretarán de acuerdo con la ley de Inglaterra y Gales sin tener en cuenta sus disposiciones sobre conflictos de leyes, incluyendo cualquier disputa o reclamo que surja de o esté relacionado con su objeto o formación (incluyendo disputas o reclamos no contractuales).",
-
         "HEADER_7": "Cambios en Estos Términos",
         "CONTENT_7_1": "Nos reservamos el derecho de actualizar o modificar estos Términos de Servicio en cualquier momento sin previo aviso. La versión más reciente estará publicada en nuestro sitio web o dentro de la app."
       }
