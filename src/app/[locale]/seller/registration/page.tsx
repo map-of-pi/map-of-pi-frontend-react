@@ -421,53 +421,58 @@ const SellerRegistrationForm = () => {
           <ToggleCollapse
             header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}
             open={false}>
-              <div className="text-sm mb-3">
-                <span className="font-bold">
-                  {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
-                </span>
-                <span>{currentUser ? currentUser.pi_username : ''}</span>
-              </div>
-              <div className="text-sm mb-3">
-                <span className="font-bold">
-                  {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
-                </span>
-                <span>{currentUser ? currentUser.user_name : ''}</span>
-              </div>
-              <div className="mb-4">
-                <TelephoneInput
-                  label={t('SCREEN.SELLER_REGISTRATION.PHONE_NUMBER_LABEL')}
-                  value={formData.phone_number}
-                  name="phone_number"
-                  onChange={(value: any) => handleChange({ name: 'phone_number', value })}
-                />
-              </div>
-              <div className="mb-4">
-                <Input
-                  label={t('SCREEN.SELLER_REGISTRATION.EMAIL_LABEL')}
-                  placeholder=""
-                  type="email"
-                  name="email"
-                  value={formData.email ? formData.email: ''}
-                  onChange={handleChange}
-                />
-              </div>
-              <p className="text-gray-400 text-sm -mt-3 mb-5">
-                {t('SCREEN.SELLER_REGISTRATION.CONTACT_PUBLIC_NOTE')}
-              </p>
-              <div className="mb-4 mt-3 ml-auto w-min">
-                <Button
-                  label={t('SHARED.SAVE')}
-                  disabled={!isSaveEnabled}
-                  styles={{
-                    color: '#ffc153',
-                    height: '40px',
-                    padding: '10px 15px',
-                  }}
-                  onClick={handleSave}
-                />
-              </div>
+            <div className="text-sm mb-3">
+              <span className="font-bold">
+                {t('SHARED.USER_INFORMATION.PI_USERNAME_LABEL') + ': '}
+              </span>
+              <span>{currentUser ? currentUser.pi_username : ''}</span>
+            </div>
+            <div className="text-sm mb-3">
+              <span className="font-bold">
+                {t('SHARED.USER_INFORMATION.NAME_LABEL') + ': '}
+              </span>
+              <span>
+                {dbUserSettings
+                  ? dbUserSettings.user_name
+                  : currentUser?.user_name}
+              </span>
+            </div>
+            <div className="mb-4">
+              <TelephoneInput
+                label={t('SCREEN.SELLER_REGISTRATION.PHONE_NUMBER_LABEL')}
+                value={formData.phone_number}
+                name="phone_number"
+                onChange={(value: any) =>
+                  handleChange({ name: 'phone_number', value })
+                }
+              />
+            </div>
+            <div className="mb-4">
+              <Input
+                label={t('SCREEN.SELLER_REGISTRATION.EMAIL_LABEL')}
+                placeholder=""
+                type="email"
+                name="email"
+                value={formData.email ? formData.email : ''}
+                onChange={handleChange}
+              />
+            </div>
+            <p className="text-gray-400 text-sm -mt-3 mb-5">
+              {t('SCREEN.SELLER_REGISTRATION.CONTACT_PUBLIC_NOTE')}
+            </p>
+            <div className="mb-4 mt-3 ml-auto w-min">
+              <Button
+                label={t('SHARED.SAVE')}
+                disabled={!isSaveEnabled}
+                styles={{
+                  color: '#ffc153',
+                  height: '40px',
+                  padding: '10px 15px',
+                }}
+                onClick={handleSave}
+              />
+            </div>
           </ToggleCollapse>
-          
         </div>
         <ConfirmDialog
           show={showConfirmDialog}
