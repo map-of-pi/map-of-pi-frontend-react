@@ -11,4 +11,3 @@ export const sellerPrompt = {
     description: 'I sell items via Pay with Pi.',
     image: '/android-chrome-192x192.png'  // change to map of pi logo image
 }
-

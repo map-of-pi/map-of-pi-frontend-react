@@ -53,11 +53,9 @@
           "TEST_SELLER": "Test seller"
         }
       },
-      "PRE_FILLED_SELLER_RETAIL_OUTLET_NAME_TEXT": "Enter your store name",
-      "PRE_FILLED_SELLER_DESCRIPTION_TEXT": "Enter a description of the items available in your shop",
-      "PRE_FILLED_SELLER_ADDRESS_TEXT": "1234 Street Name, Town, City",
       "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
       "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
+      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "Name of your shop",
       "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Help your buyers find you by adding address or a description of where you are selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",

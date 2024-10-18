@@ -217,7 +217,7 @@ const SellerRegistrationForm = () => {
     // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
-      return toast.error( t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
+      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
     }
 
     preFilledFields.forEach(({ fieldName, preFilledTextKey }) => {
@@ -277,9 +277,9 @@ const SellerRegistrationForm = () => {
   };
 
   const translatedPreFilledText = {
-    'retail-outlet-name': t('SCREEN.SELLER_REGISTRATION.PRE_FILLED_SELLER_RETAIL_OUTLET_NAME_TEXT'),
-    'seller-description': t('SCREEN.SELLER_REGISTRATION.PRE_FILLED_SELLER_DESCRIPTION_TEXT'),
-    'seller-address': t('SCREEN.SELLER_REGISTRATION.PRE_FILLED_SELLER_ADDRESS_TEXT'),
+    'retail-outlet-name': t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_PLACEHOLDER'),
+    'seller-description': t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER'),
+    'seller-address': t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER'),
   };
 
   const preFilledFields: {

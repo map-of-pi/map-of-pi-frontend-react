@@ -53,11 +53,9 @@
           "TEST_SELLER": "Vendedor de prueba"
         }
       },
-      "PRE_FILLED_SELLER_RETAIL_OUTLET_NAME_TEXT": "Introduce el nombre de tu tienda",
-      "PRE_FILLED_SELLER_DESCRIPTION_TEXT": "Introduce una descripción de los artículos disponibles en tu tienda.",
-      "PRE_FILLED_SELLER_ADDRESS_TEXT": "1234 Nombre de la calle, pueblo, ciudad",
       "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",
       "SELLER_RETAIL_OUTLET_NAME": "Nombre del punto de venta",
+      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "Nombre de tu tienda",
       "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o lugar de venta",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Ayuda a tus compradores a encontrarte agregando una dirección o una descripción de dónde estás vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",

@@ -53,11 +53,9 @@
           "TEST_SELLER": "Mai siyarwa gwaji"
         }
       },
-      "PRE_FILLED_SELLER_RETAIL_OUTLET_NAME_TEXT": "Shigar da sunan kantin sayar da ku",
-      "PRE_FILLED_SELLER_DESCRIPTION_TEXT": "Shigar da bayanin abubuwan da ke cikin shagon ku",
-      "PRE_FILLED_SELLER_ADDRESS_TEXT": "1234 Sunan Titin, Garin, Birni",
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
       "SELLER_RETAIL_OUTLET_NAME": "Sunan mashaya",
+      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "Sunan shagonka",
       "SELLER_ADDRESS_LOCATION_LABEL": "Adireshi ko inda kake siyarwa",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Taimaka wa masu saye su same ka ta hanyar ƙara adireshi ko bayanin inda kake siyarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
