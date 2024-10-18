@@ -229,6 +229,8 @@ const SellerRegistrationForm = () => {
     // hardcode the value until the form element is built
     formDataToSend.append('order_online_enabled_pref', 'false');
 
+    const mapCenter = dbSeller?.sell_map_center || dbUserSettings?.search_map_center;
+    formDataToSend.append('sell_map_center', JSON.stringify(mapCenter));
     // Add the image if it exists
     if (file) {
       formDataToSend.append('image', file);
