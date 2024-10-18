@@ -23,16 +23,20 @@ interface IAppContextProps {
   currentUser: IUser | null;
   setCurrentUser: React.Dispatch<SetStateAction<IUser | null>>;
   registerUser: () => void;
-  autoLoginUser:()=> void,
-  isSigningInUser: boolean
+  autoLoginUser: ()=> void;
+  isSigningInUser: boolean;
+  reload: boolean;
+  setReload: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const initialState: IAppContextProps = {
   currentUser: null,
   setCurrentUser: () => {},
   registerUser: () => { },
-  autoLoginUser:()=> {},
-  isSigningInUser:false
+  autoLoginUser: ()=> {},
+  isSigningInUser: false,
+  reload: false,
+  setReload: () => {},
 };
 
 export const AppContext = createContext<IAppContextProps>(initialState);
@@ -45,6 +49,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const t = useTranslations();
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   const [isSigningInUser, setIsSigningInUser] = useState(false);
+  const [reload, setReload] = useState(false);
 
   const registerUser = async () => {
     logger.info('Initializing Pi SDK for user registration.');
@@ -111,7 +116,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser }}>
+    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser, reload, setReload }}>
       {children}
     </AppContext.Provider>
   );

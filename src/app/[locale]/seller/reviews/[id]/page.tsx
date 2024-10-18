@@ -10,26 +10,12 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
-import { IReviewOutput } from '@/constants/types';
+import { IReviewOutput, ReviewInt } from '@/constants/types';
 import SearchIcon from '@mui/icons-material/Search';
 import { FormControl, TextField } from '@mui/material';
 import { fetchReviews } from '@/services/reviewsApi';
 import { resolveDate } from '@/utils/date';
 import logger from '../../../../../../logger.config.mjs';
-
-interface ReviewInt {
-  heading: string;
-  date: string;
-  time: string;
-  giver: string;
-  receiver: string;
-  reviewId: string;
-  receiverId: string;
-  giverId: string;
-  reaction: string;
-  unicode: string;
-  image: string;
-}
 
 function SellerReviews({
   params,
@@ -43,12 +29,11 @@ function SellerReviews({
   const userId = params.id;
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
-  const [receiverReviews, setReciverReviews] = useState<ReviewInt[] | null>(null);
-  const [searchLoading, setSearchLoading] = useState<boolean>(false);
+  const [receiverReviews, setReceiverReviews] = useState<ReviewInt[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-  const { currentUser } = useContext(AppContext);
+  const { currentUser, setReload, reload } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchBarValue, setSearchBarValue] = useState('');
 
@@ -86,7 +71,7 @@ function SellerReviews({
 
   useEffect(() => {
     const fetchSellerReviews = async () => {
-      setLoading(true);
+      setError(null);
       try {
         logger.info(`Fetching reviews for seller ID: ${userId}`);
         const data = await fetchReviews(userId);
@@ -95,26 +80,28 @@ function SellerReviews({
           logger.info(`Fetched ${data.length} reviews for seller ID: ${userId}`);
           const { giverReviews, receiverReviews } = processReviews(data, userId);
           setGiverReviews(giverReviews);
-          setReciverReviews(receiverReviews);
+          setReceiverReviews(receiverReviews);
         } else {
           logger.warn(`No reviews found for seller ID: ${userId}`);
           setGiverReviews([]);
-          setReciverReviews([]);
+          setReceiverReviews([]);
         }
       } catch (error) {
         logger.error(`Error fetching reviews for seller ID: ${userId}`, { error });
         setError('Error fetching reviews. Please try again later.');
       } finally {
         setLoading(false);
+        setReload(false);
       }
     };
 
     fetchSellerReviews();
-  }, [userId, currentUser]);
+  }, [userId, currentUser, reload]);
 
   // Handle search logic
   const handleSearch = async () => {
-    setSearchLoading(true);
+    setReload(true);
+    setError(null);
     try {
       logger.info(`Searching reviews for seller ID: ${userId} with query: ${searchBarValue}`);
       const data = await fetchReviews(userId, searchBarValue);
@@ -123,17 +110,17 @@ function SellerReviews({
         logger.info(`Found ${data.length} reviews for seller ID: ${userId}`);
         const { giverReviews, receiverReviews } = processReviews(data, userId);
         setGiverReviews(giverReviews);
-        setReciverReviews(receiverReviews);
+        setReceiverReviews(receiverReviews);
       } else {
         logger.warn(`No reviews found for seller ID: ${userId} with query: ${searchBarValue}`);
         setGiverReviews([]);
-        setReciverReviews([]);
+        setReceiverReviews([]);
       }
     } catch (error) {
       logger.error(`Error searching reviews for seller ID: ${userId}`, { error });
       setError('Error searching reviews. Please try again later.');
     } finally {
-      setSearchLoading(false);
+      setReload(false);
     }
   };
 
@@ -149,7 +136,7 @@ function SellerReviews({
 
   return (
     <>
-      {error && <div className="error">{error}</div>}
+      {error && <div className="error text-center text-red-400">{error}</div>}
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto gap-5">
         <h1 className="text-[#333333] text-lg font-semibold md:font-bold md:text-2xl mb-1">
           {t('SCREEN.REVIEWS.REVIEWS_HEADER')}
@@ -157,7 +144,7 @@ function SellerReviews({
 
         {/* Search area */}
         <div className='flex gap-3 items-center justify-items-center py-3'>
-        <span>{t('SHARED.PIONEER_LABEL')}</span>
+          <span>{t('SHARED.PIONEER_LABEL')}</span>
           <FormControl className="flex-grow mr-2">
             <TextField
               id="search-input"
@@ -180,21 +167,61 @@ function SellerReviews({
             <SearchIcon className="text-[#ffc153]" />
           </button>
         </div>
-        
-        {searchLoading && (<div className='text-center text-primary text-lg'>
-          {t('SHARED.SEARCH_LOADING')}
-        </div>)        
-        }
 
         <ToggleCollapse header={t('SCREEN.REVIEWS.GIVE_REVIEW_SECTION_HEADER')}>
           <div>
-            <EmojiPicker sellerId={userId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} />
+            <EmojiPicker sellerId={userId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} setReload={setReload} />
           </div>
-        </ToggleCollapse>
-
+        </ToggleCollapse>      
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
-          
-          {giverReviews && giverReviews.map((review, index) => (
+          {reload 
+            ? <Skeleton type='seller_review' />
+            : giverReviews && giverReviews.map((review, index) => (
+              <div key={index} className="seller_item_container mb-5">
+                <div className="flex justify-between items-start mb-3">
+                  {/* Left content */}
+                  <div className="flex-grow">
+                    <p className="text-primary text-sm">
+                      {review.giver} {' -> '}
+                      <span className="text-primary text-sm">{review.receiver}</span>
+                    </p>
+                    <p className="text-md break-words">{review.heading}</p>
+                  </div>
+
+                  {/* Right content */}
+                  <div className="flex flex-col items-end space-y-2">
+                    <div className="text-[#828282] text-sm text-right whitespace-nowrap">
+                      <p>{review.date}</p>
+                      <p>{review.time}</p>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                      <Image
+                        src={review.image}
+                        alt="emoji image"
+                        width={50}
+                        height={50}
+                        className="object-cover rounded-md"
+                      />
+                      <p className="text-xl max-w-[50px]" title={review.reaction}>
+                        {review.unicode}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
+                        <OutlineBtn label={t('SHARED.REPLY')} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </ToggleCollapse>
+ 
+        <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_RECEIVED_SECTION_HEADER')} open={true}>
+        {reload
+          ? <Skeleton type='seller_review' />
+          : receiverReviews && receiverReviews.map((review, index) => (
             <div key={index} className="seller_item_container mb-5">
               <div className="flex justify-between items-start mb-3">
                 {/* Left content */}
@@ -220,7 +247,9 @@ function SellerReviews({
                       height={50}
                       className="object-cover rounded-md"
                     />
-                    <p className="text-xl max-w-[50px]">{review.unicode}</p>
+                    <p className="text-xl max-w-[50px]" title={review.reaction}>
+                      {review.unicode}
+                    </p>
                   </div>
                   <div className="flex justify-between items-center">
                     <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
@@ -230,47 +259,8 @@ function SellerReviews({
                 </div>
               </div>
             </div>
-          ))}
-        </ToggleCollapse>
-          
-        <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_RECEIVED_SECTION_HEADER')} open={true}>
-        {receiverReviews && receiverReviews.map((review, index) => (
-            <div key={index} className="seller_item_container mb-5">
-              <div className="flex justify-between items-start mb-3">
-                    {/* Left content */}
-                    <div className="flex-grow">
-                      <p className="text-primary text-sm">
-                        {review.giver} {' -> '}
-                        <span className="text-primary text-sm">{review.receiver}</span>
-                      </p>
-                      <p className="text-md break-words">{review.heading}</p>
-                    </div>
-
-                    {/* Right content */}
-                    <div className="flex flex-col items-end space-y-2">
-                      <div className="text-[#828282] text-sm text-right whitespace-nowrap">
-                        <p>{review.date}</p>
-                        <p>{review.time}</p>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <Image
-                          src={review.image}
-                          alt="emoji image"
-                          width={50}
-                          height={50}
-                          className="object-cover rounded-md"
-                        />
-                        <p className="text-xl max-w-[50px]">{review.unicode}</p>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
-                          <OutlineBtn label={t('SHARED.REPLY')} />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-            </div>
-          ))}
+          ))
+        }
         </ToggleCollapse>
       </div>
     </>

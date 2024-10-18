@@ -48,13 +48,14 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "Seller type",
         "SELLER_TYPE_OPTIONS": {
-          "ACTIVE_SELLER": "Active seller", 
-          "INACTIVE_SELLER": "Inactive seller", 
+          "ACTIVE_SELLER": "Active seller",
+          "INACTIVE_SELLER": "Inactive seller",
           "TEST_SELLER": "Test seller"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
       "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
+      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "Name of your shop",
       "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Help your buyers find you by adding address or a description of where you are selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
@@ -78,9 +79,9 @@
       "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Seller Contact Details",
       "SELLER_USERNAME_LABEL": "Username",
-      "SELLER_PIONEER_ID_LABEL": "Pioneer ID", 
+      "SELLER_PIONEER_ID_LABEL": "Pioneer ID",
       "SELLER_PHONE_NUMBER_LABEL": "Phone number",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Email address" 
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email address"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Reviews",
@@ -105,7 +106,7 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
       "VALIDATION": {
         "LOADING_REVIEW_FAILURE": "Error loading review",
-        "SELF_REVIEW_PROHIBITED": "Self-review is prohibited"
+        "SELF_REVIEW_NOT_POSSIBLE": "Self-review is not possible"
       }
     }
   },
@@ -124,7 +125,6 @@
       "SECTIONS": {
         "HEADER_1": "Introduction",
         "CONTENT_1": "Welcome to the Map of Pi app, developed by the Map of Pi team in collaboration with the Pi Community. This Privacy Policy outlines how we collect, use, disclose, and protect your personal information when you use our mobile application.",
-        
         "HEADER_2": "Information We Collect",
         "SUBHEADER_2_1": "User Information",
         "CONTENT_2_1_1": "When you register as a user, we may collect your name, email address, username, and other relevant details.",
@@ -132,7 +132,6 @@
         "SUBHEADER_2_2": "Seller Information",
         "CONTENT_2_2_1": "Sellers registering on the platform may be required to provide Seller information, including Seller name, location, and contact details.",
         "CONTENT_2_2_2": "A Seller may be a business or a private individual.",
-
         "HEADER_3": "How We Use Your Information",
         "SUBHEADER_3_1": "Providing Services",
         "CONTENT_3_1_1": "We use your information to provide and enhance the Map of Pi app services, including user and Seller functionalities.",
@@ -140,22 +139,17 @@
         "CONTENT_3_2_1": "We may use your contact information to send you updates, notifications, and promotional messages related to the Map of Pi app.",
         "SUBHEADER_3_3": "Analytics",
         "CONTENT_3_3_1": "We collect and analyze data to improve the performance, features, and functionality of the app.",
-
         "HEADER_4": "Sharing Your Information",
         "SUBHEADER_4_1": "With Sellers",
         "CONTENT_4_1_1": "User information may be shared with Sellers for order fulfillment and communication purposes.",
         "SUBHEADER_4_2": "With Third Parties",
         "CONTENT_4_2_1": "We may share information with third-party service providers for app functionality, analytics, and payment processing.",
-
         "HEADER_5": "Security Measures",
         "CONTENT_5_1": "We employ industry-standard security measures to protect your information. However, no method of transmission over the internet or electronic storage is completely secure.",
-
         "HEADER_6": "Your Choices",
         "CONTENT_6_1": "You can update your account information through the app settings. You may delete your Map of Pi account by deleting your Pi Network account and then choosing the option to delete your Map of Pi data when you next access Map of Pi. You may opt-out of promotional communications.",
-
         "HEADER_7": "Changes to This Privacy Policy",
         "CONTENT_7_1": "We may update this Privacy Policy as necessary. The latest version will be posted on our website or within the app.",
-
         "HEADER_8": "Contact Us",
         "CONTENT_8_1": "If you have any questions or concerns about this Privacy Policy, please contact us by sending an email to"
       }
@@ -167,24 +161,18 @@
       "SECTIONS": {
         "HEADER_1": "Acceptance of Terms",
         "CONTENT_1_1": "Welcome to the Map of Pi app, developed by the Map of Pi team in collaboration with the Pi Community. By using this app, you agree to abide by these Terms of Service, as well as our Privacy Policy.",
-        
         "HEADER_2": "Use of the App",
         "CONTENT_2_1": "You agree to use the Map of Pi app in compliance with all applicable laws and regulations.",
-        "CONTENT_2_2": "You shall not use the app for any unlawful or prohibited purpose, or in any way that could damage, disable, overburden, or impair the app.", 
-        "CONTENT_2_3": "To use Map of Pi you must be registered as a pioneer user of the Pi Network.", 
-
+        "CONTENT_2_2": "You shall not use the app for any unlawful or prohibited purpose, or in any way that could damage, disable, overburden, or impair the app.",
+        "CONTENT_2_3": "To use Map of Pi you must be registered as a pioneer user of the Pi Network.",
         "HEADER_3": "Intellectual Property",
         "CONTENT_3_1": "The Map of Pi app and all content, features, and functionality are owned by Map of Pi and are protected by copyright, trademark, and other intellectual property laws.",
-
         "HEADER_4": "Limitation of Liability",
         "CONTENT_4_1": "Map of Pi shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with the use of the Map of Pi app.",
-
         "HEADER_5": "Indemnification",
         "CONTENT_5_1": "You agree to indemnify and hold harmless Map of Pi and its affiliates, officers, directors, employees, and agents from any and all claims, liabilities, damages, losses, or expenses (including attorneys' fees) arising out of or in any way related to your use of the Map of Pi app.",
-
         "HEADER_6": "Governing Law",
         "CONTENT_6_1": "These Terms of Service shall be governed by and construed in accordance with the law of England and Wales without regard to their conflict of law provisions, including any dispute or claim arising out of or in connection with their subject matter or formation (including non-contractual disputes or claims).",
-
         "HEADER_7": "Changes to These Terms",
         "CONTENT_7_1": "We reserve the right to update or modify these Terms of Service at any time without prior notice. The latest version will be posted on our website or within the app."
       }
@@ -206,7 +194,7 @@
       "PI_USERNAME_LABEL": "Pi username",
       "NAME_LABEL": "Name",
       "PHONE_NUMBER_LABEL": "Phone number",
-      "EMAIL_LABEL": "Email" 
+      "EMAIL_LABEL": "Email"
     },
     "PHOTO": {
       "UPLOAD_PHOTO_LABEL": "Upload photo",
@@ -246,7 +234,7 @@
     "LOADING_SCREEN_MESSAGE": "Loading data...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Submission failed because user is not authenticated",
-      "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  
+      "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"
     }
   }
 }
