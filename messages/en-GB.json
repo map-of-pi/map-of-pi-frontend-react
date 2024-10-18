@@ -104,7 +104,7 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
       "VALIDATION": {
         "LOADING_REVIEW_FAILURE": "Error loading review",
-        "SELF_REVIEW_PROHIBITED": "Self-review is prohibited"
+        "SELF_REVIEW_NOT_POSSIBLE": "Self-review is not possible"
       }
     }
   },

@@ -104,7 +104,7 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "피드백 사진 업로드",
       "VALIDATION": {
         "LOADING_REVIEW_FAILURE": "리뷰 로딩 오류",
-        "SELF_REVIEW_PROHIBITED": "자기 평가는 금지되어 있습니다"
+        "SELF_REVIEW_NOT_POSSIBLE": "자기 평가가 불가능합니다"
       }
     }
   },
