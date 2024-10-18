@@ -71,7 +71,6 @@ function SellerReviews({
 
   useEffect(() => {
     const fetchSellerReviews = async () => {
-      // setLoading(true);
       setError(null);
       try {
         logger.info(`Fetching reviews for seller ID: ${userId}`);
