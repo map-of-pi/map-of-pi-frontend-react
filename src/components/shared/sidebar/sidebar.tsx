@@ -370,7 +370,7 @@ function Sidebar(props: any) {
               <h3 className={`font-bold text-sm text-nowrap`}>Trust-o-meter</h3>
               <TrustMeter ratings={dbUserSettings ? dbUserSettings.trust_meter_rating : 100} hideLabel={true} />
             </div>             
-            <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}` : '#'}>
+            <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}?user_name=${currentUser.user_name}` : '#'}>
               <OutlineBtn
                 label={t('SHARED.CHECK_REVIEWS')}
                 styles={{
