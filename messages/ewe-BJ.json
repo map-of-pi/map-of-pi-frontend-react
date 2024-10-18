@@ -104,7 +104,7 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Photo na vovɔ",
       "VALIDATION": {
         "LOADING_REVIEW_FAILURE": "Dzudzɔmenyã meyinaa nuwò dzi o",
-        "SELF_REVIEW_PROHIBITED": "Wòdzɔ wò nɔnɔ kple wòkplɔ míaɖu o"
+        "SELF_REVIEW_NOT_POSSIBLE": "Metsɔ eme eŋu srɔ ŋgɔmetɔ ƒe yiwo"
       }
     }
   },

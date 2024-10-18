@@ -104,7 +104,7 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
       "VALIDATION": {
         "LOADING_REVIEW_FAILURE": "Error al cargar la reseña",
-        "SELF_REVIEW_NOT_POSSIBLE": "La autoevaluación está prohibida"
+        "SELF_REVIEW_NOT_POSSIBLE": "No es posible autoevaluarse"
       }
     }
   },
