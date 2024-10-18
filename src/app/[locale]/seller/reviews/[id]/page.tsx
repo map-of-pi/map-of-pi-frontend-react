@@ -29,7 +29,7 @@ function SellerReviews({
   const userId = params.id;
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
-  const [receiverReviews, setReciverReviews] = useState<ReviewInt[] | null>(null);
+  const [receiverReviews, setReceiverReviews] = useState<ReviewInt[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
@@ -81,11 +81,11 @@ function SellerReviews({
           logger.info(`Fetched ${data.length} reviews for seller ID: ${userId}`);
           const { giverReviews, receiverReviews } = processReviews(data, userId);
           setGiverReviews(giverReviews);
-          setReciverReviews(receiverReviews);
+          setReceiverReviews(receiverReviews);
         } else {
           logger.warn(`No reviews found for seller ID: ${userId}`);
           setGiverReviews([]);
-          setReciverReviews([]);
+          setReceiverReviews([]);
         }
       } catch (error) {
         logger.error(`Error fetching reviews for seller ID: ${userId}`, { error });
@@ -111,11 +111,11 @@ function SellerReviews({
         logger.info(`Found ${data.length} reviews for seller ID: ${userId}`);
         const { giverReviews, receiverReviews } = processReviews(data, userId);
         setGiverReviews(giverReviews);
-        setReciverReviews(receiverReviews);
+        setReceiverReviews(receiverReviews);
       } else {
         logger.warn(`No reviews found for seller ID: ${userId} with query: ${searchBarValue}`);
         setGiverReviews([]);
-        setReciverReviews([]);
+        setReceiverReviews([]);
       }
     } catch (error) {
       logger.error(`Error searching reviews for seller ID: ${userId}`, { error });
@@ -174,50 +174,50 @@ function SellerReviews({
             <EmojiPicker sellerId={userId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} setReload={setReload} />
           </div>
         </ToggleCollapse>      
-          <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
-            {reload 
-              ? <Skeleton type='seller_review' />
-              : giverReviews && giverReviews.map((review, index) => (
-                <div key={index} className="seller_item_container mb-5">
-                  <div className="flex justify-between items-start mb-3">
-                    {/* Left content */}
-                    <div className="flex-grow">
-                      <p className="text-primary text-sm">
-                        {review.giver} {' -> '}
-                        <span className="text-primary text-sm">{review.receiver}</span>
-                      </p>
-                      <p className="text-md break-words">{review.heading}</p>
-                    </div>
+        <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
+          {reload 
+            ? <Skeleton type='seller_review' />
+            : giverReviews && giverReviews.map((review, index) => (
+              <div key={index} className="seller_item_container mb-5">
+                <div className="flex justify-between items-start mb-3">
+                  {/* Left content */}
+                  <div className="flex-grow">
+                    <p className="text-primary text-sm">
+                      {review.giver} {' -> '}
+                      <span className="text-primary text-sm">{review.receiver}</span>
+                    </p>
+                    <p className="text-md break-words">{review.heading}</p>
+                  </div>
 
-                    {/* Right content */}
-                    <div className="flex flex-col items-end space-y-2">
-                      <div className="text-[#828282] text-sm text-right whitespace-nowrap">
-                        <p>{review.date}</p>
-                        <p>{review.time}</p>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <Image
-                          src={review.image}
-                          alt="emoji image"
-                          width={50}
-                          height={50}
-                          className="object-cover rounded-md"
-                        />
-                        <p className="text-xl max-w-[50px]" title={review.reaction}>
-                          {review.unicode}
-                        </p>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
-                          <OutlineBtn label={t('SHARED.REPLY')} />
-                        </Link>
-                      </div>
+                  {/* Right content */}
+                  <div className="flex flex-col items-end space-y-2">
+                    <div className="text-[#828282] text-sm text-right whitespace-nowrap">
+                      <p>{review.date}</p>
+                      <p>{review.time}</p>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                      <Image
+                        src={review.image}
+                        alt="emoji image"
+                        width={50}
+                        height={50}
+                        className="object-cover rounded-md"
+                      />
+                      <p className="text-xl max-w-[50px]" title={review.reaction}>
+                        {review.unicode}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
+                        <OutlineBtn label={t('SHARED.REPLY')} />
+                      </Link>
                     </div>
                   </div>
                 </div>
-                ))
-            }
-          </ToggleCollapse>
+              </div>
+            ))
+          }
+        </ToggleCollapse>
  
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_RECEIVED_SECTION_HEADER')} open={true}>
         {reload
@@ -225,42 +225,42 @@ function SellerReviews({
           : receiverReviews && receiverReviews.map((review, index) => (
             <div key={index} className="seller_item_container mb-5">
               <div className="flex justify-between items-start mb-3">
-                    {/* Left content */}
-                    <div className="flex-grow">
-                      <p className="text-primary text-sm">
-                        {review.giver} {' -> '}
-                        <span className="text-primary text-sm">{review.receiver}</span>
-                      </p>
-                      <p className="text-md break-words">{review.heading}</p>
-                    </div>
+                {/* Left content */}
+                <div className="flex-grow">
+                  <p className="text-primary text-sm">
+                    {review.giver} {' -> '}
+                    <span className="text-primary text-sm">{review.receiver}</span>
+                  </p>
+                  <p className="text-md break-words">{review.heading}</p>
+                </div>
 
-                    {/* Right content */}
-                    <div className="flex flex-col items-end space-y-2">
-                      <div className="text-[#828282] text-sm text-right whitespace-nowrap">
-                        <p>{review.date}</p>
-                        <p>{review.time}</p>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <Image
-                          src={review.image}
-                          alt="emoji image"
-                          width={50}
-                          height={50}
-                          className="object-cover rounded-md"
-                        />
-                        <p className="text-xl max-w-[50px]" title={review.reaction}>
-                          {review.unicode}
-                        </p>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
-                          <OutlineBtn label={t('SHARED.REPLY')} />
-                        </Link>
-                      </div>
-                    </div>
+                {/* Right content */}
+                <div className="flex flex-col items-end space-y-2">
+                  <div className="text-[#828282] text-sm text-right whitespace-nowrap">
+                    <p>{review.date}</p>
+                    <p>{review.time}</p>
                   </div>
+                  <div className="flex gap-2 items-center">
+                    <Image
+                      src={review.image}
+                      alt="emoji image"
+                      width={50}
+                      height={50}
+                      className="object-cover rounded-md"
+                    />
+                    <p className="text-xl max-w-[50px]" title={review.reaction}>
+                      {review.unicode}
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
+                      <OutlineBtn label={t('SHARED.REPLY')} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
-            ))
+          ))
         }
         </ToggleCollapse>
       </div>

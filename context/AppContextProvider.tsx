@@ -23,9 +23,9 @@ interface IAppContextProps {
   currentUser: IUser | null;
   setCurrentUser: React.Dispatch<SetStateAction<IUser | null>>;
   registerUser: () => void;
-  autoLoginUser:()=> void,
-  isSigningInUser: boolean
-  reload: boolean
+  autoLoginUser: ()=> void;
+  isSigningInUser: boolean;
+  reload: boolean;
   setReload: React.Dispatch<SetStateAction<boolean>>;
 }
 
@@ -33,8 +33,8 @@ const initialState: IAppContextProps = {
   currentUser: null,
   setCurrentUser: () => {},
   registerUser: () => { },
-  autoLoginUser:()=> {},
-  isSigningInUser:false,
+  autoLoginUser: ()=> {},
+  isSigningInUser: false,
   reload: false,
   setReload: () => {},
 };
