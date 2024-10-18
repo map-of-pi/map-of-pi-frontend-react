@@ -10,26 +10,12 @@ import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
-import { IReviewOutput } from '@/constants/types';
+import { IReviewOutput, ReviewInt } from '@/constants/types';
 import SearchIcon from '@mui/icons-material/Search';
 import { FormControl, TextField } from '@mui/material';
 import { fetchReviews } from '@/services/reviewsApi';
 import { resolveDate } from '@/utils/date';
 import logger from '../../../../../../logger.config.mjs';
-
-interface ReviewInt {
-  heading: string;
-  date: string;
-  time: string;
-  giver: string;
-  receiver: string;
-  reviewId: string;
-  receiverId: string;
-  giverId: string;
-  reaction: string;
-  unicode: string;
-  image: string;
-}
 
 function SellerReviews({
   params,
@@ -85,7 +71,7 @@ function SellerReviews({
 
   useEffect(() => {
     const fetchSellerReviews = async () => {
-      setLoading(true);
+      setError(null);
       try {
         logger.info(`Fetching reviews for seller ID: ${userId}`);
         const data = await fetchReviews(userId);
@@ -105,16 +91,17 @@ function SellerReviews({
         setError('Error fetching reviews. Please try again later.');
       } finally {
         setLoading(false);
-        setReload(false)
+        setReload(false);
       }
     };
 
     fetchSellerReviews();
-  }, [userId, currentUser]);
+  }, [userId, currentUser, reload]);
 
   // Handle search logic
   const handleSearch = async () => {
     setReload(true);
+    setError(null);
     try {
       logger.info(`Searching reviews for seller ID: ${userId} with query: ${searchBarValue}`);
       const data = await fetchReviews(userId, searchBarValue);
@@ -149,7 +136,7 @@ function SellerReviews({
 
   return (
     <>
-      {error && <div className="error">{error}</div>}
+      {error && <div className="error text-center text-red-400">{error}</div>}
       <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto gap-5">
         <h1 className="text-[#333333] text-lg font-semibold md:font-bold md:text-2xl mb-1">
           {t('SCREEN.REVIEWS.REVIEWS_HEADER')}
