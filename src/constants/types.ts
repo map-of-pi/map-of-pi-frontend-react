@@ -37,6 +37,21 @@ export interface ISeller {
 }
 
 
+export interface ReviewInt {
+  heading: string;
+  date: string;
+  time: string;
+  giver: string;
+  receiver: string;
+  reviewId: string;
+  receiverId: string;
+  giverId: string;
+  reaction: string;
+  unicode: string;
+  image: string;
+}
+
+
 export interface IReviewFeedback {
   _id: string;
   review_receiver_id: string;

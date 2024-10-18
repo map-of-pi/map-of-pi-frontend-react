@@ -8,7 +8,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import ConfirmDialog from '@/components/shared/confirm';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
 import Skeleton from '@/components/skeleton/skeleton';
-import { IReviewOutput } from '@/constants/types';
+import { IReviewOutput, ReviewInt } from '@/constants/types';
 import { fetchSingleReview } from '@/services/reviewsApi';
 import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../../util/ratingUtils';
@@ -24,20 +24,6 @@ interface ReplyToReviewPageProps {
   };
 }
 
-interface ReviewInt {
-  heading: string;
-  date: string;
-  time: string;
-  giver: string;
-  receiver: string;
-  reviewId: string;
-  receiverId: string;
-  giverId: string;
-  reaction: string;
-  unicode: string;
-  image: string;
-}
-
 export default function ReplyToReviewPage({ params, searchParams }: ReplyToReviewPageProps) {
   const t = useTranslations();
   const router = useRouter();
@@ -51,9 +37,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [direction, setDirection] = useState('');
-  const [reload, setReload] = useState<boolean>(false);
-  const { currentUser, autoLoginUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser, reload, setReload } = useContext(AppContext);
 
   const processReviews = (data: IReviewOutput[]): ReviewInt[] => {
     return data.map((feedback) => {
@@ -83,10 +67,11 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
     }
 
     const getReviewData = async () => {
-      setLoading(true);
+      // setLoading(true);
       try {
         logger.info(`Fetching review data for review ID: ${reviewId}`);
-        setReload(false)
+        // setReload(false)
+        setError(null);
         const data = await fetchSingleReview(reviewId);
 
         if (data.review) {
@@ -104,6 +89,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
         setError('Error fetching review. Please try again later.');
       } finally {
         setLoading(false);
+        setReload(false)
       }
     };
 
@@ -113,14 +99,12 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
   // Scroll functions
   const prevSlide = () => {
     if (reviews.length > 1 && currentIndex > 0) {
-      setDirection('left'); // Swipe to the left
       setCurrentIndex((prevIndex) => prevIndex - 1);
     }
   };
 
   const nextSlide = () => {
     if (reviews.length > 1 && currentIndex < reviews.length - 1) {
-      setDirection('right'); // Swipe to the right
       setCurrentIndex((prevIndex) => prevIndex + 1);
     }
   };
