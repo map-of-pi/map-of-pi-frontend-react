@@ -172,7 +172,9 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
                           height={50}
                           className="object-cover rounded-md"
                         />
-                        <p className="text-xl max-w-[50px]">{review.unicode}</p>
+                        <p className="text-xl max-w-[50px]" title={review.reaction}>
+                          {review.unicode}
+                        </p>
                       </div>
                     </div>
                   </div>

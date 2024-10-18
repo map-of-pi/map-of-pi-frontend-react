@@ -95,7 +95,7 @@ export default function EmojiPicker(props: any) {
       if (props.currentUser) {
         if (props.currentUser.pi_uid === props.sellerId) {
           logger.warn(`Attempted self review by user ${props.currentUser.pi_uid}`);
-          toast.error(t('SCREEN.REPLY_TO_REVIEW.VALIDATION.SELF_REVIEW_PROHIBITED'));
+          toast.error(t('SCREEN.REPLY_TO_REVIEW.VALIDATION.SELF_REVIEW_NOT_POSSIBLE'));
         }
         if (reviewEmoji === null) {
           logger.warn('Attempted to save review without selecting an emoji.');
