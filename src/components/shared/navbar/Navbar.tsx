@@ -19,21 +19,21 @@ function Navbar() {
   const local = useLocale();
   const t = useTranslations();
   const [sidebarToggle, setSidebarToggle] = useState(false);
-  const [checkHomePage, setCheckHomePage] = useState(true);
+  const [isHomePage, setIsHomePage] = useState(true);
 
   const {isSigningInUser, reload} = useContext(AppContext)
 
   // check if the current page is the homepage
   useEffect(() => {
-    const CheckHomePage = () => {
-      if (pathname === `/${local}`) {
-        setCheckHomePage(true);
+    const checkHomePage = () => {
+      if (pathname === `/`) {
+        setIsHomePage(true);
       } else {
-        setCheckHomePage(false);
+        setIsHomePage(false);
       }
     };
 
-    CheckHomePage();
+    checkHomePage();
   });
 
   const handleBackBtn = () => {
@@ -53,15 +53,15 @@ function Navbar() {
         </div>
         <div
           className="flex justify-between">
-          <div className={`${styles.nav_item} ${checkHomePage && 'disabled'}`}>
+          <div className={`${styles.nav_item} ${isHomePage && 'disabled'}`}>
             <Link href="/" onClick={handleBackBtn}>
-              <IoMdArrowBack size={26} className={`${checkHomePage ? 'text-tertiary' : 'text-secondary'}`} />
+              <IoMdArrowBack size={26} className={`${isHomePage ? 'text-tertiary' : 'text-secondary'}`} />
             </Link>
           </div>
 
-            <div className={`${styles.nav_item} ${checkHomePage && 'disabled'}`}>
+            <div className={`${styles.nav_item} ${isHomePage && 'disabled'}`}>
               <Link href="/">
-                <MdHome size={24} className={`${'text-tertiary' }`} />
+                <MdHome size={24} className={`${isHomePage ? 'text-tertiary' : 'text-secondary'}`} />
               </Link>
             </div>
           <div className={`${styles.nav_item}`}>
