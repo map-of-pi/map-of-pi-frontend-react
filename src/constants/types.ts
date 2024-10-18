@@ -36,7 +36,6 @@ export interface ISeller {
   order_online_enabled_pref: boolean;
 }
 
-
 export interface IReviewFeedback {
   _id: string;
   review_receiver_id: string;
@@ -46,6 +45,20 @@ export interface IReviewFeedback {
   comment: string;
   image: string;
   review_date: string;
+}
+
+export interface ReviewInt {
+  heading: string;
+  date: string;
+  time: string;
+  giver: string;
+  receiver: string;
+  reviewId: string;
+  receiverId: string;
+  giverId: string;
+  reaction: string;
+  unicode: string;
+  image: string;
 }
 
 // Select specific fields from IUserSettings
