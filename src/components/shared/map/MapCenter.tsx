@@ -2,6 +2,7 @@
 
 import 'leaflet/dist/leaflet.css';
 import './MapCenter.css';
+import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 import { useState, useEffect, useContext, useRef } from 'react';
@@ -27,8 +28,8 @@ import logger from '../../../../logger.config.mjs';
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
   iconUrl: '/images/icons/crosshair.png',
-  iconSize: [80, 80],
-  iconAnchor: [40, 40],
+  iconSize: [100, 100],
+  iconAnchor: [60, 60],
 });
 
 interface MapCenterProps {
@@ -44,6 +45,8 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
   });
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const mapRef = useRef<L.Map | null>(null);
+
+  const isSigningInUser = false;
 
   useEffect(() => {
     if (!currentUser) {
@@ -144,6 +147,10 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
 
   const bounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
 
+  const handleLocationButtonClick = () => { // Temporary placeholders for handling errors
+    console.log('Location Button Clicked')
+  } 
+
   return (
     <div className="search-container">
       <p className="search-text">
@@ -175,23 +182,58 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <MapHandler />
         <RecenterAutomatically position={center} />
       </MapContainer>
-      <div className="absolute bottom-8 z-10 flex justify-center px-6 right-0 left-0 m-auto pointer-events-none">
+      
+      <div className="absolute bottom-8 z-10 flex justify-start px-6 right-0 left-0 m-auto pointer-events-none">
         {/* Add Set Map Center Button */}
         <div className="pointer-events-auto">
           <Button
             label={entryType === 'sell'
               ? t('SCREEN.SELLER_REGISTRATION.SELLER_SELL_CENTER')
-              : t('SHARED.SEARCH_CENTER')
-            }
+              : t('SHARED.SEARCH_CENTER')}
             onClick={setMapCenter}
             styles={{
-              borderRadius: '10px',
               color: '#ffc153',
-              paddingLeft: '50px',
-              paddingRight: '50px'
+              height: '50px',
+              padding: '20px',
+              fontSize: '22px',
             }}
           />
         </div>
+      </div>
+      <div className="absolute bottom-8 z-10 flex justify-end px-6 right-0 left-0 m-auto pointer-events-none">
+        {/* Find Me Button */}
+        <div className="pointer-events-auto">
+          <Button
+            icon={
+              <Image
+                src="/images/shared/my_location.png"
+                width={40}
+                height={40}
+                alt="my location"
+              />
+            }
+            styles={{
+              borderRadius: '50%',
+              width: '55px',
+              height: '55px',
+              padding: '0px',
+            }}
+            onClick={handleLocationButtonClick}
+            disabled={isSigningInUser}
+          />
+        </div>
+      </div>
+      {/* Static Scope - should always be centered */}
+      <div className="absolute z-10 pointer-events-none top-[54.2%] left-[49.4%] transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-16 sm:h-16">
+        <img
+          src="/images/icons/scope.png"
+          alt="Scope"
+          className="w-full h-full"
+          style={{
+            width: '65px',
+            height: '65px'
+          }}
+        />
       </div>
       {showPopup && (
         <ConfirmDialogX

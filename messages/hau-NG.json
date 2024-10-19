@@ -55,6 +55,7 @@
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
       "SELLER_RETAIL_OUTLET_NAME": "Sunan mashaya",
+      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "Sunan shagonka",
       "SELLER_ADDRESS_LOCATION_LABEL": "Adireshi ko inda kake siyarwa",
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Taimaka wa masu saye su same ka ta hanyar ƙara adireshi ko bayanin inda kake siyarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
@@ -77,7 +78,7 @@
       "REVIEWS_SCORE_MESSAGE": "Makin Sake Dubawa: {seller_review_rating} cikin 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Bayanin Tuntuɓar Mai Siyarwa",
       "SELLER_USERNAME_LABEL": "Sunan mai amfani",
-      "SELLER_PIONEER_ID_LABEL": "ID na Pioneer", 
+      "SELLER_PIONEER_ID_LABEL": "ID na Pioneer",
       "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
       "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
     },
@@ -104,7 +105,7 @@
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
       "VALIDATION": {
         "LOADING_REVIEW_FAILURE": "Kuskure wajen ɗaukar bita",
-        "SELF_REVIEW_PROHIBITED": "Binciken kai an hana"
+        "SELF_REVIEW_NOT_POSSIBLE": "Ba zai yiwu ka duba kanka ba"
       }
     }
   },
@@ -123,7 +124,6 @@
       "SECTIONS": {
         "HEADER_1": "Gabatarwa",
         "CONTENT_1": "Barka da zuwa Taswirar Pi app, wanda ƙungiyar taswirar Pi ta haɓaka tare da haɗin gwiwar Pi Community. Wannan Dokar Sirri tana fayyace yadda muke tattarawa, amfani, bayyanawa, da kare keɓaɓɓun bayanin ku lokacin da kuke amfani da manhajarmu ta hannu.",
-        
         "HEADER_2": "Bayanan da muke tattarawa",
         "SUBHEADER_2_1": "Bayanan Mai Amfani",
         "CONTENT_2_1_1": "Lokacin da kayi rajista matsayin mai amfani, ƙila mu tattara sunanka, adireshin imel, sunan mai amfani, da sauran bayanan da suka dace.",
@@ -131,7 +131,6 @@
         "SUBHEADER_2_2": "Bayanin mai siyarwa",
         "CONTENT_2_2_1": "Ana iya buƙatar masu siyarwa masu rijista akan dandamali don samar da bayanin Mai siyarwa, gami da sunan mai siyarwa, wuri, da bayanan tuntuɓar.",
         "CONTENT_2_2_2": "Mai sayarwa na iya zama kasuwanci ko mutum mai zaman kansa.",
-
         "HEADER_3": "Yadda Muke Amfani da Bayananku",
         "SUBHEADER_3_1": "Bayar da Ayyuka",
         "CONTENT_3_1_1": "Muna amfani da bayanin ku don samarwa da haɓaka Taswirar ayyukan manhaja na Pi, gami da ayyukan mai amfani da mai siyarwa.",
@@ -139,22 +138,17 @@
         "CONTENT_3_2_1": "Za mu iya amfani da bayanan tuntuɓar ku don aiko muku da sabuntawa, sanarwa, da saƙonnin tallatawa masu alaƙa da Taswirar manhajar Pi.",
         "SUBHEADER_3_3": "Bincike",
         "CONTENT_3_3_1": "Muna tattarawa da bincika bayanai don haɓaka aiki, fasali, da ayyukan ƙa'idar manhajar.",
-
         "HEADER_4": "Raba Bayananku",
         "SUBHEADER_4_1": "Tare da Masu siyarwa",
         "CONTENT_4_1_1": "Ana iya raba bayanin mai amfani tare da Masu siyarwa don cika oda da dalilai na sadarwa.",
         "SUBHEADER_4_2": "Tare Da Jam'iyyu Na Uku",
         "CONTENT_4_2_1": "Za mu iya raba bayani tare da masu ba da sabis na ɓangare na uku don aikin app, nazari, da sarrafa biyan kuɗi.",
-
         "HEADER_5": "Matakan Tsaro",
         "CONTENT_5_1": "Muna amfani da matakan tsaro na masana'antu don kare bayanan ku. Duk da haka, babu hanyar watsawa akan intanit ko ma'ajin lantarki da ke da cikakken tsaro.",
-
         "HEADER_6": "Zaɓuɓɓukaku",
         "CONTENT_6_1": "Kuna iya sabunta bayanan asusunku ta saitunan manhaja. Kuna iya share asusun Map of Pi ta hanyar share asusun cibiyar sadarwar Pi sannan zaɓi zaɓi don share bayanan Map Of Pi lokacin da kuka shiga Map of Pi na gaba. Kuna iya ficewa daga sadarwar talla.",
-
         "HEADER_7": "Canje-canje ga Wannan takardar kebantawa",
         "CONTENT_7_1": "Za mu iya sabunta wannan takardar kenbantawa kamar yadda ya cancanta. Za a buga sabon sigar a gidan yanar gizon mu ko a cikin manhajar.",
-
         "HEADER_8": "Tuntuɓe Mu",
         "CONTENT_8_1": "Idan kuna da wasu tambayoyi ko damuwa game da wannan takardar kebantawa, da fatan za a tuntuɓe mu ta hanyar aika imel zuwa"
       }
@@ -166,24 +160,18 @@
       "SECTIONS": {
         "HEADER_1": "Yarda da Sharuɗɗan",
         "CONTENT_1_1": "Barka da zuwa manhaja Map of Pi, wanda ƙungiyar Map of Pi ta haɓaka tare da haɗin gwiwar Pi Community. Ta amfani da wannan manhaja, kun yarda ku bi waɗannan Sharuɗɗan Sabis, da kuma Manufar Sirrin mu.",
-        
         "HEADER_2": "Amfani da manhajar",
         "CONTENT_2_1": "Kun yarda da amfani da manhajar Map of Pi bisa bin duk dokoki da ƙa'idodi.",
-        "CONTENT_2_2": "Kada ku yi amfani da manhaja ɗin don kowane dalili na haram ko haramtaten dalili, ko ta kowace hanya da za ta iya lalata, musaki, nauyi, ko ɓata ƙa'idar..", 
-        "CONTENT_2_3": "Don amfani da Map of Pi dole ne a yi muku rajista azaman pioneer mai amfani da hanyar sadarwar Pi.", 
-
+        "CONTENT_2_2": "Kada ku yi amfani da manhaja ɗin don kowane dalili na haram ko haramtaten dalili, ko ta kowace hanya da za ta iya lalata, musaki, nauyi, ko ɓata ƙa'idar..",
+        "CONTENT_2_3": "Don amfani da Map of Pi dole ne a yi muku rajista azaman pioneer mai amfani da hanyar sadarwar Pi.",
         "HEADER_3": "Kayayyakin da aka samar dasu ta Hanyan Kirkire-kirkire",
         "CONTENT_3_1": "Manhajar Map of Pi da duk abun ciki, fasali, da ayyuka na Map of Pi ne kuma ana kiyaye su ta haƙƙin mallaka, alamar kasuwanci, da sauran dokokin mallakar fasaha..",
-
         "HEADER_4": "Iyakance Abin Alhaki",
         "CONTENT_4_1": "Map of Pi ba za ta kasance abin dogaro ga kowane kai tsaye, kaikaice, na bazata, na musamman, ko lahani mai lalacewa da ya taso daga ko ta kowace hanya da ke da alaƙa da amfani da manhajar Map of Pi.",
-
         "HEADER_5": "Ramuwa",
         "CONTENT_5_1": "Kun yarda da ramuwa da riƙe Map of Pi mara lahani da masu haɗin gwiwa, jami'ai, daraktoci, ma'aikata, da wakilai daga kowane da'awar, alhaki, diyya, asara, ko kashe kuɗi (ciki har da kuɗin lauyoyi) waɗanda suka taso daga ko ta kowace hanya mai alaƙa. Don amfani da manhajar Map of Pi.",
-
         "HEADER_6": "Dokokin Gudanarwa",
         "CONTENT_6_1": "Waɗannan Sharuɗɗan Sabis za a sarrafa su kuma a yi amfani da su daidai da dokar Ingila da Wales ba tare da la’akari da tanadin dokar su ba, gami da duk wata jayayya ko da’awar da ta taso daga ko dangane da batunsu ko samuwarsu (gami da rashin yarjejeniya). jayayya ko da'awar).",
-
         "HEADER_7": "Canje-Canje ga Wadannan Sharuddan",
         "CONTENT_7_1": "Mun tanadi haƙƙin sabunta ko gyara waɗannan Sharuɗɗan Sabis a kowane lokaci ba tare da sanarwa ba. Za a buga sabon sigar a gidan yanar gizon mu ko a cikin manhaja."
       }
