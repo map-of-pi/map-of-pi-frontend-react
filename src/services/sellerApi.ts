@@ -5,7 +5,7 @@ import logger from '../../logger.config.mjs';
 // Fetch all sellers or sellers within bounds and/ or matching search criteria
 export const fetchSellers = async (bounds: L.LatLngBounds, searchQuery?: string) => {
   try {
-    logger.debug('Fetching sellers with bounds and search query:', { bounds, searchQuery });
+    logger.debug('Fetching sellers associated with bounds and search query:', { bounds, searchQuery });
     
     // Prepare the request payload with bounds
     const requestPayload: any = {

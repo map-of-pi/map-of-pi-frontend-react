@@ -7,7 +7,6 @@ import _ from 'lodash';
 
 import { ISeller, ISellerWithSettings } from '@/constants/types';
 import { fetchSellers } from '@/services/sellerApi';
-import { toLatLngLiteral } from '@/utils/map';
 
 import MapMarkerPopup from './MapMarkerPopup'
 
@@ -126,9 +125,6 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
     setLoading(true);
     setError(null);
     try {
-      const originLiteral = toLatLngLiteral(origin);
-      const originLatLngTuple: LatLngTuple = [originLiteral.lat, originLiteral.lng];
-
       // Fetch the current map bounds
       const bounds = mapRef.current?.getBounds();
 
