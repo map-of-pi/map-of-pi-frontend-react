@@ -84,15 +84,15 @@ function SellerReviews({
 
         if (data.receivedReviews.length>0){
           logger.info(`Fetched ${data.receivedReviews.length} reviews received by user ID: ${userId}`);
-          setReciverReviews(processReviews(data.receivedReviews));
+          setReceiverReviews(processReviews(data.receivedReviews));
         } else {
           logger.warn(`No received reviews found for user ID: ${userId}`);
-          setReciverReviews([]);
+          setReceiverReviews([]);
         }          
       } else {
         logger.warn(`No reviews found for user ID: ${userId}`);
         setGiverReviews([]);
-        setReciverReviews([]);
+        setReceiverReviews([]);
       }
     } catch (error) {
       logger.error(`Error fetching reviews for seller ID: ${userId}`, { error });
@@ -126,11 +126,11 @@ function SellerReviews({
         }
         if (data.receivedReviews.length>0) {
           logger.info(`Found ${data.receivedReviews.length} reviews received by user: ${searchBarValue}`);
-          setReciverReviews(processReviews(data.receivedReviews));
+          setReceiverReviews(processReviews(data.receivedReviews));
           setToUser(data.givenReviews[0].review_receiver_id);
         } else {
           logger.warn(`No given reviews found for user:  ${searchBarValue}`);
-          setReciverReviews([]);
+          setReceiverReviews([]);
         }
         
       } else {
