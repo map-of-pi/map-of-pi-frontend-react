@@ -67,10 +67,8 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
     }
 
     const getReviewData = async () => {
-      // setLoading(true);
       try {
         logger.info(`Fetching review data for review ID: ${reviewId}`);
-        // setReload(false)
         setError(null);
         const data = await fetchSingleReview(reviewId);
 
@@ -89,7 +87,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
         setError('Error fetching review. Please try again later.');
       } finally {
         setLoading(false);
-        setReload(false)
+        setReload(false);
       }
     };
 

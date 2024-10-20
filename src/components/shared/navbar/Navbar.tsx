@@ -12,6 +12,7 @@ import { MdHome } from 'react-icons/md';
 import Sidebar from '../sidebar/sidebar';
 import styles from './Navbar.module.css';
 import { AppContext } from '../../../../context/AppContextProvider';
+import logger from '../../../../logger.config.mjs';
 
 function Navbar() {
   const router = useRouter();
@@ -26,15 +27,15 @@ function Navbar() {
   // check if the current page is the homepage
   useEffect(() => {
     const checkHomePage = () => {
-      if (pathname === `/`) {
+      if (pathname === '/' || pathname === `/${local}`) {
         setIsHomePage(true);
       } else {
+        logger.info(`HomePage Pathname is ${pathname}`);
         setIsHomePage(false);
       }
     };
-
     checkHomePage();
-  });
+  }, [pathname]);
 
   const handleBackBtn = () => {
     router.back();
