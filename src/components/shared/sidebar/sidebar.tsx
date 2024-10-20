@@ -66,7 +66,7 @@ function Sidebar(props: any) {
   }>({
     user_name: '',
     image: '',
-    findme: 'auto',
+    findme: 'searchCenter',
     trust_meter_rating: 100,
   });
 
@@ -290,10 +290,12 @@ function Sidebar(props: any) {
   };
 
   const translateFindMeOptions = [
+
     {
-      value: 'auto',
-      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
-    },
+      value: 'searchCenter',
+      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_SEARCH_CENTER'),
+    }
+  ,
     {
       value: 'deviceGPS',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
@@ -301,6 +303,10 @@ function Sidebar(props: any) {
     {
       value: 'searchCenter',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_SEARCH_CENTER'),
+    },
+    {
+      value: 'auto',
+      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
     }
   ];
 
