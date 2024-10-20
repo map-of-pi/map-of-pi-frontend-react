@@ -225,14 +225,14 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
       </div>
       {/* Static Scope - should always be centered */}
       <div className="absolute z-10 pointer-events-none top-[54.2%] left-[49.4%] transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-16 sm:h-16">
-        <img
+        <Image
           src="/images/icons/scope.png"
-          alt="Scope"
           className="w-full h-full"
           style={{
             width: '65px',
             height: '65px'
           }}
+          alt="Scope"
         />
       </div>
       {showPopup && (
