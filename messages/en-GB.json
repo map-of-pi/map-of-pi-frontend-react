@@ -86,7 +86,11 @@
       "REVIEWS_HEADER": "Reviews",
       "GIVE_REVIEW_SECTION_HEADER": "Give review to this pioneer",
       "REVIEWS_GIVEN_SECTION_HEADER": "Reviews given by this pioneer",
-      "REVIEWS_RECEIVED_SECTION_HEADER": "Reviews received by this pioneer"
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Reviews received by this pioneer",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "No reviews found for Pioneer {search_value}",
+        "NO_PIONEER_FOUND": "Pioneer {search_value} not found"  
+      }
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No reviews for {seller_id}",

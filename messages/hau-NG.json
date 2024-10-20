@@ -86,7 +86,11 @@
       "REVIEWS_HEADER": "Bita",
       "GIVE_REVIEW_SECTION_HEADER": "Ba wa wannan jagora sharhi",
       "REVIEWS_GIVEN_SECTION_HEADER": "Sharhi da aka ba wannan jagora",
-      "REVIEWS_RECEIVED_SECTION_HEADER": "Sharhi da wannan jagora ya samu"
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Sharhi da wannan jagora ya samu",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "Ba a sami bita ga Mai-tushen {search_value} ba",
+        "NO_PIONEER_FOUND": "Ba a sami Mai-tushen {search_value} ba"
+      }
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Babu bita don {seller_id}",
