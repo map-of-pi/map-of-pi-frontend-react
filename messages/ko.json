@@ -86,7 +86,11 @@
       "REVIEWS_HEADER": "리뷰",
       "GIVE_REVIEW_SECTION_HEADER": "이 개척자에게 리뷰 남기기",
       "REVIEWS_GIVEN_SECTION_HEADER": "이 개척자가 남긴 리뷰",
-      "REVIEWS_RECEIVED_SECTION_HEADER": "이 개척자가 받은 리뷰"
+      "REVIEWS_RECEIVED_SECTION_HEADER": "이 개척자가 받은 리뷰",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "개척자 {search_value}에 대한 리뷰를 찾을 수 없습니다",
+        "NO_PIONEER_FOUND": "개척자 {search_value}를 찾을 수 없습니다"
+      }
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "{seller_id}에 대한 리뷰가 없습니다",
