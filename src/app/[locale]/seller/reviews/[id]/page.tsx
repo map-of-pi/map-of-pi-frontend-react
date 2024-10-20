@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef, useContext } from 'react';
-import { AppContext } from '../../../../../../context/AppContextProvider';
+import { toast } from 'react-toastify';
 import { resolveRating } from '../util/ratingUtils';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
@@ -15,8 +15,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { FormControl, TextField } from '@mui/material';
 import { fetchReviews } from '@/services/reviewsApi';
 import { resolveDate } from '@/utils/date';
+import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import { toast } from 'react-toastify';
 
 function SellerReviews({
   params,
@@ -61,41 +61,39 @@ function SellerReviews({
       })
       .filter((review): review is ReviewInt => review !== null);
 
-    // Separate into giver and receiver reviews
-    return reviews
+    return reviews;
   };
 
   const fetchUserReviews = async () => {
-    // setLoading(true);
     setError(null);
     try {
-      logger.info(`Fetching reviews for seller ID: ${userId}`);
+      logger.info(`Fetching reviews for userID: ${userId}`);
       const data = await fetchReviews(userId);
 
       if (data) {
-        if (data.givenReviews.length>0) {
-          logger.info(`Fetched ${data.givenReviews.length} reviews given by user ID: ${userId}`);
+        if (data.givenReviews.length > 0) {
+          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${userId}`);
           setGiverReviews(processReviews(data.givenReviews));
           setToUser(userId);
         } else {
-          logger.warn(`No given reviews found for user ID: ${userId}`);
+          logger.warn(`No given reviews found for userID: ${userId}`);
           setGiverReviews([]);
         }
 
-        if (data.receivedReviews.length>0){
-          logger.info(`Fetched ${data.receivedReviews.length} reviews received by user ID: ${userId}`);
+        if (data.receivedReviews.length > 0) {
+          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${userId}`);
           setReceiverReviews(processReviews(data.receivedReviews));
         } else {
-          logger.warn(`No received reviews found for user ID: ${userId}`);
+          logger.warn(`No received reviews found for userID: ${userId}`);
           setReceiverReviews([]);
         }          
       } else {
-        logger.warn(`No reviews found for user ID: ${userId}`);
+        logger.warn(`No reviews found for userID: ${userId}`);
         setGiverReviews([]);
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Error fetching reviews for seller ID: ${userId}`, { error });
+      logger.error(`Error fetching reviews for userID: ${userId}`, { error });
       setError('Error fetching reviews. Please try again later.');
     } finally {
       setLoading(false);
@@ -112,37 +110,36 @@ function SellerReviews({
     setReload(true);
     setError(null);
     try {
-      logger.info(`Searching reviews for user ID: ${userId} with query: ${searchBarValue}`);
+      logger.info(`Searching reviews for userID: ${userId} with query: ${searchBarValue}`);
       const data = await fetchReviews(userId, searchBarValue);
 
       if (data) {
-        if (data.givenReviews.length>0) {
-          logger.info(`Found ${data.givenReviews.length} reviews given by user: ${searchBarValue}`);
+        if (data.givenReviews.length > 0) {
+          logger.info(`Found ${data.givenReviews.length} reviews given by Pioneer: ${searchBarValue}`);
           setGiverReviews(processReviews(data.givenReviews));
           setToUser(data.givenReviews[0].review_giver_id);
         } else {
-          logger.warn(`No given reviews found for user: ${searchBarValue}`);
+          logger.warn(`No given reviews found for Pioneer: ${searchBarValue}`);
           setGiverReviews([]);
         }
-        if (data.receivedReviews.length>0) {
-          logger.info(`Found ${data.receivedReviews.length} reviews received by user: ${searchBarValue}`);
+        if (data.receivedReviews.length > 0) {
+          logger.info(`Found ${data.receivedReviews.length} reviews received by Pioneer: ${searchBarValue}`);
           setReceiverReviews(processReviews(data.receivedReviews));
           setToUser(data.givenReviews[0].review_receiver_id);
         } else {
-          logger.warn(`No given reviews found for user:  ${searchBarValue}`);
+          logger.warn(`No given reviews found for Pioneer: ${searchBarValue}`);
           setReceiverReviews([]);
         }
         
       } else {
-        toast.error(`No reviews found for Pioneer with username ${searchBarValue}`);
-        logger.warn(`No reviews found for user: ${searchBarValue}`);
+        toast.error(t('SCREEN.REVIEWS.VALIDATION.NO_REVIEWS_FOUND', { search_value: searchBarValue }));
+        logger.warn(`No reviews found for Pioneer: ${searchBarValue}`);
         setGiverReviews([]);
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Pioneer with username ${searchBarValue} not found on map-of-pi`, { error });
-      return toast.error(`Pioneer with username ${searchBarValue} not found on map-of-pi`);
-      
+      logger.error(`Pioneer ${searchBarValue} not found`, { error });
+      return toast.error(t('SCREEN.REVIEWS.VALIDATION.NO_PIONEER_FOUND', { search_value: searchBarValue }));
     } finally {
       setReload(false);
     }
@@ -212,35 +209,35 @@ function SellerReviews({
                     <p className="text-md break-words">{review.heading}</p>
                   </div>
 
-                    {/* Right content */}
-                    <div className="flex flex-col items-end space-y-2">
-                      <div className="text-[#828282] text-sm text-right whitespace-nowrap">
-                        <p>{review.date}</p>
-                        <p>{review.time}</p>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <Image
-                          src={review.image}
-                          alt="emoji image"
-                          width={50}
-                          height={50}
-                          className="object-cover rounded-md"
-                        />
-                        <p className="text-xl max-w-[50px]" title={review.reaction}>
-                          {review.unicode}
-                        </p>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <Link href={`/seller/reviews/feedback/${review.reviewId}?user_name=${review.giver}`}>
-                          <OutlineBtn label={t('SHARED.REPLY')} />
-                        </Link>
-                      </div>
+                  {/* Right content */}
+                  <div className="flex flex-col items-end space-y-2">
+                    <div className="text-[#828282] text-sm text-right whitespace-nowrap">
+                      <p>{review.date}</p>
+                      <p>{review.time}</p>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                      <Image
+                        src={review.image}
+                        alt="emoji image"
+                        width={50}
+                        height={50}
+                        className="object-cover rounded-md"
+                      />
+                      <p className="text-xl max-w-[50px]" title={review.reaction}>
+                        {review.unicode}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <Link href={`/seller/reviews/feedback/${review.reviewId}?user_name=${review.giver}`}>
+                        <OutlineBtn label={t('SHARED.REPLY')} />
+                      </Link>
                     </div>
                   </div>
                 </div>
-                ))
-            }
-          </ToggleCollapse>
+              </div>
+            ))
+          }
+        </ToggleCollapse>
  
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_RECEIVED_SECTION_HEADER')} open={true}>
         {reload
