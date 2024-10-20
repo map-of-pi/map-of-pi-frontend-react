@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef, useContext } from 'react';
-import { AppContext } from '../../../../../../context/AppContextProvider';
+import { toast } from 'react-toastify';
 import { resolveRating } from '../util/ratingUtils';
 import { OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import EmojiPicker from '@/components/shared/Review/emojipicker';
@@ -15,6 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { FormControl, TextField } from '@mui/material';
 import { fetchReviews } from '@/services/reviewsApi';
 import { resolveDate } from '@/utils/date';
+import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
 
 function SellerReviews({
@@ -36,89 +37,109 @@ function SellerReviews({
   const { currentUser, setReload, reload } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchBarValue, setSearchBarValue] = useState('');
+  const [toUser, setToUser] = useState('');
 
   // Reusable function to process and filter reviews
-  const processReviews = (data: IReviewOutput[], userId: string): { giverReviews: ReviewInt[], receiverReviews: ReviewInt[] } => {
+  const processReviews = (data: IReviewOutput[]): ReviewInt[] => {
     const reviews = data
       .map((feedback: IReviewOutput) => {
-        if (feedback.review_giver_id === userId || feedback.review_receiver_id === userId) {
-          const { date, time } = resolveDate(feedback.review_date);
-          const { reaction, unicode } = resolveRating(feedback.rating) || {};
-
-          return {
-            heading: feedback.comment,
-            date,
-            time,
-            giver: feedback.giver,
-            receiver: feedback.receiver,
-            giverId: feedback.review_giver_id,
-            receiverId: feedback.review_receiver_id,
-            reviewId: feedback._id,
-            reaction,
-            unicode
-          };
-        }
-        return null; // Ignore irrelevant reviews
+        const { date, time } = resolveDate(feedback.review_date);
+        const { reaction, unicode } = resolveRating(feedback.rating) || {};
+        return {
+          heading: feedback.comment,
+          date,
+          time,
+          giver: feedback.giver,
+          receiver: feedback.receiver,
+          giverId: feedback.review_giver_id,
+          receiverId: feedback.review_receiver_id,
+          reviewId: feedback._id,
+          reaction,
+          unicode, 
+          image: feedback.image
+        };
       })
       .filter((review): review is ReviewInt => review !== null);
 
-    // Separate into giver and receiver reviews
-    return {
-      giverReviews: reviews.filter((review) => review.giverId === userId),
-      receiverReviews: reviews.filter((review) => review.receiverId === userId)
-    };
+    return reviews;
+  };
+
+  const fetchUserReviews = async () => {
+    setError(null);
+    try {
+      logger.info(`Fetching reviews for userID: ${userId}`);
+      const data = await fetchReviews(userId);
+
+      if (data) {
+        if (data.givenReviews.length > 0) {
+          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${userId}`);
+          setGiverReviews(processReviews(data.givenReviews));
+          setToUser(userId);
+        } else {
+          logger.warn(`No given reviews found for userID: ${userId}`);
+          setGiverReviews([]);
+        }
+
+        if (data.receivedReviews.length > 0) {
+          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${userId}`);
+          setReceiverReviews(processReviews(data.receivedReviews));
+        } else {
+          logger.warn(`No received reviews found for userID: ${userId}`);
+          setReceiverReviews([]);
+        }          
+      } else {
+        logger.warn(`No reviews found for userID: ${userId}`);
+        setGiverReviews([]);
+        setReceiverReviews([]);
+      }
+    } catch (error) {
+      logger.error(`Error fetching reviews for userID: ${userId}`, { error });
+      setError('Error fetching reviews. Please try again later.');
+    } finally {
+      setLoading(false);
+      setReload(false);
+    }
   };
 
   useEffect(() => {
-    const fetchSellerReviews = async () => {
-      setError(null);
-      try {
-        logger.info(`Fetching reviews for seller ID: ${userId}`);
-        const data = await fetchReviews(userId);
-
-        if (data && data.length > 0) {
-          logger.info(`Fetched ${data.length} reviews for seller ID: ${userId}`);
-          const { giverReviews, receiverReviews } = processReviews(data, userId);
-          setGiverReviews(giverReviews);
-          setReceiverReviews(receiverReviews);
-        } else {
-          logger.warn(`No reviews found for seller ID: ${userId}`);
-          setGiverReviews([]);
-          setReceiverReviews([]);
-        }
-      } catch (error) {
-        logger.error(`Error fetching reviews for seller ID: ${userId}`, { error });
-        setError('Error fetching reviews. Please try again later.');
-      } finally {
-        setLoading(false);
-        setReload(false);
-      }
-    };
-
-    fetchSellerReviews();
-  }, [userId, currentUser, reload]);
+    fetchUserReviews();
+  }, [userId, currentUser]);
 
   // Handle search logic
   const handleSearch = async () => {
     setReload(true);
     setError(null);
     try {
-      logger.info(`Searching reviews for seller ID: ${userId} with query: ${searchBarValue}`);
+      logger.info(`Searching reviews for userID: ${userId} with query: ${searchBarValue}`);
       const data = await fetchReviews(userId, searchBarValue);
 
-      if (data && data.length > 0) {
-        logger.info(`Found ${data.length} reviews for seller ID: ${userId}`);
-        const { giverReviews, receiverReviews } = processReviews(data, userId);
-        setGiverReviews(giverReviews);
-        setReceiverReviews(receiverReviews);
+      if (data) {
+        if (data.givenReviews.length > 0) {
+          logger.info(`Found ${data.givenReviews.length} reviews given by Pioneer: ${searchBarValue}`);
+          setGiverReviews(processReviews(data.givenReviews));
+          setToUser(data.givenReviews[0].review_giver_id);
+        } else {
+          logger.warn(`No given reviews found for Pioneer: ${searchBarValue}`);
+          setGiverReviews([]);
+        }
+        if (data.receivedReviews.length > 0) {
+          logger.info(`Found ${data.receivedReviews.length} reviews received by Pioneer: ${searchBarValue}`);
+          setReceiverReviews(processReviews(data.receivedReviews));
+          setToUser(data.givenReviews[0].review_receiver_id);
+        } else {
+          logger.warn(`No given reviews found for Pioneer: ${searchBarValue}`);
+          setReceiverReviews([]);
+        }
+        
       } else {
-        logger.warn(`No reviews found for seller ID: ${userId} with query: ${searchBarValue}`);
+        toast.error(t('SCREEN.REVIEWS.VALIDATION.NO_REVIEWS_FOUND', { search_value: searchBarValue }));
+        logger.warn(`No reviews found for Pioneer: ${searchBarValue}`);
         setGiverReviews([]);
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Error searching reviews for seller ID: ${userId}`, { error });
-      setError('Error searching reviews. Please try again later.');
+      logger.error(`Pioneer ${searchBarValue} not found`, { error });
+      return toast.error(t('SCREEN.REVIEWS.VALIDATION.NO_PIONEER_FOUND', { search_value: searchBarValue }));
     } finally {
       setReload(false);
     }
@@ -170,7 +191,7 @@ function SellerReviews({
 
         <ToggleCollapse header={t('SCREEN.REVIEWS.GIVE_REVIEW_SECTION_HEADER')}>
           <div>
-            <EmojiPicker sellerId={userId} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} setReload={setReload} />
+            <EmojiPicker sellerId={toUser} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} setReload={setReload} refresh={fetchUserReviews} />
           </div>
         </ToggleCollapse>      
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
@@ -207,7 +228,7 @@ function SellerReviews({
                       </p>
                     </div>
                     <div className="flex justify-between items-center">
-                      <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
+                      <Link href={`/seller/reviews/feedback/${review.reviewId}?user_name=${review.giver}`}>
                         <OutlineBtn label={t('SHARED.REPLY')} />
                       </Link>
                     </div>

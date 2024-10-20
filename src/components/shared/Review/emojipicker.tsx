@@ -119,7 +119,8 @@ export default function EmojiPicker(props: any) {
           const newReview = await createReview(formDataToSend);
           if (newReview) {
             toast.success(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
-            props.setReload(true)
+            props.setReload(true);
+            props.refresh()
             logger.info('Review submitted successfully');
           }
           resetReview();
