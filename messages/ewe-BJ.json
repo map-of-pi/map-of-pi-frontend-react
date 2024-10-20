@@ -86,7 +86,11 @@
       "REVIEWS_HEADER": "Nenyíawo",
       "GIVE_REVIEW_SECTION_HEADER": "No wo review kplii ame siaa",
       "REVIEWS_GIVEN_SECTION_HEADER": "Reviewwo kplii ame siaa",
-      "REVIEWS_RECEIVED_SECTION_HEADER": "Reviewwo yi le ame siaa"
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Reviewwo yi le ame siaa",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "Mèɖu nú ŋutɔ wòàdzra Pioné {search_value}",
+        "NO_PIONEER_FOUND": "Pioné {search_value} wòɖu nɔ anyi"
+      }
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Mèkpɔ dzudzɔkpɔkpɔ ƒe {seller_id} o",
