@@ -1,6 +1,5 @@
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useContext, useRef, MutableRefObject } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
 import _ from 'lodash';
@@ -8,13 +7,16 @@ import _ from 'lodash';
 import { ISeller, ISellerWithSettings } from '@/constants/types';
 import { fetchSellers } from '@/services/sellerApi';
 
-import MapMarkerPopup from './MapMarkerPopup'
+import MapMarkerPopup from './MapMarkerPopup';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
 
 // Function to fetch seller coordinates based on bounds and optional search query
-const fetchSellerCoordinates = async (bounds: L.LatLngBounds, searchQuery?: string): Promise<ISellerWithSettings[]> => {
+const fetchSellerCoordinates = async (
+  bounds: L.LatLngBounds,
+  searchQuery?: string
+): Promise<ISellerWithSettings[]> => {
   try {
     const sellersData = await fetchSellers(bounds, searchQuery);
 
@@ -23,12 +25,12 @@ const fetchSellerCoordinates = async (bounds: L.LatLngBounds, searchQuery?: stri
       const [lng, lat] = seller.sell_map_center.coordinates;
       return {
         ...seller,
-        coordinates: [lat, lng] as LatLngTuple
+        coordinates: [lat, lng] as LatLngTuple,
       };
     });
 
     logger.info('Fetched sellers data:', { sellersWithCoordinates });
-    
+
     return sellersWithCoordinates;
   } catch (error) {
     logger.error('Error fetching seller coordinates:', { error });
@@ -40,22 +42,28 @@ const fetchSellerCoordinates = async (bounds: L.LatLngBounds, searchQuery?: stri
 restricted to one shop at the time of registration. */
 const removeDuplicates = (sellers: ISellerWithSettings[]): ISellerWithSettings[] => {
   const uniqueSellers: { [key: string]: ISellerWithSettings } = {};
-  sellers.forEach(seller => {
+  sellers.forEach((seller) => {
     uniqueSellers[seller.seller_id] = seller;
   });
   return Object.values(uniqueSellers);
 };
 
-const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: { 
-  center: LatLngExpression, 
-  zoom: number, 
-  searchQuery: string, 
-  isSearchClicked: boolean, 
-  searchResults: ISeller[] 
+const Map = ({
+  center,
+  zoom,
+  mapRef,
+  searchQuery,
+  isSearchClicked,
+  searchResults,
+}: {
+  center: LatLngExpression;
+  zoom: number;
+  mapRef: React.MutableRefObject<L.Map | null>;   searchQuery: string;
+  isSearchClicked: boolean;
+  searchResults: ISeller[];
 }) => {
   const t = useTranslations();
-  const mapRef = useRef<L.Map | null>(null); // reference to hold the map instance
-  const {isSigningInUser} = useContext(AppContext);
+  const { isSigningInUser } = useContext(AppContext);
 
   const customIcon = L.icon({
     iconUrl: 'images/icons/map-of-pi-icon.png',
@@ -71,12 +79,12 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
-  
+
   // Fetch initial seller coordinates when component mounts
   useEffect(() => {
     logger.info('Component mounted, fetching initial coordinates..');
     fetchInitialCoordinates();
-  }, []);
+  }, [searchQuery]);
 
   // Update origin when center prop changes
   useEffect(() => {
@@ -86,32 +94,41 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
   }, [center]);
 
   useEffect(() => {
-    if (searchQuery) {
-      setLoading(true);
-  
-      const sellersWithCoordinates = searchResults
-        .map((seller: any) => {
-          const [lng, lat] = seller.sell_map_center.coordinates;
-          return {
-            ...seller,
-            coordinates: [lat, lng] as LatLngTuple
-          };
-        });
-            
-      // Remove duplicates
-      const uniqueSellers = removeDuplicates(sellersWithCoordinates);
-  
-      // Update the sellers state
+    if (searchResults.length > 0) {
+      const sellersWithCoordinates = searchResults.map((seller: any) => {
+        const [lng, lat] = seller.sell_map_center.coordinates;
+        return {
+          ...seller,
+          coordinates: [lat, lng] as LatLngTuple,
+        };
+      });
+
+      // Remove duplicates and limit to 36 sellers
+      const uniqueSellers = removeDuplicates(sellersWithCoordinates).slice(0, 36);
+
       setSellers(uniqueSellers);
-      setLoading(false);
+    } else if (!searchQuery) {
+      // If no search results and no search query, fetch initial sellers
+      fetchInitialCoordinates();
+    } else {
+      setSellers([]); // Clear sellers when search yields no results
     }
-  }, [searchQuery, searchResults]);
+  }, [searchResults]);
 
   // Effect to zoom to fit all sellers when the search button is clicked
   useEffect(() => {
     if (isSearchClicked && searchResults.length > 0) {
-      const bounds = L.latLngBounds(searchResults.map(seller => seller.coordinates));
-      mapRef.current?.fitBounds(bounds, { padding: [50, 50] }); // zoom to fit all sellers
+      // Ensure that only valid coordinates are used to create bounds
+      const validCoordinates = searchResults
+        .map((seller) => seller.coordinates)
+        .filter((coordinates) => coordinates && coordinates.length === 2);
+  
+      if (validCoordinates.length > 0) {
+        const bounds = L.latLngBounds(validCoordinates);
+        mapRef.current?.fitBounds(bounds, { padding: [50, 50] }); // zoom to fit all sellers
+      } else {
+        logger.warn("No valid coordinates found to fit bounds.");
+      }
     }
   }, [isSearchClicked, searchResults]);
 
@@ -122,6 +139,8 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
 
   // Function to fetch initial coordinates
   const fetchInitialCoordinates = async () => {
+    if (searchQuery) return;
+
     setLoading(true);
     setError(null);
     try {
@@ -129,7 +148,7 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
       const bounds = mapRef.current?.getBounds();
 
       if (bounds) {
-        let sellersData = await fetchSellerCoordinates(bounds, searchQuery);
+        let sellersData = await fetchSellerCoordinates(bounds, '');
         sellersData = removeDuplicates(sellersData);
         setSellers(sellersData);
       }
@@ -141,9 +160,10 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
     }
   };
 
-  // Function to handle map interactions (zoom and move); lazy-loading implementation
+  // Function to handle map interactions (only when there's no search query)
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
     const newCenter = newBounds.getCenter();
+    if (searchQuery) return;
 
     logger.info('Handling map interaction with new center:', { newCenter });
     setLoading(true);
@@ -157,17 +177,21 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
 
       // Filter sellers within the new bounds, checking if coordinates are defined
       const filteredSellers = additionalSellers.filter(
-        seller => seller.coordinates && newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
+        (seller) =>
+          seller.coordinates &&
+          newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
       );
       logger.info('Filtered sellers within bounds', { filteredSellers });
 
       // Filter out sellers that are not within the new bounds from the existing sellers
       const remainingSellers = sellers.filter(
-        seller => seller.coordinates && newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
+        (seller) =>
+          seller.coordinates &&
+          newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
       );
       logger.info('Remaining sellers within bounds:', { remainingSellers });
 
-       // Combine remaining and filtered sellers, remove duplicates, and cap at 36 sellers
+      // Combine remaining and filtered sellers, remove duplicates, and cap at 36 sellers
       const updatedSellers = removeDuplicates([...remainingSellers, ...filteredSellers]);
 
       // Log the combined sellers before slicing
@@ -175,7 +199,9 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
 
       setSellers(updatedSellers.slice(0, 36)); // Cap the total sellers to 36
 
-      logger.info('Sellers after capping at 36:', { updatedSellers: updatedSellers.slice(0, 36) });
+      logger.info('Sellers after capping at 36:', {
+        updatedSellers: updatedSellers.slice(0, 36),
+      });
 
       setSellers(updatedSellers);
     } catch (error) {
@@ -235,15 +261,13 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
       }
     }, [position, map, initialLocationSet]);
 
-    return position === null ? null : (
-      <Marker position={position} />
-    );
+    return position === null ? null : <Marker position={position} />;
   }
 
-  // define map boundaries
+  // Define map boundaries
   const bounds = L.latLngBounds(
     L.latLng(-90, -180), // SW corner
-    L.latLng(90, 180)  // NE corner
+    L.latLng(90, 180) // NE corner
   );
 
   return (
@@ -270,26 +294,26 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
           {t('HOME.LOCATION_SERVICES.DISABLED_LOCATION_SERVICES_MESSAGE')}
         </div>
       )}
-      {isSigningInUser ?
-        <div className='w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0 bg-[#f5f1e6] '>
+      {isSigningInUser ? (
+        <div className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0 bg-[#f5f1e6] ">
           <div className="flex justify-center items-center w-full h-full">
-            <Image 
-              src="/default.png" 
-              width={120} 
-              height={140} 
-              alt="splashscreen" 
-            />
+            <img src="/default.png" width={120} height={140} alt="splashscreen" />
           </div>
-        </div> :
+        </div>
+      ) : (
         <MapContainer
           center={isLocationAvailable ? origin : [0, 0]}
           zoom={isLocationAvailable ? zoom : 2}
+          whenReady={(mapInstance: L.LeafletEvent) => {
+            mapRef.current = mapInstance.target as L.Map;
+          }}
           zoomControl={false}
           minZoom={2}
           maxZoom={18}
           // maxBounds={bounds}
           // maxBoundsViscosity={1.0}
-          className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0">
+          className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
+        >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -297,14 +321,18 @@ const Map = ({ center, zoom, searchQuery, isSearchClicked, searchResults }: {
           />
           <LocationMarker />
           {sellers.map((seller) => (
-            <Marker position={seller.coordinates as LatLngExpression} key={seller.seller_id} icon={customIcon}>
+            <Marker
+              position={seller.coordinates as LatLngExpression}
+              key={seller.seller_id}
+              icon={customIcon}
+            >
               <Popup closeButton={false} minWidth={300}>
                 <MapMarkerPopup seller={seller} />
               </Popup>
             </Marker>
           ))}
         </MapContainer>
-      }
+      )}
     </>
   );
 };
