@@ -304,8 +304,8 @@ const Map = ({
         <MapContainer
           center={isLocationAvailable ? origin : [0, 0]}
           zoom={isLocationAvailable ? zoom : 2}
-          whenReady={(mapInstance: L.LeafletEvent) => {
-            mapRef.current = mapInstance.target as L.Map;
+          whenReady={(mapInstance) => {
+            mapRef.current = mapInstance.target;
           }}
           zoomControl={false}
           minZoom={2}
