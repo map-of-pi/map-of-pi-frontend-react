@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
@@ -136,6 +137,28 @@ const Map = ({
   useEffect(() => {
     logger.debug('Sellers Array:', { sellers });
   }, [sellers]);
+
+  // Function to handle marker click
+  const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
+    if (!mapRef.current) return;
+
+    const map = mapRef.current;
+    const currentZoom = map.getZoom();
+
+    // Set the view to the seller's coordinates
+    map.setView(sellerCoordinates, currentZoom, { animate: true });
+    // Get the position of the clicked marker
+    const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
+    // Get the width and height of the map container
+    const mapSize = map.getSize();
+    const mapWidth = mapSize.x;
+    const mapHeight = mapSize.y;
+    // Calculate the offsets to center the marker in the map view
+    const panOffset = L.point(mapWidth / 2 - markerPoint.x, mapHeight / 2 - markerPoint.y);
+
+    // Pan the map by the calculated offset
+    map.panBy(panOffset, { animate: false }); // Disable animation to make the movement instant
+  };
 
   // Function to fetch initial coordinates
   const fetchInitialCoordinates = async () => {
@@ -296,7 +319,12 @@ const Map = ({
       {isSigningInUser ? (
         <div className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0 bg-[#f5f1e6] ">
           <div className="flex justify-center items-center w-full h-full">
-            <img src="/default.png" width={120} height={140} alt="splashscreen" />
+            <Image 
+              src="/default.png" 
+              width={120} 
+              height={140} 
+              alt="splashscreen" 
+            />
           </div>
         </div>
       ) : (
@@ -321,11 +349,20 @@ const Map = ({
               position={seller.coordinates as LatLngExpression}
               key={seller.seller_id}
               icon={customIcon}
+              eventHandlers={{
+                click: () => handleMarkerClick(seller.coordinates as LatLngTuple),
+              }}
             >
-              <Popup closeButton={false} minWidth={300}>
+              <Popup
+                closeButton={true}
+                minWidth={200}
+                maxWidth={250}
+                className="custom-popup"
+                offset={L.point(0, -3)} // Ensures the popup is slightly lower than the marker
+              >
                 <MapMarkerPopup seller={seller} />
               </Popup>
-            </Marker>
+          </Marker>
           ))}
         </MapContainer>
       )}
