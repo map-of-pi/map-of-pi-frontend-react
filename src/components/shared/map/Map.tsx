@@ -168,15 +168,13 @@ const Map = ({
     setError(null);
     try {
       // Fetch the current map bounds
-      // manually set bounds as mapref is null during component rendering phase
-      const bounds = L.latLngBounds(
-        L.latLng(-90, -180),
-        L.latLng(90, 180)
-      );
+      const bounds = mapRef.current?.getBounds();
 
-      let sellersData = await fetchSellerCoordinates(bounds, '');
-      sellersData = removeDuplicates(sellersData);
-      setSellers(sellersData);
+      if (bounds) {
+        let sellersData = await fetchSellerCoordinates(bounds, '');
+        sellersData = removeDuplicates(sellersData);
+        setSellers(sellersData);
+      }
     } catch (error) {
       logger.error('Failed to fetch initial coordinates:', { error });
       setError('Failed to fetch initial coordinates');
