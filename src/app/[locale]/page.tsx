@@ -1,13 +1,16 @@
 'use client';
 
+import L from 'leaflet';
+
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
+import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserLocation } from '@/services/userSettingsApi';
 
 import { AppContext } from '../../../context/AppContextProvider';
@@ -18,6 +21,7 @@ export default function Index() {
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), {
     ssr: false,
   });
+  const mapRef = useRef<L.Map | null>(null);
 
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
     lat: 0,
@@ -71,10 +75,21 @@ export default function Index() {
   };
 
   // handle search query update from SearchBar and associated results
-  const handleSearch = (query: string, results: any[]) => {
+  const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setSearchClicked(true);
-    setSearchResults(results);
+
+    // Fetch sellers based on current map bounds and search query
+    try {
+      const mapInstance = mapRef.current;
+      if (mapInstance) {
+        const bounds = mapInstance.getBounds();
+        const results = await fetchSellers(bounds, query); // Use API to fetch sellers
+        setSearchResults(results || []); // Update searchResults
+      }
+    } catch (error) {
+      logger.error('Failed to fetch sellers for search query.', { error });
+    }
   };
 
   return (
@@ -82,6 +97,7 @@ export default function Index() {
       <DynamicMap
         center={[mapCenter.lat, mapCenter.lng]}
         zoom={zoomLevel}
+        mapRef={mapRef}
         searchQuery={searchQuery}
         isSearchClicked={isSearchClicked}
         searchResults={searchResults || []}
