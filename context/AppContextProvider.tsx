@@ -68,7 +68,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           logger.info('User authenticated successfully.');
           setTimeout(() => {
             setIsSigningInUser(false); // hide the splash screen after the delay
-          }, 5000);
+          }, 2500);
         } else if (res.status === 500) {
           setCurrentUser(null);
           logger.error('User authentication failed.');
@@ -94,7 +94,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         setCurrentUser(res.data);
         setTimeout(() => {
           setIsSigningInUser(false); // hide the splash screen after the delay
-        }, 5000);
+        }, 2500);
       } else {
         setCurrentUser(null);
         logger.warn('Auto-login failed.');

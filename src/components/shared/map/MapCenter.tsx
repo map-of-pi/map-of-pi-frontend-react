@@ -224,17 +224,15 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         </div>
       </div>
       {/* Static Scope - should always be centered */}
-      <div className="absolute z-10 pointer-events-none top-[54.2%] left-[49.4%] transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-16 sm:h-16">
+      <div className="absolute z-10 pointer-events-none top-[53.5%] left-[47.3%] transform -translate-x-1/2 -translate-y-1/2" style={{ width: '65px', height: '65px' }}>
         <Image
           src="/images/icons/scope.png"
-          className="w-full h-full"
-          style={{
-            width: '65px',
-            height: '65px'
-          }}
           alt="Scope"
+          layout="fill"
+          className="w-full h-full object-contain" // Ensure proper scaling
         />
       </div>
+
       {showPopup && (
         <ConfirmDialogX
           toggle={() => setShowPopup(false)}

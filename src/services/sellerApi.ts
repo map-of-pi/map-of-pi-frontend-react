@@ -3,14 +3,18 @@ import { getMultipartFormDataHeaders } from '@/utils/api';
 import logger from '../../logger.config.mjs';
 
 // Fetch all sellers or sellers within bounds and/ or matching search criteria
-export const fetchSellers = async (origin: any, radius: number | undefined, searchQuery?: string) => {
+export const fetchSellers = async (bounds: L.LatLngBounds, searchQuery?: string) => {
   try {
-    logger.debug('Fetching sellers with origin, radius, and search query:', { origin, radius, searchQuery });
+    logger.debug('Fetching sellers associated with bounds and search query:', { bounds, searchQuery });
     
-    // prepare the request payload accordingly
+    // Prepare the request payload with bounds
     const requestPayload: any = {
-      origin,
-      radius
+      bounds: {
+        sw_lat: bounds.getSouthWest().lat,
+        sw_lng: bounds.getSouthWest().lng,
+        ne_lat: bounds.getNorthEast().lat,
+        ne_lng: bounds.getNorthEast().lng,
+      }
     };
     
     if (searchQuery) {
