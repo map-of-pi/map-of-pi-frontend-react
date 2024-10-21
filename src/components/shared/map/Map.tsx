@@ -203,7 +203,6 @@ const Map = ({
         updatedSellers: updatedSellers.slice(0, 36),
       });
 
-      setSellers(updatedSellers);
     } catch (error) {
       logger.error('Failed to fetch additional data:', { error });
       setError('Failed to fetch additional data');
