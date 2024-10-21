@@ -228,7 +228,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <Image
           src="/images/icons/scope.png"
           alt="Scope"
-          layout="fill" // Automatically fills the parent container
+          layout="fill"
           className="w-full h-full object-contain" // Ensure proper scaling
         />
       </div>

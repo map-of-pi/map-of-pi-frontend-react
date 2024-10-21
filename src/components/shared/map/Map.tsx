@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import React, { useEffect, useState, useCallback, useContext, useRef, MutableRefObject } from 'react';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
 import _ from 'lodash';
@@ -42,7 +42,7 @@ const fetchSellerCoordinates = async (
 restricted to one shop at the time of registration. */
 const removeDuplicates = (sellers: ISellerWithSettings[]): ISellerWithSettings[] => {
   const uniqueSellers: { [key: string]: ISellerWithSettings } = {};
-  sellers.forEach((seller) => {
+  sellers.forEach(seller => {
     uniqueSellers[seller.seller_id] = seller;
   });
   return Object.values(uniqueSellers);

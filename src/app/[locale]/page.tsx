@@ -8,9 +8,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useEffect, useState, useRef } from 'react';
 
-import { fetchSellers } from '@/services/sellerApi';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
+import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserLocation } from '@/services/userSettingsApi';
 
 import { AppContext } from '../../../context/AppContextProvider';
@@ -21,6 +21,7 @@ export default function Index() {
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), {
     ssr: false,
   });
+  const mapRef = useRef<L.Map | null>(null);
 
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
     lat: 0,
@@ -72,8 +73,6 @@ export default function Index() {
       );
     }
   };
-
-  const mapRef = useRef<L.Map | null>(null);
 
   // handle search query update from SearchBar and associated results
   const handleSearch = async (query: string) => {
