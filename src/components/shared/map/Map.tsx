@@ -154,6 +154,12 @@ const Map = ({
     map.panBy(panOffset, { animate: false }); // Disable animation to make the movement instant
   };
 
+  useEffect(() => {
+    if (mapRef.current) {
+      fetchInitialCoordinates();  // Fetch sellers when map is ready
+    }
+  }, [mapRef.current]);
+
   const fetchInitialCoordinates = async () => {
     if (searchQuery) return;
   
@@ -333,12 +339,9 @@ const Map = ({
           zoomControl={false}
           minZoom={2}
           maxZoom={18}
-          whenReady={() => {
-            if (mapRef.current) {
-              fetchInitialCoordinates(); // Fetch sellers now that mapRef is ready
-            }
+          whenReady={(mapInstance) => {
+            mapRef.current = mapInstance;        // Fetch sellers now that mapRef is ready
           }}
-          ref={mapRef}
           className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
         >
           <TileLayer
