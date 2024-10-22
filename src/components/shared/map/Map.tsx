@@ -339,9 +339,11 @@ const Map = ({
           zoomControl={false}
           minZoom={2}
           maxZoom={18}
-          whenReady={(mapInstance) => {
-            mapRef.current = mapInstance;        // Fetch sellers now that mapRef is ready
-          }}
+          whenReady={
+            ((mapInstance: L.Map) => {
+              mapRef.current = mapInstance;
+            }) as unknown as () => void // utilize Type assertion
+          }
           className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
         >
           <TileLayer
