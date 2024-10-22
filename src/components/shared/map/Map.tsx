@@ -157,7 +157,7 @@ const Map = ({
   // Function to fetch initial coordinates
   const fetchInitialCoordinates = async () => {
     if (searchQuery) return;
-  
+    
     setLoading(true);
     setError(null);
   
@@ -166,11 +166,14 @@ const Map = ({
   
       if (!mapInstance) {
         logger.warn('Map instance is not ready yet');
-        return; // Exit early if the map is not ready
+        return;
       }
   
-      // Fetch the current map bounds
+      logger.info('Map instance:', mapInstance);
+  
+      // Fetch the bounds using mapInstance.target.getBounds()
       const bounds = mapInstance.getBounds();
+      logger.info('Fetched map bounds:', bounds); // Debug log for bounds
   
       if (bounds) {
         let sellersData = await fetchSellerCoordinates(bounds, '');
@@ -183,8 +186,7 @@ const Map = ({
     } finally {
       setLoading(false);
     }
-  };
-  
+  };  
 
   // Function to handle map interactions (only when there's no search query)
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
@@ -337,8 +339,9 @@ const Map = ({
           zoomControl={false}
           minZoom={2}
           maxZoom={18}
-          whenReady={(mapInstance) => {
-            mapRef.current = mapInstance.target; // Set mapRef correctly
+          whenReady={(mapInstance: any) => {
+            mapRef.current = mapInstance.target; // Use mapInstance.target as the actual map object
+            fetchInitialCoordinates();        // Fetch sellers now that mapRef is ready
           }}
           className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
         >
