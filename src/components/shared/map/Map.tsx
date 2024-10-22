@@ -338,8 +338,7 @@ const Map = ({
           minZoom={2}
           maxZoom={18}
           whenReady={(mapInstance) => {
-            mapRef.current = mapInstance.target;
-            fetchInitialCoordinates(); // Fetch sellers after the map is initialized
+            mapRef.current = mapInstance.target; // Set mapRef correctly
           }}
           className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
         >
