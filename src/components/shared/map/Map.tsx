@@ -81,12 +81,6 @@ const Map = ({
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
 
-  // Fetch initial seller coordinates when component mounts
-  useEffect(() => {
-    logger.info('Component mounted, fetching initial coordinates..');
-    fetchInitialCoordinates();
-  }, [searchQuery]);
-
   // Update origin when center prop changes
   useEffect(() => {
     if (center) {
@@ -163,20 +157,26 @@ const Map = ({
   // Function to fetch initial coordinates
   const fetchInitialCoordinates = async () => {
     if (searchQuery) return;
-
+  
     setLoading(true);
     setError(null);
+  
     try {
+      const mapInstance = mapRef.current;
+  
+      if (!mapInstance) {
+        logger.warn('Map instance is not ready yet');
+        return; // Exit early if the map is not ready
+      }
+  
       // Fetch the current map bounds
-      // manually set bounds as mapref is null during component rendering phase
-      const bounds = L.latLngBounds(
-        L.latLng(-90, -180),
-        L.latLng(90, 180)
-      );
-
-      let sellersData = await fetchSellerCoordinates(bounds, '');
-      sellersData = removeDuplicates(sellersData);
-      setSellers(sellersData);
+      const bounds = mapInstance.getBounds();
+  
+      if (bounds) {
+        let sellersData = await fetchSellerCoordinates(bounds, '');
+        sellersData = removeDuplicates(sellersData);
+        setSellers(sellersData);
+      }
     } catch (error) {
       logger.error('Failed to fetch initial coordinates:', { error });
       setError('Failed to fetch initial coordinates');
@@ -184,6 +184,7 @@ const Map = ({
       setLoading(false);
     }
   };
+  
 
   // Function to handle map interactions (only when there's no search query)
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
@@ -336,8 +337,10 @@ const Map = ({
           zoomControl={false}
           minZoom={2}
           maxZoom={18}
-          // maxBounds={bounds}
-          // maxBoundsViscosity={1.0}
+          whenReady={(event) => {
+            mapRef.current = event.target; // Set mapRef.current
+            fetchInitialCoordinates();     // Fetch sellers now that mapRef is ready
+          }}
           className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
         >
           <TileLayer
