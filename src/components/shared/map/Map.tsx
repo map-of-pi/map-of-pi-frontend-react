@@ -154,27 +154,21 @@ const Map = ({
     map.panBy(panOffset, { animate: false }); // Disable animation to make the movement instant
   };
 
-  // Function to fetch initial coordinates
   const fetchInitialCoordinates = async () => {
     if (searchQuery) return;
-    
+  
     setLoading(true);
     setError(null);
   
     try {
-      const mapInstance = mapRef.current;
+      const mapInstance = mapRef.current; // Access map instance via ref
   
       if (!mapInstance) {
         logger.warn('Map instance is not ready yet');
         return;
       }
   
-      logger.info('Map instance:', mapInstance);
-  
-      // Fetch the bounds using mapInstance.target.getBounds()
       const bounds = mapInstance.getBounds();
-      logger.info('Fetched map bounds:', bounds); // Debug log for bounds
-  
       if (bounds) {
         let sellersData = await fetchSellerCoordinates(bounds, '');
         sellersData = removeDuplicates(sellersData);
@@ -339,10 +333,12 @@ const Map = ({
           zoomControl={false}
           minZoom={2}
           maxZoom={18}
-          whenReady={(mapInstance: any) => {
-            mapRef.current = mapInstance.target; // Use mapInstance.target as the actual map object
-            fetchInitialCoordinates();        // Fetch sellers now that mapRef is ready
+          whenReady={() => {
+            if (mapRef.current) {
+              fetchInitialCoordinates(); // Fetch sellers now that mapRef is ready
+            }
           }}
+          ref={mapRef}
           className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
         >
           <TileLayer
