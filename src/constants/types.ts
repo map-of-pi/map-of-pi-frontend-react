@@ -73,3 +73,9 @@ export type PartialReview = {
 }
 
 export interface IReviewOutput extends IReviewFeedback, PartialReview {}
+
+export enum DeviceLocationType {
+  Automatic = 'Auto',
+  GPS = 'GPS',
+  SearchCenter = 'searchCenter'
+}

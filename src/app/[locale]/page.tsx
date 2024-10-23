@@ -11,7 +11,8 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import { fetchSellers } from '@/services/sellerApi';
-import { fetchUserLocation } from '@/services/userSettingsApi';
+import { fetchUserLocation, fetchUserSettings } from '@/services/userSettingsApi';
+import { DeviceLocationType, IUserSettings } from '@/constants/types';
 
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
@@ -27,35 +28,66 @@ export default function Index() {
     lat: 0,
     lng: 0,
   });
+  const [searchCenter, setSetSearchCenter] = useState<{ lat: number; lng: number }>({
+    lat: 0,
+    lng: 0,
+  });
+  const [findme, setFindme] = useState<DeviceLocationType>(DeviceLocationType.SearchCenter);
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
-  const { isSigningInUser } = useContext(AppContext);
+  const { isSigningInUser, currentUser, autoLoginUser } = useContext(AppContext);
 
   // Default map center (example: New York City)
   const defaultMapCenter = { lat: 20, lng: -74.006 };
 
   useEffect(() => {
-    const fetchLocationOnLoad = async () => {
+    if (!currentUser) {
+      logger.info("User not logged in; attempting auto-login..");
+      autoLoginUser();
+    }
+
+    const getUserSettingsData = async () => {
       try {
-        const location = await fetchUserLocation();
-        setMapCenter(location.origin);
-        setZoomLevel(location.radius);
-        logger.info('User location obtained successfully on initial load:', {
-          location,
-        });
+        const data = await fetchUserSettings();
+        if (data) {
+          console.log('Fetched user settings data successfully: ', data.findme)
+          logger.info('Fetched user settings data successfully:', { data });
+          setDbUserSettings(data);
+          setSetSearchCenter(data.search_map_center.coordinates)
+        } else {
+          logger.warn('User Settings not found.');
+          setDbUserSettings(null);
+        }
       } catch (error) {
-        logger.error('Error getting location on initial load.', { error });
-        setMapCenter(defaultMapCenter);
-        setZoomLevel(2);
+        logger.error('Error fetching user settings data:', { error });
       }
     };
+    getUserSettingsData();
+  }, [currentUser]);
 
-    fetchLocationOnLoad();
-  }, [isSigningInUser]);
+  // useEffect(() => {
+  //   const fetchLocationOnLoad = async () => {
+  //     try {
+  //       const location = await fetchUserLocation();
+  //       setMapCenter(location.origin);
+  //       setZoomLevel(location.radius);
+  //       logger.info('User location obtained successfully on initial load:', {
+  //         location,
+  //       });
+  //     } catch (error) {
+  //       logger.error('Error getting location on initial load.', { error });
+  //       setMapCenter(defaultMapCenter);
+  //       setZoomLevel(2);
+  //     }
+  //   };
+
+  //   fetchLocationOnLoad();
+  // }, [isSigningInUser]);
 
   const handleLocationButtonClick = async () => {
     try {
@@ -95,7 +127,7 @@ export default function Index() {
   return (
     <>
       <DynamicMap
-        center={[mapCenter.lat, mapCenter.lng]}
+        center={searchCenter}
         zoom={zoomLevel}
         mapRef={mapRef}
         searchQuery={searchQuery}

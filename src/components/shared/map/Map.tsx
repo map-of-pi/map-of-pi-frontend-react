@@ -72,6 +72,13 @@ const Map = ({
     popupAnchor: [1, -34],
   });
 
+  // Define the crosshair icon for the center of the map
+  const crosshairIcon = new L.Icon({
+    iconUrl: '/images/icons/crosshair.png',
+    iconSize: [100, 100],
+    iconAnchor: [60, 60],
+  });
+
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellers, setSellers] = useState<ISellerWithSettings[]>([]);
   const [origin, setOrigin] = useState(center);
@@ -173,6 +180,8 @@ const Map = ({
         logger.warn('Map instance is not ready yet');
         return;
       }
+      console.log("initial user center:", center.toString())
+      mapInstance.setView(center, 8, { animate: true })
   
       const bounds = mapInstance.getBounds();
       if (bounds) {
@@ -203,32 +212,10 @@ const Map = ({
 
       logger.info('Fetched additional sellers:', { additionalSellers });
 
-      // Filter sellers within the new bounds, checking if coordinates are defined
-      const filteredSellers = additionalSellers.filter(
-        (seller) =>
-          seller.coordinates &&
-          newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
-      );
-      logger.info('Filtered sellers within bounds', { filteredSellers });
-
-      // Filter out sellers that are not within the new bounds from the existing sellers
-      const remainingSellers = sellers.filter(
-        (seller) =>
-          seller.coordinates &&
-          newBounds.contains([seller.coordinates[0], seller.coordinates[1]])
-      );
-      logger.info('Remaining sellers within bounds:', { remainingSellers });
-
-      // Combine remaining and filtered sellers, remove duplicates, and cap at 36 sellers
-      const updatedSellers = removeDuplicates([...remainingSellers, ...filteredSellers]);
-
-      // Log the combined sellers before slicing
-      logger.info('Combined sellers (before capping at 36):', { updatedSellers });
-
-      setSellers(updatedSellers.slice(0, 36)); // Cap the total sellers to 36
+      setSellers(additionalSellers); // Cap the total sellers to 36
 
       logger.info('Sellers after capping at 36:', {
-        updatedSellers: updatedSellers.slice(0, 36),
+        additionalSellers: additionalSellers,
       });
 
     } catch (error) {
@@ -351,6 +338,10 @@ const Map = ({
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             noWrap={true}
           />
+          <Marker
+              position={center as LatLngExpression}
+              icon={crosshairIcon}
+            ></Marker>
           <LocationMarker />
           {sellers.map((seller) => (
             <Marker

@@ -291,11 +291,11 @@ function Sidebar(props: any) {
 
   const translateFindMeOptions = [
     {
-      value: 'auto',
+      value: 'Auto',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
     },
     {
-      value: 'deviceGPS',
+      value: 'GPS',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
     },
     {
