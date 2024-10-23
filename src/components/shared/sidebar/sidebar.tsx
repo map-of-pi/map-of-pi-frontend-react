@@ -55,7 +55,7 @@ function Sidebar(props: any) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const { currentUser, autoLoginUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser, showAlert } = useContext(AppContext);
   const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   // Initialize state with appropriate types
   const [formData, setFormData] = useState<{
@@ -248,11 +248,11 @@ function Sidebar(props: any) {
         setDbUserSettings(data.settings);
         setIsSaveEnabled(false);
         logger.info('User Settings saved successfully:', { data });
-        toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
+        showAlert(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
       }
     } catch (error) {
       logger.error('Error saving user settings:', { error });
-      toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
+      showAlert(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
     }
   }
 
