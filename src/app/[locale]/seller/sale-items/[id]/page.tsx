@@ -127,10 +127,16 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           </div>
         </div>
 
-        {/* Seller Details/ Description */}
+        {/* Seller Details/Description */}
         <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.SELLER_DETAILS_LABEL')}</h2>
-        <div className="seller_item_container mb-5">          
-          <p className="mb-3">{sellerShopInfo.description}</p>
+        <div className="seller_item_container">          
+
+          {/* Seller's description with line breaks */}
+          <div className="seller-description-display">
+            <p className='mb-5' style={{ whiteSpace: 'pre-wrap' }}>
+              {sellerShopInfo.description}
+            </p>
+          </div>
         </div>
 
         {/* Seller Address/ Position */}
