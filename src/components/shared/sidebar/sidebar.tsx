@@ -251,7 +251,7 @@ function Sidebar(props: any) {
         logger.info('User Settings saved successfully:', { data });
         toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
         if (pathname === '/' || pathname === `/${local}`) {
-        setReload(true)
+          setReload(true);
         }
       }
     } catch (error) {
@@ -295,11 +295,11 @@ function Sidebar(props: any) {
 
   const translateFindMeOptions = [
     {
-      value: 'Auto',
+      value: 'auto',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
     },
     {
-      value: 'GPS',
+      value: 'deviceGPS',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
     },
     {

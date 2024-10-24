@@ -1,11 +1,5 @@
-import { IUserSettings } from '@/constants/types';
+import { DeviceLocationType, IUserSettings } from '@/constants/types';
 import logger from '../../logger.config.mjs';
-
-export enum DeviceLocationType {
-  Automatic = 'Auto',
-  GPS = 'GPS',
-  SearchCenter = 'searchCenter',
-}
 
 // Get device location, first trying GPS, and then falling back to IP-based geolocation
 const getDeviceLocation = async (): Promise<[number, number] | null> => {
