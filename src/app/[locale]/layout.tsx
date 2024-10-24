@@ -87,6 +87,17 @@ export default function LocaleLayout({
           href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
         />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVNC88Q13K"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-SVNC88Q13K');
+          `,
+        }} />
       </head>
       <body
         className={`bg-background text-black ${lato.className}`}>
