@@ -57,9 +57,10 @@ const Map = ({
   isSearchClicked,
   searchResults,
 }: {
-  center: LatLngExpression;
+  center: LatLngExpression | null;
   zoom: number;
-  mapRef: React.MutableRefObject<L.Map | null>;   searchQuery: string;
+  mapRef: React.MutableRefObject<L.Map | null>;   
+  searchQuery: string;
   isSearchClicked: boolean;
   searchResults: ISeller[];
 }) => {
@@ -81,19 +82,11 @@ const Map = ({
 
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellers, setSellers] = useState<ISellerWithSettings[]>([]);
-  const [origin, setOrigin] = useState(center);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
-
-  // Update origin when center prop changes
-  useEffect(() => {
-    if (center) {
-      setOrigin(center);
-    }
-  }, [center]);
 
   useEffect(() => {
     if (searchResults.length > 0) {
@@ -180,8 +173,17 @@ const Map = ({
         logger.warn('Map instance is not ready yet');
         return;
       }
-      console.log("initial user center:", center.toString())
-      mapInstance.setView(center, 8, { animate: true })
+      // Set and zoom map center to search center if available
+      if (center){
+        console.log("initial map center is focus to user center:", center.toString())
+        mapInstance.setView(center, 8, { animate: true })
+      } else {
+        const worldCenter = mapRef.current?.getCenter()
+        console.log("initial map center focus to world:", worldCenter?.toString())
+        worldCenter 
+        ? mapInstance.setView(worldCenter, 2, { animate: false }) 
+        : mapRef.current = mapInstance;
+      }      
   
       const bounds = mapInstance.getBounds();
       if (bounds) {
@@ -241,10 +243,10 @@ const Map = ({
         logger.info(`Location found: ${e.latlng.toString()}`);
         setPosition(e.latlng);
         setLocationError(false);
-        if (!initialLocationSet) {
-          map.setView(e.latlng, zoom, { animate: false });
-          setInitialLocationSet(true);
-          setIsLocationAvailable(true);
+        if (center) {
+          map.setView(center, zoom, { animate: false });
+          // setInitialLocationSet(true);
+          // setIsLocationAvailable(true);
         }
       },
       locationerror() {
@@ -275,7 +277,7 @@ const Map = ({
       }
     }, [position, map, initialLocationSet]);
 
-    return position === null ? null : <Marker position={position} />;
+    return center === null ? null : <Marker position={center} icon={crosshairIcon} />;
   }
 
   // Define map boundaries
@@ -321,8 +323,8 @@ const Map = ({
         </div>
       ) : (
         <MapContainer
-          center={isLocationAvailable ? origin : [0, 0]}
-          zoom={isLocationAvailable ? zoom : 2}
+          center={center ? center : [0,0]}
+          zoom={center ? zoom : 2}
           zoomControl={false}
           minZoom={2}
           maxZoom={18}
@@ -338,10 +340,10 @@ const Map = ({
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             noWrap={true}
           />
-          <Marker
+          {/* <Marker
               position={center as LatLngExpression}
               icon={crosshairIcon}
-            ></Marker>
+            ></Marker> */}
           <LocationMarker />
           {sellers.map((seller) => (
             <Marker
