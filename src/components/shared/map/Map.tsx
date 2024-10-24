@@ -72,6 +72,13 @@ const Map = ({
     popupAnchor: [1, -34],
   });
 
+  // Define the crosshair icon for the center of the map
+  const crosshairIcon = new L.Icon({
+    iconUrl: '/images/icons/crosshair.png',
+    iconSize: [100, 100],
+    iconAnchor: [60, 60],
+  });
+
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellers, setSellers] = useState<ISellerWithSettings[]>([]);
   const [origin, setOrigin] = useState(center);
@@ -332,7 +339,7 @@ const Map = ({
           />
           <Marker
             position={center as LatLngExpression}
-            icon={L.icon({ iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png' })}
+            icon={crosshairIcon}
           ></Marker>
           <LocationMarker />
           {sellers.map((seller) => (
