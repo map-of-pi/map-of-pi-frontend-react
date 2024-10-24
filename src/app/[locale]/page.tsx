@@ -1,7 +1,6 @@
 'use client';
 
 import L from 'leaflet';
-
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -11,7 +10,9 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import { fetchSellers } from '@/services/sellerApi';
-import { fetchUserLocation } from '@/services/userSettingsApi';
+import { fetchUserSettings } from '@/services/userSettingsApi';
+import { DeviceLocationType, IUserSettings } from '@/constants/types';
+import { userLocation } from '@/utils/geolocation';
 
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
@@ -23,58 +24,92 @@ export default function Index() {
   });
   const mapRef = useRef<L.Map | null>(null);
 
-  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
-    lat: 0,
-    lng: 0,
-  });
+  // State management with proper typing
+  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number } | null>(null);
+  const [searchCenter, setSearchCenter] = useState<{ lat: number; lng: number } | null>(null);
+  const [findme, setFindme] = useState<DeviceLocationType>(DeviceLocationType.SearchCenter);
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
-  const { isSigningInUser } = useContext(AppContext);
-
-  // Default map center (example: New York City)
-  const defaultMapCenter = { lat: 20, lng: -74.006 };
+  const { isSigningInUser, currentUser, autoLoginUser, reload, setReload } = useContext(AppContext);
 
   useEffect(() => {
-    const fetchLocationOnLoad = async () => {
+    setReload(false)
+    if (!currentUser) {
+      logger.info("User not logged in; attempting auto-login..");
+      autoLoginUser();
+    }
+
+    const getUserSettingsData = async () => {
       try {
-        const location = await fetchUserLocation();
-        setMapCenter(location.origin);
-        setZoomLevel(location.radius);
-        logger.info('User location obtained successfully on initial load:', {
-          location,
-        });
+        const data = await fetchUserSettings();
+        if (data) {
+          logger.info('Fetched user settings data successfully:', { data });
+          setDbUserSettings(data);
+          if (data.search_map_center?.coordinates) {
+            setSearchCenter({
+              lat: data.search_map_center.coordinates[1],
+              lng: data.search_map_center.coordinates[0],
+            });
+          }
+        } else {
+          logger.warn('User Settings not found.');
+          setDbUserSettings(null);
+          setSearchCenter(null)
+        }
       } catch (error) {
-        logger.error('Error getting location on initial load.', { error });
-        setMapCenter(defaultMapCenter);
-        setZoomLevel(2);
+        logger.error('Error fetching user settings data:', { error });
       }
     };
 
-    fetchLocationOnLoad();
-  }, [isSigningInUser]);
+    getUserSettingsData();   
+  }, [currentUser, reload]);
+
+  useEffect(() => {
+    const resolveLocation = async () => {
+      if (dbUserSettings && dbUserSettings.findme !== DeviceLocationType.SearchCenter) {
+        const loc = await userLocation(dbUserSettings);
+        if (loc) {
+          setSearchCenter({ lat: loc[0], lng: loc[1] });
+        }
+        else{
+          setSearchCenter(null)
+        }
+      }
+    };
+    resolveLocation();
+  }, [dbUserSettings]);
 
   const handleLocationButtonClick = async () => {
-    try {
-      const location = await fetchUserLocation();
-      setMapCenter(location.origin);
-      setZoomLevel(location.radius);
-      setLocationError(null);
-      logger.info('User location obtained successfully on button click:', {
-        location,
-      });
-    } catch (error) {
-      logger.error('Error getting location on button click.', { error });
-      setLocationError(
-        t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'),
-      );
+    if (dbUserSettings) {
+      const loc = await userLocation(dbUserSettings);
+      if (loc) {
+        setSearchCenter({ lat: loc[0], lng: loc[1] });
+        logger.info('User location obtained successfully on button click:', { location });
+      }
+      else{
+        setSearchCenter(null)
+      }
     }
+    // try {
+    //   setReload(true);
+    //   setLocationError(null);
+    //   logger.info('User location obtained successfully on button click:', { location });
+    // } catch (error) {
+    //   setReload(false)
+    //   logger.error('Error getting location on button click.', { error });
+    //   setLocationError(t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'));
+    // }
+    // finally{
+    //   setReload(false);
+    // }
   };
 
-  // handle search query update from SearchBar and associated results
+  // Handle search query update from SearchBar and associated results
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setSearchClicked(true);
@@ -95,7 +130,7 @@ export default function Index() {
   return (
     <>
       <DynamicMap
-        center={[mapCenter.lat, mapCenter.lng]}
+        center={searchCenter}
         zoom={zoomLevel}
         mapRef={mapRef}
         searchQuery={searchQuery}
@@ -103,7 +138,7 @@ export default function Index() {
         searchResults={searchResults || []}
       />
       <SearchBar page={'default'} onSearch={handleSearch} />
-      <div className="absolute bottom-8 z-10   right-0 left-0 m-auto pointer-events-none">
+      <div className="absolute bottom-8 z-10 right-0 left-0 m-auto pointer-events-none">
         <div className="w-[90%] lg:w-full lg:px-6 mx-auto flex items-center justify-between">
           {/* Add Seller Button */}
           <div className="pointer-events-auto">
