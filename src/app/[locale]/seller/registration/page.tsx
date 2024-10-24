@@ -129,7 +129,7 @@ const SellerRegistrationForm = () => {
       });
     } else {
       setFormData({
-        sellerName: translatedPreFilledText['retail-outlet-name'],
+        sellerName: currentUser?.pi_username || '',
         sellerType: translatedSellerTypeOptions[2].value,
         sellerDescription: translatedPreFilledText['seller-description'],
         sellerAddress: translatedPreFilledText['seller-address'],
