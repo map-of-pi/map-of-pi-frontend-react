@@ -275,7 +275,7 @@ const Map = ({
       }
     }, [position, map, initialLocationSet]);
 
-    return center === null ? null : <Marker position={center} icon={crosshairIcon} />;
+    return center === null ? null : <Marker position={center} />;
   }
 
   // Define map boundaries
