@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { useContext, useEffect, useState } from 'react';
-import { FiMenu } from 'react-icons/fi';
+import { FiHelpCircle, FiMenu } from 'react-icons/fi';
 import { IoMdArrowBack, IoMdClose } from 'react-icons/io';
 import { MdHome } from 'react-icons/md';
 
@@ -13,6 +13,7 @@ import Sidebar from '../sidebar/sidebar';
 import styles from './Navbar.module.css';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
+import Image from 'next/image'
 
 function Navbar() {
   const router = useRouter();
@@ -45,6 +46,12 @@ function Navbar() {
     setSidebarToggle(!sidebarToggle);
   };
 
+
+  const handleClick = (e: any) => {
+    e.preventDefault();
+    window.open("https://mapofpi.zapier.app", "_blank", "noopener, noreferrer");
+  };
+
   return (
     <>
       <div
@@ -60,33 +67,48 @@ function Navbar() {
             </Link>
           </div>
 
-            <div className={`${styles.nav_item} ${isHomePage && 'disabled'}`}>
-              <Link href="/">
-                <MdHome size={24} className={`${isHomePage ? 'text-tertiary' : 'text-secondary'}`} />
-              </Link>
-            </div>
-          <div className={`${styles.nav_item}`}>
-          <Link
-            href=""
-            onClick={(e) => {
-              if (isSigningInUser) {
-                e.preventDefault();
-              } else {
-                handleMenu();
-              }
-            }}
-          >
-            {sidebarToggle && !isSigningInUser ? (
-              <IoMdClose size={24} className="text-secondary" />
-            ) : (
-              <FiMenu
-                size={24}
-                className={`${
-                  isSigningInUser ? 'text-tertiary cursor-not-allowed' : 'text-secondary'
-                }`}
+          <div className={`${styles.nav_item} ${isHomePage && 'disabled'}`}>
+            <Link href="/">
+              <MdHome size={24} className={`${isHomePage ? 'text-tertiary' : 'text-secondary'}`} />
+            </Link>
+          </div>
+          <div className={`${styles.nav_item} disabled`}>
+            <Link href="/">
+              <Image
+                src="/images/logo.svg"
+                alt="Home Logo"
+                width={34}
+                height={34}
               />
-            )}
-          </Link>
+            </Link>
+          </div>
+          <div className={`${styles.nav_item}`}>
+            <Link href="/" onClick={handleClick}>
+              <FiHelpCircle size={24} className={'text-secondary'} />
+            </Link>
+          </div>
+          <div className={`${styles.nav_item}`}>
+            <Link
+              href=""
+              onClick={(e) => {
+                if (isSigningInUser) {
+                  e.preventDefault();
+                } else {
+                  handleMenu();
+                }
+              }}
+            >
+              {sidebarToggle && !isSigningInUser ? (
+                <IoMdClose size={24} className="text-secondary" />
+              ) : (
+                <FiMenu
+                  size={24}
+                  className={`${
+                    isSigningInUser ? 'text-tertiary cursor-not-allowed' : 'text-secondary'
+                  }`}
+                />
+              )}
+            </Link>
           </div>
         </div>
       </div>
