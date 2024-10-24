@@ -10,12 +10,12 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import { fetchSellers } from '@/services/sellerApi';
-import { fetchUserLocation, fetchUserSettings } from '@/services/userSettingsApi';
+import { fetchUserSettings } from '@/services/userSettingsApi';
 import { DeviceLocationType, IUserSettings } from '@/constants/types';
+import { userLocation } from '@/utils/geolocation';
 
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
-import { userLocation } from '@/utils/resolveUserLocation';
 
 export default function Index() {
   const t = useTranslations();
@@ -36,9 +36,6 @@ export default function Index() {
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
   const { isSigningInUser, currentUser, autoLoginUser, reload, setReload } = useContext(AppContext);
-
-  // Default map center (example: New York City)
-  const defaultMapCenter = { lat: 20, lng: -74.006 };
 
   useEffect(() => {
     setReload(false)

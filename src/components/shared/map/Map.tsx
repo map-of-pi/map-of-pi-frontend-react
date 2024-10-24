@@ -245,8 +245,6 @@ const Map = ({
         setLocationError(false);
         if (center) {
           map.setView(center, zoom, { animate: false });
-          // setInitialLocationSet(true);
-          // setIsLocationAvailable(true);
         }
       },
       locationerror() {
@@ -340,10 +338,6 @@ const Map = ({
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             noWrap={true}
           />
-          {/* <Marker
-              position={center as LatLngExpression}
-              icon={crosshairIcon}
-            ></Marker> */}
           <LocationMarker />
           {sellers.map((seller) => (
             <Marker
