@@ -42,9 +42,6 @@ export default function Index() {
 
   const { isSigningInUser, currentUser, autoLoginUser } = useContext(AppContext);
 
-  // Default map center (example: New York City)
-  const defaultMapCenter = { lat: 20, lng: -74.006 };
-
   useEffect(() => {
     if (!currentUser) {
       logger.info("User not logged in; attempting auto-login..");
@@ -55,7 +52,6 @@ export default function Index() {
       try {
         const data = await fetchUserSettings();
         if (data) {
-          console.log('Fetched user settings data successfully: ', data.findme)
           logger.info('Fetched user settings data successfully:', { data });
           setDbUserSettings(data);
           setSetSearchCenter(data.search_map_center.coordinates)
@@ -70,30 +66,11 @@ export default function Index() {
     getUserSettingsData();
   }, [currentUser]);
 
-  // useEffect(() => {
-  //   const fetchLocationOnLoad = async () => {
-  //     try {
-  //       const location = await fetchUserLocation();
-  //       setMapCenter(location.origin);
-  //       setZoomLevel(location.radius);
-  //       logger.info('User location obtained successfully on initial load:', {
-  //         location,
-  //       });
-  //     } catch (error) {
-  //       logger.error('Error getting location on initial load.', { error });
-  //       setMapCenter(defaultMapCenter);
-  //       setZoomLevel(2);
-  //     }
-  //   };
-
-  //   fetchLocationOnLoad();
-  // }, [isSigningInUser]);
-
   const handleLocationButtonClick = async () => {
     try {
       const location = await fetchUserLocation();
       setMapCenter(location.origin);
-      setZoomLevel(location.radius);
+      setZoomLevel(location.zoom);
       setLocationError(null);
       logger.info('User location obtained successfully on button click:', {
         location,

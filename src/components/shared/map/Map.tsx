@@ -72,13 +72,6 @@ const Map = ({
     popupAnchor: [1, -34],
   });
 
-  // Define the crosshair icon for the center of the map
-  const crosshairIcon = new L.Icon({
-    iconUrl: '/images/icons/crosshair.png',
-    iconSize: [100, 100],
-    iconAnchor: [60, 60],
-  });
-
   const [position, setPosition] = useState<L.LatLng | null>(null);
   const [sellers, setSellers] = useState<ISellerWithSettings[]>([]);
   const [origin, setOrigin] = useState(center);
@@ -180,8 +173,7 @@ const Map = ({
         logger.warn('Map instance is not ready yet');
         return;
       }
-      console.log("initial user center:", center.toString())
-      mapInstance.setView(center, 8, { animate: true })
+      mapInstance.setView(center, 8, { animate: true });
   
       const bounds = mapInstance.getBounds();
       if (bounds) {
@@ -339,9 +331,9 @@ const Map = ({
             noWrap={true}
           />
           <Marker
-              position={center as LatLngExpression}
-              icon={crosshairIcon}
-            ></Marker>
+            position={center as LatLngExpression}
+            icon={L.icon({ iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png' })}
+          ></Marker>
           <LocationMarker />
           {sellers.map((seller) => (
             <Marker

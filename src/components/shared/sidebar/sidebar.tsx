@@ -290,14 +290,6 @@ function Sidebar(props: any) {
   };
 
   const translateFindMeOptions = [
-    // {
-    //   value: 'Auto',
-    //   name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
-    // },
-    // {
-    //   value: 'GPS',
-    //   name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
-    // },
     {
       value: 'searchCenter',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_SEARCH_CENTER'),

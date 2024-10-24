@@ -61,6 +61,12 @@ export interface ReviewInt {
   image: string;
 }
 
+export enum DeviceLocationType {
+  Automatic = 'auto',
+  GPS = 'deviceGPS',
+  SearchCenter = 'searchCenter'
+}
+
 // Select specific fields from IUserSettings
 export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'email' | 'phone_number' | 'findme' | 'trust_meter_rating'>;
 
@@ -73,9 +79,3 @@ export type PartialReview = {
 }
 
 export interface IReviewOutput extends IReviewFeedback, PartialReview {}
-
-export enum DeviceLocationType {
-  Automatic = 'Auto',
-  GPS = 'GPS',
-  SearchCenter = 'searchCenter'
-}
