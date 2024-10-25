@@ -33,7 +33,7 @@ const SellerRegistrationForm = () => {
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
 
-  const { currentUser, autoLoginUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser, showAlert } = useContext(AppContext);
 
   type IFormData = {
     sellerName: string;
@@ -217,7 +217,8 @@ const SellerRegistrationForm = () => {
     // Check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
-      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
+      showAlert(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
+      return;
     }
 
     preFilledFields.forEach(({ fieldName, preFilledTextKey }) => {
@@ -246,14 +247,14 @@ const SellerRegistrationForm = () => {
         setDbSeller(data.seller);
         setIsSaveEnabled(false);
         logger.info('Seller registration saved successfully:', { data });
-        toast.success(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
+        showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_REGISTRATION_SUBMISSION'));
 
         // Fetch updated user settings
         const updatedUserSettings = await fetchUserSettings();
         setDbUserSettings(updatedUserSettings);
       }
     } catch (error) {
-      logger.error('Error saving seller registration:', { error });
+      showAlert('Error saving seller registration:');
     }
   };
 
