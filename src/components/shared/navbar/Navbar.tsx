@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -14,7 +15,6 @@ import Sidebar from '../sidebar/sidebar';
 import styles from './Navbar.module.css';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
-import Image from 'next/image'
 
 function Navbar() {
   const router = useRouter();
@@ -46,7 +46,6 @@ function Navbar() {
   const handleMenu = () => {
     setSidebarToggle(!sidebarToggle);
   };
-
 
   const handleClick = (e: any) => {
     e.preventDefault();
@@ -90,7 +89,7 @@ function Navbar() {
             <Link href="/">
               <Image
                 src="/images/logo.svg"
-                alt="Home Logo"
+                alt="Map of Pi Home Logo"
                 width={34}
                 height={34}
               />
