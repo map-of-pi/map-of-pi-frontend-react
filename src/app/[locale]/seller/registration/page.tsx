@@ -128,7 +128,7 @@ const SellerRegistrationForm = () => {
       });
     } else {
       setFormData({
-        sellerName: translatedPreFilledText['retail-outlet-name'],
+        sellerName: currentUser?.pi_username || '',
         sellerType: translatedSellerTypeOptions[2].value,
         sellerDescription: translatedPreFilledText['seller-description'],
         sellerAddress: translatedPreFilledText['seller-address'],
@@ -281,7 +281,6 @@ const SellerRegistrationForm = () => {
   };
 
   const translatedPreFilledText = {
-    'retail-outlet-name': t('SCREEN.SELLER_REGISTRATION.SELLER_RETAIL_OUTLET_PLACEHOLDER'),
     'seller-description': t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER'),
     'seller-address': t('SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER'),
   };
@@ -290,7 +289,6 @@ const SellerRegistrationForm = () => {
     fieldName: keyof IFormData;
     preFilledTextKey: keyof typeof translatedPreFilledText;
   }[] = [
-      { fieldName: 'sellerName', preFilledTextKey: 'retail-outlet-name' },
       { fieldName: 'sellerDescription', preFilledTextKey: 'seller-description' },
       { fieldName: 'sellerAddress', preFilledTextKey: 'seller-address' },
     ];
