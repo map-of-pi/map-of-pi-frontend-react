@@ -30,8 +30,8 @@
     },
     "CONTACT_MAP_OF_PI": "Wò Map of Pi me",
     "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nuŋlɔdodoawo ƒe se se yia ɖe asi me",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Nusrɔkɔdɔ togbɔna mewɔna o"
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Etsɔnyɛ nufiala nɔe o",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Nufiala menɔa wo nɛ gbɔna o"
     }
   },
   "SCREEN": {
@@ -62,7 +62,8 @@
       "SELLER_SELL_CENTER": "Nàƒé Wòkpɔ̃nɔnyewo",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Metsɔ ema aɖeke wɔna le ŋgɔ le eme",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Nyatakɔɖu nàtsoɖe tɔ wòɖé yèna nyuie",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Nukplɔla nɔa gbedodo",
+        "FAILED_REGISTRATION_SUBMISSION": "Kplɔla menɔa wo nɛ gbɔna o",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nɔviɖewɔwɔ na mi kplɔ nɛ ƒe viwo nɔ anyi nyɔnu ƒe ŋu nɔ anyi",
         "UNINITIALIZED_SELL_CENTER": "Mɛnya ɖe gbe na wo trɔtrɔ wo fiawo tso me"
       }
@@ -233,7 +234,7 @@
         "SEARCH_CENTER_SUCCESS_MESSAGE": "Nye dzi tsɔtɔ wɔm o"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Ɣe siwo...",
+    "LOADING_SCREEN_MESSAGE": "Gɔme ɖa ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Nɔvia míaɖu abe nu wò ye mele wònu o le fifiawo nyo",
       "UNEXPECTED_ERROR_MESSAGE": "Nuxlɔ̃sia na mi ɖe mɔ o"
