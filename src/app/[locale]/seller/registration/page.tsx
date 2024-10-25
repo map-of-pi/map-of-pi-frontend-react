@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useContext } from 'react';
-import { toast } from 'react-toastify';
 
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
@@ -253,8 +252,12 @@ const SellerRegistrationForm = () => {
         const updatedUserSettings = await fetchUserSettings();
         setDbUserSettings(updatedUserSettings);
       }
-    } catch (error) {
-      showAlert('Error saving seller registration:');
+    } catch (error: any) {
+      logger.error('Error saving seller registration:', { 
+        message: error.message,
+        stack: error.stack
+      });
+      showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_REGISTRATION_SUBMISSION'));
     }
   };
 
