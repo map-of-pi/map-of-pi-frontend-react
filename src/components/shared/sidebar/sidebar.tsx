@@ -56,7 +56,7 @@ function Sidebar(props: any) {
   const local = useLocale();
   const router = useRouter();
 
-  const { currentUser, autoLoginUser, setReload } = useContext(AppContext);
+  const { currentUser, autoLoginUser, setReload, showAlert } = useContext(AppContext);
   const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   // Initialize state with appropriate types
   const [formData, setFormData] = useState<{
@@ -249,14 +249,14 @@ function Sidebar(props: any) {
         setDbUserSettings(data.settings);
         setIsSaveEnabled(false);
         logger.info('User Settings saved successfully:', { data });
-        toast.success(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
+        showAlert(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
         if (pathname === '/' || pathname === `/${local}`) {
           setReload(true);
         }
       }
     } catch (error) {
       logger.error('Error saving user settings:', { error });
-      toast.error(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
+      showAlert(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
     }
   }
 
