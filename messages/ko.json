@@ -30,8 +30,8 @@
     },
     "CONTACT_MAP_OF_PI": "Map of Pi에 문의",
     "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "사용자 환경 설정 업데이트 성공",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "사용자 환경 설정 업데이트 실패"
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "환경 설정이 성공적으로 완료되었습니다",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "환경 설정 저장 중 오류 발생"
     }
   },
   "SCREEN": {
@@ -62,7 +62,8 @@
       "SELLER_SELL_CENTER": "판매 센터 설정",
       "VALIDATION": {
         "EMAIL_VALIDATION": "유효한 이메일 주소를 입력하세요",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "판매자 등록이 성공적으로 제출되었습니다",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "등록이 성공적으로 완료되었습니다",
+        "FAILED_REGISTRATION_SUBMISSION": "등록 저장 중 오류 발생",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "사용자가 인증되지 않아 등록에 실패했습니다",
         "UNINITIALIZED_SELL_CENTER": "판매 센터를 설정해주세요"
       }
@@ -233,7 +234,7 @@
         "SEARCH_CENTER_SUCCESS_MESSAGE": "검색 센터가 성공적으로 저장되었습니다"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "데이터 로딩 중...",
+    "LOADING_SCREEN_MESSAGE": "로딩 중 ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "제출이 실패했습니다; 사용자가 인증되지 않았습니다",
       "UNEXPECTED_ERROR_MESSAGE": "예기치 않은 오류가 발생했습니다"
