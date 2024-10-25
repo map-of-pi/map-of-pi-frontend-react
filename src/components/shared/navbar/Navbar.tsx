@@ -1,11 +1,12 @@
 'use client';
 
+import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { useContext, useEffect, useState } from 'react';
-import { FiMenu } from 'react-icons/fi';
+import { FiHelpCircle, FiMenu } from 'react-icons/fi';
 import { ImSpinner2 } from 'react-icons/im';
 import { IoMdArrowBack, IoMdClose } from 'react-icons/io';
 import { MdHome } from 'react-icons/md';
@@ -46,6 +47,11 @@ function Navbar() {
     setSidebarToggle(!sidebarToggle);
   };
 
+  const handleClick = (e: any) => {
+    e.preventDefault();
+    window.open("https://mapofpi.zapier.app", "_blank", "noopener, noreferrer");
+  };
+
   return (
     <>
       <div className="w-full h-[76.19px] z-500 px-[16px] py-[5px] bg-primary fixed top-0 left-0 right-0">
@@ -79,7 +85,21 @@ function Navbar() {
               <MdHome size={24} className={`${isHomePage ? 'text-tertiary' : 'text-secondary'}`} />
             </Link>
           </div>
-
+          <div className={`${styles.nav_item} disabled`}>
+            <Link href="/">
+              <Image
+                src="/images/logo.svg"
+                alt="Map of Pi Home Logo"
+                width={34}
+                height={34}
+              />
+            </Link>
+          </div>
+          <div className={`${styles.nav_item}`}>
+            <Link href="/" onClick={handleClick}>
+              <FiHelpCircle size={24} className={'text-secondary'} />
+            </Link>
+          </div>
           <div className={`${styles.nav_item}`}>
             <Link
               href=""
