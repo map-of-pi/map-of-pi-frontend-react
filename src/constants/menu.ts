@@ -31,6 +31,14 @@ export const menu = {
       },
       {
         id: 4,
+        code: 'ar',
+        label: 'AR',
+        title: 'Arabic',
+        translation: 'العربية',
+        icon: '/images/shared/language/ar.svg',
+      },
+      {
+        id: 5,
         code: 'ko',
         label: 'KO',
         title: 'Korean',
@@ -38,7 +46,7 @@ export const menu = {
         icon: '/images/shared/language/ko.svg',
       },
       {
-        id: 5,
+        id: 6,
         code: 'hau-NG',
         label: 'NG/HAU',
         title: 'Nigerian Hausa',
@@ -46,7 +54,7 @@ export const menu = {
         icon: '/images/shared/language/ng.svg',
       },
       {
-        id: 6,
+        id: 7,
         code: 'ewe-BJ',
         label: 'BJ/EWE',
         title: 'Benin Ewe',
