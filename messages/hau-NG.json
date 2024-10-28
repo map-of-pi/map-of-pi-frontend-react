@@ -41,7 +41,7 @@
       "EMAIL_LABEL": "Adireshin imel",
       "PHONE_NUMBER_LABEL": "Lambar waya",
       "CONTACT_PUBLIC_NOTE": "Adireshin imel da lambar waya za su kasance a bayyane ga kowa.",
-      "SELLER_DETAILS_PLACEHOLDER": "Bayani game da mai sayarwa da kayayyakin da ake sayarwa tare da farashin pi, da sauransu.",
+      "SELLER_DETAILS_PLACEHOLDER": "Ina sayarwa ta hanyar Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayani",
       "REVIEWS_SCORE_LABEL": "Maki Sake Dubawa",
       "SELLER_NAME": "Sunan Mai Sayarwa",
@@ -56,7 +56,7 @@
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
       "SELLER_RETAIL_OUTLET_NAME": "Sunan mashaya",
       "SELLER_ADDRESS_LOCATION_LABEL": "Adireshi ko inda kake siyarwa",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Taimaka wa masu saye su same ka ta hanyar ƙara adireshi ko bayanin inda kake siyarwa",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Alamar taswira ta na nuna inda nake sayarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
       "VALIDATION": {
