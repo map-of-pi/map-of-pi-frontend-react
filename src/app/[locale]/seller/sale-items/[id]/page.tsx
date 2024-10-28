@@ -114,7 +114,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           <div className="rounded-[50%] w-[65px] h-[65px] relative">
             <Image 
               className="rounded-[50%]" 
-              src={sellerShopInfo.image && sellerShopInfo.image.trim() !== "" ? sellerShopInfo.image : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png'} 
+              src={sellerShopInfo.image && sellerShopInfo.image.trim() !== "" ? sellerShopInfo.image : 'images/logo.svg' } 
               alt="seller logo" 
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

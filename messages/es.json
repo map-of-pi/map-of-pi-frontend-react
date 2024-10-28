@@ -41,7 +41,7 @@
       "EMAIL_LABEL": "Dirección de correo electrónico",
       "PHONE_NUMBER_LABEL": "Número de teléfono",
       "CONTACT_PUBLIC_NOTE": "La dirección de correo electrónico y el número de teléfono serán visibles públicamente.",
-      "SELLER_DETAILS_PLACEHOLDER": "Descripción del vendedor y artículos en venta con precio pi, etc.",
+      "SELLER_DETAILS_PLACEHOLDER": "Vendo a través de Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
       "REVIEWS_SCORE_LABEL": "Puntuación de Reseñas",
       "SELLER_NAME": "Nombre del Vendedor",
@@ -56,7 +56,7 @@
       "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",
       "SELLER_RETAIL_OUTLET_NAME": "Nombre del punto de venta",
       "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o lugar de venta",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Ayuda a tus compradores a encontrarte agregando una dirección o una descripción de dónde estás vendiendo",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mi marcador en el mapa muestra dónde estoy vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
       "VALIDATION": {
