@@ -352,11 +352,11 @@ const SellerRegistrationForm = () => {
           <h2 className={SUBHEADER}>
             {t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_LABEL')}
           </h2>
-          <p className="text-gray-400 text-sm">
-            {t('SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER')}
-          </p>
           <div className="mb-2">
             <TextArea
+              placeholder={t(
+                'SCREEN.SELLER_REGISTRATION.SELLER_DETAILS_PLACEHOLDER',
+              )}
               name="sellerDescription"
               value={formData.sellerDescription}
               onChange={handleChange}
@@ -424,7 +424,7 @@ const SellerRegistrationForm = () => {
                 label={t(
                   'SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL',
                 )}
-                describe={t(
+                placeholder={t(
                   'SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_PLACEHOLDER',
                 )}
                 name="sellerAddress"
