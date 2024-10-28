@@ -41,7 +41,7 @@
       "EMAIL_LABEL": "Email address",
       "PHONE_NUMBER_LABEL": "Phone number",
       "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
-      "SELLER_DETAILS_PLACEHOLDER": "Description of seller & items for sale with pi price, etc.",
+      "SELLER_DETAILS_PLACEHOLDER": "I sell via Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_LABEL": "Reviews Score",
       "SELLER_NAME": "Seller Name",
@@ -56,7 +56,7 @@
       "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
       "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
       "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Help your buyers find you by adding address or a description of where you are selling",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
       "VALIDATION": {
