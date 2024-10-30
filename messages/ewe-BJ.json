@@ -30,8 +30,8 @@
     },
     "CONTACT_MAP_OF_PI": "Wò Map of Pi me",
     "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nuŋlɔdodoawo ƒe se se yia ɖe asi me",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Nusrɔkɔdɔ togbɔna mewɔna o"
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Etsɔnyɛ nufiala nɔe o",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Nufiala menɔa wo nɛ gbɔna o"
     }
   },
   "SCREEN": {
@@ -41,7 +41,7 @@
       "EMAIL_LABEL": "Nu kɔnta le ema",
       "PHONE_NUMBER_LABEL": "Nɔ̃nyo ƒe dzesi",
       "CONTACT_PUBLIC_NOTE": "Nu kɔnta le ema kple nɔ̃nyo ƒe dzesi wogbe na wo.",
-      "SELLER_DETAILS_PLACEHOLDER": "Nuxlɔ̃tɔ kple nyateƒea ƒe agblewo tso pi gãwɔna dzi, etc.",
+      "SELLER_DETAILS_PLACEHOLDER": "Metɔ ƒe sia menye Pay with Pi ƒe gbɔgbɔ la me.",
       "REVIEWS_SUMMARY_LABEL": "Sɔlɔɖe ɖe do",
       "REVIEWS_SCORE_LABEL": "Sɔlɔɖe mɔkpla",
       "SELLER_NAME": "Adesɔ ŋutɔ",
@@ -55,14 +55,14 @@
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Tsiteyɔnu Nusrɔ̃ Me ɖoɖo",
       "SELLER_RETAIL_OUTLET_NAME": "Nukunu nye reta tso hã",
-      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "Ŋkɔnye tsɔ ƒe nye ame du",
       "SELLER_ADDRESS_LOCATION_LABEL": "Duɖuɖu kple wò nɔ ɖa xɔxɔ me",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nu tsɔ agbalẽ la yi be wò nu fia wò dzi be wò dzoe fɔ nuɖe ɖo nyɔnu me, ekema wò to gbɔ me kpɔ wo",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nudɔlaɖiɖiɖia ƒe ame la le ŋgɔ me kplɔe to ɖe madzɔna gɔme",
       "SELLER_SETTINGS_LABEL": "Ɖe le Adesɔ",
       "SELLER_SELL_CENTER": "Nàƒé Wòkpɔ̃nɔnyewo",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Metsɔ ema aɖeke wɔna le ŋgɔ le eme",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Nyatakɔɖu nàtsoɖe tɔ wòɖé yèna nyuie",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Nukplɔla nɔa gbedodo",
+        "FAILED_REGISTRATION_SUBMISSION": "Kplɔla menɔa wo nɛ gbɔna o",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nɔviɖewɔwɔ na mi kplɔ nɛ ƒe viwo nɔ anyi nyɔnu ƒe ŋu nɔ anyi",
         "UNINITIALIZED_SELL_CENTER": "Mɛnya ɖe gbe na wo trɔtrɔ wo fiawo tso me"
       }
@@ -233,7 +233,7 @@
         "SEARCH_CENTER_SUCCESS_MESSAGE": "Nye dzi tsɔtɔ wɔm o"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Ɣe siwo...",
+    "LOADING_SCREEN_MESSAGE": "Gɔme ɖa ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Nɔvia míaɖu abe nu wò ye mele wònu o le fifiawo nyo",
       "UNEXPECTED_ERROR_MESSAGE": "Nuxlɔ̃sia na mi ɖe mɔ o"

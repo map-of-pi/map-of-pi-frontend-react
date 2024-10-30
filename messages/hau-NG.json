@@ -30,8 +30,8 @@
     },
     "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
     "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Sabunta zaɓuɓɓukan mai amfani ya yi nasara",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Sabuntawar zaɓuɓɓukan mai amfani ta gaza"
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Zaɓuɓɓuka sun yi nasara",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Kuskure wajen adana zaɓuɓɓuka"
     }
   },
   "SCREEN": {
@@ -41,7 +41,7 @@
       "EMAIL_LABEL": "Adireshin imel",
       "PHONE_NUMBER_LABEL": "Lambar waya",
       "CONTACT_PUBLIC_NOTE": "Adireshin imel da lambar waya za su kasance a bayyane ga kowa.",
-      "SELLER_DETAILS_PLACEHOLDER": "Bayani game da mai sayarwa da kayayyakin da ake sayarwa tare da farashin pi, da sauransu.",
+      "SELLER_DETAILS_PLACEHOLDER": "Ina sayarwa ta hanyar Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayani",
       "REVIEWS_SCORE_LABEL": "Maki Sake Dubawa",
       "SELLER_NAME": "Sunan Mai Sayarwa",
@@ -55,14 +55,14 @@
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
       "SELLER_RETAIL_OUTLET_NAME": "Sunan mashaya",
-      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "Sunan shagonka",
       "SELLER_ADDRESS_LOCATION_LABEL": "Adireshi ko inda kake siyarwa",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Taimaka wa masu saye su same ka ta hanyar ƙara adireshi ko bayanin inda kake siyarwa",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Alamar taswira ta na nuna inda nake sayarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Don Allah shigar da ingantaccen adireshin imel",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rijista ta sayarwa ta samu nasara",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rajista ta yi nasara",
+        "FAILED_REGISTRATION_SUBMISSION": "Kuskure wajen adana rajista",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Rijista ta gaza saboda mai amfani ba a tantance shi ba",
         "UNINITIALIZED_SELL_CENTER": "Da fatan za ku saita cibiyar sayarwarku"
       }
@@ -232,7 +232,7 @@
         "SEARCH_CENTER_SUCCESS_MESSAGE": "An adana Cibiyar Bincike ɗinku cikin nasara"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Ana ɗaukar bayanai...",
+    "LOADING_SCREEN_MESSAGE": "Ana loda ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Aika ya kasa saboda mai amfani ba a tabbatar da shi ba",
       "UNEXPECTED_ERROR_MESSAGE": "An samu kuskure da ba a zata ba"

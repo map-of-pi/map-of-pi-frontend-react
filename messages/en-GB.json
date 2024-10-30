@@ -30,8 +30,8 @@
     },
     "CONTACT_MAP_OF_PI": "Contact Map of Pi",
     "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "User Preferences update successful",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "User Preferences update failed"
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Preferences successful",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Error saving preferences"
     }
   },
   "SCREEN": {
@@ -41,7 +41,7 @@
       "EMAIL_LABEL": "Email address",
       "PHONE_NUMBER_LABEL": "Phone number",
       "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
-      "SELLER_DETAILS_PLACEHOLDER": "Description of seller & items for sale with pi price, etc.",
+      "SELLER_DETAILS_PLACEHOLDER": "I sell via Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_LABEL": "Reviews Score",
       "SELLER_NAME": "Seller Name",
@@ -55,14 +55,14 @@
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
       "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
-      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "Name of your shop",
       "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Help your buyers find you by adding address or a description of where you are selling",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Please enter a valid email address",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Seller Registration submitted successfully",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",
+        "FAILED_REGISTRATION_SUBMISSION": "Error saving registration",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated",
         "UNINITIALIZED_SELL_CENTER": "Please set your Sell Centre"
       }
@@ -246,7 +246,7 @@
         "SEARCH_CENTER_SUCCESS_MESSAGE": "Your Search Centre has been saved successfully"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Loading data...",
+    "LOADING_SCREEN_MESSAGE": "Loading ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Submission failed because user is not authenticated",
       "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  

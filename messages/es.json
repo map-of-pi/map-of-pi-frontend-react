@@ -30,8 +30,8 @@
     },
     "CONTACT_MAP_OF_PI": "Contactar a Map of Pi",
     "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Actualización de preferencias del usuario exitosa",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "La actualización de las preferencias del usuario falló"
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Preferencias guardadas con éxito",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Error al guardar las preferencias"
     }
   },
   "SCREEN": {
@@ -41,7 +41,7 @@
       "EMAIL_LABEL": "Dirección de correo electrónico",
       "PHONE_NUMBER_LABEL": "Número de teléfono",
       "CONTACT_PUBLIC_NOTE": "La dirección de correo electrónico y el número de teléfono serán visibles públicamente.",
-      "SELLER_DETAILS_PLACEHOLDER": "Descripción del vendedor y artículos en venta con precio pi, etc.",
+      "SELLER_DETAILS_PLACEHOLDER": "Vendo a través de Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
       "REVIEWS_SCORE_LABEL": "Puntuación de Reseñas",
       "SELLER_NAME": "Nombre del Vendedor",
@@ -55,14 +55,14 @@
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",
       "SELLER_RETAIL_OUTLET_NAME": "Nombre del punto de venta",
-      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "Nombre de tu tienda",
       "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o lugar de venta",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Ayuda a tus compradores a encontrarte agregando una dirección o una descripción de dónde estás vendiendo",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mi marcador en el mapa muestra dónde estoy vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Por favor, ingresa una dirección de correo electrónico válida",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro de vendedor enviado con éxito",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro exitoso",
+        "FAILED_REGISTRATION_SUBMISSION": "Error al guardar el registro",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "El registro falló porque el usuario no está autenticado",
         "UNINITIALIZED_SELL_CENTER": "Por favor, establezca su Centro de Venta"
       }
@@ -233,7 +233,7 @@
         "SEARCH_CENTER_SUCCESS_MESSAGE": "Tu centro de búsqueda se ha guardado correctamente"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Cargando datos...",
+    "LOADING_SCREEN_MESSAGE": "Cargando ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "El envío falló porque el usuario no está autenticado",
       "UNEXPECTED_ERROR_MESSAGE": "Ocurrió un error inesperado"

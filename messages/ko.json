@@ -30,8 +30,8 @@
     },
     "CONTACT_MAP_OF_PI": "Map of Pi에 문의",
     "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "사용자 환경 설정 업데이트 성공",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "사용자 환경 설정 업데이트 실패"
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "환경 설정이 성공적으로 완료되었습니다",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "환경 설정 저장 중 오류 발생"
     }
   },
   "SCREEN": {
@@ -41,7 +41,7 @@
       "EMAIL_LABEL": "이메일 주소",
       "PHONE_NUMBER_LABEL": "전화번호",
       "CONTACT_PUBLIC_NOTE": "이메일 주소와 전화번호가 공개적으로 표시됩니다.",
-      "SELLER_DETAILS_PLACEHOLDER": "판매자 및 판매 품목 설명, pi 가격 등",
+      "SELLER_DETAILS_PLACEHOLDER": "Pay with Pi로 판매합니다.",
       "REVIEWS_SUMMARY_LABEL": "리뷰 요약",
       "REVIEWS_SCORE_LABEL": "리뷰 점수",
       "SELLER_NAME": "판매자 이름",
@@ -55,14 +55,14 @@
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "고급 판매자 설정",
       "SELLER_RETAIL_OUTLET_NAME": "소매점 이름",
-      "SELLER_RETAIL_OUTLET_PLACEHOLDER": "상점 이름을 입력하세요",
       "SELLER_ADDRESS_LOCATION_LABEL": "주소 또는 판매 장소",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "구매자가 당신을 찾을 수 있도록 주소 또는 판매 장소에 대한 설명을 추가하세요",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "내 지도 마커가 판매 위치를 표시합니다",
       "SELLER_SETTINGS_LABEL": "판매자 설정",
       "SELLER_SELL_CENTER": "판매 센터 설정",
       "VALIDATION": {
         "EMAIL_VALIDATION": "유효한 이메일 주소를 입력하세요",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "판매자 등록이 성공적으로 제출되었습니다",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "등록이 성공적으로 완료되었습니다",
+        "FAILED_REGISTRATION_SUBMISSION": "등록 저장 중 오류 발생",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "사용자가 인증되지 않아 등록에 실패했습니다",
         "UNINITIALIZED_SELL_CENTER": "판매 센터를 설정해주세요"
       }
@@ -233,7 +233,7 @@
         "SEARCH_CENTER_SUCCESS_MESSAGE": "검색 센터가 성공적으로 저장되었습니다"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "데이터 로딩 중...",
+    "LOADING_SCREEN_MESSAGE": "로딩 중 ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "제출이 실패했습니다; 사용자가 인증되지 않았습니다",
       "UNEXPECTED_ERROR_MESSAGE": "예기치 않은 오류가 발생했습니다"
