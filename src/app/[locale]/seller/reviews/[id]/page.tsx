@@ -178,6 +178,15 @@ function SellerReviews({
               onChange={handleSearchBarChange}
               ref={inputRef}
               autoCorrect="off"
+              autoCapitalize="off"
+              autoComplete="off" 
+              spellCheck="false" 
+              inputProps={{
+                autoCorrect: 'off',
+                autoCapitalize: 'off',
+                spellCheck: 'false',
+                autoComplete: 'new-password',
+              }}
             />
           </FormControl>
           <button
