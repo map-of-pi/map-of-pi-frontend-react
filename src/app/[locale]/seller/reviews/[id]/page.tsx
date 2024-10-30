@@ -67,6 +67,7 @@ function SellerReviews({
   const fetchUserReviews = async () => {
     setError(null);
     try {
+      setToUser(userId);
       logger.info(`Fetching reviews for userID: ${userId}`);
       const data = await fetchReviews(userId);
 
@@ -74,7 +75,6 @@ function SellerReviews({
         if (data.givenReviews.length > 0) {
           logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${userId}`);
           setGiverReviews(processReviews(data.givenReviews));
-          setToUser(userId);
         } else {
           logger.warn(`No given reviews found for userID: ${userId}`);
           setGiverReviews([]);
@@ -200,7 +200,7 @@ function SellerReviews({
 
         <ToggleCollapse header={t('SCREEN.REVIEWS.GIVE_REVIEW_SECTION_HEADER')}>
           <div>
-            <EmojiPicker sellerId={toUser} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} setReload={setReload} refresh={fetchUserReviews} />
+            <EmojiPicker userId={toUser} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} setReload={setReload} refresh={fetchUserReviews} />
           </div>
         </ToggleCollapse>      
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
