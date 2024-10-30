@@ -190,7 +190,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
               : reviews[currentIndex].giver}
           </h2>
           <EmojiPicker
-            sellerId={
+            userId={
               currentUser?.pi_uid === reviews[currentIndex].giverId
                 ? reviews[currentIndex]?.receiverId
                 : reviews[currentIndex].giverId
