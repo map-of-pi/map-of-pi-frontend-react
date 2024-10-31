@@ -82,5 +82,4 @@ export const userLocation = async (userSettings: IUserSettings): Promise<[number
     logger.warn('Invalid search center coordinates.');
     return null;
   }
-  
 };
