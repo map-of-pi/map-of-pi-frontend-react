@@ -102,7 +102,7 @@ function Sidebar(props: any) {
           setDbUserSettings(null);
         }
       } catch (error) {
-        logger.error('Error fetching user settings data:', { error });
+        logger.error('Error fetching user settings data:', error);
       }
     };
     getUserSettingsData();
@@ -255,7 +255,7 @@ function Sidebar(props: any) {
         }
       }
     } catch (error) {
-      logger.error('Error saving user settings:', { error });
+      logger.error('Error saving user settings:', error);
       showAlert(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
     }
   }

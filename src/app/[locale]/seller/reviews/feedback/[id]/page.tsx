@@ -24,7 +24,7 @@ interface ReplyToReviewPageProps {
   };
 }
 
-export default function ReplyToReviewPage({ params, searchParams }: ReplyToReviewPageProps) {
+export default function ReplyToReviewPage({ params }: ReplyToReviewPageProps) {
   const t = useTranslations();
   const router = useRouter();
 
@@ -83,7 +83,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
           setReviews([]);
         }
       } catch (error) {
-        logger.error(`Error fetching review data for review ID: ${reviewId}`, { error });
+        logger.error(`Error fetching review data for review ID: ${reviewId}`, error);
         setError('Error fetching review. Please try again later.');
       } finally {
         setLoading(false);

@@ -131,7 +131,7 @@ export default function EmojiPicker(props: any) {
         toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
       }
     } catch (error) {
-      logger.error('Error saving review:', { error });
+      logger.error('Error saving review:', error);
     }
   };
   

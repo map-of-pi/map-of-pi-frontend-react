@@ -87,7 +87,7 @@ const SellerRegistrationForm = () => {
           setDbSeller(null);
         }
       } catch (error) {
-        logger.error('Error fetching seller data:', { error });
+        logger.error('Error fetching seller data:', error);
         setError('Error fetching seller data.');
       } finally {
         setLoading(false);
@@ -105,7 +105,7 @@ const SellerRegistrationForm = () => {
           setDbUserSettings(null);
         }
       } catch (error) {
-        logger.error('Error fetching user settings data:', { error });
+        logger.error('Error fetching user settings data:', error);
       }
     };
 
@@ -252,11 +252,8 @@ const SellerRegistrationForm = () => {
         const updatedUserSettings = await fetchUserSettings();
         setDbUserSettings(updatedUserSettings);
       }
-    } catch (error: any) {
-      logger.error('Error saving seller registration:', { 
-        message: error.message,
-        stack: error.stack
-      });
+    } catch (error) {
+      logger.error('Error saving seller registration:',error);
       showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_REGISTRATION_SUBMISSION'));
     }
   };

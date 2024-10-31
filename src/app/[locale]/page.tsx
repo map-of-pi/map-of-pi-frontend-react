@@ -62,7 +62,7 @@ export default function Index() {
           setSearchCenter(null)
         }
       } catch (error) {
-        logger.error('Error fetching user settings data:', { error });
+        logger.error('Error fetching user settings data:', error);
       }
     };
 
@@ -95,18 +95,6 @@ export default function Index() {
         setSearchCenter(null)
       }
     }
-    // try {
-    //   setReload(true);
-    //   setLocationError(null);
-    //   logger.info('User location obtained successfully on button click:', { location });
-    // } catch (error) {
-    //   setReload(false)
-    //   logger.error('Error getting location on button click.', { error });
-    //   setLocationError(t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'));
-    // }
-    // finally{
-    //   setReload(false);
-    // }
   };
 
   // Handle search query update from SearchBar and associated results
@@ -123,7 +111,7 @@ export default function Index() {
         setSearchResults(results || []); // Update searchResults
       }
     } catch (error) {
-      logger.error('Failed to fetch sellers for search query.', { error });
+      logger.error('Failed to fetch sellers for search query.', error);
     }
   };
 
