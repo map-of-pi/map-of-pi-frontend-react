@@ -32,12 +32,8 @@ export const fetchSellers = async (bounds: L.LatLngBounds, searchQuery?: string)
       logger.error(`Fetch sellers failed with Status ${response.status}`);
       return null;
     }
-  } catch (error: any) {
-    logger.error('Fetch sellers encountered an error:', { 
-      message: error.message,
-      config: error.config,
-      stack: error.stack
-    });
+  } catch (error) {
+    logger.error('Fetch sellers encountered an error:', error);
     throw new Error('Failed to fetch sellers. Please try again later.');
   }
 };
@@ -55,12 +51,8 @@ export const fetchSingleSeller = async (sellerId: string) => {
       logger.error(`Fetch single seller failed with Status ${response.status}`);
       return null;
     }
-  } catch (error: any) {
-    logger.error('Fetch single seller encountered an error:', { 
-      message: error.message,
-      config: error.config,
-      stack: error.stack
-    });
+  } catch (error) {
+    logger.error('Fetch single seller encountered an error:', error);
     throw new Error('Failed to fetch single seller. Please try again later.');
   }
 };
@@ -78,12 +70,8 @@ export const fetchSellerRegistration = async () => {
       logger.error(`Fetch seller registration failed with Status ${response.status}`);
       return null;
     }
-  } catch (error: any) {
-    logger.error('Fetch seller registration encountered an error:', { 
-      message: error.message,
-      config: error.config,
-      stack: error.stack
-    });
+  } catch (error) {
+    logger.error('Fetch seller registration encountered an error:', error);
     throw new Error('Failed to fetch seller registration. Please try again later.');
   }
 };
@@ -105,12 +93,8 @@ export const registerSeller = async (formData: FormData) => {
       logger.error(`Create or update seller registration failed with Status ${response.status}`);
       return null;
     }
-  } catch (error: any) {
-    logger.error('Create or update seller registration encountered an error:', { 
-      message: error.message,
-      config: error.config,
-      stack: error.stack
-    });
+  } catch (error) {
+    logger.error('Create or update seller registration encountered an error:', error);
     throw new Error('Failed to register seller. Please try again later.');
   }
 };
