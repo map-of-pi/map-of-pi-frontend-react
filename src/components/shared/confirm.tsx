@@ -2,7 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 
-const ConfirmDialog = ({ show, onClose, setConfirm, message, url }:any) => {
+const ConfirmDialog = ({ show, onClose, message, url }:any) => {
   const router = useRouter();
     
   const handleClicked = () => {
