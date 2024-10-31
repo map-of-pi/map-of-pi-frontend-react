@@ -93,7 +93,7 @@ function SellerReviews({
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Error fetching reviews for userID: ${userId}`, { error });
+      logger.error(`Error fetching reviews for userID: ${userId}`, error);
       setError('Error fetching reviews. Please try again later.');
     } finally {
       setLoading(false);
@@ -138,7 +138,7 @@ function SellerReviews({
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Pioneer ${searchBarValue} not found`, { error });
+      logger.error(`Pioneer ${searchBarValue} not found`, error);
       return toast.error(t('SCREEN.REVIEWS.VALIDATION.NO_PIONEER_FOUND', { search_value: searchBarValue }));
     } finally {
       setReload(false);

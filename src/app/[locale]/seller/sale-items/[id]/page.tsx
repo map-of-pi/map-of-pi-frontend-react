@@ -54,7 +54,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           logger.warn(`No seller shop info found for seller ID: ${sellerId}`);
         }
       } catch (error) {
-        logger.error(`Error fetching seller data for seller ID: ${ sellerId }`, { error });
+        logger.error(`Error fetching seller data for seller ID: ${ sellerId }`, error);
         setError('Error fetching seller data');
       } finally {
         setLoading(false);
@@ -72,7 +72,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           logger.warn(`No seller settings found for seller ID: ${sellerId}`);
         }
       } catch (error) {
-        logger.error(`Error fetching seller settings for seller ID: ${ sellerId }`, { error });
+        logger.error(`Error fetching seller settings for seller ID: ${ sellerId }`, error);
         setError('Error fetching seller settings');
       }
     };

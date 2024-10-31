@@ -16,12 +16,8 @@ export const fetchSingleReview = async (reviewID: string) => {
       logger.error(`Fetch single review failed with Status ${response.status}`);
       return null;
     }
-  } catch (error: any) {
-    logger.error(`Fetch single review for ${ reviewID } encountered an error:`, { 
-      message: error.message,
-      config: error.config,
-      stack: error.stack
-    });
+  } catch (error) {
+    logger.error(`Fetch single review for ${ reviewID } encountered an error:`, error);
     throw new Error('Failed to fetch single review. Please try again later.');
   }
 };
@@ -42,12 +38,8 @@ export const fetchReviews = async (userId:string, searchQuery:string='') => {
       logger.error(`Fetch reviews failed with Status ${response.status}`);
       return null;
     }
-  } catch (error: any) {
-    logger.error(`Fetch reviews for ${ userId } encountered an error:`, { 
-      message: error.message,
-      config: error.config,
-      stack: error.stack
-    });
+  } catch (error) {
+    logger.error(`Fetch reviews for ${ userId } encountered an error:`, error);
     throw new Error('Failed to fetch reviews. Please try again later.');
   }
 };
@@ -69,12 +61,8 @@ export const createReview = async (formData: FormData) => {
       logger.error(`Create review failed with Status ${response.status}`);
       return null;
     }
-  } catch (error: any) {
-    logger.error('Create review encountered an error:', { 
-      message: error.message,
-      config: error.config,
-      stack: error.stack
-    });
+  } catch (error) {
+    logger.error('Create review encountered an error:', error);
     throw new Error('Failed to create review. Please try again later.');
   }
 };
