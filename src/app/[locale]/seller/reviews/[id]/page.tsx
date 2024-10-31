@@ -64,36 +64,36 @@ function SellerReviews({
     return reviews;
   };
 
-  const fetchUserReviews = async () => {
+  const fetchUserReviews = async (uid:string) => {
     setError(null);
     try {
-      setToUser(userId);
-      logger.info(`Fetching reviews for userID: ${userId}`);
-      const data = await fetchReviews(userId);
+      setToUser(uid);
+      logger.info(`Fetching reviews for userID: ${uid}`);
+      const data = await fetchReviews(uid);
 
       if (data) {
         if (data.givenReviews.length > 0) {
-          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${userId}`);
+          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${uid}`);
           setGiverReviews(processReviews(data.givenReviews));
         } else {
-          logger.warn(`No given reviews found for userID: ${userId}`);
+          logger.warn(`No given reviews found for userID: ${uid}`);
           setGiverReviews([]);
         }
 
         if (data.receivedReviews.length > 0) {
-          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${userId}`);
+          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${uid}`);
           setReceiverReviews(processReviews(data.receivedReviews));
         } else {
-          logger.warn(`No received reviews found for userID: ${userId}`);
+          logger.warn(`No received reviews found for userID: ${uid}`);
           setReceiverReviews([]);
         }          
       } else {
-        logger.warn(`No reviews found for userID: ${userId}`);
+        logger.warn(`No reviews found for userID: ${uid}`);
         setGiverReviews([]);
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Error fetching reviews for userID: ${userId}`, { error });
+      logger.error(`Error fetching reviews for userID: ${uid}`, { error });
       setError('Error fetching reviews. Please try again later.');
     } finally {
       setLoading(false);
@@ -102,7 +102,7 @@ function SellerReviews({
   };
 
   useEffect(() => {
-    fetchUserReviews();
+    fetchUserReviews(userId);
   }, [userId, currentUser]);
 
   // Handle search logic
@@ -204,7 +204,7 @@ function SellerReviews({
                   <div className="flex-grow">
                     <p className="text-primary text-sm">
                       {review.giver} {' -> '}
-                      <span className="text-primary text-sm">{review.receiver}</span>
+                      <span className="text-primary text-sm" onClick={()=>fetchUserReviews(review.receiverId)}>{review.receiver}</span>
                     </p>
                     <p className="text-md break-words">{review.heading}</p>
                   </div>
