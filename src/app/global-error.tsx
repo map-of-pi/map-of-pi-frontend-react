@@ -14,7 +14,7 @@ export default function GlobalError({
 }) {
   useEffect(() => {
     Sentry.captureException(error);
-    logger.error('Global error captured:', { error });
+    logger.error('Global error captured:', error);
   }, [error]);
 
   return (
