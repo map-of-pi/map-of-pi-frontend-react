@@ -24,6 +24,7 @@ import { fetchUserSettings } from '@/services/userSettingsApi';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
+import { authentication } from '@/utils/authentication';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -73,10 +74,7 @@ const SellerRegistrationForm = () => {
 
   // Fetch seller data and user settings on component mount
   useEffect(() => {
-    if (!currentUser) {
-      logger.info('User not logged in; attempting auto-login..');
-      autoLoginUser();
-    }
+    authentication(currentUser, autoLoginUser);
 
     const getSellerData = async () => {
       try {

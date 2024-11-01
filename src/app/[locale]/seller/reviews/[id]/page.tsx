@@ -17,6 +17,7 @@ import { fetchReviews } from '@/services/reviewsApi';
 import { resolveDate } from '@/utils/date';
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
+import { authentication } from '@/utils/authentication';
 
 function SellerReviews({
   params,
@@ -34,7 +35,7 @@ function SellerReviews({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-  const { currentUser, setReload, reload } = useContext(AppContext);
+  const { currentUser, setReload, reload, autoLoginUser } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchBarValue, setSearchBarValue] = useState('');
   const [toUser, setToUser] = useState('');
@@ -102,6 +103,7 @@ function SellerReviews({
   };
 
   useEffect(() => {
+    authentication(currentUser, autoLoginUser);
     fetchUserReviews();
   }, [userId, currentUser]);
 
