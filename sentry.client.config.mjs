@@ -6,12 +6,7 @@ if (process.env.NODE_ENV === 'production') {
   try {
     Sentry.init({
       dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-      integrations: [
-        replayIntegration({
-          maskAllText: true // enforce PII masking and privacy considerations
-        })
-      ],
-      tracesSampleRate: 1.0,
+      tracesSampleRate: 0.1,
       replaysSessionSampleRate: 0.1,
       replaysOnErrorSampleRate: 1.0
     });
