@@ -17,7 +17,7 @@ import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import { authentication } from '@/utils/authentication';
+import { checkAndAutoLoginUser } from '@/utils/checkAndAutoLoginUser';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -36,7 +36,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
-    authentication(currentUser, autoLoginUser);
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
     
     const getSellerData = async () => {
       try {

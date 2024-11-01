@@ -16,7 +16,7 @@ import { userLocation } from '@/utils/geolocation';
 
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
-import { authentication } from '@/utils/authentication';
+import { checkAndAutoLoginUser } from '@/utils/checkAndAutoLoginUser';
 
 export default function Index() {
   const t = useTranslations();
@@ -40,7 +40,7 @@ export default function Index() {
 
   useEffect(() => {
     setReload(false)
-    authentication(currentUser, autoLoginUser);
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
 
     const getUserSettingsData = async () => {
       try {

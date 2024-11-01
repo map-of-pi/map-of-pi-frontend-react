@@ -14,7 +14,7 @@ import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../../util/ratingUtils';
 import { AppContext } from '../../../../../../../context/AppContextProvider';
 import logger from '../../../../../../../logger.config.mjs';
-import { authentication } from '@/utils/authentication';
+import { checkAndAutoLoginUser } from '@/utils/checkAndAutoLoginUser';
 
 interface ReplyToReviewPageProps {
   params: {
@@ -62,7 +62,7 @@ export default function ReplyToReviewPage({ params }: ReplyToReviewPageProps) {
   };
   
   useEffect(() => {
-    authentication(currentUser, autoLoginUser);
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
 
     const getReviewData = async () => {
       try {

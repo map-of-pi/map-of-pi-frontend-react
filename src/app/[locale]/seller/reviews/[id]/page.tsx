@@ -17,7 +17,7 @@ import { fetchReviews } from '@/services/reviewsApi';
 import { resolveDate } from '@/utils/date';
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import { authentication } from '@/utils/authentication';
+import { checkAndAutoLoginUser } from '@/utils/checkAndAutoLoginUser';
 
 function SellerReviews({
   params,
@@ -103,7 +103,7 @@ function SellerReviews({
   };
 
   useEffect(() => {
-    authentication(currentUser, autoLoginUser);
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
     fetchUserReviews();
   }, [userId, currentUser]);
 
