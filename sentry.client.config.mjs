@@ -21,5 +21,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export const logToSentry = (message) => {
-  Sentry.captureMessage(message, 'error');
+  Sentry.captureException(new Error(message));
 };
