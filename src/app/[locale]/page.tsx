@@ -12,6 +12,7 @@ import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { DeviceLocationType, IUserSettings } from '@/constants/types';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import { userLocation } from '@/utils/geolocation';
 
 import { AppContext } from '../../../context/AppContextProvider';
@@ -39,10 +40,7 @@ export default function Index() {
 
   useEffect(() => {
     setReload(false)
-    if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
-      autoLoginUser();
-    }
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
 
     const getUserSettingsData = async () => {
       try {
