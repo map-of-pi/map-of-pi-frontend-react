@@ -160,6 +160,16 @@ const Map = ({
     }
   }, [mapRef.current]);
 
+  const saveMapState = () => {
+    if (mapRef.current) {
+      console.log('called handle navigation');
+      const currentCenter = mapRef.current.getCenter();
+      const currentZoom = mapRef.current.getZoom();
+      sessionStorage.setItem('prevMapCenter', JSON.stringify(currentCenter));
+      sessionStorage.setItem('prevMapZoom', currentZoom.toString());
+    }
+  };
+  
   const fetchInitialCoordinates = async () => {
     if (searchQuery) return;
   
@@ -167,23 +177,32 @@ const Map = ({
     setError(null);
   
     try {
-      const mapInstance = mapRef.current; // Access map instance via ref
+      const mapInstance = mapRef.current;
   
       if (!mapInstance) {
         logger.warn('Map instance is not ready yet');
         return;
       }
-      // Set and zoom map center to search center if available
-      if (center){
-        console.log("initial map center is focus to user center:", center.toString())
-        mapInstance.setView(center, 8, { animate: true })
+  
+      let prevCenter = sessionStorage.getItem('prevMapCenter');
+      let prevZoom = sessionStorage.getItem('prevMapZoom');
+  
+      if (prevCenter && prevZoom) {
+        // Parse prevCenter to LatLngExpression type
+        const parsedPrevCenter = JSON.parse(prevCenter) as { lat: number; lng: number };
+        const parsedPrevZoom = parseInt(prevZoom);
+        console.log("prev map center is focused to previous center:", parsedPrevCenter?.toString());  
+        mapInstance.setView(parsedPrevCenter, parsedPrevZoom, { animate: false });
+      } else if (center) {
+        console.log("initial map center is focused to user center:", center.toString());
+        mapInstance.setView(center, 8, { animate: false });
       } else {
-        const worldCenter = mapRef.current?.getCenter()
-        console.log("initial map center focus to world:", worldCenter?.toString())
-        worldCenter 
-        ? mapInstance.setView(worldCenter, 2, { animate: false }) 
-        : mapRef.current = mapInstance;
-      }      
+        const worldCenter = mapRef.current?.getCenter();
+        console.log("initial map center focused to world:", worldCenter?.toString());
+        worldCenter
+          ? mapInstance.setView(worldCenter, 2, { animate: false })
+          : (mapRef.current = mapInstance);
+      }
   
       const bounds = mapInstance.getBounds();
       if (bounds) {
@@ -197,7 +216,8 @@ const Map = ({
     } finally {
       setLoading(false);
     }
-  };  
+  };
+  
 
   // Function to handle map interactions (only when there's no search query)
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
@@ -232,6 +252,7 @@ const Map = ({
   const debouncedHandleMapInteraction = useCallback(
     _.debounce((bounds: LatLngBounds, mapInstance: L.Map) => {
       handleMapInteraction(bounds, mapInstance);
+      saveMapState();
     }, 500),
     [sellers] // Dependency array ensures the debounced function is updated with the latest sellers
   );
@@ -282,7 +303,7 @@ const Map = ({
   const bounds = L.latLngBounds(
     L.latLng(-90, -180), // SW corner
     L.latLng(90, 180) // NE corner
-  );
+  );  
 
   return (
     <>
