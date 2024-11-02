@@ -12,11 +12,11 @@ import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { DeviceLocationType, IUserSettings } from '@/constants/types';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import { userLocation } from '@/utils/geolocation';
 
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
-import { checkAndAutoLoginUser } from '@/utils/checkAndAutoLoginUser';
 
 export default function Index() {
   const t = useTranslations();

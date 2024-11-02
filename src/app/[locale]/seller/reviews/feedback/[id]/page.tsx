@@ -10,11 +10,11 @@ import EmojiPicker from '@/components/shared/Review/emojipicker';
 import Skeleton from '@/components/skeleton/skeleton';
 import { IReviewOutput, ReviewInt } from '@/constants/types';
 import { fetchSingleReview } from '@/services/reviewsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../../util/ratingUtils';
 import { AppContext } from '../../../../../../../context/AppContextProvider';
 import logger from '../../../../../../../logger.config.mjs';
-import { checkAndAutoLoginUser } from '@/utils/checkAndAutoLoginUser';
 
 interface ReplyToReviewPageProps {
   params: {

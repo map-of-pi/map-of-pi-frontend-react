@@ -14,10 +14,10 @@ import { IReviewOutput, ReviewInt } from '@/constants/types';
 import SearchIcon from '@mui/icons-material/Search';
 import { FormControl, TextField } from '@mui/material';
 import { fetchReviews } from '@/services/reviewsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import { resolveDate } from '@/utils/date';
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import { checkAndAutoLoginUser } from '@/utils/checkAndAutoLoginUser';
 
 function SellerReviews({
   params,
@@ -35,7 +35,7 @@ function SellerReviews({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-  const { currentUser, setReload, reload, autoLoginUser } = useContext(AppContext);
+  const { currentUser, reload, setReload, autoLoginUser } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchBarValue, setSearchBarValue] = useState('');
   const [toUser, setToUser] = useState('');

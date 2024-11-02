@@ -14,10 +14,10 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { ISeller, IUserSettings, IUser } from '@/constants/types';
 import { fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import { checkAndAutoLoginUser } from '@/utils/checkAndAutoLoginUser';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
