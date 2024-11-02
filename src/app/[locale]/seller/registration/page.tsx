@@ -21,6 +21,7 @@ import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller } from '@/constants/types';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
@@ -70,13 +71,9 @@ const SellerRegistrationForm = () => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
 
-
   // Fetch seller data and user settings on component mount
   useEffect(() => {
-    if (!currentUser) {
-      logger.info('User not logged in; attempting auto-login..');
-      autoLoginUser();
-    }
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
 
     const getSellerData = async () => {
       try {
@@ -87,7 +84,7 @@ const SellerRegistrationForm = () => {
           setDbSeller(null);
         }
       } catch (error) {
-        logger.error('Error fetching seller data:', { error });
+        logger.error('Error fetching seller data:', error);
         setError('Error fetching seller data.');
       } finally {
         setLoading(false);
@@ -105,7 +102,7 @@ const SellerRegistrationForm = () => {
           setDbUserSettings(null);
         }
       } catch (error) {
-        logger.error('Error fetching user settings data:', { error });
+        logger.error('Error fetching user settings data:', error);
       }
     };
 
@@ -252,11 +249,8 @@ const SellerRegistrationForm = () => {
         const updatedUserSettings = await fetchUserSettings();
         setDbUserSettings(updatedUserSettings);
       }
-    } catch (error: any) {
-      logger.error('Error saving seller registration:', { 
-        message: error.message,
-        stack: error.stack
-      });
+    } catch (error) {
+      logger.error('Error saving seller registration:',error);
       showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_REGISTRATION_SUBMISSION'));
     }
   };

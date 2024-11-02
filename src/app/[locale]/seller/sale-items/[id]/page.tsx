@@ -14,6 +14,7 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { ISeller, IUserSettings, IUser } from '@/constants/types';
 import { fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
@@ -35,10 +36,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
-    if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
-      autoLoginUser();
-    };
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
     
     const getSellerData = async () => {
       try {
@@ -54,7 +52,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           logger.warn(`No seller shop info found for seller ID: ${sellerId}`);
         }
       } catch (error) {
-        logger.error(`Error fetching seller data for seller ID: ${ sellerId }`, { error });
+        logger.error(`Error fetching seller data for seller ID: ${ sellerId }`, error);
         setError('Error fetching seller data');
       } finally {
         setLoading(false);
@@ -72,7 +70,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           logger.warn(`No seller settings found for seller ID: ${sellerId}`);
         }
       } catch (error) {
-        logger.error(`Error fetching seller settings for seller ID: ${ sellerId }`, { error });
+        logger.error(`Error fetching seller settings for seller ID: ${ sellerId }`, error);
         setError('Error fetching seller settings');
       }
     };

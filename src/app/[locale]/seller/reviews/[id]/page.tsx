@@ -14,6 +14,7 @@ import { IReviewOutput, ReviewInt } from '@/constants/types';
 import SearchIcon from '@mui/icons-material/Search';
 import { FormControl, TextField } from '@mui/material';
 import { fetchReviews } from '@/services/reviewsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import { resolveDate } from '@/utils/date';
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
@@ -34,7 +35,7 @@ function SellerReviews({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-  const { currentUser, setReload, reload } = useContext(AppContext);
+  const { currentUser, reload, setReload, autoLoginUser } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchBarValue, setSearchBarValue] = useState('');
   const [toUser, setToUser] = useState('');
@@ -94,7 +95,7 @@ function SellerReviews({
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Error fetching reviews for userID: ${uid}`, { error });
+      logger.error(`Error fetching reviews for userID: ${uid}`, error);
       setError('Error fetching reviews. Please try again later.');
     } finally {
       setLoading(false);
@@ -103,6 +104,7 @@ function SellerReviews({
   };
 
   useEffect(() => {
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
     fetchUserReviews(userId);
   }, [userId, currentUser]);
 
@@ -141,7 +143,7 @@ function SellerReviews({
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Pioneer ${searchBarValue} not found`, { error });
+      logger.error(`Pioneer ${searchBarValue} not found`, error);
       return toast.error(t('SCREEN.REVIEWS.VALIDATION.NO_PIONEER_FOUND', { search_value: searchBarValue }));
     } finally {
       setReload(false);
@@ -181,6 +183,15 @@ function SellerReviews({
               onChange={handleSearchBarChange}
               ref={inputRef}
               autoCorrect="off"
+              autoCapitalize="off"
+              autoComplete="off" 
+              spellCheck="false" 
+              inputProps={{
+                autoCorrect: 'off',
+                autoCapitalize: 'off',
+                spellCheck: 'false',
+                autoComplete: 'new-password',
+              }}
             />
           </FormControl>
           <button

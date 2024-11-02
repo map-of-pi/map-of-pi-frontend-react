@@ -10,6 +10,7 @@ import EmojiPicker from '@/components/shared/Review/emojipicker';
 import Skeleton from '@/components/skeleton/skeleton';
 import { IReviewOutput, ReviewInt } from '@/constants/types';
 import { fetchSingleReview } from '@/services/reviewsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../../util/ratingUtils';
 import { AppContext } from '../../../../../../../context/AppContextProvider';
@@ -24,7 +25,7 @@ interface ReplyToReviewPageProps {
   };
 }
 
-export default function ReplyToReviewPage({ params, searchParams }: ReplyToReviewPageProps) {
+export default function ReplyToReviewPage({ params }: ReplyToReviewPageProps) {
   const t = useTranslations();
   const router = useRouter();
 
@@ -61,10 +62,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
   };
   
   useEffect(() => {
-    if (!currentUser) {
-      logger.info('User not logged in; attempting auto-login..');
-      autoLoginUser();
-    }
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
 
     const getReviewData = async () => {
       try {
@@ -83,7 +81,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
           setReviews([]);
         }
       } catch (error) {
-        logger.error(`Error fetching review data for review ID: ${reviewId}`, { error });
+        logger.error(`Error fetching review data for review ID: ${reviewId}`, error);
         setError('Error fetching review. Please try again later.');
       } finally {
         setLoading(false);
