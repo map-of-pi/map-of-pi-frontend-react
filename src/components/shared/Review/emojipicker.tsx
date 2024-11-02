@@ -220,11 +220,13 @@ export default function EmojiPicker(props: any) {
           onClick={handleSave}
           disabled={!isSaveEnabled || isSaveLoading}
           className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
-          {isSaveLoading && <div className="flex items-center justify-center">
-            <ImSpinner2 className="animate-spin mr-2 ml-1" /> {/* Spinner Icon */}
-            {t('SHARED.LOADING_SCREEN_MESSAGE')}
-          </div>}
-          {t('SHARED.SAVE')}
+          {isSaveLoading ? 
+            <div className="flex items-center justify-center">
+              <ImSpinner2 className="animate-spin mr-2" /> {/* Spinner Icon */}
+              {t('Saving...')}
+            </div>: 
+            t('SHARED.SAVE')
+          }
         </button>
       </div>
     </div>
