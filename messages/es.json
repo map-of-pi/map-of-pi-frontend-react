@@ -234,6 +234,7 @@
       }
     },
     "LOADING_SCREEN_MESSAGE": "Cargando ...",
+    "SAVING_SCREEN_MESSAGE": "Guardando ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "El envío falló porque el usuario no está autenticado",
       "UNEXPECTED_ERROR_MESSAGE": "Ocurrió un error inesperado"

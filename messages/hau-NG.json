@@ -233,6 +233,7 @@
       }
     },
     "LOADING_SCREEN_MESSAGE": "Ana loda ...",
+    "SAVING_SCREEN_MESSAGE": "Ana ajiya ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Aika ya kasa saboda mai amfani ba a tabbatar da shi ba",
       "UNEXPECTED_ERROR_MESSAGE": "An samu kuskure da ba a zata ba"

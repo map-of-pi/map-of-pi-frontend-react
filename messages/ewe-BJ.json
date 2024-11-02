@@ -234,6 +234,7 @@
       }
     },
     "LOADING_SCREEN_MESSAGE": "Gɔme ɖa ...",
+    "SAVING_SCREEN_MESSAGE": "Le edze ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Nɔvia míaɖu abe nu wò ye mele wònu o le fifiawo nyo",
       "UNEXPECTED_ERROR_MESSAGE": "Nuxlɔ̃sia na mi ɖe mɔ o"
