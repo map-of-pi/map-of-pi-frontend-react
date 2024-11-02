@@ -27,7 +27,7 @@ function SellerReviews({
   searchParams: any;
 }) {
   const t = useTranslations();
-  const userName = searchParams.user_name;
+  const userName = useRef<string>(searchParams.user_name);
   const userId = params.id;
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
@@ -65,36 +65,37 @@ function SellerReviews({
     return reviews;
   };
 
-  const fetchUserReviews = async () => {
+  const fetchUserReviews = async (userId_: string) => {
     setError(null);
+    setReload(true);
     try {
-      setToUser(userId);
-      logger.info(`Fetching reviews for userID: ${userId}`);
-      const data = await fetchReviews(userId);
+      setToUser(userId_);
+      logger.info(`Fetching reviews for userID: ${userId_}`);
+      const data = await fetchReviews(userId_);
 
       if (data) {
         if (data.givenReviews.length > 0) {
-          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${userId}`);
+          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${userId_}`);
           setGiverReviews(processReviews(data.givenReviews));
         } else {
-          logger.warn(`No given reviews found for userID: ${userId}`);
+          logger.warn(`No given reviews found for userID: ${userId_}`);
           setGiverReviews([]);
         }
 
         if (data.receivedReviews.length > 0) {
-          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${userId}`);
+          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${userId_}`);
           setReceiverReviews(processReviews(data.receivedReviews));
         } else {
-          logger.warn(`No received reviews found for userID: ${userId}`);
+          logger.warn(`No received reviews found for userID: ${userId_}`);
           setReceiverReviews([]);
         }          
       } else {
-        logger.warn(`No reviews found for userID: ${userId}`);
+        logger.warn(`No reviews found for userID: ${userId_}`);
         setGiverReviews([]);
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Error fetching reviews for userID: ${userId}`, error);
+      logger.error(`Error fetching reviews for userID: ${userId_}`, error);
       setError('Error fetching reviews. Please try again later.');
     } finally {
       setLoading(false);
@@ -104,7 +105,7 @@ function SellerReviews({
 
   useEffect(() => {
     checkAndAutoLoginUser(currentUser, autoLoginUser);
-    fetchUserReviews();
+    fetchUserReviews(userId);
   }, [userId, currentUser]);
 
   // Handle search logic
@@ -120,6 +121,7 @@ function SellerReviews({
           logger.info(`Found ${data.givenReviews.length} reviews given by Pioneer: ${searchBarValue}`);
           setGiverReviews(processReviews(data.givenReviews));
           setToUser(data.givenReviews[0].review_giver_id);
+          userName.current = data.givenReviews[0].giver;
         } else {
           logger.warn(`No given reviews found for Pioneer: ${searchBarValue}`);
           setGiverReviews([]);
@@ -127,7 +129,8 @@ function SellerReviews({
         if (data.receivedReviews.length > 0) {
           logger.info(`Found ${data.receivedReviews.length} reviews received by Pioneer: ${searchBarValue}`);
           setReceiverReviews(processReviews(data.receivedReviews));
-          setToUser(data.givenReviews[0].review_receiver_id);
+          setToUser(data.receivedReviews[0].review_receiver_id);
+          userName.current = data.receivedReviews[0].receiver;
         } else {
           logger.warn(`No given reviews found for Pioneer: ${searchBarValue}`);
           setReceiverReviews([]);
@@ -175,7 +178,7 @@ function SellerReviews({
               variant="outlined"
               color="success"
               className="bg-none hover:bg-gray-100 w-full rounded-lg"
-              placeholder={userName}
+              placeholder={userName.current}
               value={searchBarValue}
               onChange={handleSearchBarChange}
               ref={inputRef}
@@ -215,7 +218,14 @@ function SellerReviews({
                   <div className="flex-grow">
                     <p className="text-primary text-sm">
                       {review.giver} {' -> '}
-                      <span className="text-primary text-sm">{review.receiver}</span>
+                      <span className="text-primary text-sm cursor-pointer hover:bg-gray-200" 
+                      onClick={()=>{
+                        fetchUserReviews(review.receiverId); 
+                        userName.current=review.receiver
+                      }}
+                      >
+                        {review.receiver}
+                      </span>
                     </p>
                     <p className="text-md break-words">{review.heading}</p>
                   </div>
@@ -261,8 +271,16 @@ function SellerReviews({
                 {/* Left content */}
                 <div className="flex-grow">
                   <p className="text-primary text-sm">
-                    {review.giver} {' -> '}
-                    <span className="text-primary text-sm">{review.receiver}</span>
+                    <span 
+                    className="text-primary text-sm cursor-pointer hover:bg-gray-200"
+                    onClick={()=>{
+                      fetchUserReviews(review.giverId); 
+                      userName.current=review.giver
+                    }}
+                    >
+                      {review.giver} {' → '}
+                    </span>
+                    {review.receiver}
                   </p>
                   <p className="text-md break-words">{review.heading}</p>
                 </div>

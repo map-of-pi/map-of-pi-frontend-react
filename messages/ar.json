@@ -236,6 +236,7 @@
       }
     },
     "LOADING_SCREEN_MESSAGE": "جار التحميل ...",
+    "SAVING_SCREEN_MESSAGE": "جارٍ الحفظ ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "فشل الإرسال لأن المستخدم غير مصدق",
       "UNEXPECTED_ERROR_MESSAGE": "حدث خطأ غير متوقع"
