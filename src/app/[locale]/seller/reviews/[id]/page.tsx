@@ -217,7 +217,7 @@ function SellerReviews({
                   {/* Left content */}
                   <div className="flex-grow">
                     <p className="text-primary text-sm">
-                      {review.giver} {' -> '}
+                      {review.giver} {' → '}
                       <span className="text-primary text-sm cursor-pointer hover:bg-gray-200" 
                       onClick={()=>{
                         fetchUserReviews(review.receiverId); 
