@@ -65,37 +65,37 @@ function SellerReviews({
     return reviews;
   };
 
-  const fetchUserReviews = async (uid:string) => {
+  const fetchUserReviews = async (userId_: string) => {
     setError(null);
     setReload(true);
     try {
-      setToUser(uid);
-      logger.info(`Fetching reviews for userID: ${uid}`);
-      const data = await fetchReviews(uid);
+      setToUser(userId_);
+      logger.info(`Fetching reviews for userID: ${userId_}`);
+      const data = await fetchReviews(userId_);
 
       if (data) {
         if (data.givenReviews.length > 0) {
-          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${uid}`);
+          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${userId_}`);
           setGiverReviews(processReviews(data.givenReviews));
         } else {
-          logger.warn(`No given reviews found for userID: ${uid}`);
+          logger.warn(`No given reviews found for userID: ${userId_}`);
           setGiverReviews([]);
         }
 
         if (data.receivedReviews.length > 0) {
-          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${uid}`);
+          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${userId_}`);
           setReceiverReviews(processReviews(data.receivedReviews));
         } else {
-          logger.warn(`No received reviews found for userID: ${uid}`);
+          logger.warn(`No received reviews found for userID: ${userId_}`);
           setReceiverReviews([]);
         }          
       } else {
-        logger.warn(`No reviews found for userID: ${uid}`);
+        logger.warn(`No reviews found for userID: ${userId_}`);
         setGiverReviews([]);
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Error fetching reviews for userID: ${uid}`, error);
+      logger.error(`Error fetching reviews for userID: ${userId_}`, error);
       setError('Error fetching reviews. Please try again later.');
     } finally {
       setLoading(false);
@@ -217,7 +217,7 @@ function SellerReviews({
                   {/* Left content */}
                   <div className="flex-grow">
                     <p className="text-primary text-sm">
-                      {review.giver} {' -> '}
+                      {review.giver} {' → '}
                       <span className="text-primary text-sm cursor-pointer hover:bg-gray-200" 
                       onClick={()=>{
                         fetchUserReviews(review.receiverId); 
@@ -278,7 +278,7 @@ function SellerReviews({
                       userName.current=review.giver
                     }}
                     >
-                      {review.giver} {' -> '}
+                      {review.giver} {' → '}
                     </span>
                     {review.receiver}
                   </p>

@@ -2,13 +2,13 @@
 
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
+import { ImSpinner2 } from 'react-icons/im';
 import { toast } from 'react-toastify';
 
 import { IReviewFeedback } from '@/constants/types';
 import { FileInput, TextArea } from '../Forms/Inputs/Inputs';
 import { createReview } from '@/services/reviewsApi';
 import removeUrls from '@/utils/sanitize';
-import { ImSpinner2 } from 'react-icons/im';
 
 import logger from '../../../../logger.config.mjs';
 
@@ -94,7 +94,7 @@ export default function EmojiPicker(props: any) {
 
   const handleSave = async () => {
     try {
-      setIsSaveLoading(true)
+      setIsSaveLoading(true);
       if (props.currentUser) {
         if (props.currentUser.pi_uid === props.userId) {
           logger.warn(`Attempted self review by user ${props.currentUser.pi_uid}`);
@@ -136,7 +136,7 @@ export default function EmojiPicker(props: any) {
     } catch (error) {
       logger.error('Error saving review:', error);
     } finally {
-      setIsSaveLoading(false)
+      setIsSaveLoading(false);
     }
   };
   
@@ -223,7 +223,7 @@ export default function EmojiPicker(props: any) {
           {isSaveLoading ? 
             <div className="flex items-center justify-center">
               <ImSpinner2 className="animate-spin mr-2" /> {/* Spinner Icon */}
-              {t('Saving...')}
+              {t('SHARED.SAVING_SCREEN_MESSAGE')}
             </div>: 
             t('SHARED.SAVE')
           }

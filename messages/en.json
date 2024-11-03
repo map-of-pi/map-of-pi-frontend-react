@@ -236,6 +236,7 @@
       }
     },
     "LOADING_SCREEN_MESSAGE": "Loading ...",
+    "SAVING_SCREEN_MESSAGE": "Saving ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Submission failed because user is not authenticated",
       "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"
