@@ -161,12 +161,18 @@ const Map = ({
   }, [mapRef.current]);
 
   const saveMapState = () => {
-    if (mapRef.current) {
+    try{
+      if (!mapRef.current) {
+        return
+      }
       console.log('called handle navigation');
       const currentCenter = mapRef.current.getCenter();
       const currentZoom = mapRef.current.getZoom();
       sessionStorage.setItem('prevMapCenter', JSON.stringify(currentCenter));
       sessionStorage.setItem('prevMapZoom', currentZoom.toString());
+      
+    }catch (error){
+      logger.log('map not ready')
     }
   };
   
