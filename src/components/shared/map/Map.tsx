@@ -163,21 +163,23 @@ const Map = ({
   const saveMapState = () => {
     try{
       if (!mapRef.current) {
-        return
+        return;
       }
-      console.log('called handle navigation');
+      logger.debug('called handle navigation');
       const currentCenter = mapRef.current.getCenter();
       const currentZoom = mapRef.current.getZoom();
       sessionStorage.setItem('prevMapCenter', JSON.stringify(currentCenter));
       sessionStorage.setItem('prevMapZoom', currentZoom.toString());
       
-    }catch (error){
-      logger.log('map not ready')
+    } catch (error) {
+      logger.warn('map not ready');
     }
   };
   
   const fetchInitialCoordinates = async () => {
-    if (searchQuery) return;
+    if (searchQuery) {
+      return;
+    }
   
     setLoading(true);
     setError(null);
@@ -197,14 +199,14 @@ const Map = ({
         // Parse prevCenter to LatLngExpression type
         const parsedPrevCenter = JSON.parse(prevCenter) as { lat: number; lng: number };
         const parsedPrevZoom = parseInt(prevZoom);
-        console.log("prev map center is focused to previous center:", parsedPrevCenter?.toString());  
+        logger.info("prev map center is focused to previous center:", parsedPrevCenter?.toString());  
         mapInstance.setView(parsedPrevCenter, parsedPrevZoom, { animate: false });
       } else if (center) {
-        console.log("initial map center is focused to user center:", center.toString());
+        logger.info("initial map center is focused to user center:", center.toString());
         mapInstance.setView(center, 8, { animate: false });
       } else {
         const worldCenter = mapRef.current?.getCenter();
-        console.log("initial map center focused to world:", worldCenter?.toString());
+        logger.info("initial map center focused to world:", worldCenter?.toString());
         worldCenter
           ? mapInstance.setView(worldCenter, 2, { animate: false })
           : (mapRef.current = mapInstance);
@@ -224,7 +226,6 @@ const Map = ({
     }
   };
   
-
   // Function to handle map interactions (only when there's no search query)
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
     const newCenter = newBounds.getCenter();
@@ -309,7 +310,7 @@ const Map = ({
   const bounds = L.latLngBounds(
     L.latLng(-90, -180), // SW corner
     L.latLng(90, 180) // NE corner
-  );  
+  );
 
   return (
     <>

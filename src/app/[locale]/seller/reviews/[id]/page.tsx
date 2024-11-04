@@ -218,8 +218,7 @@ function SellerReviews({
                   <div className="flex-grow">
                     <p className="text-primary text-sm">
                       {review.giver} {' → '}
-                      <span className="text-primary text-sm" 
-                      >
+                      <span className="text-primary text-sm">
                         {review.receiver}
                       </span>
                     </p>
@@ -267,12 +266,10 @@ function SellerReviews({
                 {/* Left content */}
                 <div className="flex-grow">
                   <p className="text-primary text-sm">
-                    <span 
-                    className="text-primary text-sm"
-                    >
-                      {review.giver} {' → '}
+                    {review.giver} {' → '}
+                    <span className="text-primary text-sm">
+                      {review.receiver}
                     </span>
-                    {review.receiver}
                   </p>
                   <p className="text-md break-words">{review.heading}</p>
                 </div>
