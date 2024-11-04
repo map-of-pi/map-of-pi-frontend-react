@@ -219,10 +219,6 @@ function SellerReviews({
                     <p className="text-primary text-sm">
                       {review.giver} {' → '}
                       <span className="text-primary text-sm cursor-pointer hover:bg-gray-200" 
-                      onClick={()=>{
-                        fetchUserReviews(review.receiverId); 
-                        userName.current=review.receiver
-                      }}
                       >
                         {review.receiver}
                       </span>
@@ -273,10 +269,6 @@ function SellerReviews({
                   <p className="text-primary text-sm">
                     <span 
                     className="text-primary text-sm cursor-pointer hover:bg-gray-200"
-                    onClick={()=>{
-                      fetchUserReviews(review.giverId); 
-                      userName.current=review.giver
-                    }}
                     >
                       {review.giver} {' → '}
                     </span>
