@@ -34,6 +34,7 @@ const crosshairIcon = new L.Icon({
 
 interface MapCenterProps {
   entryType: 'search' | 'sell';
+  locale: string;
 }
 
 const MapCenter = ({ entryType }: MapCenterProps) => {
