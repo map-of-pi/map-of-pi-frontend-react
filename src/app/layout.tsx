@@ -3,6 +3,8 @@ import { ReactNode } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import '../../sentry.client.config.mjs';
 
+export const dynamic = 'force-dynamic';
+
 type Props = {
   children: ReactNode;
   params?: { locale?: string };
