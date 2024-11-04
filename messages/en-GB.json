@@ -243,7 +243,7 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Search a location, city, or address",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "Your Search Centre has been saved successfully"
+        "CENTER_SUCCESS_MESSAGE": "Your centre has been saved successfully"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Loading ...",

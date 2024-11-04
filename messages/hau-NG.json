@@ -229,7 +229,7 @@
     },
     "MAP_CENTER": {
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "An adana Cibiyar Bincike ɗinku cikin nasara"
+        "CENTER_SUCCESS_MESSAGE": "An adana cibiyar ku cikin nasara"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Ana loda ...",
