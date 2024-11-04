@@ -228,6 +228,7 @@
       }
     },
     "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Nema wuri, birni, ko adireshi",
       "VALIDATION": {
         "CENTER_SUCCESS_MESSAGE": "An adana cibiyar ku cikin nasara"
       }
