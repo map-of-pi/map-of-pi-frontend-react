@@ -218,7 +218,7 @@ function SellerReviews({
                   <div className="flex-grow">
                     <p className="text-primary text-sm">
                       {review.giver} {' → '}
-                      <span className="text-primary text-sm cursor-pointer hover:bg-gray-200" 
+                      <span className="text-primary text-sm" 
                       >
                         {review.receiver}
                       </span>
@@ -268,7 +268,7 @@ function SellerReviews({
                 <div className="flex-grow">
                   <p className="text-primary text-sm">
                     <span 
-                    className="text-primary text-sm cursor-pointer hover:bg-gray-200"
+                    className="text-primary text-sm"
                     >
                       {review.giver} {' → '}
                     </span>
