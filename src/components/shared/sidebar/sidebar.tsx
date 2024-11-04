@@ -53,7 +53,7 @@ function isLanguageMenuItem(item: MenuItem): item is LanguageMenuItem {
 function Sidebar(props: any) {
   const t = useTranslations();
   const pathname = usePathname();
-  const local = useLocale();
+  const locale = useLocale();
   const router = useRouter();
 
   const { currentUser, autoLoginUser, setReload, showAlert } = useContext(AppContext);
@@ -250,7 +250,7 @@ function Sidebar(props: any) {
         setIsSaveEnabled(false);
         logger.info('User Settings saved successfully:', { data });
         showAlert(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
-        if (pathname === '/' || pathname === `/${local}`) {
+        if (pathname === '/' || pathname === `/${locale}`) {
           setReload(true);
         }
       }
@@ -335,7 +335,7 @@ function Sidebar(props: any) {
                   fontSize: '18px' 
                 }}
                 onClick={() => {
-                  router.push(`/map-center?entryType=search`);
+                  router.push(`/${locale}/map-center?entryType=search`);
                   props.setToggleDis(false); // Close sidebar on click
                 }}
               />
@@ -374,7 +374,7 @@ function Sidebar(props: any) {
               <h3 className={`font-bold text-sm text-nowrap`}>Trust-o-meter</h3>
               <TrustMeter ratings={dbUserSettings ? dbUserSettings.trust_meter_rating : 100} hideLabel={true} />
             </div>             
-            <Link href={currentUser ? `/seller/reviews/${currentUser?.pi_uid}?user_name=${currentUser.user_name}` : '#'}>
+            <Link href={currentUser ? `/${locale}/seller/reviews/${currentUser?.pi_uid}?user_name=${currentUser.user_name}` : '#'}>
               <OutlineBtn
                 label={t('SHARED.CHECK_REVIEWS')}
                 styles={{
@@ -510,6 +510,7 @@ function Sidebar(props: any) {
       {/* Conditionally render MapCenter */}
       {showMapCenter && (
         <MapCenter
+          locale={locale}
           entryType="search"
         />
       )}
