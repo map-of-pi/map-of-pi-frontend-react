@@ -230,7 +230,7 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Buscar una ubicación, ciudad o dirección",
       "VALIDATION": {
-        "CENTER_SUCCESS_MESSAGE": "Su centro ha sido guardado con éxito"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Su centro ha sido guardado con éxito"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Cargando ...",

@@ -296,7 +296,7 @@ function SellerReviews({
                     </p>
                   </div>
                   <div className="flex justify-between items-center">
-                    <Link href={`/${locale}seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
+                    <Link href={`/${locale}/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
                       <OutlineBtn label={t('SHARED.REPLY')} />
                     </Link>
                   </div>

@@ -230,7 +230,7 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "위치, 도시 또는 주소 검색",
       "VALIDATION": {
-        "CENTER_SUCCESS_MESSAGE": "귀하의 센터가 성공적으로 저장되었습니다"
+        "MAP_CENTER_SUCCESS_MESSAGE": "귀하의 센터가 성공적으로 저장되었습니다"
       }
     },
     "LOADING_SCREEN_MESSAGE": "로딩 중 ...",

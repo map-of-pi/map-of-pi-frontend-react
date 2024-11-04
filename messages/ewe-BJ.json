@@ -230,7 +230,7 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Nemo wuri, gari ko adireshi",
       "VALIDATION": {
-        "CENTER_SUCCESS_MESSAGE": "Woƒe xɔ sia le afisi mɔ na mi"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Woƒe xɔ sia le afisi mɔ na mi"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Gɔme ɖa ...",

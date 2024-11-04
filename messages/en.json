@@ -231,7 +231,7 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Search a location, city, or address",
       "VALIDATION": {
-        "CENTER_SUCCESS_MESSAGE": "Your center has been saved successfully"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Your center has been saved successfully"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Loading ...",

@@ -231,7 +231,7 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "ابحث عن موقع، مدينة، أو عنوان",
       "VALIDATION": {
-        "CENTER_SUCCESS_MESSAGE": "تم حفظ مركزك بنجاح"
+        "MAP_CENTER_SUCCESS_MESSAGE": "تم حفظ مركزك بنجاح"
       }
     },
     "LOADING_SCREEN_MESSAGE": "جار التحميل ...",

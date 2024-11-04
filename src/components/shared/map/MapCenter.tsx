@@ -238,7 +238,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <ConfirmDialogX
           toggle={() => setShowPopup(false)}
           handleClicked={handleClickDialog}
-          message={t('SHARED.MAP_CENTER.VALIDATION.CENTER_SUCCESS_MESSAGE')}
+          message={t('SHARED.MAP_CENTER.VALIDATION.MAP_CENTER_SUCCESS_MESSAGE')}
         />
       )}
     </div>

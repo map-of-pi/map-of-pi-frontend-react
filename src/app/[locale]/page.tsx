@@ -18,8 +18,7 @@ import { userLocation } from '@/utils/geolocation';
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
 
-export default function Page({ params }: { params: {locale: string } }) {
-  const locale = params;
+export default function Page({ params }: { params: { locale: string } }) {
   const t = useTranslations();
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), {
     ssr: false,
@@ -137,7 +136,7 @@ export default function Page({ params }: { params: {locale: string } }) {
         <div className="w-[90%] lg:w-full lg:px-6 mx-auto flex items-center justify-between">
           {/* Add Seller Button */}
           <div className="pointer-events-auto">
-            <Link href={`/seller/registration`}>
+            <Link href={'/seller/registration'}>
               <Button
                 label={'+ ' + t('HOME.ADD_SELLER')}
                 styles={{
