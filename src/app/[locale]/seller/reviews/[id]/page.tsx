@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef, useContext } from 'react';
@@ -29,6 +29,7 @@ function SellerReviews({
   const t = useTranslations();
   const userName = useRef<string>(searchParams.user_name);
   const userId = params.id;
+  const locale = useLocale;
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
   const [receiverReviews, setReceiverReviews] = useState<ReviewInt[] | null>(null);
@@ -251,7 +252,7 @@ function SellerReviews({
                       </p>
                     </div>
                     <div className="flex justify-between items-center">
-                      <Link href={`/seller/reviews/feedback/${review.reviewId}?user_name=${review.giver}`}>
+                      <Link href={`/${locale}/seller/reviews/feedback/${review.reviewId}?user_name=${review.giver}`}>
                         <OutlineBtn label={t('SHARED.REPLY')} />
                       </Link>
                     </div>
@@ -306,7 +307,7 @@ function SellerReviews({
                     </p>
                   </div>
                   <div className="flex justify-between items-center">
-                    <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
+                    <Link href={`/${locale}seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
                       <OutlineBtn label={t('SHARED.REPLY')} />
                     </Link>
                   </div>
