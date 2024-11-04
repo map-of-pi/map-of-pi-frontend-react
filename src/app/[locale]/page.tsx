@@ -39,6 +39,11 @@ export default function Index() {
   const { isSigningInUser, currentUser, autoLoginUser, reload, setReload } = useContext(AppContext);
 
   useEffect(() => {
+    // clear previous map state when findme option is changed
+    if (reload){
+      sessionStorage.removeItem('prevMapCenter');
+      sessionStorage.removeItem('prevMapZoom');
+    }
     setReload(false)
     checkAndAutoLoginUser(currentUser, autoLoginUser);
 
@@ -83,6 +88,9 @@ export default function Index() {
   }, [dbUserSettings]);
 
   const handleLocationButtonClick = async () => {
+    // clear previous map state when findme option is changed
+    sessionStorage.removeItem('prevMapCenter');
+    sessionStorage.removeItem('prevMapZoom');
     if (dbUserSettings) {
       const loc = await userLocation(dbUserSettings);
       if (loc) {

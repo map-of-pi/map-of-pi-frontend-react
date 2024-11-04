@@ -218,12 +218,7 @@ function SellerReviews({
                   <div className="flex-grow">
                     <p className="text-primary text-sm">
                       {review.giver} {' → '}
-                      <span className="text-primary text-sm cursor-pointer hover:bg-gray-200" 
-                      onClick={()=>{
-                        fetchUserReviews(review.receiverId); 
-                        userName.current=review.receiver
-                      }}
-                      >
+                      <span className="text-primary text-sm">
                         {review.receiver}
                       </span>
                     </p>
@@ -271,16 +266,10 @@ function SellerReviews({
                 {/* Left content */}
                 <div className="flex-grow">
                   <p className="text-primary text-sm">
-                    <span 
-                    className="text-primary text-sm cursor-pointer hover:bg-gray-200"
-                    onClick={()=>{
-                      fetchUserReviews(review.giverId); 
-                      userName.current=review.giver
-                    }}
-                    >
-                      {review.giver} {' → '}
+                    {review.giver} {' → '}
+                    <span className="text-primary text-sm">
+                      {review.receiver}
                     </span>
-                    {review.receiver}
                   </p>
                   <p className="text-md break-words">{review.heading}</p>
                 </div>

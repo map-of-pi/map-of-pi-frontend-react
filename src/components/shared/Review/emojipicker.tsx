@@ -35,7 +35,6 @@ export default function EmojiPicker(props: any) {
   const [file, setFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>(dbReviewFeedback?.image || '');
   const [isSaveEnabled, setIsSaveEnabled] = useState<boolean>(false);
-  const [isSaveLoading, setIsSaveLoading] = useState<boolean>(false);
   const [comments, setComments] = useState('');
   const [reviewEmoji, setReviewEmoji] = useState<number | null>(null);
   const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null);
@@ -94,7 +93,6 @@ export default function EmojiPicker(props: any) {
 
   const handleSave = async () => {
     try {
-      setIsSaveLoading(true);
       if (props.currentUser) {
         if (props.currentUser.pi_uid === props.userId) {
           logger.warn(`Attempted self review by user ${props.currentUser.pi_uid}`);
@@ -135,8 +133,6 @@ export default function EmojiPicker(props: any) {
       }
     } catch (error) {
       logger.error('Error saving review:', error);
-    } finally {
-      setIsSaveLoading(false);
     }
   };
   
@@ -218,15 +214,9 @@ export default function EmojiPicker(props: any) {
       <div className="mb-7">
         <button
           onClick={handleSave}
-          disabled={!isSaveEnabled || isSaveLoading}
-          className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}>
-          {isSaveLoading ? 
-            <div className="flex items-center justify-center">
-              <ImSpinner2 className="animate-spin mr-2" /> {/* Spinner Icon */}
-              {t('SHARED.SAVING_SCREEN_MESSAGE')}
-            </div>: 
-            t('SHARED.SAVE')
-          }
+          disabled={!isSaveEnabled}
+          className={`${isSaveEnabled ? 'opacity-100' : 'opacity-50'} px-6 py-2 bg-primary text-white text-xl rounded-md flex justify-right ms-auto text-[15px]`}> 
+            {t('SHARED.SAVE')}
         </button>
       </div>
     </div>
