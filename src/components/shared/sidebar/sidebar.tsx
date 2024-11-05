@@ -465,18 +465,20 @@ function Sidebar(props: any) {
                   ))}
                        
                 </div>
-                <Button
-                  label={t('SHARED.SAVE')}
-                  styles={{
-                    color: '#ffc153',
-                    height: '40px',
-                    width: '80px',
-                    padding: '10px 15px',
-                    marginLeft: 'auto',
-                    marginRight: 'auto'
-                  }}
-                  onClick={handleSave}
-                />
+                <div className="mb-3 mt-3">
+                  <Button
+                    label={t('SHARED.SAVE')}
+                    styles={{
+                      color: '#ffc153',
+                      height: '40px',
+                      width: '80px',
+                      padding: '10px 15px',
+                      marginLeft: 'auto',
+                      marginRight: 'auto'
+                    }}
+                    onClick={handleSave}
+                  />
+                </div>
               </ToggleCollapse>              
             </div>
             <div className='flex flex-col justify-items-center mx-auto text-center'>

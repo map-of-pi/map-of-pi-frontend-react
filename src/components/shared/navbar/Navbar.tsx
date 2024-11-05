@@ -19,7 +19,7 @@ import logger from '../../../../logger.config.mjs';
 function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const local = useLocale();
+  const locale = useLocale();
   const t = useTranslations();
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [isHomePage, setIsHomePage] = useState(true);
@@ -29,7 +29,7 @@ function Navbar() {
   // check if the current page is the homepage
   useEffect(() => {
     const checkHomePage = () => {
-      if (pathname === '/' || pathname === `/${local}`) {
+      if (pathname === '/' || pathname === `/${locale}`) {
         setIsHomePage(true);
       } else {
         logger.info(`HomePage Pathname is ${pathname}`);
@@ -81,7 +81,7 @@ function Navbar() {
           </div>
 
           <div className={`${styles.nav_item} ${isHomePage && 'disabled'}`}>
-            <Link href="/">
+            <Link href={`/${locale}`}>
               <MdHome size={24} className={`${isHomePage ? 'text-tertiary' : 'text-secondary'}`} />
             </Link>
           </div>

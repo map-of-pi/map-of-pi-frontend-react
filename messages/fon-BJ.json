@@ -70,7 +70,7 @@
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Xo do sato gon",
       "SELLER_DETAILS_LABEL": "Nǔsatɔ́ sín xo",
-      "SELLER_ADDRESS_POITION_LABEL": "Adlɛsi alo noten he min mi no sa onu te",
+      "SELLER_ADDRESS_POSITION_LABEL": "Adlɛsi alo noten he min mi no sa onu te",
       "LEAVE_A_REVIEW_MESSAGE": "Kan owe do ofi",
       "FACE_SELECTION_REVIEW_MESSAGE": "Sɔ́ nukúnmɛ e xlɛ́ lěe a mɔ nǔ jɛ nǔ e a nɔ wà xá nukɔntɔ́ élɔ́ é wú gbɔn é",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Mi wlan xó ɖevo lɛ dó fí",
@@ -81,7 +81,7 @@
       "SELLER_USERNAME_LABEL": "Nyikɔ mɛtɔn",
       "SELLER_PIONEER_ID_LABEL": "Pioneer ID Towe",
       "SELLER_PHONE_NUMBER_LABEL": "Nǔsátɔ́ sin numɛro",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton  "
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Kpondewu",
