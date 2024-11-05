@@ -240,5 +240,9 @@
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "فشل الإرسال لأن المستخدم غير مصدق",
       "UNEXPECTED_ERROR_MESSAGE": "حدث خطأ غير متوقع"
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "الصفحة غير موجودة",
+    "PAGE_NOT_FOUND_MESSAGE": "عذرًا، الصفحة التي تبحث عنها غير موجودة."
   }
 }

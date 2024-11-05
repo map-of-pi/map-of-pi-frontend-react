@@ -252,5 +252,9 @@
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Submission failed because user is not authenticated",
       "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Page not found",
+    "PAGE_NOT_FOUND_MESSAGE": "Sorry, the page you are looking for does not exist."
   }
 }

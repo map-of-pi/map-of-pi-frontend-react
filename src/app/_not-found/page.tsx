@@ -1,10 +1,16 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+
 export const dynamic = 'force-dynamic';
 
 export default function NotFound() {
+  const t = useTranslations();
+
   return (
     <div>
-      <h1>404 | Page Not Found</h1>
-      <p>Sorry, the page you are looking for does not exist.</p>
+      <h1>404 | {t('ERROR.PAGE_NOT_FOUND_HEADER')}</h1>
+      <p>{t('ERROR.PAGE_NOT_FOUND_MESSAGE')}</p>
     </div>
   );
 }

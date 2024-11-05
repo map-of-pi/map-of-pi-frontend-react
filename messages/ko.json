@@ -239,5 +239,9 @@
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "제출이 실패했습니다; 사용자가 인증되지 않았습니다",
       "UNEXPECTED_ERROR_MESSAGE": "예기치 않은 오류가 발생했습니다"
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "페이지를 찾을 수 없습니다",
+    "PAGE_NOT_FOUND_MESSAGE": "죄송합니다, 찾고 있는 페이지는 존재하지 않습니다."
   }
 }

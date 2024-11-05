@@ -239,5 +239,9 @@
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "El envío falló porque el usuario no está autenticado",
       "UNEXPECTED_ERROR_MESSAGE": "Ocurrió un error inesperado"
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Página no encontrada",
+    "PAGE_NOT_FOUND_MESSAGE": "Lo sentimos, la página que buscas no existe."
   }
 }
