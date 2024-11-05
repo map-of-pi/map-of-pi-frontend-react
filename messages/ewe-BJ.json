@@ -230,7 +230,7 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Nemo wuri, gari ko adireshi",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "Nye dzi tsɔtɔ wɔm o"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Woƒe xɔ sia le afisi mɔ na mi"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Gɔme ɖa ...",
@@ -239,5 +239,9 @@
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Nɔvia míaɖu abe nu wò ye mele wònu o le fifiawo nyo",
       "UNEXPECTED_ERROR_MESSAGE": "Nuxlɔ̃sia na mi ɖe mɔ o"
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Fia na wòhù",
+    "PAGE_NOT_FOUND_MESSAGE": "Mègbè, pàg nà wòhù nà àtsia nè."
   }
 }

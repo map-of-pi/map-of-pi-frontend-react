@@ -7,7 +7,11 @@ import { SkeletonSidebar } from './Sidebar';
 
 function Skeleton(props : any) {
     if (props.type === "seller_registration") return <SkeletonSellerRegistration />;
-    if (props.type === "seller_review") return Array(8).fill(<SkeletonSellerReview />);
+    if (props.type === "seller_review") {
+      return Array(8).fill(null).map((_, index) => (
+          <SkeletonSellerReview key={index} />
+      ));
+    }
     if (props.type === "seller_item") return <SkeletonSellerItem />;
     if (props.type === "sidebar") return <SkeletonSidebar />;
 }
