@@ -139,10 +139,12 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         {/* Seller Address/ Position */}
         <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.SELLER_ADDRESS_POSITION_LABEL')}</h2>
         <div className="seller_item_container mb-5">          
-          <p className="mb-3">{sellerShopInfo.address}</p>          
+          <p className='mb-3' style={{ whiteSpace: 'pre-wrap' }}>
+            {sellerShopInfo.address}
+          </p>          
         </div>
 
-          {/* Summary of Reviews */}
+        {/* Summary of Reviews */}
         <div className="mb-7 mt-5">
           <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SUMMARY_LABEL')}</h2>
           {/* Trust-O-meter */}
