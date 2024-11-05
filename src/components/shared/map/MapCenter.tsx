@@ -34,6 +34,7 @@ const crosshairIcon = new L.Icon({
 
 interface MapCenterProps {
   entryType: 'search' | 'sell';
+  locale: string;
 }
 
 const MapCenter = ({ entryType }: MapCenterProps) => {
@@ -237,12 +238,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <ConfirmDialogX
           toggle={() => setShowPopup(false)}
           handleClicked={handleClickDialog}
-          // Dynamically set the message based on entryType
-          message={
-            entryType === 'sell'
-              ? t('SHARED.MAP_CENTER.VALIDATION.SELL_CENTER_SUCCESS_MESSAGE')
-              : t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')
-          }
+          message={t('SHARED.MAP_CENTER.VALIDATION.MAP_CENTER_SUCCESS_MESSAGE')}
         />
       )}
     </div>

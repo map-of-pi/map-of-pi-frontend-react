@@ -1,11 +1,14 @@
 import createMiddleware from 'next-intl/middleware';
 
-import { locales, localePrefix } from './navigation';
+// We are not using localePrefix directly here to maintain more direct control over
+// locale handling, manually specifying locales in route paths where needed.
+const locales = ['ar', 'en', 'en-GB', 'es', 'ewe-BJ', 'hau-NG', 'ko'];
+const defaultLocale = 'en';
 
 export default createMiddleware({
-  defaultLocale: 'en',
-  localePrefix,
   locales,
+  defaultLocale,
+  localePrefix: 'always'
 });
 
 export const config = {

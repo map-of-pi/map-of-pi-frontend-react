@@ -4,8 +4,9 @@ import { Lato } from 'next/font/google';
 import { Providers } from '../providers';
 
 import Navbar from '@/components/shared/navbar/Navbar';
-
 import logger from '../../../logger.config.mjs';
+
+export const dynamic = 'force-dynamic';
 
 const lato = Lato({ weight: '400', subsets: ['latin'], display: 'swap' });
 
