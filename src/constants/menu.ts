@@ -60,6 +60,14 @@ export const menu = {
         title: 'Benin Ewe',
         translation: 'Ewe',
         icon: '/images/shared/language/bj.svg',
+      },
+      {
+        id: 8,
+        code: 'fon-BJ',
+        label: 'BJ/FON',
+        title: 'Benin Fon',
+        translation: 'Fɔngbè',
+        icon: '/images/shared/language/bj.svg',
       }
     ],
   },
