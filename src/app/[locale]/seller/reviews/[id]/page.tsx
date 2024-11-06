@@ -29,7 +29,7 @@ function SellerReviews({
   const t = useTranslations();
   const userName = useRef<string>(searchParams.user_name);
   const userId = params.id;
-  const locale = useLocale;
+  const locale = useLocale();
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
   const [receiverReviews, setReceiverReviews] = useState<ReviewInt[] | null>(null);
