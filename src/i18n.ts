@@ -8,7 +8,8 @@ export const locales = [
   'en-GB', 
   'es', 
   'ewe-BJ', 
-  'fon-BJ', 
+  'fon-BJ',
+  'fr', 
   'hau-NG', 
   'ko'
 ] as const;

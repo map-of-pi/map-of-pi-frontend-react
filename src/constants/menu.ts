@@ -31,6 +31,14 @@ export const menu = {
       },
       {
         id: 4,
+        code: 'fr',
+        label: 'FR',
+        title: 'French',
+        translation: 'Français',
+        icon: '/images/shared/language/fr.svg',
+      },
+      {
+        id: 5,
         code: 'ar',
         label: 'AR',
         title: 'Arabic',
@@ -38,7 +46,7 @@ export const menu = {
         icon: '/images/shared/language/ar.svg',
       },
       {
-        id: 5,
+        id: 6,
         code: 'ko',
         label: 'KO',
         title: 'Korean',
@@ -46,7 +54,7 @@ export const menu = {
         icon: '/images/shared/language/ko.svg',
       },
       {
-        id: 6,
+        id: 7,
         code: 'hau-NG',
         label: 'NG/HAU',
         title: 'Nigerian Hausa',
@@ -54,7 +62,7 @@ export const menu = {
         icon: '/images/shared/language/ng.svg',
       },
       {
-        id: 7,
+        id: 8,
         code: 'ewe-BJ',
         label: 'BJ/EWE',
         title: 'Benin Ewe',
@@ -62,7 +70,7 @@ export const menu = {
         icon: '/images/shared/language/bj.svg',
       },
       {
-        id: 8,
+        id: 9,
         code: 'fon-BJ',
         label: 'BJ/FON',
         title: 'Benin Fon',
