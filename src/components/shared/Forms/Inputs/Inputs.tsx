@@ -29,7 +29,7 @@ export const Input = (props: any) => {
 
 
 export const TelephoneInput = (props: any) => {
-  const { label, ...input } = props;
+  const { label, smartCaret, ...input } = props;
   return (
     <div className="">
       {props.label && (
@@ -37,6 +37,7 @@ export const TelephoneInput = (props: any) => {
       )}
       <PhoneInput 
         {...input}
+        smartCaret={smartCaret}
         className={`flex mt-1 p-[10px] w-full rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] mb-4`}
       />
     </div>
