@@ -14,6 +14,7 @@ import { fetchUserSettings } from '@/services/userSettingsApi';
 import { DeviceLocationType, IUserSettings } from '@/constants/types';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 import { userLocation } from '@/utils/geolocation';
+import ConfirmDialog from '@/components/shared/confirm';
 
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
@@ -35,6 +36,7 @@ export default function Index() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [showPopup, setShowPopup] = useState<boolean>(false)
 
   const { isSigningInUser, currentUser, autoLoginUser, reload, setReload } = useContext(AppContext);
 
@@ -45,6 +47,7 @@ export default function Index() {
       sessionStorage.removeItem('prevMapZoom');
     }
     setReload(false)
+    setShowPopup(false)
     checkAndAutoLoginUser(currentUser, autoLoginUser);
 
     const getUserSettingsData = async () => {
@@ -54,10 +57,14 @@ export default function Index() {
           logger.info('Fetched user settings data successfully:', { data });
           setDbUserSettings(data);
           if (data.search_map_center?.coordinates) {
-            setSearchCenter({
+            const coordinates = {
               lat: data.search_map_center.coordinates[1],
               lng: data.search_map_center.coordinates[0],
-            });
+            }
+            setSearchCenter(coordinates);
+            if (coordinates.lat===0 && coordinates.lng===0){
+              setShowPopup(true);
+            }
           }
         } else {
           logger.warn('User Settings not found.');
@@ -173,6 +180,12 @@ export default function Index() {
             />
           </div>
         </div>
+        {showPopup && <ConfirmDialog
+          show={setShowPopup} 
+          onClose={()=>setShowPopup(false)}
+          message={"Your Search Centre has been set to default (0, 0) location. For optimum Map of Pi experience, set your Search Centre Location"} 
+          url={`/map-center?entryType=search`}
+        />}
       </div>
     </>
   );
