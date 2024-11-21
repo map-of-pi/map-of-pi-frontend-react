@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "판매",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "현재 검색 센터가 기본 좌표 [0, 0]로 설정되어 있습니다. 경험을 개선하려면 검색 센터 위치를 업데이트하세요.",
     "SEARCH_BAR_PLACEHOLDER": "판매자 또는 항목 검색",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "이 기능을 사용하려면 장치 설정에서 위치 서비스를 활성화하세요.",

@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "Adesɔ",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Wò Search Center le dzĩe kplii aɖaŋu nù [0, 0]. Ne wòle nu sia kpli dze sia na dɔwɔ anye nye nè wòle Search Center nè amehe kpli ta.",
     "SEARCH_BAR_PLACEHOLDER": "Gblekɔ dziwo be dzidzakpɔtɔ na ɖa",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Ne woana towo yi, meɖe woɖo wo gbãto le woʋa si ƒe kplɔ̃ɖeɖe.",

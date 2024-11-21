@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "Sell",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Your Search Center is currently set to the default coordinates [0, 0]. To enhance your experience, please update your Search Center location.",
     "SEARCH_BAR_PLACEHOLDER": "Search for sellers or items",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "To use this feature, please enable location services in your device settings.",

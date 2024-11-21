@@ -1,5 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
+import { IoMdClose } from 'react-icons/io';
 import { useRouter } from 'next/navigation';
 
 const ConfirmDialog = ({ show, onClose, message, url }:any) => {
@@ -16,9 +17,9 @@ const ConfirmDialog = ({ show, onClose, message, url }:any) => {
       <div className="bg-white rounded-lg p-6 w-full max-w-md mx-6 sm:mx-auto relative">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
+          className="absolute top-3 right-3"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18.3 5.71L12 12l6.3 6.29a1 1 0 11-1.42 1.42L12 13.41l-6.29 6.3a1 1 0 11-1.42-1.42L10.59 12 4.3 5.71a1 1 0 011.42-1.42L12 10.59l6.29-6.3a1 1 0 011.42 1.42z"/></svg>
+          <IoMdClose size={24} className="text-gray-600 hover:text-gray-800" />
         </button>
         <div className="text-center mt-5">
           <p className="text-lg mb-4">{message}</p>
@@ -45,9 +46,9 @@ export const ConfirmDialogX = ({ toggle, handleClicked, message }:any) => {
       <div className="bg-white rounded-lg p-6 w-full max-w-md mx-6 sm:mx-auto relative">
         <button
           onClick={toggle}
-          className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
+          className="absolute top-3 right-3"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18.3 5.71L12 12l6.3 6.29a1 1 0 11-1.42 1.42L12 13.41l-6.29 6.3a1 1 0 11-1.42-1.42L10.59 12 4.3 5.71a1 1 0 011.42-1.42L12 10.59l6.29-6.3a1 1 0 011.42 1.42z"/></svg>
+          <IoMdClose size={24} className="text-gray-600 hover:text-gray-800" />
         </button>
         <div className="text-center mt-5">
           <p className="text-lg mb-4">{message}</p>
