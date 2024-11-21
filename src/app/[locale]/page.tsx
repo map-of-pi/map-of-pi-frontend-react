@@ -183,8 +183,8 @@ export default function Page({ params }: { params: { locale: string } }) {
         </div>
         {showPopup && <ConfirmDialog
           show={setShowPopup} 
-          onClose={()=>setShowPopup(false)}
-          message={"Your Search Centre has been set to default (0, 0) location. For optimum Map of Pi experience, set your Search Centre Location"} 
+          onClose={()=> setShowPopup(false)}
+          message={t('HOME.SEARCH_CENTER_DEFAULT_MESSAGE')} 
           url={`/map-center?entryType=search`}
         />}
       </div>
