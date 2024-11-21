@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "Onùsisà",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Search Center nu xɔxɔ wɔ nyuie [0, 0]. Ne wòle dzogbɔ dzinɖo, wòbɔ Search Center xɔ xɔ na.",
     "SEARCH_BAR_PLACEHOLDER": "Mi ba nusatɔ lê alò onùsisa lê",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Bo nu ana zan o, kin klin bo ta GPS towe to Alokan madosi towe dji.",

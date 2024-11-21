@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "بيع",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "مركز البحث الخاص بك مضبوط حاليًا على الإحداثيات الافتراضية [0، 0]. لتحسين تجربتك، يُرجى تحديث موقع مركز البحث الخاص بك.",
     "SEARCH_BAR_PLACEHOLDER": "ابحث عن البائعين أو العناصر",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "لتفعيل هذه الميزة، يرجى تفعيل خدمات الموقع في إعدادات جهازك.",
