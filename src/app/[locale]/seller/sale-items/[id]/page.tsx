@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -21,9 +21,8 @@ import logger from '../../../../../../logger.config.mjs';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
-
   const t = useTranslations();
-
+  const locale = useLocale();
   const sellerId = params.id; 
 
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -140,10 +139,12 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         {/* Seller Address/ Position */}
         <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.SELLER_ADDRESS_POSITION_LABEL')}</h2>
         <div className="seller_item_container mb-5">          
-          <p className="mb-3">{sellerShopInfo.address}</p>          
+          <p className='mb-3' style={{ whiteSpace: 'pre-wrap' }}>
+            {sellerShopInfo.address}
+          </p>          
         </div>
 
-          {/* Summary of Reviews */}
+        {/* Summary of Reviews */}
         <div className="mb-7 mt-5">
           <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SUMMARY_LABEL')}</h2>
           {/* Trust-O-meter */}
@@ -154,7 +155,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             <p className="text-sm">
               {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: sellerShopInfo.average_rating.$numberDecimal})}
             </p>
-            <Link href={`/seller/reviews/${sellerId}?buyer=true&user_name=${sellerInfo?.pi_username}`}>
+            <Link href={`/${locale}/seller/reviews/${sellerId}?buyer=true&user_name=${sellerInfo?.pi_username}`}>
             <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} />
             </Link>
           </div>

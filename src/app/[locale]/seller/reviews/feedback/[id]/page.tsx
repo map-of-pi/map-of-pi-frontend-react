@@ -185,7 +185,7 @@ export default function ReplyToReviewPage({ params }: ReplyToReviewPageProps) {
 
           <h2 className="font-bold">{t('SCREEN.REPLY_TO_REVIEW.GIVE_REPLY_TO_REVIEW_SUBHEADER')}</h2>
           <h2 className="text-[#828282]">
-            {t('To')}: {currentUser?.user_name === reviews[currentIndex].giver
+            {currentUser?.user_name === reviews[currentIndex].giver
               ? reviews[currentIndex]?.receiver
               : reviews[currentIndex].giver}
           </h2>

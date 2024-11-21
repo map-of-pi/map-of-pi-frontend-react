@@ -1,0 +1,248 @@
+{
+  "HOME": {
+    "ADD_SELLER": "Onùsisà",
+    "SEARCH_BAR_PLACEHOLDER": "Mi ba nusatɔ lê alò onùsisa lê",
+    "LOCATION_SERVICES": {
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "Bo nu ana zan o, kin klin bo ta GPS towe to Alokan madosi towe dji.",
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "GPS miton ma to tita."
+    },
+    "AUTHENTICATION": {
+      "SUCCESSFUL_LOGIN_MESSAGE": "Résò Ô wà Azô gandji",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Résò ô Ma wà Azô",
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi sin xoɖiɖɔ ma mɔ"
+    }
+  },
+  "SIDE_NAVIGATION": {
+    "USER_PREFERENCES_HEADER": "Nǔ e mɛ e nɔ zán é yí wǎn na é",
+    "PERSONALIZATION_SUBHEADER": "Mɛɖesunɔ sin nu",
+    "LANGUAGES": "Gbè lɛ",
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "gbon nu wiwa Pi ton wu",
+      "APP_VERSION": "App sin alɔkpa",
+      "PRIVACY_POLICY": "Sɛ́n mɛɖesunɔ tɔn",
+      "TERMS_OF_SERVICE": "Azɔwanú Sɛ́n lɛ"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "Kpɔn Mi Nujlo",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Automatikou",
+      "PREFERRED_DEVICE_GPS": "Zan GPS azɔwanú ce tɔn",
+      "PREFERRED_SEARCH_CENTER": "Zan Bibaatɛn"
+    },
+    "CONTACT_MAP_OF_PI": "Do xo sedo Map Of Pi",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nǔ e jló we lɛ é ɖuɖeji",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Nǔwanyido ɖò nǔ e è yí wǎn na lɛ é hɛn ɖ'ayǐ mɛ"
+    }
+  },
+  "SCREEN": {
+    "SELLER_REGISTRATION": {
+      "SELLER_REGISTRATION_HEADER": "Nǔsátɔ́ sín nyikɔ",
+      "SELLER_DETAILS_LABEL": "Nǔsátɔ́ sín gbigbajemin",
+      "EMAIL_LABEL": "Adrɛsi Email mittɔn",
+      "PHONE_NUMBER_LABEL": "Alokan numɛro miton",
+      "CONTACT_PUBLIC_NOTE": "Adlɛsi mɛbi tɔn kpodó alokan sín kɛ́n kpó na ɖò wěxo.",
+      "SELLER_DETAILS_PLACEHOLDER": "Hun nɔ sà gbɔn Akwɛ kpodo Pi kpo jí.",
+      "REVIEWS_SUMMARY_LABEL": "Kplékplé xóxó",
+      "REVIEWS_SCORE_LABEL": "Kpɔ́ndéwú lɛ",
+      "SELLER_NAME": "Nyikɔ Nusatɔ tɔn",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "Nusatɔ alɔkpa de he a yin",
+        "SELLER_TYPE_OPTIONS": {
+          "ACTIVE_SELLER": "Nusatɔ he to nus able-ble",
+          "INACTIVE_SELLER": "Nǔsátɔ́ e ma ɖò azɔ̌ wà wɛ ǎ é le",
+          "TEST_SELLER": "Tɛnkpɔn nusatɔ"
+        }
+      },
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Azɔwatɔ Nukɔntɔn lɛ sin réglages",
+      "SELLER_RETAIL_OUTLET_NAME": "Nyikɔ nuxɔsa tɔn",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Adresse alo fi e mi ɖo nu sa ɖe ɔ",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nǔsatɔ́ sín oto he min e te kpo do Katier e ton kpo",
+      "SELLER_SETTINGS_LABEL": "Seller Settings, Nǔ e nɔ xlɛ́ fí e un ɖò nǔ sà ɖè é wɛ",
+      "SELLER_SELL_CENTER": "Nǔsatɔ́ sín tito",
+      "VALIDATION": {
+        "EMAIL_VALIDATION": "Mi kɛnklɛn bo wlan adlɛsi mɛyiyi tɔn ɖe sɔgbe ɔ",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Wlanwlan ɖuɖeji",
+        "FAILED_REGISTRATION_SUBMISSION": "Nuwanyido ɖo wema wlanwlan hɛn ɖ'ayi mɛ",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nyɔma wlanwlan gló ɖó mɛ e nɔ zán é kún nyí mɛɖebǔ ó",
+        "UNINITIALIZED_SELL_CENTER": "Mi kɛnklɛn bo ze tɛn mitɔn ɖo te"
+      }
+    },
+    "BUY_FROM_SELLER": {
+      "BUY_FROM_SELLER_HEADER": "Xo do sato gon",
+      "SELLER_DETAILS_LABEL": "Nǔsatɔ́ sín xo",
+      "SELLER_ADDRESS_POSITION_LABEL": "Adlɛsi alo noten he min mi no sa onu te",
+      "LEAVE_A_REVIEW_MESSAGE": "Kan owe do ofi",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Sɔ́ nukúnmɛ e xlɛ́ lěe a mɔ nǔ jɛ nǔ e a nɔ wà xá nukɔntɔ́ élɔ́ é wú gbɔn é",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Mi wlan xó ɖevo lɛ dó fí",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL":"Xósin ɖiɖe ɖ'ayǐ",
+      "REVIEWS_SUMMARY_LABEL": "Kplékplé xóxó",
+      "REVIEWS_SCORE_MESSAGE": "Kplékplé lɛ sín kɛ́n: {seller_review_rating} ɖò 5.0 jí",
+      "SELLER_CONTACT_DETAILS_LABEL": "Nǔsátɔ́ ɔ sín xóɖóxámɛ",
+      "SELLER_USERNAME_LABEL": "Nyikɔ mɛtɔn",
+      "SELLER_PIONEER_ID_LABEL": "Pioneer ID Towe",
+      "SELLER_PHONE_NUMBER_LABEL": "Nǔsátɔ́ sin numɛro",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton"
+    },
+    "REVIEWS": {
+      "REVIEWS_HEADER": "Kpondewu",
+      "GIVE_REVIEW_SECTION_HEADER": "Na xoxin nu nukonto he lo",
+      "REVIEWS_GIVEN_SECTION_HEADER": "Xóɖɔɖókpɔ́ e nukɔntɔ́ élɔ́ ná é",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Xóɖɔɖókpɔ́ e nukɔntɔ́ élɔ́ yí é",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "Ɖo_Ɖɔ_Ɖɔ nu Pioneer {search_value}",
+        "NO_PIONEER_FOUND": "Mɔ_pionnier {search_value} a"
+      }
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Xóɖɔɖókpɔ́ ɖěbǔ de nú we a {seller_id} ǎ",
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "Xóɖɔɖókpɔ́ e kpò nú {seller_id} é sín wěma",
+      "BY_REVIEWER": "Xóɖɔɖókpɔ́ ɖěbǔ nú {buyer_id} ǎ"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Xósin nú Kpɔ́n",
+      "REPLY_TO_REVIEW_SUBHEADER": "Xóɖɔɖókpɔ́ e a ɖò xósin na wɛ é",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Na xósin nú kpɔ́n",
+      "REPLY_TO_REVIEW_HEADER": "Nǔsátɔ́ xósin nú Kpɔ́ndéwú e è jó dó nú {seller_id}",
+      "BY_REVIEWER": "Do Nuoto sin {buyer_id} mɛ",
+      "REPLY_TO_REVIEW_MESSAGE": "Jǒ xósin towe dó xóɖɔɖókpɔ́ e ɖò aga é jí",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Sɔ́ nukúnmɛ e xlɛ́ lěe a mɔ nǔ jɛ nǔ e a nɔ wà xá nukɔntɔ́ élɔ́ é wú gbɔn é nu pionneer",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Mi wlan xó ɖevo lɛ dó fí",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Xósin ɖiɖe Photo ton ɖ'ayǐ",
+      "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "Nuwanyido ɖo nukpɔn mɛ ɔ mɛ",
+        "SELF_REVIEW_NOT_POSSIBLE": "Mɛɖesunɔ gbéjé kpɔ́n sixu jɛ ǎ"
+      }
+    }
+  },
+  "POPUP": {
+    "MAP_MARKER": {
+      "SELLER_SALE_ITEMS_FIELD": "Nǔsatɔ́ lɛ ɖò sisa wɛ",
+      "DISTANCE_MESSAGE": "Distance: Do din din XXX km"
+    },
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "Mi kɛnklɛn bo ɖɔ nu e gble ɔ"
+    },
+    "PRIVACY_POLICY_INFO": {
+      "TITLE": "Sɛ́n Mɛɖesunɔ Tɔn",
+      "LAST_UPDATED": "Sɛ́n Mɛɖesunɔ Tɔn",
+      "EMAIL_ADDRESS": "Adrɛsi Email Mitɔn",
+      "SECTIONS": {
+        "HEADER_1": "Nukɔntɔn",
+        "CONTENT_1": "Mi do gbe nu mi ɖo Map of Pi app ɔ ji, e gbɛta Map of Pi tɔn ɔ blo ɖo kpɔ kpodo Pi Community kpo. Sɛ́n mɛɖesunɔ tɔn elɔ xlɛ lěe mi nɔ xò, nɔ zan, nɔ ɖe xlɛ, bo nɔ hɛn xo mitɔn lɛ gbɔn hwenu e mi nɔ zan appli alokan mitɔn ɔ .",
+        "HEADER_2": "Xlɛ́ nú tɔ́n nɔ mɛ",
+        "SUBHEADER_2_1": "Nǔ e mǐ nɔ xò kplé lɛ é",
+        "CONTENT_2_1_1": "Nú a wlan nyikɔ dó mɛ e nɔ zán nǔ ɔ é mɛ ɔ, mǐ sixu yí nyikɔ towe, adlɛsi e-mail towe tɔn, mɛ e nɔ zán é sín nyikɔ, kpo nǔ ɖevo e sɔgbe lɛ é kpo.",
+        "CONTENT_2_1_2": "Nǔsátɔ́ e ɖò nyikɔ yetɔn wlan wɛ ɖò tɛn ɛntɛnɛti tɔn ɔ jí lɛ é sixu byɔ ɖɔ ye ni na nǔsátɔ́ ɔ sín nǔ lɛ, ɖi nǔsátɔ́ ɔ sín nyikɔ, fí e é ɖè é, kpodo xó e è na mɔ ɖò tɛn ɛntɛnɛti tɔn ɔ jí lɛ é kpo.",
+        "SUBHEADER_2_2": "Nǔsátɔ́ sín xó",
+        "CONTENT_2_2_1": "Nǔsátɔ́ e ɖò nyikɔ yetɔn wlan wɛ ɖò tɛn ɛntɛnɛti tɔn ɔ jí lɛ é sixu byɔ ɖɔ ye ni na nǔsátɔ́ ɔ sín nǔ lɛ, ɖi nǔsátɔ́ ɔ sín nyikɔ, fí e é ɖè é, kpodo xó e è na mɔ ɖò tɛn ɛntɛnɛti tɔn ɔ jí lɛ é kpo.",
+        "CONTENT_2_2_2": "Nǔsátɔ́ sixú nyí ajɔ̌tɔ́ ɖé abǐ mɛɖesunɔ tɔn.",
+        "HEADER_3": "Lěe Mi Nɔ Zán Nǔ Mitɔn lɛ Gbɔn É",
+        "SUBHEADER_3_1": "Azɔwiwa",
+        "CONTENT_3_1_1": "Mi no zan xo mitɔn lɛ bo nɔ na bo nɔ hɛn Map of Pi sin azɔwiwa lɛ nyɔ hu, ɖi mɛ e nɔ zan ɔ kpodo nusatɔ ɔ kpo sin azɔwiwa lɛ.",
+        "SUBHEADER_3_2": "Xóɖɔɖókpɔ́",
+        "CONTENT_3_2_1": "Mi hɛn ɔ mi na zan xo mitɔn lɛ bo na do sɛ́ xo yɔyɔ lɛ, gbeɖiɖe lɛ kpodo wɛn jlaɖó lɛ kpo do mi.",
+        "SUBHEADER_3_3": "Nǔgbéjékpɔ́n",
+        "CONTENT_3_3_1": "Mi nɔ xò nǔ lɛ kplé bo nɔ gbéjé ye kpɔ́n bo na dó bló bɔ azɔ̌wiwa, nǔ e ɖ'emɛ lɛ é kpodó azɔ̌wiwa tɔn lɛ kpó na nyɔ́ hugǎn.",
+        "HEADER_4": "Nǔ Mitɔn lɛ Má",
+        "SUBHEADER_4_1": "Kpodo Nusatɔ lɛ kpo",
+        "CONTENT_4_1_1": "È sixu má mɛ e nɔ zán é sín xó lɛ xá Nǔsátɔ́ lɛ nú è na dó bló nǔ e è sɛ́ dó ye é kpodó xóɖɔɖókpɔ́ sín linlin lɛ kpó.",
+        "SUBHEADER_4_2": "Kpodo Mɛ Atɔngɔ lɛ kpo",
+        "CONTENT_4_2_1": "Mi hɛn ɔ mi na má xo lɛ kpodo mɛ ɖevo lɛ kpo bo na do mɔ tɛn bo na w'azɔ ɖo appli ɔ mɛ, bo na do gbéjé nu lɛ kpɔn, lobo na do su akwɛ.",
+        "HEADER_5": "Acɛkpikpa sín tuto lɛ",
+        "CONTENT_5_1": "Mi nɔ zan ayijayi sin azɔxwe lɛ bo nɔ hɛn xo mitɔn lɛ ganji. Amɔ̌, alɔkpa ɖebu e nɔ hɛn xo mitɔn lɛ gbɔn ɛntɛnɛti ji alo nu hɛn ɖ'ayi mɛ ɔ ɖebu nɔ hɛn ayijayi ɖebu ǎ.",
+        "HEADER_6": "Nǔ e a sɔ́ lɛ é",
+        "CONTENT_6_1": "A sixu jla akɔnta towe sín xo lɛ ɖó gbɔn appli ɔ sín tuto lɛ gblamɛ. A sixu súnsún akɔnta Map of Pi tɔn towe gbɔn akɔnta Pi Network towe súnsún gblamɛ bo na sɔ́ linlin ɔ bo na súnsún akɔnta Map of Pi tɔn towe lɛ hwenu e a na yì Map of Pi jí é. Mi hɛn ɔ mi na gɔn xoɖiɖɔ nujlajla tɔn lɛ yi.",
+        "HEADER_7": "Ɖyɔɖyɔ lɛ ɖo Sɛ́n Mɛɖesunɔ Tɔn Elɔ mɛ",
+        "CONTENT_7_1": "Mi hɛn ɔ mi na jla Sɛ́n Mɛɖesunɔ Tɔn elɔ lɛ ɖó lee é byɔ gbɔn é. È na sɔ́ ɖiɖe yɔyɔ̌ ɔ ɖó tɛn ɛntɛnɛti tɔn mǐtɔn jí alǒ ɖò appli ɔ mɛ.",
+        "HEADER_8": "Kàn nǔ byɔ mǐ",
+        "CONTENT_8_1": "Nú mi ɖó nùkanbyɔ́ ɖebǔ abǐ nǔ e jló mi é ɖé dó Sɛ́n Mɛɖesunɔ Tɔn Elɔ wú hǔn, mi kɛnklɛn bo sɛ́ email dó mǐ do"
+      }
+    },
+    "TERMS_OF_SERVICE_INFO": {
+      "TITLE": "Sɛ́n Azɔ̌wiwa Tɔn lɛ",
+      "LAST_UPDATED": "Ɖo Ɖɔhun",
+      "EMAIL_ADDRESS": "Adrɛsi Email towe",
+      "SECTIONS": {
+        "HEADER_1": "Sɛ́n lɛ yíyí",
+        "CONTENT_1_1": "Mi do gbe nu mi ɖo Map of Pi app ɔ ji, bɔ gbɛta Map of Pi tɔn ɔ wɛ blo ɖo kpɔ kpodo Pi Community kpo. Nu mi zan appli elɔ ɔ, mi yi gbe ɖɔ mi na xwe do Sɛ́n Azɔwiwa tɔn elɔ lɛ, kpodo Sɛ́n Mɛɖesunɔ Tɔn lɛ kpo.", 
+        "HEADER_2": "App ɔ zinzan",
+        "CONTENT_2_1": "A yigbe ɖɔ emi na zan Map of Pi sin azɔwanu ɔ ɖo sɛn lɛ bi mɛ.",
+        "CONTENT_2_2": "A ɖo na zan appli ɔ nu nuɖe ma sɔgbe xa alo nuɖe gbɛ a, alo nu ɖebu e sixu hɛn appli ɔ gble, hɛn azɔwanu ɔ gble, alo hɛn azɔwanu ɔ gble a.",
+        "CONTENT_2_3": "Bo na do zan Pi sin ɖiɖe ɔ, a ɖo na wlan nyikɔ ɖi mɛ nukɔntɔn e nɔ zan Pi sin tɛn ɛntɛnɛti tɔn ɔ.",
+        "HEADER_3": "Nǔnywɛ xwitixwiti sín nǔ lɛ",
+        "CONTENT_3_1": "Map of Pi app ɔ kpodo nu e ɖ'emɛ lɛ bi kpo, nu e ɖ'emɛ lɛ, kpodo azɔwiwa tɔn lɛ kpo ɔ, Map of Pi tɔn wɛ bɔ acɛkpikpa, wuntun, kpodo sɛn nunywɛ xwitixwiti tɔn ɖevo lɛ kpo wɛ cyɔn alɔ ye ji.",
+        "HEADER_4": "Acɛkpikpa ɔ sín dogbó",
+        "CONTENT_4_1": "Map of Pi na hɛn nǔ gblé dó mɛ wu tlɔlɔ, tlɔlɔ ǎ, nǔ e jɛ ɖò ali ɖé nu é, nǔ bunɔ ɖé, alǒ nǔ e jɛ ɖò ali ɖebǔ nu é ǎ.",
+        "HEADER_5": "Akwɛzinzan",
+        "CONTENT_5_1": "A yí gbè ɖɔ emi na sú axɔ́ nú Map of Pi kpodo azɔwatɔ́ tɔn lɛ kpo, azɔ̌watɔ́ tɔn lɛ, gǎn lɛ, azɔ̌watɔ́ lɛ, kpodo mɛ e nɔ w’azɔ̌ xá ɛ lɛ é kpo sín nǔ e è byɔ lɛ é bǐ, axɔ, nǔ e è hɛn gblé lɛ é, nǔ e è hɛn bú lɛ é, alǒ akwɛzinzan (e mɛ hwɛɖɔtɔ́ lɛ sín akwɛ ɖè lɛ é) e na tɔ́n sín . alǒ ɖò ali ɖebǔ nu e kàn Map of Pi app ɔ zinzan é.",
+        "HEADER_6": "Sɛ́n Acɛkpikpa Tɔn",
+        "CONTENT_6_1": "Sɛ́n Angleterre kpo Pays de Galles kpo tɔn wɛ na kp'acɛ dó Sɛ́n Azɔ̌wiwa Tɔn elɔ lɛ jí bo na lɛ́ tinmɛ ye sɔgbe xá sɛ́n yetɔn lɛ ǎ, kaka jɛ hwɛgbe alǒ nǔ e è byɔ ɖò mɛ sí lɛ é jí (ɖò mɛ ɔ, hwɛgbe e ma nyí akɔjijɛ tɔn ǎ lɛ é alǒ nǔ e è byɔ lɛ é lɔ ɖ’emɛ).",
+        "HEADER_7": "Ɖyɔɖyɔ lɛ ɖo Sɛ́n Enɛ lɛ mɛ",
+        "CONTENT_7_1": "Mǐ ɖó acɛ bo na jla nǔ elɔ lɛ ɖó hweɖebǔnu, bo ma na ɖɔ ɖ'ayi ǎ. È na sɔ́ nǔ yɔyɔ̌ ɔ ɖó tɛn ɛntɛnɛti tɔn mǐtɔn jí alǒ ɖò appli ɔ mɛ."
+      }
+    }
+  },
+  "SHARED": {
+    "PIONEER_LABEL": "PIOnnier",
+    "BUY": "Xɔ nu",
+    "NAVIGATE": "Kɔn",
+    "NO_COMMENT": "È na xó ɖé ǎ",
+    "SEARCH_CENTER": "Sɔ́ tɛn e mɛ è nɔ ba nǔ ɖè é",
+    "CHECK_REVIEWS": "Kpɔ́n xóɖɔɖókpɔ́ lɛ",
+    "SEARCH_REVIEWS": "Biba Xóɖɔɖókpɔ́ lɛ",
+    "SEARCH_LOADING": "Biba ɖo yiyi wɛ...",
+    "REPLY": "Xósin",
+    "SAVE": "Hɛn",
+    "CONFIRM_DIALOG": "A ɖo ɖyɔɖyɔ e ma ko hɛn ɖ'ayi ǎ lɛ. A jlo na gosin nugbo a?",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Pi nyikɔ mitɔn",
+      "NAME_LABEL": "Nyikɔ",
+      "PHONE_NUMBER_LABEL": "Alokan numɛro miton",
+      "EMAIL_LABEL": "Emai miton"
+    },
+    "PHOTO": {
+      "UPLOAD_PHOTO_LABEL": "Ɖo fɔto ɔ ji",
+      "UPLOAD_PHOTO_PLACEHOLDER": "Mi ze ɖiɖe ɔ do bo na dɔn nuxɔtɔ́ lɛ (PNG‚ JPG‚ JPEG‚ WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Zé ɖiɖe ɖe ɖ'ayi bo na dó nɔ gudo nú nukpɔn mitɔn (PNG‚ JPG‚ JPEG‚ WEBP)",
+      "IMAGE_DROP_UPLOAD_MESSAGE": "Zé ɖiɖe towe ɖó fí aló kpɔ́n",
+      "SUPPORTS_FILE_MESSAGE": "Ɖo: PNG, JPG, JPEG, WEBP",
+      "MISC_LABELS": {
+        "USER_PREFERENCES_LABEL": "Ɖiɖe mɛɖesunɔ tɔn",
+        "SELLER_IMAGE_LABEL": "Nɔsatɔ sin ɖiɖe",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Kpɔ́n ɖiɖe ɔ"
+      }
+    },
+    "REACTION_RATING": {
+      "UNSAFE": "E ma ɖo ayijayi mɛ ǎ",
+      "TRUSTWORTHY": "Jiɖe",
+      "EMOTIONS": {
+        "DESPAIR": "home ma houn",
+        "SAD": "Aluwɛ",
+        "OKAY": "E nyɔ",
+        "HAPPY": "Awǎjijɛ",
+        "DELIGHT": "Awǎjijɛ hihon ton"
+      },
+      "VALIDATION": {
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Kpɔ́ndéwú ɔ gló, Nukpɔn ɔ yi ganji",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Kpɔ́ndéwú ɔ gló",
+        "SELECT_EMOJI_EXPRESSION": "Mi kɛnklɛn bo sɔ xoɖiɖɔ emoji tɔn"
+      }
+    },
+    "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Ba oxo ton ɖe, abǐ adlɛsi ɖe",
+      "VALIDATION": {
+        "MAP_CENTER_SUCCESS_MESSAGE": "Ŋkɔ́ nì wɛ́ ɖò dàn ná tɔ́n nɔ kplɔ́ mɛ"
+      }
+    },
+    "LOADING_SCREEN_MESSAGE": "Tɔn ná mɛ̌ ...",
+    "SAVING_SCREEN_MESSAGE": "Dàn ná mɛ̌ ...",
+    "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Azɔwatɔ ɔ gbado ɖo mɛ e nɔ zan e ɔ, e sɔ nyi mɛɖe ǎ",
+      "UNEXPECTED_ERROR_MESSAGE": "Nuwanyido ɖe ma ɖo nukun tɔn mɛ a ɔ jɛ"
+    }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Xlẽtɔ̀ nɔ nɔ̌ wá ɖó",
+    "PAGE_NOT_FOUND_MESSAGE": "Mìafɔ̀, xlẽtɔ̀ nì wé ɖó sí ná kàn ná á nɔ̌."
+  }
+}

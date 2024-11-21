@@ -231,8 +231,7 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "ابحث عن موقع، مدينة، أو عنوان",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "تم حفظ مركز البحث بنجاح",
-        "SELL_CENTER_SUCCESS_MESSAGE": "تم حفظ مركز البيع بنجاح"
+        "MAP_CENTER_SUCCESS_MESSAGE": "تم حفظ مركزك بنجاح"
       }
     },
     "LOADING_SCREEN_MESSAGE": "جار التحميل ...",
@@ -241,5 +240,9 @@
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "فشل الإرسال لأن المستخدم غير مصدق",
       "UNEXPECTED_ERROR_MESSAGE": "حدث خطأ غير متوقع"
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "الصفحة غير موجودة",
+    "PAGE_NOT_FOUND_MESSAGE": "عذرًا، الصفحة التي تبحث عنها غير موجودة."
   }
 }

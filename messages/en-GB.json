@@ -243,7 +243,7 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Search a location, city, or address",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "Your Search Centre has been saved successfully"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Your centre has been saved successfully"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Loading ...",
@@ -252,5 +252,9 @@
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Submission failed because user is not authenticated",
       "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Page not found",
+    "PAGE_NOT_FOUND_MESSAGE": "Sorry, the page you are looking for does not exist."
   }
 }

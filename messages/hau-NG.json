@@ -228,8 +228,9 @@
       }
     },
     "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Nema wuri, birni, ko adireshi",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "An adana Cibiyar Bincike ɗinku cikin nasara"
+        "MAP_CENTER_SUCCESS_MESSAGE": "An adana cibiyar ku cikin nasara"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Ana loda ...",
@@ -238,5 +239,9 @@
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Aika ya kasa saboda mai amfani ba a tabbatar da shi ba",
       "UNEXPECTED_ERROR_MESSAGE": "An samu kuskure da ba a zata ba"
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Shafin ba a samu ba",
+    "PAGE_NOT_FOUND_MESSAGE": "Yi hakuri, shafin da kake nema ba ya wanzu."
   }
 }
