@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "Vender",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Tu Centro de Búsqueda está configurado actualmente en las coordenadas predeterminadas [0, 0]. Para mejorar tu experiencia, actualiza la ubicación de tu Centro de Búsqueda.",
     "SEARCH_BAR_PLACEHOLDER": "Buscar vendedores o artículos",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Para usar esta función, por favor active los servicios de ubicación en la configuración de su dispositivo.",

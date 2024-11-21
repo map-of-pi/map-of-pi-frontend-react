@@ -9,12 +9,12 @@ import { useContext, useEffect, useState, useRef } from 'react';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
+import ConfirmDialog from '@/components/shared/confirm';
 import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { DeviceLocationType, IUserSettings } from '@/constants/types';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 import { userLocation } from '@/utils/geolocation';
-import ConfirmDialog from '@/components/shared/confirm';
 
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
@@ -63,7 +63,7 @@ export default function Page({ params }: { params: { locale: string } }) {
               lng: data.search_map_center.coordinates[0],
             }
             setSearchCenter(coordinates);
-            if (coordinates.lat===0 && coordinates.lng===0){
+            if (coordinates.lat === 0 && coordinates.lng === 0) {
               setShowPopup(true);
             }
           }

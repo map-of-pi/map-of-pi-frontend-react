@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "Vendre",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Votre centre de recherche est actuellement défini sur les coordonnées par défaut [0, 0]. Pour améliorer votre expérience, veuillez mettre à jour la localisation de votre centre de recherche.",
     "SEARCH_BAR_PLACEHOLDER": "Recherchez des vendeurs ou des articles",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Pour utiliser cette fonctionnalité, veuillez activer les services de localisation dans les paramètres de votre appareil.",

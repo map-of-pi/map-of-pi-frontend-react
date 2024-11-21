@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "Sayar",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "An yanzu, Search Center ɗinku yana kan daidaitattun ƙofofi [0, 0]. Don inganta kwarewarku, da fatan za ku sabunta wurin Search Center ɗinku.",
     "SEARCH_BAR_PLACEHOLDER": "Bincika masu sayarwa ko abubuwa",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Domin amfani da wannan aikin, to ka a sauke shiga manazarta a cikin saitinsa na kasa.",
