@@ -1,20 +1,39 @@
 import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
 interface MapCenterPageProps {
   searchParams: { entryType?: string };
   params: { locale: string };
 }
 
-const MapCenterPage = ({ searchParams, params}: MapCenterPageProps) => {
-  const { entryType = 'search' } = searchParams;
-  const { locale } = params;
-  // Dynamically import the MapCenter component
-  const MapCenter = dynamic(() => import('@/components/shared/map/MapCenter'), {
+type EntryType = 'search' | 'sell';
+
+interface MapCenterProps {
+  entryType: EntryType;
+  locale: string;
+}
+
+const MapCenter = (props: MapCenterProps) => {
+  const { entryType, locale } = props
+
+  const DynamicMapCenter = dynamic(() => import('@/components/shared/map/MapCenter'), {
     ssr: false,
   });
 
   return (
-    <MapCenter entryType={entryType as 'search' | 'sell'} locale={locale} /> /* Pass entryType as a prop with locale */
+    <DynamicMapCenter entryType={entryType} locale={locale} /> /* Pass entryType as a prop with locale */
+  );
+};
+
+// Must wrap in a Suspense boundary to avoid 500 error on page load
+const MapCenterPage = ({ searchParams, params}: MapCenterPageProps) => {
+  const { entryType = 'search' } = searchParams;
+  const { locale } = params;
+
+  return (
+    <Suspense>
+      <MapCenter entryType={entryType as EntryType} locale={locale} /> {/* Pass entryType as a prop with locale */}
+    </Suspense>
   );
 };
 
