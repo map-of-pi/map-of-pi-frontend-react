@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,11 +9,12 @@ import logger from '../../../../logger.config.mjs';
 
 const MapMarkerPopup = ({ seller }: { seller: any }) => {
   const t = useTranslations();
+  const locale = useLocale();
 
   const imageUrl =
     seller.image && seller.image.trim() !== ''
       ? seller.image
-      : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png';
+      : '/images/logo.svg';
 
   const translateSellerCategory = (category: string): string => {
     switch (category) {
@@ -70,7 +71,7 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
       {/* Link to Buy button */}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5px' }}>
         <Link
-          href={`/seller/sale-items/${seller.seller_id}`} // Update to your target link
+          href={`/${locale}/seller/sale-items/${seller.seller_id}`} // Update to your target link
           style={{ display: 'flex', justifyContent: 'center', width: '100%' }}
         >
           <Button
