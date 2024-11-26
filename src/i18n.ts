@@ -11,7 +11,8 @@ export const locales = [
   'fon-BJ',
   'fr', 
   'hau-NG', 
-  'ko'
+  'ko',
+  'zh-CN'
 ] as const;
 
 export const defaultLocale = 'en';
