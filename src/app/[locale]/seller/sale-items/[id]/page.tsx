@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,15 +14,15 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { ISeller, IUserSettings, IUser } from '@/constants/types';
 import { fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
-
   const t = useTranslations();
-
+  const locale = useLocale();
   const sellerId = params.id; 
 
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -35,10 +35,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const { currentUser, autoLoginUser } = useContext(AppContext);
 
   useEffect(() => {
-    if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
-      autoLoginUser();
-    };
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
     
     const getSellerData = async () => {
       try {
@@ -54,7 +51,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           logger.warn(`No seller shop info found for seller ID: ${sellerId}`);
         }
       } catch (error) {
-        logger.error(`Error fetching seller data for seller ID: ${ sellerId }`, { error });
+        logger.error(`Error fetching seller data for seller ID: ${ sellerId }`, error);
         setError('Error fetching seller data');
       } finally {
         setLoading(false);
@@ -72,7 +69,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           logger.warn(`No seller settings found for seller ID: ${sellerId}`);
         }
       } catch (error) {
-        logger.error(`Error fetching seller settings for seller ID: ${ sellerId }`, { error });
+        logger.error(`Error fetching seller settings for seller ID: ${ sellerId }`, error);
         setError('Error fetching seller settings');
       }
     };
@@ -114,7 +111,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           <div className="rounded-[50%] w-[65px] h-[65px] relative">
             <Image 
               className="rounded-[50%]" 
-              src={sellerShopInfo.image && sellerShopInfo.image.trim() !== "" ? sellerShopInfo.image : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png'} 
+              src={sellerShopInfo.image && sellerShopInfo.image.trim() !== "" ? sellerShopInfo.image : 'images/logo.svg' } 
               alt="seller logo" 
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -142,10 +139,12 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         {/* Seller Address/ Position */}
         <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.SELLER_ADDRESS_POSITION_LABEL')}</h2>
         <div className="seller_item_container mb-5">          
-          <p className="mb-3">{sellerShopInfo.address}</p>          
+          <p className='mb-3' style={{ whiteSpace: 'pre-wrap' }}>
+            {sellerShopInfo.address}
+          </p>          
         </div>
 
-          {/* Summary of Reviews */}
+        {/* Summary of Reviews */}
         <div className="mb-7 mt-5">
           <h2 className={SUBHEADER}>{t('SCREEN.BUY_FROM_SELLER.REVIEWS_SUMMARY_LABEL')}</h2>
           {/* Trust-O-meter */}
@@ -156,7 +155,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             <p className="text-sm">
               {t('SCREEN.BUY_FROM_SELLER.REVIEWS_SCORE_MESSAGE', {seller_review_rating: sellerShopInfo.average_rating.$numberDecimal})}
             </p>
-            <Link href={`/seller/reviews/${sellerId}?buyer=true&user_name=${sellerInfo?.pi_username}`}>
+            <Link href={`/${locale}/seller/reviews/${sellerId}?buyer=true&user_name=${sellerInfo?.pi_username}`}>
             <OutlineBtn label={t('SHARED.CHECK_REVIEWS')} />
             </Link>
           </div>

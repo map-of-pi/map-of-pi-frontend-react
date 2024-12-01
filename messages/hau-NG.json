@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "Sayar",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "An yanzu, Search Center ɗinku yana kan daidaitattun ƙofofi [0, 0]. Don inganta kwarewarku, da fatan za ku sabunta wurin Search Center ɗinku.",
     "SEARCH_BAR_PLACEHOLDER": "Bincika masu sayarwa ko abubuwa",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Domin amfani da wannan aikin, to ka a sauke shiga manazarta a cikin saitinsa na kasa.",
@@ -41,7 +42,7 @@
       "EMAIL_LABEL": "Adireshin imel",
       "PHONE_NUMBER_LABEL": "Lambar waya",
       "CONTACT_PUBLIC_NOTE": "Adireshin imel da lambar waya za su kasance a bayyane ga kowa.",
-      "SELLER_DETAILS_PLACEHOLDER": "Bayani game da mai sayarwa da kayayyakin da ake sayarwa tare da farashin pi, da sauransu.",
+      "SELLER_DETAILS_PLACEHOLDER": "Ina sayarwa ta hanyar Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayani",
       "REVIEWS_SCORE_LABEL": "Maki Sake Dubawa",
       "SELLER_NAME": "Sunan Mai Sayarwa",
@@ -56,7 +57,7 @@
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
       "SELLER_RETAIL_OUTLET_NAME": "Sunan mashaya",
       "SELLER_ADDRESS_LOCATION_LABEL": "Adireshi ko inda kake siyarwa",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Taimaka wa masu saye su same ka ta hanyar ƙara adireshi ko bayanin inda kake siyarwa",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Alamar taswira ta na nuna inda nake sayarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
       "VALIDATION": {
@@ -228,14 +229,20 @@
       }
     },
     "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Nema wuri, birni, ko adireshi",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "An adana Cibiyar Bincike ɗinku cikin nasara"
+        "MAP_CENTER_SUCCESS_MESSAGE": "An adana cibiyar ku cikin nasara"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Ana loda ...",
+    "SAVING_SCREEN_MESSAGE": "Ana ajiya ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Aika ya kasa saboda mai amfani ba a tabbatar da shi ba",
       "UNEXPECTED_ERROR_MESSAGE": "An samu kuskure da ba a zata ba"
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Shafin ba a samu ba",
+    "PAGE_NOT_FOUND_MESSAGE": "Yi hakuri, shafin da kake nema ba ya wanzu."
   }
 }

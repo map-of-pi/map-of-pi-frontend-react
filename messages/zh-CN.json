@@ -1,0 +1,249 @@
+{
+  "HOME": {
+    "ADD_SELLER": "出售",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "您的搜索中心当前设置为默认坐标 [0, 0]。为提升您的体验，请更新您的搜索中心位置。",
+    "SEARCH_BAR_PLACEHOLDER": "搜索卖家或商品",
+    "LOCATION_SERVICES": {
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "要使用此功能，请在设备设置中启用位置服务。",
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "位置服务已禁用。请启用设备的定位设置。"
+    },
+    "AUTHENTICATION": {
+      "SUCCESSFUL_LOGIN_MESSAGE": "登录成功",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "登录失败",
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "未找到 Pi 信息"
+    }
+  },
+  "SIDE_NAVIGATION": {
+    "USER_PREFERENCES_HEADER": "用户偏好",
+    "PERSONALIZATION_SUBHEADER": "个性化设置",
+    "LANGUAGES": "语言",
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "关于 Map of Pi",
+      "APP_VERSION": "应用程序版本",
+      "PRIVACY_POLICY": "隐私政策",
+      "TERMS_OF_SERVICE": "服务条款"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "查找我偏好",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "自动",
+      "PREFERRED_DEVICE_GPS": "使用我设备的 GPS",
+      "PREFERRED_SEARCH_CENTER": "使用搜索中心"
+    },
+    "CONTACT_MAP_OF_PI": "联络 Map of Pi",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "偏好设置已成功保存",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "保存偏好设置时出错"
+    }
+  },
+  "SCREEN": {
+    "SELLER_REGISTRATION": {
+      "SELLER_REGISTRATION_HEADER": "卖家注册",
+      "SELLER_DETAILS_LABEL": "卖家详情",
+      "EMAIL_LABEL": "电子邮件地址",
+      "PHONE_NUMBER_LABEL": "电话号码",
+      "CONTACT_PUBLIC_NOTE": "公开显示电子邮件地址和电话号码。",
+      "SELLER_DETAILS_PLACEHOLDER": "我通过 Pi 支付进行销售。",
+      "REVIEWS_SUMMARY_LABEL": "评论概述",
+      "REVIEWS_SCORE_LABEL": "评论评分",
+      "SELLER_NAME": "卖家姓名",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "卖家类型",
+        "SELLER_TYPE_OPTIONS": {
+          "ACTIVE_SELLER": "活跃卖家",
+          "INACTIVE_SELLER": "非活跃卖家",
+          "TEST_SELLER": "测试卖家"
+        }
+      },
+      "SELLER_ADVANCED_SETTINGS_LABEL": "高级卖家设置",
+      "SELLER_RETAIL_OUTLET_NAME": "零售店名",
+      "SELLER_ADDRESS_LOCATION_LABEL": "地址或销售地点",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "我的地图标记显示我的销售位置",
+      "SELLER_SETTINGS_LABEL": "卖家设置",
+      "SELLER_SELL_CENTER": "设定销售中心",
+      "VALIDATION": {
+        "EMAIL_VALIDATION": "请输入有效的电子邮件地址",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "注册成功",
+        "FAILED_REGISTRATION_SUBMISSION": "保存注册信息时出错",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "注册失败，因为用户未验证身份",
+        "UNINITIALIZED_SELL_CENTER": "请设定您的销售中心"
+      }
+    },
+    "BUY_FROM_SELLER": {
+      "BUY_FROM_SELLER_HEADER": "从卖家购买",
+      "SELLER_DETAILS_LABEL": "卖家详情",
+      "SELLER_ADDRESS_POSITION_LABEL": "卖家地址或位置",
+      "LEAVE_A_REVIEW_MESSAGE": "留下评论",
+      "FACE_SELECTION_REVIEW_MESSAGE": "选择表情以表示您对该卖家的感受",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "在此输入附加评论",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "上传反馈照片",
+      "REVIEWS_SUMMARY_LABEL": "评论概述",
+      "REVIEWS_SCORE_MESSAGE": "评论评分：{seller_review_rating} 满分 5.0",
+      "SELLER_CONTACT_DETAILS_LABEL": "卖家联系信息",
+      "SELLER_USERNAME_LABEL": "用户名",
+      "SELLER_PIONEER_ID_LABEL": "先锋 ID",
+      "SELLER_PHONE_NUMBER_LABEL": "电话号码",
+      "SELLER_EMAIL_ADDRESS_LABEL": "电子邮件地址"
+    },
+    "REVIEWS": {
+      "REVIEWS_HEADER": "评论",
+      "GIVE_REVIEW_SECTION_HEADER": "给这位先锋的评论",
+      "REVIEWS_GIVEN_SECTION_HEADER": "该先锋给出的评论",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "该先锋收到的评论",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "未找到先锋 {search_value} 的评论",
+        "NO_PIONEER_FOUND": "未找到先锋 {search_value}"
+      }
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "没有 {seller_id} 的评论",
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "{seller_id} 的评论列表",
+      "BY_REVIEWER": "由 {buyer_id}"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "回复评论",
+      "REPLY_TO_REVIEW_SUBHEADER": "您正在回复的评论",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "给评论的回复",
+      "REPLY_TO_REVIEW_HEADER": "回复给 {seller_id} 的评论",
+      "BY_REVIEWER": "由 {buyer_id}",
+      "REPLY_TO_REVIEW_MESSAGE": "留下您对上述评论的回复",
+      "FACE_SELECTION_REVIEW_MESSAGE": "选择表情以表示您对与该先锋的互动感受",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "在此输入附加评论",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "上传反馈照片",
+      "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "加载评论时出错",
+        "SELF_REVIEW_NOT_POSSIBLE": "无法对自己进行评论"
+      }
+    }
+  },
+  "POPUP": {
+    "MAP_MARKER": {
+      "SELLER_SALE_ITEMS_FIELD": "卖家销售的商品",
+      "DISTANCE_MESSAGE": "距离：XXX 公里"
+    },
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "请报告问题至"
+    },
+    "PRIVACY_POLICY_INFO": {
+      "TITLE": "隐私政策",
+      "LAST_UPDATED": "最后更新",
+      "EMAIL_ADDRESS": "电子邮件地址",
+      "SECTIONS": {
+        "HEADER_1": "简介",
+        "CONTENT_1": "欢迎使用 Map of Pi 应用程序，由 Map of Pi 团队与 Pi 社区合作开发。本隐私政策概述了您使用我们的移动应用程序时，我们如何收集、使用、披露和保护您的个人信息。",
+        "HEADER_2": "我们收集的信息",
+        "SUBHEADER_2_1": "用户信息",
+        "CONTENT_2_1_1": "当您注册为用户时，我们可能会收集您的姓名、电子邮件地址、用户名和其他相关信息。",
+        "CONTENT_2_1_2": "我们可能会收集关于您设备的信息，包括设备类型、操作系统和唯一设备标识符。",
+        "SUBHEADER_2_2": "卖家信息",
+        "CONTENT_2_2_1": "在平台上注册的卖家可能需要提供卖家信息，包括卖家名称、位置和联系方式。",
+        "CONTENT_2_2_2": "卖家可以是企业或私人个体。",
+        "HEADER_3": "我们如何使用您的信息",
+        "SUBHEADER_3_1": "提供服务",
+        "CONTENT_3_1_1": "我们使用您的信息来提供和增强 Map of Pi 应用程序的服务，包括用户和卖家功能。",
+        "SUBHEADER_3_2": "通信",
+        "CONTENT_3_2_1": "我们可能会使用您的联系方式向您发送与 Map of Pi 应用程序相关的更新、通知和促销信息。",
+        "SUBHEADER_3_3": "数据分析",
+        "CONTENT_3_3_1": "我们收集和分析数据以改进应用程序的性能、功能和特点。",
+        "HEADER_4": "共享您的信息",
+        "SUBHEADER_4_1": "与卖家共享",
+        "CONTENT_4_1_1": "用户信息可能会与卖家共享，以便完成订单和进行沟通。",
+        "SUBHEADER_4_2": "与第三方共享",
+        "CONTENT_4_2_1": "我们可能会与第三方服务提供商共享信息，以实现应用功能、数据分析和支付处理。",
+        "HEADER_5": "安全措施",
+        "CONTENT_5_1": "我们采用行业标准的安全措施来保护您的信息。然而，互联网传输或电子存储方法并非绝对安全。",
+        "HEADER_6": "您的选择",
+        "CONTENT_6_1": "您可以通过应用程序设置更新您的账户信息。您可以通过删除 Pi 网络账户来删除您的 Map of Pi 账户，并在下次访问 Map of Pi 时选择删除您的 Map of Pi 数据。您可以选择不接收促销信息。",
+        "HEADER_7": "隐私政策的变更",
+        "CONTENT_7_1": "我们可能会根据需要更新本隐私政策。最新版本将发布在我们的网站或应用程序内。",
+        "HEADER_8": "联系我们",
+        "CONTENT_8_1": "如果您对本隐私政策有任何问题或疑虑，请通过发送电子邮件联系我们"
+      }
+    },
+    "TERMS_OF_SERVICE_INFO": {
+      "TITLE": "服务条款",
+      "LAST_UPDATED": "最后更新",
+      "EMAIL_ADDRESS": "电子邮件地址",
+      "SECTIONS": {
+        "HEADER_1": "接受条款",
+        "CONTENT_1_1": "欢迎使用由 Map of Pi 团队与 Pi 社区合作开发的 Map of Pi 应用程序。使用本应用程序即表示您同意遵守这些服务条款以及我们的隐私政策。",
+        "HEADER_2": "应用程序的使用",
+        "CONTENT_2_1": "您同意按照所有适用的法律法规使用 Map of Pi 应用程序。",
+        "CONTENT_2_2": "您不得将应用程序用于任何非法或被禁止的目的，也不得以任何可能损害、禁用、过载或削弱应用程序的方式使用该应用程序。",
+        "CONTENT_2_3": "使用 Map of Pi 需先注册为 Pi 网络的先锋用户。",
+        "HEADER_3": "知识产权",
+        "CONTENT_3_1": "Map of Pi 应用程序及其所有内容、特性和功能均归 Map of Pi 所有，并受版权、商标和其他知识产权法律的保护。",
+        "HEADER_4": "责任限制",
+        "CONTENT_4_1": "Map of Pi 不对因使用 Map of Pi 应用程序而产生的任何直接、间接、附带、特殊或后果性损害承担责任。",
+        "HEADER_5": "赔偿",
+        "CONTENT_5_1": "您同意赔偿并使 Map of Pi 及其附属公司、管理人员、董事、员工和代理人免受任何因您使用 Map of Pi 应用程序而产生的所有索赔、责任、损害、损失或费用（包括律师费）的影响。",
+        "HEADER_6": "法律适用",
+        "CONTENT_6_1": "本服务条款应依照英格兰和威尔士的法律解释和执行，不考虑其法律冲突条款，包括因其主题或形成（包括非合同纠纷或索赔）产生的任何争议或索赔。",
+        "HEADER_7": "条款变更",
+        "CONTENT_7_1": "我们保留随时更新或修改这些服务条款的权利，恕不另行通知。最新版本将发布在我们的网站或应用程序内。"
+      }
+    }
+  },
+  "SHARED": {
+    "PIONEER_LABEL": "先锋",
+    "BUY": "购买",
+    "NAVIGATE": "导航",
+    "NO_COMMENT": "无评论",
+    "SEARCH_CENTER": "设置搜索中心",
+    "CHECK_REVIEWS": "查看评论",
+    "SEARCH_REVIEWS": "搜索评论",
+    "SEARCH_LOADING": "搜索加载中...",
+    "REPLY": "回复",
+    "SAVE": "保存",
+    "CONFIRM_DIALOG": "您有未保存的更改。确定要离开吗？",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Pi 用户名",
+      "NAME_LABEL": "姓名",
+      "PHONE_NUMBER_LABEL": "电话号码",
+      "EMAIL_LABEL": "电子邮件"
+    },
+    "PHOTO": {
+      "UPLOAD_PHOTO_LABEL": "上传照片",
+      "UPLOAD_PHOTO_PLACEHOLDER": "上传图片以吸引买家（PNG、JPG、JPEG、WEBP）",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "上传图片以支持您的评论（PNG、JPG、JPEG、WEBP）",
+      "IMAGE_DROP_UPLOAD_MESSAGE": "将图片拖放到此处或浏览",
+      "SUPPORTS_FILE_MESSAGE": "支持文件格式：PNG、JPG、JPEG、WEBP",
+      "MISC_LABELS": {
+        "USER_PREFERENCES_LABEL": "个人资料图片",
+        "SELLER_IMAGE_LABEL": "卖家图片",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "评论图片"
+      }
+    },
+    "REACTION_RATING": {
+      "UNSAFE": "不安全",
+      "TRUSTWORTHY": "可信",
+      "EMOTIONS": {
+        "DESPAIR": "绝望",
+        "SAD": "悲伤",
+        "OKAY": "一般",
+        "HAPPY": "高兴",
+        "DELIGHT": "欣喜"
+      },
+      "VALIDATION": {
+        "SUCCESSFUL_REVIEW_SUBMISSION": "评论提交成功",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "评论提交失败",
+        "SELECT_EMOJI_EXPRESSION": "请选择表情符号"
+      }
+    },
+    "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "搜索位置、城市或地址",
+      "VALIDATION": {
+        "MAP_CENTER_SUCCESS_MESSAGE": "中心点保存成功"
+      }
+    },
+    "LOADING_SCREEN_MESSAGE": "加载中...",
+    "SAVING_SCREEN_MESSAGE": "保存中...",
+    "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "提交失败，用户未认证",
+      "UNEXPECTED_ERROR_MESSAGE": "发生意外错误"
+    }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "页面未找到",
+    "PAGE_NOT_FOUND_MESSAGE": "抱歉，您查找的页面不存在。"
+  }
+}

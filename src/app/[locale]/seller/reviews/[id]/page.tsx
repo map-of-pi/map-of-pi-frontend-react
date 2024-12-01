@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef, useContext } from 'react';
@@ -14,6 +14,7 @@ import { IReviewOutput, ReviewInt } from '@/constants/types';
 import SearchIcon from '@mui/icons-material/Search';
 import { FormControl, TextField } from '@mui/material';
 import { fetchReviews } from '@/services/reviewsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import { resolveDate } from '@/utils/date';
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
@@ -26,15 +27,16 @@ function SellerReviews({
   searchParams: any;
 }) {
   const t = useTranslations();
-  const userName = searchParams.user_name;
+  const userName = useRef<string>(searchParams.user_name);
   const userId = params.id;
+  const locale = useLocale();
 
   const [giverReviews, setGiverReviews] = useState<ReviewInt[] | null>(null);
   const [receiverReviews, setReceiverReviews] = useState<ReviewInt[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-  const { currentUser, setReload, reload } = useContext(AppContext);
+  const { currentUser, reload, setReload, autoLoginUser } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchBarValue, setSearchBarValue] = useState('');
   const [toUser, setToUser] = useState('');
@@ -64,36 +66,37 @@ function SellerReviews({
     return reviews;
   };
 
-  const fetchUserReviews = async () => {
+  const fetchUserReviews = async (userId_: string) => {
     setError(null);
+    setReload(true);
     try {
-      logger.info(`Fetching reviews for userID: ${userId}`);
-      const data = await fetchReviews(userId);
+      setToUser(userId_);
+      logger.info(`Fetching reviews for userID: ${userId_}`);
+      const data = await fetchReviews(userId_);
 
       if (data) {
         if (data.givenReviews.length > 0) {
-          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${userId}`);
+          logger.info(`Fetched ${data.givenReviews.length} reviews given by userID: ${userId_}`);
           setGiverReviews(processReviews(data.givenReviews));
-          setToUser(userId);
         } else {
-          logger.warn(`No given reviews found for userID: ${userId}`);
+          logger.warn(`No given reviews found for userID: ${userId_}`);
           setGiverReviews([]);
         }
 
         if (data.receivedReviews.length > 0) {
-          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${userId}`);
+          logger.info(`Fetched ${data.receivedReviews.length} reviews received by userID: ${userId_}`);
           setReceiverReviews(processReviews(data.receivedReviews));
         } else {
-          logger.warn(`No received reviews found for userID: ${userId}`);
+          logger.warn(`No received reviews found for userID: ${userId_}`);
           setReceiverReviews([]);
         }          
       } else {
-        logger.warn(`No reviews found for userID: ${userId}`);
+        logger.warn(`No reviews found for userID: ${userId_}`);
         setGiverReviews([]);
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Error fetching reviews for userID: ${userId}`, { error });
+      logger.error(`Error fetching reviews for userID: ${userId_}`, error);
       setError('Error fetching reviews. Please try again later.');
     } finally {
       setLoading(false);
@@ -102,7 +105,8 @@ function SellerReviews({
   };
 
   useEffect(() => {
-    fetchUserReviews();
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
+    fetchUserReviews(userId);
   }, [userId, currentUser]);
 
   // Handle search logic
@@ -118,6 +122,7 @@ function SellerReviews({
           logger.info(`Found ${data.givenReviews.length} reviews given by Pioneer: ${searchBarValue}`);
           setGiverReviews(processReviews(data.givenReviews));
           setToUser(data.givenReviews[0].review_giver_id);
+          userName.current = data.givenReviews[0].giver;
         } else {
           logger.warn(`No given reviews found for Pioneer: ${searchBarValue}`);
           setGiverReviews([]);
@@ -125,7 +130,8 @@ function SellerReviews({
         if (data.receivedReviews.length > 0) {
           logger.info(`Found ${data.receivedReviews.length} reviews received by Pioneer: ${searchBarValue}`);
           setReceiverReviews(processReviews(data.receivedReviews));
-          setToUser(data.givenReviews[0].review_receiver_id);
+          setToUser(data.receivedReviews[0].review_receiver_id);
+          userName.current = data.receivedReviews[0].receiver;
         } else {
           logger.warn(`No given reviews found for Pioneer: ${searchBarValue}`);
           setReceiverReviews([]);
@@ -138,7 +144,7 @@ function SellerReviews({
         setReceiverReviews([]);
       }
     } catch (error) {
-      logger.error(`Pioneer ${searchBarValue} not found`, { error });
+      logger.error(`Pioneer ${searchBarValue} not found`, error);
       return toast.error(t('SCREEN.REVIEWS.VALIDATION.NO_PIONEER_FOUND', { search_value: searchBarValue }));
     } finally {
       setReload(false);
@@ -173,11 +179,20 @@ function SellerReviews({
               variant="outlined"
               color="success"
               className="bg-none hover:bg-gray-100 w-full rounded-lg"
-              placeholder={userName}
+              placeholder={userName.current}
               value={searchBarValue}
               onChange={handleSearchBarChange}
               ref={inputRef}
               autoCorrect="off"
+              autoCapitalize="off"
+              autoComplete="off" 
+              spellCheck="false" 
+              inputProps={{
+                autoCorrect: 'off',
+                autoCapitalize: 'off',
+                spellCheck: 'false',
+                autoComplete: 'new-password',
+              }}
             />
           </FormControl>
           <button
@@ -191,7 +206,7 @@ function SellerReviews({
 
         <ToggleCollapse header={t('SCREEN.REVIEWS.GIVE_REVIEW_SECTION_HEADER')}>
           <div>
-            <EmojiPicker sellerId={toUser} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} setReload={setReload} refresh={fetchUserReviews} />
+            <EmojiPicker userId={toUser} setIsSaveEnabled={setIsSaveEnabled} currentUser={currentUser} setReload={setReload} refresh={fetchUserReviews} />
           </div>
         </ToggleCollapse>      
         <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
@@ -203,8 +218,10 @@ function SellerReviews({
                   {/* Left content */}
                   <div className="flex-grow">
                     <p className="text-primary text-sm">
-                      {review.giver} {' -> '}
-                      <span className="text-primary text-sm">{review.receiver}</span>
+                      {review.giver} {' → '}
+                      <span className="text-primary text-sm">
+                        {review.receiver}
+                      </span>
                     </p>
                     <p className="text-md break-words">{review.heading}</p>
                   </div>
@@ -216,19 +233,21 @@ function SellerReviews({
                       <p>{review.time}</p>
                     </div>
                     <div className="flex gap-2 items-center">
-                      <Image
-                        src={review.image}
-                        alt="emoji image"
-                        width={50}
-                        height={50}
-                        className="object-cover rounded-md"
-                      />
+                      {review.image ? (
+                        <Image
+                          src={review.image}
+                          alt="emoji image"
+                          width={50}
+                          height={50}
+                          className="object-cover rounded-md"
+                        />
+                      ) : null}
                       <p className="text-xl max-w-[50px]" title={review.reaction}>
                         {review.unicode}
                       </p>
                     </div>
                     <div className="flex justify-between items-center">
-                      <Link href={`/seller/reviews/feedback/${review.reviewId}?user_name=${review.giver}`}>
+                      <Link href={`/${locale}/seller/reviews/feedback/${review.reviewId}?user_name=${review.giver}`}>
                         <OutlineBtn label={t('SHARED.REPLY')} />
                       </Link>
                     </div>
@@ -248,8 +267,10 @@ function SellerReviews({
                 {/* Left content */}
                 <div className="flex-grow">
                   <p className="text-primary text-sm">
-                    {review.giver} {' -> '}
-                    <span className="text-primary text-sm">{review.receiver}</span>
+                    {review.giver} {' → '}
+                    <span className="text-primary text-sm">
+                      {review.receiver}
+                    </span>
                   </p>
                   <p className="text-md break-words">{review.heading}</p>
                 </div>
@@ -261,19 +282,21 @@ function SellerReviews({
                     <p>{review.time}</p>
                   </div>
                   <div className="flex gap-2 items-center">
-                    <Image
-                      src={review.image}
-                      alt="emoji image"
-                      width={50}
-                      height={50}
-                      className="object-cover rounded-md"
-                    />
+                    {review.image ? (
+                      <Image
+                        src={review.image}
+                        alt="emoji image"
+                        width={50}
+                        height={50}
+                        className="object-cover rounded-md"
+                      />
+                    ) : null}
                     <p className="text-xl max-w-[50px]" title={review.reaction}>
                       {review.unicode}
                     </p>
                   </div>
                   <div className="flex justify-between items-center">
-                    <Link href={`/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
+                    <Link href={`/${locale}/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
                       <OutlineBtn label={t('SHARED.REPLY')} />
                     </Link>
                   </div>

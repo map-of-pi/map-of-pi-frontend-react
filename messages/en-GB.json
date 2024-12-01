@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "Sell",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Your Search Centre is currently set to the default coordinates [0, 0]. To enhance your experience, please update your Search Centre location.",
     "SEARCH_BAR_PLACEHOLDER": "Search for sellers or items",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "To use this feature, please enable location services in your device settings.",
@@ -41,7 +42,7 @@
       "EMAIL_LABEL": "Email address",
       "PHONE_NUMBER_LABEL": "Phone number",
       "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
-      "SELLER_DETAILS_PLACEHOLDER": "Description of seller & items for sale with pi price, etc.",
+      "SELLER_DETAILS_PLACEHOLDER": "I sell via Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_LABEL": "Reviews Score",
       "SELLER_NAME": "Seller Name",
@@ -56,7 +57,7 @@
       "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
       "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
       "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Help your buyers find you by adding address or a description of where you are selling",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
       "VALIDATION": {
@@ -243,13 +244,18 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Search a location, city, or address",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "Your Search Centre has been saved successfully"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Your centre has been saved successfully"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Loading ...",
+    "SAVING_SCREEN_MESSAGE": "Saving ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Submission failed because user is not authenticated",
       "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Page not found",
+    "PAGE_NOT_FOUND_MESSAGE": "Sorry, the page you are looking for does not exist."
   }
 }

@@ -34,6 +34,7 @@ const crosshairIcon = new L.Icon({
 
 interface MapCenterProps {
   entryType: 'search' | 'sell';
+  locale: string;
 }
 
 const MapCenter = ({ entryType }: MapCenterProps) => {
@@ -68,7 +69,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
             setCenter({ lat: 50.064192, lng: 19.944544 });
           }
         } catch (error) {
-          logger.error('Error fetching map center:', { error });
+          logger.error('Error fetching map center:', error);
         }
       }
     };
@@ -94,7 +95,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         }
       });
     } catch (error) {
-      logger.error('Error during geocoding:', { error });
+      logger.error('Error during geocoding:', error);
     }
   };
 
@@ -136,7 +137,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         setShowPopup(true);
         logger.info('Map center successfully saved.');
       } catch (error) {
-        logger.error('Error saving map center:', { error });
+        logger.error('Error saving map center:', error);
       }
     }
   };
@@ -237,12 +238,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <ConfirmDialogX
           toggle={() => setShowPopup(false)}
           handleClicked={handleClickDialog}
-          // Dynamically set the message based on entryType
-          message={
-            entryType === 'sell'
-              ? t('SHARED.MAP_CENTER.VALIDATION.SELL_CENTER_SUCCESS_MESSAGE')
-              : t('SHARED.MAP_CENTER.VALIDATION.SEARCH_CENTER_SUCCESS_MESSAGE')
-          }
+          message={t('SHARED.MAP_CENTER.VALIDATION.MAP_CENTER_SUCCESS_MESSAGE')}
         />
       )}
     </div>

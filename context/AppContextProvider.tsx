@@ -87,8 +87,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           logger.error('User authentication failed.');
           setIsSigningInUser(false);
         }        
-      } catch (error: any) {
-        logger.error('Error during user registration:', { error });
+      } catch (error) {
+        logger.error('Error during user registration:', error);
         setIsSigningInUser(false);
       }
     } else {
@@ -113,8 +113,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         logger.warn('Auto-login failed.');
         setIsSigningInUser(false);
       }
-    } catch (error: any) {
-      logger.error('Auto login unresolved; attempting Pi SDK authentication:', { error });
+    } catch (error) {
+      logger.error('Auto login unresolved; attempting Pi SDK authentication:', error);
       await registerUser();
     }
   }

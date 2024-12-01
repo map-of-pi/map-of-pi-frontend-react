@@ -1,11 +1,12 @@
 import createMiddleware from 'next-intl/middleware';
-
-import { locales, localePrefix } from './navigation';
+import { locales, defaultLocale } from './i18n';
+import { localePrefix } from './navigation';
 
 export default createMiddleware({
-  defaultLocale: 'en',
-  localePrefix,
   locales,
+  defaultLocale,
+  localePrefix,
+  localeDetection: false // Remove the NEXT_LOCALE "Set-Cookie" header for CDN caching purposes
 });
 
 export const config = {

@@ -10,6 +10,7 @@ import EmojiPicker from '@/components/shared/Review/emojipicker';
 import Skeleton from '@/components/skeleton/skeleton';
 import { IReviewOutput, ReviewInt } from '@/constants/types';
 import { fetchSingleReview } from '@/services/reviewsApi';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import { resolveDate } from '@/utils/date';
 import { resolveRating } from '../../util/ratingUtils';
 import { AppContext } from '../../../../../../../context/AppContextProvider';
@@ -24,7 +25,7 @@ interface ReplyToReviewPageProps {
   };
 }
 
-export default function ReplyToReviewPage({ params, searchParams }: ReplyToReviewPageProps) {
+export default function ReplyToReviewPage({ params }: ReplyToReviewPageProps) {
   const t = useTranslations();
   const router = useRouter();
 
@@ -55,16 +56,13 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
         reviewId: feedback._id,
         reaction,
         unicode,
-        image: feedback.image || '/path/to/default/image.png',  // Use a fallback image if not provided
+        image: feedback.image
       };
     });
   };
   
   useEffect(() => {
-    if (!currentUser) {
-      logger.info('User not logged in; attempting auto-login..');
-      autoLoginUser();
-    }
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
 
     const getReviewData = async () => {
       try {
@@ -83,7 +81,7 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
           setReviews([]);
         }
       } catch (error) {
-        logger.error(`Error fetching review data for review ID: ${reviewId}`, { error });
+        logger.error(`Error fetching review data for review ID: ${reviewId}`, error);
         setError('Error fetching review. Please try again later.');
       } finally {
         setLoading(false);
@@ -147,13 +145,15 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
                         <p>{review.time}</p>
                       </div>
                       <div className="flex gap-2 items-center">
-                        <Image
-                          src={review.image}
-                          alt="emoji image"
-                          width={50}
-                          height={50}
-                          className="object-cover rounded-md"
-                        />
+                        {review.image ? (
+                          <Image
+                            src={review.image}
+                            alt="emoji image"
+                            width={50}
+                            height={50}
+                            className="object-cover rounded-md"
+                          />
+                        ) : null}
                         <p className="text-xl max-w-[50px]" title={review.reaction}>
                           {review.unicode}
                         </p>
@@ -185,12 +185,12 @@ export default function ReplyToReviewPage({ params, searchParams }: ReplyToRevie
 
           <h2 className="font-bold">{t('SCREEN.REPLY_TO_REVIEW.GIVE_REPLY_TO_REVIEW_SUBHEADER')}</h2>
           <h2 className="text-[#828282]">
-            {t('To')}: {currentUser?.user_name === reviews[currentIndex].giver
+            {currentUser?.user_name === reviews[currentIndex].giver
               ? reviews[currentIndex]?.receiver
               : reviews[currentIndex].giver}
           </h2>
           <EmojiPicker
-            sellerId={
+            userId={
               currentUser?.pi_uid === reviews[currentIndex].giverId
                 ? reviews[currentIndex]?.receiverId
                 : reviews[currentIndex].giverId

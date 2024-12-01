@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "Vender",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Tu Centro de Búsqueda está configurado actualmente en las coordenadas predeterminadas [0, 0]. Para mejorar tu experiencia, actualiza la ubicación de tu Centro de Búsqueda.",
     "SEARCH_BAR_PLACEHOLDER": "Buscar vendedores o artículos",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Para usar esta función, por favor active los servicios de ubicación en la configuración de su dispositivo.",
@@ -41,7 +42,7 @@
       "EMAIL_LABEL": "Dirección de correo electrónico",
       "PHONE_NUMBER_LABEL": "Número de teléfono",
       "CONTACT_PUBLIC_NOTE": "La dirección de correo electrónico y el número de teléfono serán visibles públicamente.",
-      "SELLER_DETAILS_PLACEHOLDER": "Descripción del vendedor y artículos en venta con precio pi, etc.",
+      "SELLER_DETAILS_PLACEHOLDER": "Vendo a través de Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
       "REVIEWS_SCORE_LABEL": "Puntuación de Reseñas",
       "SELLER_NAME": "Nombre del Vendedor",
@@ -56,7 +57,7 @@
       "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",
       "SELLER_RETAIL_OUTLET_NAME": "Nombre del punto de venta",
       "SELLER_ADDRESS_LOCATION_LABEL": "Dirección o lugar de venta",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Ayuda a tus compradores a encontrarte agregando una dirección o una descripción de dónde estás vendiendo",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mi marcador en el mapa muestra dónde estoy vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
       "VALIDATION": {
@@ -230,13 +231,18 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Buscar una ubicación, ciudad o dirección",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "Tu centro de búsqueda se ha guardado correctamente"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Su centro ha sido guardado con éxito"
       }
     },
     "LOADING_SCREEN_MESSAGE": "Cargando ...",
+    "SAVING_SCREEN_MESSAGE": "Guardando ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "El envío falló porque el usuario no está autenticado",
       "UNEXPECTED_ERROR_MESSAGE": "Ocurrió un error inesperado"
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Página no encontrada",
+    "PAGE_NOT_FOUND_MESSAGE": "Lo sentimos, la página que buscas no existe."
   }
 }

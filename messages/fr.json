@@ -1,0 +1,249 @@
+{
+  "HOME": {
+    "ADD_SELLER": "Vendre",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Votre centre de recherche est actuellement défini sur les coordonnées par défaut [0, 0]. Pour améliorer votre expérience, veuillez mettre à jour la localisation de votre centre de recherche.",
+    "SEARCH_BAR_PLACEHOLDER": "Recherchez des vendeurs ou des articles",
+    "LOCATION_SERVICES": {
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "Pour utiliser cette fonctionnalité, veuillez activer les services de localisation dans les paramètres de votre appareil.",
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "Les services de localisation sont désactivés. Veuillez activer la localisation de votre appareil."
+    },
+    "AUTHENTICATION": {
+      "SUCCESSFUL_LOGIN_MESSAGE": "Connexion réussie",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Échec de la connexion",
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Informations Pi non trouvées"
+    }
+  },
+  "SIDE_NAVIGATION": {
+    "USER_PREFERENCES_HEADER": "Préférences utilisateur",
+    "PERSONALIZATION_SUBHEADER": "Personnalisation",
+    "LANGUAGES": "Langues",
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "À propos de Map of Pi",
+      "APP_VERSION": "Version de l'application",
+      "PRIVACY_POLICY": "Politique de confidentialité",
+      "TERMS_OF_SERVICE": "Conditions d'utilisation"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "Préférence FindMe",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Automatique",
+      "PREFERRED_DEVICE_GPS": "Utiliser le GPS de mon appareil",
+      "PREFERRED_SEARCH_CENTER": "Utiliser le Centre de recherche"
+    },
+    "CONTACT_MAP_OF_PI": "Contacter Map of Pi",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Préférences enregistrées",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Erreur lors de l'enregistrement des préfèrences"
+    }
+  },
+  "SCREEN": {
+    "SELLER_REGISTRATION": {
+      "SELLER_REGISTRATION_HEADER": "Enregistrement des données vendeur",
+      "SELLER_DETAILS_LABEL": "Données vendeur",
+      "EMAIL_LABEL": "Adresse e-mail",
+      "PHONE_NUMBER_LABEL": "Numéro de téléphone",
+      "CONTACT_PUBLIC_NOTE": "L'adresse e-mail et le numéro de téléphone seront visibles publiquement.",
+      "SELLER_DETAILS_PLACEHOLDER": "Je vends via Pay with Pi.",
+      "REVIEWS_SUMMARY_LABEL": "Résumé des revues",
+      "REVIEWS_SCORE_LABEL": "Score des revues",
+      "SELLER_NAME": "Nom du vendeur",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "Type de vendeur",
+        "SELLER_TYPE_OPTIONS": {
+          "ACTIVE_SELLER": "Vendeur activé",
+          "INACTIVE_SELLER": "Vendeur desactivé",
+          "TEST_SELLER": "Vendeur de test"
+        }
+      },
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Paramètres vendeur detaillés",
+      "SELLER_RETAIL_OUTLET_NAME": "Nom du point de vente",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Adresse ou lieu de vente",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mon marqueur mon lieu de vente",
+      "SELLER_SETTINGS_LABEL": "Paramètres vendeur",
+      "SELLER_SELL_CENTER": "Définir le centre de vente",
+      "VALIDATION": {
+        "EMAIL_VALIDATION": "Veuillez entrer une adresse e-mail valide",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Enregistrement réussi",
+        "FAILED_REGISTRATION_SUBMISSION": "Erreur lors de l'enregistrement",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Échec de l'inscription car l'utilisateur n'est pas authentifié",
+        "UNINITIALIZED_SELL_CENTER": "Veuillez définir votre centre de vente"
+      }
+    },
+    "BUY_FROM_SELLER": {
+      "BUY_FROM_SELLER_HEADER": "Acheter chez le vendeur",
+      "SELLER_DETAILS_LABEL": "Détails du vendeur",
+      "SELLER_ADDRESS_POSITION_LABEL": "Adresse ou position du vendeur",
+      "LEAVE_A_REVIEW_MESSAGE": "Partagez votre avis",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Quel est votre sentiment vis-a-vis de ce vendeur",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Entrez vos commentaires ici",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Télécharger une photo",
+      "REVIEWS_SUMMARY_LABEL": "Résumé de vos commentaires",
+      "REVIEWS_SCORE_MESSAGE": "Score de votre evaluation: {seller_review_rating} sur 5.0",
+      "SELLER_CONTACT_DETAILS_LABEL": "Détails de contact du vendeur",
+      "SELLER_USERNAME_LABEL": "Nom d'utilisateur",
+      "SELLER_PIONEER_ID_LABEL": "identifianf du pionier",
+      "SELLER_PHONE_NUMBER_LABEL": "Numéro de téléphone",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adresse e-mail"
+    },
+    "REVIEWS": {
+      "REVIEWS_HEADER": "Avis",
+      "GIVE_REVIEW_SECTION_HEADER": "Donner un avis à ce pionnier",
+      "REVIEWS_GIVEN_SECTION_HEADER": "Avis donnés par ce pionnier",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Avis reçus par ce pionnier",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "Aucun avis trouvé pour le pionnier {search_value}",
+        "NO_PIONEER_FOUND": "Pionnier {search_value} non trouvé"
+      }
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Aucun avis sur {seller_id}",
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "Liste des avis laissés sur {seller_id}",
+      "BY_REVIEWER": "Par {buyer_id}"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Répondre à un avis",
+      "REPLY_TO_REVIEW_SUBHEADER": "L'avis auquel vous répondez",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Donner une réponse à l'avis",
+      "REPLY_TO_REVIEW_HEADER": "Répondre à l'avis laissé sur {seller_id}",
+      "BY_REVIEWER": "Par {buyer_id}",
+      "REPLY_TO_REVIEW_MESSAGE": "Engregistrez votre réponse à l'avis ci-dessus",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Quel est votre sentiment vis-a-vis de votre interaction avec ce pionnier",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Entrez des commentaires supplémentaires ici",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Télécharger une photo de retour",
+      "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "Erreur lors d'enregistrement de l'avis",
+        "SELF_REVIEW_NOT_POSSIBLE": "Auto-évaluation non possible"
+      }
+    }
+  },
+  "POPUP": {
+    "MAP_MARKER": {
+      "SELLER_SALE_ITEMS_FIELD": "Articles en vente",
+      "DISTANCE_MESSAGE": "Distance : XXX km"
+    },
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "Veuillez signaler les défauts à"
+    },
+    "PRIVACY_POLICY_INFO": {
+      "TITLE": "Politique de confidentialité",
+      "LAST_UPDATED": "Dernière mise à jour",
+      "EMAIL_ADDRESS": "Adresse e-mail",
+      "SECTIONS": {
+        "HEADER_1": "Introduction",
+        "CONTENT_1": "Bienvenue sur l'application Map of Pi, développée par l'équipe de Map of Pi en collaboration avec la communauté Pi. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations personnelles lorsque vous utilisez notre application mobile.",
+        "HEADER_2": "Informations que nous enregistrons",
+        "SUBHEADER_2_1": "Informations utilisateur",
+        "CONTENT_2_1_1": "Lors d'une inscription en tant qu'utilisateur, nous enregistrons votre nom, votre adresse e-mail, votre nom d'utilisateur et d'autres informations pertinentes.",
+        "CONTENT_2_1_2": "Nous enregistrons des informations sur votre appareil, y compris le type d'appareil, le système d'exploitation et les identifiants uniques de l'appareil.",
+        "SUBHEADER_2_2": "Informations sur le vendeur",
+        "CONTENT_2_2_1": "Les vendeurs s'inscrivant sur la plateforme peuvent être tenus de fournir des informations, notamment le nom, l'emplacement et les coordonnées du vendeur.",
+        "CONTENT_2_2_2": "Un vendeur peut être une entreprise ou un particulier.",
+        "HEADER_3": "Utilisation de vos informations",
+        "SUBHEADER_3_1": "Prestation de services",
+        "CONTENT_3_1_1": "Nous utilisons vos informations pour améliorer les services de l'application Map of Pi, incluant les fonctionnalités utilisateur et vendeur.",
+        "SUBHEADER_3_2": "Communications",
+        "CONTENT_3_2_1": "Nous utilisons vos informations de contact pour vous envoyer des mises à jour, notifications et messages promotionnels a propos de l'application Map of Pi.",
+        "SUBHEADER_3_3": "Analyses",
+        "CONTENT_3_3_1": "Nous enregistrons et analysons des données pour améliorer les performances, les fonctionnalités et la convivialité de l'application.",
+        "HEADER_4": "Partage de vos informations",
+        "SUBHEADER_4_1": "Avec les vendeurs",
+        "CONTENT_4_1_1": "Les informations des utilisateurs peuvent être partagées avec les vendeurs lorsque les utilisateurs interagissent avec eux pour la réalisation de transactions.",
+        "SUBHEADER_4_2": "Avec des tiers",
+        "CONTENT_4_2_1": "Nous ne partageons pas vos informations avec des tiers sans votre consentement, sauf dans les cas où cela est nécessaire pour la prestation de services ou la conformité avec la loi.",
+        "HEADER_5": "Mesures de sécurité",
+        "CONTENT_5_1": "Nous appliquons des mesures de sécurité conformes aux normes de l'industrie pour protéger vos informations. Cependant, aucun mode de transmission sur Internet ou de stockage électronique n'est entièrement sécurisé.",
+        "HEADER_6": "Vos choix",
+        "CONTENT_6_1": "Vous pouvez mettre à jour vos informations de compte via les paramètres de l'application. Vous pouvez supprimer votre compte Map of Pi en supprimant votre compte Pi Network, puis en choisissant l'option de suppression de vos données Map of Pi lors de votre prochaine connexion à Map of Pi. Vous pouvez refuser de recevoir des communications promotionnelles.",
+        "HEADER_7": "Modifications de cette politique de confidentialité",
+        "CONTENT_7_1": "Nous pouvons mettre à jour cette politique de confidentialité si nécessaire. La dernière version sera publiée sur notre site Web ou dans l'application.",
+        "HEADER_8": "Nous contacter",
+        "CONTENT_8_1": "Si vous avez des questions ou des préoccupations concernant cette politique de confidentialité, veuillez nous contacter en envoyant un e-mail à"
+      }
+    },
+    "TERMS_OF_SERVICE_INFO": {
+      "TITLE": "Conditions d'utilisation",
+      "LAST_UPDATED": "Dernière mise à jour",
+      "EMAIL_ADDRESS": "Adresse e-mail",
+      "SECTIONS": {
+        "HEADER_1": "Acceptation des conditions",
+        "CONTENT_1_1": "Bienvenue sur l'application Map of Pi, développée par l'équipe de Map of Pi en collaboration avec la communauté Pi. En utilisant cette application, vous acceptez de respecter ces conditions d'utilisation ainsi que notre politique de confidentialité.",
+        "HEADER_2": "Utilisation de l'application",
+        "CONTENT_2_1": "Vous acceptez d'utiliser l'application Map of Pi conformément aux lois et réglementations en vigueur.",
+        "CONTENT_2_2": "Vous ne devez pas utiliser l'application à des fins illégales ou interdites, ni de manière à endommager, désactiver, surcharger ou altérer l'application.",
+        "CONTENT_2_3": "Pour utiliser Map of Pi, vous devez être enregistré en tant qu'utilisateur pionnier du réseau Pi.",
+        "HEADER_3": "Propriété intellectuelle",
+        "CONTENT_3_1": "L'application Map of Pi et tous les contenus, fonctionnalités et services associés sont la propriété de Map of Pi et sont protégés par les droits d'auteur, les marques de commerce et autres lois sur la propriété intellectuelle.",
+        "HEADER_4": "Limitation de responsabilité",
+        "CONTENT_4_1": "Map of Pi ne pourra être tenu responsable des dommages directs, indirects, accessoires, spéciaux ou consécutifs découlant de ou liés de quelque manière que ce soit à l'utilisation de l'application Map of Pi.",
+        "HEADER_5": "Indemnisation",
+        "CONTENT_5_1": "Vous acceptez d'indemniser et de dégager de toute responsabilité Map of Pi et ses affiliés, dirigeants, directeurs, employés et agents de toute réclamation, responsabilité, dommage, perte ou dépense (y compris les frais d'avocats) découlant de ou liée de quelque manière que ce soit à votre utilisation de l'application Map of Pi.",
+        "HEADER_6": "Loi applicable",
+        "CONTENT_6_1": "Ces conditions d'utilisation sont régies et interprétées conformément aux lois de l'Angleterre et du Pays de Galles, sans égard à leurs dispositions en matière de conflit de lois, y compris tout litige ou réclamation découlant de ou en rapport avec leur objet ou leur formation (y compris les litiges ou réclamations non contractuels).",
+        "HEADER_7": "Modifications de ces conditions",
+        "CONTENT_7_1": "Nous nous réservons le droit de mettre à jour ou de modifier ces conditions d'utilisation à tout moment sans préavis. La dernière version sera publiée sur notre site Web ou dans l'application."
+      }
+    }
+  },
+  "SHARED": {
+    "PIONEER_LABEL": "Pionnier",
+    "BUY": "Acheter",
+    "NAVIGATE": "Naviguer",
+    "NO_COMMENT": "Aucun commentaire fourni",
+    "SEARCH_CENTER": "Définir le centre de recherche",
+    "CHECK_REVIEWS": "Vérifier les avis",
+    "SEARCH_REVIEWS": "Rechercher des avis",
+    "SEARCH_LOADING": "Chargement de la recherche...",
+    "REPLY": "Répondre",
+    "SAVE": "Enregistrer",
+    "CONFIRM_DIALOG": "Vos modifications ne sont pas enregistrées. Voulez-vous vraiment quitter?",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Nom d'utilisateur Pi",
+      "NAME_LABEL": "Nom",
+      "PHONE_NUMBER_LABEL": "Numéro de téléphone",
+      "EMAIL_LABEL": "E-mail"
+    },
+    "PHOTO": {
+      "UPLOAD_PHOTO_LABEL": "Télécharger une photo",
+      "UPLOAD_PHOTO_PLACEHOLDER": "Téléchargez une photo pour attirer les acheteurs (PNG, JPG, JPEG, WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Téléchargez une photo pour illustrer votre avis (PNG, JPG, JPEG, WEBP)",
+      "IMAGE_DROP_UPLOAD_MESSAGE": "Déposez votre photo ici ou parcourez",
+      "SUPPORTS_FILE_MESSAGE": "Formats pris en charge : PNG, JPG, JPEG, WEBP",
+      "MISC_LABELS": {
+        "USER_PREFERENCES_LABEL": "Profil de votre phote",
+        "SELLER_IMAGE_LABEL": "Photo du vendeur",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Photo d;illustration de votre avis"
+      }
+    },
+    "REACTION_RATING": {
+      "UNSAFE": "Dangereux",
+      "TRUSTWORTHY": "Digne de confiance",
+      "EMOTIONS": {
+        "DESPAIR": "Désesperant",
+        "SAD": "Triste",
+        "OKAY": "Moyen",
+        "HAPPY": "Content",
+        "DELIGHT": "Ravi"
+      },
+      "VALIDATION": {
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Votre avis est soumis avec succès",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Échec de la soumission votre l'avis",
+        "SELECT_EMOJI_EXPRESSION": "Veuillez sélectionner une expression emoji"
+      }
+    },
+    "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Recherchez un lieu, une ville ou une adresse",
+      "VALIDATION": {
+        "MAP_CENTER_SUCCESS_MESSAGE": "Votre localisation a été enregistrée avec succès"
+      }
+    },
+    "LOADING_SCREEN_MESSAGE": "Chargement ...",
+    "SAVING_SCREEN_MESSAGE": "Enregistrement ...",
+    "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Échec de la soumission car l'utilisateur n'est pas authentifié",
+      "UNEXPECTED_ERROR_MESSAGE": "Une erreur inattendue s'est produite"
+    }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Page introuvable",
+    "PAGE_NOT_FOUND_MESSAGE": "Désolé, la page que vous recherchez n'existe pas."
+  }
+}

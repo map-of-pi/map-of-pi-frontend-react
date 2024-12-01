@@ -1,6 +1,7 @@
 {
   "HOME": {
     "ADD_SELLER": "بيع",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "مركز البحث الخاص بك مضبوط حاليًا على الإحداثيات الافتراضية [0، 0]. لتحسين تجربتك، يُرجى تحديث موقع مركز البحث الخاص بك.",
     "SEARCH_BAR_PLACEHOLDER": "ابحث عن البائعين أو العناصر",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "لتفعيل هذه الميزة، يرجى تفعيل خدمات الموقع في إعدادات جهازك.",
@@ -41,7 +42,7 @@
       "EMAIL_LABEL": "عنوان البريد الإلكتروني",
       "PHONE_NUMBER_LABEL": "رقم الهاتف",
       "CONTACT_PUBLIC_NOTE": "عنوان البريد الإلكتروني ورقم الهاتف سيكونان مرئيين للعموم.",
-      "SELLER_DETAILS_PLACEHOLDER": "وصف البائع و العناصر المعروضة للبيع بسعر Pi وما إلى ذلك.",
+      "SELLER_DETAILS_PLACEHOLDER": "أبيع عبر Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "ملخص التقييمات",
       "REVIEWS_SCORE_LABEL": "درجة التقييمات",
       "SELLER_NAME": "اسم البائع",
@@ -56,7 +57,7 @@
       "SELLER_ADVANCED_SETTINGS_LABEL": "إعدادات متقدمة للبائع",
       "SELLER_RETAIL_OUTLET_NAME": "اسم منفذ البيع",
       "SELLER_ADDRESS_LOCATION_LABEL": "العنوان أو مكان البيع",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "ساعد المشترين في العثور عليك بإضافة عنوان أو وصف لمكان البيع",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "علامة الموقع على الخريطة تظهر مكان بيعي",
       "SELLER_SETTINGS_LABEL": "إعدادات البائع",
       "SELLER_SELL_CENTER": "تحديد مركز البيع",
       "VALIDATION": {
@@ -231,14 +232,18 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "ابحث عن موقع، مدينة، أو عنوان",
       "VALIDATION": {
-        "SEARCH_CENTER_SUCCESS_MESSAGE": "تم حفظ مركز البحث بنجاح",
-        "SELL_CENTER_SUCCESS_MESSAGE": "تم حفظ مركز البيع بنجاح"
+        "MAP_CENTER_SUCCESS_MESSAGE": "تم حفظ مركزك بنجاح"
       }
     },
     "LOADING_SCREEN_MESSAGE": "جار التحميل ...",
+    "SAVING_SCREEN_MESSAGE": "جارٍ الحفظ ...",
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "فشل الإرسال لأن المستخدم غير مصدق",
       "UNEXPECTED_ERROR_MESSAGE": "حدث خطأ غير متوقع"
     }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "الصفحة غير موجودة",
+    "PAGE_NOT_FOUND_MESSAGE": "عذرًا، الصفحة التي تبحث عنها غير موجودة."
   }
 }

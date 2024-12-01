@@ -34,7 +34,7 @@ const fetchSellerCoordinates = async (
 
     return sellersWithCoordinates;
   } catch (error) {
-    logger.error('Error fetching seller coordinates:', { error });
+    logger.error('Error fetching seller coordinates:', error);
     throw error;
   }
 };
@@ -160,30 +160,57 @@ const Map = ({
     }
   }, [mapRef.current]);
 
+  const saveMapState = () => {
+    try{
+      if (!mapRef.current) {
+        return;
+      }
+      logger.debug('called handle navigation');
+      const currentCenter = mapRef.current.getCenter();
+      const currentZoom = mapRef.current.getZoom();
+      sessionStorage.setItem('prevMapCenter', JSON.stringify(currentCenter));
+      sessionStorage.setItem('prevMapZoom', currentZoom.toString());
+      
+    } catch (error) {
+      logger.warn('map not ready');
+    }
+  };
+  
   const fetchInitialCoordinates = async () => {
-    if (searchQuery) return;
+    if (searchQuery) {
+      return;
+    }
   
     setLoading(true);
     setError(null);
   
     try {
-      const mapInstance = mapRef.current; // Access map instance via ref
+      const mapInstance = mapRef.current;
   
       if (!mapInstance) {
         logger.warn('Map instance is not ready yet');
         return;
       }
-      // Set and zoom map center to search center if available
-      if (center){
-        console.log("initial map center is focus to user center:", center.toString())
-        mapInstance.setView(center, 8, { animate: true })
+  
+      let prevCenter = sessionStorage.getItem('prevMapCenter');
+      let prevZoom = sessionStorage.getItem('prevMapZoom');
+  
+      if (prevCenter && prevZoom) {
+        // Parse prevCenter to LatLngExpression type
+        const parsedPrevCenter = JSON.parse(prevCenter) as { lat: number; lng: number };
+        const parsedPrevZoom = parseInt(prevZoom);
+        logger.info("prev map center is focused to previous center:", parsedPrevCenter?.toString());  
+        mapInstance.setView(parsedPrevCenter, parsedPrevZoom, { animate: false });
+      } else if (center) {
+        logger.info("initial map center is focused to user center:", center.toString());
+        mapInstance.setView(center, 8, { animate: false });
       } else {
-        const worldCenter = mapRef.current?.getCenter()
-        console.log("initial map center focus to world:", worldCenter?.toString())
-        worldCenter 
-        ? mapInstance.setView(worldCenter, 2, { animate: false }) 
-        : mapRef.current = mapInstance;
-      }      
+        const worldCenter = mapRef.current?.getCenter();
+        logger.info("initial map center focused to world:", worldCenter?.toString());
+        worldCenter
+          ? mapInstance.setView(worldCenter, 2, { animate: false })
+          : (mapRef.current = mapInstance);
+      }
   
       const bounds = mapInstance.getBounds();
       if (bounds) {
@@ -192,13 +219,13 @@ const Map = ({
         setSellers(sellersData);
       }
     } catch (error) {
-      logger.error('Failed to fetch initial coordinates:', { error });
+      logger.error('Failed to fetch initial coordinates:', error);
       setError('Failed to fetch initial coordinates');
     } finally {
       setLoading(false);
     }
-  };  
-
+  };
+  
   // Function to handle map interactions (only when there's no search query)
   const handleMapInteraction = async (newBounds: L.LatLngBounds, mapInstance: L.Map) => {
     const newCenter = newBounds.getCenter();
@@ -221,7 +248,7 @@ const Map = ({
       });
 
     } catch (error) {
-      logger.error('Failed to fetch additional data:', { error });
+      logger.error('Failed to fetch additional data:', error);
       setError('Failed to fetch additional data');
     } finally {
       setLoading(false);
@@ -232,6 +259,7 @@ const Map = ({
   const debouncedHandleMapInteraction = useCallback(
     _.debounce((bounds: LatLngBounds, mapInstance: L.Map) => {
       handleMapInteraction(bounds, mapInstance);
+      saveMapState();
     }, 500),
     [sellers] // Dependency array ensures the debounced function is updated with the latest sellers
   );

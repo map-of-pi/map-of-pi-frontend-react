@@ -9,16 +9,19 @@ import { useContext, useEffect, useState, useRef } from 'react';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
+import ConfirmDialog from '@/components/shared/confirm';
 import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { DeviceLocationType, IUserSettings } from '@/constants/types';
+import { checkAndAutoLoginUser } from '@/utils/auth';
 import { userLocation } from '@/utils/geolocation';
 
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
 
-export default function Index() {
+export default function Page({ params }: { params: { locale: string } }) {
   const t = useTranslations();
+  const { locale } = params;
   const DynamicMap = dynamic(() => import('@/components/shared/map/Map'), {
     ssr: false,
   });
@@ -34,15 +37,19 @@ export default function Index() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [showPopup, setShowPopup] = useState<boolean>(false)
 
   const { isSigningInUser, currentUser, autoLoginUser, reload, setReload } = useContext(AppContext);
 
   useEffect(() => {
-    setReload(false)
-    if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
-      autoLoginUser();
+    // clear previous map state when findme option is changed
+    if (reload){
+      sessionStorage.removeItem('prevMapCenter');
+      sessionStorage.removeItem('prevMapZoom');
     }
+    setReload(false)
+    setShowPopup(false)
+    checkAndAutoLoginUser(currentUser, autoLoginUser);
 
     const getUserSettingsData = async () => {
       try {
@@ -51,10 +58,14 @@ export default function Index() {
           logger.info('Fetched user settings data successfully:', { data });
           setDbUserSettings(data);
           if (data.search_map_center?.coordinates) {
-            setSearchCenter({
+            const coordinates = {
               lat: data.search_map_center.coordinates[1],
               lng: data.search_map_center.coordinates[0],
-            });
+            }
+            setSearchCenter(coordinates);
+            if (coordinates.lat === 0 && coordinates.lng === 0) {
+              setShowPopup(true);
+            }
           }
         } else {
           logger.warn('User Settings not found.');
@@ -62,7 +73,7 @@ export default function Index() {
           setSearchCenter(null)
         }
       } catch (error) {
-        logger.error('Error fetching user settings data:', { error });
+        logger.error('Error fetching user settings data:', error);
       }
     };
 
@@ -85,6 +96,9 @@ export default function Index() {
   }, [dbUserSettings]);
 
   const handleLocationButtonClick = async () => {
+    // clear previous map state when findme option is changed
+    sessionStorage.removeItem('prevMapCenter');
+    sessionStorage.removeItem('prevMapZoom');
     if (dbUserSettings) {
       const loc = await userLocation(dbUserSettings);
       if (loc) {
@@ -95,18 +109,6 @@ export default function Index() {
         setSearchCenter(null)
       }
     }
-    // try {
-    //   setReload(true);
-    //   setLocationError(null);
-    //   logger.info('User location obtained successfully on button click:', { location });
-    // } catch (error) {
-    //   setReload(false)
-    //   logger.error('Error getting location on button click.', { error });
-    //   setLocationError(t('HOME.LOCATION_SERVICES.ENABLE_LOCATION_SERVICES_MESSAGE'));
-    // }
-    // finally{
-    //   setReload(false);
-    // }
   };
 
   // Handle search query update from SearchBar and associated results
@@ -123,7 +125,7 @@ export default function Index() {
         setSearchResults(results || []); // Update searchResults
       }
     } catch (error) {
-      logger.error('Failed to fetch sellers for search query.', { error });
+      logger.error('Failed to fetch sellers for search query.', error);
     }
   };
 
@@ -142,7 +144,7 @@ export default function Index() {
         <div className="w-[90%] lg:w-full lg:px-6 mx-auto flex items-center justify-between">
           {/* Add Seller Button */}
           <div className="pointer-events-auto">
-            <Link href="/seller/registration">
+            <Link href={`/${locale}/seller/registration`}>
               <Button
                 label={'+ ' + t('HOME.ADD_SELLER')}
                 styles={{
@@ -179,6 +181,12 @@ export default function Index() {
             />
           </div>
         </div>
+        {showPopup && <ConfirmDialog
+          show={setShowPopup} 
+          onClose={()=> setShowPopup(false)}
+          message={t('HOME.SEARCH_CENTER_DEFAULT_MESSAGE')} 
+          url={`/map-center?entryType=search`}
+        />}
       </div>
     </>
   );

@@ -36,12 +36,8 @@ export const fetchMapCenter = async (type: 'search' | 'sell') => {
       logger.error(`Fetch map center failed with Status ${response.status}`);
       return null;
     }
-  } catch (error: any) {
-    logger.error('Fetch map center encountered an error:', { 
-      message: error.message,
-      config: error.config,
-      stack: error.stack
-    });
+  } catch (error) {
+    logger.error('Fetch map center encountered an error:', error);
     throw new Error('Failed to fetch map center. Please try again later.');
   }
 };
@@ -66,12 +62,8 @@ export const saveMapCenter = async (latitude: number, longitude: number, type: '
       logger.error(`Save map center failed with Status ${response.status}`);
       return null;
     }
-  } catch (error: any) {
-    logger.error('Save map center encountered an error:', { 
-      message: error.message,
-      config: error.config,
-      stack: error.stack
-    });
+  } catch (error) {
+    logger.error('Save map center encountered an error:', error);
     throw new Error('Failed to save map center. Please try again later.');
   }
 };
