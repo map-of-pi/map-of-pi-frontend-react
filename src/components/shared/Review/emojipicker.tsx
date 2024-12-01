@@ -2,15 +2,13 @@
 
 import { useTranslations } from 'next-intl';
 import { useState, useEffect, useContext } from 'react';
-import { ImSpinner2 } from 'react-icons/im';
 import { toast } from 'react-toastify';
 
 import { IReviewFeedback } from '@/constants/types';
-import { FileInput, TextArea } from '../Forms/Inputs/Inputs';
 import { createReview } from '@/services/reviewsApi';
 import removeUrls from '@/utils/sanitize';
+import { FileInput, TextArea } from '../Forms/Inputs/Inputs';
 import { AppContext } from '../../../../context/AppContextProvider';
-
 import logger from '../../../../logger.config.mjs';
 
 interface Emoji {
@@ -72,8 +70,8 @@ export default function EmojiPicker(props: any) {
   };
 
   const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isSaveLoading){
-      return
+    if (isSaveLoading) {
+      return;
     }
     const selectedFile = e.target.files?.[0]; // only take the first file
     if (selectedFile) {
@@ -88,13 +86,13 @@ export default function EmojiPicker(props: any) {
   };
 
   const resetReview = () => {
-    setSelectedEmoji(null)
-    setReviewEmoji(null)
+    setSelectedEmoji(null);
+    setReviewEmoji(null);
     setComments('');
     setPreviewImage('');
     setFile(null);
     setIsSaveEnabled(false);
-    props.setIsSaveEnabled(false)
+    props.setIsSaveEnabled(false);
   }
 
   const handleSave = async () => {
@@ -108,9 +106,9 @@ export default function EmojiPicker(props: any) {
           logger.warn('Attempted to save review without selecting an emoji.');
           return toast.warn(t('SHARED.REACTION_RATING.VALIDATION.SELECT_EMOJI_EXPRESSION'));
         } else {
-          setIsSaveEnabled(false)
-          setIsSaveLoading(true)
-          setAlertMessage('Saving ...') 
+          setIsSaveEnabled(false);
+          setIsSaveLoading(true);
+          setAlertMessage(t('SHARED.SAVING_SCREEN_MESSAGE'));
           const formDataToSend = new FormData();
           formDataToSend.append('comment', removeUrls(comments));
           formDataToSend.append('rating', reviewEmoji.toString());
@@ -128,14 +126,13 @@ export default function EmojiPicker(props: any) {
 
           const newReview = await createReview(formDataToSend);
           if (newReview) {
-            setAlertMessage(null)
-            // toast.success(t('SHARED.REACTION_RATING.VALIDATION.SUCCESSFUL_REVIEW_SUBMISSION'));
+            setAlertMessage(null);
             resetReview();
             props.setReload(true);
             props.refresh();
             logger.info('Review submitted successfully');
           } else {
-            setAlertMessage('Save not successful.')
+            setAlertMessage(t('SHARED.REACTION_RATING.VALIDATION.UNSUCCESSFUL_REVIEW_SUBMISSION'));
           }
           resetReview();
         }
@@ -146,15 +143,15 @@ export default function EmojiPicker(props: any) {
     } catch (error) {
       logger.error('Error saving review:', error);
     } finally {
-      setIsSaveLoading(false)
-      setAlertMessage(null)
+      setIsSaveLoading(false);
+      setAlertMessage(null);
     }
   };
   
   // Function to handle the click of an emoji
   const handleEmojiClick = (emojiValue: number) => {
-    if (isSaveLoading){
-      return
+    if (isSaveLoading) {
+      return;
     }
     if (selectedEmoji === emojiValue) {
       setSelectedEmoji(null);
