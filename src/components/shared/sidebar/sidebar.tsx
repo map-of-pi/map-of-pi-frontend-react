@@ -406,73 +406,65 @@ function Sidebar(props: any) {
                   onChange={handleChange}
                   options={translateFindMeOptions}
                 />
-                <div key={menu.Languages.id} className="flex flex-col">
-  {/* Dropdown Button */}
-  <div
-    className="flex items-center justify-between px-4 py-2 border rounded-md border-gray-400 hover:border-gray-500 cursor-pointer"
-    onClick={() => handleMenu(menu.Languages.title, menu.Languages.url)}
-    style={{
-      minHeight: '40px', // Match button height
-      backgroundColor: '#fff', // Match background
-    }}
-  >
-    {/* Icon and Title */}
-    <div className="flex items-center">
-      <Image
-        src={menu.Languages.icon}
-        alt={menu.Languages.title}
-        width={20}
-        height={20}
-        className="mr-2"
-      />
-      <span className="text-sm font-medium">
-        {translateMenuTitle(menu.Languages.title)}
-      </span>
-    </div>
-
-    {/* Dropdown Indicator */}
-    <FaChevronDown
-      size={14}
-      className={`transition-transform ${
-        toggle[menu.Languages.title] ? 'rotate-180' : ''
-      }`}
-    />
-  </div>
-
-  {/* Dropdown Content */}
-  {menu.Languages.children && toggle[menu.Languages.title] && (
-    <div
-      style={{
-        maxHeight: '180px', // Restrict height for ~5 items
-        overflowY: 'scroll', // Enable scrolling
-        border: '1px solid #ccc',
-        borderRadius: '5px',
-        marginTop: '5px',
-        backgroundColor: '#fff',
-      }}
-    >
-      {menu.Languages.children.map((child) => (
-        <div
-          key={child.id}
-          className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-          onClick={() => handleChildMenu(menu.Languages.title, child.code)}
-        >
-          {child.icon && (
-            <Image
-              src={child.icon}
-              alt={child.title}
-              width={17}
-              height={17}
-              className="mr-3"
-            />
-          )}
-          <span className="text-sm">{translateChildMenuTitle(child.title)}</span>
-        </div>
-      ))}
-    </div>
-  )}
-</div>
-
+                <div key={menu.Languages.id} className="">
+                  <div
+                    className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] w-full mb-3`}
+                    onClick={() => handleMenu(menu.Languages.title, menu.Languages.url)}>
+                    <Image
+                      src={menu.Languages.icon}
+                      alt={menu.Languages.title}
+                      width={22}
+                      height={22}
+                      className=""
+                    />
+                    <span className="ml-3">
+                      {translateMenuTitle(menu.Languages.title)}
+                    </span>
+                    {menu.Languages.children && (
+                      <div className="ml-4">
+                        <FaChevronDown
+                          size={13}
+                          className={`text-[#000000] ${toggle[menu.Languages.title] && 'rotate-90'}`}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  {/* MENU WITH CHILDREN */}
+                  {menu.Languages.children &&
+                    toggle[menu.Languages.title] &&
+                    menu.Languages.children.map((child) => (
+                      <div key={child.id} className="mx-auto">
+                        <div
+                          className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
+                          onClick={() =>
+                            handleChildMenu(menu.Languages.title, child.code)
+                          }>
+                          {child.icon && ( // conditional rendering
+                            <Image
+                              src={child.icon}
+                              alt={child.title}
+                              width={17}
+                              height={17}
+                              className={styles.lng_img}
+                            />
+                          )}
+                          {menu.Languages.title === 'Languages' &&
+                          isLanguageMenuItem(child) ? (
+                            <div className="ml-2 text-[14px] flex">
+                              <div className="font-bold">{child.label}</div>
+                              <div className="mx-1"> - </div>
+                              <div>{child.translation}</div>
+                            </div>
+                          ) : (
+                            <span className="ml-2 text-[14px]">
+                              {translateChildMenuTitle(child.title)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                  ))}
+                       
+                </div>
                 <div className="mb-3 mt-3">
                   <Button
                     label={t('SHARED.SAVE')}
