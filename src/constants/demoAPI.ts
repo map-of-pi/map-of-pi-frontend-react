@@ -61,3 +61,37 @@ export const PiFestJson = {
     __v: 0
   }
 };
+
+export const SellerItems = [
+  {
+    name: "Ham & cheese sandwich",
+    item_id: "01",
+    price: 4,
+    quantity: 10,
+    description: "A filling sandwich made with soft fresh-backed bread, tender, ham, cheese creamy slices, crisp lettuce, juicy tomato and mayo",
+    photo: "/images/business/product.png",
+    last_sold: "",
+    status: 'Active',
+  }, 
+  {
+    name: "Coffee",
+    item_id: "02",
+    price: 0.5,
+    quantity: 10,
+    description: "A nice refreshing coffee",
+    photo: "/images/business/product.png",
+    last_sold: "",
+    status: 'Active',
+  }, 
+  {
+    name: "Mobile phones",
+    item_id: "03",
+    price: 11,
+    quantity: 20,
+    description: "All kind of mobile phones",
+    photo: "/images/business/product.png",
+    last_sold: "",
+    status: 'Active',
+  }, 
+];
+

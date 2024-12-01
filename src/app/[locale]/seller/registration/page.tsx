@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
@@ -25,6 +25,8 @@ import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
+import { ShopItem } from '@/components/ShopItem';
+import { SellerItems } from '@/constants/demoAPI';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -71,6 +73,38 @@ const SellerRegistrationForm = () => {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
+  const [focusedItemId, setFocusedItemId] = useState<string | null>(null);
+
+  const observer = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    // Create Intersection Observer
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const itemId = entry.target.getAttribute("data-id");
+            if (itemId) {
+              setFocusedItemId(itemId);
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the item is in view
+      }
+    );
+  
+    return () => {
+      observer.current?.disconnect(); // Clean up observer
+    };
+  }, []);
+  
+  const handleShopItemRef = (node: HTMLElement | null) => {
+    if (node && observer.current) {
+      observer.current.observe(node);
+    }
+  };
 
   // Fetch seller data and user settings on component mount
   useEffect(() => {
@@ -551,6 +585,37 @@ const SellerRegistrationForm = () => {
                 onClick={handleSave}
               />
             </div>
+          </ToggleCollapse>
+          
+          {/* Online Shopping */}
+          <ToggleCollapse
+            header={t(
+              'Online Shopping',
+            )}
+            open={true}>
+            <div className="mb-4">
+                <Button
+                  label='Add Item'
+                  // disabled={!isActive}
+                  styles={{
+                      color: '#ffc153',
+                      height: '40px',
+                      padding: '10px 15px',
+                      marginLeft: 'auto',
+                  }}
+                />
+            </div>
+            <div className="max-h-[500px] overflow-y-auto p-1 mb-7">
+              {SellerItems.map((item) => (
+                <ShopItem
+                  key={item.item_id}
+                  item={item}
+                  isActive={focusedItemId === item.item_id}
+                  refCallback={handleShopItemRef} // Attach observer
+                />
+              ))}
+            </div>
+
           </ToggleCollapse>
         </div>
         <ConfirmDialog
