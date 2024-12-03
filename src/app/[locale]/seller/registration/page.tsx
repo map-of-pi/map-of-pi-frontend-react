@@ -71,6 +71,7 @@ const SellerRegistrationForm = () => {
   );
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [isAddItemEnabled, setIsAddItemEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
   const [focusedItemId, setFocusedItemId] = useState<string | null>(null);
@@ -78,7 +79,7 @@ const SellerRegistrationForm = () => {
   const observer = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    // Create Intersection Observer
+    // Intersection Observer
     observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -596,7 +597,7 @@ const SellerRegistrationForm = () => {
             <div className="mb-4">
                 <Button
                   label='Add Item'
-                  // disabled={!isActive}
+                  disabled={isAddItemEnabled}
                   styles={{
                       color: '#ffc153',
                       height: '40px',
@@ -612,6 +613,7 @@ const SellerRegistrationForm = () => {
                   item={item}
                   isActive={focusedItemId === item.item_id}
                   refCallback={handleShopItemRef} // Attach observer
+                  setIsAddItemEnabled={setIsAddItemEnabled}
                 />
               ))}
             </div>

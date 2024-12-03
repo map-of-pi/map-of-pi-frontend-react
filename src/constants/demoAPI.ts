@@ -81,7 +81,7 @@ export const SellerItems = [
     description: "A nice refreshing coffee",
     photo: "/images/business/product.png",
     last_sold: "",
-    status: 'Active',
+    status: 'expired',
   }, 
   {
     name: "Mobile phones",
