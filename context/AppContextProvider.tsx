@@ -27,8 +27,11 @@ interface IAppContextProps {
   isSigningInUser: boolean;
   reload: boolean;
   alertMessage: string | null;
+  setAlertMessage: React.Dispatch<SetStateAction<string | null>>;
   showAlert: (message: string) => void;
   setReload: React.Dispatch<SetStateAction<boolean>>;
+  isSaveLoading: boolean;
+  setIsSaveLoading: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const initialState: IAppContextProps = {
@@ -39,8 +42,11 @@ const initialState: IAppContextProps = {
   isSigningInUser: false,
   reload: false,
   alertMessage: null,
+  setAlertMessage: () => {},
   showAlert: () => {},
   setReload: () => {},
+  isSaveLoading: false,
+  setIsSaveLoading: () => {}
 };
 
 export const AppContext = createContext<IAppContextProps>(initialState);
@@ -54,6 +60,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   const [isSigningInUser, setIsSigningInUser] = useState(false);
   const [reload, setReload] = useState(false);
+  const [isSaveLoading, setIsSaveLoading] = useState(false);
 
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
@@ -129,7 +136,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser, reload, setReload, showAlert, alertMessage }}>
+    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser, reload, setReload, showAlert, alertMessage, setAlertMessage, isSaveLoading, setIsSaveLoading }}>
       {children}
     </AppContext.Provider>
   );

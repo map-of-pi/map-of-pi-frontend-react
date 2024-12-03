@@ -430,40 +430,47 @@ function Sidebar(props: any) {
                     )}
                   </div>
                   {/* MENU WITH CHILDREN */}
-                  {menu.Languages.children &&
-                    toggle[menu.Languages.title] &&
-                    menu.Languages.children.map((child) => (
-                      <div key={child.id} className="mx-auto">
-                        <div
-                          className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
-                          onClick={() =>
-                            handleChildMenu(menu.Languages.title, child.code)
-                          }>
-                          {child.icon && ( // conditional rendering
-                            <Image
-                              src={child.icon}
-                              alt={child.title}
-                              width={17}
-                              height={17}
-                              className={styles.lng_img}
-                            />
-                          )}
-                          {menu.Languages.title === 'Languages' &&
-                          isLanguageMenuItem(child) ? (
-                            <div className="ml-2 text-[14px] flex">
-                              <div className="font-bold">{child.label}</div>
-                              <div className="mx-1"> - </div>
-                              <div>{child.translation}</div>
-                            </div>
-                          ) : (
-                            <span className="ml-2 text-[14px]">
-                              {translateChildMenuTitle(child.title)}
-                            </span>
-                          )}
+                  {menu.Languages.children && toggle[menu.Languages.title] && (
+                    <div
+                      className="max-h-[200px] overflow-y-auto"
+                      style={{
+                        scrollbarWidth: 'thin',
+                        WebkitOverflowScrolling: 'touch',
+                      }}
+                    >    
+                      {menu.Languages.children.map((child) => (
+                        <div key={child.id} className="mx-auto">
+                          <div
+                            className={`${styles.slide_contentx} hover:bg-[#424242] hover:text-white `}
+                            onClick={() =>
+                              handleChildMenu(menu.Languages.title, child.code)
+                            }>
+                            {child.icon && ( // conditional rendering
+                              <Image
+                                src={child.icon}
+                                alt={child.title}
+                                width={17}
+                                height={17}
+                                className={styles.lng_img}
+                              />
+                            )}
+                            {menu.Languages.title === 'Languages' &&
+                            isLanguageMenuItem(child) ? (
+                              <div className="ml-2 text-[14px] flex">
+                                <div className="font-bold">{child.label}</div>
+                                <div className="mx-1"> - </div>
+                                <div>{child.translation}</div>
+                              </div>
+                            ) : (
+                              <span className="ml-2 text-[14px]">
+                                {translateChildMenuTitle(child.title)}
+                              </span>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                  ))}
-                       
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div className="mb-3 mt-3">
                   <Button
