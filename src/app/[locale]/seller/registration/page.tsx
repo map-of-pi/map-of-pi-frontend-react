@@ -358,6 +358,21 @@ const SellerRegistrationForm = () => {
     },
   ];
 
+  const translatedItemDeliveryMethod = [
+    {
+      value: 'pickup',
+      name: t(
+        'Collection by Buyer',
+      ),
+    },
+    {
+      value: 'delivery',
+      name: t(
+        'Delivered to Buyer',
+      ),
+    },
+  ];
+
   if (loading) {
     logger.info('Loading Seller Registration Form.');
     return <Skeleton type="seller_registration" />;
@@ -595,16 +610,19 @@ const SellerRegistrationForm = () => {
             )}
             open={false}>
             <div className="mb-4">
-                <Button
-                  label='Add Item'
-                  disabled={isAddItemEnabled}
-                  styles={{
-                      color: '#ffc153',
-                      height: '40px',
-                      padding: '10px 15px',
-                      marginLeft: 'auto',
-                  }}
-                />
+              <h2 className='text-gray-500 text-lg'>
+                {t('Mappi allowance remaining ')}: 999
+              </h2>
+              <Button
+                label='Add Item'
+                disabled={isAddItemEnabled}
+                styles={{
+                    color: '#ffc153',
+                    height: '40px',
+                    padding: '10px 15px',
+                    marginLeft: 'auto',
+                }}
+              />
             </div>
             <div className="max-h-[500px] overflow-y-auto p-1 mb-7">
               {SellerItems.map((item) => (
@@ -616,6 +634,25 @@ const SellerRegistrationForm = () => {
                   setIsAddItemEnabled={setIsAddItemEnabled}
                 />
               ))}
+            </div>
+            <div>
+              <h2 className={SUBHEADER}>{t('Fulfilment Method')}</h2>
+              <Select
+                name="delivery_method"
+                // value={formData.sellerType}
+                // onChange={handleChange}
+                options={translatedItemDeliveryMethod}
+              />
+              <h2 className={SUBHEADER}>{t('Fulfilment Instructions to Buyer')}</h2>
+              <TextArea
+                name="delivery_address"
+                type="text"
+                placeholder='Collection is from seller address. If delivery, then enter the buyer address'
+                // value={formData.quantity}
+                styles={{ height: '80px' }}
+                // onChange={handleChange}
+                // disabled={!isActive} Disable if not active
+              />
             </div>
 
           </ToggleCollapse>
