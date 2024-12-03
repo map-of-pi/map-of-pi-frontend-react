@@ -593,7 +593,7 @@ const SellerRegistrationForm = () => {
             header={t(
               'Online Shopping',
             )}
-            open={true}>
+            open={false}>
             <div className="mb-4">
                 <Button
                   label='Add Item'
