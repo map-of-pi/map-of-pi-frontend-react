@@ -24,7 +24,7 @@ function Navbar() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [isHomePage, setIsHomePage] = useState(true);
 
-  const {isSigningInUser, reload, alertMessage, isSaveLoading} = useContext(AppContext)
+  const {isSigningInUser, reload, alertMessage, isSaveLoading} = useContext(AppContext);
 
   // check if the current page is the homepage
   useEffect(() => {
@@ -58,8 +58,8 @@ function Navbar() {
         <div className="text-center text-secondary text-[1.3rem] whitespace-nowrap">
           {/* Display alert message with spinner if present, otherwise display 'Map of Pi' */}
           {alertMessage ? (
-            <div className="alert-message flex items-center justify-center"> {/* Adjust font size */}
-              {t(alertMessage)}
+            <div className="alert-message flex items-center justify-center">
+              {alertMessage}
             </div>
           ) : (
             isSigningInUser || reload ? (
@@ -81,7 +81,7 @@ function Navbar() {
 
           <div className={`${styles.nav_item} ${(isHomePage || isSaveLoading) && 'disabled'}`}>
             <Link href={`/${locale}`}>
-              <MdHome size={24} className={`${(isHomePage || isSaveLoading ) ? 'text-tertiary' : 'text-secondary'}`} />
+              <MdHome size={24} className={`${(isHomePage || isSaveLoading) ? 'text-tertiary' : 'text-secondary'}`} />
             </Link>
           </div>
           <div className={`${styles.nav_item} disabled`}>
@@ -103,7 +103,7 @@ function Navbar() {
             <Link
               href=""
               onClick={(e) => {
-                if (isSigningInUser || isSaveLoading ) {
+                if (isSigningInUser || isSaveLoading) {
                   e.preventDefault();
                 } else {
                   handleMenu();
