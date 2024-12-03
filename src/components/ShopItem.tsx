@@ -122,6 +122,9 @@ export const ShopItem: React.FC<{
                             />
                         </div>
                 </div>
+                <label className="text-[18px] text-[#333333]">
+                    {t('Selling duration in weeks')}:
+                </label>
                 <div className="flex items-center gap-2">
                     <div className="flex gap-1 items-center">
                         <Button
