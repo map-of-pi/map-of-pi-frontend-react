@@ -4,16 +4,15 @@ import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
 import _ from 'lodash';
-import { CloseButton } from '../Forms/Buttons/Buttons';
 
 import { ISeller, ISellerWithSettings } from '@/constants/types';
 import { fetchSellers } from '@/services/sellerApi';
 
 import MapMarkerPopup from './MapMarkerPopup';
+import { CloseButton } from '../Forms/Buttons/Buttons';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
-
 
 // Function to fetch seller coordinates based on bounds and optional search query
 const fetchSellerCoordinates = async (
@@ -89,6 +88,7 @@ const Map = ({
   const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
+  const [lastClickedMarker, setLastClickedMarker] = useState<LatLngTuple | null>(null);
 
   useEffect(() => {
     if (searchResults.length > 0) {
@@ -134,40 +134,37 @@ const Map = ({
     logger.debug('Sellers Array:', { sellers });
   }, [sellers]);
 
-  const [lastClickedMarker, setLastClickedMarker] = useState<LatLngTuple | null>(null);
-
-// Function to handle marker click and center popup
-const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
-  if (!mapRef.current) return;
-
-  const map = mapRef.current;
-  setLastClickedMarker(sellerCoordinates);
-
-  // Set the target zoom level
-  const targetZoom = 5; // Zoom level when clicking the marker
-
-  // Center the map to the marker position without animation
-  map.setView(sellerCoordinates, targetZoom, { animate: false });
-
-  // Calculate offset to center the popup (move right by 2x)
-  const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
-  const mapSize = map.getSize();
-
-  const centerOffset = L.point(
-    mapSize.x / 2 - markerPoint.x - 40,   // Shift horizontal offset slightly (-40 moves right)
-    mapSize.y / 2 - markerPoint.y - 229   // Vertical offset unchanged
-  );
-
-  // Pan the map instantly to center the popup without animation
-  map.panBy(centerOffset, { animate: false });
-};
-
-
   useEffect(() => {
     if (mapRef.current) {
       fetchInitialCoordinates();  // Fetch sellers when map is ready
     }
   }, [mapRef.current]);
+
+  // Function to handle marker click and center popup
+  const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
+    if (!mapRef.current) return;
+
+    const map = mapRef.current;
+    setLastClickedMarker(sellerCoordinates);
+
+    // Set the target zoom level
+    const targetZoom = 5; // Zoom level when clicking the marker
+
+    // Center the map to the marker position without animation
+    map.setView(sellerCoordinates, targetZoom, { animate: false });
+
+    // Calculate offset to center the popup (move right by 2x)
+    const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
+    const mapSize = map.getSize();
+
+    const centerOffset = L.point(
+      mapSize.x / 2 - markerPoint.x - 40,   // Shift horizontal offset slightly (-40 moves right)
+      mapSize.y / 2 - markerPoint.y - 229   // Vertical offset unchanged
+    );
+
+    // Pan the map instantly to center the popup without animation
+    map.panBy(centerOffset, { animate: false });
+  };
 
   const saveMapState = () => {
     try{
@@ -356,7 +353,7 @@ const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
             />
           </div>
         </div>
-      ) : (
+        ) : (
         <MapContainer
           center={center ? center : [0,0]}
           zoom={center ? zoom : 2}
@@ -378,41 +375,38 @@ const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
           <LocationMarker />
           {sellers.map((seller) => (
             <Marker
-            position={seller.coordinates as LatLngExpression}
-            key={seller.seller_id}
-            icon={customIcon}
-            eventHandlers={{
-              click: () => handleMarkerClick(seller.coordinates as LatLngTuple),
-            }}
-          >
-          <Popup
-  closeButton={false} 
-  minWidth={140}
-  maxWidth={190}
-  className="custom-popup"
-  offset={L.point(4, -0.5)} // Shifted offset from [0, -3] to [10, -3] to move the popup right
->
-  <div
-    style={{
-      position: 'absolute',
-      top: '-6px',
-      right: '-6px',
-      zIndex: 1000,
-    }}
-  >
-    <CloseButton
-      onClick={() => {
-        mapRef.current?.closePopup(); // Close the popup programmatically
-      }}
-      aria-label="Close Popup"
-    />
-  </div>
-  {/* Popup Content */}
-  <MapMarkerPopup seller={seller} />
-</Popup>
-
-          </Marker>
-          
+              position={seller.coordinates as LatLngExpression}
+              key={seller.seller_id}
+              icon={customIcon}
+              eventHandlers={{
+                click: () => handleMarkerClick(seller.coordinates as LatLngTuple),
+              }}
+            >
+              <Popup
+                minWidth={140}
+                maxWidth={190}
+                className="custom-popup"
+                offset={L.point(4, -0.5)} // Shifted offset from [0, -3] to [10, -3] to move the popup right
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '-6px',
+                    right: '-6px',
+                    zIndex: 1000,
+                  }}
+                >
+                  <CloseButton
+                    onClick={() => {
+                      mapRef.current?.closePopup(); // Close the popup programmatically
+                    }}
+                    aria-label="Close Popup"
+                  />
+                </div>
+                {/* Popup Content */}
+                <MapMarkerPopup seller={seller} />
+              </Popup>
+            </Marker>
           ))}
         </MapContainer>
       )}
