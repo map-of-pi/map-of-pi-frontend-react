@@ -9,6 +9,7 @@ import { ISeller, ISellerWithSettings } from '@/constants/types';
 import { fetchSellers } from '@/services/sellerApi';
 
 import MapMarkerPopup from './MapMarkerPopup';
+import { CloseButton } from '../Forms/Buttons/Buttons';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
@@ -87,6 +88,7 @@ const Map = ({
   const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
+  const [lastClickedMarker, setLastClickedMarker] = useState<LatLngTuple | null>(null);
 
   useEffect(() => {
     if (searchResults.length > 0) {
@@ -132,33 +134,37 @@ const Map = ({
     logger.debug('Sellers Array:', { sellers });
   }, [sellers]);
 
-  // Function to handle marker click
-  const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
-    if (!mapRef.current) return;
-
-    const map = mapRef.current;
-    const currentZoom = map.getZoom();
-
-    // Set the view to the seller's coordinates
-    map.setView(sellerCoordinates, currentZoom, { animate: true });
-    // Get the position of the clicked marker
-    const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
-    // Get the width and height of the map container
-    const mapSize = map.getSize();
-    const mapWidth = mapSize.x;
-    const mapHeight = mapSize.y;
-    // Calculate the offsets to center the marker in the map view
-    const panOffset = L.point(mapWidth / 2 - markerPoint.x, mapHeight / 2 - markerPoint.y);
-
-    // Pan the map by the calculated offset
-    map.panBy(panOffset, { animate: false }); // Disable animation to make the movement instant
-  };
-
   useEffect(() => {
     if (mapRef.current) {
       fetchInitialCoordinates();  // Fetch sellers when map is ready
     }
   }, [mapRef.current]);
+
+  // Function to handle marker click and center popup
+  const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
+    if (!mapRef.current) return;
+
+    const map = mapRef.current;
+    setLastClickedMarker(sellerCoordinates);
+
+    // Set the target zoom level
+    const targetZoom = 5; // Zoom level when clicking the marker
+
+    // Center the map to the marker position without animation
+    map.setView(sellerCoordinates, targetZoom, { animate: false });
+
+    // Calculate offset to center the popup (move right by 2x)
+    const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
+    const mapSize = map.getSize();
+
+    const centerOffset = L.point(
+      mapSize.x / 2 - markerPoint.x - 40,   // Shift horizontal offset slightly (-40 moves right)
+      mapSize.y / 2 - markerPoint.y - 229   // Vertical offset unchanged
+    );
+
+    // Pan the map instantly to center the popup without animation
+    map.panBy(centerOffset, { animate: false });
+  };
 
   const saveMapState = () => {
     try{
@@ -347,7 +353,7 @@ const Map = ({
             />
           </div>
         </div>
-      ) : (
+        ) : (
         <MapContainer
           center={center ? center : [0,0]}
           zoom={center ? zoom : 2}
@@ -377,15 +383,30 @@ const Map = ({
               }}
             >
               <Popup
-                closeButton={true}
-                minWidth={200}
-                maxWidth={250}
+                minWidth={140}
+                maxWidth={190}
                 className="custom-popup"
-                offset={L.point(0, -3)} // Ensures the popup is slightly lower than the marker
+                offset={L.point(4, -0.5)} // Shifted offset from [0, -3] to [10, -3] to move the popup right
               >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '-6px',
+                    right: '-6px',
+                    zIndex: 1000,
+                  }}
+                >
+                  <CloseButton
+                    onClick={() => {
+                      mapRef.current?.closePopup(); // Close the popup programmatically
+                    }}
+                    aria-label="Close Popup"
+                  />
+                </div>
+                {/* Popup Content */}
                 <MapMarkerPopup seller={seller} />
               </Popup>
-          </Marker>
+            </Marker>
           ))}
         </MapContainer>
       )}
