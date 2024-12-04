@@ -75,10 +75,10 @@ export const FileInput = (props: any) => {
         <label className="block text-[17px] text-[#333333] font-bold">{imageLabel}</label>
       )}
       {props.describe && (
-        <label className="block pb-3 text-sm text-gray-400">{props.describe}</label>
+        <label className="block pb-3 text-sm text-gray-400 pb-5">{props.describe}</label>
       )}
-      <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative">
-        <div className="w-full h-[200px] relative mb-4">
+      <div className="flex flex-col items-center justify-center overflow-hidden p-3 rounded-md relative">
+        <div className={`w-full ${props.height? props.height: 'h-[200px]'} relative mb-4`}>
           <Image
             src={isImageUploaded ? props.imageUrl : '/images/shared/upload.png'}
             alt="Upload image"

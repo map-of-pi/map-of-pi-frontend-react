@@ -624,7 +624,7 @@ const SellerRegistrationForm = () => {
                 }}
               />
             </div>
-            <div className="max-h-[500px] overflow-y-auto p-1 mb-7">
+            <div className="max-h-[550px] overflow-y-auto p-1 mb-7">
               {SellerItems.map((item) => (
                 <ShopItem
                   key={item.item_id}

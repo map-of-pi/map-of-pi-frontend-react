@@ -4,6 +4,7 @@ import Image from "next/image";
 import { TextArea, Input } from "./shared/Forms/Inputs/Inputs";
 import { Button } from "./shared/Forms/Buttons/Buttons";
 import { Notification } from "./shared/confirm";
+import { FileInput } from "./shared/Forms/Inputs/Inputs";
 
 type SellerItem = {
     name: string,
@@ -33,9 +34,27 @@ export const ShopItem: React.FC<{
         last_sold: item.last_sold, 
         item_id: item.item_id
       });
+      const [previewImage, setPreviewImage] = useState<string>(
+        formData?.photo || '',
+      );
+      const [showDialog, setShowDialog] = useState<boolean>(false);
+      const [file, setFile] = useState<File | null>(null);
 
     const t = useTranslations();
-    const [showDialog, setShowDialog] = useState<boolean>(false)
+
+    // Handle image upload
+    const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files?.[0]; // only take the first file
+        if (selectedFile) {
+        setFile(selectedFile);
+
+        const objectUrl = URL.createObjectURL(selectedFile);
+        setPreviewImage(objectUrl);
+        //   logger.info('Image selected for upload:', { selectedFile });
+
+        setIsAddItemEnabled(true);
+        }
+    };
 
     const handleChange = (
         e:
@@ -58,7 +77,7 @@ export const ShopItem: React.FC<{
         // enable or disable save button based on form inputs
         const isFormFilled = Object.values(updatedFormData).some((v) => v !== '');
         setIsAddItemEnabled(isFormFilled);
-      };
+    };
     
 
   
@@ -113,12 +132,10 @@ export const ShopItem: React.FC<{
                         </div>
                         <div className="flex-auto w-32 gap-2">
                             <label className="block text-[17px] text-[#333333]">Photo:</label>
-                            <Image
-                                src={formData.photo}
-                                alt="product image"
-                                width={100}
-                                height={130}
-                                className="object-cover rounded-md"
+                            <FileInput
+                                imageUrl={previewImage}
+                                handleAddImage={handleAddImage}
+                                height={'h-[100px]'}
                             />
                         </div>
                 </div>
