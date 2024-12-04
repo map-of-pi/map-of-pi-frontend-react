@@ -79,7 +79,19 @@ export const ShopItem: React.FC<{
         setIsAddItemEnabled(isFormFilled);
     };
     
-
+    const handleIncrement = () => {
+        const updatedQuantity = formData.quantity + 1;
+        setFormData({ ...formData, quantity: updatedQuantity });
+        setIsAddItemEnabled(true); // Enable save button
+      };
+    
+      const handleDecrement = () => {
+        if (formData.quantity > 0) {
+          const updatedQuantity = formData.quantity - 1;
+          setFormData({ ...formData, quantity: updatedQuantity });
+          setIsAddItemEnabled(true); // Enable save button
+        }
+      };
   
     return (
         <>
@@ -144,32 +156,34 @@ export const ShopItem: React.FC<{
                 </label>
                 <div className="flex items-center gap-2">
                     <div className="flex gap-1 items-center">
-                        <Button
-                            label="-"
-                            disabled={!isActive} // Disable if not active
-                            styles={{
-                                color: '#ffc153',
-                                padding: '10px 15px',
-                                borderRadius: '100%',
-                            }}
-                        />
-                        <Input
-                            name="quantity"
-                            type="number"
-                            value={formData.quantity}
-                            onChange={handleChange}
-                            disabled={!isActive} // Disable if not active
-                        />
-                        <Button
-                            label="+"
-                            disabled={!isActive} // Disable if not active
-                            styles={{
-                            color: '#ffc153',
-                            padding: '10px 15px',
-                            borderRadius: '100%',
-                            marginRight: '5px',
-                            }}
-                        />
+                    <Button
+                        label="-"
+                        disabled={!isActive || formData.quantity <= 0} // Disable if not active or quantity is zero
+                        styles={{
+                        color: "#ffc153",
+                        padding: "10px 15px",
+                        borderRadius: "100%",
+                        }}
+                        onClick={handleDecrement} // Decrement handler
+                    />
+                    <Input
+                        name="quantity"
+                        type="number"
+                        value={formData.quantity}
+                        onChange={handleChange}
+                        disabled={!isActive} // Disable if not active
+                    />
+                    <Button
+                        label="+"
+                        disabled={!isActive} // Disable if not active
+                        styles={{
+                        color: "#ffc153",
+                        padding: "10px 15px",
+                        borderRadius: "100%",
+                        marginRight: "5px",
+                        }}
+                        onClick={handleIncrement} // Increment handler
+                    />
                     </div>
                     <Button
                     label={t('Delete')}
