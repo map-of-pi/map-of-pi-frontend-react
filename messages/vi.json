@@ -5,7 +5,7 @@
     "SEARCH_BAR_PLACEHOLDER": "Tìm kiếm người bán hoặc sản phẩm",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Để sử dụng tính năng này, vui lòng bật dịch vụ vị trí trong cài đặt thiết bị của bạn.",
-      "DISABLED_LOCATION_SERVICES_MESSAGE": "Dịch vụ vị trí bị tắt. Vui lòng bật cài đặt vị trí của thiết bị."
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "Dịch vụ vị trí bị tắt. Vui lòng bật thiết lập vị trí của thiết bị."
     },
     "AUTHENTICATION": {
       "SUCCESSFUL_LOGIN_MESSAGE": "Đăng nhập thành công",
@@ -47,7 +47,7 @@
       "REVIEWS_SCORE_LABEL": "Điểm đánh giá",
       "SELLER_NAME": "Tên người bán",
       "SELLER_TYPE": {
-        "SELLER_TYPE_LABEL": "Loại người bán",
+        "SELLER_TYPE_LABEL": "Loại hình người bán",
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Người bán hoạt động",
           "INACTIVE_SELLER": "Người bán không hoạt động",
@@ -57,7 +57,7 @@
       "SELLER_ADVANCED_SETTINGS_LABEL": "Cài đặt nâng cao cho người bán",
       "SELLER_RETAIL_OUTLET_NAME": "Tên cửa hàng bán lẻ",
       "SELLER_ADDRESS_LOCATION_LABEL": "Địa chỉ hoặc nơi bán",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Dấu vị trí trên bản đồ của tôi chỉ ra nơi tôi đang bán",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Vị trí trên bản đồ của tôi cũng là nơi tôi đang bán",
       "SELLER_SETTINGS_LABEL": "Cài đặt người bán",
       "SELLER_SELL_CENTER": "Đặt Trung tâm bán hàng",
       "VALIDATION": {
@@ -96,7 +96,7 @@
     },
     "CHECK_REVIEWS_FEEDBACK": {
       "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Không có đánh giá cho {seller_id}",
-      "CHECK_REVIEWS_FEEDBACK_HEADER": "Danh sách đánh giá để lại cho {seller_id}",
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "Các đánh giá để lại cho {seller_id}",
       "BY_REVIEWER": "Bởi {buyer_id}"
     },
     "REPLY_TO_REVIEW": {
@@ -105,8 +105,8 @@
       "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Đưa ra trả lời cho đánh giá",
       "REPLY_TO_REVIEW_HEADER": "Trả lời đánh giá để lại cho {seller_id}",
       "BY_REVIEWER": "Bởi {buyer_id}",
-      "REPLY_TO_REVIEW_MESSAGE": "Để lại câu trả lời cho đánh giá trên",
-      "FACE_SELECTION_REVIEW_MESSAGE": "Chọn biểu cảm khuôn mặt thể hiện cảm xúc của bạn về tương tác với Pioneer này",
+      "REPLY_TO_REVIEW_MESSAGE": "Trả lời lại cho đánh giá trên",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Chọn biểu tượng cảm xúc của bạn về tương tác với Pioneer này",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Nhập thêm bình luận ở đây",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Tải lên ảnh phản hồi",
       "VALIDATION": {
