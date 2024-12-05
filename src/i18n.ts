@@ -12,6 +12,7 @@ export const locales = [
   'fr', 
   'hau-NG', 
   'ko',
+  'vi',
   'zh-CN',
   'zh-TW'
 ] as const;

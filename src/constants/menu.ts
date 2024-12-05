@@ -71,6 +71,14 @@ export const menu = {
       },
       {
         id: 9,
+        code: 'vi',
+        label: 'VI',
+        title: 'Vietnamese',
+        translation: 'Tiếng Việt',
+        icon: '/images/shared/language/vi.svg',
+      },
+      {
+        id: 10,
         code: 'hau-NG',
         label: 'NG/HAU',
         title: 'Nigerian Hausa',
@@ -78,7 +86,7 @@ export const menu = {
         icon: '/images/shared/language/ng.svg',
       },
       {
-        id: 10,
+        id: 11,
         code: 'ewe-BJ',
         label: 'BJ/EWE',
         title: 'Benin Ewe',
@@ -86,7 +94,7 @@ export const menu = {
         icon: '/images/shared/language/bj.svg',
       },
       {
-        id: 11,
+        id: 12,
         code: 'fon-BJ',
         label: 'BJ/FON',
         title: 'Benin Fon',
