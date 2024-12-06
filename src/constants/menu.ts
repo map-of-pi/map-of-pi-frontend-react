@@ -11,7 +11,7 @@ export const menu = {
         label: 'EN/US',
         title: 'American English',
         translation: 'English',
-        icon: '/images/shared/language/en_us.svg',
+        icon: '',
       },
       {
         id: 2,
@@ -19,7 +19,7 @@ export const menu = {
         label: 'EN/GB',
         title: 'British English',
         translation: 'English',
-        icon: '/images/shared/language/en_gb.svg',
+        icon: '',
       },
       {
         id: 3,
@@ -27,7 +27,7 @@ export const menu = {
         label: 'ES',
         title: 'Spanish',
         translation: 'Español',
-        icon: '/images/shared/language/es.svg',
+        icon: '',
       },
       {
         id: 4,
@@ -35,7 +35,7 @@ export const menu = {
         label: 'FR',
         title: 'French',
         translation: 'Français',
-        icon: '/images/shared/language/fr.svg',
+        icon: '',
       },
       {
         id: 5,
@@ -43,7 +43,7 @@ export const menu = {
         label: 'AR',
         title: 'Arabic',
         translation: 'العربية',
-        icon: '/images/shared/language/ar.svg',
+        icon: '',
       },
       {
         id: 6,
@@ -51,7 +51,7 @@ export const menu = {
         label: 'ZH/CN',
         title: 'Simplified Chinese',
         translation: '简体中文',
-        icon: '/images/shared/language/zh.svg',
+        icon: '',
       },
       {
         id: 7,
@@ -59,7 +59,7 @@ export const menu = {
         label: 'ZH/TW',
         title: 'Traditional Chinese',
         translation: '繁體中文',
-        icon: '/images/shared/language/zh.svg',
+        icon: '',
       },
       {
         id: 8,
@@ -67,7 +67,7 @@ export const menu = {
         label: 'KO',
         title: 'Korean',
         translation: '한국어',
-        icon: '/images/shared/language/ko.svg',
+        icon: '',
       },
       {
         id: 9,
@@ -75,7 +75,7 @@ export const menu = {
         label: 'VI',
         title: 'Vietnamese',
         translation: 'Tiếng Việt',
-        icon: '/images/shared/language/vi.svg',
+        icon: '',
       },
       {
         id: 10,
@@ -83,7 +83,7 @@ export const menu = {
         label: 'NG/HAU',
         title: 'Nigerian Hausa',
         translation: 'Hausa',
-        icon: '/images/shared/language/ng.svg',
+        icon: '',
       },
       {
         id: 11,
@@ -91,7 +91,7 @@ export const menu = {
         label: 'BJ/EWE',
         title: 'Benin Ewe',
         translation: 'Ewe',
-        icon: '/images/shared/language/bj.svg',
+        icon: '',
       },
       {
         id: 12,
@@ -99,7 +99,7 @@ export const menu = {
         label: 'BJ/FON',
         title: 'Benin Fon',
         translation: 'Fɔngbè',
-        icon: '/images/shared/language/bj.svg',
+        icon: '',
       }
     ],
   },
