@@ -1,177 +1,178 @@
 {
   "HOME": {
-    "ADD_SELLER": "Adesɔ",
-    "SEARCH_CENTER_DEFAULT_MESSAGE": "Wò Search Center le dzĩe kplii aɖaŋu nù [0, 0]. Ne wòle nu sia kpli dze sia na dɔwɔ anye nye nè wòle Search Center nè amehe kpli ta.",
-    "SEARCH_BAR_PLACEHOLDER": "Gblekɔ dziwo be dzidzakpɔtɔ na ɖa",
+    "ADD_SELLER": "Dzra",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Woɖo wò Didiƒe fifia ɖe kɔordinate gbãtɔwo dzi [0, 0]. Be nàna wò nuteƒekpɔkpɔ nanyo ɖe edzi la, taflatse trɔ asi le wò Didiƒe ƒe teƒe ŋu.",
+    "SEARCH_BAR_PLACEHOLDER": "Di nudzralawo alo nuwo",
     "LOCATION_SERVICES": {
-      "ENABLE_LOCATION_SERVICES_MESSAGE": "Ne woana towo yi, meɖe woɖo wo gbãto le woʋa si ƒe kplɔ̃ɖeɖe.",
-      "DISABLED_LOCATION_SERVICES_MESSAGE": "Gbãto le woʋa si mewɔ ɖe edzi. Meɖe woɖo wo gbãto le woʋa si ƒe kplɔ̃ɖeɖe."
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "Ne èdi be yeazã nɔnɔme sia la, taflatse na teƒe ƒe dɔwɔnawo nawɔ dɔ le wò mɔ̃a ƒe ɖoɖowo me.",
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "Wowɔ teƒe ƒe dɔwɔnawo nuwɔametɔwo. Taflatse na wò mɔ̃a ƒe teƒe ƒe ɖoɖoa nawɔ dɔ."
     },
     "AUTHENTICATION": {
-      "SUCCESSFUL_LOGIN_MESSAGE": "Dzo le gbɔŋɔ le asi kplɔe",
-      "UNSUCCESSFUL_LOGIN_MESSAGE": "Dɔ wòkplɔ nye",
-      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi ƒe nusia tɔ dɔ aɖe ma va dɔ o"
+      "SUCCESSFUL_LOGIN_MESSAGE": "Gbeɖiɖi dzidzedzetɔe",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Ge ɖe eme do kpo nu",
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi nyatakaka siwo womekpɔ o"
     }
   },
   "SIDE_NAVIGATION": {
-    "USER_PREFERENCES_HEADER": "Nutifafa le Mawuwo",
-    "PERSONALIZATION_SUBHEADER": "Trɔtrɔnye",
-    "LANGUAGES": "Ɖe ŋutɔ",
+    "USER_PREFERENCES_HEADER": "Zãla ƒe Tiatia",
+    "PERSONALIZATION_SUBHEADER": "Ame ŋutɔ ƒe nɔnɔme",
+    "LANGUAGES": "Gbegbɔgblɔwo",
     "ABOUT": {
-      "ABOUT_MAP_OF_PI": "Nudɔ Map of Pi",
+      "ABOUT_MAP_OF_PI": "Map of Pi ƒe anyigbatata ŋu",
       "APP_VERSION": "App ƒe tɔtrɔ",
       "PRIVACY_POLICY": "Ameŋunyatakakawo Ŋuti Ðoɖo",
-      "TERMS_OF_SERVICE": "Ɖoɖo ƒe tɔtrɔ"
+      "TERMS_OF_SERVICE": "Subɔsubɔdɔ ƒe Ðoɖowo"
     },
-    "FIND_ME_PREFERENCE_LABEL": "FindMe la wɔ nu si",
+    "FIND_ME_PREFERENCE_LABEL": "FindMe ƒe Tiatia",
     "FIND_ME_OPTIONS": {
-      "PREFERRED_AUTO": "Auto",
-      "PREFERRED_DEVICE_GPS": "Ne míetsɔ nyɔnu tɔn wɔ mí geɖeŋu me",
-      "PREFERRED_SEARCH_CENTER": "Ne míetsɔ Gbesɔsɔmesi"
+      "PREFERRED_AUTO": "Afɔɖeɖe le eɖokui si",
+      "PREFERRED_DEVICE_GPS": "Zã nye mɔ̃a ƒe GPS",
+      "PREFERRED_SEARCH_CENTER": "Zã Didiƒe"
     },
-    "CONTACT_MAP_OF_PI": "Wò Map of Pi me",
+    "CONTACT_MAP_OF_PI": "Kadodo ƒe Map of Pi",
     "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Etsɔnyɛ nufiala nɔe o",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Nufiala menɔa wo nɛ gbɔna o"
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nu siwo wodi la kpɔ dzidzedze",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Vodada le tiatiawɔblɔɖewo dzadzraɖo me"
     }
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Nàƒé Wòkpɔ̃nɔnyewo",
-      "SELLER_DETAILS_LABEL": "Nuxlɔ̃tɔ la gbɔgbɔmɛ",
-      "EMAIL_LABEL": "Nu kɔnta le ema",
-      "PHONE_NUMBER_LABEL": "Nɔ̃nyo ƒe dzesi",
-      "CONTACT_PUBLIC_NOTE": "Nu kɔnta le ema kple nɔ̃nyo ƒe dzesi wogbe na wo.",
-      "SELLER_DETAILS_PLACEHOLDER": "Metɔ ƒe sia menye Pay with Pi ƒe gbɔgbɔ la me.",
-      "REVIEWS_SUMMARY_LABEL": "Sɔlɔɖe ɖe do",
-      "REVIEWS_SCORE_LABEL": "Sɔlɔɖe mɔkpla",
-      "SELLER_NAME": "Adesɔ ŋutɔ",
+      "SELLER_REGISTRATION_HEADER": "Nudzrala ƒe Ŋkɔ ŋɔŋlɔ",
+      "SELLER_DETAILS_LABEL": "Nudzrala ƒe Nyatakakawo",
+      "EMAIL_LABEL": "Email adrɛsi",
+      "PHONE_NUMBER_LABEL": "Telefon xexlẽdzesi",
+      "CONTACT_PUBLIC_NOTE": "Email adrɛsi kple telefon xexlẽdzesi adze le dutoƒo.",
+      "SELLER_DETAILS_PLACEHOLDER": "Medzraa nu to Fe kple Pi dzi.",
+      "REVIEWS_SUMMARY_LABEL": "Totoɖemewo ƒe Kpuie",
+      "REVIEWS_SCORE_LABEL": "Totoɖemewo ƒe Dzesi",
+      "SELLER_NAME": "Nudzrala ƒe ƒomevi",
       "SELLER_TYPE": {
-        "SELLER_TYPE_LABEL": "Ɖe le adesɔ",
+        "SELLER_TYPE_LABEL": "Nudzrala ƒe ƒomevi",
         "SELLER_TYPE_OPTIONS": {
-          "ACTIVE_SELLER": "Trɔtrɔlɔ ame si nya nɔ",
-          "INACTIVE_SELLER": "Trɔtrɔlɔ ame si le hã",
-          "TEST_SELLER": "Trɔtrɔlɔ ame si nye nyatsɔ"
+          "ACTIVE_SELLER": "Nudzrala si le dɔ wɔm",
+          "INACTIVE_SELLER": "Nudzrala si mele dɔ wɔm o",
+          "TEST_SELLER": "Dodokpɔ ƒe nudzrala"
         }
       },
-      "SELLER_ADVANCED_SETTINGS_LABEL": "Tsiteyɔnu Nusrɔ̃ Me ɖoɖo",
-      "SELLER_RETAIL_OUTLET_NAME": "Nukunu nye reta tso hã",
-      "SELLER_ADDRESS_LOCATION_LABEL": "Duɖuɖu kple wò nɔ ɖa xɔxɔ me",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nudɔlaɖiɖiɖia ƒe ame la le ŋgɔ me kplɔe to ɖe madzɔna gɔme",
-      "SELLER_SETTINGS_LABEL": "Ɖe le Adesɔ",
-      "SELLER_SELL_CENTER": "Nàƒé Wòkpɔ̃nɔnyewo",
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Nudzrala ƒe Ðoɖo Deŋgɔwo",
+      "SELLER_RETAIL_OUTLET_NAME": "Asitsatsa outlet ƒe ŋkɔ",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Adrɛsi alo afisi wole nu dzram le",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nye anyigbatata ƒe dzesi fia afisi mele nu dzram le",
+      "SELLER_SETTINGS_LABEL": "Nudzrala ƒe Ðoɖowo",
+      "SELLER_SELL_CENTER": "Ðo Dzadzra ƒe Titina",
       "VALIDATION": {
-        "EMAIL_VALIDATION": "Metsɔ ema aɖeke wɔna le ŋgɔ le eme",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Nukplɔla nɔa gbedodo",
-        "FAILED_REGISTRATION_SUBMISSION": "Kplɔla menɔa wo nɛ gbɔna o",
-        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nɔviɖewɔwɔ na mi kplɔ nɛ ƒe viwo nɔ anyi nyɔnu ƒe ŋu nɔ anyi",
-        "UNINITIALIZED_SELL_CENTER": "Mɛnya ɖe gbe na wo trɔtrɔ wo fiawo tso me"
+        "EMAIL_VALIDATION": "Taflatse ŋlɔ e-mail adrɛsi si sɔ",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Ŋkɔ ŋɔŋlɔ kpɔ dzidzedze",
+        "FAILED_REGISTRATION_SUBMISSION": "Vodada le ŋkɔ ŋɔŋlɔ dzraɖo me",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Ŋkɔ ŋɔŋlɔ do kpo nu elabena womeɖo kpe zãla dzi o",
+        "UNINITIALIZED_SELL_CENTER": "Taflatse ɖo wò Dzraɖoƒe"
       }
     },
     "BUY_FROM_SELLER": {
-      "BUY_FROM_SELLER_HEADER": "Xɔ le Adesɔviwo",
-      "SELLER_DETAILS_LABEL": "Nàƒé Wòkpɔ̃nɔ ƒé Nunya",
-      "SELLER_ADDRESS_POSITION_LABEL": "Nàƒé Wòkpɔ̃nɔ ƒé Adrεs kple Nudɔla",
-      "LEAVE_A_REVIEW_MESSAGE": "Nà tsɔ asi kple wɔ gɔmesese",
-      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Xɔ le vavaŋuto ŋutɔ kple kple",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Photo na vovɔ",
-      "REVIEWS_SUMMARY_LABEL": "Sɔlɔɖe ɖe do",
-      "REVIEWS_SCORE_MESSAGE": "Sɔlɔɖe mɔkpla: {seller_review_rating} ɖe ame sia 5.0",
-      "SELLER_CONTACT_DETAILS_LABEL": "Nuɖoɖoɖo aɖeƒe ƒe Tsiteyɔnu",
-      "SELLER_USERNAME_LABEL": "Nuɖuiwɔafɔ",
-      "SELLER_PIONEER_ID_LABEL": "Pioneer ID",
-      "SELLER_PHONE_NUMBER_LABEL": "Ɖeɖekɔaɖe",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Email gɔme"
+      "BUY_FROM_SELLER_HEADER": "Ƒle nu tso Nudzrala gbɔ",
+      "SELLER_DETAILS_LABEL": "Nudzrala ƒe Nyatakakawo",
+      "SELLER_ADDRESS_POSITION_LABEL": "Nudzrala ƒe Adrɛs alo Ðoƒe",
+      "LEAVE_A_REVIEW_MESSAGE": "Gblẽ Totoɖeme",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Tia mo si ɖe alesi nèse le ɖokuiwò me tso nudzrala si le etame ŋu",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Ŋlɔ nya bubuwo ɖe afisia",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Nyaŋuɖoɖo ƒe foto dada ɖe Internet dzi",
+      "REVIEWS_SUMMARY_LABEL": "Totoɖemewo ƒe Kpuie",
+      "REVIEWS_SCORE_MESSAGE": "Totoɖemewo ƒe Dzesi: {seller_review_rating} tso 5.0 me",
+      "SELLER_CONTACT_DETAILS_LABEL": "Nudzrala ƒe Kadodo Ŋuti Nyatakakawo",
+      "SELLER_USERNAME_LABEL": "Zãla ƒe ŋkɔ",
+      "SELLER_PIONEER_ID_LABEL": "Mɔɖela Pionier ƒe ID",
+      "SELLER_PHONE_NUMBER_LABEL": "Telefon xexlẽdzesi",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email adrɛsi"
     },
     "REVIEWS": {
-      "REVIEWS_HEADER": "Nenyíawo",
-      "GIVE_REVIEW_SECTION_HEADER": "No wo review kplii ame siaa",
-      "REVIEWS_GIVEN_SECTION_HEADER": "Reviewwo kplii ame siaa",
-      "REVIEWS_RECEIVED_SECTION_HEADER": "Reviewwo yi le ame siaa",
+      "REVIEWS_HEADER": "Totoɖemewo",
+      "GIVE_REVIEW_SECTION_HEADER": "Na numetoto na mɔɖela sia",
+      "REVIEWS_GIVEN_SECTION_HEADER": "Ŋkuléleɖenuŋu siwo mɔɖela sia na Pionnier",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Numetoto siwo mɔɖela sia Pionnier xɔ",
       "VALIDATION": {
-        "NO_REVIEWS_FOUND": "Mèɖu nú ŋutɔ wòàdzra Pioné {search_value}",
-        "NO_PIONEER_FOUND": "Pioné {search_value} wòɖu nɔ anyi"
+        "NO_REVIEWS_FOUND": "Womekpɔ numetoto aɖeke na Mɔɖela {search_value}",
+        "NO_PIONEER_FOUND": "Mɔɖela Pionnier {search_value} mekpɔe o"
       }
     },
     "CHECK_REVIEWS_FEEDBACK": {
-      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Mèkpɔ dzudzɔkpɔkpɔ ƒe {seller_id} o",
-      "CHECK_REVIEWS_FEEDBACK_HEADER": "Ɖe le sɔlɔɖe ɖe doaɖe {seller_id}",
-      "BY_REVIEWER": "Dze {buyer_id}"
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Ŋkuléleɖenuŋu aɖeke meli na {seller_id} o",
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "Ŋkuléleɖenuŋu ƒe xexlẽdzesi si susɔ na {seller_id}",
+      "BY_REVIEWER": "To {buyer_id}"
     },
     "REPLY_TO_REVIEW": {
-      "REPLY_TO_REVIEW_STATIC_HEADER": "Nye anyi hã nu wò mli",
-      "REPLY_TO_REVIEW_SUBHEADER": "Nudɔla si wòyi dzudzɔmenyã gã eye wò woe vɔna",
-      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Fia dzi yɔ nudɔla me",
-      "REPLY_TO_REVIEW_HEADER": "Le ŋutɔ sia sɔlɔɖe ɖe doaɖe {seller_id}",
-      "BY_REVIEWER": "Dze {buyer_id}",
-      "REPLY_TO_REVIEW_MESSAGE": "Xɔ le ŋutɔ sia sɔlɔɖe ɖe doaɖe lɔme",
-      "FACE_SELECTION_REVIEW_MESSAGE": "Tia amenuveve aƒe si le eme wò dzo be wò nɔnye le etsɔ nu kplii ame siaa",
-      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Xɔ le vavaŋuto ŋutɔ kple kple",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Photo na vovɔ",
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Ðo ŋuɖoɖo na Totoɖeme",
+      "REPLY_TO_REVIEW_SUBHEADER": "Totoɖeme si ŋu nèle ŋu ɖom na",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Na ŋuɖoɖo na ŋkuléleɖenuŋu",
+      "REPLY_TO_REVIEW_HEADER": "Ðo ŋu na Totoɖeme le miame na {seller_id}",
+      "BY_REVIEWER": "To {buyer_id}",
+      "REPLY_TO_REVIEW_MESSAGE": "Gblẽ wò ŋuɖoɖo ɖe numetoto si le etame la me",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Tia mo si fia alesi nèse le ɖokuiwò me le wò kadodo kple mɔɖela sia ŋu",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Tia mo si fia alesi nèse le ɖokuiwò me le wò kadodo kple mɔɖela sia ŋu",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Nyaŋuɖoɖo ƒe fotowo dada ɖe Internet dzi",
       "VALIDATION": {
-        "LOADING_REVIEW_FAILURE": "Dzudzɔmenyã meyinaa nuwò dzi o",
-        "SELF_REVIEW_NOT_POSSIBLE": "Metsɔ eme eŋu srɔ ŋgɔmetɔ ƒe yiwo"
+        "LOADING_REVIEW_FAILURE": "Vodada le agbatsɔtsɔ ƒe ŋkuléleɖenuŋu me",
+        "SELF_REVIEW_NOT_POSSIBLE": "Ame ŋutɔ ƒe ŋkuléle ɖe nu ŋu mateŋu adzɔ o"
       }
     }
   },
   "POPUP": {
     "MAP_MARKER": {
-      "SELLER_SALE_ITEMS_FIELD": "Dzidzakpɔtɔ ɖe dze be dzidzakpɔtɔ na",
-      "DISTANCE_MESSAGE": "Zãla: XXX km gblɔ"
+      "SELLER_SALE_ITEMS_FIELD": "Nudzrala ƒe nu siwo wodzra",
+      "DISTANCE_MESSAGE": "Adzɔge: XXX km ƒe didime"
     },
     "APP_VERSION_INFO": {
-      "REPORTING_MESSAGE": "Ŋutɔ le gblɔ si ɖe"
+      "REPORTING_MESSAGE": "Taflatse gblɔ nusiwo gblẽ la na"
     },
     "PRIVACY_POLICY_INFO": {
       "TITLE": "Ameŋunyatakakawo Ŋuti Ðoɖo",
-      "LAST_UPDATED": "Le dzɔm le",
-      "EMAIL_ADDRESS": "Email Adrɛs",
+      "LAST_UPDATED": "Wowɔ Ðɔɖɔɖo Mamlɛtɔ",
+      "EMAIL_ADDRESS": "Email Adrɛsi",
       "SECTIONS": {
-        "HEADER_1": "Ɖe ŋutɔ",
-        "CONTENT_1": "Gbegbɔgblɔwo le Map of Pi, le aɖe me ŋkɔna do ƒe gblɔm na xɔ si Map of Pi gblɔwo le Pi Community. Ameŋunyatakakawo ŋuti ðoɖo keke wo wo dze ɖeŋu gblɔm na xɔ si wo dzi dze ŋutɔ le mobile app lɔme.",
-        "HEADER_2": "Xɔ ɖe ŋutɔ ŋuti",
-        "SUBHEADER_2_1": "Nuwo ŋutɔ",
-        "CONTENT_2_1_1": "Ŋutɔ le wo dze nuwo xɔ si ɖe le ŋutɔ, ŋutɔ le wo email adrɛs, ŋutɔ le wo dze kple wo dzidzakpɔtɔ lɔme.",
-        "CONTENT_2_1_2": "Le wo dze nuwo xɔ si wo device, enye wo device type, operating system, kple unique device identifiers.",
-        "SUBHEADER_2_2": "Dzidzakpɔtɔ ŋuti",
-        "CONTENT_2_2_1": "Sellers dze le platform lɔme gblɔxɔ le ŋutɔ dzidzakpɔtɔ, dzidzakpɔtɔ le wo dze, wo location, kple wo dzidzakpɔtɔ ɖoɖo.",
-        "CONTENT_2_2_2": "Dzidzakpɔtɔ ŋuti me ŋutɔ ŋutɔ ŋutɔ na me.",
-        "HEADER_3": "Dze wo ŋutɔ ɖe",
-        "SUBHEADER_3_1": "Dze gblɔm",
-        "CONTENT_3_1_1": "Xɔ le wo ŋutɔ xɔ si ɖe kple gblɔm le Map of Pi app, ɖe user kple seller functionalities lɔme.",
-        "SUBHEADER_3_2": "Miekegbe",
-        "CONTENT_3_2_1": "Wo dze gblɔm xɔ si wo contact information me hã wo nuwo, notification, kple vuvuwo dzidzakpɔtɔ le Map of Pi app lɔme.",
-        "SUBHEADER_3_3": "Analytics",
-        "CONTENT_3_3_1": "Wɔe le dze kple kpɔkpɔ ɖe ŋutɔ wo dze na ɖe wo ɖeɖe, features, kple functionality le app lɔme.",
-        "HEADER_4": "Dzɔ le wo ŋutɔ ɖe",
-        "SUBHEADER_4_1": "Gblɔɖe ŋutɔ",
-        "CONTENT_4_1_1": "User ŋutɔ le wo dze be dzidzakpɔtɔ ɖe gblɔɖe kple wo dzidzakpɔtɔ wo dze be dzidzakpɔtɔ lɔme.",
-        "SUBHEADER_4_2": "Le Third Parties",
-        "CONTENT_4_2_1": "Ŋutɔ le wo ŋutɔ be dzidzakpɔtɔ ɖe third-party service providers lɔme gblɔɖe le app functionality, analytics, kple payment processing.",
-        "HEADER_5": "Vovɔ lɔ le wo ŋutɔ ɖe",
-        "CONTENT_5_1": "Wɔe le industry-standard vovɔ lɔ le wo ŋutɔ. Ewe, nú ɖe wò bliboɖe, wò elektroniklɔ si vovɔ seseke na aɖe bliboɖe.",
-        "HEADER_6": "Wo Wòanya",
-        "CONTENT_6_1": "Wo ka xɔ le wo account information kple app settings lɔme. Wo ɖeɖe le wo Map of Pi account me ŋutɔ le wo Pi Network account kple kple xɔ le ŋutɔ le wo Map of Pi data ŋutɔ lɔme. Wo ka hã le promotional communications kple.",
-        "HEADER_7": "Dzɔme me Ameŋunyatakakawo Ŋuti Ðoɖo",
-        "CONTENT_7_1": "Wo le wo Ameŋunyatakakawo ŋuti ðoɖo be dzidzakpɔtɔ lɔme. Ɖe le dzɔm le wo website kple ɖe app lɔme.",
-        "HEADER_8": "Zãla Gblɔwo",
-        "CONTENT_8_1": "Ne wo ka ŋutɔ le wo dzidzakpɔtɔ lɔmewo aɖe le ameŋunyatakakawo ŋuti ðoɖo, ŋutɔ le wo xɔ si email adrɛs lɔme."
+        "HEADER_1": "Kpɔkplɔyiɖeme",
+        "CONTENT_1": "Míexɔ wò nyuie ɖe Map of Pi dɔwɔnua me, si Map of Pi ƒe ƒuƒoƒoa wɔ le nuwɔwɔ aduadu kple Pi Habɔbɔa me. Ameŋunyatakakawo Ŋuti Ðoɖo sia gblɔ alesi míeƒoa wò nyatakakawo nu ƒu, zãa wo, ɖea wo fiana, eye míekpɔa wo ta ne èzã míaƒe asitelefon dzi dɔwɔnua.",
+        "HEADER_2": "Nyatakaka Si Míeƒoa Nu ƒu",
+        "SUBHEADER_2_1": "Zãla ƒe Nyatakaka",
+        "CONTENT_2_1_1": "Ne èŋlɔ ŋkɔ abe zãla ene la, míate ŋu aƒo wò ŋkɔ, e-mail adrɛs, zãla ƒe ŋkɔ, kple nyatakaka bubu siwo sɔ nu ƒu.",
+        "CONTENT_2_1_2": "Míate ŋu aƒo nyatakakawo nu ƒu tso wò mɔ̃a ŋu, siwo dometɔ aɖewoe nye mɔ̃a ƒe ƒomevi, dɔwɔɖoɖo, kple mɔ̃a ƒe dzesidenu tɔxɛwo.",
+        "SUBHEADER_2_2": "Nudzrala Ŋuti Nyatakaka",
+        "CONTENT_2_2_1": "Woate ŋu abia tso nudzrala siwo ŋlɔ ŋkɔ ɖe mɔ̃a dzi si be woana Nudzrala ŋuti nyatakakawo, siwo dometɔ aɖewoe nye Nudzrala ƒe ŋkɔ, teƒe si wòle, kple kadodo ŋuti nyatakakawo.",
+        "CONTENT_2_2_2": "Nudzrala ate ŋu anye asitsala alo ame ŋutɔ tɔ.",
+        "HEADER_3": "Alesi Míezãa Wò Nyatakakawo",
+        "SUBHEADER_3_1": "Subɔsubɔdɔwo Nana",
+        "CONTENT_3_1_1": "Míezãa wò nyatakakawo tsɔ naa Map of Pi app ƒe dɔwɔnawo eye míedoa wo ɖe ŋgɔ, siwo dome zãla kple Nudzrala ƒe dɔwɔwɔwo hã le.",
+        "SUBHEADER_3_2": "Kadodowo",
+        "CONTENT_3_2_1": "Míate ŋu azã wò kadodo ŋuti nyatakakawo atsɔ aɖo nyatakaka yeyewo, nyatakakawo, kple boblododo gbedasi siwo ku ɖe Map of Pi dɔwɔnua ŋu ɖe wò.",
+        "SUBHEADER_3_3": "Numekukuwo",
+        "CONTENT_3_3_1": "Míeƒoa nyatakakawo nu ƒu hedzroa wo me be míana dɔwɔnua ƒe dɔwɔwɔ, eƒe nɔnɔmewo, kple eƒe dɔwɔwɔ nanyo ɖe edzi.",
+        "HEADER_4": "Wò Nyatakakawo Mamã",
+        "SUBHEADER_4_1": "Kple Nudzralawo",
+        "CONTENT_4_1_1": "Woate ŋu ama zãla ŋuti nyatakakawo kple Nudzralawo hena nudɔdɔa dzi wɔwɔ kple kadodo ƒe taɖodzinuwo.",
+        "SUBHEADER_4_2": "Kple Ame Etɔ̃lia",
+        "CONTENT_4_2_1": "Míate ŋu ama nyatakakawo kple ame bubuwo ƒe dɔwɔƒewo hena dɔwɔnua ƒe dɔwɔwɔ, numekuku, kple fexexe ŋuti dɔwɔwɔ.",
+        "HEADER_5": "Dedienɔnɔ ƒe Afɔɖeɖewo",
+        "CONTENT_5_1": "Míewɔa dedienɔnɔ ƒe ɖoɖo siwo sɔ ɖe dɔwɔƒewo nu tsɔ kpɔa wò nyatakakawo ta. Gake mɔnu aɖeke si dzi woato aɖo wo to internet alo elektrɔnikmɔ̃ dzi nudzraɖoƒe dzi mele dedie keŋkeŋ o.",
+        "HEADER_6": "Wò Tiatiawɔblɔɖewo",
+        "CONTENT_6_1": "Àte ŋu awɔ wò akɔntabubu ŋuti nyatakakawo yeyee to dɔwɔnua ƒe ɖoɖowo dzi. Àte ŋu atutu wò Map of Pi akɔnta to wò Pi Network akɔnta tutu me eye emegbe nàtia tiatia si nye be nàtutu wò Map of Pi nyatakakawo ne ègage ɖe Map of Pi me ake. Àte ŋu atiae. tso boblododo kadodowo me.",
+        "HEADER_7": "Tɔtrɔwo le Ameŋunyatakakawo Ŋuti Ðoɖo Sia Ŋu",
+        "CONTENT_7_1": "Míate ŋu atrɔ asi le Ameŋunyatakakawo Ŋuti Ðoɖo sia ŋu ne ehiã. Woada eƒe tata yeyetɔ ɖe míaƒe nyatakakadzraɖoƒea alo dɔwɔnua me.",
+        "HEADER_8": "Ka Ðe Mía Dzi",
+        "CONTENT_8_1": "Ne nya aɖe le asiwò alo nètsi dzi ɖe Ameŋunyatakakawo Ŋuti Ðoɖo sia ŋu la, taflatse te ɖe mía ŋu to e-mail ɖoɖo ɖe"
       }
     },
     "TERMS_OF_SERVICE_INFO": {
-      "TITLE": "Ɖoɖo ƒe tɔtrɔ",
-      "LAST_UPDATED": "Le dzɔm le",
-      "EMAIL_ADDRESS": "Email Adrɛs",
+      "TITLE": "Subɔsubɔdɔ ƒe Ðoɖowo",
+      "LAST_UPDATED": "Wowɔ Ðɔɖɔɖo Mamlɛtɔ",
+      "EMAIL_ADDRESS": "Email Adrɛsi",
       "SECTIONS": {
-        "HEADER_1": "Vaklɔwo aŋutsɔ",
-        "CONTENT_1_1": "Le akɔ ƒe Nudɔ Map of Pi, ɖe ameŋunyatakakawo ŋuti Ðoɖo, agbe Map of Pi ɖe ƒe Pi Network. Megbetɔwo ɖe ƒe si le ɖe be agbe yi kple ŋuti ɖo ɖo ɖe akɔ ƒe akɔwo aŋutsɔ le ameŋunyatakakawo ŋuti Ðoɖo.",
-        "HEADER_2": "Tso ƒe nɔ",
-        "CONTENT_2_1": "Megbetɔwo ɖe ƒe Nudɔ Map of Pi ɖo ɖo me nyate nɔ siwo kple mele.",
-        "CONTENT_2_2": "Akɔ ƒe Nudɔ Map of Pi ɖe enye ɖe tsoɖzɔ le agbe ɖe la siwo nuwo, eye la mɛlo akɔ ame me nɔ, be mɛlɔkpɔkpɔ, fia meko dze, eye me yia.",
-        "CONTENT_2_3": "Ɖo ƒe Nudɔ Map of Pi, o nye o siɖi le ɖe be piɔnɔwo aɖe Pi Network kple ɖo.",
-        "HEADER_3": "Tso ƒe tsoɖo",
-        "CONTENT_3_1": "Nudɔ Map of Pi, siwo kple nu, akɔ siwo kple mɔkpɔkpɔ, eye kple nɔkɔtɔwo kple dze me tsoƒe, gake le Map of Pi kple melewo lawo kple nɔ.",
-        "HEADER_4": "Vaklɔwo aɖeka",
+        "HEADER_1": "Lɔlɔ̃ ɖe Ðoɖowo Dzi",
+        "CONTENT_1_1": "Míexɔ wò nyuie ɖe Map of Pi dɔwɔnua me, si Map of Pi ƒe ƒuƒoƒoa wɔ le nuwɔwɔ aduadu kple Pi Habɔbɔa me. Ne èzã dɔwɔnu sia la, efia be èlɔ̃ ɖe edzi be yeawɔ ɖe Dɔwɔɖoɖo siawo dzi, kpakple míaƒe Ameŋunyatakakawo Ŋuti Ðoɖo dzi.",
+        "HEADER_2": "App la Zazã",
+        "CONTENT_2_1": "Èlɔ̃ be yeazã Map of Pi dɔwɔnua le ɖekawɔwɔ me kple se kple ɖoɖo siwo katã li.",
+        "CONTENT_2_2": "Mègazã dɔwɔnua na taɖodzinu aɖeke si mele se nu o alo si ŋu wode se ɖo o, alo le mɔ aɖeke nu si ate ŋu agblẽ nu le dɔwɔnua ŋu, awɔe nuwɔametɔe, awɔ agba wòagbɔ eme, alo agblẽ nu le eŋu o.",
+        "CONTENT_2_3": "Be nàzã Map of Pi la, ele be nàŋlɔ ŋkɔ abe Pi Network zãla mɔɖela ene.",
+        "HEADER_3": "Nunya ƒe nunɔamesiwo",
+        "CONTENT_3_1": "Map of Pi ƒe dɔwɔnua kple emenyawo, nɔnɔmewo, kple dɔwɔwɔwo katã nye Map of Pi tɔ eye wokpɔ eta to nutata ƒe gomenɔamesi, asitsadzesi, kple nunya ƒe nunɔamesiwo ŋuti se bubuwo me.",
+        "HEADER_4": "Agbanɔamedzi ƒe Seɖoƒe",
         "CONTENT_4_1": "Map of Pi aɖe wò kpe gbe siwo dze, eye siwoɖeka nɔ, nu, mɛkpɔkpɔ, eye aɖeka me ɖeka kple nɔwo eye siwo ɖeka le Nudɔ Map of Pi.",
         "HEADER_5": "Ɖe aloɖaɖa",
         "CONTENT_5_1": "Megbetɔwo ɖe ƒe aloɖaɖa kple keke Mɔ Map of Pi kple me ɖeɖea ɖeka kple nyate, nɔ, mɛkpɔkpɔ, eye kple ɖe aloɖaɖa kple nɔ mekplewo (keke la me ɖeɖeaɖea siwo be ɖeɖeaɖea ɖeka kple nɔme).",
