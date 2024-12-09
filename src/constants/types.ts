@@ -80,3 +80,14 @@ export type PartialReview = {
 
 export interface IReviewOutput extends IReviewFeedback, PartialReview {}
 
+export type SellerItem = {
+  name: string,
+  item_id: string,
+  price: number,
+  quantity: number,
+  description: string
+  photo: string,
+  last_sold: string,
+  status: string,
+  stock_level: string
+}

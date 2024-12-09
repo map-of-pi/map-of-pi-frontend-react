@@ -5,17 +5,7 @@ import { TextArea, Input } from "./shared/Forms/Inputs/Inputs";
 import { Button } from "./shared/Forms/Buttons/Buttons";
 import { Notification } from "./shared/confirm";
 import { FileInput } from "./shared/Forms/Inputs/Inputs";
-
-type SellerItem = {
-    name: string,
-    item_id: string,
-    price: number,
-    quantity: number,
-    description: string
-    photo: string,
-    last_sold: string,
-    status: string,
-}
+import { SellerItem } from "@/constants/types";
 
 export const ShopItem: React.FC<{
     item: SellerItem;
@@ -32,7 +22,8 @@ export const ShopItem: React.FC<{
         status: item.status,
         photo: item.photo,
         last_sold: item.last_sold, 
-        item_id: item.item_id
+        item_id: item.item_id,
+        stock_level: item.stock_level
       });
       const [previewImage, setPreviewImage] = useState<string>(
         formData?.photo || '',
@@ -131,26 +122,34 @@ export const ShopItem: React.FC<{
                     </div>
                 </div>
                 <div className="flex gap-x-4 items-center">
-                        <div className="flex-auto w-64">
-                            <TextArea
-                                label={'Description:'}
-                                placeholder={t('Item detail information')}
-                                name="description"
-                                value={formData.description}
-                                onChange={handleChange}
-                                disabled={!isActive} // Disable if not active
-                                styles={{ height: '100px' }}
-                            />
-                        </div>
-                        <div className="flex-auto w-32 gap-2">
-                            <label className="block text-[17px] text-[#333333]">Photo:</label>
-                            <FileInput
-                                imageUrl={previewImage}
-                                handleAddImage={handleAddImage}
-                                height={'h-[100px]'}
-                            />
-                        </div>
+                    <div className="flex-auto w-64">
+                        <TextArea
+                            label={'Description:'}
+                            placeholder={t('Item detail information')}
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            disabled={!isActive} // Disable if not active
+                            styles={{ height: '100px' }}
+                        />
+                    </div>
+                    <div className="flex-auto w-32 gap-2">
+                        <label className="block text-[17px] text-[#333333]">Photo:</label>
+                        <FileInput
+                            imageUrl={previewImage}
+                            handleAddImage={handleAddImage}
+                            height={'h-[100px]'}
+                        />
+                    </div>
                 </div>
+                <Input
+                    label={t('Stock level:')}
+                    name="name"
+                    type="text"
+                    value={formData.stock_level}
+                    onChange={handleChange}
+                    disabled={!isActive} // Disable if not active
+                />
                 <label className="text-[18px] text-[#333333]">
                     {t('Selling duration in weeks')}:
                 </label>

@@ -72,6 +72,7 @@ export const SellerItems = [
     photo: "/images/business/product.png",
     last_sold: "",
     status: 'Active',
+    stock_level: '1 available'
   }, 
   {
     name: "Coffee",
@@ -82,6 +83,7 @@ export const SellerItems = [
     photo: "/images/business/product.png",
     last_sold: "",
     status: 'expired',
+    stock_level: '5 available'
   }, 
   {
     name: "Mobile phones",
@@ -92,6 +94,7 @@ export const SellerItems = [
     photo: "/images/business/product.png",
     last_sold: "",
     status: 'Active',
+    stock_level: '10 available'
   }, 
 ];
 
