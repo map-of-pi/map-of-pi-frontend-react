@@ -18,15 +18,14 @@ import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
-import { IUserSettings, ISeller } from '@/constants/types';
+import { IUserSettings, ISeller, SellerItem, StockLevelType } from '@/constants/types';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
-import { ShopItem } from '@/components/ShopItem';
-import { SellerItems } from '@/constants/demoAPI';
+import OnlineShopping from '@/components/ShopItem';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -36,7 +35,7 @@ const SellerRegistrationForm = () => {
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
 
-  const { currentUser, autoLoginUser, showAlert } = useContext(AppContext);
+  const { currentUser, autoLoginUser, showAlert, reload, setReload } = useContext(AppContext);
 
   type IFormData = {
     sellerName: string;
@@ -71,42 +70,9 @@ const SellerRegistrationForm = () => {
   );
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-  const [isAddItemEnabled, setIsAddItemEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-  const [focusedItemId, setFocusedItemId] = useState<string | null>(null);
-
-  const observer = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    // Intersection Observer
-    observer.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const itemId = entry.target.getAttribute("data-id");
-            if (itemId) {
-              setFocusedItemId(itemId);
-            }
-          }
-        });
-      },
-      {
-        threshold: 0.5, // Trigger when 50% of the item is in view
-      }
-    );
   
-    return () => {
-      observer.current?.disconnect(); // Clean up observer
-    };
-  }, []);
-  
-  const handleShopItemRef = (node: HTMLElement | null) => {
-    if (node && observer.current) {
-      observer.current.observe(node);
-    }
-  };
-
   // Fetch seller data and user settings on component mount
   useEffect(() => {
     checkAndAutoLoginUser(currentUser, autoLoginUser);
@@ -358,21 +324,6 @@ const SellerRegistrationForm = () => {
     },
   ];
 
-  const translatedItemDeliveryMethod = [
-    {
-      value: 'pickup',
-      name: t(
-        'Collection by Buyer',
-      ),
-    },
-    {
-      value: 'delivery',
-      name: t(
-        'Delivered to Buyer',
-      ),
-    },
-  ];
-
   if (loading) {
     logger.info('Loading Seller Registration Form.');
     return <Skeleton type="seller_registration" />;
@@ -609,53 +560,9 @@ const SellerRegistrationForm = () => {
               'Online Shopping',
             )}
             open={false}>
-            <div className="mb-4">
-              <h2 className='text-gray-500 text-lg'>
-                {t('Mappi allowance remaining ')}: 999
-              </h2>
-              <Button
-                label='Add Item'
-                disabled={isAddItemEnabled}
-                styles={{
-                    color: '#ffc153',
-                    height: '40px',
-                    padding: '10px 15px',
-                    marginLeft: 'auto',
-                }}
-              />
-            </div>
-            <div className="max-h-[600px] overflow-y-auto p-1 mb-7">
-              {SellerItems.map((item) => (
-                <ShopItem
-                  key={item.item_id}
-                  item={item}
-                  isActive={focusedItemId === item.item_id}
-                  refCallback={handleShopItemRef} // Attach observer
-                  setIsAddItemEnabled={setIsAddItemEnabled}
-                />
-              ))}
-            </div>
-            <div>
-              <h2 className={SUBHEADER}>{t('Fulfilment Method')}</h2>
-              <Select
-                name="delivery_method"
-                // value={formData.sellerType}
-                // onChange={handleChange}
-                options={translatedItemDeliveryMethod}
-              />
-              <h2 className={SUBHEADER}>{t('Fulfilment Instructions to Buyer')}</h2>
-              <TextArea
-                name="delivery_address"
-                type="text"
-                placeholder='Collection is from seller address. If delivery, then enter the buyer address'
-                // value={formData.quantity}
-                styles={{ height: '80px' }}
-                // onChange={handleChange}
-                // disabled={!isActive} Disable if not active
-              />
-            </div>
-
+            {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
           </ToggleCollapse>
+          
         </div>
         <ConfirmDialog
           show={showConfirmDialog}
