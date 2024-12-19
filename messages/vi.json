@@ -1,0 +1,249 @@
+{
+  "HOME": {
+    "ADD_SELLER": "Bán hàng",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Trung tâm tìm kiếm của bạn hiện đang được đặt ở tọa độ mặc định [0, 0]. Để nâng cao trải nghiệm của bạn, vui lòng cập nhật vị trí trung tâm tìm kiếm.",
+    "SEARCH_BAR_PLACEHOLDER": "Tìm kiếm người bán hoặc sản phẩm",
+    "LOCATION_SERVICES": {
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "Để sử dụng tính năng này, vui lòng bật dịch vụ vị trí trong cài đặt thiết bị của bạn.",
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "Dịch vụ vị trí bị tắt. Vui lòng bật thiết lập vị trí của thiết bị."
+    },
+    "AUTHENTICATION": {
+      "SUCCESSFUL_LOGIN_MESSAGE": "Đăng nhập thành công",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Đăng nhập không thành công",
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Không tìm thấy thông tin Pi"
+    }
+  },
+  "SIDE_NAVIGATION": {
+    "USER_PREFERENCES_HEADER": "Tùy chọn người dùng",
+    "PERSONALIZATION_SUBHEADER": "Cá nhân hóa",
+    "LANGUAGES": "Ngôn ngữ",
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "Giới thiệu về Map of Pi",
+      "APP_VERSION": "Phiên bản ứng dụng",
+      "PRIVACY_POLICY": "Chính sách bảo mật",
+      "TERMS_OF_SERVICE": "Điều khoản dịch vụ"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "Tùy chọn FindMe",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Tự động",
+      "PREFERRED_DEVICE_GPS": "Sử dụng GPS thiết bị của tôi",
+      "PREFERRED_SEARCH_CENTER": "Sử dụng Trung tâm tìm kiếm"
+    },
+    "CONTACT_MAP_OF_PI": "Liên hệ với Map of Pi",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Cập nhật tùy chọn thành công",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Lỗi khi lưu tùy chọn"
+    }
+  },
+  "SCREEN": {
+    "SELLER_REGISTRATION": {
+      "SELLER_REGISTRATION_HEADER": "Đăng ký người bán",
+      "SELLER_DETAILS_LABEL": "Thông tin người bán",
+      "EMAIL_LABEL": "Địa chỉ email",
+      "PHONE_NUMBER_LABEL": "Số điện thoại",
+      "CONTACT_PUBLIC_NOTE": "Địa chỉ email và số điện thoại sẽ được hiển thị công khai.",
+      "SELLER_DETAILS_PLACEHOLDER": "Tôi bán qua Pay with Pi.",
+      "REVIEWS_SUMMARY_LABEL": "Tóm tắt đánh giá",
+      "REVIEWS_SCORE_LABEL": "Điểm đánh giá",
+      "SELLER_NAME": "Tên người bán",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "Loại hình người bán",
+        "SELLER_TYPE_OPTIONS": {
+          "ACTIVE_SELLER": "Người bán hoạt động",
+          "INACTIVE_SELLER": "Người bán không hoạt động",
+          "TEST_SELLER": "Người bán thử nghiệm"
+        }
+      },
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Cài đặt nâng cao cho người bán",
+      "SELLER_RETAIL_OUTLET_NAME": "Tên cửa hàng bán lẻ",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Địa chỉ hoặc nơi bán",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Vị trí trên bản đồ của tôi cũng là nơi tôi đang bán",
+      "SELLER_SETTINGS_LABEL": "Cài đặt người bán",
+      "SELLER_SELL_CENTER": "Đặt Trung tâm bán hàng",
+      "VALIDATION": {
+        "EMAIL_VALIDATION": "Vui lòng nhập địa chỉ email hợp lệ",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Đăng ký thành công",
+        "FAILED_REGISTRATION_SUBMISSION": "Lỗi khi lưu đăng ký",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Đăng ký thất bại vì người dùng chưa xác thực",
+        "UNINITIALIZED_SELL_CENTER": "Vui lòng đặt Trung tâm bán hàng của bạn"
+      }
+    },
+    "BUY_FROM_SELLER": {
+      "BUY_FROM_SELLER_HEADER": "Mua từ người bán",
+      "SELLER_DETAILS_LABEL": "Thông tin người bán",
+      "SELLER_ADDRESS_POSITION_LABEL": "Địa chỉ hoặc vị trí người bán",
+      "LEAVE_A_REVIEW_MESSAGE": "Để lại đánh giá",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Chọn biểu cảm khuôn mặt để thể hiện cảm xúc của bạn về người bán trên",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Nhập thêm bình luận ở đây",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Tải lên ảnh phản hồi",
+      "REVIEWS_SUMMARY_LABEL": "Tóm tắt đánh giá",
+      "REVIEWS_SCORE_MESSAGE": "Điểm đánh giá: {seller_review_rating} trên 5.0",
+      "SELLER_CONTACT_DETAILS_LABEL": "Thông tin liên hệ người bán",
+      "SELLER_USERNAME_LABEL": "Tên người dùng",
+      "SELLER_PIONEER_ID_LABEL": "Mã Pioneer",
+      "SELLER_PHONE_NUMBER_LABEL": "Số điện thoại",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Địa chỉ email"
+    },
+    "REVIEWS": {
+      "REVIEWS_HEADER": "Đánh giá",
+      "GIVE_REVIEW_SECTION_HEADER": "Đưa ra đánh giá cho Pioneer này",
+      "REVIEWS_GIVEN_SECTION_HEADER": "Đánh giá đã đưa của Pioneer này",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Đánh giá nhận được của Pioneer này",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "Không tìm thấy đánh giá cho Pioneer {search_value}",
+        "NO_PIONEER_FOUND": "Không tìm thấy Pioneer {search_value}"
+      }
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Không có đánh giá cho {seller_id}",
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "Các đánh giá để lại cho {seller_id}",
+      "BY_REVIEWER": "Bởi {buyer_id}"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Trả lời đánh giá",
+      "REPLY_TO_REVIEW_SUBHEADER": "Đánh giá mà bạn đang trả lời",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Đưa ra trả lời cho đánh giá",
+      "REPLY_TO_REVIEW_HEADER": "Trả lời đánh giá để lại cho {seller_id}",
+      "BY_REVIEWER": "Bởi {buyer_id}",
+      "REPLY_TO_REVIEW_MESSAGE": "Trả lời lại cho đánh giá trên",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Chọn biểu tượng cảm xúc của bạn về tương tác với Pioneer này",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Nhập thêm bình luận ở đây",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Tải lên ảnh phản hồi",
+      "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "Lỗi khi tải đánh giá",
+        "SELF_REVIEW_NOT_POSSIBLE": "Không thể tự đánh giá"
+      }
+    }
+  },
+  "POPUP": {
+    "MAP_MARKER": {
+      "SELLER_SALE_ITEMS_FIELD": "Sản phẩm bán của người bán",
+      "DISTANCE_MESSAGE": "Khoảng cách: XXX km"
+    },
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "Vui lòng báo cáo lỗi đến"
+    },
+    "PRIVACY_POLICY_INFO": {
+      "TITLE": "Chính Sách Bảo Mật",
+      "LAST_UPDATED": "Cập nhật lần cuối",
+      "EMAIL_ADDRESS": "Địa chỉ email",
+      "SECTIONS": {
+        "HEADER_1": "Giới thiệu",
+        "CONTENT_1": "Chào mừng bạn đến với ứng dụng Map of Pi, được phát triển bởi đội ngũ Map of Pi cùng sự hợp tác với Cộng đồng Pi. Chính sách bảo mật này mô tả cách chúng tôi thu thập, sử dụng, tiết lộ và bảo vệ thông tin cá nhân của bạn khi bạn sử dụng ứng dụng di động của chúng tôi.",
+        "HEADER_2": "Thông tin chúng tôi thu thập",
+        "SUBHEADER_2_1": "Thông tin người dùng",
+        "CONTENT_2_1_1": "Khi bạn đăng ký làm người dùng, chúng tôi có thể thu thập tên, địa chỉ email, tên người dùng và các thông tin liên quan khác.",
+        "CONTENT_2_1_2": "Chúng tôi có thể thu thập thông tin về thiết bị của bạn, bao gồm loại thiết bị, hệ điều hành và các mã định danh thiết bị duy nhất.",
+        "SUBHEADER_2_2": "Thông tin người bán",
+        "CONTENT_2_2_1": "Người bán đăng ký trên nền tảng có thể phải cung cấp thông tin người bán, bao gồm tên người bán, vị trí và chi tiết liên lạc.",
+        "CONTENT_2_2_2": "Một người bán có thể là doanh nghiệp hoặc cá nhân.",
+        "HEADER_3": "Cách chúng tôi sử dụng thông tin của bạn",
+        "SUBHEADER_3_1": "Cung cấp dịch vụ",
+        "CONTENT_3_1_1": "Chúng tôi sử dụng thông tin của bạn để cung cấp và nâng cao các dịch vụ của ứng dụng Map of Pi, bao gồm các chức năng của người dùng và người bán.",
+        "SUBHEADER_3_2": "Thông tin liên lạc",
+        "CONTENT_3_2_1": "Chúng tôi có thể sử dụng thông tin liên lạc của bạn để gửi cập nhật, thông báo và thông điệp khuyến mại liên quan đến ứng dụng Map of Pi.",
+        "SUBHEADER_3_3": "Phân tích",
+        "CONTENT_3_3_1": "Chúng tôi thu thập và phân tích dữ liệu để cải thiện hiệu suất, tính năng và chức năng của ứng dụng.",
+        "HEADER_4": "Chia sẻ thông tin của bạn",
+        "SUBHEADER_4_1": "Với người bán",
+        "CONTENT_4_1_1": "Thông tin người dùng có thể được chia sẻ với người bán để hoàn thành đơn hàng và mục đích giao tiếp.",
+        "SUBHEADER_4_2": "Với bên thứ ba",
+        "CONTENT_4_2_1": "Chúng tôi có thể chia sẻ thông tin với các nhà cung cấp dịch vụ bên thứ ba để hỗ trợ tính năng ứng dụng, phân tích và xử lý thanh toán.",
+        "HEADER_5": "Biện pháp bảo mật",
+        "CONTENT_5_1": "Chúng tôi áp dụng các biện pháp bảo mật tiêu chuẩn trong ngành để bảo vệ thông tin của bạn. Tuy nhiên, không có phương pháp truyền tải qua internet hay lưu trữ điện tử nào là hoàn toàn an toàn.",
+        "HEADER_6": "Lựa chọn của bạn",
+        "CONTENT_6_1": "Bạn có thể cập nhật thông tin tài khoản của mình qua cài đặt ứng dụng. Bạn có thể xóa tài khoản Map of Pi của mình bằng cách xóa tài khoản Pi Network và chọn tùy chọn xóa dữ liệu Map of Pi khi truy cập ứng dụng Map of Pi lần sau. Bạn có thể chọn không nhận thông tin khuyến mại.",
+        "HEADER_7": "Thay đổi Chính sách bảo mật này",
+        "CONTENT_7_1": "Chúng tôi có thể cập nhật Chính sách bảo mật này khi cần thiết. Phiên bản mới nhất sẽ được đăng tải trên trang web của chúng tôi hoặc trong ứng dụng.",
+        "HEADER_8": "Liên hệ với chúng tôi",
+        "CONTENT_8_1": "Nếu bạn có bất kỳ câu hỏi hoặc mối quan tâm nào về Chính sách bảo mật này, vui lòng liên hệ với chúng tôi qua email"
+      }
+    },
+    "TERMS_OF_SERVICE_INFO": {
+      "TITLE": "Điều Khoản Dịch Vụ",
+      "LAST_UPDATED": "Cập nhật lần cuối",
+      "EMAIL_ADDRESS": "Địa chỉ email",
+      "SECTIONS": {
+        "HEADER_1": "Chấp nhận Điều Khoản",
+        "CONTENT_1_1": "Chào mừng bạn đến với ứng dụng Map of Pi, được phát triển bởi đội ngũ Map of Pi cùng sự hợp tác với Cộng đồng Pi. Bằng cách sử dụng ứng dụng này, bạn đồng ý tuân thủ các Điều Khoản Dịch Vụ này, cũng như Chính Sách Bảo Mật của chúng tôi.",
+        "HEADER_2": "Sử dụng ứng dụng",
+        "CONTENT_2_1": "Bạn đồng ý sử dụng ứng dụng Map of Pi theo đúng các luật và quy định áp dụng.",
+        "CONTENT_2_2": "Bạn không được sử dụng ứng dụng cho mục đích bất hợp pháp hoặc bị cấm, hoặc theo cách thức có thể gây hư hại, vô hiệu hóa, làm quá tải, hoặc làm suy yếu ứng dụng.",
+        "CONTENT_2_3": "Để sử dụng Map of Pi, bạn phải đăng ký là người dùng tiên phong của Pi Network.",
+        "HEADER_3": "Sở hữu trí tuệ",
+        "CONTENT_3_1": "Ứng dụng Map of Pi và tất cả nội dung, tính năng, và chức năng đều thuộc sở hữu của Map of Pi và được bảo vệ bởi luật bản quyền, nhãn hiệu và các luật sở hữu trí tuệ khác.",
+        "HEADER_4": "Giới hạn Trách nhiệm",
+        "CONTENT_4_1": "Map of Pi không chịu trách nhiệm đối với bất kỳ thiệt hại trực tiếp, gián tiếp, ngẫu nhiên, đặc biệt hoặc hậu quả nào phát sinh từ hoặc liên quan đến việc sử dụng ứng dụng Map of Pi.",
+        "HEADER_5": "Bồi thường",
+        "CONTENT_5_1": "Bạn đồng ý bồi thường và bảo vệ Map of Pi và các công ty con, cán bộ, giám đốc, nhân viên và đại lý của công ty khỏi bất kỳ khiếu nại, trách nhiệm, thiệt hại, tổn thất hoặc chi phí (bao gồm cả phí luật sư) phát sinh từ hoặc liên quan đến việc sử dụng ứng dụng Map of Pi.",
+        "HEADER_6": "Luật áp dụng",
+        "CONTENT_6_1": "Điều Khoản Dịch Vụ này sẽ được điều chỉnh và giải thích theo luật của Anh và xứ Wales mà không xét đến các quy định xung đột của luật pháp, bao gồm bất kỳ tranh chấp hoặc yêu cầu phát sinh từ hoặc liên quan đến nội dung hoặc việc hình thành của chúng (bao gồm cả tranh chấp ngoài hợp đồng).",
+        "HEADER_7": "Thay đổi Điều Khoản này",
+        "CONTENT_7_1": "Chúng tôi có quyền cập nhật hoặc sửa đổi Điều Khoản Dịch Vụ này bất kỳ lúc nào mà không cần thông báo trước. Phiên bản mới nhất sẽ được đăng tải trên trang web của chúng tôi hoặc trong ứng dụng."
+      }
+    }
+  },
+  "SHARED": {
+    "PIONEER_LABEL": "Tiên phong",
+    "BUY": "Mua",
+    "NAVIGATE": "Dẫn đường",
+    "NO_COMMENT": "Chưa có bình luận",
+    "SEARCH_CENTER": "Đặt Trung tâm Tìm kiếm",
+    "CHECK_REVIEWS": "Kiểm tra Đánh giá",
+    "SEARCH_REVIEWS": "Tìm kiếm Đánh giá",
+    "SEARCH_LOADING": "Đang tải tìm kiếm...",
+    "REPLY": "Trả lời",
+    "SAVE": "Lưu",
+    "CONFIRM_DIALOG": "Bạn có thay đổi chưa lưu. Bạn thực sự muốn rời đi?",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Tên người dùng Pi",
+      "NAME_LABEL": "Tên",
+      "PHONE_NUMBER_LABEL": "Số điện thoại",
+      "EMAIL_LABEL": "Email"
+    },
+    "PHOTO": {
+      "UPLOAD_PHOTO_LABEL": "Tải ảnh lên",
+      "UPLOAD_PHOTO_PLACEHOLDER": "Tải ảnh lên để thu hút người mua (PNG, JPG, JPEG, WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Tải ảnh lên để hỗ trợ đánh giá của bạn (PNG, JPG, JPEG, WEBP)",
+      "IMAGE_DROP_UPLOAD_MESSAGE": "Kéo thả ảnh của bạn vào đây hoặc duyệt",
+      "SUPPORTS_FILE_MESSAGE": "Hỗ trợ: PNG, JPG, JPEG, WEBP",
+      "MISC_LABELS": {
+        "USER_PREFERENCES_LABEL": "Ảnh hồ sơ",
+        "SELLER_IMAGE_LABEL": "Ảnh người bán",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Ảnh đánh giá"
+      }
+    },
+    "REACTION_RATING": {
+      "UNSAFE": "Không an toàn",
+      "TRUSTWORTHY": "Đáng tin cậy",
+      "EMOTIONS": {
+        "DESPAIR": "Tuyệt vọng",
+        "SAD": "Buồn",
+        "OKAY": "Tạm ổn",
+        "HAPPY": "Vui vẻ",
+        "DELIGHT": "Hạnh phúc"
+      },
+      "VALIDATION": {
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Đánh giá đã được gửi thành công",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Đánh giá không thể gửi",
+        "SELECT_EMOJI_EXPRESSION": "Vui lòng chọn biểu tượng cảm xúc"
+      }
+    },
+    "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Tìm kiếm địa điểm, thành phố hoặc địa chỉ",
+      "VALIDATION": {
+        "MAP_CENTER_SUCCESS_MESSAGE": "Vị trí của bạn đã được lưu thành công"
+      }
+    },
+    "LOADING_SCREEN_MESSAGE": "Đang tải ...",
+    "SAVING_SCREEN_MESSAGE": "Đang lưu ...",
+    "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Gửi thất bại vì người dùng chưa xác thực",
+      "UNEXPECTED_ERROR_MESSAGE": "Đã xảy ra lỗi không mong muốn"
+    }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Không tìm thấy trang",
+    "PAGE_NOT_FOUND_MESSAGE": "Xin lỗi, trang bạn đang tìm không tồn tại."
+  }
+}
