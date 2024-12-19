@@ -87,7 +87,7 @@ export const FileInput = (props: any) => {
             style={{ objectFit: 'contain', maxHeight: '200px', maxWidth: '100%' }}
           />
         </div>
-        {!isImageUploaded && (
+        {!props.hideCaption && !isImageUploaded && (
           <div className="text-center text-[#828282]">
             <div>
               {t('SHARED.PHOTO.IMAGE_DROP_UPLOAD_MESSAGE')}

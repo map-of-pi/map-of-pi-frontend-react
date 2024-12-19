@@ -80,14 +80,28 @@ export type PartialReview = {
 
 export interface IReviewOutput extends IReviewFeedback, PartialReview {}
 
+export enum StockLevelType {
+  available_1 = '1 available', 
+  available_2 = '2 available', 
+  available_3 = '3 available',
+  many = 'Many available', 
+  made_to_order = 'Made to order', 
+  ongoing_service = 'Ongoing service', 
+  sold = 'Sold'
+}
+
 export type SellerItem = {
-  name: string,
-  item_id: string,
-  price: number,
-  quantity: number,
-  description: string
-  photo: string,
-  last_sold: string,
-  status: string,
-  stock_level: string
+  seller_id: string;
+  _id: string;
+  name: string;
+  description?: string;
+  price: number;
+  stock_level: StockLevelType;
+  image?: string;
+  duration: {
+    $numberDecimal: number;
+  };
+  created_at?: Date;
+  updated_at?: Date;
+  expired_by?: Date;
 }
