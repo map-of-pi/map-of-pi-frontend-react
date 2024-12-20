@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
@@ -18,13 +18,14 @@ import ConfirmDialog from '@/components/shared/confirm';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
-import { IUserSettings, ISeller } from '@/constants/types';
+import { IUserSettings, ISeller, SellerItem, StockLevelType } from '@/constants/types';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
+import OnlineShopping from '@/components/ShopItem';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -34,7 +35,7 @@ const SellerRegistrationForm = () => {
   const t = useTranslations();
   const placeholderSeller = itemData.seller;
 
-  const { currentUser, autoLoginUser, showAlert } = useContext(AppContext);
+  const { currentUser, autoLoginUser, showAlert, reload, setReload } = useContext(AppContext);
 
   type IFormData = {
     sellerName: string;
@@ -71,7 +72,7 @@ const SellerRegistrationForm = () => {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-
+  
   // Fetch seller data and user settings on component mount
   useEffect(() => {
     checkAndAutoLoginUser(currentUser, autoLoginUser);
@@ -552,6 +553,16 @@ const SellerRegistrationForm = () => {
               />
             </div>
           </ToggleCollapse>
+          
+          {/* Online Shopping */}
+          <ToggleCollapse
+            header={t(
+              'Online Shopping',
+            )}
+            open={false}>
+            {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
+          </ToggleCollapse>
+          
         </div>
         <ConfirmDialog
           show={showConfirmDialog}
