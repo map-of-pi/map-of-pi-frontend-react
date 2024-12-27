@@ -84,8 +84,8 @@ export default function OnlineShopping({ dbSeller }: {dbSeller: ISeller}){
         seller_id: dbSeller.seller_id as string,
         name: "",
         _id: "",
-        price: 0.01,
-        duration: {$numberDecimal: 1},
+        duration: 1,
+        price: {$numberDecimal: 0.01},
         description: "",
         image: "",
         stock_level: StockLevelType.available_1,
@@ -236,15 +236,15 @@ export const ShopItem: React.FC<{
     };
     
     const handleIncrement = () => {
-        const updatedQuantity = parseInt(formData.duration.$numberDecimal.toString()) + 1;
-        setFormData({ ...formData, duration: { $numberDecimal: updatedQuantity }});
+        const updatedQuantity = parseInt(formData.duration.toString()) + 1;
+        setFormData({ ...formData, duration: updatedQuantity });
         setIsAddItemEnabled(true); // Enable save button
     };
     
     const handleDecrement = () => {
-        if ((formData.duration.$numberDecimal || 0) > 1) {
-          const updatedQuantity = parseInt(formData.duration.$numberDecimal.toString()) - 1;
-          setFormData({ ...formData, duration: {$numberDecimal:updatedQuantity }});
+        if ((formData.duration || 0) > 1) {
+          const updatedQuantity = parseInt(formData.duration.toString()) - 1;
+          setFormData({ ...formData, duration: updatedQuantity });
           setIsAddItemEnabled(true); // Enable save button
         }
     };
@@ -254,10 +254,10 @@ export const ShopItem: React.FC<{
         formDataToSend.append('name', removeUrls(formData.name));
         formDataToSend.append('_id', formData._id || '');
         formDataToSend.append('description', removeUrls(formData.description || ''));
-        formDataToSend.append('price', formData.price?.toString() ?? 0.01);
+        formDataToSend.append('duration', formData.duration?.toString() ?? 1);
         formDataToSend.append('seller_id', '');
         formDataToSend.append('stock_level', formData.stock_level || '1 available');
-        formDataToSend.append('duration', formData.duration.$numberDecimal?.toString() ?? 1);
+        formDataToSend.append('price', formData.price.$numberDecimal?.toString() ?? 0.01);
         // hardcode the value until the form element is built
     
         if (file) {
@@ -328,7 +328,7 @@ export const ShopItem: React.FC<{
                             label={t('Price:')}
                             name="price"
                             type="number"
-                            value={formData.price}
+                            value={formData.price.$numberDecimal}
                             onChange={handleChange}
                             disabled={!isActive} // Disable if not active
                             />
@@ -373,7 +373,7 @@ export const ShopItem: React.FC<{
                     <div className="flex gap-1 items-center">
                     <Button
                         label="-"
-                        disabled={!isActive || formData.duration.$numberDecimal <= 1} // Disable if not active or quantity is zero
+                        disabled={!isActive || formData.duration <= 1} // Disable if not active or quantity is zero
                         styles={{
                         color: "#ffc153",
                         padding: "10px 15px",
@@ -384,7 +384,7 @@ export const ShopItem: React.FC<{
                     <Input
                         name="duration"
                         type="number"
-                        value={formData.duration.$numberDecimal}
+                        value={formData.duration}
                         onChange={handleChange}
                         disabled={!isActive} // Disable if not active
                     />

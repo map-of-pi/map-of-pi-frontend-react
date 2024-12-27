@@ -95,10 +95,10 @@ export type SellerItem = {
   _id: string;
   name: string;
   description?: string;
-  price: number;
+  duration: number;
   stock_level: StockLevelType;
   image?: string;
-  duration: {
+  price: {
     $numberDecimal: number;
   };
   created_at?: Date;
