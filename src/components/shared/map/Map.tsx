@@ -154,8 +154,8 @@ const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
   const mapSize = map.getSize();
 
   const centerOffset = L.point(
-    mapSize.x / 2 - markerPoint.x - 40,   // Shift horizontal offset slightly (-40 moves right)
-    mapSize.y / 2 - markerPoint.y - 229   // Vertical offset unchanged
+    mapSize.x / 2 - markerPoint.x + 12, // Shift map right (+100 moves popup left)
+    mapSize.y / 2 - markerPoint.y - 219   // Vertical offset unchanged
   );
 
   // Pan the map instantly to center the popup without animation

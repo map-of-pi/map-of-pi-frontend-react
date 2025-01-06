@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -10,22 +10,34 @@ import logger from '../../../../logger.config.mjs';
 
 const MapMarkerPopup = ({ seller }: { seller: any }) => {
   const t = useTranslations();
+  const locale = useLocale();
   const nameRef = useRef<HTMLHeadingElement>(null);
   const [imageHeight, setImageHeight] = useState(100); // Default height
 
-  // Dynamically adjust the image height based on name height
+  const [imageSize, setImageSize] = useState(110);  // Default image size
+  const [placeholderSize, setPlaceholderSize] = useState(60);  // Default placeholder size
+  
   useEffect(() => {
     if (nameRef.current) {
       const nameHeight = nameRef.current.offsetHeight;
-      // Reduce image height slightly if name wraps (i.e., height > 22px)
-      setImageHeight(nameHeight > 22 ? 75 : 100);
+  
+      // Reduce image size when name wraps
+      if (nameHeight > 22) {
+        setImageSize(70);  // Shrink actual image
+        setPlaceholderSize(50);  // Shrink placeholder image
+      } else {
+        setImageSize(105);
+        setPlaceholderSize(60);
+      }
     }
   }, [seller.name]);
+  
+  
 
   const imageUrl =
-    seller.image && seller.image.trim() !== ''
-      ? seller.image
-      : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/shared/upload.png';
+  seller.image && seller.image.trim() !== ''
+    ? seller.image
+    : process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/logo.svg'; // Placeholder fallback
 
   const translateSellerCategory = (category: string): string => {
     switch (category) {
@@ -46,18 +58,22 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
     <div style={{ position: 'relative', zIndex: 20, padding: '10px' }}>
       {/* Seller name and type */}
       <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-        <h2
-          ref={nameRef}
-          style={{
-            fontWeight: 'bold',
-            fontSize: '18px',
-            marginBottom: '2px',
-            lineHeight: '1.2',
-            overflowWrap: 'break-word', // Ensures long words break properly
-          }}
-        >
-          {seller.name}
-        </h2>
+      <h2
+  ref={nameRef}
+  style={{
+    fontWeight: 'bold',
+    fontSize: '16px', // Slightly smaller font size
+    marginBottom: '2px',
+    lineHeight: '1.2',
+    overflow: 'hidden', // Ensure content doesn't overflow
+    textOverflow: 'ellipsis', // Adds ellipsis for overflow
+    display: '-webkit-box', // Required for line-clamp to work
+    WebkitLineClamp: 2, // Limit to 2 lines
+    WebkitBoxOrient: 'vertical', // Required for line-clamp
+  }}
+>
+  {seller.name}
+</h2>
         {seller.seller_type && (
           <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '0px', marginBottom: '4px' }}>
             {translateSellerCategory(seller.seller_type)}
@@ -65,22 +81,23 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
         )}
       </div>
 
-      {/* Seller image */}
-      <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-        <Image
-          src={imageUrl}
-          alt="Seller Image"
-          width={155}
-          height={135} // Base dimensions
-          style={{
-            objectFit: 'cover',
-            display: 'block',
-            margin: '0 auto',
-            maxHeight: `${imageHeight}px`, // Dynamic height based on name length
-            width: 'auto',
-          }}
-        />
-      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+  <Image
+    src={imageUrl}
+    alt="Seller Image"
+    width={
+      imageUrl === (process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/logo.svg')
+        ? 60  // Reduced from 75 to 70
+        : 105 // Reduced from 120 to 110
+    }
+    height={
+      imageUrl === (process.env.NEXT_PUBLIC_IMAGE_PLACEHOLDER_URL || '/images/logo.svg')
+        ? 60  // Reduced from 75 to 70
+        : imageHeight * 0.9  // Slightly reduce by 10%
+    }
+  />
+</div>
+
 
       {/* Trust-o-meter Label */}
       <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '14px', marginBottom: '2px' }}>
@@ -101,20 +118,24 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
         <TrustMeter ratings={seller.trust_meter_rating} />
       </div>
 
+
       {/* Link to Buy button */}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5px' }}>
-        <Link href={`/seller/sale-items/${seller.seller_id}`} style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-          <Button
-            label={t('SHARED.BUY')}
-            styles={{
-              color: '#ffc153',
-              paddingTop: '6px',
-              paddingBottom: '6px',
-              width: '35%',
-              textAlign: 'center',
-            }}
-          />
-        </Link>
+      <Link
+  href={`/${locale}/seller/sale-items/${seller.seller_id}`} // Include locale dynamically
+  style={{ display: 'flex', justifyContent: 'center', width: '100%' }}
+>
+  <Button
+    label={t('SHARED.BUY')}
+    styles={{
+      color: '#ffc153',
+      paddingTop: '6px',
+      paddingBottom: '6px',
+      width: '35%',
+      textAlign: 'center',
+    }}
+  />
+</Link>
       </div>
     </div>
   );
