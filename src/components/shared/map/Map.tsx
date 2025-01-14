@@ -143,7 +143,7 @@ const Map = ({
     map.setView(sellerCoordinates, currentZoom, { animate: true });
     // Get the position of the clicked marker
     const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
-    // Get the width and height of the map container
+     // Get the width and height of the map container
     const mapSize = map.getSize();
     const mapWidth = mapSize.x;
     const mapHeight = mapSize.y;
@@ -347,7 +347,7 @@ const Map = ({
             />
           </div>
         </div>
-      ) : (
+        ) : (
         <MapContainer
           center={center ? center : [0,0]}
           zoom={center ? zoom : 2}
@@ -385,7 +385,7 @@ const Map = ({
               >
                 <MapMarkerPopup seller={seller} />
               </Popup>
-          </Marker>
+            </Marker>
           ))}
         </MapContainer>
       )}

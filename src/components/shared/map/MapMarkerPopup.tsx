@@ -91,3 +91,4 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
 };
 
 export default MapMarkerPopup;
+
