@@ -1,7 +1,6 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
 
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { Button } from '../Forms/Buttons/Buttons';
@@ -11,17 +10,6 @@ import logger from '../../../../logger.config.mjs';
 const MapMarkerPopup = ({ seller }: { seller: any }) => {
   const t = useTranslations();
   const locale = useLocale();
-  const nameRef = useRef<HTMLHeadingElement>(null);
-  const [imageHeight, setImageHeight] = useState(100); // Default height
-
-  // Dynamically adjust the image height based on name height
-  useEffect(() => {
-    if (nameRef.current) {
-      const nameHeight = nameRef.current.offsetHeight;
-      // Reduce image height slightly if name wraps (i.e., height > 22px)
-      setImageHeight(nameHeight > 22 ? 75 : 100);
-    }
-  }, [seller.name]);
 
   const imageUrl =
     seller.image && seller.image.trim() !== ''
@@ -45,18 +33,9 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
 
   return (
     <div style={{ position: 'relative', zIndex: 20, padding: '10px' }}>
-      {/* Seller name and type */}
+      {/* Seller name and type - Close with a small gap */}
       <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-        <h2
-          ref={nameRef}
-          style={{
-            fontWeight: 'bold',
-            fontSize: '18px',
-            marginBottom: '2px',
-            lineHeight: '1.2',
-            overflowWrap: 'break-word', // Ensures long words break properly
-          }}
-        >
+        <h2 style={{ fontWeight: 'bold', fontSize: '18px', marginBottom: '2px' }}>
           {seller.name}
         </h2>
         {seller.seller_type && (
@@ -66,46 +45,33 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
         )}
       </div>
 
-      {/* Seller image */}
+      {/* Seller image - Close to seller type */}
       <div style={{ textAlign: 'center', marginBottom: '5px' }}>
         <Image
           src={imageUrl}
           alt="Seller Image"
-          width={155}
-          height={135} // Base dimensions
-          style={{
-            objectFit: 'cover',
-            display: 'block',
-            margin: '0 auto',
-            maxHeight: `${imageHeight}px`, // Dynamic height based on name length
-            width: 'auto',
-          }}
+          width={150}
+          height={50}
+          style={{ borderRadius: '0px', objectFit: 'cover', display: 'block', margin: '0 auto' }}
         />
       </div>
 
-      {/* Trust-o-meter Label */}
+      {/* Trust-o-meter Label - Close to image */}
       <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '14px', marginBottom: '2px' }}>
         Trust-o-meter
       </p>
 
-      {/* Trust-o-meter */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '150px',
-          margin: '0 auto',
-          marginBottom: '8px',
-        }}
-      >
-        <TrustMeter ratings={seller.trust_meter_rating} />
+      {/* Trust-o-meter - Close to the Trust-o-meter label */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '8px' }}>
+        <TrustMeter
+          ratings={seller.trust_meter_rating}
+        />
       </div>
 
       {/* Link to Buy button */}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5px' }}>
         <Link
-          href={`/${locale}/seller/sale-items/${seller.seller_id}`}
+          href={`/${locale}/seller/sale-items/${seller.seller_id}`} // Update to your target link
           style={{ display: 'flex', justifyContent: 'center', width: '100%' }}
         >
           <Button
