@@ -2,17 +2,14 @@
 
 import { useState, SetStateAction, useContext, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { TextArea, Input } from "./shared/Forms/Inputs/Inputs";
+import { TextArea, Input, Select } from "./shared/Forms/Inputs/Inputs";
 import { Button } from "./shared/Forms/Buttons/Buttons";
 import { Notification } from "./shared/confirm";
 import { FileInput } from "./shared/Forms/Inputs/Inputs";
 import { ISeller, SellerItem, StockLevelType } from "@/constants/types";
 import { AppContext } from "../../context/AppContextProvider";
-import { addOrUpdateSellerItem, deleteSellerItem } from "@/services/sellerApi";
+import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/services/sellerApi";
 import removeUrls from "@/utils/sanitize";
-import { Select } from "./shared/Forms/Inputs/Inputs";
-import { SellerItems } from '@/constants/demoAPI';
-import { fetchSellerItems } from '@/services/sellerApi';
 
 export default function OnlineShopping({ dbSeller }: {dbSeller: ISeller}){
     const t = useTranslations();
