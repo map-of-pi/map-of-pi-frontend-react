@@ -555,9 +555,7 @@ const SellerRegistrationForm = () => {
           
           {/* Online Shopping */}
           <ToggleCollapse
-            header={t(
-              'Online Shopping',
-            )}
+            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_LABEL')}
             open={false}>
             {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
           </ToggleCollapse>
