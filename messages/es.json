@@ -61,6 +61,16 @@
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
       "SELLER_ONLINE_SHOPPING_LABEL": "Compras en línea",
+      "MAPPI_ALLOWANCE_LABEL": "Asignación de Mappi restante",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Método de cumplimiento",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Recogida por el comprador",
+          "DELIVERED_TO_BUYER": "Entregado al comprador"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Instrucciones de cumplimiento para el comprador",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "La recogida es desde la dirección del vendedor. Si se selecciona la entrega, por favor ingrese la dirección del comprador.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Por favor, ingresa una dirección de correo electrónico válida",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro exitoso",
@@ -193,6 +203,7 @@
     "SEARCH_REVIEWS": "Buscar reseñas",
     "SEARCH_LOADING": "Cargando búsqueda...",
     "REPLY": "Responder",
+    "ADD_ITEM": "Agregar artículo",
     "SAVE": "Guardar",
     "CONFIRM": "Confirmar",
     "CONFIRM_DIALOG": "Tienes cambios sin guardar. Realmente quieres salir?",

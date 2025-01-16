@@ -61,6 +61,16 @@
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
       "SELLER_ONLINE_SHOPPING_LABEL": "Online Shopping",
+      "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Fulfilment method",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Collection by buyer",
+          "DELIVERED_TO_BUYER": "Delivered to buyer"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Fulfilment instructions to buyer",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Please enter a valid email address",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",
@@ -206,6 +216,7 @@
     "SEARCH_REVIEWS": "Search Reviews",
     "SEARCH_LOADING": "Search loading...",
     "REPLY": "Reply",
+    "ADD_ITEM": "Add Item",
     "SAVE": "Save",
     "CONFIRM": "Confirm",
     "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",

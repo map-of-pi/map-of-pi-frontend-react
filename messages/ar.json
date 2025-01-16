@@ -61,6 +61,16 @@
       "SELLER_SETTINGS_LABEL": "إعدادات البائع",
       "SELLER_SELL_CENTER": "تحديد مركز البيع",
       "SELLER_ONLINE_SHOPPING_LABEL": "التسوق عبر الإنترنت",
+      "MAPPI_ALLOWANCE_LABEL": "المخصص المتبقي في Mappi",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "طريقة الإتمام",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "جمع من قبل المشتري",
+          "DELIVERED_TO_BUYER": "تسليم إلى المشتري"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "تعليمات التنفيذ للمشتري",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "التجميع يكون من عنوان البائع. إذا تم اختيار التوصيل، يرجى إدخال عنوان المشتري.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "يرجى إدخال عنوان بريد إلكتروني صالح",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "تم التسجيل بنجاح",
@@ -194,6 +204,7 @@
     "SEARCH_REVIEWS": "البحث في التقييمات",
     "SEARCH_LOADING": "جارٍ تحميل البحث...",
     "REPLY": "رد",
+    "ADD_ITEM": "إضافة عنصر",
     "SAVE": "حفظ",
     "CONFIRM": "تأكيد",
     "CONFIRM_DIALOG": "لديك تغييرات غير محفوظة. هل تريد مغادرة الصفحة حقًا؟",

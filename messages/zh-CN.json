@@ -61,6 +61,16 @@
       "SELLER_SETTINGS_LABEL": "卖家设置",
       "SELLER_SELL_CENTER": "设定销售中心",
       "SELLER_ONLINE_SHOPPING_LABEL": "在线购物",
+      "MAPPI_ALLOWANCE_LABEL": "剩余的 Mappi 额度",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "履行方式",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "买家自取",
+          "DELIVERED_TO_BUYER": "送货到买家"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "给买家的履行说明",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "取货地址为卖家的地址。如果选择配送，请输入买家的地址。",
       "VALIDATION": {
         "EMAIL_VALIDATION": "请输入有效的电子邮件地址",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "注册成功",
@@ -194,6 +204,7 @@
     "SEARCH_REVIEWS": "搜索评论",
     "SEARCH_LOADING": "搜索加载中...",
     "REPLY": "回复",
+    "ADD_ITEM": "添加项目",
     "SAVE": "保存",
     "CONFIRM": "确认",
     "CONFIRM_DIALOG": "您有未保存的更改。确定要离开吗？",

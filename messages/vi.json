@@ -61,6 +61,16 @@
       "SELLER_SETTINGS_LABEL": "Cài đặt người bán",
       "SELLER_SELL_CENTER": "Đặt Trung tâm bán hàng",
       "SELLER_ONLINE_SHOPPING_LABEL": "Mua sắm trực tuyến",
+      "MAPPI_ALLOWANCE_LABEL": "Trợ cấp Mappi còn lại",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Phương thức hoàn thành",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Người mua tự nhận hàng",
+          "DELIVERED_TO_BUYER": "Giao hàng cho người mua"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Hướng dẫn hoàn thành cho người mua",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Lấy hàng tại địa chỉ của người bán. Nếu chọn giao hàng, vui lòng nhập địa chỉ của người mua.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Vui lòng nhập địa chỉ email hợp lệ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Đăng ký thành công",
@@ -194,6 +204,7 @@
     "SEARCH_REVIEWS": "Tìm kiếm Đánh giá",
     "SEARCH_LOADING": "Đang tải tìm kiếm...",
     "REPLY": "Trả lời",
+    "ADD_ITEM": "Thêm mục",
     "SAVE": "Lưu",
     "CONFIRM": "Xác nhận",
     "CONFIRM_DIALOG": "Bạn có thay đổi chưa lưu. Bạn thực sự muốn rời đi?",

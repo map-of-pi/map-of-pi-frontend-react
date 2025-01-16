@@ -61,6 +61,16 @@
       "SELLER_SETTINGS_LABEL": "Paramètres vendeur",
       "SELLER_SELL_CENTER": "Définir le centre de vente",
       "SELLER_ONLINE_SHOPPING_LABEL": "Achats en ligne",
+      "MAPPI_ALLOWANCE_LABEL": "Allocation Mappi restante",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Méthode de réalisation",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Collecte par l'acheteur",
+          "DELIVERED_TO_BUYER": "Livré à l'acheteur"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Instructions de réalisation pour l'acheteur",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Le retrait se fait à l'adresse du vendeur. Si la livraison est choisie, veuillez entrer l'adresse de l'acheteur.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Veuillez entrer une adresse e-mail valide",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Enregistrement réussi",
@@ -194,6 +204,7 @@
     "SEARCH_REVIEWS": "Rechercher des avis",
     "SEARCH_LOADING": "Chargement de la recherche...",
     "REPLY": "Répondre",
+    "ADD_ITEM": "Ajouter un article",
     "SAVE": "Enregistrer",
     "CONFIRM": "Confirmer",
     "CONFIRM_DIALOG": "Vos modifications ne sont pas enregistrées. Voulez-vous vraiment quitter?",

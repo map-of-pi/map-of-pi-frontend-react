@@ -61,6 +61,16 @@
       "SELLER_SETTINGS_LABEL": "Seller Settings, Nǔ e nɔ xlɛ́ fí e un ɖò nǔ sà ɖè é wɛ",
       "SELLER_SELL_CENTER": "Nǔsatɔ́ sín tito",
       "SELLER_ONLINE_SHOPPING_LABEL": "Sɛnawe hwehwɛ ta",
+      "MAPPI_ALLOWANCE_LABEL": "Dada Mappi tɔ̌n gbè",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Hèzɔ wuwɛ",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Gan mì xɔ",
+          "DELIVERED_TO_BUYER": "Gan mì sò"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Aɖoɖo si ɖò ná tòxɔmɛ",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Àxɔmɛ nɔ tɔxɔ si tòxɔmɛ le. Mà tɔkpò tòxɔ mɛ, mède yè tòxɔmɛ lɛ tò hènɔ.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Mi kɛnklɛn bo wlan adlɛsi mɛyiyi tɔn ɖe sɔgbe ɔ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Wlanwlan ɖuɖeji",
@@ -194,6 +204,7 @@
     "SEARCH_REVIEWS": "Biba Xóɖɔɖókpɔ́ lɛ",
     "SEARCH_LOADING": "Biba ɖo yiyi wɛ...",
     "REPLY": "Xósin",
+    "ADD_ITEM": "Tán nūn",
     "SAVE": "Hɛn",
     "CONFIRM": "Ganmɛ",
     "CONFIRM_DIALOG": "A ɖo ɖyɔɖyɔ e ma ko hɛn ɖ'ayi ǎ lɛ. A jlo na gosin nugbo a?",

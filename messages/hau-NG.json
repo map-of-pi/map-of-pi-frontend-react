@@ -61,6 +61,16 @@
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
       "SELLER_ONLINE_SHOPPING_LABEL": "Siyayya ta yanar gizo",
+      "MAPPI_ALLOWANCE_LABEL": "Ragowar adadin Mappi",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Hanyar Cika Umarni",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Karɓa ta hanyar mai saya",
+          "DELIVERED_TO_BUYER": "An kawo wa mai saya"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Umarni na cika wa ga mai siya",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Tattara yana daga adireshin mai sayarwa. Idan an zaɓi isarwa, da fatan a shigar da adireshin mai siya.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Don Allah shigar da ingantaccen adireshin imel",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rajista ta yi nasara",
@@ -194,6 +204,7 @@
     "SEARCH_REVIEWS": "Binciken sharhi",
     "SEARCH_LOADING": "Ana ɗora bincike...",
     "REPLY": "Amsa",
+    "ADD_ITEM": "Ƙara abu",
     "SAVE": "Ajiye",
     "CONFIRM": "Tabbatar",
     "CONFIRM_DIALOG": "Kuna da canje-canje marasa ajiya. Da gaske kuna son barin?",

@@ -89,13 +89,13 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
     {
       value: 'pickup',
       name: t(
-        'Collection by Buyer',
+        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
       ),
     },
     {
       value: 'delivery',
       name: t(
-        'Delivered to Buyer',
+        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
       ),
     },
   ];
@@ -104,10 +104,10 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
     <>        
       <div className="mb-4">
         <h2 className='text-gray-500 text-lg'>
-          {t('Mappi allowance remaining ')}: 999
+          {t('SCREEN.SELLER_REGISTRATION.MAPPI_ALLOWANCE_LABEL')}: 999
         </h2>
         <Button
-          label='Add Item'
+          label={t('SHARED.ADD_ITEM')}
           disabled={isAddItemEnabled}
           onClick={()=>setIsNewItem(true)}
           styles={{
@@ -141,22 +141,39 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
         }
       </div>
       <div>
-        <h2 className={SUBHEADER}>
-          {t('Fulfilment Method')}
-        </h2>
         <Select
+          label={t(
+            'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL',
+          )}
           name="fulfillment_method"
           options={translatedFulfillmentMethod}
         />
         <h2 className={SUBHEADER}>
-          {t('Fulfilment Instructions to Buyer')}
+          {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}
         </h2>
+        {/* <Select
+          name="fulfillment_method"
+          options={translatedFulfillmentMethod}
+        />
+        <h2 className={SUBHEADER}>
+          {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL')}
+        </h2> */}
         <TextArea
+          label={t(
+            'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
+          )}
+          placeholder={t(
+            'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
+          )}
           name="delivery_address"
           type="text"
-          placeholder='Collection is from seller address. If delivery, then enter the buyer address'
-          styles={{ height: '80px' }}
         />
+        {/* <TextArea
+          name="delivery_address"
+          type="text"
+          placeholder={t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER')}
+          styles={{ height: '80px' }}
+        /> */}
       </div>
     </>
   );
