@@ -4,9 +4,8 @@ import React, { SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
 
-const t = useTranslations();
-
 const ConfirmDialog = ({ show, onClose, message, url }:any) => {
+  const t = useTranslations();
   const router = useRouter();
     
   const handleClicked = () => {
@@ -42,6 +41,8 @@ const ConfirmDialog = ({ show, onClose, message, url }:any) => {
 };
 
 export const ConfirmDialogX = ({ toggle, handleClicked, message }:any) => {
+  const t = useTranslations();
+  
   return createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg p-6 w-full max-w-md mx-6 sm:mx-auto relative">
