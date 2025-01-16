@@ -194,6 +194,7 @@
     "SEARCH_LOADING": "Search loading...",
     "REPLY": "Reply",
     "SAVE": "Save",
+    "CONFIRM": "Confirm",
     "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Pi username",

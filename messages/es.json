@@ -193,7 +193,8 @@
     "SEARCH_LOADING": "Cargando búsqueda...",
     "REPLY": "Responder",
     "SAVE": "Guardar",
-    "CONFIRM_DIALOG": "Tienes cambios sin guardar. ¿Realmente quieres salir?",
+    "CONFIRM": "Confirmar",
+    "CONFIRM_DIALOG": "Tienes cambios sin guardar. Realmente quieres salir?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Nombre de usuario Pi",
       "NAME_LABEL": "Nombre",

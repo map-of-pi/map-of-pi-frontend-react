@@ -241,7 +241,7 @@ const Map = ({
 
       logger.info('Fetched additional sellers:', { additionalSellers });
 
-      setSellers(additionalSellers); // Cap the total sellers to 36
+      setSellers(additionalSellers); // Cap the total sellers to 50
 
       logger.info('Sellers after capping at 36:', {
         additionalSellers: additionalSellers,

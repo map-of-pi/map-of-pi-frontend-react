@@ -67,19 +67,6 @@ export enum DeviceLocationType {
   SearchCenter = 'searchCenter'
 }
 
-// Select specific fields from IUserSettings
-export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'email' | 'phone_number' | 'findme' | 'trust_meter_rating'>;
-
-// Combined interface representing a seller with selected user settings
-export interface ISellerWithSettings extends ISeller, PartialUserSettings {}
-
-export type PartialReview = {
-  giver: string;
-  receiver: string;
-}
-
-export interface IReviewOutput extends IReviewFeedback, PartialReview {}
-
 export enum StockLevelType {
   available_1 = '1 available', 
   available_2 = '2 available', 
@@ -90,9 +77,15 @@ export enum StockLevelType {
   sold = 'Sold'
 }
 
+// Select specific fields from IUserSettings
+export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'email' | 'phone_number' | 'findme' | 'trust_meter_rating'>;
+
+// Combined interface representing a seller with selected user settings
+export interface ISellerWithSettings extends ISeller, PartialUserSettings {}
+
 export type SellerItem = {
-  seller_id: string;
   _id: string;
+  seller_id: string;
   name: string;
   description?: string;
   duration: number;
@@ -105,3 +98,10 @@ export type SellerItem = {
   updated_at?: Date;
   expired_by?: Date;
 }
+
+export type PartialReview = {
+  giver: string;
+  receiver: string;
+}
+
+export interface IReviewOutput extends IReviewFeedback, PartialReview {}

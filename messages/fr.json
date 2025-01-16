@@ -194,6 +194,7 @@
     "SEARCH_LOADING": "Chargement de la recherche...",
     "REPLY": "Répondre",
     "SAVE": "Enregistrer",
+    "CONFIRM": "Confirmer",
     "CONFIRM_DIALOG": "Vos modifications ne sont pas enregistrées. Voulez-vous vraiment quitter?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Nom d'utilisateur Pi",

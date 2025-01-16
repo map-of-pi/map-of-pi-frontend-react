@@ -194,6 +194,7 @@
     "SEARCH_LOADING": "جارٍ تحميل البحث...",
     "REPLY": "رد",
     "SAVE": "حفظ",
+    "CONFIRM": "تأكيد",
     "CONFIRM_DIALOG": "لديك تغييرات غير محفوظة. هل تريد مغادرة الصفحة حقًا؟",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "اسم مستخدم Pi",

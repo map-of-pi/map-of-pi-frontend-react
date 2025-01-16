@@ -193,6 +193,7 @@
     "SEARCH_LOADING": "검색 로딩 중...",
     "REPLY": "답장",
     "SAVE": "저장",
+    "CONFIRM": "확인",
     "CONFIRM_DIALOG": "저장되지 않은 변경 사항이 있습니다. 정말 나가시겠습니까?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Pi 사용자 이름",

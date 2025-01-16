@@ -87,7 +87,6 @@ export const SellerItems:SellerItem[] = [
     description: "A nice refreshing coffee",
     image: "/images/business/product.png",
     stock_level: StockLevelType.available_2,
-
     created_at: new Date(),
     updated_at: new Date(),
     expired_by: new Date()
@@ -101,10 +100,8 @@ export const SellerItems:SellerItem[] = [
     description: "All kind of mobile phones",
     image: "/images/business/product.png",
     stock_level: StockLevelType.available_3,
-
     created_at: new Date(),
     updated_at: new Date(),
     expired_by: new Date()
   }, 
 ];
-

@@ -194,6 +194,7 @@
     "SEARCH_LOADING": "搜索加载中...",
     "REPLY": "回复",
     "SAVE": "保存",
+    "CONFIRM": "確認",
     "CONFIRM_DIALOG": "您有未保存的更改。确定要离开吗？",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Pi 用户名",

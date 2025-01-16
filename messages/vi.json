@@ -194,6 +194,7 @@
     "SEARCH_LOADING": "Đang tải tìm kiếm...",
     "REPLY": "Trả lời",
     "SAVE": "Lưu",
+    "CONFIRM": "Xác nhận",
     "CONFIRM_DIALOG": "Bạn có thay đổi chưa lưu. Bạn thực sự muốn rời đi?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Tên người dùng Pi",
