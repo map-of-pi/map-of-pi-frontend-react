@@ -60,6 +60,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mi marcador en el mapa muestra dónde estoy vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Compras en línea",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Por favor, ingresa una dirección de correo electrónico válida",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro exitoso",

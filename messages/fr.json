@@ -60,6 +60,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mon marqueur mon lieu de vente",
       "SELLER_SETTINGS_LABEL": "Paramètres vendeur",
       "SELLER_SELL_CENTER": "Définir le centre de vente",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Achats en ligne",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Veuillez entrer une adresse e-mail valide",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Enregistrement réussi",

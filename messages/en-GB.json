@@ -60,6 +60,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Online Shopping",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Please enter a valid email address",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",

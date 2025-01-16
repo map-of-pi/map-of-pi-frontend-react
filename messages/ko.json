@@ -60,6 +60,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "내 지도 마커가 판매 위치를 표시합니다",
       "SELLER_SETTINGS_LABEL": "판매자 설정",
       "SELLER_SELL_CENTER": "판매 센터 설정",
+      "SELLER_ONLINE_SHOPPING_LABEL": "온라인 쇼핑",
       "VALIDATION": {
         "EMAIL_VALIDATION": "유효한 이메일 주소를 입력하세요",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "등록이 성공적으로 완료되었습니다",

@@ -60,6 +60,7 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "علامة الموقع على الخريطة تظهر مكان بيعي",
       "SELLER_SETTINGS_LABEL": "إعدادات البائع",
       "SELLER_SELL_CENTER": "تحديد مركز البيع",
+      "SELLER_ONLINE_SHOPPING_LABEL": "التسوق عبر الإنترنت",
       "VALIDATION": {
         "EMAIL_VALIDATION": "يرجى إدخال عنوان بريد إلكتروني صالح",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "تم التسجيل بنجاح",
