@@ -76,7 +76,36 @@
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "註冊成功",
         "FAILED_REGISTRATION_SUBMISSION": "保存註冊資訊時出錯",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "註冊失敗，因為用戶未驗證身份",
-        "UNINITIALIZED_SELL_CENTER": "請設定您的銷售中心"
+        "UNINITIALIZED_SELL_CENTER": "請設定您的銷售中心",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "賣家商品已成功保存",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "賣家商品已成功刪除",
+        "FAILED_SELLER_ITEM_SAVE": "保存賣家商品時發生錯誤",
+        "FAILED_SELLER_ITEM_DELETE": "刪除賣家商品時出錯",
+        "SELLER_ITEM_NOT_FOUND": "未找到賣家商品",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "儲存成功。使用的 Mappi 配額為 {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "儲存失敗。可用的 Mappi 配額不足"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "商品",
+        "PRICE_LABEL": "價格",
+        "STOCK_LABEL": "庫存水平",
+        "DESCRIPTION_LABEL": "描述",
+        "PHOTO": "照片",
+        "SELLING_DURATION_LABEL": "銷售周期（以週為單位）",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "活躍中",
+          "EXPIRED": "已過期"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 個可用",
+          "AVAILABLE_2": "2 個可用",
+          "AVAILABLE_3": "3 個可用",
+          "MANY": "多個可用",
+          "MADE_TO_ORDER": "訂製",
+          "ONGOING_SERVICE": "正在進行的服務",
+          "SOLD": "已售出"
+        },
+        "SELLING_EXPIRATION_DATE": "{expired_by_date} 前銷售"
       }
     },
     "BUY_FROM_SELLER": {
@@ -205,6 +234,7 @@
     "SEARCH_LOADING": "搜索加载中...",
     "REPLY": "回复",
     "ADD_ITEM": "新增項目",
+    "DELETE": "刪除",
     "SAVE": "保存",
     "CONFIRM": "確認",
     "CONFIRM_DIALOG": "您有未保存的更改。确定要离开吗？",

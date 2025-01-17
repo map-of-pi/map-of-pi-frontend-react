@@ -189,7 +189,7 @@ export const ShopItem: React.FC<{
   
   const translatedStockLevelOption = Object.values(StockLevelType).map((value) => ({
     value,
-    name: t(value)
+    name: t(`STOCK_LEVEL_OPTIONS.${value}`)
   }));
   
   const [formData, setFormData] = useState<SellerItem>({
@@ -284,17 +284,17 @@ export const ShopItem: React.FC<{
         setShowDialog(true); 
         setIsAddItemEnabled(false);
         logger.info('Seller item saved successfully:', { data });
-        showAlert(t('Item modify successfully'));
+        showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_SAVED'));
       }
     } catch (error) {
       logger.error('Error saving seller item:', error);
-      showAlert(t('Error adding or modifying items'));
+      showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_SAVE'));
     }
   };
 
   const handleDelete = async (item_id: string)=> {
     if (!item_id || item_id==='') {
-      return showAlert('Item not found');     
+      return showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SELLER_ITEM_NOT_FOUND'));     
     }
       
     try {
@@ -303,11 +303,11 @@ export const ShopItem: React.FC<{
         setReload(true);
         setShowDialog(true); 
         setIsAddItemEnabled(false);
-        showAlert(t('Item deleted successfully'));
+        showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_DELETED'));
       }
     } catch (error) {
       logger.error('Error deleting seller item:', error);
-      showAlert('Error deleting seller item');                
+      showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_DELETE'));                
     }
   }
   
@@ -319,12 +319,12 @@ export const ShopItem: React.FC<{
         className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 cursor-pointer 
           ${isActive ? '' : 'opacity-50 pointer-events-none'}`}
       >
-        <Notification message={'Save successful, Mappi allowance used 99'} showDialog={showDialog} setShowDialog={setShowDialog} />
+        <Notification message={t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT')} showDialog={showDialog} setShowDialog={setShowDialog} />
         <div className="p-3">
           <div className="flex gap-x-4">
             <div className="flex-auto w-64">
               <Input
-                label={t('Item:')}
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.ITEM_LABEL') + ':'}
                 name="name"
                 type="text"
                 value={formData.name}
@@ -336,7 +336,7 @@ export const ShopItem: React.FC<{
             <div className="flex-auto w-32">
               <div className="flex items-center gap-1">
                 <Input
-                  label={t('Price:')}
+                  label={t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
                   name="price"
                   type="number"
                   value={formData.price.$numberDecimal}
@@ -350,8 +350,7 @@ export const ShopItem: React.FC<{
           <div className="flex gap-x-4 items-center">
             <div className="flex-auto w-64">
               <TextArea
-                label={'Description:'}
-                placeholder={t('Item detail information')}
+                label={t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
@@ -370,7 +369,7 @@ export const ShopItem: React.FC<{
             </div>
           </div>
           <Select
-            label='Stock level:'
+            label={t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LABEL') + ':'}
             name="stock_level"
             value={formData.stock_level}
             onChange={handleChange}
@@ -378,7 +377,7 @@ export const ShopItem: React.FC<{
             disabled={!isActive}
           />
           <label className="text-[18px] text-[#333333]">
-            {t('Selling duration in weeks')}:
+            {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_DURATION_LABEL')}:
           </label>
           <div className="flex items-center gap-2">
             <div className="flex gap-1 items-center">
@@ -412,7 +411,7 @@ export const ShopItem: React.FC<{
               />
             </div>
             <Button
-              label={t('Delete')}
+              label={t('SHARED.DELETE')}
               disabled={!isActive} // Disable if not active
               styles={{
                 color: '#ffc153',
@@ -434,9 +433,9 @@ export const ShopItem: React.FC<{
           </div>
           <label className="text-[14px] text-[#333333]">
             <span className="fw-bold text-lg">
-              {t('Active')}: 
+              {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE')}: 
             </span>
-            {t('Sell by 21 November 2024, 13:00pm')}
+            {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE')}
           </label>
         </div>
       </div>

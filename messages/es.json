@@ -76,7 +76,36 @@
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro exitoso",
         "FAILED_REGISTRATION_SUBMISSION": "Error al guardar el registro",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "El registro falló porque el usuario no está autenticado",
-        "UNINITIALIZED_SELL_CENTER": "Por favor, establezca su Centro de Venta"
+        "UNINITIALIZED_SELL_CENTER": "Por favor, establezca su Centro de Venta",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Artículo del vendedor guardado con éxito",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Artículo del vendedor eliminado con éxito",
+        "FAILED_SELLER_ITEM_SAVE": "Error al guardar el artículo del vendedor",
+        "FAILED_SELLER_ITEM_DELETE": "Error al eliminar el artículo del vendedor",
+        "SELLER_ITEM_NOT_FOUND": "Artículo del vendedor no encontrado",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Guardado exitoso. Mappi usado {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Guardado fallido. Mappi disponible insuficiente"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "Artículo",
+        "PRICE_LABEL": "Precio",
+        "STOCK_LABEL": "Nivel de existencias",
+        "DESCRIPTION_LABEL": "Descripción",
+        "PHOTO": "Foto",
+        "SELLING_DURATION_LABEL": "Duración de venta en semanas",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Activo",
+          "EXPIRED": "Expirado"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 disponible",
+          "AVAILABLE_2": "2 disponibles",
+          "AVAILABLE_3": "3 disponibles",
+          "MANY": "Muchos disponibles",
+          "MADE_TO_ORDER": "Hecho a pedido",
+          "ONGOING_SERVICE": "Servicio continuo",
+          "SOLD": "Vendido"
+        },
+        "SELLING_EXPIRATION_DATE": "Vender antes de {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -204,6 +233,7 @@
     "SEARCH_LOADING": "Cargando búsqueda...",
     "REPLY": "Responder",
     "ADD_ITEM": "Agregar artículo",
+    "DELETE": "Eliminar",
     "SAVE": "Guardar",
     "CONFIRM": "Confirmar",
     "CONFIRM_DIALOG": "Tienes cambios sin guardar. Realmente quieres salir?",

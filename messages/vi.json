@@ -76,7 +76,36 @@
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Đăng ký thành công",
         "FAILED_REGISTRATION_SUBMISSION": "Lỗi khi lưu đăng ký",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Đăng ký thất bại vì người dùng chưa xác thực",
-        "UNINITIALIZED_SELL_CENTER": "Vui lòng đặt Trung tâm bán hàng của bạn"
+        "UNINITIALIZED_SELL_CENTER": "Vui lòng đặt Trung tâm bán hàng của bạn",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Mặt hàng của người bán đã được lưu thành công",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Xóa thành công mặt hàng của người bán",
+        "FAILED_SELLER_ITEM_SAVE": "Lỗi khi lưu mặt hàng của người bán",
+        "FAILED_SELLER_ITEM_DELETE": "Lỗi khi xóa mặt hàng của người bán",
+        "SELLER_ITEM_NOT_FOUND": "Không tìm thấy mặt hàng của người bán",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Lưu thành công. Số lượng Mappi đã dùng {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Lưu không thành công. Số lượng Mappi không đủ"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "Mặt hàng",
+        "PRICE_LABEL": "Giá",
+        "STOCK_LABEL": "Mức tồn kho",
+        "DESCRIPTION_LABEL": "Mô tả",
+        "PHOTO": "Ảnh",
+        "SELLING_DURATION_LABEL": "Thời gian bán hàng (tính theo tuần)",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Đang hoạt động",
+          "EXPIRED": "Đã hết hạn"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 còn lại",
+          "AVAILABLE_2": "2 còn lại",
+          "AVAILABLE_3": "3 còn lại",
+          "MANY": "Còn nhiều",
+          "MADE_TO_ORDER": "Làm theo yêu cầu",
+          "ONGOING_SERVICE": "Dịch vụ đang hoạt động",
+          "SOLD": "Đã bán"
+        },
+        "SELLING_EXPIRATION_DATE": "Bán trước {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -205,6 +234,7 @@
     "SEARCH_LOADING": "Đang tải tìm kiếm...",
     "REPLY": "Trả lời",
     "ADD_ITEM": "Thêm mục",
+    "DELETE": "Xóa",
     "SAVE": "Lưu",
     "CONFIRM": "Xác nhận",
     "CONFIRM_DIALOG": "Bạn có thay đổi chưa lưu. Bạn thực sự muốn rời đi?",

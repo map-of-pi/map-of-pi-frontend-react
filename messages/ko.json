@@ -76,7 +76,36 @@
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "등록이 성공적으로 완료되었습니다",
         "FAILED_REGISTRATION_SUBMISSION": "등록 저장 중 오류 발생",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "사용자가 인증되지 않아 등록에 실패했습니다",
-        "UNINITIALIZED_SELL_CENTER": "판매 센터를 설정해주세요"
+        "UNINITIALIZED_SELL_CENTER": "판매 센터를 설정해주세요",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "판매자 항목이 성공적으로 저장되었습니다",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "판매자 항목이 성공적으로 삭제되었습니다",
+        "FAILED_SELLER_ITEM_SAVE": "판매자 항목 저장 중 오류 발생",
+        "FAILED_SELLER_ITEM_DELETE": "판매자 항목 삭제 중 오류 발생",
+        "SELLER_ITEM_NOT_FOUND": "판매자 항목을 찾을 수 없습니다",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "저장 성공. 사용된 Mappi 허용량 {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "저장 실패. 사용 가능한 Mappi 허용량 부족"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "품목",
+        "PRICE_LABEL": "가격",
+        "STOCK_LABEL": "재고 수준",
+        "DESCRIPTION_LABEL": "설명",
+        "PHOTO": "사진",
+        "SELLING_DURATION_LABEL": "판매 기간 (주 단위)",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "활성",
+          "EXPIRED": "만료됨"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1개 남음",
+          "AVAILABLE_2": "2개 남음",
+          "AVAILABLE_3": "3개 남음",
+          "MANY": "여러 개 남음",
+          "MADE_TO_ORDER": "주문 제작",
+          "ONGOING_SERVICE": "진행 중인 서비스",
+          "SOLD": "판매 완료"
+        },
+        "SELLING_EXPIRATION_DATE": "{expired_by_date}까지 판매"
       }
     },
     "BUY_FROM_SELLER": {
@@ -204,6 +233,7 @@
     "SEARCH_LOADING": "검색 로딩 중...",
     "REPLY": "답장",
     "ADD_ITEM": "항목 추가",
+    "DELETE": "삭제",
     "SAVE": "저장",
     "CONFIRM": "확인",
     "CONFIRM_DIALOG": "저장되지 않은 변경 사항이 있습니다. 정말 나가시겠습니까?",

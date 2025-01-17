@@ -76,7 +76,36 @@
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Wlanwlan ɖuɖeji",
         "FAILED_REGISTRATION_SUBMISSION": "Nuwanyido ɖo wema wlanwlan hɛn ɖ'ayi mɛ",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nyɔma wlanwlan gló ɖó mɛ e nɔ zán é kún nyí mɛɖebǔ ó",
-        "UNINITIALIZED_SELL_CENTER": "Mi kɛnklɛn bo ze tɛn mitɔn ɖo te"
+        "UNINITIALIZED_SELL_CENTER": "Mi kɛnklɛn bo ze tɛn mitɔn ɖo te",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Wɛ kan xɛ sɔn sɔ",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Kan xɛ wɔ ɔ gba ji",
+        "FAILED_SELLER_ITEM_SAVE": "Wɛ kan ɖɔ hɛn wɔ a wɔ xɔ sɔ",
+        "FAILED_SELLER_ITEM_DELETE": "Kan xɛ wɔ ɔ gba sɛnɔn",
+        "SELLER_ITEM_NOT_FOUND": "Kan xɛ wɔ ɔ dɛ",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Dɔ yì kpɔ. Mappi dɔ kɛ kpé {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Dɔ yì kpɔ mìxwé. Mappi nɔ ke tɔ nɔ kɛ kpɔ"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "Wɛ",
+        "PRICE_LABEL": "Hɛnɔ",
+        "STOCK_LABEL": "Atchon kpɔ nu",
+        "DESCRIPTION_LABEL": "Hɛnɔnɔn",
+        "PHOTO": "Wɛnɔ kpɔ nɔn",
+        "SELLING_DURATION_LABEL": "Wɛ hɛnɔn de xɔ zɔɖɔ hɛn nyɔ hɛn",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Dɔnɛ",
+          "EXPIRED": "Wɛ tò xɔ wɔn"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 do gbe",
+          "AVAILABLE_2": "2 do gbe",
+          "AVAILABLE_3": "3 do gbe",
+          "MANY": "Kpɔnu do gbe",
+          "MADE_TO_ORDER": "Sɛ yé ɖa",
+          "ONGOING_SERVICE": "Wɛ na gbeto",
+          "SOLD": "Wɛ klé"
+        },
+        "SELLING_EXPIRATION_DATE": "Nɛnɔ {expired_by_date} kɛ"
       }
     },
     "BUY_FROM_SELLER": {
@@ -205,6 +234,7 @@
     "SEARCH_LOADING": "Biba ɖo yiyi wɛ...",
     "REPLY": "Xósin",
     "ADD_ITEM": "Tán nūn",
+    "DELETE": "Hã",
     "SAVE": "Hɛn",
     "CONFIRM": "Ganmɛ",
     "CONFIRM_DIALOG": "A ɖo ɖyɔɖyɔ e ma ko hɛn ɖ'ayi ǎ lɛ. A jlo na gosin nugbo a?",
