@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, SetStateAction, useContext, useEffect, useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Button } from "../Forms/Buttons/Buttons";
 import { TextArea, Input, FileInput, Select } from "../Forms/Inputs/Inputs";
 import { Notification } from "../confirm";
@@ -13,6 +13,7 @@ import logger from '../../../../logger.config.mjs';
 
 export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
   const t = useTranslations();
+
   const SUBHEADER = 'font-bold mb-2';
 
   const { reload, setReload } = useContext(AppContext);
@@ -151,13 +152,6 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
         <h2 className={SUBHEADER}>
           {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}
         </h2>
-        {/* <Select
-          name="fulfillment_method"
-          options={translatedFulfillmentMethod}
-        />
-        <h2 className={SUBHEADER}>
-          {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL')}
-        </h2> */}
         <TextArea
           label={t(
             'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
@@ -168,12 +162,6 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
           name="delivery_address"
           type="text"
         />
-        {/* <TextArea
-          name="delivery_address"
-          type="text"
-          placeholder={t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER')}
-          styles={{ height: '80px' }}
-        /> */}
       </div>
     </>
   );
@@ -185,12 +173,53 @@ export const ShopItem: React.FC<{
   refCallback: (node: HTMLElement | null) => void;
   setIsAddItemEnabled: React.Dispatch<SetStateAction<boolean>>;
 }> = ({ item, isActive, refCallback, setIsAddItemEnabled }) => {
+  const locale = useLocale();
   const t = useTranslations();
   
-  const translatedStockLevelOption = Object.values(StockLevelType).map((value) => ({
-    value,
-    name: t(`STOCK_LEVEL_OPTIONS.${value}`)
-  }));
+  const translatedStockLevelOptions = [
+    {
+      value: 'available_1',
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_1',
+      ),
+    },
+    {
+      value: 'available_2',
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_2',
+      ),
+    },
+    {
+      value: 'available_3',
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_3',
+      ),
+    },
+    {
+      value: 'many',
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MANY',
+      ),
+    },
+    {
+      value: 'made_to_order',
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MADE_TO_ORDER',
+      ),
+    },
+    {
+      value: 'ongoing_service',
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.ONGOING_SERVICE',
+      ),
+    },
+    {
+      value: 'sold',
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.SOLD',
+      ),
+    }
+  ];
   
   const [formData, setFormData] = useState<SellerItem>({
     seller_id: item.seller_id || '',
@@ -199,7 +228,8 @@ export const ShopItem: React.FC<{
     duration: item.duration || 1,
     price: item.price || 0.01,
     image: item.image || '',
-    stock_level: item.stock_level || translatedStockLevelOption[0].name, 
+    stock_level: item.stock_level || translatedStockLevelOptions[0].name,
+    expired_by: item.expired_by, 
     _id: item._id || ''
   });
   
@@ -373,7 +403,7 @@ export const ShopItem: React.FC<{
             name="stock_level"
             value={formData.stock_level}
             onChange={handleChange}
-            options={translatedStockLevelOption}
+            options={translatedStockLevelOptions}
             disabled={!isActive}
           />
           <label className="text-[18px] text-[#333333]">
@@ -404,8 +434,7 @@ export const ShopItem: React.FC<{
                 styles={{
                   color: "#ffc153",
                   padding: "10px 15px",
-                  borderRadius: "100%",
-                  marginRight: "5px",
+                  borderRadius: "100%"
                 }}
                 onClick={handleIncrement} // Increment handler
               />
@@ -416,7 +445,7 @@ export const ShopItem: React.FC<{
               styles={{
                 color: '#ffc153',
                 height: '40px',
-                padding: '10px 15px',
+                padding: '10px 15px'
               }}
               onClick={()=>handleDelete(formData._id)}
             />
@@ -431,12 +460,23 @@ export const ShopItem: React.FC<{
               onClick={handleSave}
             />
           </div>
-          <label className="text-[14px] text-[#333333]">
-            <span className="fw-bold text-lg">
-              {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE')}: 
-            </span>
-            {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE')}
-          </label>
+          {formData?.expired_by && (
+            <label className="text-[14px] text-[#333333]">
+              <span className="fw-bold text-lg">
+                {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') + ': '} 
+              </span>
+              {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
+                expired_by_date: new Intl.DateTimeFormat(locale || 'en-US', {
+                  day: '2-digit',
+                  month: 'long',
+                  year: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  hour12: true,
+                }).format(new Date(formData.expired_by)),
+              })}
+            </label>
+          )}
         </div>
       </div>
     </>

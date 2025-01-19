@@ -27,7 +27,6 @@ export const Input = (props: any) => {
   );
 };
 
-
 export const TelephoneInput = (props: any) => {
   const { label, smartCaret, ...input } = props;
   return (
@@ -75,7 +74,7 @@ export const FileInput = (props: any) => {
         <label className="block text-[17px] text-[#333333] font-bold">{imageLabel}</label>
       )}
       {props.describe && (
-        <label className="block pb-3 text-sm text-gray-400 pb-5">{props.describe}</label>
+        <label className="block pb-3 text-sm text-gray-400">{props.describe}</label>
       )}
       <div className="flex flex-col items-center justify-center overflow-hidden p-3 rounded-md relative">
         <div className={`w-full ${props.height? props.height: 'h-[200px]'} relative mb-4`}>
