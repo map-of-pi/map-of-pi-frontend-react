@@ -12,7 +12,9 @@ export const locales = [
   'fr', 
   'hau-NG', 
   'ko',
-  'zh-CN'
+  'vi',
+  'zh-CN',
+  'zh-TW'
 ] as const;
 
 export const defaultLocale = 'en';
