@@ -178,43 +178,43 @@ export const ShopItem: React.FC<{
   
   const translatedStockLevelOptions = [
     {
-      value: 'available_1',
+      value: '1 available',
       name: t(
         'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_1',
       ),
     },
     {
-      value: 'available_2',
+      value: '2 available',
       name: t(
         'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_2',
       ),
     },
     {
-      value: 'available_3',
+      value: '3 available',
       name: t(
         'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_3',
       ),
     },
     {
-      value: 'many',
+      value: 'Many available',
       name: t(
         'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MANY',
       ),
     },
     {
-      value: 'made_to_order',
+      value: 'Made to order',
       name: t(
         'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MADE_TO_ORDER',
       ),
     },
     {
-      value: 'ongoing_service',
+      value: 'Ongoing service',
       name: t(
         'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.ONGOING_SERVICE',
       ),
     },
     {
-      value: 'sold',
+      value: 'Sold',
       name: t(
         'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.SOLD',
       ),
@@ -323,7 +323,7 @@ export const ShopItem: React.FC<{
   };
 
   const handleDelete = async (item_id: string)=> {
-    if (!item_id || item_id==='') {
+    if (!item_id || item_id ==='') {
       return showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SELLER_ITEM_NOT_FOUND'));     
     }
       
@@ -349,7 +349,9 @@ export const ShopItem: React.FC<{
         className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 cursor-pointer 
           ${isActive ? '' : 'opacity-50 pointer-events-none'}`}
       >
-        <Notification message={t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT')} showDialog={showDialog} setShowDialog={setShowDialog} />
+        <Notification message={t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT', { 
+          mappi_count: '99' 
+        })} showDialog={showDialog} setShowDialog={setShowDialog} />
         <div className="p-3">
           <div className="flex gap-x-4">
             <div className="flex-auto w-64">
