@@ -1,0 +1,249 @@
+{
+  "HOME": {
+    "ADD_SELLER": "Ta Oja",   
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Ile-iṣẹ wiwa rẹ ti ṣeto lọwọlọwọ si awọn ipoidojuko aiyipada [0, 0]. Lati mu iriri rẹ pọ si, jọwọ ṣe imudojuiwọn ipo Ile-iwadii rẹ.",   
+    "SEARCH_BAR_PLACEHOLDER": "Ṣawari fun awọn ti o ntaa tabi awọn ohun kan",    
+    "LOCATION_SERVICES": {
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "Lati lo ẹya ara ẹrọ yii, jọwọ mu awọn iṣẹ ipo ṣiṣẹ ninu awọn eto ẹrọ rẹ.",      
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "Awọn iṣẹ iṣeto agbegbe jẹ alaabo. Jọwọ mu ipo ẹrọ rẹ ṣiṣẹ."     
+    },
+    "AUTHENTICATION": {
+      "SUCCESSFUL_LOGIN_MESSAGE": "Iwọle aṣeyọri",      
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Iwọle kuna",
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "A ko ri alaye ti Pi"
+    }
+  },
+  "SIDE_NAVIGATION": {
+    "USER_PREFERENCES_HEADER": "Awọn ayanfẹ Olumulo",   
+    "PERSONALIZATION_SUBHEADER": "Ẹni-ara-ẹni",    
+    "LANGUAGES": "Awọn ede",
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "Nipa Map of Pi",
+      "APP_VERSION": "Ẹya App yi",     
+      "PRIVACY_POLICY": "Ìlànà Ìfipamọ́",     
+      "TERMS_OF_SERVICE": "Àwọn Ofin Iṣẹ́"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "Ri-mi feran ju",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Alaifọwọyi",
+      "PREFERRED_DEVICE_GPS": "Lo GPS ohun elo mi",     
+      "PREFERRED_SEARCH_CENTER": "Lo Ile-iṣẹ Wiwa"
+    },
+    "CONTACT_MAP_OF_PI": "Olubasọrọ Map of Pi",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Aseyori awọn ayanfẹ",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Aṣiṣe fifipamọ awọn ayanfẹ"
+    }
+  },
+  "SCREEN": {
+    "SELLER_REGISTRATION": {
+      "SELLER_REGISTRATION_HEADER": "Iforukosile Olutaja",
+      "SELLER_DETAILS_LABEL": "Awọn alaye Olutaja",
+      "EMAIL_LABEL": "Adirẹsi imeeli",
+      "PHONE_NUMBER_LABEL": "Nọmba foonu re",
+      "CONTACT_PUBLIC_NOTE": "Adirẹsi imeeli ati nọmba foonu yoo han ni gbangba.", 
+      "SELLER_DETAILS_PLACEHOLDER": "Itaja nipasẹ Sanwo pẹlu Pi.",
+      "REVIEWS_SUMMARY_LABEL": "Atunyẹwo  Lakotan",
+      "REVIEWS_SCORE_LABEL": "Awon atunyewo",
+      "SELLER_NAME": "Orukọ Olutaja",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "Irú olùtajà",
+        "SELLER_TYPE_OPTIONS": {
+          "ACTIVE_SELLER": "Onítajà lọ́wọ́-lọ́wọ́",
+          "INACTIVE_SELLER": "Onítajà aláì ṣi ṣẹ́mọ́",
+          "TEST_SELLER": "Idanwo Olutaja"
+        }
+      },
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Eto Olutaja to ti ni ilọsiwaju",
+      "SELLER_RETAIL_OUTLET_NAME": "Orukọ ile-itaja soobu",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Adirẹsi tabi ibiti o ti ntà",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Ifiran adirẹsi ile itaja mi , tabi awon nkan ti mo nta",
+      "SELLER_SETTINGS_LABEL": "Eto reglage ti Olutaja",
+      "SELLER_SELL_CENTER": "Ṣeto aarin Ile-iṣẹ Tita",
+      "VALIDATION": {
+        "EMAIL_VALIDATION": "Jọwọ tẹ adirẹsi imeeli to sise dada eyi to wulo",  
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Aṣeyọri Iforukọsilẹ",
+        "FAILED_REGISTRATION_SUBMISSION": "Aṣiṣe fifipamọ iforukọsilẹ",  
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Ìforúkọsílẹ̀ kùnà nítorí pé aṣàmúlò kò jẹ́ ìfìdímúlẹ̀", 
+        "UNINITIALIZED_SELL_CENTER": "Jọ̀wọ́ ṣeto Ilé-iṣẹ́ Títà"
+      }
+    },
+    "BUY_FROM_SELLER": {
+      "BUY_FROM_SELLER_HEADER": "Ra oja ni owo olutaja",
+      "SELLER_DETAILS_LABEL": "Awọn alaye Olutaja",                  
+      "SELLER_ADDRESS_POSITION_LABEL": "Adirẹsi Olutaja tabi Ibi to wa",
+      "LEAVE_A_REVIEW_MESSAGE": "Fi Atunwo kan silẹ",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Yan oju ti o ṣe afihan loke ti o fihan bi o ṣe ri lara ohun ti o ntaa", 
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Ẹ fi àfikún ìdáhùn síbí",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Ìrùsókè Fọto Esi",
+      "REVIEWS_SUMMARY_LABEL": "Atunyẹwo Lakotan",
+      "REVIEWS_SCORE_MESSAGE": "Atunwo Dimegilio: {seller_review_rating} ninu 5.0",
+      "SELLER_CONTACT_DETAILS_LABEL": "Awon alaye olubasoro eniti ta oja",
+      "SELLER_USERNAME_LABEL": "Orukọ olumulo", 
+      "SELLER_PIONEER_ID_LABEL": "ID aṣáájú-ọnà",
+      "SELLER_PHONE_NUMBER_LABEL": "Foonu nomba", 
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adirẹsi imeeli"    
+    },
+    "REVIEWS": {
+      "REVIEWS_HEADER": "Atunyẹwo",
+      "GIVE_REVIEW_SECTION_HEADER": "Fún àtúnyẹ̀wò sí aṣáájú-ọ̀nà yìí", 
+      "REVIEWS_GIVEN_SECTION_HEADER": "Àwọn àyẹ̀wò tí aṣáájú-ọ̀nà yìí fi fún Pionnier yi", 
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Àwọn àyẹ̀wò tí aṣáájú-ọ̀nà yìí gbàkò rí fún Pionnier yi",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "Ko si awọn awotẹlẹ ti o rii fun Pioneer {search_value}",
+        "NO_PIONEER_FOUND": "Pionnier a kò rí aṣáájú-ọ̀nà {search_value}"  
+      }
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Ko si awọn awotẹlẹ fun {seller_id}", 
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "Kò sí àwọn àyẹ̀wò fún {seller_id}",
+      "BY_REVIEWER": "Nipase {buyer_id}"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Edahun si Atunwo",
+      "REPLY_TO_REVIEW_SUBHEADER": "Atunyẹwo naa ni o nṣe idahun",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Fun esi lati ṣe atunwo",
+      "REPLY_TO_REVIEW_HEADER": "Idahun si Atunwo osi fun {seller_id}",
+      "BY_REVIEWER": "Raa {buyer_id}",
+      "REPLY_TO_REVIEW_MESSAGE": "Fi esi rẹ si awotẹlẹ re soke",
+      "FACE_SELECTION_REVIEW_MESSAGE":"Yan oju ti o fihan bi o ṣe lero nipa ibaraṣepọ rẹ pẹlu aṣaaju-ọna fun pioneer yii",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Ẹ fi àfikún ìdáhùn síbí yi",                 
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Ìrùsókè fọ́tò ìfèsì", 
+      "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "àṣìṣe ayẹ̀wò ìrùsókè fun awotele",
+        "SELF_REVIEW_NOT_POSSIBLE": "àtúnyẹ̀wò ara eni ko seesé ṣe"
+      }
+    }
+  },
+  "POPUP": {
+    "MAP_MARKER": {
+      "SELLER_SALE_ITEMS_FIELD": "Awọn oja ti olutaja ntaa", 
+      "DISTANCE_MESSAGE": "Ijinna: XXX km lo kuro"
+    },
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "Jọwọ jabo awọn abawọn si"
+    },
+    "PRIVACY_POLICY_INFO": {
+      "TITLE": "Afihan  Aṣiri",
+      "LAST_UPDATED": "Imudojuiwọn to kẹhin",
+      "EMAIL_ADDRESS": "Adirẹsi Imeeli",
+      "SECTIONS": {
+        "HEADER_1": "Ifihan",
+        "CONTENT_1": "Kaabo si Map of Pi app, ni idagbasoke nipasẹ Map of Pi ẹgbẹ ni ifowosowopo pẹlu Agbegbe Pi Afihan iṣe ilana bi aṣe ni igba, lo, ṣafihan, ati daabobo alaye ti ara ẹni ni gbati o ba lo ohun elo alagbeka ti Applicaion ti Map of Pi.",
+        "HEADER_2": "Alaye ti ogba", 
+        "SUBHEADER_2_1": "Alaye olumulo",
+        "CONTENT_2_1_1": "Nigbati o ba forukọsilẹ bi olumulo, a le gba orukọ rẹ, adirẹsi imeeli, orukọ olumulo, ati awọn alaye miiran ti o yẹ.", 
+        "CONTENT_2_1_2": "A le gba alaye nipa ohun elo rẹ, pẹlu iru ẹrọ, ẹrọ ṣiṣe, ati awọn idamọ ẹrọ alailẹgbẹ.",  
+        "SUBHEADER_2_2": "Alaye olùtajà",
+        "CONTENT_2_2_1": "Àwọn olùtajà tí ń forukọ sílẹ̀ lórí pèpéle ni a le nílò láti pèsè ìwífún Olùtajà, pẹ̀lú orúkọ olùtajà, ibi, àti àlàyé Olubasoro.",
+        "CONTENT_2_2_2": "Ẹni Taja le jẹ iṣowo tabi ẹni-ikọkọ.",
+        "HEADER_3": "Bawo ni oṣe le lo Alaye Rẹ", 
+        "SUBHEADER_3_1": "Awọn iṣẹ ipese Re", 
+        "CONTENT_3_1_1": "A nlo alaye re lati pese ati imudara awọn iṣẹ Map of Pi, pẹlu olumulo ati awọn iṣẹ ṣiṣe Olutaja.", 
+        "SUBHEADER_3_2": "Iba Ara Soro",
+        "CONTENT_3_2_1": "A le lo alaye olubasọrọ rẹ lati fi awọn imudojuiwọn, awọn ifitonileti, ati awọn ifiranṣẹ igbega ti o ni ibatan si Map of Pi ranṣẹ si ọ.",        
+        "SUBHEADER_3_3": "Atupalẹ",
+        "CONTENT_3_3_1":"A gba ati  ṣe itupalẹ awọn data lati mu iṣẹ ṣiṣe, awọn ẹya, ati iṣẹ ṣiṣe ti ohun elo naa pọ sii ni ori App yi.", 
+        "HEADER_4": "Pin-pin awon alaye Rẹ", 
+        "SUBHEADER_4_1": "Pẹlu Awọn olutaja",
+        "CONTENT_4_1_1": "A le pin alaye olumulo pẹlu Awọn olutaja fun ibere, Imu-se ati awọn idi ibara ẹni sọrọ.", 
+        "SUBHEADER_4_2": "Pẹlu Awọn ẹgbẹ Kẹta",
+        "CONTENT_4_2_1": "A le pin  alaye pẹlu awọn olupese iṣẹ ẹni-kẹta fun iṣẹ ṣiṣe fun app, atupale, ati sisẹ isanwo.", 
+        "HEADER_5": "Awọn Igbese ti Aabo",
+        "CONTENT_5_1": "A gbe awọn igbese aabo ile-iṣẹ lati daabobo alaye rẹ. Sibẹsibẹ, ko si ọna gbigbe lori intanẹẹti tabi ibi ipamọ itanna ti o ni aabo patapata ti ope.",
+        "HEADER_6": "Awọn yiyan Rẹ",
+        "CONTENT_6_1": "O le ṣe imudojuiwọn alaye akọọlẹ rẹ nipasẹ awọn eto app. O le pa akọọlẹ Map of Pi rẹ rẹ nipa piparẹ akọọlẹ Nẹtiwọọki Pi rẹ ati lẹhinna yiyan aṣayan lati pa data Map of Pi rẹ rẹ nigbati o wọle si Maapu Pi nigbamii. O le jade kuro ni awọn ibaraẹnisọrọ ipolowo.", 
+        "HEADER_7": "Awọn iyipada si Ilana Aṣiri Yi",
+        "CONTENT_7_1": "A le ṣe imudojuiwọn Ilana Aṣiri yii bi o ṣe yẹ. Ẹya tuntun yoo wa ni ipolowo lori oju opo wẹẹbu wa tabi laarin ohun elo naa.", 
+        "HEADER_8": "Wa kan si",
+        "CONTENT_8_1": "Ti o ba ni ibeere eyikeyi tabi awọn aniyan ifiyesi nipa Ilana Aṣiri yii, jọwọ kan si , wa nipa fifiranse imeeli re si wa"
+      }
+    },
+    "TERMS_OF_SERVICE_INFO": {
+      "TITLE": "Awọn ofin Iṣẹ", 
+      "LAST_UPDATED": " Ikẹhin Imudojuiwọn", 
+      "EMAIL_ADDRESS": "Adirẹsi imeeli",
+      "SECTIONS": {
+        "HEADER_1": "Gbigba Awọn ofin",
+        "CONTENT_1_1": "Kaabo si Map of Pi App, ni idagbasoke nipasẹ awọn Map of Pi egbe ni ifowosowopo pelu Pi Community Nipa lilo App yii, O ti gba lati tẹle awọn ofin ti Service, bi daradara bi Ilana Aṣiri wa.", 
+        "HEADER_2": "Lilo Ohun ti App", 
+        "CONTENT_2_1": "Se O gba lati lo Map of Pi app ni ibamu pẹlu gbogbo awọn ofin ati ilana to wulo.", 
+        "CONTENT_2_2": "Iwọ ko gbọdọ lo app naa fun eyikeyi idi arufin tabi ti a ko gba, tabi ni ọna eyikeyi ti o le ba, mu ṣiṣẹ, ẹru apọju, tabi ba app naa ṣiṣẹ",
+        "CONTENT_2_3": "Lati lo maapu Pi o gbọdọ forukọsilẹ bi aṣaaju-ọna olumulo ti Pi Nẹtiwọọki.", 
+        "HEADER_3": "fin ohun-ini ọgbọn",       
+        "CONTENT_3_1": "Map of Pi app ati gbogbo akoonu, awọn ẹya ara ẹrọ, ati iṣẹ ṣiṣe jẹ ohun ini nipasẹ Maapu Of Pi ati pe o ni aabo nipasẹ aṣẹ-lori-ara, aami-iṣowo, ati awọn ofin ohun-ini ọgbọn.", 
+        "HEADER_4": "Iwọntunwọnsi Ẹ̀rù",
+        "CONTENT_4_1": "Map of Pi ko ni ṣe oniduro fun ibaje eyikeyi, aiṣe-ti aara, lairotẹlẹ, pataki, tabi awọn ibajẹ ti o waye lati ọna eyikeyi ti o ni asopọ pẹlu lilo Map of Pi app.", 
+        "HEADER_5": "Didahun Idaniloju",
+        "CONTENT_5_1": "O gba lati jẹri ati lo Map of Pi ti ko ni ipalara ati awọn alafaramo rẹ, awọn alakoso, awọn oludari, awọn oṣiṣẹ, ati awọn aṣoju lati eyikeyi ati gbogbo awọn ẹtọ, awọn gbese, awọn bibajẹ, adanu, tabi awọn inawo (pẹlu awọn idiyele awọn aṣofin) ti o dide lati ọna eyikeyi tabi ni ti o ni ibatan si lilo Map of Pi app.",
+        "HEADER_6": "Iṣakoso Ofin Ijoba",
+        "CONTENT_6_1": "Awọn ofin Iṣẹ wọnyi yoo jẹ akoso ati tumọ ni ibamu pẹlu ofin England ati Wales laisi iyi si awọn ipese ofin wọn, pẹlu  eyikeyi ifarakanra tabi ẹtọ ti o waye lati inu tabi ni asopọ pẹlu koko-ọrọ wọn tabi idasile (pẹlu awọn ariyanjiyan ti kii ṣe adehun tabi awọn ẹtọ),", 
+        "HEADER_7": "Awọn Ayipada si Awọn Ọ̀rọ̀ Yi",        
+        "CONTENT_7_1": "A ni ẹtọ lati ṣe imudojuiwọn. tabi yipada Awọn ofin Iṣẹ ni eyikeyi akoko laisi akiyesi iṣaaju. Ẹya tuntun ni a yoo fi sii sori oju opo wẹẹbu wa tabi laarin ohun elo App."
+      }
+    }
+  },
+  "SHARED": {
+    "PIONEER_LABEL": "Pionier",
+    "BUY": "Ra oja",
+    "NAVIGATE": "Ṣàbẹ̀wò",
+    "NO_COMMENT": "Ko si asọye ti a pese", 
+    "SEARCH_CENTER": "Ṣeto ile-iṣẹ wiwa", 
+    "CHECK_REVIEWS": "Ṣayẹwo Awọn atunwo",
+    "SEARCH_REVIEWS": "Awọn atunwo wiwa", 
+    "SEARCH_LOADING": "Ṣawari nlo...", 
+    "REPLY": "E te pada", 
+    "SAVE": "Fipamọ",
+    "CONFIRM_DIALOG": "O ni awọn ayipada ti a ko fi pamọ. Ṣe o fẹ lati lọ nitootọ?",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Orukọ olumulo Pi",
+      "NAME_LABEL": "Orukọ",
+      "PHONE_NUMBER_LABEL": "Nomba foonu",
+      "EMAIL_LABEL": "Imeeli"
+    },
+    "PHOTO": {
+      "UPLOAD_PHOTO_LABEL": "Irùsókè Fọto re",
+      "UPLOAD_PHOTO_PLACEHOLDER": "Ṣirùsókè aworan lati ṣe iranlọwọ lati fa awọn oluraja (PNG, JPG, JPEG, WEBP)", 
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Ṣe agbejade aworan lati ṣe atilẹyin atunyẹwo rẹ (PNG, JPG, JPEG, WEBP)", 
+      "IMAGE_DROP_UPLOAD_MESSAGE": "Fi aworan rẹ silẹ nibi tabi ṣawari",
+      "SUPPORTS_FILE_MESSAGE": "Awọn atilẹyin: PNG, JPG, JPEG, WEBP",
+      "MISC_LABELS": {
+        "USER_PREFERENCES_LABEL": "Aworan profaili",
+        "SELLER_IMAGE_LABEL": "Aworan eniti o ta ọja",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Aworan atunyẹwo"
+      }
+    },
+    "REACTION_RATING": {
+      "UNSAFE": "Ailewu",
+      "TRUSTWORTHY": "Igbẹkẹle",
+      "EMOTIONS": {
+        "DESPAIR": "Ibanuje",
+        "SAD": "Binilẹ",
+        "OKAY": "Odara",
+        "HAPPY": "Ayọ",
+        "DELIGHT": "Inu-didun"
+      },
+      "VALIDATION": {
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Atunyẹwo kuna lati fi silẹ",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Atunyẹwo silẹ ni aṣeyọri",
+        "SELECT_EMOJI_EXPRESSION": "Jọwọ yan ikosile emoji" 
+      }
+    },
+    "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "Ṣawari ipo kan, ilu, tabi adirẹsi",
+      "VALIDATION": {
+        "MAP_CENTER_SUCCESS_MESSAGE": "A ti fipamọ ile-iṣẹ rẹ dara dada"
+      }
+    },
+    "LOADING_SCREEN_MESSAGE": "Iboju Ikojopo ifiranse ...",
+    "SAVING_SCREEN_MESSAGE": "Iboju Nfipamo ifiranse ...",
+    "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Ifi silẹ kuna nitori olumulo ko ni Atilẹyin rara", 
+      "UNEXPECTED_ERROR_MESSAGE": "Aṣiṣe Aiirotẹlẹ kan oṣẹlẹ" 
+    }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "A ko ri oju-iwe ti owa",
+    "PAGE_NOT_FOUND_MESSAGE": "Mabinu, oju-iwe ti o n wa ko si ni ibi."
+  }
+}
