@@ -87,6 +87,14 @@ export const menu = {
       },
       {
         id: 11,
+        code: 'yor-NG',
+        label: 'NG/YOR',
+        title: 'Nigerian Yoruba',
+        translation: 'Yoruba',
+        icon: '',
+      },
+      {
+        id: 12,
         code: 'ewe-BJ',
         label: 'BJ/EWE',
         title: 'Benin Ewe',
@@ -94,7 +102,7 @@ export const menu = {
         icon: '',
       },
       {
-        id: 12,
+        id: 13,
         code: 'fon-BJ',
         label: 'BJ/FON',
         title: 'Benin Fon',
