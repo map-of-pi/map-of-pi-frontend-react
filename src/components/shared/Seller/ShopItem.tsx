@@ -294,27 +294,32 @@ export const ShopItem: React.FC<{
 
   const handleSave = async () => {
     const formDataToSend = new FormData();
-    formDataToSend.append('name', removeUrls(formData.name));
-    formDataToSend.append('_id', formData._id || '');
-    formDataToSend.append('description', removeUrls(formData.description || ''));
-    formDataToSend.append('duration', formData.duration?.toString() ?? 1);
-    formDataToSend.append('seller_id', '');
-    formDataToSend.append('stock_level', formData.stock_level || '1 available');
-    formDataToSend.append('price', formData.price.$numberDecimal?.toString() ?? 0.01);
+    
+    // Prepare form data
+    formDataToSend.append('name', removeUrls(formData.name || '').trim());
+    formDataToSend.append('_id', formData._id || ''); // Ensure `_id` is empty if not provided
+    formDataToSend.append('description', removeUrls(formData.description || '').trim());
+    formDataToSend.append('duration', formData.duration?.toString() || '1'); // Default to '1' week if not provided
+    formDataToSend.append('seller_id', formData.seller_id || ''); // Ensure `seller_id` is added at BE
+    formDataToSend.append('stock_level', formData.stock_level || '1 available'); // Default stock level
+    formDataToSend.append('price', formData.price?.$numberDecimal?.toString() || '0.01'); // Ensure default price is valid
   
+    // Add file if provided
     if (file) {
       formDataToSend.append('image', file);
     }
-
+  
     try {
       logger.info('Form data being sent:', Object.fromEntries(formDataToSend.entries()));
+      
+      // Send data to backend
       const data = await addOrUpdateSellerItem(formDataToSend);
+      
       if (data) {
-        logger.info('Saved seller item', data);
+        logger.info('Saved seller item:', data);
         setReload(true);
-        setShowDialog(true); 
+        setShowDialog(true);
         setIsAddItemEnabled(false);
-        logger.info('Seller item saved successfully:', { data });
         showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_SAVED'));
       }
     } catch (error) {
@@ -322,6 +327,7 @@ export const ShopItem: React.FC<{
       showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_SAVE'));
     }
   };
+  
 
   const handleDelete = async (item_id: string)=> {
     if (!item_id || item_id ==='') {
@@ -329,7 +335,7 @@ export const ShopItem: React.FC<{
     }
       
     try {
-      const resp = await deleteSellerItem(item_id);
+      const resp = await deleteSellerItem(item_id); 
       if (resp) {
         setReload(true);
         setShowDialog(true); 
