@@ -10,6 +10,7 @@ import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/ser
 import removeUrls from "@/utils/sanitize";
 import { AppContext } from "../../../../context/AppContextProvider";
 import logger from '../../../../logger.config.mjs';
+import { SellerItems } from "@/constants/demoAPI";
 
 export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
   const t = useTranslations();
@@ -366,7 +367,7 @@ export const ShopItem: React.FC<{
             </div>
         
             <div className="flex-auto w-32">
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <Input
                   label={t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
                   name="price"
@@ -411,35 +412,34 @@ export const ShopItem: React.FC<{
           <label className="text-[18px] text-[#333333]">
             {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_DURATION_LABEL')}:
           </label>
-          <div className="flex items-center gap-2">
-            <div className="flex gap-1 items-center">
-              <Button
-                label="-"
-                disabled={!isActive || formData.duration <= 1} // Disable if not active or quantity is zero
-                styles={{
-                  color: "#ffc153",
-                  padding: "10px 15px",
-                  borderRadius: "100%",
-                }}
+          <div className="flex items-center gap-4 w-full">
+            <div className="flex gap-2 items-center justify-between mr-4">
+              <button
+                className={`text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center ${
+                  !isActive || formData.duration <= 1 ? `bg-[grey]` : `bg-primary`
+                }`}
                 onClick={handleDecrement} // Decrement handler
-              />
-              <Input
+              >
+                -
+              </button>
+
+              <input
                 name="duration"
                 type="number"
                 value={formData.duration}
                 onChange={handleChange}
+                className={`p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 text-center focus:border-[#1d724b] border-[2px] max-w-[65px]`}
                 disabled={!isActive} // Disable if not active
               />
-              <Button
-                label="+"
-                disabled={!isActive} // Disable if not active
-                styles={{
-                  color: "#ffc153",
-                  padding: "10px 15px",
-                  borderRadius: "100%"
-                }}
+
+              <button
+                className={`text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center ${
+                  !isActive ? `bg-[grey]` : `bg-primary`
+                }`}
                 onClick={handleIncrement} // Increment handler
-              />
+              >
+                +
+              </button>
             </div>
             <Button
               label={t('SHARED.DELETE')}
@@ -447,7 +447,8 @@ export const ShopItem: React.FC<{
               styles={{
                 color: '#ffc153',
                 height: '40px',
-                padding: '10px 15px'
+                padding: '5px 8px',
+                width: "100%"
               }}
               onClick={()=>handleDelete(formData._id)}
             />
@@ -458,6 +459,7 @@ export const ShopItem: React.FC<{
                 color: '#ffc153',
                 height: '40px',
                 padding: '10px 15px',
+                width: "100%"
               }}
               onClick={handleSave}
             />
