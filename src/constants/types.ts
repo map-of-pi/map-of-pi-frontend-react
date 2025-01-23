@@ -16,6 +16,15 @@ export interface IUserSettings {
     type: 'Point';
     coordinates: [number, number];
   };
+  search_filters?: {
+    include_active_sellers: boolean | undefined;
+    include_inactive_sellers: boolean | undefined;
+    include_test_sellers: boolean | undefined;
+    include_trust_level_100: boolean | undefined;
+    include_trust_level_80: boolean | undefined;
+    include_trust_level_50: boolean | undefined;
+    include_trust_level_0: boolean | undefined;
+  };
 }
 
 export interface ISeller {
