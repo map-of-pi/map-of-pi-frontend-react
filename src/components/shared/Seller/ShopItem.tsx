@@ -87,21 +87,6 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
     stock_level: StockLevelType.available_1,
   }
 
-  const translatedFulfillmentMethod = [
-    {
-      value: 'pickup',
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
-      ),
-    },
-    {
-      value: 'delivery',
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
-      ),
-    },
-  ];
-
   return (
     <>        
       <div className="mb-4">
@@ -141,28 +126,6 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
             /> 
           ))            
         }
-      </div>
-      <div>
-        <Select
-          label={t(
-            'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL',
-          )}
-          name="fulfillment_method"
-          options={translatedFulfillmentMethod}
-        />
-        <h2 className={SUBHEADER}>
-          {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}
-        </h2>
-        <TextArea
-          label={t(
-            'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
-          )}
-          placeholder={t(
-            'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
-          )}
-          name="delivery_address"
-          type="text"
-        />
       </div>
     </>
   );
@@ -418,7 +381,7 @@ export const ShopItem: React.FC<{
           <label className="text-[18px] text-[#333333]">
             {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_DURATION_LABEL')}:
           </label>
-          <div className="flex items-center gap-4 w-full">
+          <div className="flex items-center gap-4 w-full mt-1">
             <div className="flex gap-2 items-center justify-between mr-4">
               <button
                 className={`text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center ${
@@ -473,7 +436,10 @@ export const ShopItem: React.FC<{
           {formData?.expired_by && (
             <label className="text-[14px] text-[#333333]">
               <span className="fw-bold text-lg">
-                {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') + ': '} 
+                {new Date(formData.expired_by) > new Date() ? 
+                  t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') : 
+                  t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.EXPIRED')
+                } :  
               </span>
               {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
                 expired_by_date: new Intl.DateTimeFormat(locale || 'en-US', {
