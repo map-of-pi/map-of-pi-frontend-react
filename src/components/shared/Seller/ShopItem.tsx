@@ -10,7 +10,6 @@ import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/ser
 import removeUrls from "@/utils/sanitize";
 import { AppContext } from "../../../../context/AppContextProvider";
 import logger from '../../../../logger.config.mjs';
-import { SellerItems } from "@/constants/demoAPI";
 
 export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
   const t = useTranslations();
@@ -328,14 +327,13 @@ export const ShopItem: React.FC<{
     }
   };
   
-
   const handleDelete = async (item_id: string)=> {
     if (!item_id || item_id ==='') {
       return showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SELLER_ITEM_NOT_FOUND'));     
     }
       
     try {
-      const resp = await deleteSellerItem(item_id); 
+      const resp = await deleteSellerItem(item_id);
       if (resp) {
         setReload(true);
         setShowDialog(true); 
