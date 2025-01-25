@@ -1,3 +1,5 @@
+import { SellerItem, StockLevelType } from "./types";
+
 export const itemData = {
   seller: {
     name: "seller name",
@@ -61,3 +63,45 @@ export const PiFestJson = {
     __v: 0
   }
 };
+
+export const SellerItems:SellerItem[] = [
+  {
+    seller_id: '01',
+    name: "Ham & cheese sandwich",
+    _id: "01",
+    duration: 4,
+    price: {$numberDecimal: 10},
+    description: "A filling sandwich made with soft fresh-backed bread, tender, ham, cheese creamy slices, crisp lettuce, juicy tomato and mayo",
+    image: "/images/business/product.png",
+    stock_level: StockLevelType.available_1,
+    created_at: new Date(),
+    updated_at: new Date(),
+    expired_by: new Date()
+  }, 
+  {
+    seller_id: '02',
+    name: "Coffee",
+    _id: "02",
+    duration: 0.5,
+    price: {$numberDecimal: 10},
+    description: "A nice refreshing coffee",
+    image: "/images/business/product.png",
+    stock_level: StockLevelType.available_2,
+    created_at: new Date(),
+    updated_at: new Date(),
+    expired_by: new Date()
+  }, 
+  {
+    seller_id: '03',
+    name: "Mobile phones",
+    _id: "03",
+    duration: 11,
+    price: {$numberDecimal: 20},
+    description: "All kind of mobile phones",
+    image: "/images/business/product.png",
+    stock_level: StockLevelType.available_3,
+    created_at: new Date(),
+    updated_at: new Date(),
+    expired_by: new Date()
+  }, 
+];
