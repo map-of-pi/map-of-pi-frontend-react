@@ -10,6 +10,7 @@ import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/ser
 import removeUrls from "@/utils/sanitize";
 import { AppContext } from "../../../../context/AppContextProvider";
 import logger from '../../../../logger.config.mjs';
+import Image from "next/image";
 
 export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
   const t = useTranslations();
@@ -456,4 +457,151 @@ export const ShopItem: React.FC<{
     </>
   );
 };
-  
+
+
+export const ListItem: React.FC<{
+  item: SellerItem;
+  refCallback: (node: HTMLElement | null) => void;
+}> = ({ item, refCallback }) => {
+  const t = useTranslations();
+
+  const translatedStockLevelOptions = [
+    { value: '1 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_1') },
+    { value: '2 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_2') },
+    { value: '3 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_3') },
+    { value: 'Many available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MANY') },
+    { value: 'Made to order', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MADE_TO_ORDER') },
+    { value: 'Ongoing service', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.ONGOING_SERVICE') },
+    { value: 'Sold', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.SOLD') },
+  ];
+
+  const [formData, setFormData] = useState<SellerItem>({
+    seller_id: item.seller_id || '',
+    name: item.name || '',
+    description: item.description || '',
+    duration: item.duration || 1,
+    price: item.price || 0.01,
+    image: item.image || '',
+    stock_level: item.stock_level || translatedStockLevelOptions[0].name,
+    expired_by: item.expired_by,
+    _id: item._id || '',
+  });
+  const [quantity, setQuantity] = useState<number>(1)
+
+  const [previewImage, setPreviewImage] = useState<string>(formData.image || '');
+  const [pickedItems, setPickedItems] = useState<string[]>([]);
+
+  const handlePicked = (itemId: string): void => {
+    setPickedItems((prev) =>
+      prev.includes(itemId) ? prev.filter((item) => item !== itemId) : [...prev, itemId]
+    );
+    console.log("picked items: ", pickedItems)
+  };
+
+  const handleIncrement = () => {
+    setQuantity((prev) => ( prev + 1 ));
+  };
+
+  const handleDecrement = () => {
+    setQuantity((prev) => (Math.max(1, prev - 1) ));
+  };
+
+  return (
+    <div
+      ref={refCallback}
+      data-id={item._id}
+      className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
+        pickedItems.includes(formData._id) ? 'bg-yellow-100' : ''
+      }`}
+    >
+      <div className="p-3">
+        <div className="flex gap-x-4">
+          <div className="flex-auto w-64">
+            <Input
+              label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.ITEM_LABEL') + ':'}
+              name="name"
+              type="text"
+              value={formData.name}
+              disabled={true}
+            />
+          </div>
+
+          <div className="flex-auto w-32">
+            <div className="flex items-center gap-2">
+              <Input
+                label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
+                name="price"
+                type="number"
+                value={formData.price?.$numberDecimal || formData.price.toString()}
+                disabled={true}
+              />
+              <p className="text-gray-500 text-sm">Pi</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex gap-x-4 items-center">
+          <div className="flex-auto w-64">
+            <TextArea
+              label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
+              name="description"
+              value={formData.description}
+              disabled={true}
+              styles={{ maxHeight: '100px' }}
+            />
+          </div>
+          <div className="flex-auto w-32 gap-2">
+            <label className="block text-[17px] text-[#333333]">
+              {t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.PHOTO') + ':'}
+            </label>
+            <Image
+              src={previewImage}
+              height={50}
+              width={50}
+              alt="image"
+              className={'h-[100px] w-auto'}
+            />
+          </div>
+        </div>
+
+        <label className="text-[18px] text-[#333333]">
+          {t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.BUYING_QUANTITY_LABEL')}:
+        </label>
+        <div className="flex items-center gap-4 w-full mt-1">
+          <div className="flex gap-2 items-center justify-between mr-4">
+            <button
+              className={`text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center ${
+                quantity <= 1 ? `bg-[grey]` : `bg-primary`
+              }`}
+              onClick={handleDecrement}
+            >
+              -
+            </button>
+            <input
+              name="duration"
+              type="number"
+              value={quantity}
+              className="p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 text-center focus:border-[#1d724b] border-[2px] max-w-[65px]"
+              disabled={false}
+            />
+            <button
+              className="text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center bg-primary"
+              onClick={handleIncrement}
+            >
+              +
+            </button>
+          </div>
+
+          <Button
+            label={pickedItems.includes(formData._id) ? t('Unpick') : t('Pick')}
+            styles={{
+              color: '#ffc153',
+              width: '100%',
+            }}
+            onClick={() => handlePicked(formData._id)}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
