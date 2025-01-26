@@ -70,7 +70,7 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
       }
     };
     
-    if (dbSeller){
+    if (dbSeller) {
       getSellerItems(dbSeller.seller_id);
     }
   }, [dbSeller, reload]); 
@@ -431,26 +431,33 @@ export const ShopItem: React.FC<{
               onClick={handleSave}
             />
           </div>
-          {formData?.expired_by && (
-            <label className="text-[14px] text-[#333333]">
-              <span className="fw-bold text-lg">
-                {new Date(formData.expired_by) > new Date() ? 
-                  t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') : 
-                  t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.EXPIRED')
-                } :  
-              </span>
-              {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
-                expired_by_date: new Intl.DateTimeFormat(locale || 'en-US', {
-                  day: '2-digit',
-                  month: 'long',
-                  year: 'numeric',
-                  hour: 'numeric',
-                  minute: 'numeric',
-                  hour12: true,
-                }).format(new Date(formData.expired_by)),
-              })}
-            </label>
-          )}
+          <div className="mt-3">
+            {formData?.expired_by && (() => {
+              const expiredDate = new Date(formData.expired_by);
+              const isActive = expiredDate > new Date();
+              const sellingStatus = isActive 
+                ? t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') 
+                : t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.EXPIRED');
+
+              const formattedDate = new Intl.DateTimeFormat(locale || 'en-US', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true,
+              }).format(expiredDate);
+
+              return (
+                <label className="text-[14px] text-[#333333]">
+                  <span className="fw-bold text-lg">{sellingStatus}: </span>
+                  {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
+                    expired_by_date: formattedDate,
+                  })}
+                </label>
+              );
+            })()}
+          </div>
         </div>
       </div>
     </>

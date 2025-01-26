@@ -18,11 +18,6 @@ export interface IUserSettings {
   };
 }
 
-export enum FulfillmentType {
-  CollectionByBuyer = 'Collection by Buyer',
-  DeliveredToBuyer = 'Delivered to Buyer'
-}
-
 export interface ISeller {
   seller_id: string;
   name: string;
@@ -40,7 +35,7 @@ export interface ISeller {
   coordinates: [number, number];
   order_online_enabled_pref: boolean;
   fulfillment_method?: string;
-  fulfillment_description?: string
+  fulfillment_description?: string;
 }
 
 export interface IReviewFeedback {
@@ -72,6 +67,11 @@ export enum DeviceLocationType {
   Automatic = 'auto',
   GPS = 'deviceGPS',
   SearchCenter = 'searchCenter'
+}
+
+export enum FulfillmentType {
+  CollectionByBuyer = 'Collection by buyer',
+  DeliveredToBuyer = 'Delivered to buyer'
 }
 
 export enum StockLevelType {
