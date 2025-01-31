@@ -4,7 +4,7 @@ import { useState, SetStateAction, useContext, useEffect, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "../Forms/Buttons/Buttons";
 import { TextArea, Input, FileInput, Select } from "../Forms/Inputs/Inputs";
-import { Notification } from "../confirm";
+import { ConfirmDialogX, Notification } from "../confirm";
 import { ISeller, SellerItem, StockLevelType } from "@/constants/types";
 import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/services/sellerApi";
 import removeUrls from "@/utils/sanitize";
@@ -200,6 +200,7 @@ export const ShopItem: React.FC<{
   const [previewImage, setPreviewImage] = useState<string>(
     formData?.image || '',
   );
+  const [showPopup, setShowPopup] = useState(false);
   const [showDialog, setShowDialog] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const { reload, setReload, showAlert } = useContext(AppContext);
@@ -300,7 +301,7 @@ export const ShopItem: React.FC<{
       const resp = await deleteSellerItem(item_id);
       if (resp) {
         setReload(true);
-        setShowDialog(true); 
+        // setShowDialog(true); 
         setIsAddItemEnabled(false);
         showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_DELETED'));
       }
@@ -418,7 +419,7 @@ export const ShopItem: React.FC<{
                 padding: '5px 8px',
                 width: "100%"
               }}
-              onClick={()=>handleDelete(formData._id)}
+              onClick={()=>setShowPopup(true)}
             />
             <Button
               label={t('SHARED.SAVE')}
@@ -461,6 +462,13 @@ export const ShopItem: React.FC<{
           </div>
         </div>
       </div>
+      {showPopup && (
+        <ConfirmDialogX
+          toggle={() => setShowPopup(false)}
+          handleClicked={()=> handleDelete(formData._id)}
+          message={t('SHARED.MAP_CENTER.VALIDATION.MAP_CENTER_SUCCESS_MESSAGE')}
+        />
+      )}
     </>
   );
 };
