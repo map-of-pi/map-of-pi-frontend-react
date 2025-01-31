@@ -34,7 +34,7 @@ export interface ISeller {
   };
   coordinates: [number, number];
   order_online_enabled_pref: boolean;
-  fulfillment_method?: string;
+  fulfillment_method: string;
   fulfillment_description?: string;
 }
 
