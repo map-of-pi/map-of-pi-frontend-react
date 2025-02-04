@@ -342,20 +342,22 @@ const Map = ({
           {t('HOME.LOCATION_SERVICES.DISABLED_LOCATION_SERVICES_MESSAGE')}
         </div>
       )}
-      {isSigningInUser ? (
-        <div className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0 bg-[#f5f1e6] ">
+
+      <div className="relative mt--2 h-[400px] translate-y-[calc(50vh_-_238.19px)] sm:h-[100vh] sm:translate-y-0">
+        {isSigningInUser ? (
+        <div className="w-full flex-1 fixed h-full top-0 left-0 right-0 bottom-0 bg-[#f5f1e6] ">
           <div className="flex justify-center items-center w-full h-full">
-            <Image 
-              src="/default.png" 
-              width={120} 
-              height={140} 
-              alt="splashscreen" 
+            <Image
+              src="/default.png"
+              width={120}
+              height={140}
+              alt="splashscreen"
             />
           </div>
         </div>
-        ) : (
+      ) : (
         <MapContainer
-          center={center ? center : [0,0]}
+          center={center ? center : [0, 0]}
           zoom={center ? zoom : 2}
           zoomControl={false}
           minZoom={2}
@@ -365,7 +367,7 @@ const Map = ({
               mapRef.current = mapInstance;
             }) as unknown as () => void // utilize Type assertion
           }
-          className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
+          className="w-full flex-1 fixed h-full top-0 left-0 right-0 bottom-0"
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -379,7 +381,7 @@ const Map = ({
               key={seller.seller_id}
               icon={customIcon}
               eventHandlers={{
-                click: () => handleMarkerClick(seller.coordinates as LatLngTuple),
+                click: () => handleMarkerClick(seller.coordinates as LatLngTuple)
               }}
             >
               <Popup
@@ -393,7 +395,7 @@ const Map = ({
                     position: 'absolute',
                     top: '-6px',
                     right: '-6px',
-                    zIndex: 1000,
+                    zIndex: 1000
                   }}
                 >
                   <CloseButton
@@ -409,7 +411,7 @@ const Map = ({
             </Marker>
           ))}
         </MapContainer>
-      )}
+      )}</div>
     </>
   );
 };

@@ -153,12 +153,13 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
   } 
 
   return (
-    <div className="search-container">
+    <div className="search-container ">
+      <SearchBar onSearch={handleSearch} page={'map_center'} />
+      <div className="relative mt--2 h-[400px] translate-y-[calc(50vh_-_238.19px)] sm:h-[100vh] sm:translate-y-0">
       <p className="search-text">
         {t('SHARED.MAP_CENTER.SEARCH_BAR_PLACEHOLDER')}
       </p>
-      <SearchBar onSearch={handleSearch} page={'map_center'} />
-      <MapContainer
+        <MapContainer
         center={center}
         zoom={2}
         zoomControl={false}
@@ -166,7 +167,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         maxZoom={18}
         // maxBounds={bounds}
         // maxBoundsViscosity={1.0}
-        className="w-full flex-1 fixed top-[76.19px] h-[calc(100vh-76.19px)] left-0 right-0 bottom-0"
+        className="w-full flex-1 fixed h-full top-0 left-0 right-0 bottom-0"
         whenReady={() => {
           const mapInstance: any = mapRef.current;
           if (mapInstance) {
@@ -182,7 +183,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <CenterMarker />
         <MapHandler />
         <RecenterAutomatically position={center} />
-      </MapContainer>
+      </MapContainer></div>
       
       <div className="absolute bottom-8 z-10 flex justify-start px-6 right-0 left-0 m-auto pointer-events-none">
         {/* Add Set Map Center Button */}
