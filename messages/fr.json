@@ -60,12 +60,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mon marqueur mon lieu de vente",
       "SELLER_SETTINGS_LABEL": "Paramètres vendeur",
       "SELLER_SELL_CENTER": "Définir le centre de vente",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Achats en ligne",
+      "MAPPI_ALLOWANCE_LABEL": "Allocation Mappi restante",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Méthode de réalisation",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Collecte par l'acheteur",
+          "DELIVERED_TO_BUYER": "Livré à l'acheteur"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Instructions de réalisation pour l'acheteur",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Le retrait se fait à l'adresse du vendeur. Si la livraison est choisie, veuillez entrer l'adresse de l'acheteur.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Veuillez entrer une adresse e-mail valide",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Enregistrement réussi",
         "FAILED_REGISTRATION_SUBMISSION": "Erreur lors de l'enregistrement",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Échec de l'inscription car l'utilisateur n'est pas authentifié",
-        "UNINITIALIZED_SELL_CENTER": "Veuillez définir votre centre de vente"
+        "UNINITIALIZED_SELL_CENTER": "Veuillez définir votre centre de vente",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Article du vendeur enregistré avec succès",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Article du vendeur supprimé avec succès",
+        "FAILED_SELLER_ITEM_SAVE": "Erreur lors de l'enregistrement de l'article du vendeur",
+        "FAILED_SELLER_ITEM_DELETE": "Erreur lors de la suppression de l'article du vendeur",
+        "SELLER_ITEM_NOT_FOUND": "Article du vendeur introuvable",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Enregistrement réussi. Allocation Mappi utilisée {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Échec de l'enregistrement. Allocation Mappi insuffisante disponible"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "Article",
+        "PRICE_LABEL": "Prix",
+        "STOCK_LABEL": "Niveau de stock",
+        "DESCRIPTION_LABEL": "Description",
+        "PHOTO": "Photo",
+        "SELLING_DURATION_LABEL": "Durée de vente en semaines",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Actif",
+          "EXPIRED": "Expiré"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 disponible",
+          "AVAILABLE_2": "2 disponibles",
+          "AVAILABLE_3": "3 disponibles",
+          "MANY": "Beaucoup disponibles",
+          "MADE_TO_ORDER": "Fabriqué sur commande",
+          "ONGOING_SERVICE": "Service continu",
+          "SOLD": "Vendu"
+        },
+        "SELLING_EXPIRATION_DATE": "À vendre avant le {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -193,7 +233,11 @@
     "SEARCH_REVIEWS": "Rechercher des avis",
     "SEARCH_LOADING": "Chargement de la recherche...",
     "REPLY": "Répondre",
+    "ADD_ITEM": "Ajouter un article",
+    "DELETE": "Supprimer",
+    "CONFIRM_DELETE": "Voulez-vous vraiment supprimer cet élément? Cette action est irréversible.",
     "SAVE": "Enregistrer",
+    "CONFIRM": "Confirmer",
     "CONFIRM_DIALOG": "Vos modifications ne sont pas enregistrées. Voulez-vous vraiment quitter?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Nom d'utilisateur Pi",

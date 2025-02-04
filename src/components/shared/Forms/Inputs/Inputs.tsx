@@ -27,7 +27,6 @@ export const Input = (props: any) => {
   );
 };
 
-
 export const TelephoneInput = (props: any) => {
   const { label, smartCaret, ...input } = props;
   return (
@@ -77,8 +76,8 @@ export const FileInput = (props: any) => {
       {props.describe && (
         <label className="block pb-3 text-sm text-gray-400">{props.describe}</label>
       )}
-      <div className="flex flex-col items-center justify-center overflow-hidden p-3 pt-5 pb-5 rounded-md relative">
-        <div className="w-full h-[200px] relative mb-4">
+      <div className="flex flex-col items-center justify-center overflow-hidden p-3 rounded-md relative">
+        <div className={`w-full ${props.height? props.height: 'h-[200px]'} relative mb-4`}>
           <Image
             src={isImageUploaded ? props.imageUrl : '/images/shared/upload.png'}
             alt="Upload image"
@@ -87,7 +86,7 @@ export const FileInput = (props: any) => {
             style={{ objectFit: 'contain', maxHeight: '200px', maxWidth: '100%' }}
           />
         </div>
-        {!isImageUploaded && (
+        {!props.hideCaption && !isImageUploaded && (
           <div className="text-center text-[#828282]">
             <div>
               {t('SHARED.PHOTO.IMAGE_DROP_UPLOAD_MESSAGE')}
