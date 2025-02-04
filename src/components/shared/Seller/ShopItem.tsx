@@ -301,7 +301,6 @@ export const ShopItem: React.FC<{
       const resp = await deleteSellerItem(item_id);
       if (resp) {
         setReload(true);
-        // setShowDialog(true); 
         setIsAddItemEnabled(false);
         showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_DELETED'));
       }
@@ -466,7 +465,7 @@ export const ShopItem: React.FC<{
         <ConfirmDialogX
           toggle={() => setShowPopup(false)}
           handleClicked={()=> handleDelete(formData._id)}
-          message={t('SHARED.MAP_CENTER.VALIDATION.MAP_CENTER_SUCCESS_MESSAGE')}
+          message={t('SHARED.CONFIRM_DELETE')}
         />
       )}
     </>

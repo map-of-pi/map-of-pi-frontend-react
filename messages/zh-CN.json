@@ -235,6 +235,7 @@
     "REPLY": "回复",
     "ADD_ITEM": "添加项目",
     "DELETE": "删除",
+    "CONFIRM_DELETE": "您确定要删除此项目吗？此操作无法撤销。",
     "SAVE": "保存",
     "CONFIRM": "确认",
     "CONFIRM_DIALOG": "您有未保存的更改。确定要离开吗？",

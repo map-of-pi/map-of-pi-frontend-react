@@ -242,6 +242,7 @@
     "REPLY": "Reply",
     "ADD_ITEM": "Add Item",
     "DELETE": "Delete",
+    "CONFIRM_DELETE": "Do you really want to delete this item? This action cannot be undone.",
     "SAVE": "Save",
     "CONFIRM": "Confirm",
     "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",

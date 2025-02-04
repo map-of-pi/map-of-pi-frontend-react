@@ -60,12 +60,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Ifiran adirẹsi ile itaja mi , tabi awon nkan ti mo nta",
       "SELLER_SETTINGS_LABEL": "Eto reglage ti Olutaja",
       "SELLER_SELL_CENTER": "Ṣeto aarin Ile-iṣẹ Tita",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Ìṣàkóso Ọjà Lórí Ayélujára",
+      "MAPPI_ALLOWANCE_LABEL": "Ìkúnrẹ́rẹ́ Mappi tó kù",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Ọ̀nà ìpẹ̀yà",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Ìkó nàgó látàrí oníbàárà",
+          "DELIVERED_TO_BUYER": "Títẹ̀sí lọ sí oníbàárà"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Ìtọná ìpẹ̀yà sí oníbàárà",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Ìkó nàgó jẹ́ láti àdírẹ́sì olùtà. Tí ìfí tọ́jú bá ti yan, jọ̀wọ́ fi àdírẹ́sì oníbàárà rẹ̀ sílẹ̀.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Jọwọ tẹ adirẹsi imeeli to sise dada eyi to wulo",  
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Aṣeyọri Iforukọsilẹ",
-        "FAILED_REGISTRATION_SUBMISSION": "Aṣiṣe fifipamọ iforukọsilẹ",  
-        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Ìforúkọsílẹ̀ kùnà nítorí pé aṣàmúlò kò jẹ́ ìfìdímúlẹ̀", 
-        "UNINITIALIZED_SELL_CENTER": "Jọ̀wọ́ ṣeto Ilé-iṣẹ́ Títà"
+        "FAILED_REGISTRATION_SUBMISSION": "Aṣiṣe fifipamọ iforukọsilẹ",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Ìforúkọsílẹ̀ kùnà nítorí pé aṣàmúlò kò jẹ́ ìfìdímúlẹ̀",
+        "UNINITIALIZED_SELL_CENTER": "Jọ̀wọ́ ṣeto Ilé-iṣẹ́ Títà",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Item olùtà ti fipamọ́ pẹ̀lú aṣeyọrí",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Item olùtà ti parí pẹ̀lú aṣeyọrí",
+        "FAILED_SELLER_ITEM_SAVE": "Àṣìṣe ní fífi item olùtà pamọ́",
+        "FAILED_SELLER_ITEM_DELETE": "Àṣìṣe ní pa item olùtà",
+        "SELLER_ITEM_NOT_FOUND": "Kò ri item olùtà",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Fipamọ́ aṣeyọrí. Mappi ìkúnrẹ́rẹ́ tó lò ni {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Fipamọ́ kò ṣeyọrí. Mappi ìkúnrẹ́rẹ́ kò tó"
+      },
+      "SELLER_ITEMS_FEATURE": {  
+        "ITEM_LABEL": "Item",
+        "PRICE_LABEL": "Ọya",
+        "STOCK_LABEL": "Ìpele ìkópa",
+        "DESCRIPTION_LABEL": "Àpejúwe",
+        "PHOTO": "Fọ́tò",
+        "SELLING_DURATION_LABEL": "Àkókò títà ní ọsẹ",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Ṣiṣẹ́",
+          "EXPIRED": "Tí parí"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 wà",
+          "AVAILABLE_2": "2 wà",
+          "AVAILABLE_3": "3 wà",
+          "MANY": "Ọ̀pọ̀ wà",
+          "MADE_TO_ORDER": "A ṣe é fún ìbéèrè",
+          "ONGOING_SERVICE": "Ìrànlọwọ tó nlọ lọwọ",
+          "SOLD": "Tà"
+        },
+        "SELLING_EXPIRATION_DATE": "Títà ní {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -193,6 +233,9 @@
     "SEARCH_REVIEWS": "Awọn atunwo wiwa", 
     "SEARCH_LOADING": "Ṣawari nlo...", 
     "REPLY": "E te pada", 
+    "ADD_ITEM": "Fikun un Item",  
+    "DELETE": "Pàdánù",  
+    "CONFIRM_DELETE": "Ṣé o dájú pé o fẹ́ pa àyọkà yìí? Ìṣe yìí kò lè tún ṣe.",
     "SAVE": "Fipamọ",
     "CONFIRM_DIALOG": "O ni awọn ayipada ti a ko fi pamọ. Ṣe o fẹ lati lọ nitootọ?",
     "USER_INFORMATION": {
