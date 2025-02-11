@@ -349,7 +349,7 @@ export const ShopItem: React.FC<{
               </div>
             </div>
           </div>
-          <div className="flex gap-x-4 items-center">
+          <div className="flex gap-x-4">
             <div className="flex-auto w-64">
               <TextArea
                 label={t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
@@ -555,7 +555,7 @@ export const ListItem: React.FC<{
           </div>
         </div>
 
-        <div className="flex gap-x-4 items-center">
+        <div className="flex gap-x-4">
           <div className="flex-auto w-64">
             <TextArea
               label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
