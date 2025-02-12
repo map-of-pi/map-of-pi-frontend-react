@@ -202,6 +202,7 @@ export const ShopItem: React.FC<{
   );
   const [showPopup, setShowPopup] = useState(false);
   const [showDialog, setShowDialog] = useState<boolean>(false);
+  const [dialogueMessage, setDialogueMessage] = useState<string>('');
   const [file, setFile] = useState<File | null>(null);
   const { reload, setReload, showAlert } = useContext(AppContext);
 
@@ -257,40 +258,61 @@ export const ShopItem: React.FC<{
   };
 
   const handleSave = async () => {
+    const duration = Number(formData.duration);
+    const today = new Date();
+
+    if (item.created_at) {
+      const createdAt = new Date(item.created_at);
+        
+      // Calculate spent weeks since created_at
+      const spentWeeks = Math.floor((today.getTime() - createdAt.getTime()) / (7 * 24 * 60 * 60 * 1000));
+
+        // Ensure the new duration is not less than already spent weeks
+      if (duration < spentWeeks) {
+        setDialogueMessage(`Selling duration cannot be reduced below the ${spentWeeks} weeks already spent`);
+        setShowDialog(true);
+        return null;
+      }
+    }
+
     const formDataToSend = new FormData();
-    
+
     // Prepare form data
     formDataToSend.append('name', removeUrls(formData.name || '').trim());
-    formDataToSend.append('_id', formData._id || ''); // Ensure `_id` is empty if not provided
+    formDataToSend.append('_id', formData._id || '');
     formDataToSend.append('description', removeUrls(formData.description || '').trim());
-    formDataToSend.append('duration', formData.duration?.toString() || '1'); // Default to '1' week if not provided
-    formDataToSend.append('seller_id', formData.seller_id || ''); // Ensure `seller_id` is added at BE
-    formDataToSend.append('stock_level', formData.stock_level || '1 available'); // Default stock level
-    formDataToSend.append('price', formData.price?.$numberDecimal?.toString() || '0.01'); // Ensure default price is valid
-  
+    formDataToSend.append('duration', formData.duration?.toString() || '1');
+    formDataToSend.append('seller_id', formData.seller_id || '');
+    formDataToSend.append('stock_level', formData.stock_level || '1 available');
+    formDataToSend.append('price', formData.price?.$numberDecimal?.toString() || '0.01');
+
     // Add file if provided
     if (file) {
-      formDataToSend.append('image', file);
+        formDataToSend.append('image', file);
     }
-  
+
     try {
-      logger.info('Form data being sent:', Object.fromEntries(formDataToSend.entries()));
-      
-      // Send data to backend
-      const data = await addOrUpdateSellerItem(formDataToSend);
-      
-      if (data) {
-        logger.info('Saved seller item:', data);
-        setReload(true);
-        setShowDialog(true);
-        setIsAddItemEnabled(false);
-        showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_SAVED'));
-      }
+        logger.info('Form data being sent:', Object.fromEntries(formDataToSend.entries()));
+
+        // Send data to backend
+        const data = await addOrUpdateSellerItem(formDataToSend);
+
+        if (data) {
+            logger.info('Saved seller item:', data);
+            setReload(true);
+            setDialogueMessage(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT', {
+                mappi_count: '99'
+            }));
+            setShowDialog(true);
+            setIsAddItemEnabled(false);
+            showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_SAVED'));
+        }
     } catch (error) {
-      logger.error('Error saving seller item:', error);
-      showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_SAVE'));
+        logger.error('Error saving seller item:', error);
+        showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_SAVE'));
     }
-  };
+};
+
   
   const handleDelete = async (item_id: string)=> {
     if (!item_id || item_id ==='') {
@@ -319,9 +341,7 @@ export const ShopItem: React.FC<{
         className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 cursor-pointer 
           ${isActive ? '' : 'opacity-50 pointer-events-none'}`}
       >
-        <Notification message={t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT', { 
-          mappi_count: '99' 
-        })} showDialog={showDialog} setShowDialog={setShowDialog} />
+        <Notification message={dialogueMessage} showDialog={showDialog} setShowDialog={setShowDialog} />
         <div className="p-3">
           <div className="flex gap-x-4">
             <div className="flex-auto w-64">
@@ -466,7 +486,7 @@ export const ShopItem: React.FC<{
         <ConfirmDialogX
           toggle={() => setShowPopup(false)}
           handleClicked={()=> handleDelete(formData._id)}
-          message={t('SHARED.MAP_CENTER.VALIDATION.MAP_CENTER_SUCCESS_MESSAGE')}
+          message={t('Do you want to delete the item?')}
         />
       )}
     </>
