@@ -13,13 +13,14 @@ import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { ISeller, IUserSettings, IUser, SellerItem } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
-import { fetchSingleUserSettings } from '@/services/userSettingsApi';
+import { fetchSingleUserSettings, makePayment } from '@/services/userSettingsApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
 import { ListItem, ShopItem } from '@/components/shared/Seller/ShopItem';
 import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
+import createPayment from '@/utils/payment';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -42,6 +43,20 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const handleShopItemRef = (node: HTMLElement | null) => {
     if (node && observer.current) {
       observer.current.observe(node);
+    }
+  };
+
+  const createPayment = async () => {
+    try {
+      const data = await makePayment();
+      if (data) {
+        console.log('payment data', data)
+      }
+    } catch (error) {
+      logger.error('Error fetching seller data:', error);
+      setError('Error fetching seller data.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -254,7 +269,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
                 height: '40px',
                 padding: '15px 20px',
               }}
-              // onClick={handleSave}
+              onClick={()=>createPayment()}
             />
           </div>
         </ToggleCollapse>
