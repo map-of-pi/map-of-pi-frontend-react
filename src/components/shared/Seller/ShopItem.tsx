@@ -81,7 +81,7 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
     name: "",
     _id: "",
     duration: 1,
-    price: {$numberDecimal: 0.01},
+    price: {$numberDecimal: '0.01'},
     description: "",
     image: "",
     stock_level: StockLevelType.available_1,
@@ -190,7 +190,7 @@ export const ShopItem: React.FC<{
     name: item.name || '',
     description: item.description || '',
     duration: item.duration || 1,
-    price: item.price || 0.01,
+    price: { $numberDecimal: item.price?.$numberDecimal?.toString()},
     image: item.image || '',
     stock_level: item.stock_level || translatedStockLevelOptions[0].name,
     expired_by: item.expired_by, 
@@ -205,6 +205,31 @@ export const ShopItem: React.FC<{
   const [dialogueMessage, setDialogueMessage] = useState<string>('');
   const [file, setFile] = useState<File | null>(null);
   const { reload, setReload, showAlert } = useContext(AppContext);
+  const [sellingStatus, setSellingStatus] = useState('');
+  const [formattedDate, setFormattedDate] = useState('');
+
+  useEffect(() => {
+    if (item?.expired_by) {
+      const expiredDate = new Date(item.expired_by);
+      const isActive = expiredDate > new Date();
+      setSellingStatus(
+        isActive 
+          ? t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') 
+          : t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.EXPIRED')
+      );
+
+      setFormattedDate(
+        new Intl.DateTimeFormat(locale || 'en-US', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true,
+        }).format(expiredDate)
+      );
+    }
+  }, [item]); // ✅ Runs when `item` changes
 
   // Handle image upload
   const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -230,12 +255,13 @@ export const ShopItem: React.FC<{
     // handle such scenarios where the event might not have the typical e.target structure i.e., PhoneInput.
     const name = 'target' in e ? e.target.name : e.name;
     const value = 'target' in e ? e.target.value : e.value;
-  
     // Create a new object with the updated form data
     const updatedFormData = {
       ...formData,
       [name]: value,
     };
+    if (name==='price'){
+    }
     setFormData(updatedFormData);
   
     // enable or disable add item button based on form inputs
@@ -274,9 +300,9 @@ export const ShopItem: React.FC<{
         return null;
       }
     }
+    // console.log("item price: ", formData.price.$numberDecimal)
 
     const formDataToSend = new FormData();
-
     // Prepare form data
     formDataToSend.append('name', removeUrls(formData.name || '').trim());
     formDataToSend.append('_id', formData._id || '');
@@ -284,7 +310,13 @@ export const ShopItem: React.FC<{
     formDataToSend.append('duration', formData.duration?.toString() || '1');
     formDataToSend.append('seller_id', formData.seller_id || '');
     formDataToSend.append('stock_level', formData.stock_level || '1 available');
-    formDataToSend.append('price', formData.price?.$numberDecimal?.toString() || '0.01');
+    const price = (formData.price as unknown as string) || '0.01';
+    formDataToSend.append('price', parseFloat(price).toFixed(2));
+
+
+    // for (let [key, value] of formDataToSend.entries()) {
+    //   console.log(`${key}: ${value}`);
+    // }
 
     // Add file if provided
     if (file) {
@@ -454,31 +486,14 @@ export const ShopItem: React.FC<{
             />
           </div>
           <div className="mt-3">
-            {formData?.expired_by && (() => {
-              const expiredDate = new Date(formData.expired_by);
-              const isActive = expiredDate > new Date();
-              const sellingStatus = isActive 
-                ? t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') 
-                : t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.EXPIRED');
-
-              const formattedDate = new Intl.DateTimeFormat(locale || 'en-US', {
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true,
-              }).format(expiredDate);
-
-              return (
-                <label className="text-[14px] text-[#333333]">
-                  <span className="fw-bold text-lg">{sellingStatus}: </span>
-                  {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
-                    expired_by_date: formattedDate,
-                  })}
-                </label>
-              );
-            })()}
+            {item?.expired_by && (
+              <label className="text-[14px] text-[#333333]">
+                <span className="fw-bold text-lg">{sellingStatus}: </span>
+                {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
+                  expired_by_date: formattedDate,
+                })}
+              </label>
+            )}
           </div>
         </div>
       </div>

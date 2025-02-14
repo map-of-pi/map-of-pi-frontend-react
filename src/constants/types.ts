@@ -99,7 +99,7 @@ export type SellerItem = {
   stock_level: StockLevelType;
   image?: string;
   price: {
-    $numberDecimal: number;
+    $numberDecimal: string;
   };
   created_at?: Date;
   updated_at?: Date;
