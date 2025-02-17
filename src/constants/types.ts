@@ -112,3 +112,42 @@ export type PartialReview = {
 }
 
 export interface IReviewOutput extends IReviewFeedback, PartialReview {}
+
+type PaymentMetadataType = {
+  items: string[],
+  buyer: string,
+  seller: string,
+  amount: number,
+  fulfillment_method: string | undefined,
+  seller_filfullment_instruction:string | undefined,
+  buyer_filfullment_details: string
+}
+
+export type PaymentDataType = {
+  amount: number;
+  memo: string;
+  metadata: PaymentMetadataType;
+}
+
+export interface PaymentDTO {
+  amount: number,
+  user_uid: string,
+  created_at: string,
+  identifier: string,
+  metadata: Object,
+  memo: string,
+  status: {
+    developer_approved: boolean,
+    transaction_verified: boolean,
+    developer_completed: boolean,
+    cancelled: boolean,
+    user_cancelled: boolean,
+  },
+  to_address: string,
+  transaction: null | {
+    txid: string,
+    verified: boolean,
+    _link: string,
+  },
+};
+

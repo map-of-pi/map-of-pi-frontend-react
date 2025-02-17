@@ -4,14 +4,14 @@ import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext, useRef, ChangeEvent } from 'react';
 
 import ConfirmDialog from '@/components/shared/confirm';
 import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
-import { ISeller, IUserSettings, IUser, SellerItem } from '@/constants/types';
+import { ISeller, IUserSettings, IUser, SellerItem, PaymentDataType } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings, makePayment } from '@/services/userSettingsApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
@@ -21,6 +21,7 @@ import logger from '../../../../../../logger.config.mjs';
 import { ListItem, ShopItem } from '@/components/shared/Seller/ShopItem';
 import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import createPayment from '@/utils/payment';
+import { payWithPi } from '@/config/payment';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -34,6 +35,9 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [sellerSettings, setSellerSettings] = useState<IUserSettings | null>(null);
   const [sellerInfo, setSellerInfo] = useState<IUser | null>(null);
   const [dbSellerItems, setDbSellerItems] = useState<SellerItem[] | null>(null)
+  const [pickedItems, setPickedItems] = useState<string[]>([]);
+  const [totalAmount, setTotalAmount] = useState<number>(0.00);
+  const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { currentUser, autoLoginUser } = useContext(AppContext);
@@ -59,6 +63,25 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
       setLoading(false);
     }
   };
+
+  const checkoutOrder = async () => {
+    if(!currentUser?.pi_uid) return setError('user not login for payment');
+    const paymentData: PaymentDataType = {
+      amount: 1,
+      memo: 'This is another Test Payment',
+      metadata: { 
+        buyer: currentUser.pi_uid, 
+        seller: sellerId,
+        items: pickedItems,
+        amount: totalAmount,
+        fulfillment_method: sellerShopInfo?.fulfillment_method,
+        seller_filfullment_instruction: sellerShopInfo?.fulfillment_description,
+        buyer_filfullment_details: buyerDescription,
+      },
+    };
+    await payWithPi(paymentData)
+
+  }
 
   useEffect(() => {
     checkAndAutoLoginUser(currentUser, autoLoginUser);
@@ -234,6 +257,8 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
                   key={item._id}
                   item={item}
                   refCallback={handleShopItemRef} // Attach observer
+                  setPickedItems={setPickedItems}
+                  pickedItems={pickedItems}
                 /> 
               ))            
             }
@@ -256,8 +281,8 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             <h2 className={SUBHEADER}>{t('Buyer Fulfillment Details')}</h2>
             <TextArea
               name="buying_details"
-              type="text"
-              // value={sellerShopInfo.fulfillment_description}
+              value={buyerDescription}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setBuyerDescription(e.target.value)}
             />
           </div>
           <div className="mb-4 mt-3 ml-auto w-min">
@@ -269,7 +294,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
                 height: '40px',
                 padding: '15px 20px',
               }}
-              onClick={()=>createPayment()}
+              onClick={()=>checkoutOrder()}
             />
           </div>
         </ToggleCollapse>

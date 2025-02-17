@@ -511,8 +511,10 @@ export const ShopItem: React.FC<{
 
 export const ListItem: React.FC<{
   item: SellerItem;
+  pickedItems: string[],
+  setPickedItems:React.Dispatch<SetStateAction<string[]>>
   refCallback: (node: HTMLElement | null) => void;
-}> = ({ item, refCallback }) => {
+}> = ({ item, refCallback, setPickedItems, pickedItems=[] }) => {
   const t = useTranslations();
 
   const translatedStockLevelOptions = [
@@ -539,7 +541,7 @@ export const ListItem: React.FC<{
   const [quantity, setQuantity] = useState<number>(1)
 
   const [previewImage, setPreviewImage] = useState<string>(formData.image || '');
-  const [pickedItems, setPickedItems] = useState<string[]>([]);
+  // const [pickedItems, setPickedItems] = useState<string[]>([]);
 
   const handlePicked = (itemId: string): void => {
     setPickedItems((prev) =>
