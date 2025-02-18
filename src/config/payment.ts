@@ -5,7 +5,7 @@ const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Al
 
 const onIncompletePaymentFound = (payment: PaymentDTO) => {
   console.log("onIncompletePaymentFound", payment);
-  return axiosClient.post('/payments/incomplete', {payment});
+  return axiosClient.post('/payments/incomplete', {payment},config);
 }
 
 const onReadyForServerApproval = (paymentId: string) => {
@@ -34,11 +34,11 @@ const onError = (error: Error, payment?: PaymentDTO) => {
 export const payWithPi = async (paymentData: PaymentDataType) => {
   const callbacks = {    
     onReadyForServerApproval,
-    onIncompletePaymentFound,
     onReadyForServerCompletion,
+    onIncompletePaymentFound,
     onCancel,
     onError
   };
-  const payment = await window.Pi.createPayment(paymentData, callbacks);
+  const payment = await window.Pi.createPayment(paymentData, {...callbacks});
   console.log("initial payment: ", payment);
   }
