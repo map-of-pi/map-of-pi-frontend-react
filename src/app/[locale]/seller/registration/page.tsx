@@ -578,9 +578,54 @@ const SellerRegistrationForm = () => {
             </div>
           </ToggleCollapse>
           
-          {/* Online Shopping */}
+          {/* List Items - Online Shopping */}
           <ToggleCollapse
-            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_LABEL')}
+            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
+            open={false}>
+            {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
+            <div>
+              <Select
+                label={t(
+                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL',
+                )}
+                name="fulfillment_method"
+                options={translatedFulfillmentMethod}
+                value={formData.fulfillment_method}
+                onChange={handleChange}
+              />
+              <h2 className={SUBHEADER}>
+                {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}
+              </h2>
+              <TextArea
+                label={t(
+                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
+                )}
+                placeholder={t(
+                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
+                )}
+                name="fulfillment_description"
+                type="text"
+                value={formData.fulfillment_description}
+                onChange={handleChange}
+              />
+              <div className="mb-4 mt-3 ml-auto w-min">
+                <Button
+                  label={t('SHARED.SAVE')}
+                  disabled={!isSaveEnabled}
+                  styles={{
+                    color: '#ffc153',
+                    height: '40px',
+                    padding: '10px 15px',
+                  }}
+                  onClick={handleSave}
+                />
+              </div>
+            </div>
+          </ToggleCollapse>
+
+          {/*Order Fulfilment - Online Shopping */}
+          <ToggleCollapse
+            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ORDER_FULFILMENT_LABEL')}
             open={false}>
             {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
             <div>
