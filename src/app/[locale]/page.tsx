@@ -126,32 +126,6 @@ export default function Page({ params }: { params: { locale: string } }) {
     }
   };
 
-  // const handleSearchBarChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // const newValue = event.target.value;
-    // logger.debug(`Search bar value changed: ${newValue}`);
-
-    // console.log(newValue)
-    // setSearchBarValue(newValue);
-    // console.log(searchBarValue)
-
-    // if (isSearchClicked && newValue.trim() === '') {
-    //   setSearchClicked(false);
-    //   setSearchResults([]); // Reset results
-    //   setSearchQuery(''); // Reset query
-    // }
-
-  // };
-
-
-  // CHECK WHEN THE SEARCH BUTTON IS PREVIOUSLY CLICKED BUT NOW THE SEARCH TEXT INPUT IS EMPTY
-  // useEffect(() => {
-  //   if (isSearchClicked && searchBarValue === '') {
-  //     setSearchClicked(false);
-  //     setSearchResults([]); // 
-  //     setSearchQuery(''); // Reset search query
-  //   }
-  // }, [searchBarValue]);
-
   // Handle search query update from SearchBar and associated results
   const handleSearch = async (query: string) => {
     if (query) {

@@ -12,15 +12,20 @@ import { AppContext } from '../../../../context/AppContextProvider';
 interface SearchBarProps {
   onSearch?: (query: string) => void;
   page: 'map_center' | 'default';
-  setSearchResults: (value: any[]) => void;
-  setSearchQuery: (value: string) => void;
-  setSearchClicked: (value: boolean) => void;
-  isSearchClicked: boolean;
+  setSearchResults?: (value: any[]) => void;
+  setSearchQuery?: (value: string) => void;
+  setSearchClicked?: (value: boolean) => void;
+  isSearchClicked?: boolean;
   // handleSearchBarChange: (event: ChangeEvent<HTMLInputElement>) => void;
   // searchBarValue: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, page, setSearchResults, setSearchQuery, isSearchClicked, setSearchClicked }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, page, 
+  setSearchResults = () => {}, 
+  setSearchQuery = () => {}, 
+  setSearchClicked = () => {},
+  isSearchClicked
+ }) => {
   const t = useTranslations();
 
   const [searchBarValue, setSearchBarValue] = useState('');
@@ -39,7 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, page, setSearchResults,
     logger.debug(`Search bar value changed: ${event.target.value}`);
     setSearchBarValue(event.target.value);
 
-    if (isSearchClicked && newValue.trim() === '') {
+    if (isSearchClicked !== undefined && isSearchClicked && newValue.trim() === '') {
       setSearchClicked(false);
       setSearchResults([]); // Reset results
       setSearchQuery(''); // Reset query
