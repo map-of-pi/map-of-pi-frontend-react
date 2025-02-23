@@ -60,12 +60,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nye anyigbatata ƒe dzesi fia afisi mele nu dzram le",
       "SELLER_SETTINGS_LABEL": "Nudzrala ƒe Ðoɖowo",
       "SELLER_SELL_CENTER": "Ðo Dzadzra ƒe Titina",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Tsɔtsɔ abe internet me",
+      "MAPPI_ALLOWANCE_LABEL": "Mappi ƒe ɖasele le eɖokui me",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Ŋu wɔ ƒe tɔxɛ me",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Tia abe klotsi",
+          "DELIVERED_TO_BUYER": "Va nyo klotsi"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Ɖoɖoɖo si wòɖo na dɔwɔla",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Wotsɔ teƒe si ŋutsuɖɔla le dzi. Ne wòfa dɔɖɔ kplɔa, medea teƒe si dɔwɔla le ɖe dzi.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Taflatse ŋlɔ e-mail adrɛsi si sɔ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Ŋkɔ ŋɔŋlɔ kpɔ dzidzedze",
         "FAILED_REGISTRATION_SUBMISSION": "Vodada le ŋkɔ ŋɔŋlɔ dzraɖo me",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Ŋkɔ ŋɔŋlɔ do kpo nu elabena womeɖo kpe zãla dzi o",
-        "UNINITIALIZED_SELL_CENTER": "Taflatse ɖo wò Dzraɖoƒe"
+        "UNINITIALIZED_SELL_CENTER": "Taflatse ɖo wò Dzraɖoƒe",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Ŋlɔɖi bɔnuwo tɔ dɔ kpɔna nyuie",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Bɔnu wɔ meɖea wò ɖe mɔ na",
+        "FAILED_SELLER_ITEM_SAVE": "Nuɖeŋu bɔnuwo dzi na dɔ aɖe la de nyɔ",
+        "FAILED_SELLER_ITEM_DELETE": "Keka nɔ bɔnu wɔ meɖea wò",
+        "SELLER_ITEM_NOT_FOUND": "Bɔnu wɔ aɖe mɔ o",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Dɔɖɔɖa se fia. Mappi gbɔ na xexlẽ {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Dɔɖɔɖa na ta fia. Mappi gbɔ nɔ kea fia wɔ"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "ɖeŋu",
+        "PRICE_LABEL": "ɖaseƒe",
+        "STOCK_LABEL": "Nusɔkpɔ nyɔnu",
+        "DESCRIPTION_LABEL": "Nyateƒe",
+        "PHOTO": "Dzeƒo",
+        "SELLING_DURATION_LABEL": "Dɔɖɔɖoɖo vɔɖu awu me wo kpɔ wo dɔa",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Gblɔ nyaɖe",
+          "EXPIRED": "Nyaɖe ɖe va tso"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 le wò",
+          "AVAILABLE_2": "2 le wò",
+          "AVAILABLE_3": "3 le wò",
+          "MANY": "Nutsu le wò",
+          "MADE_TO_ORDER": "Wò dze nuku nu gãtɔ",
+          "ONGOING_SERVICE": "Nùtsɔame si le na",
+          "SOLD": "Wò tsɔ"
+        },
+        "SELLING_EXPIRATION_DATE": "Dɔ nu {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -193,7 +233,11 @@
     "SEARCH_REVIEWS": "Dii reviewwo",
     "SEARCH_LOADING": "Gɔgɔme nyateƒe kplɔ...",
     "REPLY": "Ɖe si",
+    "ADD_ITEM": "Tsɔ nyateƒe",
+    "DELETE": "Zɔ",
+    "CONFIRM_DELETE": "Míe nya dzɔ aɖe be woanɔ anyi sia dzi nyuie? Woate ŋu kɔ woanɔ anyiŋú gɔme o.",
     "SAVE": "Ŋutɔ",
+    "CONFIRM": "Tsi me",
     "CONFIRM_DIALOG": "Ɖe si kple alo ɖe be si ɖe ɖe ɖe siaɖiwo. Wò be wo kple agbe?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Nuxlɔ̃tɔ ŋkɔ Pi",

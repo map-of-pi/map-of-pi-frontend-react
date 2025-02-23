@@ -60,12 +60,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "我的地图标记显示我的销售位置",
       "SELLER_SETTINGS_LABEL": "卖家设置",
       "SELLER_SELL_CENTER": "设定销售中心",
+      "SELLER_ONLINE_SHOPPING_LABEL": "在线购物",
+      "MAPPI_ALLOWANCE_LABEL": "剩余的 Mappi 额度",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "履行方式",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "买家自取",
+          "DELIVERED_TO_BUYER": "送货到买家"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "给买家的履行说明",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "取货地址为卖家的地址。如果选择配送，请输入买家的地址。",
       "VALIDATION": {
         "EMAIL_VALIDATION": "请输入有效的电子邮件地址",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "注册成功",
         "FAILED_REGISTRATION_SUBMISSION": "保存注册信息时出错",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "注册失败，因为用户未验证身份",
-        "UNINITIALIZED_SELL_CENTER": "请设定您的销售中心"
+        "UNINITIALIZED_SELL_CENTER": "请设定您的销售中心",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "卖家商品已成功保存",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "卖家商品已成功删除",
+        "FAILED_SELLER_ITEM_SAVE": "保存卖家商品时出错",
+        "FAILED_SELLER_ITEM_DELETE": "删除卖家商品时出错",
+        "SELLER_ITEM_NOT_FOUND": "未找到卖家商品",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "保存成功。使用的 Mappi 配额为 {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "保存失败。可用的 Mappi 配额不足"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "商品",
+        "PRICE_LABEL": "价格",
+        "STOCK_LABEL": "库存水平",
+        "DESCRIPTION_LABEL": "描述",
+        "PHOTO": "照片",
+        "SELLING_DURATION_LABEL": "销售周期（以周为单位）",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "活动中",
+          "EXPIRED": "已过期"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 个可用",
+          "AVAILABLE_2": "2 个可用",
+          "AVAILABLE_3": "3 个可用",
+          "MANY": "多个可用",
+          "MADE_TO_ORDER": "定制",
+          "ONGOING_SERVICE": "正在进行的服务",
+          "SOLD": "已售出"
+        },
+        "SELLING_EXPIRATION_DATE": "{expired_by_date} 前销售"
       }
     },
     "BUY_FROM_SELLER": {
@@ -193,7 +233,11 @@
     "SEARCH_REVIEWS": "搜索评论",
     "SEARCH_LOADING": "搜索加载中...",
     "REPLY": "回复",
+    "ADD_ITEM": "添加项目",
+    "DELETE": "删除",
+    "CONFIRM_DELETE": "您确定要删除此项目吗？此操作无法撤销。",
     "SAVE": "保存",
+    "CONFIRM": "确认",
     "CONFIRM_DIALOG": "您有未保存的更改。确定要离开吗？",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Pi 用户名",
