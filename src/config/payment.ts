@@ -13,11 +13,6 @@ const onReadyForServerApproval = (paymentId: string) => {
   axiosClient.post('/payments/approve', {paymentId}, config);
 }
 
-const onSubmit = (paymentId: string) => {
-  console.log("onSubmit", paymentId);
-  axiosClient.post('/payments/submit_payment', {paymentId}, config);
-}
-
 const onReadyForServerCompletion = (paymentId: string, txid: string) => {
   console.log("onReadyForServerCompletion", paymentId, txid);
   axiosClient.post('/payments/complete', { paymentId, txid }, config);
@@ -44,12 +39,11 @@ export const payWithPi = async (paymentData: PaymentDataType) => {
     onCancel,
     onError
     
-    // onReadyForServerApproval: onSubmit
   };
   const paymentId = await window.Pi.createPayment(
     paymentData, 
     {...callbacks}    
   );
-  console.log("initial payment: ", paymentId);
+  // console.log("initial payment: ", paymentId);
   return paymentId
   }

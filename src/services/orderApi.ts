@@ -25,27 +25,6 @@ export const createOrUpdateOrder = async (orderData: any) => {
   }
 };
 
-export const paymentAPI = async (paymentId: string) => {
-  try {
-    logger.info("Sending request to create or update order", { paymentId });
-
-    const response = await axiosClient.post("/payments/submit_payment", { paymentId });
-
-    if (response.status === 201 || response.status === 200) {
-      logger.info(`Order processed successfully with Status ${response.status}`, {
-        data: response.data,
-      });
-      return response.data;
-    } else {
-      logger.error(`Order processing failed with Status ${response.status}`);
-      return null;
-    }
-  } catch (error) {
-    logger.error("Error processing order:", error);
-    throw new Error("Failed to create or update order. Please try again later.");
-  }
-};
-
 // Fetch all order list associated with the seller
 export const fetchOrderList = async (sellerId: string) => {
   try {

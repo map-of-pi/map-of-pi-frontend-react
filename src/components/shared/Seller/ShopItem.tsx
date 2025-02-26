@@ -508,7 +508,6 @@ export const ShopItem: React.FC<{
   );
 };
 
-
 export const ListItem: React.FC<{
   item: SellerItem;
   pickedItems: PickedItems[],

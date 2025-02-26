@@ -13,16 +13,14 @@ import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { ISeller, IUserSettings, IUser, SellerItem, PaymentDataType, PickedItems, FulfillmentType } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
-import { fetchSingleUserSettings, makePayment } from '@/services/userSettingsApi';
+import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import { ListItem, ShopItem } from '@/components/shared/Seller/ShopItem';
+import { ListItem } from '@/components/shared/Seller/ShopItem';
 import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
-import createPayment from '@/utils/payment';
 import { payWithPi } from '@/config/payment';
-import { paymentAPI } from '@/services/orderApi';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -133,8 +131,6 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         },
       };
       await payWithPi(paymentData)
-      // console.log("onSubmit", paymentId);
-      // await paymentAPI(paymentId)
   
     }  
 

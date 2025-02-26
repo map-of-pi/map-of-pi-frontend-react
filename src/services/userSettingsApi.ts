@@ -85,22 +85,3 @@ export const fetchUserLocation = async () => {
     throw error;
   }
 };
-
-export const makePayment = async () => {
-  try {
-    logger.info('making payment..');
-    const response = await axiosClient.post(`/users/payment`);
-    if (response.status === 200) {
-      logger.info(`Fetch user settings successful with Status ${response.status}`, {
-        data: response.data
-      });
-      return response.data;
-    } else {
-      logger.error(`payment failed with Status ${response.status}`);
-      return null;
-    }
-  } catch (error) {
-    logger.error('payment encountered an error:', error);
-    throw new Error('Failed payment. Please try again later.');
-  }
-};
