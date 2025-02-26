@@ -25,6 +25,7 @@ import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
+import { ListOrder } from '@/components/shared/Seller/OrderList';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -335,13 +336,13 @@ const SellerRegistrationForm = () => {
 
   const translatedFulfillmentMethod = [
     {
-      value: 'pickup',
+      value: FulfillmentType.CollectionByBuyer,
       name: t(
         'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
       ),
     },
     {
-      value: 'delivery',
+      value: FulfillmentType.DeliveredToBuyer,
       name: t(
         'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
       ),
@@ -624,49 +625,9 @@ const SellerRegistrationForm = () => {
           </ToggleCollapse>
 
           {/*Order Fulfilment - Online Shopping */}
-          <ToggleCollapse
-            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ORDER_FULFILMENT_LABEL')}
-            open={false}>
-            {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
-            <div>
-              <Select
-                label={t(
-                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL',
-                )}
-                name="fulfillment_method"
-                options={translatedFulfillmentMethod}
-                value={formData.fulfillment_method}
-                onChange={handleChange}
-              />
-              <h2 className={SUBHEADER}>
-                {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}
-              </h2>
-              <TextArea
-                label={t(
-                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
-                )}
-                placeholder={t(
-                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
-                )}
-                name="fulfillment_description"
-                type="text"
-                value={formData.fulfillment_description}
-                onChange={handleChange}
-              />
-              <div className="mb-4 mt-3 ml-auto w-min">
-                <Button
-                  label={t('SHARED.SAVE')}
-                  disabled={!isSaveEnabled}
-                  styles={{
-                    color: '#ffc153',
-                    height: '40px',
-                    padding: '10px 15px',
-                  }}
-                  onClick={handleSave}
-                />
-              </div>
-            </div>
-          </ToggleCollapse>
+          <div>
+            {dbSeller && <ListOrder seller_id={dbSeller.seller_id} seller_name={dbSeller.name}  seller_type={dbSeller.seller_type}/>}
+          </div>
           
         </div>
         <ConfirmDialog

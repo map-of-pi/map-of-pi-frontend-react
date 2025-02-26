@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Button } from "../Forms/Buttons/Buttons";
 import { TextArea, Input, FileInput, Select } from "../Forms/Inputs/Inputs";
 import { ConfirmDialogX, Notification } from "../confirm";
-import { ISeller, SellerItem, StockLevelType } from "@/constants/types";
+import { ISeller, PickedItems, SellerItem, StockLevelType } from "@/constants/types";
 import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/services/sellerApi";
 import removeUrls from "@/utils/sanitize";
 import { AppContext } from "../../../../context/AppContextProvider";
@@ -511,10 +511,12 @@ export const ShopItem: React.FC<{
 
 export const ListItem: React.FC<{
   item: SellerItem;
-  pickedItems: string[],
-  setPickedItems:React.Dispatch<SetStateAction<string[]>>
+  pickedItems: PickedItems[],
+  setPickedItems:React.Dispatch<SetStateAction<PickedItems[]>>
+  totalAmount: number,
+  setTotalAmount:React.Dispatch<SetStateAction<number>>
   refCallback: (node: HTMLElement | null) => void;
-}> = ({ item, refCallback, setPickedItems, pickedItems=[] }) => {
+}> = ({ item, refCallback, setPickedItems, pickedItems=[], totalAmount, setTotalAmount }) => {
   const t = useTranslations();
 
   const translatedStockLevelOptions = [
@@ -543,12 +545,28 @@ export const ListItem: React.FC<{
   const [previewImage, setPreviewImage] = useState<string>(formData.image || '');
   // const [pickedItems, setPickedItems] = useState<string[]>([]);
 
-  const handlePicked = (itemId: string): void => {
-    setPickedItems((prev) =>
-      prev.includes(itemId) ? prev.filter((item) => item !== itemId) : [...prev, itemId]
-    );
-    console.log("picked items: ", pickedItems)
+  const handlePicked = (itemId: string, price: number): void => {
+    setPickedItems((prev) => {
+      const existingItem = prev.find((item) => item.itemId === itemId);
+      let newTotalAmount = totalAmount;
+  
+      if (existingItem) {
+        // If item exists, remove it
+        newTotalAmount -= price * existingItem.quantity;
+        console.log('minus unpicked amount ', newTotalAmount);
+        setTotalAmount(newTotalAmount);
+        return prev.filter((item) => item.itemId !== itemId);
+      } else {
+        // If item doesn't exist, add it
+        const newItem = { itemId, quantity };
+        newTotalAmount += price * quantity;
+        console.log('plus picked amount ', newTotalAmount);
+        setTotalAmount(newTotalAmount);
+        return [...prev, newItem];
+      }
+    });
   };
+  
 
   const handleIncrement = () => {
     setQuantity((prev) => ( prev + 1 ));
@@ -563,7 +581,7 @@ export const ListItem: React.FC<{
       ref={refCallback}
       data-id={item._id}
       className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
-        pickedItems.includes(formData._id) ? 'bg-yellow-100' : ''
+        pickedItems.find((item)=>item.itemId===formData._id)? 'bg-yellow-100' : ''
       }`}
     >
       <div className="p-3">
@@ -626,6 +644,7 @@ export const ListItem: React.FC<{
                 quantity <= 1 ? `bg-[grey]` : `bg-primary`
               }`}
               onClick={handleDecrement}
+              disabled={pickedItems.find((item)=>item.itemId===formData._id)? true : false}
             >
               -
             </button>
@@ -634,23 +653,24 @@ export const ListItem: React.FC<{
               type="number"
               value={quantity}
               className="p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 text-center focus:border-[#1d724b] border-[2px] max-w-[65px]"
-              disabled={false}
+              disabled={pickedItems.find((item)=>item.itemId===formData._id)? true : false}
             />
             <button
               className="text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center bg-primary"
               onClick={handleIncrement}
+              disabled={pickedItems.find((item)=>item.itemId===formData._id)? true : false}
             >
               +
             </button>
           </div>
 
           <Button
-            label={pickedItems.includes(formData._id) ? t('Unpick') : t('Pick')}
+            label={pickedItems.find((item)=>item.itemId===formData._id) ? t('Unpick') : t('Pick')}
             styles={{
               color: '#ffc153',
               width: '100%',
             }}
-            onClick={() => handlePicked(formData._id)}
+            onClick={() => handlePicked(formData._id, parseFloat(formData.price.$numberDecimal))}
           />
         </div>
       </div>

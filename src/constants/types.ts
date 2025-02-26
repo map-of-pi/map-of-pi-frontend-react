@@ -34,7 +34,7 @@ export interface ISeller {
   };
   coordinates: [number, number];
   order_online_enabled_pref: boolean;
-  fulfillment_method: string;
+  fulfillment_method: FulfillmentType;
   fulfillment_description?: string;
 }
 
@@ -113,19 +113,25 @@ export type PartialReview = {
 
 export interface IReviewOutput extends IReviewFeedback, PartialReview {}
 
+export interface PickedItems {
+  itemId: string,
+  quantity: number,
+}
+
 type PaymentMetadataType = {
-  items: string[],
+  items: PickedItems[],
   buyer: string,
   seller: string,
   amount: number,
-  fulfillment_method: string | undefined,
-  seller_filfullment_instruction:string | undefined,
-  buyer_filfullment_details: string
+  fulfillment_method: FulfillmentType | undefined,
+  seller_fulfillment_description:string | undefined,
+  buyer_fulfillment_description: string
 }
 
 export type PaymentDataType = {
   amount: number;
   memo: string;
+  uid:string;
   metadata: PaymentMetadataType;
 }
 
@@ -151,3 +157,64 @@ export interface PaymentDTO {
   },
 };
 
+export enum OrderStatusType {
+  Completed = 'completed', 
+  Dispatched = 'dispatched', 
+  Collected = 'collected',
+  Cancelled = 'cancelled',
+  Pending = 'pending',
+  New = 'new'
+}
+
+export interface OrderType {
+  _id: string;
+  buyer_id: string;
+  seller_id: string;
+  transaction: string;
+  total_amount: number;
+  status: OrderStatusType;
+  paid: boolean;
+  filled: boolean;
+  fulfillment_method: FulfillmentType | undefined,
+  seller_fulfillment_description:string | undefined,
+  buyer_fulfillment_description: string
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+
+export interface PartialOrderType extends Pick<OrderType, '_id' | 'buyer_id' | 'total_amount' | 'createdAt' | 'fulfillment_method' | 'seller_fulfillment_description' | 'buyer_fulfillment_description' >  {pi_username: string};
+
+export enum OrderItemStatus { 
+  Refunded = 'refunded', 
+  Collected = 'collected',
+  Returned = 'returned',
+  Dispatched = 'dispatched',
+  Fulfilled = "fulfilled",
+  Pending = 'pending',
+}
+
+
+export interface OrderItemType {
+  _id: string;
+  order: string;
+  seller_item: SellerItem;
+  quantity: number;
+  sub_total_amount: number;
+  status: OrderItemStatus;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface TransactionType {
+  _id: string;
+  order: string;
+  user: string;
+  amount: number;
+  paid: boolean;
+  memo: string;
+  payment_id: string;
+  txid: string | null;
+  cancelled: boolean;
+  createdAt?: Date;
+}

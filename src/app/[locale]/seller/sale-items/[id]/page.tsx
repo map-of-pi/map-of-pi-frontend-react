@@ -11,7 +11,7 @@ import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
-import { ISeller, IUserSettings, IUser, SellerItem, PaymentDataType } from '@/constants/types';
+import { ISeller, IUserSettings, IUser, SellerItem, PaymentDataType, PickedItems, FulfillmentType } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings, makePayment } from '@/services/userSettingsApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
@@ -22,6 +22,7 @@ import { ListItem, ShopItem } from '@/components/shared/Seller/ShopItem';
 import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import createPayment from '@/utils/payment';
 import { payWithPi } from '@/config/payment';
+import { paymentAPI } from '@/services/orderApi';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -35,7 +36,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [sellerSettings, setSellerSettings] = useState<IUserSettings | null>(null);
   const [sellerInfo, setSellerInfo] = useState<IUser | null>(null);
   const [dbSellerItems, setDbSellerItems] = useState<SellerItem[] | null>(null)
-  const [pickedItems, setPickedItems] = useState<string[]>([]);
+  const [pickedItems, setPickedItems] = useState<PickedItems[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0.00);
   const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
@@ -49,40 +50,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
       observer.current.observe(node);
     }
   };
-
-  const createPayment = async () => {
-    try {
-      const data = await makePayment();
-      if (data) {
-        console.log('payment data', data)
-      }
-    } catch (error) {
-      logger.error('Error fetching seller data:', error);
-      setError('Error fetching seller data.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const checkoutOrder = async () => {
-    if(!currentUser?.pi_uid) return setError('user not login for payment');
-    const paymentData: PaymentDataType = {
-      amount: 1,
-      memo: 'This is another Test Payment',
-      metadata: { 
-        buyer: currentUser.pi_uid, 
-        seller: sellerId,
-        items: pickedItems,
-        amount: totalAmount,
-        fulfillment_method: sellerShopInfo?.fulfillment_method,
-        seller_filfullment_instruction: sellerShopInfo?.fulfillment_description,
-        buyer_filfullment_details: buyerDescription,
-      },
-    };
-    await payWithPi(paymentData)
-
-  }
-
+  
   useEffect(() => {
     checkAndAutoLoginUser(currentUser, autoLoginUser);
     
@@ -147,7 +115,28 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         getSellerItems(sellerShopInfo.seller_id);
       }
     }, [sellerShopInfo]); 
+
+    const checkoutOrder = async () => {
+      if(!currentUser?.pi_uid) return setError('user not login for payment');
+      const paymentData: PaymentDataType = {
+        amount: totalAmount,
+        memo: 'This is another Test Payment',
+        uid: currentUser.pi_uid,
+        metadata: { 
+          buyer: currentUser.pi_uid, 
+          seller: sellerId,
+          items: pickedItems,
+          amount: totalAmount,
+          fulfillment_method: sellerShopInfo?.fulfillment_method,
+          seller_fulfillment_description: sellerShopInfo?.fulfillment_description,
+          buyer_fulfillment_description: buyerDescription,
+        },
+      };
+      await payWithPi(paymentData)
+      // console.log("onSubmit", paymentId);
+      // await paymentAPI(paymentId)
   
+    }  
 
   const translateSellerCategory = (category: string): string => {
     switch (category) {
@@ -164,13 +153,13 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
 
   const translatedFulfillmentMethod = [
     {
-      value: 'pickup',
+      value: FulfillmentType.CollectionByBuyer,
       name: t(
         'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
       ),
     },
     {
-      value: 'delivery',
+      value: FulfillmentType.DeliveredToBuyer,
       name: t(
         'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
       ),
@@ -248,7 +237,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         
         {/* Online Shopping */}
         <ToggleCollapse
-          header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_LABEL')}
+          header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
           open={false}>
           <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
             {dbSellerItems && dbSellerItems.length > 0 && 
@@ -259,6 +248,8 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
                   refCallback={handleShopItemRef} // Attach observer
                   setPickedItems={setPickedItems}
                   pickedItems={pickedItems}
+                  totalAmount={totalAmount}
+                  setTotalAmount={setTotalAmount}
                 /> 
               ))            
             }
@@ -285,14 +276,15 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setBuyerDescription(e.target.value)}
             />
           </div>
-          <div className="mb-4 mt-3 ml-auto w-min">
+          <div className="mb-4 mt-3 ml-auto">
             <Button
-              label={t('Checkout')}
-              // disabled={!isSaveEnabled}
+              label={t('Checkout ') + `(${totalAmount.toString()} Pi)`}
+              disabled={!(pickedItems.length>0)}
               styles={{
                 color: '#ffc153',
                 height: '40px',
                 padding: '15px 20px',
+                marginLeft: 'auto'
               }}
               onClick={()=>checkoutOrder()}
             />
