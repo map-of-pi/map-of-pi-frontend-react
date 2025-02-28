@@ -1,7 +1,7 @@
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { Lato } from 'next/font/google';
-import { locales } from '@/i18n';
+import { locales } from '../../../i18n/i18n';
 import { Providers } from '../providers';
 import Navbar from '@/components/shared/navbar/Navbar';
 import logger from '../../../logger.config.mjs';
