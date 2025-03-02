@@ -13,11 +13,12 @@ import {
 
 import { Pi } from '@pinetwork-js/sdk';
 import axiosClient, {setAuthToken} from '@/config/client';
-import { onIncompletePaymentFound } from '@/utils/auth';
+// import { onIncompletePaymentFound } from '@/utils/auth';
 import { AuthResult } from '@/constants/pi';
 import { IUser } from '@/constants/types';
 
 import logger from '../logger.config.mjs';
+import { onIncompletePaymentFound } from '@/config/payment';
 
 interface IAppContextProps {
   currentUser: IUser | null;
@@ -79,7 +80,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     if (isInitiated) {
       try {
         setIsSigningInUser(true);
-        const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);
+        const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments', 'wallet_address'], onIncompletePaymentFound);
+        logger.info('user info gotten from Pi SDK: ', pioneerAuth);
         const res = await axiosClient.post("/users/authenticate", {pioneerAuth});
 
         if (res.status === 200) {

@@ -3,7 +3,7 @@ import { PaymentDataType, PaymentDTO } from "@/constants/types";
 
 const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
 
-const onIncompletePaymentFound = (payment: PaymentDTO) => {
+export const onIncompletePaymentFound = (payment: PaymentDTO) => {
   console.log("onIncompletePaymentFound", payment);
   return axiosClient.post('/payments/incomplete', {payment}, config);
 }
