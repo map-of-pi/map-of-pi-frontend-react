@@ -1,0 +1,292 @@
+{
+  "HOME": {
+    "ADD_SELLER": "販売",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "現在、検索センターはデフォルトの座標 [0, 0] に設定されています。体験を向上させるために、検索センターの位置を更新してください。",
+    "SEARCH_BAR_PLACEHOLDER": "販売者または商品を検索",
+    "LOCATION_SERVICES": {
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "この機能を使用するには、デバイスの設定で位置情報サービスを有効にしてください。",
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "位置情報サービスが無効になっています。デバイスの位置情報設定を有効にしてください。"
+    },
+    "AUTHENTICATION": {
+      "SUCCESSFUL_LOGIN_MESSAGE": "ログイン成功",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "ログインに失敗しました",
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi の情報が見つかりません"
+    }
+  },
+  "SIDE_NAVIGATION": {
+    "USER_PREFERENCES_HEADER": "ユーザー設定",
+    "PERSONALIZATION_SUBHEADER": "パーソナライズ",
+    "LANGUAGES": "言語",
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "Map of Pi について",
+      "APP_VERSION": "アプリのバージョン",
+      "PRIVACY_POLICY": "プライバシーポリシー",
+      "TERMS_OF_SERVICE": "利用規約"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "FindMe 設定",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "自動",
+      "PREFERRED_DEVICE_GPS": "デバイスのGPSを使用",
+      "PREFERRED_SEARCH_CENTER": "検索センターを使用"
+    },
+    "CONTACT_MAP_OF_PI": "Map of Pi に連絡",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "設定の保存に成功しました",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "設定の保存に失敗しました"
+    }
+  },
+  "SCREEN": {
+    "SELLER_REGISTRATION": {
+      "SELLER_REGISTRATION_HEADER": "販売者登録",
+      "SELLER_DETAILS_LABEL": "販売者の詳細",
+      "EMAIL_LABEL": "メールアドレス",
+      "PHONE_NUMBER_LABEL": "電話番号",
+      "CONTACT_PUBLIC_NOTE": "メールアドレスと電話番号は公開されます。",
+      "SELLER_DETAILS_PLACEHOLDER": "私はPay with Piを通じて販売しています。",
+      "REVIEWS_SUMMARY_LABEL": "レビュー概要",
+      "REVIEWS_SCORE_LABEL": "レビュー評価",
+      "SELLER_NAME": "販売者名",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "販売者タイプ",
+        "SELLER_TYPE_OPTIONS": {
+          "ACTIVE_SELLER": "アクティブな販売者",
+          "INACTIVE_SELLER": "非アクティブな販売者",
+          "TEST_SELLER": "テスト販売者"
+        }
+      },
+      "SELLER_ADVANCED_SETTINGS_LABEL": "販売者の詳細設定",
+      "SELLER_RETAIL_OUTLET_NAME": "店舗名",
+      "SELLER_ADDRESS_LOCATION_LABEL": "住所または販売場所",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "マップマーカーが私の販売場所を示しています",
+      "SELLER_SETTINGS_LABEL": "販売者設定",
+      "SELLER_SELL_CENTER": "販売センターを設定",
+      "SELLER_ONLINE_SHOPPING_LABEL": "オンラインショッピング",
+      "MAPPI_ALLOWANCE_LABEL": "Mappiの残り許容量",  
+      "FULFILLMENT_METHOD_TYPE": {  
+        "FULFILLMENT_METHOD_TYPE_LABEL": "履行方法",  
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {  
+          "COLLECTION_BY_BUYER": "購入者による収集",  
+          "DELIVERED_TO_BUYER": "購入者への配達"  
+        }  
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "購入者への履行指示",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "収集は販売者の住所から行われます。配達を選択した場合は、購入者の住所を入力してください。",
+      "VALIDATION": {
+        "EMAIL_VALIDATION": "有効なメールアドレスを入力してください",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "登録成功",
+        "FAILED_REGISTRATION_SUBMISSION": "登録の保存エラー",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "ユーザーが認証されていないため、登録に失敗しました",
+        "UNINITIALIZED_SELL_CENTER": "販売センターを設定してください",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "販売者アイテムが正常に保存されました",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "販売者アイテムが正常に削除されました",
+        "FAILED_SELLER_ITEM_SAVE": "販売者アイテムの保存中にエラーが発生しました",
+        "FAILED_SELLER_ITEM_DELETE": "販売者アイテムの削除中にエラーが発生しました",
+        "SELLER_ITEM_NOT_FOUND": "販売者アイテムが見つかりません",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "保存に成功しました。使用されたMappiの許容量は {mappi_count} です",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "保存に失敗しました。Mappiの許容量が不足しています"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "アイテム",
+        "PRICE_LABEL": "価格",
+        "STOCK_LABEL": "在庫レベル",
+        "DESCRIPTION_LABEL": "説明",
+        "PHOTO": "写真",
+        "SELLING_DURATION_LABEL": "販売期間（週間単位）",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "アクティブ",
+          "EXPIRED": "期限切れ"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+            "AVAILABLE_1": "1個あり",
+            "AVAILABLE_2": "2個あり",
+            "AVAILABLE_3": "3個あり",
+            "MANY": "多数あり",
+            "MADE_TO_ORDER": "注文生産",
+            "ONGOING_SERVICE": "継続的サービス",
+            "SOLD": "販売済み"
+        },
+        "SELLING_EXPIRATION_DATE": "販売期限 {expired_by_date}"
+      }
+    },
+    "BUY_FROM_SELLER": {
+      "BUY_FROM_SELLER_HEADER": "販売者から購入",
+      "SELLER_DETAILS_LABEL": "販売者の詳細",
+      "SELLER_ADDRESS_POSITION_LABEL": "販売者の住所または位置",
+      "LEAVE_A_REVIEW_MESSAGE": "レビューを残す",
+      "FACE_SELECTION_REVIEW_MESSAGE": "上記の販売者について、あなたの気持ちを表す顔を選択してください",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "追加のコメントをここに入力してください",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "フィードバック写真のアップロード",
+      "REVIEWS_SUMMARY_LABEL": "レビュー概要",
+      "REVIEWS_SCORE_MESSAGE": "レビュー評価: 5.0中 {seller_review_rating}",
+      "SELLER_CONTACT_DETAILS_LABEL": "販売者の連絡先",
+      "SELLER_USERNAME_LABEL": "ユーザー名",
+      "SELLER_PIONEER_ID_LABEL": "パイオニアID",
+      "SELLER_PHONE_NUMBER_LABEL": "電話番号",
+      "SELLER_EMAIL_ADDRESS_LABEL": "メールアドレス"
+    },
+    "REVIEWS": {
+      "REVIEWS_HEADER": "レビュー",
+      "GIVE_REVIEW_SECTION_HEADER": "このパイオニアにレビューを提供",
+      "REVIEWS_GIVEN_SECTION_HEADER": "このパイオニアが行ったレビュー",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "このパイオニアが受けたレビュー",
+      "VALIDATION": {
+        "NO_REVIEWS_FOUND": "パイオニア {search_value} に対するレビューは見つかりませんでした",
+        "NO_PIONEER_FOUND": "パイオニア {search_value} が見つかりませんでした"
+      }
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "{seller_id} に対するレビューはありません",
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "{seller_id} に残されたレビューの一覧",
+      "BY_REVIEWER": "{buyer_id} による"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "レビューへの返信",
+      "REPLY_TO_REVIEW_SUBHEADER": "あなたが返信するレビュー",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "レビューへの返信を入力",
+      "REPLY_TO_REVIEW_HEADER": "{seller_id} に残されたレビューへの返信",
+      "BY_REVIEWER": "{buyer_id} による",
+      "REPLY_TO_REVIEW_MESSAGE": "上記のレビューへの返信を入力してください",
+      "FACE_SELECTION_REVIEW_MESSAGE": "このパイオニアとのやり取りについて、あなたの気持ちを表す顔を選択してください",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "追加のコメントをここに入力してください",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "フィードバック写真のアップロード",
+      "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "レビューの読み込みエラー",
+        "SELF_REVIEW_NOT_POSSIBLE": "自分自身へのレビューはできません"
+      }
+    }
+  },
+  "POPUP": {
+    "MAP_MARKER": {
+      "SELLER_SALE_ITEMS_FIELD": "販売中のアイテム",
+      "DISTANCE_MESSAGE": "距離: XXX km 離れています"
+    },
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "不具合を報告するには、以下までご連絡ください"
+    },
+    "PRIVACY_POLICY_INFO": {
+      "TITLE": "プライバシーポリシー",
+      "LAST_UPDATED": "最終更新日",
+      "EMAIL_ADDRESS": "メールアドレス",
+      "SECTIONS": {
+        "HEADER_1": "概要",
+        "CONTENT_1": "Map of Piアプリへようこそ。このアプリはMap of PiチームがPiコミュニティと連携して開発しました。本プライバシーポリシーでは、モバイルアプリを使用する際の個人情報の収集、利用、開示、および保護について説明します。",
+        "HEADER_2": "収集する情報",
+        "SUBHEADER_2_1": "ユーザー情報",
+        "CONTENT_2_1_1": "ユーザー登録時に、お名前、メールアドレス、ユーザー名、その他関連情報を収集する場合があります。",
+        "CONTENT_2_1_2": "デバイス情報（デバイスタイプ、OS、デバイス固有の識別子など）を収集する場合があります。",
+        "SUBHEADER_2_2": "販売者情報",
+        "CONTENT_2_2_1": "プラットフォームに登録する販売者は、販売者名、所在地、連絡先などの情報を提供する必要があります。",
+        "CONTENT_2_2_2": "販売者は企業または個人のどちらかの場合があります。",
+        "HEADER_3": "情報の利用方法",
+        "SUBHEADER_3_1": "サービスの提供",
+        "CONTENT_3_1_1": "Map of Piアプリのサービス提供および向上のために情報を使用します。",
+        "SUBHEADER_3_2": "コミュニケーション",
+        "CONTENT_3_2_1": "連絡先情報を使用して、アプリに関連する更新情報、通知、およびプロモーションメッセージをお送りする場合があります。",
+        "SUBHEADER_3_3": "分析",
+        "CONTENT_3_3_1": "アプリの性能、機能、機能性を改善するためにデータを収集および分析します。",
+        "HEADER_4": "情報の共有",
+        "SUBHEADER_4_1": "販売者と共有",
+        "CONTENT_4_1_1": "注文処理やコミュニケーションの目的で、ユーザー情報を販売者と共有する場合があります。",
+        "SUBHEADER_4_2": "第三者と共有",
+        "CONTENT_4_2_1": "アプリ機能、分析、決済処理のために情報を第三者サービスプロバイダーと共有する場合があります。",
+        "HEADER_5": "セキュリティ対策",
+        "CONTENT_5_1": "業界標準のセキュリティ対策を採用していますが、インターネット上の通信や電子的な保存方法は完全に安全ではありません。",
+        "HEADER_6": "選択肢",
+        "CONTENT_6_1": "アプリ設定からアカウント情報を更新できます。Pi Networkアカウントを削除し、次回Map of Piにアクセスする際にMap of Piデータを削除するオプションを選択してアカウントを削除できます。プロモーション通信をオプトアウトできます。",
+        "HEADER_7": "プライバシーポリシーの変更",
+        "CONTENT_7_1": "必要に応じて本ポリシーを更新する場合があります。最新バージョンは、ウェブサイトまたはアプリ内に掲載されます。",
+        "HEADER_8": "お問い合わせ",
+        "CONTENT_8_1": "本プライバシーポリシーに関するご質問や懸念がある場合は、以下のメールアドレスにご連絡ください。"
+      }
+    },
+    "TERMS_OF_SERVICE_INFO": {
+      "TITLE": "利用規約",
+      "LAST_UPDATED": "最終更新日",
+      "EMAIL_ADDRESS": "メールアドレス",
+      "SECTIONS": {
+        "HEADER_1": "利用規約への同意",
+        "CONTENT_1_1": "Map of Piアプリへようこそ。このアプリはMap of PiチームがPiコミュニティと連携して開発しました。本アプリを使用することで、本利用規約およびプライバシーポリシーに同意したものとみなされます。",
+        "HEADER_2": "アプリの使用",
+        "CONTENT_2_1": "Map of Piアプリを適用法令および規制に従って使用することに同意します。",
+        "CONTENT_2_2": "アプリを違法または禁止された目的で使用したり、アプリを損傷、無効化、過負荷、または障害を引き起こす目的で使用してはなりません。",
+        "CONTENT_2_3": "Map of Piを使用するには、Pi Networkのパイオニアユーザーとして登録している必要があります。",
+        "HEADER_3": "知的財産",
+        "CONTENT_3_1": "Map of Piアプリおよびそのすべてのコンテンツ、機能、および機能性はMap of Piに帰属し、著作権、商標、その他の知的財産法によって保護されています。",
+        "HEADER_4": "責任の制限",
+        "CONTENT_4_1": "Map of Piは、Map of Piアプリの使用に関連して発生するいかなる損害についても責任を負いません。",
+        "HEADER_5": "補償",
+        "CONTENT_5_1": "Map of Piおよびその関連会社、役員、取締役、従業員、代理人を、アプリの使用に起因または関連して生じるすべての請求、責任、損害、損失、または費用（弁護士費用を含む）から補償し、免責することに同意します。",
+        "HEADER_6": "準拠法",
+        "CONTENT_6_1": "本利用規約は、法の抵触に関する規定を除き、イングランドおよびウェールズの法に準拠し、それに従って解釈されます。",
+        "HEADER_7": "利用規約の変更",
+        "CONTENT_7_1": "事前通知なしに本利用規約を更新または修正する権利を留保します。最新バージョンは、ウェブサイトまたはアプリ内に掲載されます。"
+      }
+    }
+  },
+  "SHARED": {
+    "PIONEER_LABEL": "パイオニア",
+    "BUY": "購入",
+    "NAVIGATE": "ナビゲート",
+    "NO_COMMENT": "コメントが提供されていません",
+    "SEARCH_CENTER": "検索センターを設定",
+    "CHECK_REVIEWS": "レビューを確認",
+    "SEARCH_REVIEWS": "レビューを検索",
+    "SEARCH_LOADING": "検索中...",
+    "REPLY": "返信",
+    "ADD_ITEM": "アイテムを追加",
+    "DELETE": "削除",
+    "CONFIRM_DELETE": "本当にこのアイテムを削除しますか？この操作は元に戻せません。",
+    "SAVE": "保存",
+    "CONFIRM_DIALOG": "保存されていない変更があります。本当に離れますか？",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Piユーザー名",
+      "NAME_LABEL": "名前",
+      "PHONE_NUMBER_LABEL": "電話番号",
+      "EMAIL_LABEL": "メール"
+    },
+    "PHOTO": {
+      "UPLOAD_PHOTO_LABEL": "写真をアップロード",
+      "UPLOAD_PHOTO_PLACEHOLDER": "画像をアップロードして購入者を引き付ける（PNG、JPG、JPEG、WEBP）",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "レビューをサポートするための画像をアップロード（PNG、JPG、JPEG、WEBP）",
+      "IMAGE_DROP_UPLOAD_MESSAGE": "ここに画像をドロップするか、参照してください",
+      "SUPPORTS_FILE_MESSAGE": "対応形式: PNG、JPG、JPEG、WEBP",
+      "MISC_LABELS": {
+        "USER_PREFERENCES_LABEL": "プロフィール画像",
+        "SELLER_IMAGE_LABEL": "販売者画像",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "レビュー画像"
+      }
+    },
+    "REACTION_RATING": {
+      "UNSAFE": "安全ではない",
+      "TRUSTWORTHY": "信頼できる",
+      "EMOTIONS": {
+        "DESPAIR": "絶望",
+        "SAD": "悲しい",
+        "OKAY": "普通",
+        "HAPPY": "嬉しい",
+        "DELIGHT": "大満足"
+      },
+      "VALIDATION": {
+        "SUCCESSFUL_REVIEW_SUBMISSION": "レビューが正常に送信されました",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "レビューの送信に失敗しました",
+        "SELECT_EMOJI_EXPRESSION": "絵文字を選択してください"
+      }
+    },
+    "MAP_CENTER": {
+      "SEARCH_BAR_PLACEHOLDER": "場所、都市、住所を検索",
+      "VALIDATION": {
+        "MAP_CENTER_SUCCESS_MESSAGE": "センターが正常に保存されました"
+      }
+    },
+    "LOADING_SCREEN_MESSAGE": "読み込み中...",
+    "SAVING_SCREEN_MESSAGE": "保存中...",
+    "VALIDATION": {
+      "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "認証されていないため送信に失敗しました",
+      "UNEXPECTED_ERROR_MESSAGE": "予期しないエラーが発生しました"
+    }
+  },
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "ページが見つかりません",
+    "PAGE_NOT_FOUND_MESSAGE": "申し訳ありませんが、お探しのページは存在しません。"
+  }
+}

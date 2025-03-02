@@ -235,6 +235,7 @@
     "REPLY": "Trả lời",
     "ADD_ITEM": "Thêm mục",
     "DELETE": "Xóa",
+    "CONFIRM_DELETE": "Bạn có thực sự muốn xóa mục này không? Hành động này không thể hoàn tác.",
     "SAVE": "Lưu",
     "CONFIRM": "Xác nhận",
     "CONFIRM_DIALOG": "Bạn có thay đổi chưa lưu. Bạn thực sự muốn rời đi?",
