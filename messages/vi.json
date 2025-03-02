@@ -37,7 +37,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Đăng ký người bán",
+      "SELLER_REGISTRATION_HEADER": "Quản Lý Người Bán",
       "SELLER_DETAILS_LABEL": "Thông tin người bán",
       "EMAIL_LABEL": "Địa chỉ email",
       "PHONE_NUMBER_LABEL": "Số điện thoại",
@@ -60,6 +60,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Vị trí trên bản đồ của tôi cũng là nơi tôi đang bán",
       "SELLER_SETTINGS_LABEL": "Cài đặt người bán",
       "SELLER_SELL_CENTER": "Đặt Trung tâm bán hàng",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Mua Sắm Trực Tuyến | Danh Sách Mặt Hàng Bán",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Mua Sắm Trực Tuyến | Hoàn Thành Đơn Hàng",
       "SELLER_ONLINE_SHOPPING_LABEL": "Mua sắm trực tuyến",
       "MAPPI_ALLOWANCE_LABEL": "Trợ cấp Mappi còn lại",
       "FULFILLMENT_METHOD_TYPE": {
