@@ -60,8 +60,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
-      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Online Shopping - List Items for Sale",
-      "SELLER_ONLINE_SHOPPING_ORDER_FULFILMENT_LABEL": "Online Shopping - Order Fulfilment",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Online Shopping | List Items for Sale",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Online Shopping | Order Fulfilment",
       "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Fulfilment method",

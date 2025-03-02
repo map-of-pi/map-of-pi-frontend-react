@@ -37,7 +37,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Enregistrement des données vendeur",
+      "SELLER_REGISTRATION_HEADER": "Administration du Vendeur",
       "SELLER_DETAILS_LABEL": "Données vendeur",
       "EMAIL_LABEL": "Adresse e-mail",
       "PHONE_NUMBER_LABEL": "Numéro de téléphone",
@@ -60,6 +60,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mon marqueur mon lieu de vente",
       "SELLER_SETTINGS_LABEL": "Paramètres vendeur",
       "SELLER_SELL_CENTER": "Définir le centre de vente",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Achats en Ligne | Lister les Articles en Vente",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Achats en Ligne | Traitement des Commandes",
       "SELLER_ONLINE_SHOPPING_LABEL": "Achats en ligne",
       "MAPPI_ALLOWANCE_LABEL": "Allocation Mappi restante",
       "FULFILLMENT_METHOD_TYPE": {

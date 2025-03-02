@@ -37,7 +37,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Nǔsátɔ́ sín nyikɔ",
+      "SELLER_REGISTRATION_HEADER": "Dohwɛ ƒɛnu",
       "SELLER_DETAILS_LABEL": "Nǔsátɔ́ sín gbigbajemin",
       "EMAIL_LABEL": "Adrɛsi Email mittɔn",
       "PHONE_NUMBER_LABEL": "Alokan numɛro miton",
@@ -60,6 +60,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nǔsatɔ́ sín oto he min e te kpo do Katier e ton kpo",
       "SELLER_SETTINGS_LABEL": "Seller Settings, Nǔ e nɔ xlɛ́ fí e un ɖò nǔ sà ɖè é wɛ",
       "SELLER_SELL_CENTER": "Nǔsatɔ́ sín tito",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Zɔzɔ kɛ tɔn | Dɔwɛ̀ ji xɔn",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Zɔzɔ kɛ tɔn | Dɔkpo we",
       "SELLER_ONLINE_SHOPPING_LABEL": "Sɛnawe hwehwɛ ta",
       "MAPPI_ALLOWANCE_LABEL": "Dada Mappi tɔ̌n gbè",
       "FULFILLMENT_METHOD_TYPE": {

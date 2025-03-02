@@ -37,7 +37,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "販売者登録",
+      "SELLER_REGISTRATION_HEADER": "販売者管理",
       "SELLER_DETAILS_LABEL": "販売者の詳細",
       "EMAIL_LABEL": "メールアドレス",
       "PHONE_NUMBER_LABEL": "電話番号",
@@ -60,6 +60,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "マップマーカーが私の販売場所を示しています",
       "SELLER_SETTINGS_LABEL": "販売者設定",
       "SELLER_SELL_CENTER": "販売センターを設定",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "オンラインショッピング | 販売商品のリスト",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "オンラインショッピング | 注文の履行",
       "SELLER_ONLINE_SHOPPING_LABEL": "オンラインショッピング",
       "MAPPI_ALLOWANCE_LABEL": "Mappiの残り許容量",  
       "FULFILLMENT_METHOD_TYPE": {  

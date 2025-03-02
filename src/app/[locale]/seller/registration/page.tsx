@@ -579,7 +579,7 @@ const SellerRegistrationForm = () => {
             </div>
           </ToggleCollapse>
           
-          {/* List Items - Online Shopping */}
+          {/* List Items | Online Shopping */}
           <ToggleCollapse
             header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
             open={false}>
@@ -624,7 +624,7 @@ const SellerRegistrationForm = () => {
             </div>
           </ToggleCollapse>
 
-          {/*Order Fulfilment - Online Shopping */}
+          {/*Order Fulfillment | Online Shopping */}
           <div>
             {dbSeller && <ListOrder seller_id={dbSeller.seller_id} seller_name={dbSeller.name}  seller_type={dbSeller.seller_type}/>}
           </div>

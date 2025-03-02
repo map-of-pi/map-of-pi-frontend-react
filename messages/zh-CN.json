@@ -37,7 +37,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "卖家注册",
+      "SELLER_REGISTRATION_HEADER": "卖家管理",
       "SELLER_DETAILS_LABEL": "卖家详情",
       "EMAIL_LABEL": "电子邮件地址",
       "PHONE_NUMBER_LABEL": "电话号码",
@@ -60,6 +60,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "我的地图标记显示我的销售位置",
       "SELLER_SETTINGS_LABEL": "卖家设置",
       "SELLER_SELL_CENTER": "设定销售中心",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "在线购物 | 列出待售商品",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "在线购物 | 订单履行",
       "SELLER_ONLINE_SHOPPING_LABEL": "在线购物",
       "MAPPI_ALLOWANCE_LABEL": "剩余的 Mappi 额度",
       "FULFILLMENT_METHOD_TYPE": {

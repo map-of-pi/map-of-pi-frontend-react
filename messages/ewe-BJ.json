@@ -37,7 +37,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Nudzrala ƒe Ŋkɔ ŋɔŋlɔ",
+      "SELLER_REGISTRATION_HEADER": "ƒeƒeɖoɖoɖoɖo ƒe Nyɔnu",
       "SELLER_DETAILS_LABEL": "Nudzrala ƒe Nyatakakawo",
       "EMAIL_LABEL": "Email adrɛsi",
       "PHONE_NUMBER_LABEL": "Telefon xexlẽdzesi",
@@ -60,6 +60,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nye anyigbatata ƒe dzesi fia afisi mele nu dzram le",
       "SELLER_SETTINGS_LABEL": "Nudzrala ƒe Ðoɖowo",
       "SELLER_SELL_CENTER": "Ðo Dzadzra ƒe Titina",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Ŋkekewo ƒe ŋkɔɖoɖo | Ŋkekeɖoɖowo le ata",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Ŋkekewo ƒe ŋkɔɖoɖo | Nyatakakpɔkpɔ",
       "SELLER_ONLINE_SHOPPING_LABEL": "Tsɔtsɔ abe internet me",
       "MAPPI_ALLOWANCE_LABEL": "Mappi ƒe ɖasele le eɖokui me",
       "FULFILLMENT_METHOD_TYPE": {
