@@ -37,7 +37,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "تسجيل البائع",
+      "SELLER_REGISTRATION_HEADER": "إدارة البائع",
       "SELLER_DETAILS_LABEL": "تفاصيل البائع",
       "EMAIL_LABEL": "عنوان البريد الإلكتروني",
       "PHONE_NUMBER_LABEL": "رقم الهاتف",
@@ -60,6 +60,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "علامة الموقع على الخريطة تظهر مكان بيعي",
       "SELLER_SETTINGS_LABEL": "إعدادات البائع",
       "SELLER_SELL_CENTER": "تحديد مركز البيع",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "التسوق عبر الإنترنت | قائمة العناصر للبيع",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "التسوق عبر الإنترنت | تنفيذ الطلبات",
       "SELLER_ONLINE_SHOPPING_LABEL": "التسوق عبر الإنترنت",
       "MAPPI_ALLOWANCE_LABEL": "المخصص المتبقي في Mappi",
       "FULFILLMENT_METHOD_TYPE": {
@@ -235,6 +237,7 @@
     "REPLY": "رد",
     "ADD_ITEM": "إضافة عنصر",
     "DELETE": "حذف",
+    "CONFIRM_DELETE": "هل تريد حقًا حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.",
     "SAVE": "حفظ",
     "CONFIRM": "تأكيد",
     "CONFIRM_DIALOG": "لديك تغييرات غير محفوظة. هل تريد مغادرة الصفحة حقًا؟",

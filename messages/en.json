@@ -60,8 +60,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Center",
-      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Online Shopping - List Items for Sale",
-      "SELLER_ONLINE_SHOPPING_ORDER_FULFILMENT_LABEL": "Online Shopping - Order Fulfilment",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Online Shopping | List Items for Sale",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Online Shopping | Order Fulfillment",
       "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Fulfillment method",
@@ -243,6 +243,7 @@
     "REPLY": "Reply",
     "ADD_ITEM": "Add Item",
     "DELETE": "Delete",
+    "CONFIRM_DELETE": "Do you really want to delete this item? This action cannot be undone.",
     "SAVE": "Save",
     "CONFIRM": "Confirm",
     "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",

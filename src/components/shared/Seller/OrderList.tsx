@@ -37,7 +37,7 @@ export const ListOrder: React.FC<{
 
   return (
     <ToggleCollapse
-      header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ORDER_FULFILMENT_LABEL')}
+      header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL')}
       open={false}>
         {orderList && orderList.length>0 && orderList.map((item, index)=>(
           <div
