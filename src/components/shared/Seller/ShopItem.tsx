@@ -541,9 +541,6 @@ export const ListItem: React.FC<{
   });
   const [quantity, setQuantity] = useState<number>(1)
 
-  const [previewImage, setPreviewImage] = useState<string>(formData.image || '');
-  // const [pickedItems, setPickedItems] = useState<string[]>([]);
-
   const handlePicked = (itemId: string, price: number): void => {
     setPickedItems((prev) => {
       const existingItem = prev.find((item) => item.itemId === itemId);
@@ -568,19 +565,21 @@ export const ListItem: React.FC<{
   
 
   const handleIncrement = () => {
-    setQuantity((prev) => ( prev + 1 ));
+    setQuantity((prev) => prev + 1);
   };
 
   const handleDecrement = () => {
-    setQuantity((prev) => (Math.max(1, prev - 1) ));
+    setQuantity((prev) => Math.max(1, prev - 1));
   };
+
+  const isPicked = pickedItems.find((item)=>item.itemId===formData._id);
 
   return (
     <div
       ref={refCallback}
       data-id={item._id}
       className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
-        pickedItems.find((item)=>item.itemId===formData._id)? 'bg-yellow-100' : ''
+        isPicked ? 'bg-yellow-100' : ''
       }`}
     >
       <div className="p-3">
@@ -590,7 +589,7 @@ export const ListItem: React.FC<{
               label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.ITEM_LABEL') + ':'}
               name="name"
               type="text"
-              value={formData.name}
+              value={item.name}
               disabled={true}
             />
           </div>
@@ -601,7 +600,7 @@ export const ListItem: React.FC<{
                 label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
                 name="price"
                 type="number"
-                value={formData.price?.$numberDecimal || formData.price.toString()}
+                value={item.price?.$numberDecimal || item.price.toString()}
                 disabled={true}
               />
               <p className="text-gray-500 text-sm">Pi</p>
@@ -614,7 +613,7 @@ export const ListItem: React.FC<{
             <TextArea
               label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
               name="description"
-              value={formData.description}
+              value={item.description}
               disabled={true}
               styles={{ maxHeight: '100px' }}
             />
@@ -624,7 +623,7 @@ export const ListItem: React.FC<{
               {t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.PHOTO') + ':'}
             </label>
             <Image
-              src={previewImage}
+              src={item.image || ''}
               height={50}
               width={50}
               alt="image"
@@ -640,10 +639,10 @@ export const ListItem: React.FC<{
           <div className="flex gap-2 items-center justify-between mr-4">
             <button
               className={`text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center ${
-                quantity <= 1 ? `bg-[grey]` : `bg-primary`
+                quantity <= 1 || isPicked ? `bg-[grey]` : `bg-primary`
               }`}
               onClick={handleDecrement}
-              disabled={pickedItems.find((item)=>item.itemId===formData._id)? true : false}
+              disabled={isPicked? true : false }
             >
               -
             </button>
@@ -652,19 +651,21 @@ export const ListItem: React.FC<{
               type="number"
               value={quantity}
               className="p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 text-center focus:border-[#1d724b] border-[2px] max-w-[65px]"
-              disabled={pickedItems.find((item)=>item.itemId===formData._id)? true : false}
+              disabled={isPicked? true : false}
             />
             <button
-              className="text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center bg-primary"
+              className={`text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center ${
+                isPicked ? `bg-[grey]` : `bg-primary`
+              }`}
               onClick={handleIncrement}
-              disabled={pickedItems.find((item)=>item.itemId===formData._id)? true : false}
+              disabled={isPicked? true : false} 
             >
               +
             </button>
           </div>
 
           <Button
-            label={pickedItems.find((item)=>item.itemId===formData._id) ? t('Unpick') : t('Pick')}
+            label={isPicked ? t('Unpick') : t('Pick')}
             styles={{
               color: '#ffc153',
               width: '100%',
@@ -676,3 +677,4 @@ export const ListItem: React.FC<{
     </div>
   );
 };
+

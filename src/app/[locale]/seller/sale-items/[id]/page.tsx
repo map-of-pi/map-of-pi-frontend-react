@@ -34,12 +34,13 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [sellerSettings, setSellerSettings] = useState<IUserSettings | null>(null);
   const [sellerInfo, setSellerInfo] = useState<IUser | null>(null);
   const [dbSellerItems, setDbSellerItems] = useState<SellerItem[] | null>(null)
-  const [pickedItems, setPickedItems] = useState<PickedItems[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0.00);
   const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { currentUser, autoLoginUser } = useContext(AppContext);
+  const [pickedItems, setPickedItems] = useState<{ itemId: string; quantity: number }[]>([]);
+
 
     const observer = useRef<IntersectionObserver | null>(null);
 
@@ -241,9 +242,9 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
                 <ListItem
                   key={item._id}
                   item={item}
-                  refCallback={handleShopItemRef} // Attach observer
-                  setPickedItems={setPickedItems}
                   pickedItems={pickedItems}
+                  setPickedItems={setPickedItems}
+                  refCallback={handleShopItemRef} // Attach observer
                   totalAmount={totalAmount}
                   setTotalAmount={setTotalAmount}
                 /> 
