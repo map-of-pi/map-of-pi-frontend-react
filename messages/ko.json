@@ -110,6 +110,15 @@
         "SELLING_EXPIRATION_DATE": "{expired_by_date}까지 판매"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "판매자 주문 이행",
+      "ORDER_SUBHEADER": "주문 헤더",
+      "ORDERED_ITEMS_SUBHEADER": "주문된 항목",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "총 가격",
+        "TIME_OF_ORDER_LABEL": "주문 시간"
+      }  
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "판매자로부터 구매",
       "SELLER_DETAILS_LABEL": "판매자 세부 정보",
@@ -121,7 +130,6 @@
       "REVIEWS_SCORE_MESSAGE": "리뷰 점수: {seller_review_rating} / 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "판매자 연락처 정보",
       "SELLER_USERNAME_LABEL": "사용자 이름",
-      "SELLER_PIONEER_ID_LABEL": "파이오니어 ID",
       "SELLER_PHONE_NUMBER_LABEL": "전화번호",
       "SELLER_EMAIL_ADDRESS_LABEL": "이메일 주소"
     },
@@ -226,7 +234,11 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "개척자",
+    "PIONEER_ID_LABEL": "파이오니어 ID",
     "BUY": "구매",
+    "RESET": "재설정",
+    "REFUND": "환불",
+    "FULFILLED": "완료됨",
     "NAVIGATE": "탐색",
     "NO_COMMENT": "댓글이 제공되지 않았습니다",
     "SEARCH_CENTER": "검색 센터 설정",

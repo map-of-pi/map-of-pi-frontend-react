@@ -109,6 +109,15 @@
         "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Seller Order Fulfilment",
+      "ORDER_SUBHEADER": "Order Header",
+      "ORDERED_ITEMS_SUBHEADER": "Ordered Items",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "Total price",
+        "TIME_OF_ORDER_LABEL": "Time of order"
+      }
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Buy from Seller",
       "SELLER_DETAILS_LABEL": "Seller Details",
@@ -119,8 +128,7 @@
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Seller Contact Details",
-      "SELLER_USERNAME_LABEL": "Username",
-      "SELLER_PIONEER_ID_LABEL": "Pioneer ID", 
+      "SELLER_USERNAME_LABEL": "Username", 
       "SELLER_PHONE_NUMBER_LABEL": "Phone number",
       "SELLER_EMAIL_ADDRESS_LABEL": "Email address" 
     },
@@ -238,7 +246,11 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pioneer",
+    "PIONEER_ID_LABEL": "Pioneer ID",
     "BUY": "Buy",
+    "RESET": "Reset",
+    "REFUND": "Refund",
+    "FULFILLED": "Fulfilled",
     "NAVIGATE": "Navigate",
     "NO_COMMENT": "No comment provided",
     "SEARCH_CENTER": "Set Search Centre",

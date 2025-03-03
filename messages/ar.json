@@ -49,9 +49,9 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "نوع البائع",
         "SELLER_TYPE_OPTIONS": {
-            "ACTIVE_SELLER": "بائع نشط",
-            "INACTIVE_SELLER": "بائع غير نشط",
-            "TEST_SELLER": "بائع تجريبي"
+          "ACTIVE_SELLER": "بائع نشط",
+          "INACTIVE_SELLER": "بائع غير نشط",
+          "TEST_SELLER": "بائع تجريبي"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "إعدادات متقدمة للبائع",
@@ -110,6 +110,15 @@
         "SELLING_EXPIRATION_DATE": "يباع بحلول {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "إتمام طلب البائع",
+      "ORDER_HEADER_SUBHEADER": "رأس الطلب",
+      "ORDERED_ITEMS_SUBHEADER": "العناصر المطلوبة",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "السعر الإجمالي",
+        "TIME_OF_ORDER_LABEL": "وقت الطلب"
+      }
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "شراء من البائع",
       "SELLER_DETAILS_LABEL": "تفاصيل البائع",
@@ -122,7 +131,6 @@
       "REVIEWS_SCORE_MESSAGE": "درجة التقييمات: {seller_review_rating} من 5.0", 
       "SELLER_CONTACT_DETAILS_LABEL": "تفاصيل الاتصال بالبائع", 
       "SELLER_USERNAME_LABEL": "اسم المستخدم", 
-      "SELLER_PIONEER_ID_LABEL": "معرف المستخدم", 
       "SELLER_PHONE_NUMBER_LABEL": "رقم الهاتف", 
       "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني" 
     }, 
@@ -227,7 +235,11 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "رائد",
+    "PIONEER_ID_LABEL": "معرف المستخدم", 
     "BUY": "شراء",
+    "RESET": "إعادة تعيين",
+    "REFUND": "استرداد",
+    "FULFILLED": "مكتمل",
     "NAVIGATE": "تنقل",
     "NO_COMMENT": "لم يتم تقديم تعليق",
     "SEARCH_CENTER": "تعيين مركز البحث",

@@ -110,6 +110,15 @@
         "SELLING_EXPIRATION_DATE": "Vender antes de {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Cumplimiento de pedido del vendedor",
+      "ORDER_SUBHEADER": "Encabezado del pedido",
+      "ORDERED_ITEMS_SUBHEADER": "Artículos pedidos",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "Precio total",
+        "TIME_OF_ORDER_LABEL": "Hora del pedido"
+      }
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Comprar del Vendedor",
       "SELLER_DETAILS_LABEL": "Detalles del Vendedor",
@@ -121,7 +130,6 @@
       "REVIEWS_SCORE_MESSAGE": "Puntuación de Reseñas: {seller_review_rating} de 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Detalles de Contacto del Vendedor",
       "SELLER_USERNAME_LABEL": "Nombre de usuario",
-      "SELLER_PIONEER_ID_LABEL": "ID de Pionero",
       "SELLER_PHONE_NUMBER_LABEL": "Número de teléfono",
       "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico"
     },
@@ -226,7 +234,11 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pionero",
+    "PIONEER_ID_LABEL": "ID de Pionero",
     "BUY": "Comprar",
+    "RESET": "Restablecer",
+    "REFUND": "Reembolso",
+    "FULFILLED": "Cumplido",
     "NAVIGATE": "Navegar",
     "NO_COMMENT": "No se proporcionó comentario",
     "SEARCH_CENTER": "Establecer Centro de Búsqueda",

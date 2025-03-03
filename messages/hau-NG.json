@@ -110,6 +110,15 @@
         "SELLING_EXPIRATION_DATE": "Sayarwa kafin {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Cikar umarnin mai sayarwa",
+      "ORDER_SUBHEADER": "Kanun umarni",
+      "ORDERED_ITEMS_SUBHEADER": "Kayayyakin da aka umarce",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "Jimillar farashi",
+        "TIME_OF_ORDER_LABEL": "Lokacin umarni"
+      }    
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Saya daga Mai Sayarwa",
       "SELLER_DETAILS_LABEL": "Bayanin Mai Sayarwa",
@@ -122,7 +131,6 @@
       "REVIEWS_SCORE_MESSAGE": "Makin Sake Dubawa: {seller_review_rating} cikin 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Bayanin Tuntuɓar Mai Siyarwa",
       "SELLER_USERNAME_LABEL": "Sunan mai amfani",
-      "SELLER_PIONEER_ID_LABEL": "ID na Pioneer",
       "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
       "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
     },
@@ -226,8 +234,12 @@
     }
   },
   "SHARED": {
-    "PIONEER_LABEL": "Pione",
+    "PIONEER_LABEL": "Pioneer",
+    "PIONEER_ID_LABEL": "ID na Pioneer",
     "BUY": "Saya",
+    "RESET": "Sake saiti",
+    "REFUND": "Mayar da kudi",
+    "FULFILLED": "An cika",
     "NAVIGATE": "Kewaya",
     "NO_COMMENT": "Ba a ba da tsokaci ba",
     "SEARCH_CENTER": "Saita Cibiyar Bincike",

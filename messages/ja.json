@@ -110,6 +110,15 @@
         "SELLING_EXPIRATION_DATE": "販売期限 {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "販売者の注文履行",
+      "ORDER_SUBHEADER": "注文ヘッダー",
+      "ORDERED_ITEMS_SUBHEADER": "注文された商品",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "合計金額",
+        "TIME_OF_ORDER_LABEL": "注文時間"
+      }
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "販売者から購入",
       "SELLER_DETAILS_LABEL": "販売者の詳細",
@@ -122,7 +131,6 @@
       "REVIEWS_SCORE_MESSAGE": "レビュー評価: 5.0中 {seller_review_rating}",
       "SELLER_CONTACT_DETAILS_LABEL": "販売者の連絡先",
       "SELLER_USERNAME_LABEL": "ユーザー名",
-      "SELLER_PIONEER_ID_LABEL": "パイオニアID",
       "SELLER_PHONE_NUMBER_LABEL": "電話番号",
       "SELLER_EMAIL_ADDRESS_LABEL": "メールアドレス"
     },
@@ -227,7 +235,11 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "パイオニア",
+    "PIONEER_ID_LABEL": "パイオニアID",
     "BUY": "購入",
+    "RESET": "リセット",
+    "REFUND": "返金",
+    "FULFILLED": "完了",
     "NAVIGATE": "ナビゲート",
     "NO_COMMENT": "コメントが提供されていません",
     "SEARCH_CENTER": "検索センターを設定",

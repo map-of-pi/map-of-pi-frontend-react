@@ -110,6 +110,15 @@
         "SELLING_EXPIRATION_DATE": "Títà ní {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Ipari ibere onisowo",
+      "ORDER_SUBHEADER": "Akọle ibere",
+      "ORDERED_ITEMS_SUBHEADER": "Awọn ohun ti a bere",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "Lapapọ iye",
+        "TIME_OF_ORDER_LABEL": "Akoko ibere"
+      }  
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Ra oja ni owo olutaja",
       "SELLER_DETAILS_LABEL": "Awọn alaye Olutaja",                  
@@ -122,7 +131,6 @@
       "REVIEWS_SCORE_MESSAGE": "Atunwo Dimegilio: {seller_review_rating} ninu 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Awon alaye olubasoro eniti ta oja",
       "SELLER_USERNAME_LABEL": "Orukọ olumulo", 
-      "SELLER_PIONEER_ID_LABEL": "ID aṣáájú-ọnà",
       "SELLER_PHONE_NUMBER_LABEL": "Foonu nomba", 
       "SELLER_EMAIL_ADDRESS_LABEL": "Adirẹsi imeeli"    
     },
@@ -227,7 +235,11 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pionier",
+    "PIONEER_ID_LABEL": "ID aṣáájú-ọnà",
     "BUY": "Ra oja",
+    "RESET": "Tunṣe",
+    "REFUND": "Ìsanwó pada",
+    "FULFILLED": "Ti ṣe",
     "NAVIGATE": "Ṣàbẹ̀wò",
     "NO_COMMENT": "Ko si asọye ti a pese", 
     "SEARCH_CENTER": "Ṣeto ile-iṣẹ wiwa", 

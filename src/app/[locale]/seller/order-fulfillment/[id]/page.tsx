@@ -1,31 +1,24 @@
 'use client';
 
-import { Button } from "@/components/shared/Forms/Buttons/Buttons";
-import { Input, Select, TextArea } from "@/components/shared/Forms/Inputs/Inputs";
-import { FulfillmentType, OrderItemStatus, OrderItemType, PartialOrderType, PickedItems, SellerItem } from "@/constants/types";
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import logger from '../../../../../../logger.config.mjs';
+import { Button } from "@/components/shared/Forms/Buttons/Buttons";
+import { Input, Select, TextArea } from "@/components/shared/Forms/Inputs/Inputs";
+import { FulfillmentType, OrderItemStatus, OrderItemType, PartialOrderType, PickedItems, SellerItem } from "@/constants/types";
 import { fetchOrderById, updateOrderItemStatus } from "@/services/orderApi";
+import logger from '../../../../../../logger.config.mjs';
 
-
-export default function OrderItemPage({ params, searchParams }: { params: { id: string }, searchParams: {seller_name: string, seller_type: string} }) {
-  const t = useTranslations();
+export default function OrderItemPage({ params, searchParams }: { params: { id: string }, searchParams: { seller_name: string, seller_type: string } }) {
+  const HEADER = 'font-bold text-lg md:text-2xl';
+  const SUBHEADER = 'font-bold mb-2';
+  
   const locale = useLocale();
+  const t = useTranslations();
+
   const orderId = params.id;
   const sellerName = searchParams.seller_name;
   const sellerType = searchParams.seller_type;
-
-  const translatedStockLevelOptions = [
-    { value: '1 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_1') },
-    { value: '2 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_2') },
-    { value: '3 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_3') },
-    { value: 'Many available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MANY') },
-    { value: 'Made to order', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MADE_TO_ORDER') },
-    { value: 'Ongoing service', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.ONGOING_SERVICE') },
-    { value: 'Sold', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.SOLD') },
-  ];
 
   const [currentOrder, setCurrentOrder] = useState<PartialOrderType | null>(null);
   const [orderItems, setOrderItems] = useState<OrderItemType[]>([]);
@@ -38,11 +31,11 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
         if (data) {
           setCurrentOrder(data.order);
           setOrderItems(data.orderItems);
-          setBuyerName(data.pi_username)
+          setBuyerName(data.pi_username);
         } else {
           setCurrentOrder(null);
           setOrderItems([]);
-          setBuyerName('')
+          setBuyerName('');
         }
       } catch (error) {
         logger.error('Error fetching seller items data:', error);
@@ -51,9 +44,6 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
     
     getOrder(orderId);
   }, [orderId]);
-
-  const HEADER = 'font-bold text-lg md:text-2xl';
-  const SUBHEADER = 'font-bold mb-2';
 
   const translateSellerCategory = (category: string): string => {
     switch (category) {
@@ -89,7 +79,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
       },
     ];
   
-    const handleFufill = async (itemId: string,) => {
+    const handleFulfillment = async (itemId: string) => {
       try {
         const updateItem = await updateOrderItemStatus(itemId, "fulfilled");
     
@@ -112,7 +102,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
           {sellerName}
         </h3>
         <h1 className={HEADER}>
-          {'Seller Order Fulfillment'}
+          {t('SCREEN.SELLER_ORDER_FULFILLMENT.SELLER_ORDER_FULFILLMENT_HEADER')}
         </h1>
         <p className="text-gray-400 text-sm">
           {translateSellerCategory(sellerType)}
@@ -120,7 +110,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
       </div>
 
       <h2 className={SUBHEADER}>
-        Order Header:
+      {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_SUBHEADER')}
       </h2>
       {currentOrder && <div className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7`}
       >
@@ -128,7 +118,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
               <div className="flex gap-x-4">
                 <div className="flex-auto w-64">
                   <Input
-                    label={'Pioneer:'}
+                    label={t('SHARED.PIONEER_ID_LABEL')}
                     name="name"
                     type="text"
                     value={buyerName}
@@ -139,7 +129,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                 <div className="flex-auto w-32">
                   <div className="flex items-center gap-2">
                     <Input
-                      label={'Total Price:'}
+                      label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.TOTAL_PRICE_LABEL')}
                       name="price"
                       type="number"
                       value={currentOrder.total_amount || currentOrder.total_amount.toString()}
@@ -261,7 +251,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                   color: '#ffc153',
                   width: '100%',
                 }}
-                onClick={() => handleFufill(item._id)}
+                onClick={() => handleFulfillment(item._id)}
               />
             </div>
           </div>

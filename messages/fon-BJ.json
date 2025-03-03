@@ -110,6 +110,15 @@
         "SELLING_EXPIRATION_DATE": "Nɛnɔ {expired_by_date} kɛ"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Dɔkpo xɔxɔ hɛnnu",
+      "ORDER_SUBHEADER": "Dɔkpo xɔxɔ",
+      "ORDERED_ITEMS_SUBHEADER": "Dɔwɛ si xɔn",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "Hɛnnu jiji",
+        "TIME_OF_ORDER_LABEL": "Dɔwɛ hɛnnu"
+      }
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Xo do sato gon",
       "SELLER_DETAILS_LABEL": "Nǔsatɔ́ sín xo",
@@ -122,7 +131,6 @@
       "REVIEWS_SCORE_MESSAGE": "Kplékplé lɛ sín kɛ́n: {seller_review_rating} ɖò 5.0 jí",
       "SELLER_CONTACT_DETAILS_LABEL": "Nǔsátɔ́ ɔ sín xóɖóxámɛ",
       "SELLER_USERNAME_LABEL": "Nyikɔ mɛtɔn",
-      "SELLER_PIONEER_ID_LABEL": "Pioneer ID Towe",
       "SELLER_PHONE_NUMBER_LABEL": "Nǔsátɔ́ sin numɛro",
       "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton"
     },
@@ -226,8 +234,12 @@
     }
   },
   "SHARED": {
-    "PIONEER_LABEL": "PIOnnier",
+    "PIONEER_LABEL": "Pionnier",
+    "PIONEER_ID_LABEL": "Pioneer ID Towe",
     "BUY": "Xɔ nu",
+    "RESET": "Wɛ to",
+    "REFUND": "Zɔ na azɔ",
+    "FULFILLED": "Dada",
     "NAVIGATE": "Kɔn",
     "NO_COMMENT": "È na xó ɖé ǎ",
     "SEARCH_CENTER": "Sɔ́ tɛn e mɛ è nɔ ba nǔ ɖè é",
