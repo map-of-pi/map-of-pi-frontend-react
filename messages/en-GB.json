@@ -60,12 +60,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Online Shopping",
+      "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Fulfilment method",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Collection by buyer",
+          "DELIVERED_TO_BUYER": "Delivered to buyer"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Fulfilment instructions to buyer",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Please enter a valid email address",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",
         "FAILED_REGISTRATION_SUBMISSION": "Error saving registration",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated",
-        "UNINITIALIZED_SELL_CENTER": "Please set your Sell Centre"
+        "UNINITIALIZED_SELL_CENTER": "Please set your Sell Centre",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Seller item saved successfully",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Seller item deleted successfully",
+        "FAILED_SELLER_ITEM_SAVE": "Error saving seller item",
+        "FAILED_SELLER_ITEM_DELETE": "Error deleting seller item",
+        "SELLER_ITEM_NOT_FOUND": "Seller item not found",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Save successful. Mappi allowance used {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Save unsuccessful. Insufficient Mappi allowance available"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "Item",
+        "PRICE_LABEL": "Price",
+        "STOCK_LABEL": "Stock level",
+        "DESCRIPTION_LABEL": "Description",
+        "PHOTO": "Photo",
+        "SELLING_DURATION_LABEL": "Selling duration in weeks",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Active", 
+          "EXPIRED": "Expired"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 available",
+          "AVAILABLE_2": "2 available",
+          "AVAILABLE_3": "3 available",
+          "MANY": "Many available",
+          "MADE_TO_ORDER": "Made to order",
+          "ONGOING_SERVICE": "Ongoing service",
+          "SOLD": "Sold"  
+        },
+        "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -205,7 +245,11 @@
     "SEARCH_REVIEWS": "Search Reviews",
     "SEARCH_LOADING": "Search loading...",
     "REPLY": "Reply",
+    "ADD_ITEM": "Add Item",
+    "DELETE": "Delete",
+    "CONFIRM_DELETE": "Do you really want to delete this item? This action cannot be undone.",
     "SAVE": "Save",
+    "CONFIRM": "Confirm",
     "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Pi username",

@@ -60,12 +60,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Vị trí trên bản đồ của tôi cũng là nơi tôi đang bán",
       "SELLER_SETTINGS_LABEL": "Cài đặt người bán",
       "SELLER_SELL_CENTER": "Đặt Trung tâm bán hàng",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Mua sắm trực tuyến",
+      "MAPPI_ALLOWANCE_LABEL": "Trợ cấp Mappi còn lại",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Phương thức hoàn thành",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Người mua tự nhận hàng",
+          "DELIVERED_TO_BUYER": "Giao hàng cho người mua"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Hướng dẫn hoàn thành cho người mua",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Lấy hàng tại địa chỉ của người bán. Nếu chọn giao hàng, vui lòng nhập địa chỉ của người mua.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Vui lòng nhập địa chỉ email hợp lệ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Đăng ký thành công",
         "FAILED_REGISTRATION_SUBMISSION": "Lỗi khi lưu đăng ký",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Đăng ký thất bại vì người dùng chưa xác thực",
-        "UNINITIALIZED_SELL_CENTER": "Vui lòng đặt Trung tâm bán hàng của bạn"
+        "UNINITIALIZED_SELL_CENTER": "Vui lòng đặt Trung tâm bán hàng của bạn",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Mặt hàng của người bán đã được lưu thành công",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Xóa thành công mặt hàng của người bán",
+        "FAILED_SELLER_ITEM_SAVE": "Lỗi khi lưu mặt hàng của người bán",
+        "FAILED_SELLER_ITEM_DELETE": "Lỗi khi xóa mặt hàng của người bán",
+        "SELLER_ITEM_NOT_FOUND": "Không tìm thấy mặt hàng của người bán",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Lưu thành công. Số lượng Mappi đã dùng {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Lưu không thành công. Số lượng Mappi không đủ"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "Mặt hàng",
+        "PRICE_LABEL": "Giá",
+        "STOCK_LABEL": "Mức tồn kho",
+        "DESCRIPTION_LABEL": "Mô tả",
+        "PHOTO": "Ảnh",
+        "SELLING_DURATION_LABEL": "Thời gian bán hàng (tính theo tuần)",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Đang hoạt động",
+          "EXPIRED": "Đã hết hạn"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 còn lại",
+          "AVAILABLE_2": "2 còn lại",
+          "AVAILABLE_3": "3 còn lại",
+          "MANY": "Còn nhiều",
+          "MADE_TO_ORDER": "Làm theo yêu cầu",
+          "ONGOING_SERVICE": "Dịch vụ đang hoạt động",
+          "SOLD": "Đã bán"
+        },
+        "SELLING_EXPIRATION_DATE": "Bán trước {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -193,7 +233,11 @@
     "SEARCH_REVIEWS": "Tìm kiếm Đánh giá",
     "SEARCH_LOADING": "Đang tải tìm kiếm...",
     "REPLY": "Trả lời",
+    "ADD_ITEM": "Thêm mục",
+    "DELETE": "Xóa",
+    "CONFIRM_DELETE": "Bạn có thực sự muốn xóa mục này không? Hành động này không thể hoàn tác.",
     "SAVE": "Lưu",
+    "CONFIRM": "Xác nhận",
     "CONFIRM_DIALOG": "Bạn có thay đổi chưa lưu. Bạn thực sự muốn rời đi?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Tên người dùng Pi",

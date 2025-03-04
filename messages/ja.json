@@ -60,12 +60,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "マップマーカーが私の販売場所を示しています",
       "SELLER_SETTINGS_LABEL": "販売者設定",
       "SELLER_SELL_CENTER": "販売センターを設定",
+      "SELLER_ONLINE_SHOPPING_LABEL": "オンラインショッピング",
+      "MAPPI_ALLOWANCE_LABEL": "Mappiの残り許容量",  
+      "FULFILLMENT_METHOD_TYPE": {  
+        "FULFILLMENT_METHOD_TYPE_LABEL": "履行方法",  
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {  
+          "COLLECTION_BY_BUYER": "購入者による収集",  
+          "DELIVERED_TO_BUYER": "購入者への配達"  
+        }  
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "購入者への履行指示",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "収集は販売者の住所から行われます。配達を選択した場合は、購入者の住所を入力してください。",
       "VALIDATION": {
         "EMAIL_VALIDATION": "有効なメールアドレスを入力してください",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "登録成功",
         "FAILED_REGISTRATION_SUBMISSION": "登録の保存エラー",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "ユーザーが認証されていないため、登録に失敗しました",
-        "UNINITIALIZED_SELL_CENTER": "販売センターを設定してください"
+        "UNINITIALIZED_SELL_CENTER": "販売センターを設定してください",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "販売者アイテムが正常に保存されました",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "販売者アイテムが正常に削除されました",
+        "FAILED_SELLER_ITEM_SAVE": "販売者アイテムの保存中にエラーが発生しました",
+        "FAILED_SELLER_ITEM_DELETE": "販売者アイテムの削除中にエラーが発生しました",
+        "SELLER_ITEM_NOT_FOUND": "販売者アイテムが見つかりません",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "保存に成功しました。使用されたMappiの許容量は {mappi_count} です",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "保存に失敗しました。Mappiの許容量が不足しています"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "アイテム",
+        "PRICE_LABEL": "価格",
+        "STOCK_LABEL": "在庫レベル",
+        "DESCRIPTION_LABEL": "説明",
+        "PHOTO": "写真",
+        "SELLING_DURATION_LABEL": "販売期間（週間単位）",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "アクティブ",
+          "EXPIRED": "期限切れ"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+            "AVAILABLE_1": "1個あり",
+            "AVAILABLE_2": "2個あり",
+            "AVAILABLE_3": "3個あり",
+            "MANY": "多数あり",
+            "MADE_TO_ORDER": "注文生産",
+            "ONGOING_SERVICE": "継続的サービス",
+            "SOLD": "販売済み"
+        },
+        "SELLING_EXPIRATION_DATE": "販売期限 {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -193,6 +233,9 @@
     "SEARCH_REVIEWS": "レビューを検索",
     "SEARCH_LOADING": "検索中...",
     "REPLY": "返信",
+    "ADD_ITEM": "アイテムを追加",
+    "DELETE": "削除",
+    "CONFIRM_DELETE": "本当にこのアイテムを削除しますか？この操作は元に戻せません。",
     "SAVE": "保存",
     "CONFIRM_DIALOG": "保存されていない変更があります。本当に離れますか？",
     "USER_INFORMATION": {

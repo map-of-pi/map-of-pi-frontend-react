@@ -98,4 +98,67 @@ export const registerSeller = async (formData: FormData) => {
     throw new Error('Failed to register seller. Please try again later.');
   }
 };
+
+// Fetch all seller items associated with the seller
+export const fetchSellerItems = async (sellerId: string) => {
+  try {
+    logger.info(`Fetching seller items associated with sellerID: ${sellerId}`);
+    const response = await axiosClient.get(`/sellers/item/${sellerId}`);
+    if (response.status === 200) {
+      logger.info(`Fetch seller items successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Fetch seller items failed with Status ${response.status}`);
+      return null;
+    }
+  } catch (error) {
+    logger.error('Fetch seller items encountered an error:', error);
+    throw new Error('Failed to fetch seller items. Please try again later.');
+  }
+};
+
+// Add or update seller item
+export const addOrUpdateSellerItem = async (formData: FormData) => {
+  try {
+    logger.info('Creating or updating seller item with formData..');
+    const headers = getMultipartFormDataHeaders();
+
+    const response = await axiosClient.put('/sellers/item/add', formData, { headers });
+
+    if (response.status === 200) {
+      logger.info(`Add or update seller item successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Add or update seller item failed with Status ${response.status}`);
+      return null;
+    }
+  } catch (error) {
+    logger.error('Add or update seller item encountered an error:', error);
+    throw new Error('Failed to add or update seller item. Please try again later.');
+  }
+};
+
+// Delete a seller item
+export const deleteSellerItem = async (itemId: string) => {
+  try {
+    logger.info(`Deleting seller item with itemID: ${itemId}`);
+    const response = await axiosClient.delete(`/sellers/item/delete/${itemId}`);
+    if (response.status === 200) {
+      logger.info(`Delete seller item successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Delete seller item failed with Status ${response.status}`);
+      return null;
+    }
+  } catch (error) {
+    logger.error('Delete seller item encountered an error:', error);
+    throw new Error('Failed to delete seller item. Please try again later.');
+  }
+};
   
