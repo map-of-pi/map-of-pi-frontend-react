@@ -33,6 +33,7 @@ import ToggleCollapse from '../Seller/ToggleCollapse';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
+import { ImSpinner2 } from 'react-icons/im';
 
 interface MenuItem {
   id: number;
@@ -59,6 +60,17 @@ function Sidebar(props: any) {
   const pathname = usePathname();
   const locale = useLocale();
   const router = useRouter();
+
+  
+  const Filters = [
+    { target: 'include_active_sellers', title: 'Include Active Sellers' },
+    { target: 'include_inactive_sellers', title: 'Include Inactive Sellers' },
+    { target: 'include_test_sellers', title: 'Include Test Sellers' },
+    { target: 'include_trust_level_100', title: 'Include Trust 100%' },
+    { target: 'include_trust_level_80', title: 'Include Trust 80%' },
+    { target: 'include_trust_level_50', title: 'Include Trust 50%' },
+    { target: 'include_trust_level_0', title: 'Include Trust 0%' },
+  ];
 
   const { currentUser, autoLoginUser, setReload, showAlert } =
     useContext(AppContext);
@@ -93,6 +105,15 @@ function Sidebar(props: any) {
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [filterLoading, setFilterLoading] = useState({
+    include_active_sellers: false,
+    include_inactive_sellers: false,
+    include_test_sellers: false,
+    include_trust_level_100: false,
+    include_trust_level_80: false,
+    include_trust_level_50: false,
+    include_trust_level_0: false,
+  });
 
   useEffect(() => {
     if (!currentUser) {
@@ -232,7 +253,6 @@ function Sidebar(props: any) {
     setIsSaveEnabled(isFormFilled);
   };
 
-
   const translateMenuTitle = (title: string): string => {
     switch (title) {
       case 'Languages':
@@ -281,17 +301,7 @@ function Sidebar(props: any) {
     },
   ];
 
-  const Filters = [
-    { target: 'include_active_sellers', title: 'Include Active Sellers' },
-    { target: 'include_inactive_sellers', title: 'Include Inactive Sellers' },
-    { target: 'include_test_sellers', title: 'Include Test Sellers' },
-    { target: 'include_trust_level_100', title: 'Include Trust 100%' },
-    { target: 'include_trust_level_80', title: 'Include Trust 80%' },
-    { target: 'include_trust_level_50', title: 'Include Trust 50%' },
-    { target: 'include_trust_level_0', title: 'Include Trust 0%' },
-  ];
 
-  
   // Function to save data to the database
   const handleSave = async () => {
     // check if user is authenticated and form is valid
@@ -340,24 +350,27 @@ function Sidebar(props: any) {
   };
 
   const handleSearchFilter = async (target: string) => {
+  
+    if (!dbUserSettings?.search_filters) return;
+    
+    const updatedFilters = {
+      ...dbUserSettings.search_filters,
+      [target]:
+        !dbUserSettings.search_filters[
+          target as keyof IUserSettings['search_filters']
+        ],
+    };
 
-        // check if user is authenticated and form is valid
-        if (!currentUser) {
-          logger.warn('Form submission failed: User not authenticated.');
-          return toast.error(
-            t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'),
-          );
-        }
+    const formDataToSend = new FormData();
+    formDataToSend.append('search_filters', JSON.stringify(updatedFilters));
 
-        const formDataToSend = new FormData();
-        formDataToSend.append('search_filters', JSON.stringify({[target as keyof IUserSettings['search_filters']]: !dbUserSettings?.search_filters?.[target as keyof IUserSettings['search_filters']]}));
-
-        
     try {
+      setFilterLoading({...filterLoading, [target]: true});
       const data = await createUserSettings(formDataToSend);
       if (data.settings) {
         setDbUserSettings(data.settings);
-        setIsSaveEnabled(false);
+        setFilterLoading({...filterLoading, [target]: false});
+        // setIsSaveEnabled(false);
         logger.info('User Settings saved successfully:', { data });
         // showAlert(
         //   t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'),
@@ -367,12 +380,12 @@ function Sidebar(props: any) {
         // }
       }
     } catch (error) {
+      setFilterLoading({...filterLoading, [target]: false});
       logger.error('Error saving user settings:', error);
       showAlert(
         t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'),
       );
     }
-
   };
 
   return (
@@ -477,13 +490,19 @@ function Sidebar(props: any) {
                       key={index}
                       className="mb-1 flex gap-2 pr-7 items-center cursor-pointer"
                       onClick={() => handleSearchFilter(filter.target)}>
-                      {dbUserSettings?.search_filters?.[
+                      {
+                        filterLoading[filter.target as keyof typeof filterLoading] ? (
+                          <ImSpinner2 className="animate-spin" />
+                        ) : (                       
+                       dbUserSettings?.search_filters?.[
                         filter.target as keyof IUserSettings['search_filters']
                       ] ? (
                         <IoCheckmark />
                       ) : (
                         <IoClose />
-                      )}
+                      )
+                        )
+                      }
                       {filter.title}
                     </div>
                   ))}
