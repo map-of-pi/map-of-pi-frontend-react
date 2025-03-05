@@ -15,6 +15,7 @@ import Sidebar from '../sidebar/sidebar';
 import styles from './Navbar.module.css';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
+import MembershipIcon from '../membership/MembershipIcon';
 
 function Navbar() {
   const router = useRouter();
@@ -55,7 +56,9 @@ function Navbar() {
   return (
     <>
       <div className="w-full h-[76.19px] z-500 px-[16px] py-[5px] bg-primary fixed top-0 left-0 right-0">
-        <div className="text-center text-secondary text-[1.3rem] whitespace-nowrap">
+        <div className="w-full flex justify-between items-center">
+          <div className="flex-1"></div>
+          <div className="text-center text-secondary text-[1.3rem] whitespace-nowrap flex-1">
           {/* Display alert message with spinner if present, otherwise display 'Map of Pi' */}
           {alertMessage ? (
             <div className="alert-message flex items-center justify-center">
@@ -72,6 +75,11 @@ function Navbar() {
             )
           )}
         </div>
+          <div className="flex-1">
+            <MembershipIcon category='triple_gold' />
+          </div>
+        </div>
+
         <div className="flex justify-between">
           <div className={`${styles.nav_item} ${(isHomePage || isSaveLoading) && 'disabled'}`}>
             <Link href="/" onClick={handleBackBtn}>

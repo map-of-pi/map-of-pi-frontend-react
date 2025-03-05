@@ -18,6 +18,7 @@ import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
+import MembershipIcon from '@/components/shared/membership/MembershipIcon';
 import { ListItem, ShopItem } from '@/components/shared/Seller/ShopItem';
 import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 
@@ -166,7 +167,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             />
           </div>
           <div className="my-auto">
-            <h2 className="font-bold mb-2">{sellerShopInfo.name}</h2>
+            <h2 className="font-bold text-[18px] mb-2 flex items-center">{sellerShopInfo.name} <MembershipIcon category='triple_gold' styleComponent={{height: "14px", marginLeft: "10px"}} /></h2>
             <p className="text-sm">{translateSellerCategory(sellerShopInfo.seller_type)}</p>
           </div>
         </div>
