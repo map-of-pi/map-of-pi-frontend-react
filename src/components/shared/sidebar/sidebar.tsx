@@ -341,6 +341,24 @@ function Sidebar(props: any) {
               />
           </div>
 
+           {/* membership screen */}
+           <div className='mb-2'>
+            <Button
+                label={t('Membership')}
+                styles={{
+                  color: '#ffc153',
+                  width: '100%',
+                  padding: '10px',
+                  borderRadius: '10px',
+                  fontSize: '18px' 
+                }}
+                onClick={() => {
+                  router.push(`/${locale}/membership`);
+                  props.setToggleDis(false); // Close sidebar on click
+                }}
+              />
+          </div>
+
           {/* user settings form fields */}
           <div className="flex flex-col justify-items-center mx-auto text-center gap-1">
             <Input
