@@ -4,7 +4,7 @@ import { useState, SetStateAction, useContext, useEffect, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "../Forms/Buttons/Buttons";
 import { TextArea, Input, FileInput, Select } from "../Forms/Inputs/Inputs";
-import { Notification } from "../confirm";
+import { ConfirmDialogX, Notification } from "../confirm";
 import { ISeller, SellerItem, StockLevelType } from "@/constants/types";
 import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/services/sellerApi";
 import removeUrls from "@/utils/sanitize";
@@ -71,7 +71,7 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
       }
     };
     
-    if (dbSeller){
+    if (dbSeller) {
       getSellerItems(dbSeller.seller_id);
     }
   }, [dbSeller, reload]); 
@@ -200,6 +200,7 @@ export const ShopItem: React.FC<{
   const [previewImage, setPreviewImage] = useState<string>(
     formData?.image || '',
   );
+  const [showPopup, setShowPopup] = useState(false);
   const [showDialog, setShowDialog] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const { reload, setReload, showAlert } = useContext(AppContext);
@@ -300,7 +301,6 @@ export const ShopItem: React.FC<{
       const resp = await deleteSellerItem(item_id);
       if (resp) {
         setReload(true);
-        setShowDialog(true); 
         setIsAddItemEnabled(false);
         showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_DELETED'));
       }
@@ -418,7 +418,7 @@ export const ShopItem: React.FC<{
                 padding: '5px 8px',
                 width: "100%"
               }}
-              onClick={()=>handleDelete(formData._id)}
+              onClick={()=>setShowPopup(true)}
             />
             <Button
               label={t('SHARED.SAVE')}
@@ -432,28 +432,42 @@ export const ShopItem: React.FC<{
               onClick={handleSave}
             />
           </div>
-          {formData?.expired_by && (
-            <label className="text-[14px] text-[#333333]">
-              <span className="fw-bold text-lg">
-                {new Date(formData.expired_by) > new Date() ? 
-                  t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') : 
-                  t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.EXPIRED')
-                } :  
-              </span>
-              {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
-                expired_by_date: new Intl.DateTimeFormat(locale || 'en-US', {
-                  day: '2-digit',
-                  month: 'long',
-                  year: 'numeric',
-                  hour: 'numeric',
-                  minute: 'numeric',
-                  hour12: true,
-                }).format(new Date(formData.expired_by)),
-              })}
-            </label>
-          )}
+          <div className="mt-3">
+            {formData?.expired_by && (() => {
+              const expiredDate = new Date(formData.expired_by);
+              const isActive = expiredDate > new Date();
+              const sellingStatus = isActive 
+                ? t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') 
+                : t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.EXPIRED');
+
+              const formattedDate = new Intl.DateTimeFormat(locale || 'en-US', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true,
+              }).format(expiredDate);
+
+              return (
+                <label className="text-[14px] text-[#333333]">
+                  <span className="fw-bold text-lg">{sellingStatus}: </span>
+                  {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
+                    expired_by_date: formattedDate,
+                  })}
+                </label>
+              );
+            })()}
+          </div>
         </div>
       </div>
+      {showPopup && (
+        <ConfirmDialogX
+          toggle={() => setShowPopup(false)}
+          handleClicked={()=> handleDelete(formData._id)}
+          message={t('SHARED.CONFIRM_DELETE')}
+        />
+      )}
     </>
   );
 };

@@ -80,7 +80,15 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       try {
         setIsSigningInUser(true);
         const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);
-        const res = await axiosClient.post("/users/authenticate", {pioneerAuth});
+        const res = await axiosClient.post(
+          "/users/authenticate",
+          {}, // empty body
+          {
+            headers: {
+              Authorization: `Bearer ${pioneerAuth.accessToken}`,
+            },
+          }
+        );
 
         if (res.status === 200) {
           setAuthToken(res.data?.token);

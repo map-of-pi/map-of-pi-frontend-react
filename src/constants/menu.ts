@@ -63,6 +63,14 @@ export const menu = {
       },
       {
         id: 8,
+        code: 'ja',
+        label: 'JA',
+        title: 'Japanese',
+        translation: '日本語',
+        icon: '',
+      },
+      {
+        id: 9,
         code: 'ko',
         label: 'KO',
         title: 'Korean',
@@ -70,7 +78,7 @@ export const menu = {
         icon: '',
       },
       {
-        id: 9,
+        id: 10,
         code: 'vi',
         label: 'VI',
         title: 'Vietnamese',
@@ -78,7 +86,7 @@ export const menu = {
         icon: '',
       },
       {
-        id: 10,
+        id: 11,
         code: 'hau-NG',
         label: 'NG/HAU',
         title: 'Nigerian Hausa',
@@ -86,7 +94,15 @@ export const menu = {
         icon: '',
       },
       {
-        id: 11,
+        id: 12,
+        code: 'yor-NG',
+        label: 'NG/YOR',
+        title: 'Nigerian Yoruba',
+        translation: 'Yoruba',
+        icon: '',
+      },
+      {
+        id: 13,
         code: 'ewe-BJ',
         label: 'BJ/EWE',
         title: 'Benin Ewe',
@@ -94,7 +110,7 @@ export const menu = {
         icon: '',
       },
       {
-        id: 12,
+        id: 14,
         code: 'fon-BJ',
         label: 'BJ/FON',
         title: 'Benin Fon',

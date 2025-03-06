@@ -234,6 +234,7 @@
     "REPLY": "Responder",
     "ADD_ITEM": "Agregar artículo",
     "DELETE": "Eliminar",
+    "CONFIRM_DELETE": "¿Realmente quieres eliminar este elemento? Esta acción no se puede deshacer.",
     "SAVE": "Guardar",
     "CONFIRM": "Confirmar",
     "CONFIRM_DIALOG": "Tienes cambios sin guardar. Realmente quieres salir?",

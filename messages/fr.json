@@ -235,6 +235,7 @@
     "REPLY": "Répondre",
     "ADD_ITEM": "Ajouter un article",
     "DELETE": "Supprimer",
+    "CONFIRM_DELETE": "Voulez-vous vraiment supprimer cet élément? Cette action est irréversible.",
     "SAVE": "Enregistrer",
     "CONFIRM": "Confirmer",
     "CONFIRM_DIALOG": "Vos modifications ne sont pas enregistrées. Voulez-vous vraiment quitter?",
