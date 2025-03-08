@@ -121,7 +121,18 @@
       "SELLER_USERNAME_LABEL": "Username",
       "SELLER_PIONEER_ID_LABEL": "Pioneer ID", 
       "SELLER_PHONE_NUMBER_LABEL": "Phone number",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Email address" 
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email address",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Item",
+          "PRICE_LABEL": "Price",
+          "DESCRIPTION_LABEL": "Description",
+          "PHOTO": "Photo",
+          "BUYING_QUANTITY_LABEL": "Quantity",
+          "PICK_LABEL": "Pick",
+          "UNPICK_LABEL": "Unpick"
+        }  
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Reviews",

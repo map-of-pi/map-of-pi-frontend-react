@@ -36,6 +36,8 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { currentUser, autoLoginUser } = useContext(AppContext);
+  const [pickedItems, setPickedItems] = useState<{ id: string; quantity: number }[]>([]);
+
 
     const observer = useRef<IntersectionObserver | null>(null);
 
@@ -218,6 +220,8 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
                 <ListItem
                   key={item._id}
                   item={item}
+                  pickedItems={pickedItems}
+                  setPickedItems={setPickedItems}
                   refCallback={handleShopItemRef} // Attach observer
                 /> 
               ))            
@@ -248,7 +252,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           <div className="mb-4 mt-3 ml-auto w-min">
             <Button
               label={t('Checkout')}
-              // disabled={!isSaveEnabled}
+              disabled={pickedItems.length === 0}
               styles={{
                 color: '#ffc153',
                 height: '40px',
