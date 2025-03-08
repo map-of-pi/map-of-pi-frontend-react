@@ -596,7 +596,9 @@ export const ListItem: React.FC<{
           </div>
 
           <Button
-            label={isPicked ? t('Unpick') : t('Pick')}
+            label={isPicked ? 
+              t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.UNPICK_LABEL') : 
+              t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PICK_LABEL')}
             styles={{
               color: '#ffc153',
               width: '100%',

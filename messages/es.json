@@ -121,7 +121,18 @@
       "SELLER_USERNAME_LABEL": "Nombre de usuario",
       "SELLER_PIONEER_ID_LABEL": "ID de Pionero",
       "SELLER_PHONE_NUMBER_LABEL": "Número de teléfono",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Artículo",
+          "PRICE_LABEL": "Precio",
+          "DESCRIPTION_LABEL": "Descripción",
+          "PHOTO": "Foto",
+          "BUYING_QUANTITY_LABEL": "Cantidad",
+          "PICK_LABEL": "Agregar",
+          "UNPICK_LABEL": "Eliminar"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Reseñas",

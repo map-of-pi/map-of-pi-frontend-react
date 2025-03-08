@@ -121,7 +121,18 @@
       "SELLER_USERNAME_LABEL": "사용자 이름",
       "SELLER_PIONEER_ID_LABEL": "파이오니어 ID",
       "SELLER_PHONE_NUMBER_LABEL": "전화번호",
-      "SELLER_EMAIL_ADDRESS_LABEL": "이메일 주소"
+      "SELLER_EMAIL_ADDRESS_LABEL": "이메일 주소",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "상품",
+          "PRICE_LABEL": "가격",
+          "DESCRIPTION_LABEL": "설명",
+          "PHOTO": "사진",
+          "BUYING_QUANTITY_LABEL": "수량",
+          "PICK_LABEL": "추가",
+          "UNPICK_LABEL": "제거"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "리뷰",
