@@ -122,7 +122,18 @@
       "SELLER_USERNAME_LABEL": "اسم المستخدم", 
       "SELLER_PIONEER_ID_LABEL": "معرف المستخدم", 
       "SELLER_PHONE_NUMBER_LABEL": "رقم الهاتف", 
-      "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني" 
+      "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "عنصر",
+          "PRICE_LABEL": "السعر",
+          "DESCRIPTION_LABEL": "الوصف",
+          "PHOTO": "صورة",
+          "BUYING_QUANTITY_LABEL": "الكمية",
+          "PICK_LABEL": "إضافة",
+          "UNPICK_LABEL": "إزالة"
+        }
+      } 
     }, 
     "REVIEWS": { 
       "REVIEWS_HEADER": "التقييمات", 
