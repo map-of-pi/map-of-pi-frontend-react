@@ -132,7 +132,18 @@
       "SELLER_CONTACT_DETAILS_LABEL": "Thông tin liên hệ người bán",
       "SELLER_USERNAME_LABEL": "Tên người dùng",
       "SELLER_PHONE_NUMBER_LABEL": "Số điện thoại",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Địa chỉ email"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Địa chỉ email",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Mặt hàng",
+          "PRICE_LABEL": "Giá",
+          "DESCRIPTION_LABEL": "Mô tả",
+          "PHOTO": "Ảnh",
+          "BUYING_QUANTITY_LABEL": "Số lượng",
+          "PICK_LABEL": "Thêm",
+          "UNPICK_LABEL": "Gỡ bỏ"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Đánh giá",

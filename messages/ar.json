@@ -132,7 +132,18 @@
       "SELLER_CONTACT_DETAILS_LABEL": "تفاصيل الاتصال بالبائع", 
       "SELLER_USERNAME_LABEL": "اسم المستخدم", 
       "SELLER_PHONE_NUMBER_LABEL": "رقم الهاتف", 
-      "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني" 
+      "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "عنصر",
+          "PRICE_LABEL": "السعر",
+          "DESCRIPTION_LABEL": "الوصف",
+          "PHOTO": "صورة",
+          "BUYING_QUANTITY_LABEL": "الكمية",
+          "PICK_LABEL": "إضافة",
+          "UNPICK_LABEL": "إزالة"
+        }
+      } 
     }, 
     "REVIEWS": { 
       "REVIEWS_HEADER": "التقييمات", 

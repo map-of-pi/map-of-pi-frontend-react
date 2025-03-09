@@ -132,7 +132,18 @@
       "SELLER_CONTACT_DETAILS_LABEL": "Nǔsátɔ́ ɔ sín xóɖóxámɛ",
       "SELLER_USERNAME_LABEL": "Nyikɔ mɛtɔn",
       "SELLER_PHONE_NUMBER_LABEL": "Nǔsátɔ́ sin numɛro",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Nɔ̀nɔ",
+          "PRICE_LABEL": "Xɔ̀ mɛ",
+          "DESCRIPTION_LABEL": "Bíbá",
+          "PHOTO": "Fɔto",
+          "BUYING_QUANTITY_LABEL": "Nɔ̀nɔ hɛnnu",
+          "PICK_LABEL": "Tɔn",
+          "UNPICK_LABEL": "Zàn"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Kpondewu",

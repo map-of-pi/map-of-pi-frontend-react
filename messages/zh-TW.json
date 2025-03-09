@@ -132,7 +132,18 @@
       "SELLER_CONTACT_DETAILS_LABEL": "賣家聯絡資訊",
       "SELLER_USERNAME_LABEL": "用戶名稱",
       "SELLER_PHONE_NUMBER_LABEL": "電話號碼",
-      "SELLER_EMAIL_ADDRESS_LABEL": "電子郵件地址"
+      "SELLER_EMAIL_ADDRESS_LABEL": "電子郵件地址",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "商品",
+          "PRICE_LABEL": "價格",
+          "DESCRIPTION_LABEL": "描述",
+          "PHOTO": "照片",
+          "BUYING_QUANTITY_LABEL": "數量",
+          "PICK_LABEL": "新增",
+          "UNPICK_LABEL": "移除"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "評論",

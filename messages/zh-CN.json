@@ -132,7 +132,18 @@
       "SELLER_CONTACT_DETAILS_LABEL": "卖家联系信息",
       "SELLER_USERNAME_LABEL": "用户名",
       "SELLER_PHONE_NUMBER_LABEL": "电话号码",
-      "SELLER_EMAIL_ADDRESS_LABEL": "电子邮件地址"
+      "SELLER_EMAIL_ADDRESS_LABEL": "电子邮件地址",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "商品",
+          "PRICE_LABEL": "价格",
+          "DESCRIPTION_LABEL": "描述",
+          "PHOTO": "照片",
+          "BUYING_QUANTITY_LABEL": "数量",
+          "PICK_LABEL": "添加",
+          "UNPICK_LABEL": "移除"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "评论",

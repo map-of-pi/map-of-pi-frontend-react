@@ -585,7 +585,7 @@ export const ListItem: React.FC<{
         <div className="flex gap-x-4">
           <div className="flex-auto w-64">
             <Input
-              label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.ITEM_LABEL') + ':'}
+              label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.ITEM_LABEL') + ':'}
               name="name"
               type="text"
               value={item.name}
@@ -596,7 +596,7 @@ export const ListItem: React.FC<{
           <div className="flex-auto w-32">
             <div className="flex items-center gap-2">
               <Input
-                label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
+                label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
                 name="price"
                 type="number"
                 value={item.price?.$numberDecimal || item.price.toString()}
@@ -610,7 +610,7 @@ export const ListItem: React.FC<{
         <div className="flex gap-x-4">
           <div className="flex-auto w-64">
             <TextArea
-              label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
+              label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
               name="description"
               value={item.description}
               disabled={true}
@@ -619,7 +619,7 @@ export const ListItem: React.FC<{
           </div>
           <div className="flex-auto w-32 gap-2">
             <label className="block text-[17px] text-[#333333]">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.PHOTO') + ':'}
+              {t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PHOTO') + ':'}
             </label>
             <Image
               src={item.image || ''}
@@ -632,7 +632,7 @@ export const ListItem: React.FC<{
         </div>
 
         <label className="text-[18px] text-[#333333]">
-          {t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.BUYING_QUANTITY_LABEL')}:
+          {t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.BUYING_QUANTITY_LABEL')}:
         </label>
         <div className="flex items-center gap-4 w-full mt-1">
           <div className="flex gap-2 items-center justify-between mr-4">
@@ -664,7 +664,9 @@ export const ListItem: React.FC<{
           </div>
 
           <Button
-            label={isPicked ? t('Unpick') : t('Pick')}
+            label={isPicked ? 
+              t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.UNPICK_LABEL') : 
+              t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PICK_LABEL')}
             styles={{
               color: '#ffc153',
               width: '100%',

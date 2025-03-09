@@ -132,7 +132,18 @@
       "SELLER_CONTACT_DETAILS_LABEL": "Bayanin Tuntuɓar Mai Siyarwa",
       "SELLER_USERNAME_LABEL": "Sunan mai amfani",
       "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Abu",
+          "PRICE_LABEL": "Farashi",
+          "DESCRIPTION_LABEL": "Bayani",
+          "PHOTO": "Hoto",
+          "BUYING_QUANTITY_LABEL": "Yawan abu",
+          "PICK_LABEL": "Kara",
+          "UNPICK_LABEL": "Cire"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Bita",

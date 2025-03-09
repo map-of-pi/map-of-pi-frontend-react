@@ -132,7 +132,18 @@
       "SELLER_CONTACT_DETAILS_LABEL": "Nudzrala ƒe Kadodo Ŋuti Nyatakakawo",
       "SELLER_USERNAME_LABEL": "Zãla ƒe ŋkɔ",
       "SELLER_PHONE_NUMBER_LABEL": "Telefon xexlẽdzesi",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Email adrɛsi"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email adrɛsi",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Agbalẽ",
+          "PRICE_LABEL": "Nuxlɔ̃",
+          "DESCRIPTION_LABEL": "Nukpɔkpɔ",
+          "PHOTO": "Fɔto",
+          "BUYING_QUANTITY_LABEL": "Dɔwɔƒe ŋkekea",
+          "PICK_LABEL": "Tutu",
+          "UNPICK_LABEL": "Dzi"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Totoɖemewo",

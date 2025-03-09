@@ -132,7 +132,18 @@
       "SELLER_CONTACT_DETAILS_LABEL": "販売者の連絡先",
       "SELLER_USERNAME_LABEL": "ユーザー名",
       "SELLER_PHONE_NUMBER_LABEL": "電話番号",
-      "SELLER_EMAIL_ADDRESS_LABEL": "メールアドレス"
+      "SELLER_EMAIL_ADDRESS_LABEL": "メールアドレス",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "商品",
+          "PRICE_LABEL": "価格",
+          "DESCRIPTION_LABEL": "説明",
+          "PHOTO": "写真",
+          "BUYING_QUANTITY_LABEL": "数量",
+          "PICK_LABEL": "追加",
+          "UNPICK_LABEL": "削除"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "レビュー",
