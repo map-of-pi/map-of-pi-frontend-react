@@ -122,7 +122,18 @@
       "SELLER_USERNAME_LABEL": "Orukọ olumulo", 
       "SELLER_PIONEER_ID_LABEL": "ID aṣáájú-ọnà",
       "SELLER_PHONE_NUMBER_LABEL": "Foonu nomba", 
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adirẹsi imeeli"    
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adirẹsi imeeli",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Ohun kan",
+          "PRICE_LABEL": "Iye",
+          "DESCRIPTION_LABEL": "Apejuwe",
+          "PHOTO": "Aworan",
+          "BUYING_QUANTITY_LABEL": "Opo iye",
+          "PICK_LABEL": "Fi kun",
+          "UNPICK_LABEL": "Yọ"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Atunyẹwo",
