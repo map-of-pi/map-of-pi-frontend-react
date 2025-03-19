@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "Zã nye mɔ̃a ƒe GPS",
       "PREFERRED_SEARCH_CENTER": "Zã Didiƒe"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Agbalẽŋlɔwo ƒe Filterwo",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Le ame aɖe si dɔ agboɖa le ŋkeke me",
+      "INCLUDE_INACTIVE_SELLERS": "Le ame aɖe si dɔ agboɖa o le ŋkeke me",
+      "INCLUDE_TEST_SELLERS": "Le ame aɖe si dɔ agboɖa dɔɖa",
+      "INCLUDE_TRUST_LEVEL_100": "Le ame aɖe si nà agbo 100%",
+      "INCLUDE_TRUST_LEVEL_80": "Le ame aɖe si nà agbo 80%",
+      "INCLUDE_TRUST_LEVEL_50": "Le ame aɖe si nà agbo 50%",
+      "INCLUDE_TRUST_LEVEL_0": "Le ame aɖe si nà agbo 0%"
+    },
     "CONTACT_MAP_OF_PI": "Kadodo ƒe Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nu siwo wodi la kpɔ dzidzedze",
@@ -122,7 +132,18 @@
       "SELLER_USERNAME_LABEL": "Zãla ƒe ŋkɔ",
       "SELLER_PIONEER_ID_LABEL": "Mɔɖela Pionier ƒe ID",
       "SELLER_PHONE_NUMBER_LABEL": "Telefon xexlẽdzesi",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Email adrɛsi"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email adrɛsi",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Agbalẽ",
+          "PRICE_LABEL": "Nuxlɔ̃",
+          "DESCRIPTION_LABEL": "Nukpɔkpɔ",
+          "PHOTO": "Fɔto",
+          "BUYING_QUANTITY_LABEL": "Dɔwɔƒe ŋkekea",
+          "PICK_LABEL": "Tutu",
+          "UNPICK_LABEL": "Dzi"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Totoɖemewo",

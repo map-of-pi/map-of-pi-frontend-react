@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "使用我設備的 GPS",
       "PREFERRED_SEARCH_CENTER": "使用搜尋中心"
     },
+    "SEARCH_FILTERS_SUBHEADER": "搜尋篩選器",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "包含活躍賣家",
+      "INCLUDE_INACTIVE_SELLERS": "包含非活躍賣家",
+      "INCLUDE_TEST_SELLERS": "包含測試賣家",
+      "INCLUDE_TRUST_LEVEL_100": "包含信任級別100",
+      "INCLUDE_TRUST_LEVEL_80": "包含信任級別80",
+      "INCLUDE_TRUST_LEVEL_50": "包含信任級別50",
+      "INCLUDE_TRUST_LEVEL_0": "包含信任級別0"
+    },
     "CONTACT_MAP_OF_PI": "聯絡 Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "偏好設定已成功儲存",
@@ -122,7 +132,18 @@
       "SELLER_USERNAME_LABEL": "用戶名稱",
       "SELLER_PIONEER_ID_LABEL": "先鋒 ID",
       "SELLER_PHONE_NUMBER_LABEL": "電話號碼",
-      "SELLER_EMAIL_ADDRESS_LABEL": "電子郵件地址"
+      "SELLER_EMAIL_ADDRESS_LABEL": "電子郵件地址",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "商品",
+          "PRICE_LABEL": "價格",
+          "DESCRIPTION_LABEL": "描述",
+          "PHOTO": "照片",
+          "BUYING_QUANTITY_LABEL": "數量",
+          "PICK_LABEL": "新增",
+          "UNPICK_LABEL": "移除"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "評論",

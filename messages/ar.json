@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "استخدام GPS الجهاز",
       "PREFERRED_SEARCH_CENTER": "استخدام مركز البحث"
     },
+    "SEARCH_FILTERS_SUBHEADER": "فلاتر البحث",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "تضمين البائعين النشطين",
+      "INCLUDE_INACTIVE_SELLERS": "تضمين البائعين غير النشطين",
+      "INCLUDE_TEST_SELLERS": "تضمين البائعين التجريبيين",
+      "INCLUDE_TRUST_LEVEL_100": "تضمين مستوى الثقة 100",
+      "INCLUDE_TRUST_LEVEL_80": "تضمين مستوى الثقة 80",
+      "INCLUDE_TRUST_LEVEL_50": "تضمين مستوى الثقة 50",
+      "INCLUDE_TRUST_LEVEL_0": "تضمين مستوى الثقة 0"
+    },
     "CONTACT_MAP_OF_PI": "اتصل بـ Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "تم حفظ التفضيلات بنجاح",
@@ -122,7 +132,18 @@
       "SELLER_USERNAME_LABEL": "اسم المستخدم", 
       "SELLER_PIONEER_ID_LABEL": "معرف المستخدم", 
       "SELLER_PHONE_NUMBER_LABEL": "رقم الهاتف", 
-      "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني" 
+      "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "عنصر",
+          "PRICE_LABEL": "السعر",
+          "DESCRIPTION_LABEL": "الوصف",
+          "PHOTO": "صورة",
+          "BUYING_QUANTITY_LABEL": "الكمية",
+          "PICK_LABEL": "إضافة",
+          "UNPICK_LABEL": "إزالة"
+        }
+      } 
     }, 
     "REVIEWS": { 
       "REVIEWS_HEADER": "التقييمات", 

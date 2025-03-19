@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "Yi amfani da GPS na na'urar",
       "PREFERRED_SEARCH_CENTER": "Yi amfani da Cibiyar Bincike"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Farantan Bincike",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Hada da masu sayarwa masu aiki",
+      "INCLUDE_INACTIVE_SELLERS": "Hada da masu sayarwa marasa aiki",
+      "INCLUDE_TEST_SELLERS": "Hada da masu sayarwa na gwaji",
+      "INCLUDE_TRUST_LEVEL_100": "Hada da matakin amana 100",
+      "INCLUDE_TRUST_LEVEL_80": "Hada da matakin amana 80",
+      "INCLUDE_TRUST_LEVEL_50": "Hada da matakin amana 50",
+      "INCLUDE_TRUST_LEVEL_0": "Hada da matakin amana 0"
+    },
     "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Zaɓuɓɓuka sun yi nasara",
@@ -122,7 +132,18 @@
       "SELLER_USERNAME_LABEL": "Sunan mai amfani",
       "SELLER_PIONEER_ID_LABEL": "ID na Pioneer",
       "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Abu",
+          "PRICE_LABEL": "Farashi",
+          "DESCRIPTION_LABEL": "Bayani",
+          "PHOTO": "Hoto",
+          "BUYING_QUANTITY_LABEL": "Yawan abu",
+          "PICK_LABEL": "Kara",
+          "UNPICK_LABEL": "Cire"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Bita",

@@ -16,16 +16,16 @@ interface SearchBarProps {
   setSearchQuery?: (value: string) => void;
   setSearchClicked?: (value: boolean) => void;
   isSearchClicked?: boolean;
-  // handleSearchBarChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  // searchBarValue: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, page, 
+const SearchBar: React.FC<SearchBarProps> = ({ 
+  onSearch, 
+  page, 
   setSearchResults = () => {}, 
   setSearchQuery = () => {}, 
   setSearchClicked = () => {},
   isSearchClicked
- }) => {
+}) => {
   const t = useTranslations();
 
   const [searchBarValue, setSearchBarValue] = useState('');

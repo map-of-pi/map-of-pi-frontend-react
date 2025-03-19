@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "デバイスのGPSを使用",
       "PREFERRED_SEARCH_CENTER": "検索センターを使用"
     },
+    "SEARCH_FILTERS_SUBHEADER": "検索フィルター",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "アクティブな販売者を含める",
+      "INCLUDE_INACTIVE_SELLERS": "非アクティブな販売者を含める",
+      "INCLUDE_TEST_SELLERS": "テスト販売者を含める",
+      "INCLUDE_TRUST_LEVEL_100": "信頼レベル100を含める",
+      "INCLUDE_TRUST_LEVEL_80": "信頼レベル80を含める",
+      "INCLUDE_TRUST_LEVEL_50": "信頼レベル50を含める",
+      "INCLUDE_TRUST_LEVEL_0": "信頼レベル0を含める"
+    },
     "CONTACT_MAP_OF_PI": "Map of Pi に連絡",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "設定の保存に成功しました",
@@ -122,7 +132,18 @@
       "SELLER_USERNAME_LABEL": "ユーザー名",
       "SELLER_PIONEER_ID_LABEL": "パイオニアID",
       "SELLER_PHONE_NUMBER_LABEL": "電話番号",
-      "SELLER_EMAIL_ADDRESS_LABEL": "メールアドレス"
+      "SELLER_EMAIL_ADDRESS_LABEL": "メールアドレス",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "商品",
+          "PRICE_LABEL": "価格",
+          "DESCRIPTION_LABEL": "説明",
+          "PHOTO": "写真",
+          "BUYING_QUANTITY_LABEL": "数量",
+          "PICK_LABEL": "追加",
+          "UNPICK_LABEL": "削除"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "レビュー",

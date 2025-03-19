@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "Use my device GPS",
       "PREFERRED_SEARCH_CENTER": "Use Search Center"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Search Filters",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Include active sellers",
+      "INCLUDE_INACTIVE_SELLERS": "Include inactive sellers",
+      "INCLUDE_TEST_SELLERS": "Include test sellers",
+      "INCLUDE_TRUST_LEVEL_100": "Include trust level 100",
+      "INCLUDE_TRUST_LEVEL_80": "Include trust level 80",
+      "INCLUDE_TRUST_LEVEL_50": "Include trust level 50",
+      "INCLUDE_TRUST_LEVEL_0": "Include trust level 0"
+    },
     "CONTACT_MAP_OF_PI": "Contact Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Preferences successful",
@@ -123,12 +133,16 @@
       "SELLER_PIONEER_ID_LABEL": "Pioneer ID",
       "SELLER_PHONE_NUMBER_LABEL": "Phone number",
       "SELLER_EMAIL_ADDRESS_LABEL": "Email address",
-      "SELLER_ITEMS_FEATURE": {
-        "ITEM_LABEL": "Item",
-        "PRICE_LABEL": "Price",
-        "DESCRIPTION_LABEL": "Description",
-        "PHOTO": "Photo",
-        "BUYING_QUANTITY_LABEL": "Quantity"
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Item",
+          "PRICE_LABEL": "Price",
+          "DESCRIPTION_LABEL": "Description",
+          "PHOTO": "Photo",
+          "BUYING_QUANTITY_LABEL": "Quantity",
+          "PICK_LABEL": "Pick",
+          "UNPICK_LABEL": "Unpick"
+        }
       }
     },
     "REVIEWS": {
