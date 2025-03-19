@@ -8,10 +8,13 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
+import { ImSpinner2 } from 'react-icons/im';
 import { IoCheckmark, IoClose } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 
 import MapCenter from '../map/MapCenter';
+import TrustMeter from '../Review/TrustMeter';
+import ToggleCollapse from '../Seller/ToggleCollapse';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
@@ -19,21 +22,15 @@ import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import {
   FileInput,
   Input,
-  Select,
+  Select
 } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
-import {
-  createUserSettings,
-  fetchUserSettings,
-} from '@/services/userSettingsApi';
-import removeUrls from '@/utils/sanitize';
-import TrustMeter from '../Review/TrustMeter';
-import ToggleCollapse from '../Seller/ToggleCollapse';
+import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import removeUrls from "@/utils/sanitize";
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
-import { ImSpinner2 } from 'react-icons/im';
 
 interface MenuItem {
   id: number;
@@ -61,22 +58,18 @@ function Sidebar(props: any) {
   const locale = useLocale();
   const router = useRouter();
 
-  
   const Filters = [
-    { target: 'include_active_sellers', title: 'Include Active Sellers' },
-    { target: 'include_inactive_sellers', title: 'Include Inactive Sellers' },
-    { target: 'include_test_sellers', title: 'Include Test Sellers' },
-    { target: 'include_trust_level_100', title: 'Include Trust 100%' },
-    { target: 'include_trust_level_80', title: 'Include Trust 80%' },
-    { target: 'include_trust_level_50', title: 'Include Trust 50%' },
-    { target: 'include_trust_level_0', title: 'Include Trust 0%' },
+    { target: 'include_active_sellers', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_ACTIVE_SELLERS') },
+    { target: 'include_inactive_sellers', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_INACTIVE_SELLERS') },
+    { target: 'include_test_sellers', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TEST_SELLERS') },
+    { target: 'include_trust_level_100', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_100') },
+    { target: 'include_trust_level_80', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_80') },
+    { target: 'include_trust_level_50', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_50') },
+    { target: 'include_trust_level_0', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_0') },
   ];
 
-  const { currentUser, autoLoginUser, setReload, showAlert } =
-    useContext(AppContext);
-  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(
-    null,
-  );
+  const { currentUser, autoLoginUser, setReload, showAlert } = useContext(AppContext);
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   // Initialize state with appropriate types
   const [formData, setFormData] = useState<{
     user_name: string;
@@ -97,9 +90,7 @@ function Sidebar(props: any) {
   });
 
   const [file, setFile] = useState<File | null>(null);
-  const [previewImage, setPreviewImage] = useState<string>(
-    dbUserSettings?.image || '',
-  );
+  const [previewImage, setPreviewImage] = useState<string>(dbUserSettings?.image || '');
   const [showMapCenter] = useState(false);
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
@@ -301,15 +292,12 @@ function Sidebar(props: any) {
     },
   ];
 
-
   // Function to save data to the database
   const handleSave = async () => {
     // check if user is authenticated and form is valid
     if (!currentUser) {
       logger.warn('Form submission failed: User not authenticated.');
-      return toast.error(
-        t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'),
-      );
+      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
     }
 
     const formDataToSend = new FormData();
@@ -323,10 +311,7 @@ function Sidebar(props: any) {
       formDataToSend.append('image', ''); // set to previous image url if no upload
     }
 
-    logger.info(
-      'User Settings form data:',
-      Object.fromEntries(formDataToSend.entries()),
-    );
+    logger.info('User Settings form data:', Object.fromEntries(formDataToSend.entries()));
 
     try {
       const data = await createUserSettings(formDataToSend);
@@ -334,23 +319,18 @@ function Sidebar(props: any) {
         setDbUserSettings(data.settings);
         setIsSaveEnabled(false);
         logger.info('User Settings saved successfully:', { data });
-        showAlert(
-          t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'),
-        );
+        showAlert(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
         if (pathname === '/' || pathname === `/${locale}`) {
           setReload(true);
         }
       }
     } catch (error) {
       logger.error('Error saving user settings:', error);
-      showAlert(
-        t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'),
-      );
+      showAlert(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
     }
   };
 
   const handleSearchFilter = async (target: string) => {
-  
     if (!dbUserSettings?.search_filters) return;
     
     const updatedFilters = {
@@ -370,14 +350,7 @@ function Sidebar(props: any) {
       if (data.settings) {
         setDbUserSettings(data.settings);
         setFilterLoading({...filterLoading, [target]: false});
-        // setIsSaveEnabled(false);
         logger.info('User Settings saved successfully:', { data });
-        // showAlert(
-        //   t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'),
-        // );
-        // if (pathname === '/' || pathname === `/${locale}`) {
-        //   setReload(true);
-        // }
       }
     } catch (error) {
       setFilterLoading({...filterLoading, [target]: false});
@@ -393,7 +366,8 @@ function Sidebar(props: any) {
       <div className="w-full h-[calc(100vh-74px)] fixed bottom-0 bg-transparent right-0 z-[70]">
         <div
           className="absolute w-full h-full bg-[#82828284]"
-          onClick={() => props.setToggleDis(false)}></div>
+          onClick={() => props.setToggleDis(false)}>
+        </div>
         <div
           className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
           {/* header title */}
@@ -483,7 +457,7 @@ function Sidebar(props: any) {
 
             {/* THIS IS THE THE SEARCH FILTERS */}
             <div className="flex flex-col justify-items-center text-center mx-auto gap-2 mt-4">
-              <ToggleCollapse header="Search Filters">
+              <ToggleCollapse header={t('SIDE_NAVIGATION.SEARCH_FILTERS_SUBHEADER')}>
                 <div className="h-[110px] overflow-y-scroll overflow-hidden">
                   {Filters.map((filter, index) => (
                     <div
@@ -494,13 +468,13 @@ function Sidebar(props: any) {
                         filterLoading[filter.target as keyof typeof filterLoading] ? (
                           <ImSpinner2 className="animate-spin" />
                         ) : (                       
-                       dbUserSettings?.search_filters?.[
-                        filter.target as keyof IUserSettings['search_filters']
-                      ] ? (
-                        <IoCheckmark />
-                      ) : (
-                        <IoClose />
-                      )
+                        dbUserSettings?.search_filters?.[
+                          filter.target as keyof IUserSettings['search_filters']
+                          ] ? (
+                          <IoCheckmark />
+                          ) : (
+                          <IoClose />
+                          )
                         )
                       }
                       {filter.title}

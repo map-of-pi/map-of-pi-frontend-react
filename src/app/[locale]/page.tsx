@@ -28,30 +28,19 @@ export default function Page({ params }: { params: { locale: string } }) {
   const mapRef = useRef<L.Map | null>(null);
 
   // State management with proper typing
-  const [mapCenter, setMapCenter] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
-  const [searchCenter, setSearchCenter] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
-  const [findme, setFindme] = useState<DeviceLocationType>(
-    DeviceLocationType.SearchCenter,
-  );
-  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(
-    null,
-  );
+  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number } | null>(null);
+  const [searchCenter, setSearchCenter] = useState<{ lat: number; lng: number } | null>(null);
+  const [findme, setFindme] = useState<DeviceLocationType>(DeviceLocationType.SearchCenter);
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [searchBarValue, setSearchBarValue] = useState('');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showPopup, setShowPopup] = useState<boolean>(false);
-  const [searchBarValue, setSearchBarValue] = useState('');
 
-  const { isSigningInUser, currentUser, autoLoginUser, reload, setReload } =
-    useContext(AppContext);
+  const { isSigningInUser, currentUser, autoLoginUser, reload, setReload } = useContext(AppContext);
 
   useEffect(() => {
     // clear previous map state when findme option is changed
@@ -94,10 +83,7 @@ export default function Page({ params }: { params: { locale: string } }) {
 
   useEffect(() => {
     const resolveLocation = async () => {
-      if (
-        dbUserSettings &&
-        dbUserSettings.findme !== DeviceLocationType.SearchCenter
-      ) {
+      if (dbUserSettings && dbUserSettings.findme !== DeviceLocationType.SearchCenter) {
         const loc = await userLocation(dbUserSettings);
         if (loc) {
           setSearchCenter({ lat: loc[0], lng: loc[1] });
@@ -117,10 +103,8 @@ export default function Page({ params }: { params: { locale: string } }) {
       const loc = await userLocation(dbUserSettings);
       if (loc) {
         setSearchCenter({ lat: loc[0], lng: loc[1] });
-        logger.info('User location obtained successfully on button click:', {
-          location,
-        });
-      } else {
+        logger.info('User location obtained successfully on button click:', { location });
+      } else{
         setSearchCenter(null);
       }
     }
@@ -163,9 +147,6 @@ export default function Page({ params }: { params: { locale: string } }) {
         setSearchQuery={setSearchQuery}
         setSearchClicked={setSearchClicked}
         isSearchClicked={isSearchClicked}
-
-        // handleSearchBarChange={handleSearchBarChange}
-        // searchBarValue={searchBarValue}
       />
       <div className="absolute bottom-8 z-10 right-0 left-0 m-auto pointer-events-none">
         <div className="w-[90%] lg:w-full lg:px-6 mx-auto flex items-center justify-between">
