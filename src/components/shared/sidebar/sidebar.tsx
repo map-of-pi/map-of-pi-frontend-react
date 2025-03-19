@@ -488,7 +488,7 @@ function Sidebar(props: any) {
                   {Filters.map((filter, index) => (
                     <div
                       key={index}
-                      className="mb-1 flex gap-2 pr-7 items-center cursor-pointer"
+                      className="mb-1 flex gap-2 pr-7 items-center cursor-pointer text-nowrap"
                       onClick={() => handleSearchFilter(filter.target)}>
                       {
                         filterLoading[filter.target as keyof typeof filterLoading] ? (
