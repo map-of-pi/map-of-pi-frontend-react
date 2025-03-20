@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useEffect, useState, useRef, ChangeEvent } from 'react';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
@@ -34,21 +34,22 @@ export default function Page({ params }: { params: { locale: string } }) {
   const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const [zoomLevel, setZoomLevel] = useState(2);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [searchBarValue, setSearchBarValue] = useState('');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [showPopup, setShowPopup] = useState<boolean>(false)
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   const { isSigningInUser, currentUser, autoLoginUser, reload, setReload } = useContext(AppContext);
 
   useEffect(() => {
     // clear previous map state when findme option is changed
-    if (reload){
+    if (reload) {
       sessionStorage.removeItem('prevMapCenter');
       sessionStorage.removeItem('prevMapZoom');
     }
-    setReload(false)
-    setShowPopup(false)
+    setReload(false);
+    setShowPopup(false);
     checkAndAutoLoginUser(currentUser, autoLoginUser);
 
     const getUserSettingsData = async () => {
@@ -61,7 +62,7 @@ export default function Page({ params }: { params: { locale: string } }) {
             const coordinates = {
               lat: data.search_map_center.coordinates[1],
               lng: data.search_map_center.coordinates[0],
-            }
+            };
             setSearchCenter(coordinates);
             if (coordinates.lat === 0 && coordinates.lng === 0) {
               setShowPopup(true);
@@ -70,14 +71,14 @@ export default function Page({ params }: { params: { locale: string } }) {
         } else {
           logger.warn('User Settings not found.');
           setDbUserSettings(null);
-          setSearchCenter(null)
+          setSearchCenter(null);
         }
       } catch (error) {
         logger.error('Error fetching user settings data:', error);
       }
     };
 
-    getUserSettingsData();   
+    getUserSettingsData();
   }, [currentUser, reload]);
 
   useEffect(() => {
@@ -86,9 +87,8 @@ export default function Page({ params }: { params: { locale: string } }) {
         const loc = await userLocation(dbUserSettings);
         if (loc) {
           setSearchCenter({ lat: loc[0], lng: loc[1] });
-        }
-        else{
-          setSearchCenter(null)
+        } else {
+          setSearchCenter(null);
         }
       }
     };
@@ -104,28 +104,29 @@ export default function Page({ params }: { params: { locale: string } }) {
       if (loc) {
         setSearchCenter({ lat: loc[0], lng: loc[1] });
         logger.info('User location obtained successfully on button click:', { location });
-      }
-      else{
-        setSearchCenter(null)
+      } else{
+        setSearchCenter(null);
       }
     }
   };
 
   // Handle search query update from SearchBar and associated results
   const handleSearch = async (query: string) => {
-    setSearchQuery(query);
-    setSearchClicked(true);
+    if (query) {
+      setSearchQuery(query);
+      setSearchClicked(true);
 
-    // Fetch sellers based on current map bounds and search query
-    try {
-      const mapInstance = mapRef.current;
-      if (mapInstance) {
-        const bounds = mapInstance.getBounds();
-        const results = await fetchSellers(bounds, query); // Use API to fetch sellers
-        setSearchResults(results || []); // Update searchResults
+      // Fetch sellers based on current map bounds and search query
+      try {
+        const mapInstance = mapRef.current;
+        if (mapInstance) {
+          const bounds = mapInstance.getBounds();
+          const results = await fetchSellers(bounds, query); // Use API to fetch sellers
+          setSearchResults(results || []); // Update searchResults
+        }
+      } catch (error) {
+        logger.error('Failed to fetch sellers for search query.', error);
       }
-    } catch (error) {
-      logger.error('Failed to fetch sellers for search query.', error);
     }
   };
 
@@ -139,7 +140,14 @@ export default function Page({ params }: { params: { locale: string } }) {
         isSearchClicked={isSearchClicked}
         searchResults={searchResults || []}
       />
-      <SearchBar page={'default'} onSearch={handleSearch} />
+      <SearchBar
+        page={'default'}
+        onSearch={handleSearch}
+        setSearchResults={setSearchResults}
+        setSearchQuery={setSearchQuery}
+        setSearchClicked={setSearchClicked}
+        isSearchClicked={isSearchClicked}
+      />
       <div className="absolute bottom-8 z-10 right-0 left-0 m-auto pointer-events-none">
         <div className="w-[90%] lg:w-full lg:px-6 mx-auto flex items-center justify-between">
           {/* Add Seller Button */}
@@ -181,12 +189,14 @@ export default function Page({ params }: { params: { locale: string } }) {
             />
           </div>
         </div>
-        {showPopup && <ConfirmDialog
-          show={setShowPopup} 
-          onClose={()=> setShowPopup(false)}
-          message={t('HOME.SEARCH_CENTER_DEFAULT_MESSAGE')} 
-          url={`/map-center?entryType=search`}
-        />}
+        {showPopup && (
+          <ConfirmDialog
+            show={setShowPopup}
+            onClose={() => setShowPopup(false)}
+            message={t('HOME.SEARCH_CENTER_DEFAULT_MESSAGE')}
+            url={`/map-center?entryType=search`}
+          />
+        )}
       </div>
     </>
   );

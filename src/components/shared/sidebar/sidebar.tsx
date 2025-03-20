@@ -8,9 +8,13 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { useRef, useState, useContext, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
+import { ImSpinner2 } from 'react-icons/im';
+import { IoCheckmark, IoClose } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 
 import MapCenter from '../map/MapCenter';
+import TrustMeter from '../Review/TrustMeter';
+import ToggleCollapse from '../Seller/ToggleCollapse';
 import InfoModel from '@/components/shared/About/Info/Info';
 import PrivacyPolicyModel from '@/components/shared/About/privacy-policy/PrivacyPolicy';
 import TermsOfServiceModel from '@/components/shared/About/terms-of-service/TermsOfService';
@@ -24,8 +28,6 @@ import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
 import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
 import removeUrls from "@/utils/sanitize";
-import TrustMeter from '../Review/TrustMeter';
-import ToggleCollapse from '../Seller/ToggleCollapse';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
@@ -56,6 +58,16 @@ function Sidebar(props: any) {
   const locale = useLocale();
   const router = useRouter();
 
+  const Filters = [
+    { target: 'include_active_sellers', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_ACTIVE_SELLERS') },
+    { target: 'include_inactive_sellers', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_INACTIVE_SELLERS') },
+    { target: 'include_test_sellers', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TEST_SELLERS') },
+    { target: 'include_trust_level_100', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_100') },
+    { target: 'include_trust_level_80', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_80') },
+    { target: 'include_trust_level_50', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_50') },
+    { target: 'include_trust_level_0', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_0') },
+  ];
+
   const { currentUser, autoLoginUser, setReload, showAlert } = useContext(AppContext);
   const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   // Initialize state with appropriate types
@@ -76,7 +88,7 @@ function Sidebar(props: any) {
     Themes: false,
     Languages: false,
   });
- 
+
   const [file, setFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>(dbUserSettings?.image || '');
   const [showMapCenter] = useState(false);
@@ -84,10 +96,19 @@ function Sidebar(props: any) {
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [filterLoading, setFilterLoading] = useState({
+    include_active_sellers: false,
+    include_inactive_sellers: false,
+    include_test_sellers: false,
+    include_trust_level_100: false,
+    include_trust_level_80: false,
+    include_trust_level_50: false,
+    include_trust_level_0: false,
+  });
 
   useEffect(() => {
     if (!currentUser) {
-      logger.info("User not logged in; attempting auto-login..");
+      logger.info('User not logged in; attempting auto-login..');
       autoLoginUser();
     }
 
@@ -115,7 +136,7 @@ function Sidebar(props: any) {
         user_name: dbUserSettings.user_name || '',
         image: dbUserSettings.image || '',
         findme: dbUserSettings.findme || translateFindMeOptions[0].value,
-        trust_meter_rating: dbUserSettings.trust_meter_rating
+        trust_meter_rating: dbUserSettings.trust_meter_rating,
       });
     }
   }, [dbUserSettings]);
@@ -162,14 +183,13 @@ function Sidebar(props: any) {
       router.push(url);
       props.setToggleDis(false);
     }
-  
+
     if (
       title === 'Themes' ||
       title === 'Languages' ||
       title === 'About Map of Pi'
     ) {
       setToggle({ ...toggle, [title]: !toggle[title] });
-      
     }
     if (toggle[title] === false) {
       setTimeout(() => {
@@ -177,7 +197,7 @@ function Sidebar(props: any) {
       }, 90);
     }
   };
-  
+
   const handleChildMenu = (title: any, code: string) => {
     logger.debug(`Child menu item selected: ${title}, Code: ${code}`);
     if (title === 'Languages') {
@@ -204,61 +224,25 @@ function Sidebar(props: any) {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    > | { name: string; value: string }) => {
+    e:
+      | React.ChangeEvent<
+          HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+        >
+      | { name: string; value: string },
+  ) => {
     // handle such scenarios where the event might not have the typical e.target structure i.e., PhoneInput.
     const name = 'target' in e ? e.target.name : e.name;
     const value = 'target' in e ? e.target.value : e.value;
 
-    setFormData(prevFormData => ({
+    setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
 
     // enable or disable save button based on form inputs
-    const isFormFilled = Object.values(formData).some(v => v !== '');
+    const isFormFilled = Object.values(formData).some((v) => v !== '');
     setIsSaveEnabled(isFormFilled);
   };
-
-  // Function to save data to the database
-  const handleSave = async () => { 
-    // check if user is authenticated and form is valid
-    if (!currentUser) {
-      logger.warn('Form submission failed: User not authenticated.');
-      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
-    }
-
-    const formDataToSend = new FormData();
-    formDataToSend.append('user_name', removeUrls(formData.user_name));
-    formDataToSend.append('findme', formData.findme);
-
-
-    // add the image if it exists
-    if (file) {
-      formDataToSend.append('image', file);
-    } else {
-      formDataToSend.append('image', '');  // set to previous image url if no upload
-    }
-
-    logger.info('User Settings form data:', Object.fromEntries(formDataToSend.entries()));
-
-    try {
-      const data = await createUserSettings(formDataToSend);
-      if (data.settings) {
-        setDbUserSettings(data.settings);
-        setIsSaveEnabled(false);
-        logger.info('User Settings saved successfully:', { data });
-        showAlert(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
-        if (pathname === '/' || pathname === `/${locale}`) {
-          setReload(true);
-        }
-      }
-    } catch (error) {
-      logger.error('Error saving user settings:', error);
-      showAlert(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
-    }
-  }
 
   const translateMenuTitle = (title: string): string => {
     switch (title) {
@@ -305,40 +289,113 @@ function Sidebar(props: any) {
     {
       value: 'searchCenter',
       name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_SEARCH_CENTER'),
-    }
+    },
   ];
+
+  // Function to save data to the database
+  const handleSave = async () => {
+    // check if user is authenticated and form is valid
+    if (!currentUser) {
+      logger.warn('Form submission failed: User not authenticated.');
+      return toast.error(t('SHARED.VALIDATION.SUBMISSION_FAILED_USER_NOT_AUTHENTICATED'));
+    }
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('user_name', removeUrls(formData.user_name));
+    formDataToSend.append('findme', formData.findme);
+
+    // add the image if it exists
+    if (file) {
+      formDataToSend.append('image', file);
+    } else {
+      formDataToSend.append('image', ''); // set to previous image url if no upload
+    }
+
+    logger.info('User Settings form data:', Object.fromEntries(formDataToSend.entries()));
+
+    try {
+      const data = await createUserSettings(formDataToSend);
+      if (data.settings) {
+        setDbUserSettings(data.settings);
+        setIsSaveEnabled(false);
+        logger.info('User Settings saved successfully:', { data });
+        showAlert(t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'));
+        if (pathname === '/' || pathname === `/${locale}`) {
+          setReload(true);
+        }
+      }
+    } catch (error) {
+      logger.error('Error saving user settings:', error);
+      showAlert(t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'));
+    }
+  };
+
+  const handleSearchFilter = async (target: string) => {
+    if (!dbUserSettings?.search_filters) return;
+    
+    const updatedFilters = {
+      ...dbUserSettings.search_filters,
+      [target]:
+        !dbUserSettings.search_filters[
+          target as keyof IUserSettings['search_filters']
+        ],
+    };
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('search_filters', JSON.stringify(updatedFilters));
+
+    try {
+      setFilterLoading({...filterLoading, [target]: true});
+      const data = await createUserSettings(formDataToSend);
+      if (data.settings) {
+        setDbUserSettings(data.settings);
+        setFilterLoading({...filterLoading, [target]: false});
+        logger.info('User Settings saved successfully:', { data });
+      }
+    } catch (error) {
+      setFilterLoading({...filterLoading, [target]: false});
+      logger.error('Error saving user settings:', error);
+      showAlert(
+        t('SIDE_NAVIGATION.VALIDATION.UNSUCCESSFUL_PREFERENCES_SUBMISSION'),
+      );
+    }
+  };
 
   return (
     <>
       <div className="w-full h-[calc(100vh-74px)] fixed bottom-0 bg-transparent right-0 z-[70]">
         <div
           className="absolute w-full h-full bg-[#82828284]"
-          onClick={() => props.setToggleDis(false)}></div>
+          onClick={() => props.setToggleDis(false)}>
+        </div>
         <div
           className={`absolute bg-white right-0 top-0 z-50 p-[1.2rem] h-[calc(100vh-74px)] sm:w-[350px] w-[250px] overflow-y-auto`}>
-          
           {/* header title */}
           <div className="mb-1 pb-3 text-center">
-            <p className='text-sm text-gray-400'>{currentUser? currentUser.pi_username : ""}</p>
-            <h1 className='text-2xl font-bold'>{t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}</h1>
+            <p className="text-sm text-gray-400">
+              {currentUser ? currentUser.pi_username : ''}
+            </p>
+            <h1 className="text-2xl font-bold">
+              {t('SIDE_NAVIGATION.USER_PREFERENCES_HEADER')}
+            </h1>
           </div>
 
           {/* set search center button */}
-          <div className='mb-2'>
+          <div className="mb-2">
             <Button
-                label={t('SHARED.SEARCH_CENTER')}
-                styles={{
-                  color: '#ffc153',
-                  width: '100%',
-                  padding: '10px',
-                  borderRadius: '10px',
-                  fontSize: '18px' 
-                }}
-                onClick={() => {
-                  router.push(`/${locale}/map-center?entryType=search`);
-                  props.setToggleDis(false); // Close sidebar on click
-                }}
-              />
+              label={t('SHARED.SEARCH_CENTER')}
+              styles={{
+                color: '#ffc153',
+                width: '100%',
+                padding: '10px',
+                borderRadius: '10px',
+                fontSize: '18px',
+              }}
+              onClick={() => {
+                router.push(`/${locale}/map-center?entryType=search`);
+                props.setToggleDis(false); // Close sidebar on click
+              }}
+            />
           </div>
 
           {/* user settings form fields */}
@@ -349,9 +406,9 @@ function Sidebar(props: any) {
               type="text"
               name="user_name"
               style={{
-                textAlign: 'center'
+                textAlign: 'center',
               }}
-              value={formData.user_name? formData.user_name: ''}
+              value={formData.user_name ? formData.user_name : ''}
               onChange={handleChange}
             />
 
@@ -364,17 +421,27 @@ function Sidebar(props: any) {
                 width: '80px',
                 padding: '10px 15px',
                 marginLeft: 'auto',
-                marginRight: 'auto'
+                marginRight: 'auto',
               }}
               onClick={handleSave}
             />
 
             {/* user review */}
-            <div className='my-2'>
+            <div className="my-2">
               <h3 className={`font-bold text-sm text-nowrap`}>Trust-o-meter</h3>
-              <TrustMeter ratings={dbUserSettings ? dbUserSettings.trust_meter_rating : 100} hideLabel={true} />
-            </div>             
-            <Link href={currentUser ? `/${locale}/seller/reviews/${currentUser?.pi_uid}?user_name=${currentUser.user_name}` : '#'}>
+              <TrustMeter
+                ratings={
+                  dbUserSettings ? dbUserSettings.trust_meter_rating : 100
+                }
+                hideLabel={true}
+              />
+            </div>
+            <Link
+              href={
+                currentUser
+                  ? `/${locale}/seller/reviews/${currentUser?.pi_uid}?user_name=${currentUser.user_name}`
+                  : '#'
+              }>
               <OutlineBtn
                 label={t('SHARED.CHECK_REVIEWS')}
                 styles={{
@@ -388,13 +455,41 @@ function Sidebar(props: any) {
               />
             </Link>
 
-            <div className='flex flex-col justify-items-center text-center mx-auto gap-2 my-4'>
+            {/* THIS IS THE THE SEARCH FILTERS */}
+            <div className="flex flex-col justify-items-center text-center mx-auto gap-2 mt-4">
+              <ToggleCollapse header={t('SIDE_NAVIGATION.SEARCH_FILTERS_SUBHEADER')}>
+                <div className="h-[110px] overflow-y-scroll overflow-hidden">
+                  {Filters.map((filter, index) => (
+                    <div
+                      key={index}
+                      className="mb-1 flex gap-2 pr-7 items-center cursor-pointer text-nowrap"
+                      onClick={() => handleSearchFilter(filter.target)}>
+                      {
+                        filterLoading[filter.target as keyof typeof filterLoading] ? (
+                          <ImSpinner2 className="animate-spin" />
+                        ) : (                       
+                        dbUserSettings?.search_filters?.[
+                          filter.target as keyof IUserSettings['search_filters']
+                          ] ? (
+                          <IoCheckmark />
+                          ) : (
+                          <IoClose />
+                          )
+                        )
+                      }
+                      {filter.title}
+                    </div>
+                  ))}
+                </div>
+              </ToggleCollapse>
+            </div>
+            <div className="flex flex-col justify-items-center text-center mx-auto gap-2">
               <ToggleCollapse
                 header={t('SIDE_NAVIGATION.PERSONALIZATION_SUBHEADER')}>
                 <div className="mb-2">
                   <FileInput
                     label={t('SHARED.PHOTO.MISC_LABELS.USER_PREFERENCES_LABEL')}
-                    imageUrl={ previewImage }
+                    imageUrl={previewImage}
                     handleAddImage={handleAddImage}
                   />
                 </div>
@@ -402,14 +497,16 @@ function Sidebar(props: any) {
                 <Select
                   label={t('SIDE_NAVIGATION.FIND_ME_PREFERENCE_LABEL')}
                   name="findme"
-                  value={ formData.findme }
+                  value={formData.findme}
                   onChange={handleChange}
                   options={translateFindMeOptions}
                 />
                 <div key={menu.Languages.id} className="">
                   <div
                     className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] w-full mb-3`}
-                    onClick={() => handleMenu(menu.Languages.title, menu.Languages.url)}>
+                    onClick={() =>
+                      handleMenu(menu.Languages.title, menu.Languages.url)
+                    }>
                     <Image
                       src={menu.Languages.icon}
                       alt={menu.Languages.title}
@@ -436,8 +533,7 @@ function Sidebar(props: any) {
                       style={{
                         scrollbarWidth: 'thin',
                         WebkitOverflowScrolling: 'touch',
-                      }}
-                    >    
+                      }}>
                       {menu.Languages.children.map((child) => (
                         <div key={child.id} className="mx-auto">
                           <div
@@ -481,35 +577,39 @@ function Sidebar(props: any) {
                       width: '80px',
                       padding: '10px 15px',
                       marginLeft: 'auto',
-                      marginRight: 'auto'
+                      marginRight: 'auto',
                     }}
                     onClick={handleSave}
                   />
                 </div>
-              </ToggleCollapse>              
+              </ToggleCollapse>
             </div>
-            <div className='flex flex-col justify-items-center mx-auto text-center'>
-              <ToggleCollapse header={t('SIDE_NAVIGATION.ABOUT.ABOUT_MAP_OF_PI')}>
-                  {menu.about.children.map((menuItem) => (
-                    <div key={menuItem.id} className="">
-                      <div
-                        className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] mb-3`}
-                        onClick={() => handleChildMenu(menu.about.title, menuItem.code)}
-                      >
-                        {/* Conditionally render icon only if it exists */}
-                        {menuItem.icon && (
-                          <Image
-                            src={menuItem.icon}
-                            alt={menuItem.title}
-                            width={22}
-                            height={22}
-                            className=""
-                          />
-                        )}
-                        <span className="">{translateMenuTitle(menuItem.title)}</span>
-                      </div>
+            <div className="flex flex-col justify-items-center mx-auto text-center">
+              <ToggleCollapse
+                header={t('SIDE_NAVIGATION.ABOUT.ABOUT_MAP_OF_PI')}>
+                {menu.about.children.map((menuItem) => (
+                  <div key={menuItem.id} className="">
+                    <div
+                      className={`${styles.slide_content} hover:bg-primary hover:text-yellow-500 outline outline-primary outline-[1.5px] mb-3`}
+                      onClick={() =>
+                        handleChildMenu(menu.about.title, menuItem.code)
+                      }>
+                      {/* Conditionally render icon only if it exists */}
+                      {menuItem.icon && (
+                        <Image
+                          src={menuItem.icon}
+                          alt={menuItem.title}
+                          width={22}
+                          height={22}
+                          className=""
+                        />
+                      )}
+                      <span className="">
+                        {translateMenuTitle(menuItem.title)}
+                      </span>
                     </div>
-                  ))}
+                  </div>
+                ))}
               </ToggleCollapse>
             </div>
           </div>
@@ -517,12 +617,7 @@ function Sidebar(props: any) {
         </div>
       </div>
       {/* Conditionally render MapCenter */}
-      {showMapCenter && (
-        <MapCenter
-          locale={locale}
-          entryType="search"
-        />
-      )}
+      {showMapCenter && <MapCenter locale={locale} entryType="search" />}
       <InfoModel toggleInfo={showInfoModel} setToggleInfo={setShowInfoModel} />
       <PrivacyPolicyModel
         togglePrivacyPolicy={showPrivacyPolicyModel}

@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "使用我設備的 GPS",
       "PREFERRED_SEARCH_CENTER": "使用搜尋中心"
     },
+    "SEARCH_FILTERS_SUBHEADER": "搜尋篩選器",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "包含活躍賣家",
+      "INCLUDE_INACTIVE_SELLERS": "包含非活躍賣家",
+      "INCLUDE_TEST_SELLERS": "包含測試賣家",
+      "INCLUDE_TRUST_LEVEL_100": "包含信任級別100",
+      "INCLUDE_TRUST_LEVEL_80": "包含信任級別80",
+      "INCLUDE_TRUST_LEVEL_50": "包含信任級別50",
+      "INCLUDE_TRUST_LEVEL_0": "包含信任級別0"
+    },
     "CONTACT_MAP_OF_PI": "聯絡 Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "偏好設定已成功儲存",

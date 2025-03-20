@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "Usar el GPS de mi dispositivo",
       "PREFERRED_SEARCH_CENTER": "Usar el Centro de Búsqueda"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Filtros de búsqueda",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Incluir vendedores activos",
+      "INCLUDE_INACTIVE_SELLERS": "Incluir vendedores inactivos",
+      "INCLUDE_TEST_SELLERS": "Incluir vendedores de prueba",
+      "INCLUDE_TRUST_LEVEL_100": "Incluir nivel de confianza 100",
+      "INCLUDE_TRUST_LEVEL_80": "Incluir nivel de confianza 80",
+      "INCLUDE_TRUST_LEVEL_50": "Incluir nivel de confianza 50",
+      "INCLUDE_TRUST_LEVEL_0": "Incluir nivel de confianza 0"
+    },
     "CONTACT_MAP_OF_PI": "Contactar a Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Preferencias guardadas con éxito",
