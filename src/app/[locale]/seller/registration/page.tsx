@@ -115,7 +115,7 @@ const SellerRegistrationForm = () => {
 
     const getToggleData = async () => {
       try {
-        const toggle = await fetchToggle('onlineShoppingToggle');
+        const toggle = await fetchToggle('onlineShoppingFeature');
         setOnlineShoppingEnabled(toggle.enabled);
       } catch (error) {
         logger.error('Error fetching toggle:', error);
