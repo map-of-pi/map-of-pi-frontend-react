@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "내 기기의 GPS 사용",
       "PREFERRED_SEARCH_CENTER": "검색 센터 사용"
     },
+    "SEARCH_FILTERS_SUBHEADER": "검색 필터",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "활동 중인 판매자 포함",
+      "INCLUDE_INACTIVE_SELLERS": "비활동 중인 판매자 포함",
+      "INCLUDE_TEST_SELLERS": "테스트 판매자 포함",
+      "INCLUDE_TRUST_LEVEL_100": "신뢰 수준 100 포함",
+      "INCLUDE_TRUST_LEVEL_80": "신뢰 수준 80 포함",
+      "INCLUDE_TRUST_LEVEL_50": "신뢰 수준 50 포함",
+      "INCLUDE_TRUST_LEVEL_0": "신뢰 수준 0 포함"
+    },
     "CONTACT_MAP_OF_PI": "Map of Pi에 문의",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "환경 설정이 성공적으로 완료되었습니다",
@@ -60,12 +70,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "내 지도 마커가 판매 위치를 표시합니다",
       "SELLER_SETTINGS_LABEL": "판매자 설정",
       "SELLER_SELL_CENTER": "판매 센터 설정",
+      "SELLER_ONLINE_SHOPPING_LABEL": "온라인 쇼핑",
+      "MAPPI_ALLOWANCE_LABEL": "남은 Mappi 허용량",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "이행 방법",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "구매자가 직접 수령",
+          "DELIVERED_TO_BUYER": "구매자에게 배송"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "구매자에게 전달할 이행 지침",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "수거는 판매자의 주소에서 이루어집니다. 배송이 선택된 경우, 구매자의 주소를 입력하세요.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "유효한 이메일 주소를 입력하세요",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "등록이 성공적으로 완료되었습니다",
         "FAILED_REGISTRATION_SUBMISSION": "등록 저장 중 오류 발생",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "사용자가 인증되지 않아 등록에 실패했습니다",
-        "UNINITIALIZED_SELL_CENTER": "판매 센터를 설정해주세요"
+        "UNINITIALIZED_SELL_CENTER": "판매 센터를 설정해주세요",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "판매자 항목이 성공적으로 저장되었습니다",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "판매자 항목이 성공적으로 삭제되었습니다",
+        "FAILED_SELLER_ITEM_SAVE": "판매자 항목 저장 중 오류 발생",
+        "FAILED_SELLER_ITEM_DELETE": "판매자 항목 삭제 중 오류 발생",
+        "SELLER_ITEM_NOT_FOUND": "판매자 항목을 찾을 수 없습니다",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "저장 성공. 사용된 Mappi 허용량 {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "저장 실패. 사용 가능한 Mappi 허용량 부족"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "품목",
+        "PRICE_LABEL": "가격",
+        "STOCK_LABEL": "재고 수준",
+        "DESCRIPTION_LABEL": "설명",
+        "PHOTO": "사진",
+        "SELLING_DURATION_LABEL": "판매 기간 (주 단위)",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "활성",
+          "EXPIRED": "만료됨"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1개 남음",
+          "AVAILABLE_2": "2개 남음",
+          "AVAILABLE_3": "3개 남음",
+          "MANY": "여러 개 남음",
+          "MADE_TO_ORDER": "주문 제작",
+          "ONGOING_SERVICE": "진행 중인 서비스",
+          "SOLD": "판매 완료"
+        },
+        "SELLING_EXPIRATION_DATE": "{expired_by_date}까지 판매"
       }
     },
     "BUY_FROM_SELLER": {
@@ -81,7 +131,18 @@
       "SELLER_USERNAME_LABEL": "사용자 이름",
       "SELLER_PIONEER_ID_LABEL": "파이오니어 ID",
       "SELLER_PHONE_NUMBER_LABEL": "전화번호",
-      "SELLER_EMAIL_ADDRESS_LABEL": "이메일 주소"
+      "SELLER_EMAIL_ADDRESS_LABEL": "이메일 주소",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "상품",
+          "PRICE_LABEL": "가격",
+          "DESCRIPTION_LABEL": "설명",
+          "PHOTO": "사진",
+          "BUYING_QUANTITY_LABEL": "수량",
+          "PICK_LABEL": "추가",
+          "UNPICK_LABEL": "제거"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "리뷰",
@@ -192,7 +253,11 @@
     "SEARCH_REVIEWS": "리뷰 검색",
     "SEARCH_LOADING": "검색 로딩 중...",
     "REPLY": "답장",
+    "ADD_ITEM": "항목 추가",
+    "DELETE": "삭제",
+    "CONFIRM_DELETE": "정말로 이 항목을 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
     "SAVE": "저장",
+    "CONFIRM": "확인",
     "CONFIRM_DIALOG": "저장되지 않은 변경 사항이 있습니다. 정말 나가시겠습니까?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Pi 사용자 이름",

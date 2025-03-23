@@ -16,6 +16,15 @@ export interface IUserSettings {
     type: 'Point';
     coordinates: [number, number];
   };
+  search_filters?: {
+    include_active_sellers: boolean | undefined;
+    include_inactive_sellers: boolean | undefined;
+    include_test_sellers: boolean | undefined;
+    include_trust_level_100: boolean | undefined;
+    include_trust_level_80: boolean | undefined;
+    include_trust_level_50: boolean | undefined;
+    include_trust_level_0: boolean | undefined;
+  };
 }
 
 export interface ISeller {
@@ -34,6 +43,8 @@ export interface ISeller {
   };
   coordinates: [number, number];
   order_online_enabled_pref: boolean;
+  fulfillment_method: string;
+  fulfillment_description?: string;
 }
 
 export interface IReviewFeedback {
@@ -67,11 +78,42 @@ export enum DeviceLocationType {
   SearchCenter = 'searchCenter'
 }
 
+export enum FulfillmentType {
+  CollectionByBuyer = 'Collection by buyer',
+  DeliveredToBuyer = 'Delivered to buyer'
+}
+
+export enum StockLevelType {
+  available_1 = '1 available', 
+  available_2 = '2 available', 
+  available_3 = '3 available',
+  many = 'Many available', 
+  made_to_order = 'Made to order', 
+  ongoing_service = 'Ongoing service', 
+  sold = 'Sold'
+}
+
 // Select specific fields from IUserSettings
 export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'email' | 'phone_number' | 'findme' | 'trust_meter_rating'>;
 
 // Combined interface representing a seller with selected user settings
 export interface ISellerWithSettings extends ISeller, PartialUserSettings {}
+
+export type SellerItem = {
+  _id: string;
+  seller_id: string;
+  name: string;
+  description?: string;
+  duration: number;
+  stock_level: StockLevelType;
+  image?: string;
+  price: {
+    $numberDecimal: number;
+  };
+  created_at?: Date;
+  updated_at?: Date;
+  expired_by?: Date;
+}
 
 export type PartialReview = {
   giver: string;
@@ -79,4 +121,3 @@ export type PartialReview = {
 }
 
 export interface IReviewOutput extends IReviewFeedback, PartialReview {}
-

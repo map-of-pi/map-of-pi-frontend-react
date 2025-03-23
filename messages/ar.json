@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "استخدام GPS الجهاز",
       "PREFERRED_SEARCH_CENTER": "استخدام مركز البحث"
     },
+    "SEARCH_FILTERS_SUBHEADER": "فلاتر البحث",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "تضمين البائعين النشطين",
+      "INCLUDE_INACTIVE_SELLERS": "تضمين البائعين غير النشطين",
+      "INCLUDE_TEST_SELLERS": "تضمين البائعين التجريبيين",
+      "INCLUDE_TRUST_LEVEL_100": "تضمين مستوى الثقة 100",
+      "INCLUDE_TRUST_LEVEL_80": "تضمين مستوى الثقة 80",
+      "INCLUDE_TRUST_LEVEL_50": "تضمين مستوى الثقة 50",
+      "INCLUDE_TRUST_LEVEL_0": "تضمين مستوى الثقة 0"
+    },
     "CONTACT_MAP_OF_PI": "اتصل بـ Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "تم حفظ التفضيلات بنجاح",
@@ -60,12 +70,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "علامة الموقع على الخريطة تظهر مكان بيعي",
       "SELLER_SETTINGS_LABEL": "إعدادات البائع",
       "SELLER_SELL_CENTER": "تحديد مركز البيع",
+      "SELLER_ONLINE_SHOPPING_LABEL": "التسوق عبر الإنترنت",
+      "MAPPI_ALLOWANCE_LABEL": "المخصص المتبقي في Mappi",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "طريقة الإتمام",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "جمع من قبل المشتري",
+          "DELIVERED_TO_BUYER": "تسليم إلى المشتري"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "تعليمات التنفيذ للمشتري",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "التجميع يكون من عنوان البائع. إذا تم اختيار التوصيل، يرجى إدخال عنوان المشتري.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "يرجى إدخال عنوان بريد إلكتروني صالح",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "تم التسجيل بنجاح",
         "FAILED_REGISTRATION_SUBMISSION": "خطأ في حفظ التسجيل",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "فشل التسجيل بسبب عدم المصادقة",
-        "UNINITIALIZED_SELL_CENTER": "يرجى تحديد مركز البيع"
+        "UNINITIALIZED_SELL_CENTER": "يرجى تحديد مركز البيع",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "تم حفظ عنصر البائع بنجاح",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "تم حذف عنصر البائع بنجاح",
+        "FAILED_SELLER_ITEM_SAVE": "حدث خطأ أثناء حفظ عنصر البائع",
+        "FAILED_SELLER_ITEM_DELETE": "خطأ في حذف عنصر البائع",
+        "SELLER_ITEM_NOT_FOUND": "عنصر البائع غير موجود",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "تم الحفظ بنجاح. تم استخدام مخصصات Mappi {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "فشل الحفظ. المخصصات المتاحة من Mappi غير كافية"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "العنصر",
+        "PRICE_LABEL": "السعر",
+        "STOCK_LABEL": "مستوى المخزون",
+        "DESCRIPTION_LABEL": "الوصف",
+        "PHOTO": "الصورة",
+        "SELLING_DURATION_LABEL": "مدة البيع بالأسابيع",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "نشط",
+          "EXPIRED": "منتهي الصلاحية"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 متوفر",
+          "AVAILABLE_2": "2 متوفر",
+          "AVAILABLE_3": "3 متوفر",
+          "MANY": "متوفر بكثرة",
+          "MADE_TO_ORDER": "يصنع عند الطلب",
+          "ONGOING_SERVICE": "خدمة مستمرة",
+          "SOLD": "تم البيع"
+        },
+        "SELLING_EXPIRATION_DATE": "يباع بحلول {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -82,7 +132,18 @@
       "SELLER_USERNAME_LABEL": "اسم المستخدم", 
       "SELLER_PIONEER_ID_LABEL": "معرف المستخدم", 
       "SELLER_PHONE_NUMBER_LABEL": "رقم الهاتف", 
-      "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني" 
+      "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "عنصر",
+          "PRICE_LABEL": "السعر",
+          "DESCRIPTION_LABEL": "الوصف",
+          "PHOTO": "صورة",
+          "BUYING_QUANTITY_LABEL": "الكمية",
+          "PICK_LABEL": "إضافة",
+          "UNPICK_LABEL": "إزالة"
+        }
+      } 
     }, 
     "REVIEWS": { 
       "REVIEWS_HEADER": "التقييمات", 
@@ -193,7 +254,11 @@
     "SEARCH_REVIEWS": "البحث في التقييمات",
     "SEARCH_LOADING": "جارٍ تحميل البحث...",
     "REPLY": "رد",
+    "ADD_ITEM": "إضافة عنصر",
+    "DELETE": "حذف",
+    "CONFIRM_DELETE": "هل تريد حقًا حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.",
     "SAVE": "حفظ",
+    "CONFIRM": "تأكيد",
     "CONFIRM_DIALOG": "لديك تغييرات غير محفوظة. هل تريد مغادرة الصفحة حقًا؟",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "اسم مستخدم Pi",

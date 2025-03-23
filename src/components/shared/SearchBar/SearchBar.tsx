@@ -12,9 +12,20 @@ import { AppContext } from '../../../../context/AppContextProvider';
 interface SearchBarProps {
   onSearch?: (query: string) => void;
   page: 'map_center' | 'default';
+  setSearchResults?: (value: any[]) => void;
+  setSearchQuery?: (value: string) => void;
+  setSearchClicked?: (value: boolean) => void;
+  isSearchClicked?: boolean;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, page }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ 
+  onSearch, 
+  page, 
+  setSearchResults = () => {}, 
+  setSearchQuery = () => {}, 
+  setSearchClicked = () => {},
+  isSearchClicked
+}) => {
   const t = useTranslations();
 
   const [searchBarValue, setSearchBarValue] = useState('');
@@ -29,8 +40,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, page }) => {
   const placeholder = getPlaceholderText(page);
 
   const handleSearchBarChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value;
     logger.debug(`Search bar value changed: ${event.target.value}`);
     setSearchBarValue(event.target.value);
+
+    if (isSearchClicked !== undefined && isSearchClicked && newValue.trim() === '') {
+      setSearchClicked(false);
+      setSearchResults([]); // Reset results
+      setSearchQuery(''); // Reset query
+    }
   };
 
   const handleSubmitSearch = (event: FormEvent) => {

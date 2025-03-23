@@ -3,8 +3,7 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect, useContext, useRef } from 'react';
-
+import { useState, useEffect, useContext } from 'react';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { OutlineBtn, Button } from '@/components/shared/Forms/Buttons/Buttons';
 import {
@@ -15,18 +14,17 @@ import {
   TelephoneInput
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
+import OnlineShopping from '@/components/shared/Seller/ShopItem';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
-import { IUserSettings, ISeller } from '@/constants/types';
+import { IUserSettings, ISeller, FulfillmentType } from '@/constants/types';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
-import { ShopItem } from '@/components/ShopItem';
-import { SellerItems } from '@/constants/demoAPI';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -46,6 +44,8 @@ const SellerRegistrationForm = () => {
     email: string | null;
     phone_number: string | null;
     image: string;
+    fulfillment_method: string;
+    fulfillment_description: string;
   };
 
   // Initialize state with appropriate types
@@ -57,6 +57,8 @@ const SellerRegistrationForm = () => {
     email: null,
     phone_number: null,
     image: '',
+    fulfillment_method: FulfillmentType.CollectionByBuyer,
+    fulfillment_description: '',
   });
 
   const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
@@ -71,42 +73,9 @@ const SellerRegistrationForm = () => {
   );
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-  const [isAddItemEnabled, setIsAddItemEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-  const [focusedItemId, setFocusedItemId] = useState<string | null>(null);
-
-  const observer = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    // Intersection Observer
-    observer.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const itemId = entry.target.getAttribute("data-id");
-            if (itemId) {
-              setFocusedItemId(itemId);
-            }
-          }
-        });
-      },
-      {
-        threshold: 0.5, // Trigger when 50% of the item is in view
-      }
-    );
   
-    return () => {
-      observer.current?.disconnect(); // Clean up observer
-    };
-  }, []);
-  
-  const handleShopItemRef = (node: HTMLElement | null) => {
-    if (node && observer.current) {
-      observer.current.observe(node);
-    }
-  };
-
   // Fetch seller data and user settings on component mount
   useEffect(() => {
     checkAndAutoLoginUser(currentUser, autoLoginUser);
@@ -158,6 +127,8 @@ const SellerRegistrationForm = () => {
         email: dbUserSettings?.email || '',
         phone_number: dbUserSettings?.phone_number || '',
         image: dbSeller.image || '',
+        fulfillment_method: dbSeller.fulfillment_method || FulfillmentType.CollectionByBuyer,
+        fulfillment_description: dbSeller.fulfillment_description || ''
       });
     } else {
       setFormData({
@@ -168,6 +139,8 @@ const SellerRegistrationForm = () => {
         email: '',
         phone_number: dbUserSettings?.phone_number || '',
         image: '',
+        fulfillment_method: FulfillmentType.CollectionByBuyer,
+        fulfillment_description: ''
       });
     }
   }, [dbSeller, dbUserSettings]);
@@ -264,6 +237,8 @@ const SellerRegistrationForm = () => {
     formDataToSend.append('address', removeUrls(formData.sellerAddress));
     formDataToSend.append('email', formData.email ?? '');
     formDataToSend.append('phone_number', formData.phone_number?.toString() ?? '');
+    formDataToSend.append('fulfillment_method', formData.fulfillment_method);
+    formDataToSend.append('fulfillment_description', removeUrls(formData.fulfillment_description))
     // hardcode the value until the form element is built
     formDataToSend.append('order_online_enabled_pref', 'false');
 
@@ -286,7 +261,7 @@ const SellerRegistrationForm = () => {
         setDbUserSettings(updatedUserSettings);
       }
     } catch (error) {
-      logger.error('Error saving seller registration:',error);
+      logger.error('Error saving seller registration:', error);
       showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_REGISTRATION_SUBMISSION'));
     }
   };
@@ -354,6 +329,21 @@ const SellerRegistrationForm = () => {
       value: 'testSeller',
       name: t(
         'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER',
+      ),
+    },
+  ];
+
+  const translatedFulfillmentMethod = [
+    {
+      value: 'pickup',
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
+      ),
+    },
+    {
+      value: 'delivery',
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
       ),
     },
   ];
@@ -590,35 +580,49 @@ const SellerRegistrationForm = () => {
           
           {/* Online Shopping */}
           <ToggleCollapse
-            header={t(
-              'Online Shopping',
-            )}
-            open={true}>
-            <div className="mb-4">
+            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_LABEL')}
+            open={false}>
+            {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
+            <div>
+              <Select
+                label={t(
+                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL',
+                )}
+                name="fulfillment_method"
+                options={translatedFulfillmentMethod}
+                value={formData.fulfillment_method}
+                onChange={handleChange}
+              />
+              <h2 className={SUBHEADER}>
+                {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}
+              </h2>
+              <TextArea
+                label={t(
+                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
+                )}
+                placeholder={t(
+                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
+                )}
+                name="fulfillment_description"
+                type="text"
+                value={formData.fulfillment_description}
+                onChange={handleChange}
+              />
+              <div className="mb-4 mt-3 ml-auto w-min">
                 <Button
-                  label='Add Item'
-                  disabled={isAddItemEnabled}
+                  label={t('SHARED.SAVE')}
+                  disabled={!isSaveEnabled}
                   styles={{
-                      color: '#ffc153',
-                      height: '40px',
-                      padding: '10px 15px',
-                      marginLeft: 'auto',
+                    color: '#ffc153',
+                    height: '40px',
+                    padding: '10px 15px',
                   }}
+                  onClick={handleSave}
                 />
+              </div>
             </div>
-            <div className="max-h-[500px] overflow-y-auto p-1 mb-7">
-              {SellerItems.map((item) => (
-                <ShopItem
-                  key={item.item_id}
-                  item={item}
-                  isActive={focusedItemId === item.item_id}
-                  refCallback={handleShopItemRef} // Attach observer
-                  setIsAddItemEnabled={setIsAddItemEnabled}
-                />
-              ))}
-            </div>
-
           </ToggleCollapse>
+          
         </div>
         <ConfirmDialog
           show={showConfirmDialog}

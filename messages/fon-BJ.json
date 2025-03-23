@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "Zan GPS azɔwanú ce tɔn",
       "PREFERRED_SEARCH_CENTER": "Zan Bibaatɛn"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Wàɖànsu ƒè Filtèr",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Gba anɔnkɔ tɔn xɔxɔ me",
+      "INCLUDE_INACTIVE_SELLERS": "Gba anɔnkɔ tɔn mà xɔxɔ o me",
+      "INCLUDE_TEST_SELLERS": "Gba anɔnkɔ tɔn sɔ̃ɖo me",
+      "INCLUDE_TRUST_LEVEL_100": "Gba anɔnkɔ tɔn wɔ ɖe 100%",
+      "INCLUDE_TRUST_LEVEL_80": "Gba anɔnkɔ tɔn wɔ ɖe 80%",
+      "INCLUDE_TRUST_LEVEL_50": "Gba anɔnkɔ tɔn wɔ ɖe 50%",
+      "INCLUDE_TRUST_LEVEL_0": "Gba anɔnkɔ tɔn wɔ ɖe 0%"
+    },
     "CONTACT_MAP_OF_PI": "Do xo sedo Map Of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nǔ e jló we lɛ é ɖuɖeji",
@@ -60,12 +70,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nǔsatɔ́ sín oto he min e te kpo do Katier e ton kpo",
       "SELLER_SETTINGS_LABEL": "Seller Settings, Nǔ e nɔ xlɛ́ fí e un ɖò nǔ sà ɖè é wɛ",
       "SELLER_SELL_CENTER": "Nǔsatɔ́ sín tito",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Sɛnawe hwehwɛ ta",
+      "MAPPI_ALLOWANCE_LABEL": "Dada Mappi tɔ̌n gbè",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Hèzɔ wuwɛ",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Gan mì xɔ",
+          "DELIVERED_TO_BUYER": "Gan mì sò"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Aɖoɖo si ɖò ná tòxɔmɛ",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Àxɔmɛ nɔ tɔxɔ si tòxɔmɛ le. Mà tɔkpò tòxɔ mɛ, mède yè tòxɔmɛ lɛ tò hènɔ.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Mi kɛnklɛn bo wlan adlɛsi mɛyiyi tɔn ɖe sɔgbe ɔ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Wlanwlan ɖuɖeji",
         "FAILED_REGISTRATION_SUBMISSION": "Nuwanyido ɖo wema wlanwlan hɛn ɖ'ayi mɛ",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nyɔma wlanwlan gló ɖó mɛ e nɔ zán é kún nyí mɛɖebǔ ó",
-        "UNINITIALIZED_SELL_CENTER": "Mi kɛnklɛn bo ze tɛn mitɔn ɖo te"
+        "UNINITIALIZED_SELL_CENTER": "Mi kɛnklɛn bo ze tɛn mitɔn ɖo te",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Wɛ kan xɛ sɔn sɔ",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Kan xɛ wɔ ɔ gba ji",
+        "FAILED_SELLER_ITEM_SAVE": "Wɛ kan ɖɔ hɛn wɔ a wɔ xɔ sɔ",
+        "FAILED_SELLER_ITEM_DELETE": "Kan xɛ wɔ ɔ gba sɛnɔn",
+        "SELLER_ITEM_NOT_FOUND": "Kan xɛ wɔ ɔ dɛ",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Dɔ yì kpɔ. Mappi dɔ kɛ kpé {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Dɔ yì kpɔ mìxwé. Mappi nɔ ke tɔ nɔ kɛ kpɔ"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "Wɛ",
+        "PRICE_LABEL": "Hɛnɔ",
+        "STOCK_LABEL": "Atchon kpɔ nu",
+        "DESCRIPTION_LABEL": "Hɛnɔnɔn",
+        "PHOTO": "Wɛnɔ kpɔ nɔn",
+        "SELLING_DURATION_LABEL": "Wɛ hɛnɔn de xɔ zɔɖɔ hɛn nyɔ hɛn",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Dɔnɛ",
+          "EXPIRED": "Wɛ tò xɔ wɔn"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 do gbe",
+          "AVAILABLE_2": "2 do gbe",
+          "AVAILABLE_3": "3 do gbe",
+          "MANY": "Kpɔnu do gbe",
+          "MADE_TO_ORDER": "Sɛ yé ɖa",
+          "ONGOING_SERVICE": "Wɛ na gbeto",
+          "SOLD": "Wɛ klé"
+        },
+        "SELLING_EXPIRATION_DATE": "Nɛnɔ {expired_by_date} kɛ"
       }
     },
     "BUY_FROM_SELLER": {
@@ -82,7 +132,18 @@
       "SELLER_USERNAME_LABEL": "Nyikɔ mɛtɔn",
       "SELLER_PIONEER_ID_LABEL": "Pioneer ID Towe",
       "SELLER_PHONE_NUMBER_LABEL": "Nǔsátɔ́ sin numɛro",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Nɔ̀nɔ",
+          "PRICE_LABEL": "Xɔ̀ mɛ",
+          "DESCRIPTION_LABEL": "Bíbá",
+          "PHOTO": "Fɔto",
+          "BUYING_QUANTITY_LABEL": "Nɔ̀nɔ hɛnnu",
+          "PICK_LABEL": "Tɔn",
+          "UNPICK_LABEL": "Zàn"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Kpondewu",
@@ -193,7 +254,11 @@
     "SEARCH_REVIEWS": "Biba Xóɖɔɖókpɔ́ lɛ",
     "SEARCH_LOADING": "Biba ɖo yiyi wɛ...",
     "REPLY": "Xósin",
+    "ADD_ITEM": "Tán nūn",
+    "DELETE": "Hã",
+    "CONFIRM_DELETE": "Ɛ wɛ nyɛnã anɔ hɛn dó kɔ̀ sí wá ɖú ɖɛ? Ɛ kó nyɔ ní sɛ́ wɛ̀ ɖú nɔn wá gbónu mé yè.",
     "SAVE": "Hɛn",
+    "CONFIRM": "Ganmɛ",
     "CONFIRM_DIALOG": "A ɖo ɖyɔɖyɔ e ma ko hɛn ɖ'ayi ǎ lɛ. A jlo na gosin nugbo a?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Pi nyikɔ mitɔn",

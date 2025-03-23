@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "Yi amfani da GPS na na'urar",
       "PREFERRED_SEARCH_CENTER": "Yi amfani da Cibiyar Bincike"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Farantan Bincike",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Hada da masu sayarwa masu aiki",
+      "INCLUDE_INACTIVE_SELLERS": "Hada da masu sayarwa marasa aiki",
+      "INCLUDE_TEST_SELLERS": "Hada da masu sayarwa na gwaji",
+      "INCLUDE_TRUST_LEVEL_100": "Hada da matakin amana 100",
+      "INCLUDE_TRUST_LEVEL_80": "Hada da matakin amana 80",
+      "INCLUDE_TRUST_LEVEL_50": "Hada da matakin amana 50",
+      "INCLUDE_TRUST_LEVEL_0": "Hada da matakin amana 0"
+    },
     "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Zaɓuɓɓuka sun yi nasara",
@@ -60,12 +70,52 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Alamar taswira ta na nuna inda nake sayarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Siyayya ta yanar gizo",
+      "MAPPI_ALLOWANCE_LABEL": "Ragowar adadin Mappi",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Hanyar Cika Umarni",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Karɓa ta hanyar mai saya",
+          "DELIVERED_TO_BUYER": "An kawo wa mai saya"
+        }
+      },
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Umarni na cika wa ga mai siya",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Tattara yana daga adireshin mai sayarwa. Idan an zaɓi isarwa, da fatan a shigar da adireshin mai siya.",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Don Allah shigar da ingantaccen adireshin imel",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rajista ta yi nasara",
         "FAILED_REGISTRATION_SUBMISSION": "Kuskure wajen adana rajista",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Rijista ta gaza saboda mai amfani ba a tantance shi ba",
-        "UNINITIALIZED_SELL_CENTER": "Da fatan za ku saita cibiyar sayarwarku"
+        "UNINITIALIZED_SELL_CENTER": "Da fatan za ku saita cibiyar sayarwarku",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "An adana kayan mai sayarwa cikin nasara",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "An cire kayan mai sayarwa cikin nasara",
+        "FAILED_SELLER_ITEM_SAVE": "Kuskure wajen adana kayan mai sayarwa",
+        "FAILED_SELLER_ITEM_DELETE": "Kuskure wajen share kayan mai sayarwa",
+        "SELLER_ITEM_NOT_FOUND": "Ba a samu kayan mai sayarwa ba",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Ajiye ya yi nasara. An yi amfani da Mappi {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Ajiye bai yi nasara ba. Adadin Mappi ba ya wadatarwa"
+      },
+      "SELLER_ITEMS_FEATURE": {
+        "ITEM_LABEL": "Abu",
+        "PRICE_LABEL": "Farashi",
+        "STOCK_LABEL": "Matsayin kaya",
+        "DESCRIPTION_LABEL": "Bayani",
+        "PHOTO": "Hoto",
+        "SELLING_DURATION_LABEL": "Tsawon lokacin siyarwa a makonni",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Aiki",
+          "EXPIRED": "Ƙarewa"
+        },
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 akwai",
+          "AVAILABLE_2": "2 akwai",
+          "AVAILABLE_3": "3 akwai",
+          "MANY": "Da yawa akwai",
+          "MADE_TO_ORDER": "An yi domin oda",
+          "ONGOING_SERVICE": "Aikin ci gaba",
+          "SOLD": "An sayar"
+        },
+        "SELLING_EXPIRATION_DATE": "Sayarwa kafin {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
@@ -73,6 +123,7 @@
       "SELLER_DETAILS_LABEL": "Bayanin Mai Sayarwa",
       "SELLER_ADDRESS_POSITION_LABEL": "Adireshin Ko Matsayin Mai Sayarwa",
       "LEAVE_A_REVIEW_MESSAGE": "Bar Saƙon Bita",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kake ji game da wannan mai siyarwa na sama",	
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Shigar da karin sharhi a nan",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
       "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayanin Sake Dubawa",
@@ -81,7 +132,18 @@
       "SELLER_USERNAME_LABEL": "Sunan mai amfani",
       "SELLER_PIONEER_ID_LABEL": "ID na Pioneer",
       "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Abu",
+          "PRICE_LABEL": "Farashi",
+          "DESCRIPTION_LABEL": "Bayani",
+          "PHOTO": "Hoto",
+          "BUYING_QUANTITY_LABEL": "Yawan abu",
+          "PICK_LABEL": "Kara",
+          "UNPICK_LABEL": "Cire"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Bita",
@@ -102,7 +164,7 @@
       "REPLY_TO_REVIEW_STATIC_HEADER": "Amsa Bita",
       "REPLY_TO_REVIEW_SUBHEADER": "Bitar da kake maida martani",
       "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Bayar da amsa ga bita",
-      "REPLY_TO_REVIEW_HEADER": "Amsa wa bita",
+      "REPLY_TO_REVIEW_HEADER": "Amsa wa bita da aka bar wa {seller_id}",
       "BY_REVIEWER": "Ta {buyer_id}",
       "REPLY_TO_REVIEW_MESSAGE": "Bar amsar ku ga bita ta sama",
       "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kake ji game da mu'amalarka da wannan jagora",
@@ -192,7 +254,11 @@
     "SEARCH_REVIEWS": "Binciken sharhi",
     "SEARCH_LOADING": "Ana ɗora bincike...",
     "REPLY": "Amsa",
+    "ADD_ITEM": "Ƙara abu",
+    "DELETE": "Goge",
+    "CONFIRM_DELETE": "Shin da gaske kake son share wannan abu? Wannan aiki ba zai iya dawowa ba.",
     "SAVE": "Ajiye",
+    "CONFIRM": "Tabbatar",
     "CONFIRM_DIALOG": "Kuna da canje-canje marasa ajiya. Da gaske kuna son barin?",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Sunan mai amfani na Pi",
