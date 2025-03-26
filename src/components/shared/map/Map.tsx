@@ -87,6 +87,7 @@ const Map = ({
   const [locationError, setLocationError] = useState(false);
   const [isLocationAvailable, setIsLocationAvailable] = useState(false);
   const [initialLocationSet, setInitialLocationSet] = useState(false);
+  const [lastClickedMarker, setLastClickedMarker] = useState<LatLngTuple | null>(null);
 
   useEffect(() => {
     if (searchResults.length > 0) {
@@ -137,21 +138,25 @@ const Map = ({
     if (!mapRef.current) return;
 
     const map = mapRef.current;
-    const currentZoom = map.getZoom();
+    setLastClickedMarker(sellerCoordinates);
 
-    // Set the view to the seller's coordinates
-    map.setView(sellerCoordinates, currentZoom, { animate: true });
-    // Get the position of the clicked marker
+    // Set the target zoom level
+    const targetZoom = 5; // Zoom level when clicking the marker
+
+    // Center the map to the marker position without animation
+    map.setView(sellerCoordinates, targetZoom, { animate: false });
+
+    // Calculate offset to center the popup (move right by 2x)
     const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
-     // Get the width and height of the map container
     const mapSize = map.getSize();
-    const mapWidth = mapSize.x;
-    const mapHeight = mapSize.y;
-    // Calculate the offsets to center the marker in the map view
-    const panOffset = L.point(mapWidth / 2 - markerPoint.x, mapHeight / 2 - markerPoint.y);
+
+    const centerOffset = L.point(
+      mapSize.x / 2 - markerPoint.x + 12, // Shift map right (+100 moves popup left)
+      mapSize.y / 2 - markerPoint.y - 219   // Vertical offset unchanged
+    );
 
     // Pan the map by the calculated offset
-    map.panBy(panOffset, { animate: false }); // Disable animation to make the movement instant
+    map.panBy(centerOffset, { animate: false }); // Disable animation to make the movement instant
   };
 
   useEffect(() => {
