@@ -359,7 +359,7 @@ const Map = ({
               mapRef.current = mapInstance;
             }) as unknown as () => void // utilize Type assertion
           }
-          className="w-full flex-1 fixed bottom-0 h-[calc(100vh-76.19px)] left-0 right-0"
+          className="w-full flex-1 fixed bottom-0 h-[calc(100vh)] left-0 right-0"
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

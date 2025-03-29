@@ -5,10 +5,15 @@ import { locales } from '../../../i18n/i18n';
 import { Providers } from '../providers';
 import Navbar from '@/components/shared/navbar/Navbar';
 import logger from '../../../logger.config.mjs';
+import SimpleBottomNavigation from '@/components/mui/navigation/SimpleBottomNavigation';
+import { ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import theme from '@/components/mui/theme/Theme';
 
 export const dynamic = 'force-dynamic';
 
 const lato = Lato({ weight: '400', subsets: ['latin'], display: 'swap' });
+
 
 export async function generateStaticParams() {
   return locales.map((locale) => { locale })
@@ -109,12 +114,19 @@ export default function LocaleLayout({
       </head>
       <body
         className={`bg-background text-black ${lato.className}`}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Providers>
-            <Navbar />
-            <div className='pt-[80px]'>{children}</div>
-          </Providers>
-        </NextIntlClientProvider>
+        <ThemeProvider theme={theme}>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <Providers>
+              <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+                <Box sx={{ flex: 1 }}>
+                  {/* Main content area */}
+                  {children}
+                </Box>
+                <SimpleBottomNavigation />
+              </Box>
+            </Providers>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useContext, useEffect, useState, useRef, ChangeEvent } from 'react';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
-import SearchBar from '@/components/shared/SearchBar/SearchBar';
+import SearchBar from '@/components/mui/input/SearchBar';
 import ConfirmDialog from '@/components/shared/confirm';
 import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
@@ -18,6 +18,7 @@ import { userLocation } from '@/utils/geolocation';
 
 import { AppContext } from '../../../context/AppContextProvider';
 import logger from '../../../logger.config.mjs';
+import FullScreenLoading from '@/components/mui/loading/FullScreenLoading';
 
 export default function Page({ params }: { params: { locale: string } }) {
   const t = useTranslations();
@@ -132,6 +133,7 @@ export default function Page({ params }: { params: { locale: string } }) {
 
   return (
     <>
+      {isSigningInUser && <FullScreenLoading />}
       <DynamicMap
         center={searchCenter}
         zoom={zoomLevel}
@@ -147,57 +149,8 @@ export default function Page({ params }: { params: { locale: string } }) {
         setSearchQuery={setSearchQuery}
         setSearchClicked={setSearchClicked}
         isSearchClicked={isSearchClicked}
+        handleLocationButtonClick={handleLocationButtonClick}
       />
-      <div className="absolute bottom-8 z-10 right-0 left-0 m-auto pointer-events-none">
-        <div className="w-[90%] lg:w-full lg:px-6 mx-auto flex items-center justify-between">
-          {/* Add Seller Button */}
-          <div className="pointer-events-auto">
-            <Link href={`/${locale}/seller/registration`}>
-              <Button
-                label={'+ ' + t('HOME.ADD_SELLER')}
-                styles={{
-                  height: '55px',
-                  fontSize: '20px',
-                  borderRadius: '10px',
-                  color: '#ffc153',
-                  paddingLeft: '45px',
-                  paddingRight: '45px',
-                }}
-                disabled={isSigningInUser}
-              />
-            </Link>
-          </div>
-          {/* Location Button */}
-          <div className="pointer-events-auto">
-            <Button
-              icon={
-                <Image
-                  src="/images/shared/my_location.png"
-                  width={40}
-                  height={40}
-                  alt="my location"
-                />
-              }
-              styles={{
-                borderRadius: '50%',
-                width: '55px',
-                height: '55px',
-                padding: '0px',
-              }}
-              onClick={handleLocationButtonClick}
-              disabled={isSigningInUser}
-            />
-          </div>
-        </div>
-        {showPopup && (
-          <ConfirmDialog
-            show={setShowPopup}
-            onClose={() => setShowPopup(false)}
-            message={t('HOME.SEARCH_CENTER_DEFAULT_MESSAGE')}
-            url={`/map-center?entryType=search`}
-          />
-        )}
-      </div>
     </>
   );
 }
