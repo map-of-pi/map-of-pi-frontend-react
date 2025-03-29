@@ -79,17 +79,18 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
     },
   ];
   
-  const handleFulfillment = async (itemId: string) => {
+  const handleFulfillment = async (itemId: string, status:string) => {
     try {
-        const updateItem = await updateOrderItemStatus(itemId, "fulfilled");
+      logger.info(`Updating order item status with id: ${itemId}`);
+      const updateItem = await updateOrderItemStatus(itemId, status);
     
-        if (updateItem) {
+      if (updateItem) {
           setOrderItems((prev) => 
             prev.map((item) =>
-              item._id === itemId ? { ...item, status: OrderItemStatus.Fulfilled } : item
+              item._id === itemId ? { ...updateItem } : item
             )
           );
-        }
+      }
     } catch (error) {
         console.error("Error updating item status:", error);
     }
@@ -169,8 +170,9 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
       <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
         {orderItems && orderItems.length>0 && orderItems.map((item, index)=>(<div
           data-id={item._id}
-          className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7${
-            item.status==='fulfilled'? 'bg-yellow-100' : ''
+          className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
+            item.status===OrderItemStatus.Fulfilled || item.status===OrderItemStatus.Refunded? 
+            'bg-yellow-100' : ''
           }`}
           key={index}
         >
@@ -243,15 +245,18 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                   color: '#ffc153',
                   width: '100%',
                 }}
-                // onClick={() => handlePicked(formData._id)}
+                disabled={!(item.status === OrderItemStatus.Fulfilled || item.status === OrderItemStatus.Refunded)}
+                onClick={() => handleFulfillment(item._id, 'Pending')}
               />
+
               <Button
                 label="Refund"
                 styles={{
                   color: '#ffc153',
                   width: '100%',
                 }}
-                // onClick={() => handlePicked(formData._id)}
+                disabled={item.status === OrderItemStatus.Fulfilled || item.status === OrderItemStatus.Refunded}
+                onClick={() => handleFulfillment(item._id, 'Refunded')}
               />
               <Button
                 label="Fulfill"
@@ -259,7 +264,8 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                   color: '#ffc153',
                   width: '100%',
                 }}
-                onClick={() => handleFulfillment(item._id)}
+                disabled={item.status===OrderItemStatus.Fulfilled || item.status===OrderItemStatus.Refunded}
+                onClick={() => handleFulfillment(item._id, 'Fulfilled')}
               />
             </div>
           </div>

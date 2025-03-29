@@ -186,12 +186,9 @@ export interface OrderType {
 export interface PartialOrderType extends Pick<OrderType, '_id' | 'buyer_id' | 'total_amount' | 'createdAt' | 'fulfillment_method' | 'seller_fulfillment_description' | 'buyer_fulfillment_description' >  {pi_username: string};
 
 export enum OrderItemStatus { 
-  Refunded = 'refunded', 
-  Collected = 'collected',
-  Returned = 'returned',
-  Dispatched = 'dispatched',
-  Fulfilled = "fulfilled",
-  Pending = 'pending',
+  Refunded = 'Refunded',
+  Fulfilled = "Fulfilled",
+  Pending = 'Pending',
 }
 
 
