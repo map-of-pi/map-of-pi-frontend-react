@@ -89,7 +89,7 @@ export const ListOrder: React.FC<{
                     </label>
                   )}
                 </div>
-                <Link href={`/${locale}/seller/order-fulfilment/${item._id}?seller_name=${seller_name}&seller_type=${seller_type}`}>       
+                <Link href={`/${locale}/seller/order-fulfillment/${item._id}?seller_name=${seller_name}&seller_type=${seller_type}`}>       
                 <Button
                   label={"Fulfill"}
                   disabled={false} 

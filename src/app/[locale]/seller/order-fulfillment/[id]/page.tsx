@@ -65,22 +65,22 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
   };
 
   const translatedFulfillmentMethod = [
-      {
-        value: FulfillmentType.CollectionByBuyer,
-        name: t(
-          'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
-        ),
-      },
-      {
-        value: FulfillmentType.DeliveredToBuyer,
-        name: t(
-          'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
-        ),
-      },
-    ];
+    {
+      value: FulfillmentType.CollectionByBuyer,
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
+      ),
+    },
+    {
+      value: FulfillmentType.DeliveredToBuyer,
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
+      ),
+    },
+  ];
   
-    const handleFulfillment = async (itemId: string) => {
-      try {
+  const handleFulfillment = async (itemId: string) => {
+    try {
         const updateItem = await updateOrderItemStatus(itemId, "fulfilled");
     
         if (updateItem) {
@@ -90,10 +90,10 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
             )
           );
         }
-      } catch (error) {
+    } catch (error) {
         console.error("Error updating item status:", error);
-      }
-    };
+    }
+  };
 
   return (
     <div className="w-full md:w-[500px] md:mx-auto p-4">
@@ -178,7 +178,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
             <div className="flex gap-x-4">
               <div className="flex-auto w-64">
                 <Input
-                  label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.ITEM_LABEL') + ':'}
+                  label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.ITEM_LABEL') + ':'}
                   name="name"
                   type="text"
                   value={item.seller_item.name}
@@ -203,7 +203,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
             <div className="flex gap-x-4">
               <div className="flex-auto w-64">
                 <TextArea
-                  label={t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
+                  label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
                   name="description"
                   value={item.seller_item.description}
                   disabled={true}
@@ -212,7 +212,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
               </div>
               <div className="flex-auto w-32 gap-2">
                 <label className="block text-[17px] text-[#333333]">
-                  {t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.PHOTO') + ':'}
+                  {t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PHOTO') + ':'}
                 </label>
                 <Image
                   src={item.seller_item.image || ''}
@@ -225,18 +225,26 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
             </div>
 
             <label className="text-[18px] text-[#333333]">
-              {t('SCREEN.BUY_FROM_SELLER.SELLER_ITEMS_FEATURE.BUYING_QUANTITY_LABEL')}:
+              {t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.BUYING_QUANTITY_LABEL')}:
             </label>
-            <div className="flex items-center gap-4 w-full mt-1">
-              <div className="flex gap-2 items-center justify-between mr-7">
+            <div className="flex items-center gap-3 w-full mt-1">
+              <div className="flex gap-2 items-center justify-between mr-2">
                 <input
                   name="duration"
                   type="number"
                   value={item.quantity}
-                  className="p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 text-center focus:border-[#1d724b] border-[2px] max-w-[80px]"
+                  className="p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 text-center focus:border-[#1d724b] border-[2px] max-w-[100px]"
                   disabled={true}
                 />
               </div>
+              <Button
+                label="Reset"
+                styles={{
+                  color: '#ffc153',
+                  width: '100%',
+                }}
+                // onClick={() => handlePicked(formData._id)}
+              />
               <Button
                 label="Refund"
                 styles={{
