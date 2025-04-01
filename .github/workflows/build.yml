@@ -31,7 +31,7 @@ jobs:
 
         # Frontend CI/CD Process
       - name: Install Dependencies for Frontend
-        run: npm install
+        run: npm ci
 
       - name: Build Frontend
         run: npm run build

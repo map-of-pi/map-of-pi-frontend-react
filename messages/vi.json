@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "Sử dụng GPS thiết bị của tôi",
       "PREFERRED_SEARCH_CENTER": "Sử dụng Trung tâm tìm kiếm"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Bộ lọc tìm kiếm",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Bao gồm người bán hoạt động",
+      "INCLUDE_INACTIVE_SELLERS": "Bao gồm người bán không hoạt động",
+      "INCLUDE_TEST_SELLERS": "Bao gồm người bán thử nghiệm",
+      "INCLUDE_TRUST_LEVEL_100": "Bao gồm mức độ tin cậy 100",
+      "INCLUDE_TRUST_LEVEL_80": "Bao gồm mức độ tin cậy 80",
+      "INCLUDE_TRUST_LEVEL_50": "Bao gồm mức độ tin cậy 50",
+      "INCLUDE_TRUST_LEVEL_0": "Bao gồm mức độ tin cậy 0"
+    },
     "CONTACT_MAP_OF_PI": "Liên hệ với Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Cập nhật tùy chọn thành công",

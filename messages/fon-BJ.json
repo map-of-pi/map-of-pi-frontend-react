@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "Zan GPS azɔwanú ce tɔn",
       "PREFERRED_SEARCH_CENTER": "Zan Bibaatɛn"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Wàɖànsu ƒè Filtèr",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Gba anɔnkɔ tɔn xɔxɔ me",
+      "INCLUDE_INACTIVE_SELLERS": "Gba anɔnkɔ tɔn mà xɔxɔ o me",
+      "INCLUDE_TEST_SELLERS": "Gba anɔnkɔ tɔn sɔ̃ɖo me",
+      "INCLUDE_TRUST_LEVEL_100": "Gba anɔnkɔ tɔn wɔ ɖe 100%",
+      "INCLUDE_TRUST_LEVEL_80": "Gba anɔnkɔ tɔn wɔ ɖe 80%",
+      "INCLUDE_TRUST_LEVEL_50": "Gba anɔnkɔ tɔn wɔ ɖe 50%",
+      "INCLUDE_TRUST_LEVEL_0": "Gba anɔnkɔ tɔn wɔ ɖe 0%"
+    },
     "CONTACT_MAP_OF_PI": "Do xo sedo Map Of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nǔ e jló we lɛ é ɖuɖeji",

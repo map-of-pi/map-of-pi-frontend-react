@@ -14,6 +14,7 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { ISeller, IUserSettings, IUser, SellerItem, PaymentDataType, PickedItems, FulfillmentType } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
+import { fetchToggle } from '@/services/toggleApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
@@ -40,9 +41,9 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [error, setError] = useState<string | null>(null);
   const { currentUser, autoLoginUser } = useContext(AppContext);
   const [pickedItems, setPickedItems] = useState<{ itemId: string; quantity: number }[]>([]);
+  const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
 
-
-    const observer = useRef<IntersectionObserver | null>(null);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   const handleShopItemRef = (node: HTMLElement | null) => {
     if (node && observer.current) {
@@ -90,9 +91,18 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
       }
     };
 
+    const getToggleData = async () => {
+      try {
+        const toggle = await fetchToggle('onlineShoppingFeature');
+        setOnlineShoppingEnabled(toggle.enabled);
+      } catch (error) {
+        logger.error('Error fetching toggle:', error);
+      }
+    };
+
     getSellerData();
     getSellerSettings();
-    
+    getToggleData();
   }, []);
 
    // Fetch seller items
