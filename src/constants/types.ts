@@ -158,23 +158,21 @@ export interface PaymentDTO {
 };
 
 export enum OrderStatusType {
-  Completed = 'completed', 
-  Dispatched = 'dispatched', 
-  Collected = 'collected',
-  Cancelled = 'cancelled',
+  Initialized = 'initialized',
   Pending = 'pending',
-  New = 'new'
+  Completed = 'completed', 
+  Cancelled = 'cancelled'
 }
 
 export interface OrderType {
   _id: string;
   buyer_id: string;
   seller_id: string;
-  transaction: string;
+  payment_id: string;
   total_amount: number;
   status: OrderStatusType;
-  paid: boolean;
-  filled: boolean;
+  is_paid: boolean;
+  is_fulfilled: boolean;
   fulfillment_method: FulfillmentType | undefined,
   seller_fulfillment_description:string | undefined,
   buyer_fulfillment_description: string
@@ -186,9 +184,9 @@ export interface OrderType {
 export interface PartialOrderType extends Pick<OrderType, '_id' | 'buyer_id' | 'total_amount' | 'createdAt' | 'fulfillment_method' | 'seller_fulfillment_description' | 'buyer_fulfillment_description' >  {pi_username: string};
 
 export enum OrderItemStatus { 
-  Refunded = 'Refunded',
-  Fulfilled = "Fulfilled",
-  Pending = 'Pending',
+  Refunded = 'refunded',
+  Fulfilled = "fulfilled",
+  Pending = 'pending',
 }
 
 
@@ -214,4 +212,25 @@ export interface TransactionType {
   txid: string | null;
   cancelled: boolean;
   createdAt?: Date;
+}
+
+export enum U2UPaymentStatus {
+  Pending = 'Pending', 
+  U2ACompleted = 'U2A Completed',
+  U2AFailed = 'U2A Failed',
+  A2UCompleted = 'A2U Completed',
+  A2UFailed = 'A2U Failed',
+  Completed = 'Completed'
+}
+
+export interface PaymentCrossReferenceType {
+  _id: string;
+  u2a_payment_id: string;
+  a2u_payment_id: string;
+  u2u_status: U2UPaymentStatus;
+  error_message: string;
+  u2a_completed_at: Date;
+  a2u_completed_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
