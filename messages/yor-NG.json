@@ -29,6 +29,16 @@
       "PREFERRED_DEVICE_GPS": "Lo GPS ohun elo mi",     
       "PREFERRED_SEARCH_CENTER": "Lo Ile-iṣẹ Wiwa"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Àwọn Àlẹ̀mọ́ọ̀rùn Ìwádìí",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Fi awọn olutaja ti n ṣiṣẹ kun",
+      "INCLUDE_INACTIVE_SELLERS": "Fi awọn olutaja ti ko n ṣiṣẹ kun",
+      "INCLUDE_TEST_SELLERS": "Fi awọn olutaja idanwo kun",
+      "INCLUDE_TRUST_LEVEL_100": "Fi ipele igbẹkẹle 100 kun",
+      "INCLUDE_TRUST_LEVEL_80": "Fi ipele igbẹkẹle 80 kun",
+      "INCLUDE_TRUST_LEVEL_50": "Fi ipele igbẹkẹle 50 kun",
+      "INCLUDE_TRUST_LEVEL_0": "Fi ipele igbẹkẹle 0 kun"
+    },
     "CONTACT_MAP_OF_PI": "Olubasọrọ Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Aseyori awọn ayanfẹ",
