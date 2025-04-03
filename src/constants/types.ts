@@ -1,3 +1,5 @@
+import { MembershipType } from "./membershipTypes";
+
 export interface IUser {
   pi_uid: string;
   pi_username: string;
@@ -45,6 +47,14 @@ export interface ISeller {
   order_online_enabled_pref: boolean;
   fulfillment_method: string;
   fulfillment_description?: string;
+}
+
+export interface IMembership {
+  pi_uid: string;
+  membership_class: MembershipType;
+  mappi_balance: number;
+  membership_expiration: Date | null;
+  mappi_used_to_date?: number; // optional, in case not always returned
 }
 
 export interface IReviewFeedback {
