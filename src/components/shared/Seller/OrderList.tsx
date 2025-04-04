@@ -1,4 +1,4 @@
-import { PartialOrderType } from "@/constants/types";
+import { OrderStatusType, PartialOrderType } from "@/constants/types";
 import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 import { Input } from "../Forms/Inputs/Inputs";
@@ -43,7 +43,8 @@ export const ListOrder: React.FC<{
           <div
             data-id={item._id}
             key={index}
-            className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7`}
+            className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${item.status===OrderStatusType.Completed ? 'bg-yellow-100' : item.status===OrderStatusType.Cancelled? 
+            'bg-red-100' : ''}`}
           >
             <div className="p-3">
               <div className="flex gap-x-4">
@@ -52,7 +53,7 @@ export const ListOrder: React.FC<{
                     label={'Pioneer:'}
                     name="name"
                     type="text"
-                    value={item.pi_username}
+                    value={item.buyer_id.pi_username}
                     disabled={true}
                   />
                 </div>
@@ -63,7 +64,7 @@ export const ListOrder: React.FC<{
                       label={'Total Price:'}
                       name="price"
                       type="number"
-                      value={item.total_amount || item.total_amount.toString()}
+                      value={item.total_amount.$numberDecimal || item.total_amount.$numberDecimal.toString()}
                       disabled={true}
                     />
                     <p className="text-gray-500 text-sm">Pi</p>

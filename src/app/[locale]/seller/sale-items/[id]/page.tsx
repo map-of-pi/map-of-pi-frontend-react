@@ -106,44 +106,44 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   }, []);
 
    // Fetch seller items
-    useEffect(() => {
-      const getSellerItems = async (seller_id: string) => {
-        try {
-          const items = await fetchSellerItems(seller_id);
-          if (items) {
-            setDbSellerItems(items);
-          } else {
-            setDbSellerItems(null);
-          }
-        } catch (error) {
-          logger.error('Error fetching seller items data:', error);
+  useEffect(() => {
+    const getSellerItems = async (seller_id: string) => {
+      try {
+        const items = await fetchSellerItems(seller_id);
+        if (items) {
+          setDbSellerItems(items);
+        } else {
+          setDbSellerItems(null);
         }
-      };
-      
-      if (sellerShopInfo){
-        getSellerItems(sellerShopInfo.seller_id);
+      } catch (error) {
+        logger.error('Error fetching seller items data:', error);
       }
-    }, [sellerShopInfo]); 
+    };
+    
+    if (sellerShopInfo){
+      getSellerItems(sellerShopInfo.seller_id);
+    }
+  }, [sellerShopInfo]); 
 
-    const checkoutOrder = async () => {
-      if(!currentUser?.pi_uid) return setError('user not login for payment');
-      const paymentData: PaymentDataType = {
-        amount: totalAmount,
-        memo: 'This is another Test Payment',
-        uid: currentUser.pi_uid,
-        metadata: { 
-          buyer: currentUser.pi_uid, 
-          seller: sellerId,
-          items: pickedItems,
-          amount: totalAmount,
-          fulfillment_method: sellerShopInfo?.fulfillment_method,
-          seller_fulfillment_description: sellerShopInfo?.fulfillment_description,
-          buyer_fulfillment_description: buyerDescription,
-        },
-      };
-      await payWithPi(paymentData)
-  
-    }  
+  const checkoutOrder = async () => {
+    if(!currentUser?.pi_uid) return setError('user not login for payment');
+    const paymentData: PaymentDataType = {
+      amount: totalAmount,
+      memo: 'This is another Test Payment',
+      metadata: { 
+        buyer: currentUser.pi_uid, 
+        seller: sellerId,
+        items: pickedItems,
+        fulfillment_method: sellerShopInfo?.fulfillment_method,
+        seller_fulfillment_description: sellerShopInfo?.fulfillment_description,
+        buyer_fulfillment_description: buyerDescription,
+      },
+    };
+    await payWithPi(paymentData)
+    setPickedItems([]);
+    setTotalAmount(0);
+    setBuyerDescription("");
+  }  
 
   const translateSellerCategory = (category: string): string => {
     switch (category) {

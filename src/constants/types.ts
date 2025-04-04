@@ -131,7 +131,6 @@ type PaymentMetadataType = {
   items: PickedItems[],
   buyer: string,
   seller: string,
-  amount: number,
   fulfillment_method: FulfillmentType | undefined,
   seller_fulfillment_description:string | undefined,
   buyer_fulfillment_description: string
@@ -140,7 +139,6 @@ type PaymentMetadataType = {
 export type PaymentDataType = {
   amount: number;
   memo: string;
-  uid:string;
   metadata: PaymentMetadataType;
 }
 
@@ -175,10 +173,12 @@ export enum OrderStatusType {
 
 export interface OrderType {
   _id: string;
-  buyer_id: string;
+  buyer_id: {
+    pi_username: string
+  };
   seller_id: string;
   payment_id: string;
-  total_amount: number;
+  total_amount: {$numberDecimal: number};
   status: OrderStatusType;
   is_paid: boolean;
   is_fulfilled: boolean;
@@ -190,7 +190,7 @@ export interface OrderType {
 }
 
 
-export interface PartialOrderType extends Pick<OrderType, '_id' | 'buyer_id' | 'total_amount' | 'createdAt' | 'fulfillment_method' | 'seller_fulfillment_description' | 'buyer_fulfillment_description' >  {pi_username: string};
+export interface PartialOrderType extends Pick<OrderType, '_id' | 'buyer_id' | 'total_amount' | 'createdAt' |  'status' | 'fulfillment_method' | 'seller_fulfillment_description' | 'buyer_fulfillment_description' > {};
 
 export enum OrderItemStatus { 
   Refunded = 'refunded',
@@ -202,9 +202,9 @@ export enum OrderItemStatus {
 export interface OrderItemType {
   _id: string;
   order: string;
-  seller_item: SellerItem;
+  seller_item_id: SellerItem;
   quantity: number;
-  sub_total_amount: number;
+  subtotal: {$numberDecimal: number};
   status: OrderItemStatus;
   createdAt?: Date;
   updatedAt?: Date;

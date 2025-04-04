@@ -65,6 +65,26 @@ export const fetchOrderById = async (orderId: string) => {
   }
 };
 
+export const updateCompletedOrder = async (orderId: string) => {
+  try {
+    logger.info(`Updating completed order with orderID: ${orderId}`);
+    const response = await axiosClient.put(`/orders/complete/${orderId}`);
+    if (response.status === 200) {
+      logger.info(`Update completed order successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Update completed order failed with Status ${response.status}`);
+      return null;
+    }
+  }
+  catch (error) {
+    logger.error('Update completed order encountered an error:', error);
+    throw new Error('Failed to update completed order. Please try again later.');
+  }
+}
+
 // Fetch all order items associated with the seller
 export const updateOrderItemStatus = async (itemId:string, itemStatus:string) => {
   try {

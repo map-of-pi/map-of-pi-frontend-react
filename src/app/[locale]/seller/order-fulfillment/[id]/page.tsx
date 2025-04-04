@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/shared/Forms/Buttons/Buttons";
 import { Input, Select, TextArea } from "@/components/shared/Forms/Inputs/Inputs";
 import { FulfillmentType, OrderItemStatus, OrderItemType, PartialOrderType, PickedItems, SellerItem } from "@/constants/types";
-import { fetchOrderById, updateOrderItemStatus } from "@/services/orderApi";
+import { fetchOrderById, updateCompletedOrder, updateOrderItemStatus } from "@/services/orderApi";
 import logger from '../../../../../../logger.config.mjs';
 
 export default function OrderItemPage({ params, searchParams }: { params: { id: string }, searchParams: { seller_name: string, seller_type: string } }) {
@@ -23,6 +23,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
   const [currentOrder, setCurrentOrder] = useState<PartialOrderType | null>(null);
   const [orderItems, setOrderItems] = useState<OrderItemType[]>([]);
   const [buyerName, setBuyerName] = useState<string>('');
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     const getOrder= async (id: string) => {
@@ -79,20 +80,42 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
     },
   ];
   
-  const handleFulfillment = async (itemId: string, status:string) => {
+  const handleFulfillment = async (itemId: string, status: OrderItemStatus) => {
     try {
       logger.info(`Updating order item status with id: ${itemId}`);
       const updateItem = await updateOrderItemStatus(itemId, status);
-    
+
       if (updateItem) {
-          setOrderItems((prev) => 
-            prev.map((item) =>
-              item._id === itemId ? { ...updateItem } : item
-            )
-          );
+            setOrderItems((prev) => {
+                const updatedItems = prev.map((item) =>
+                    item._id === itemId ? { ...item, status: status } : item
+                );
+                return updatedItems;
+            });
+      } else {
+        logger.warn("Failed to update item status on the server.");
       }
     } catch (error) {
-        console.error("Error updating item status:", error);
+      logger.error("Error updating item status:", error);
+    }
+  };
+
+  const handleCompleted = async () => {
+    try {
+      logger.info(`Updating order item status with id: ${orderId}`);
+      const data = await updateCompletedOrder(orderId);
+
+      if (data) {
+        setCurrentOrder(data.order);
+        setOrderItems(data.orderItems);
+        setBuyerName(data.pi_username);
+        setIsCompleted(true);
+      } else {
+        logger.warn("Failed to update item status on the server.");
+      }
+    }
+    catch (error) {
+      logger.error("Error updating item status:", error);
     }
   };
 
@@ -133,7 +156,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                       label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.TOTAL_PRICE_LABEL')}
                       name="price"
                       type="number"
-                      value={currentOrder.total_amount || currentOrder.total_amount.toString()}
+                      value={currentOrder.total_amount.$numberDecimal || currentOrder.total_amount.$numberDecimal.toString()}
                       disabled={true}
                     />
                     <p className="text-gray-500 text-sm">Pi</p>
@@ -183,7 +206,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                   label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.ITEM_LABEL') + ':'}
                   name="name"
                   type="text"
-                  value={item.seller_item.name}
+                  value={item.seller_item_id.name}
                   disabled={true}
                 />
               </div>
@@ -194,7 +217,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                     label={'Amount:'}
                     name="price"
                     type="number"
-                    value={item.sub_total_amount || item.sub_total_amount.toString()}
+                    value={item.subtotal.$numberDecimal || item.subtotal.$numberDecimal.toString()}
                     disabled={true}
                   />
                   <p className="text-gray-500 text-sm">Pi</p>
@@ -207,7 +230,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                 <TextArea
                   label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
                   name="description"
-                  value={item.seller_item.description}
+                  value={item.seller_item_id.description}
                   disabled={true}
                   styles={{ maxHeight: '100px' }}
                 />
@@ -217,7 +240,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                   {t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PHOTO') + ':'}
                 </label>
                 <Image
-                  src={item.seller_item.image || ''}
+                  src={item.seller_item_id.image || ''}
                   height={50}
                   width={50}
                   alt="image"
@@ -245,8 +268,8 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                   color: '#ffc153',
                   width: '100%',
                 }}
-                disabled={!(item.status === OrderItemStatus.Fulfilled || item.status === OrderItemStatus.Refunded)}
-                onClick={() => handleFulfillment(item._id, 'Pending')}
+                disabled={isCompleted || !(item.status === OrderItemStatus.Fulfilled || item.status === OrderItemStatus.Refunded)}
+                onClick={() => handleFulfillment(item._id, OrderItemStatus.Pending)}
               />
 
               <Button
@@ -256,7 +279,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                   width: '100%',
                 }}
                 disabled={item.status === OrderItemStatus.Fulfilled || item.status === OrderItemStatus.Refunded}
-                onClick={() => handleFulfillment(item._id, 'Refunded')}
+                onClick={() => handleFulfillment(item._id, OrderItemStatus.Refunded)}
               />
               <Button
                 label="Fulfill"
@@ -265,7 +288,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                   width: '100%',
                 }}
                 disabled={item.status===OrderItemStatus.Fulfilled || item.status===OrderItemStatus.Refunded}
-                onClick={() => handleFulfillment(item._id, 'Fulfilled')}
+                onClick={() => handleFulfillment(item._id, OrderItemStatus.Fulfilled)}
               />
             </div>
           </div>
@@ -295,14 +318,14 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
         <div className="flex flex-col gap-y-4">
           <Button
             label={"Order completed"}
-            // disabled={!isSaveEnabled}
+            disabled={isCompleted}
             styles={{
               color: '#ffc153',
               height: '40px',
               padding: '15px 20px',
               width:'100%'
             }}
-            // onClick={()=>checkoutOrder()}
+            onClick={()=>handleCompleted()}
           />
 
           <Button
