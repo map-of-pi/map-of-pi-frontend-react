@@ -33,11 +33,7 @@
     "SEARCH_FILTERS": {
       "INCLUDE_ACTIVE_SELLERS": "활동 중인 판매자 포함",
       "INCLUDE_INACTIVE_SELLERS": "비활동 중인 판매자 포함",
-      "INCLUDE_TEST_SELLERS": "테스트 판매자 포함",
-      "INCLUDE_TRUST_LEVEL_100": "신뢰 수준 100 포함",
-      "INCLUDE_TRUST_LEVEL_80": "신뢰 수준 80 포함",
-      "INCLUDE_TRUST_LEVEL_50": "신뢰 수준 50 포함",
-      "INCLUDE_TRUST_LEVEL_0": "신뢰 수준 0 포함"
+      "INCLUDE_TEST_SELLERS": "테스트 판매자 포함"
     },
     "CONTACT_MAP_OF_PI": "Map of Pi에 문의",
     "VALIDATION": {
