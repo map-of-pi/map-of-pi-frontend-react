@@ -33,11 +33,7 @@
     "SEARCH_FILTERS": {
       "INCLUDE_ACTIVE_SELLERS": "Bao gồm người bán hoạt động",
       "INCLUDE_INACTIVE_SELLERS": "Bao gồm người bán không hoạt động",
-      "INCLUDE_TEST_SELLERS": "Bao gồm người bán thử nghiệm",
-      "INCLUDE_TRUST_LEVEL_100": "Bao gồm mức độ tin cậy 100",
-      "INCLUDE_TRUST_LEVEL_80": "Bao gồm mức độ tin cậy 80",
-      "INCLUDE_TRUST_LEVEL_50": "Bao gồm mức độ tin cậy 50",
-      "INCLUDE_TRUST_LEVEL_0": "Bao gồm mức độ tin cậy 0"
+      "INCLUDE_TEST_SELLERS": "Bao gồm người bán thử nghiệm"
     },
     "CONTACT_MAP_OF_PI": "Liên hệ với Map of Pi",
     "VALIDATION": {
