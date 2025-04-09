@@ -33,11 +33,7 @@
     "SEARCH_FILTERS": {
       "INCLUDE_ACTIVE_SELLERS": "包含活躍賣家",
       "INCLUDE_INACTIVE_SELLERS": "包含非活躍賣家",
-      "INCLUDE_TEST_SELLERS": "包含測試賣家",
-      "INCLUDE_TRUST_LEVEL_100": "包含信任級別100",
-      "INCLUDE_TRUST_LEVEL_80": "包含信任級別80",
-      "INCLUDE_TRUST_LEVEL_50": "包含信任級別50",
-      "INCLUDE_TRUST_LEVEL_0": "包含信任級別0"
+      "INCLUDE_TEST_SELLERS": "包含測試賣家"
     },
     "CONTACT_MAP_OF_PI": "聯絡 Map of Pi",
     "VALIDATION": {
