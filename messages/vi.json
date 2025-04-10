@@ -43,7 +43,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Đăng ký người bán",
+      "SELLER_REGISTRATION_HEADER": "Quản Lý Người Bán",
       "SELLER_DETAILS_LABEL": "Thông tin người bán",
       "EMAIL_LABEL": "Địa chỉ email",
       "PHONE_NUMBER_LABEL": "Số điện thoại",
@@ -66,6 +66,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Vị trí trên bản đồ của tôi cũng là nơi tôi đang bán",
       "SELLER_SETTINGS_LABEL": "Cài đặt người bán",
       "SELLER_SELL_CENTER": "Đặt Trung tâm bán hàng",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Mua Sắm Trực Tuyến | Danh Sách Mặt Hàng Bán",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Mua Sắm Trực Tuyến | Hoàn Thành Đơn Hàng",
       "SELLER_ONLINE_SHOPPING_LABEL": "Mua sắm trực tuyến",
       "MAPPI_ALLOWANCE_LABEL": "Trợ cấp Mappi còn lại",
       "FULFILLMENT_METHOD_TYPE": {
@@ -114,6 +116,15 @@
         "SELLING_EXPIRATION_DATE": "Bán trước {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Hoàn thành đơn hàng người bán",
+      "ORDER_SUBHEADER": "Tiêu đề đơn hàng",
+      "ORDERED_ITEMS_SUBHEADER": "Mặt hàng đã đặt",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "Tổng giá",
+        "TIME_OF_ORDER_LABEL": "Thời gian đặt hàng"
+      }    
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Mua từ người bán",
       "SELLER_DETAILS_LABEL": "Thông tin người bán",
@@ -126,7 +137,6 @@
       "REVIEWS_SCORE_MESSAGE": "Điểm đánh giá: {seller_review_rating} trên 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Thông tin liên hệ người bán",
       "SELLER_USERNAME_LABEL": "Tên người dùng",
-      "SELLER_PIONEER_ID_LABEL": "Mã Pioneer",
       "SELLER_PHONE_NUMBER_LABEL": "Số điện thoại",
       "SELLER_EMAIL_ADDRESS_LABEL": "Địa chỉ email",
       "ONLINE_SHOPPING": {
@@ -242,7 +252,11 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Tiên phong",
+    "PIONEER_ID_LABEL": "Mã Pioneer",
     "BUY": "Mua",
+    "RESET": "Đặt lại",
+    "REFUND": "Hoàn tiền",
+    "FULFILLED": "Đã hoàn thành",
     "NAVIGATE": "Dẫn đường",
     "NO_COMMENT": "Chưa có bình luận",
     "SEARCH_CENTER": "Đặt Trung tâm Tìm kiếm",
