@@ -43,7 +43,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Seller Registration",
+      "SELLER_REGISTRATION_HEADER": "Seller Administration",
       "SELLER_DETAILS_LABEL": "Seller Details",
       "EMAIL_LABEL": "Email address",
       "PHONE_NUMBER_LABEL": "Phone number",
@@ -66,7 +66,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Center",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Online Shopping",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Online Shopping | List Items for Sale",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Online Shopping | Order Fulfillment",
       "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Fulfillment method",
@@ -114,6 +115,15 @@
         "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Seller Order Fulfillment",
+      "ORDER_SUBHEADER": "Order Header",
+      "ORDERED_ITEMS_SUBHEADER": "Ordered Items",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "Total price",
+        "TIME_OF_ORDER_LABEL": "Time of order"
+      }
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Buy from Seller",
       "SELLER_DETAILS_LABEL": "Seller Details",
@@ -126,7 +136,6 @@
       "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Seller Contact Details",
       "SELLER_USERNAME_LABEL": "Username",
-      "SELLER_PIONEER_ID_LABEL": "Pioneer ID",
       "SELLER_PHONE_NUMBER_LABEL": "Phone number",
       "SELLER_EMAIL_ADDRESS_LABEL": "Email address",
       "ONLINE_SHOPPING": {
@@ -242,7 +251,11 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pioneer",
+    "PIONEER_ID_LABEL": "Pioneer ID",
     "BUY": "Buy",
+    "RESET": "Reset",
+    "REFUND": "Refund",
+    "FULFILLED": "Fulfilled",
     "NAVIGATE": "Navigate",
     "NO_COMMENT": "No comment provided",
     "SEARCH_CENTER": "Set Search Center",
