@@ -135,25 +135,38 @@ const Map = ({
   // Function to handle marker click
   const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
     if (!mapRef.current) return;
-
+  
     const map = mapRef.current;
     const currentZoom = map.getZoom();
-
-    // Set the view to the seller's coordinates
-    map.setView(sellerCoordinates, currentZoom, { animate: true });
-    // Get the position of the clicked marker
+    const maxZoom = map.getMaxZoom();
+    
+    // Check if zoom & pan have already been applied
+    const hasZoomed = mapRef.current?.getContainer().dataset.zoomApplied === "true";
+    
+    if (hasZoomed) return; // Prevent further zoom & pan on second click
+  
+    // Apply zoom increase only once
+    const targetZoom = Math.min(currentZoom + 3, maxZoom); 
+    const zoomLevel = targetZoom;
+  
+    // Convert marker lat/lng to pixel position
     const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
-     // Get the width and height of the map container
-    const mapSize = map.getSize();
-    const mapWidth = mapSize.x;
-    const mapHeight = mapSize.y;
-    // Calculate the offsets to center the marker in the map view
-    const panOffset = L.point(mapWidth / 2 - markerPoint.x, mapHeight / 2 - markerPoint.y);
-
-    // Pan the map by the calculated offset
-    map.panBy(panOffset, { animate: false }); // Disable animation to make the movement instant
+  
+    // Adjust popup position: move **left (-X) and UP (-Y)**
+    const offsetX = -3;  // Slight left shift
+    const offsetY = 28;  // Moves UP instead of down
+    const panOffset = L.point(offsetX, offsetY);
+  
+    // Calculate new center position based on offset
+    const newCenter = map.containerPointToLatLng(markerPoint.subtract(panOffset));
+  
+    // Apply view changes **only once**
+    map.setView(newCenter, zoomLevel, { animate: false });
+  
+    // Mark zoom as applied (prevents further zooming & movement)
+    mapRef.current.getContainer().dataset.zoomApplied = "true";
   };
-
+  
   useEffect(() => {
     if (mapRef.current) {
       fetchInitialCoordinates();  // Fetch sellers when map is ready
