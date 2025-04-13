@@ -116,6 +116,14 @@ export const menu = {
         title: 'Benin Fon',
         translation: 'Fɔngbè',
         icon: '',
+      },
+      {
+        id: 15,
+        code: 'ak-TW',
+        label: 'AK/TW',
+        title: 'Akan Twi',
+        translation: 'Twi',
+        icon: '',
       }
     ],
   },
