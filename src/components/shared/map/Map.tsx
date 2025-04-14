@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBounds, LatLngTuple } from 'leaflet';
 import _ from 'lodash';
@@ -132,39 +132,44 @@ const Map = ({
     logger.debug('Sellers Array:', { sellers });
   }, [sellers]);
 
-  // Function to handle marker click
-  const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
-    if (!mapRef.current) return;
+  const useMarkerZoomHandler = (mapRef: React.RefObject<L.Map>) => {
+    const lastClickedMarker = useRef<string | null>(null);
   
-    const map = mapRef.current;
-    const currentZoom = map.getZoom();
-    const maxZoom = map.getMaxZoom();
-    
-    // Check if zoom & pan have already been applied
-    const hasZoomed = mapRef.current?.getContainer().dataset.zoomApplied === "true";
-    
-    if (hasZoomed) return; // Prevent further zoom & pan on second click
+    // Function to handle marker click
+    const handleMarkerClick = (sellerCoordinates: LatLngTuple) => {
+      if (!mapRef.current) return;
   
-    // Apply zoom increase only once
-    const targetZoom = Math.min(currentZoom + 3, maxZoom); 
-    const zoomLevel = targetZoom;
+      const map = mapRef.current;
+      const currentZoom = map.getZoom();
+      const maxZoom = map.getMaxZoom();
   
-    // Convert marker lat/lng to pixel position
-    const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
+      const coordKey = sellerCoordinates.join(',');
   
-    // Adjust popup position: move **left (-X) and up (-Y)**
-    const offsetX = -3;  // Slight left shift
-    const offsetY = 28;  // Moves up instead of down
-    const panOffset = L.point(offsetX, offsetY);
+      // Prevent zooming again on the same marker
+      if (lastClickedMarker.current === coordKey) return;
   
-    // Calculate new center position based on offset
-    const newCenter = map.containerPointToLatLng(markerPoint.subtract(panOffset));
+      // Update the last clicked marker
+      lastClickedMarker.current = coordKey;
   
-    // Apply view changes **only once**
-    map.setView(newCenter, zoomLevel, { animate: false });
+      // Calculate target zoom
+      const targetZoom = Math.min(currentZoom + 3, maxZoom);
   
-    // Mark zoom as applied (prevents further zooming & movement)
-    mapRef.current.getContainer().dataset.zoomApplied = "true";
+      // Convert lat/lng to pixel position
+      const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
+  
+      // Offset to move popup up and left
+      const OFFSET_X = -3;
+      const OFFSET_Y = 28;
+      const panOffset = L.point(OFFSET_X, OFFSET_Y);
+  
+      // New center for map
+      const newCenter = map.containerPointToLatLng(markerPoint.subtract(panOffset));
+  
+      // Zoom and pan with animation
+      map.setView(newCenter, targetZoom, { animate: true });
+    };
+  
+    return handleMarkerClick;
   };
   
   useEffect(() => {
@@ -172,6 +177,8 @@ const Map = ({
       fetchInitialCoordinates();  // Fetch sellers when map is ready
     }
   }, [mapRef.current]);
+
+  const handleMarkerClick = useMarkerZoomHandler(mapRef);
 
   const saveMapState = () => {
     try{

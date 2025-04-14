@@ -65,12 +65,12 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
         <Image
           src={imageUrl}
           alt="Seller Image"
-          width={imageUrl === '/images/logo.svg' ? 80 : 150}
-          height={imageUrl === '/images/logo.svg' ? 40 : 70}
+          width={150}
+          height={70}
           style={{
-            objectFit: imageUrl === '/images/logo.svg' ? 'contain' : 'cover',
-            width: imageUrl === '/images/logo.svg' ? '80px' : '100%',
-            height: imageUrl === '/images/logo.svg' ? '40px' : '100%',
+            objectFit: 'contain',
+            width: '100%',
+            height: '100%',
           }}
         />
       </div>
