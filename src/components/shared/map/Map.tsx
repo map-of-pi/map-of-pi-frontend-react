@@ -152,9 +152,9 @@ const Map = ({
     // Convert marker lat/lng to pixel position
     const markerPoint = map.latLngToContainerPoint(sellerCoordinates);
   
-    // Adjust popup position: move **left (-X) and UP (-Y)**
+    // Adjust popup position: move **left (-X) and up (-Y)**
     const offsetX = -3;  // Slight left shift
-    const offsetY = 28;  // Moves UP instead of down
+    const offsetY = 28;  // Moves up instead of down
     const panOffset = L.point(offsetX, offsetY);
   
     // Calculate new center position based on offset

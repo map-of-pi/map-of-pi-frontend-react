@@ -16,12 +16,9 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
       ? seller.image
       : '/images/logo.svg';
 
- const truncateChars = (text: string, maxChars: number): string => {
-        return text.length > maxChars ? text.slice(0, maxChars) + '...' : text;
-      };
-      
-      
-
+  const truncateChars = (text: string, maxChars: number): string => {
+    return text.length > maxChars ? text.slice(0, maxChars) + '...' : text;
+  };
 
   const translateSellerCategory = (category: string): string => {
     switch (category) {
@@ -42,45 +39,41 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
     <div style={{ position: 'relative', zIndex: 20, padding: '10px' }}>
       {/* Seller name and type - Close with a small gap */}
       <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-      <h2
-  style={{
-    fontWeight: 'bold',
-    fontSize: '15px',
-    marginBottom: '2px',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  }}
->
-  {truncateChars(seller.name, 12)} {/* Adjust limit as needed */}
-</h2>
-
-
+        <h2
+          style={{
+            fontWeight: 'bold',
+            fontSize: '15px',
+            marginBottom: '2px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {truncateChars(seller.name, 12)} {/* Adjust limit as needed */}
+        </h2>
 
         {seller.seller_type && (
-         <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '0px', marginBottom: '4px' }}>
-  {translateSellerCategory(seller.seller_type)}
-</p>
+          <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '0px', marginBottom: '4px' }}>
+            {translateSellerCategory(seller.seller_type)}
+          </p>
 
         )}
       </div>
 
       {/* Seller image - Close to seller type */}
       <div style={{ width: '150px', height: '70px', overflow: 'hidden', margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-  <Image
-    src={imageUrl}
-    alt="Seller Image"
-    width={imageUrl === '/images/logo.svg' ? 80 : 150}
-    height={imageUrl === '/images/logo.svg' ? 40 : 70}
-    style={{
-      objectFit: imageUrl === '/images/logo.svg' ? 'contain' : 'cover',
-      width: imageUrl === '/images/logo.svg' ? '80px' : '100%',
-      height: imageUrl === '/images/logo.svg' ? '40px' : '100%',
-    }}
-  />
-</div>
-
-
+        <Image
+          src={imageUrl}
+          alt="Seller Image"
+          width={imageUrl === '/images/logo.svg' ? 80 : 150}
+          height={imageUrl === '/images/logo.svg' ? 40 : 70}
+          style={{
+            objectFit: imageUrl === '/images/logo.svg' ? 'contain' : 'cover',
+            width: imageUrl === '/images/logo.svg' ? '80px' : '100%',
+            height: imageUrl === '/images/logo.svg' ? '40px' : '100%',
+          }}
+        />
+      </div>
 
       {/* Trust-o-meter Label - Close to image */}
       <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '14px', marginBottom: '2px' }}>
