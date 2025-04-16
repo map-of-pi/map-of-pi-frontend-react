@@ -1,4 +1,4 @@
-import { MembershipType } from "./membershipTypes";
+import { MembershipClassType } from "./membershipClassType";
 
 export interface IUser {
   pi_uid: string;
@@ -50,11 +50,14 @@ export interface ISeller {
 }
 
 export interface IMembership {
-  pi_uid: string;
-  membership_class: MembershipType;
+  _id: string;
+  membership_id: string;
+  membership_expiry_date: string | null;
   mappi_balance: number;
-  membership_expiration: Date | null;
-  mappi_used_to_date?: number; // optional, in case not always returned
+  mappi_used_to_date?: number;
+  membership_class: MembershipClassType;
+  user?: string;
+  createdAt?: string;
 }
 
 export interface IReviewFeedback {
