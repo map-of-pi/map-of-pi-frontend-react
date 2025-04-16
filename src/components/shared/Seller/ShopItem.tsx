@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Button } from "../Forms/Buttons/Buttons";
 import { TextArea, Input, FileInput, Select } from "../Forms/Inputs/Inputs";
 import { ConfirmDialogX, Notification } from "../confirm";
-import { ISeller, SellerItem, StockLevelType } from "@/constants/types";
+import { ISeller, PickedItems, SellerItem, StockLevelType } from "@/constants/types";
 import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/services/sellerApi";
 import removeUrls from "@/utils/sanitize";
 import { AppContext } from "../../../../context/AppContextProvider";
@@ -81,7 +81,7 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
     name: "",
     _id: "",
     duration: 1,
-    price: {$numberDecimal: 0.01},
+    price: {$numberDecimal: '0.01'},
     description: "",
     image: "",
     stock_level: StockLevelType.available_1,
@@ -190,7 +190,7 @@ export const ShopItem: React.FC<{
     name: item.name || '',
     description: item.description || '',
     duration: item.duration || 1,
-    price: item.price || 0.01,
+    price: { $numberDecimal: item.price?.$numberDecimal?.toString()},
     image: item.image || '',
     stock_level: item.stock_level || translatedStockLevelOptions[0].name,
     expired_by: item.expired_by, 
@@ -202,8 +202,34 @@ export const ShopItem: React.FC<{
   );
   const [showPopup, setShowPopup] = useState(false);
   const [showDialog, setShowDialog] = useState<boolean>(false);
+  const [dialogueMessage, setDialogueMessage] = useState<string>('');
   const [file, setFile] = useState<File | null>(null);
   const { reload, setReload, showAlert } = useContext(AppContext);
+  const [sellingStatus, setSellingStatus] = useState('');
+  const [formattedDate, setFormattedDate] = useState('');
+
+  useEffect(() => {
+    if (item?.expired_by) {
+      const expiredDate = new Date(item.expired_by);
+      const isActive = expiredDate > new Date();
+      setSellingStatus(
+        isActive 
+          ? t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') 
+          : t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.EXPIRED')
+      );
+
+      setFormattedDate(
+        new Intl.DateTimeFormat(locale || 'en-US', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true,
+        }).format(expiredDate)
+      );
+    }
+  }, [item]); // ✅ Runs when `item` changes
 
   // Handle image upload
   const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -229,12 +255,13 @@ export const ShopItem: React.FC<{
     // handle such scenarios where the event might not have the typical e.target structure i.e., PhoneInput.
     const name = 'target' in e ? e.target.name : e.name;
     const value = 'target' in e ? e.target.value : e.value;
-  
     // Create a new object with the updated form data
     const updatedFormData = {
       ...formData,
       [name]: value,
     };
+    if (name==='price'){
+    }
     setFormData(updatedFormData);
   
     // enable or disable add item button based on form inputs
@@ -257,40 +284,67 @@ export const ShopItem: React.FC<{
   };
 
   const handleSave = async () => {
+    const duration = Number(formData.duration);
+    const today = new Date();
+
+    if (item.created_at) {
+      const createdAt = new Date(item.created_at);
+        
+      // Calculate spent weeks since created_at
+      const spentWeeks = Math.floor((today.getTime() - createdAt.getTime()) / (7 * 24 * 60 * 60 * 1000));
+
+        // Ensure the new duration is not less than already spent weeks
+      if (duration < spentWeeks) {
+        setDialogueMessage(`Selling duration cannot be reduced below the ${spentWeeks} weeks already spent`);
+        setShowDialog(true);
+        return null;
+      }
+    }
+    // console.log("item price: ", formData.price.$numberDecimal)
+
     const formDataToSend = new FormData();
-    
     // Prepare form data
     formDataToSend.append('name', removeUrls(formData.name || '').trim());
-    formDataToSend.append('_id', formData._id || ''); // Ensure `_id` is empty if not provided
+    formDataToSend.append('_id', formData._id || '');
     formDataToSend.append('description', removeUrls(formData.description || '').trim());
-    formDataToSend.append('duration', formData.duration?.toString() || '1'); // Default to '1' week if not provided
-    formDataToSend.append('seller_id', formData.seller_id || ''); // Ensure `seller_id` is added at BE
-    formDataToSend.append('stock_level', formData.stock_level || '1 available'); // Default stock level
-    formDataToSend.append('price', formData.price?.$numberDecimal?.toString() || '0.01'); // Ensure default price is valid
-  
+    formDataToSend.append('duration', formData.duration?.toString() || '1');
+    formDataToSend.append('seller_id', formData.seller_id || '');
+    formDataToSend.append('stock_level', formData.stock_level || '1 available');
+    const price = (formData.price as unknown as string) || '0.01';
+    formDataToSend.append('price', parseFloat(price).toFixed(2));
+
+
+    // for (let [key, value] of formDataToSend.entries()) {
+    //   console.log(`${key}: ${value}`);
+    // }
+
     // Add file if provided
     if (file) {
-      formDataToSend.append('image', file);
+        formDataToSend.append('image', file);
     }
-  
+
     try {
-      logger.info('Form data being sent:', Object.fromEntries(formDataToSend.entries()));
-      
-      // Send data to backend
-      const data = await addOrUpdateSellerItem(formDataToSend);
-      
-      if (data) {
-        logger.info('Saved seller item:', data);
-        setReload(true);
-        setShowDialog(true);
-        setIsAddItemEnabled(false);
-        showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_SAVED'));
-      }
+        logger.info('Form data being sent:', Object.fromEntries(formDataToSend.entries()));
+
+        // Send data to backend
+        const data = await addOrUpdateSellerItem(formDataToSend);
+
+        if (data) {
+            logger.info('Saved seller item:', data);
+            setReload(true);
+            setDialogueMessage(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT', {
+                mappi_count: '99'
+            }));
+            setShowDialog(true);
+            setIsAddItemEnabled(false);
+            showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_SAVED'));
+        }
     } catch (error) {
-      logger.error('Error saving seller item:', error);
-      showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_SAVE'));
+        logger.error('Error saving seller item:', error);
+        showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_SAVE'));
     }
-  };
+};
+
   
   const handleDelete = async (item_id: string)=> {
     if (!item_id || item_id ==='') {
@@ -318,9 +372,7 @@ export const ShopItem: React.FC<{
         className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 cursor-pointer 
           ${isActive ? '' : 'opacity-50 pointer-events-none'}`}
       >
-        <Notification message={t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT', { 
-          mappi_count: '99' 
-        })} showDialog={showDialog} setShowDialog={setShowDialog} />
+        <Notification message={dialogueMessage} showDialog={showDialog} setShowDialog={setShowDialog} />
         <div className="p-3">
           <div className="flex gap-x-4">
             <div className="flex-auto w-64">
@@ -348,7 +400,7 @@ export const ShopItem: React.FC<{
               </div>
             </div>
           </div>
-          <div className="flex gap-x-4 items-center">
+          <div className="flex gap-x-4">
             <div className="flex-auto w-64">
               <TextArea
                 label={t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
@@ -433,31 +485,14 @@ export const ShopItem: React.FC<{
             />
           </div>
           <div className="mt-3">
-            {formData?.expired_by && (() => {
-              const expiredDate = new Date(formData.expired_by);
-              const isActive = expiredDate > new Date();
-              const sellingStatus = isActive 
-                ? t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.ACTIVE') 
-                : t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_STATUS_OPTIONS.EXPIRED');
-
-              const formattedDate = new Intl.DateTimeFormat(locale || 'en-US', {
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true,
-              }).format(expiredDate);
-
-              return (
-                <label className="text-[14px] text-[#333333]">
-                  <span className="fw-bold text-lg">{sellingStatus}: </span>
-                  {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
-                    expired_by_date: formattedDate,
-                  })}
-                </label>
-              );
-            })()}
+            {item?.expired_by && (
+              <label className="text-[14px] text-[#333333]">
+                <span className="fw-bold text-lg">{sellingStatus}: </span>
+                {t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.SELLING_EXPIRATION_DATE', {
+                  expired_by_date: formattedDate,
+                })}
+              </label>
+            )}
           </div>
         </div>
       </div>
@@ -472,28 +507,61 @@ export const ShopItem: React.FC<{
   );
 };
 
-
 export const ListItem: React.FC<{
   item: SellerItem;
-  pickedItems:{ id: string; quantity: number }[];
-  setPickedItems: React.Dispatch<SetStateAction<{ id: string; quantity: number }[]>>;
+  pickedItems: PickedItems[],
+  setPickedItems:React.Dispatch<SetStateAction<PickedItems[]>>
+  totalAmount: number,
+  setTotalAmount:React.Dispatch<SetStateAction<number>>
   refCallback: (node: HTMLElement | null) => void;
-}> = ({ item, pickedItems, setPickedItems, refCallback }) => {
+}> = ({ item, refCallback, setPickedItems, pickedItems=[], totalAmount, setTotalAmount }) => {
   const t = useTranslations();
 
-  const [quantity, setQuantity] = useState<number>(1);
-  
-  const handlePicked = (itemId: string): void => {
+  const translatedStockLevelOptions = [
+    { value: '1 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_1') },
+    { value: '2 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_2') },
+    { value: '3 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_3') },
+    { value: 'Many available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MANY') },
+    { value: 'Made to order', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MADE_TO_ORDER') },
+    { value: 'Ongoing service', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.ONGOING_SERVICE') },
+    { value: 'Sold', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.SOLD') },
+  ];
+
+  const [formData, setFormData] = useState<SellerItem>({
+    seller_id: item.seller_id || '',
+    name: item.name || '',
+    description: item.description || '',
+    duration: item.duration || 1,
+    price: item.price || 0.01,
+    image: item.image || '',
+    stock_level: item.stock_level || translatedStockLevelOptions[0].name,
+    expired_by: item.expired_by,
+    _id: item._id || '',
+  });
+  const [quantity, setQuantity] = useState<number>(1)
+
+  const handlePicked = (itemId: string, price: number): void => {
     setPickedItems((prev) => {
-      const existingItem = prev.find((picked) => picked.id === itemId);
+      const existingItem = prev.find((item) => item.itemId === itemId);
+      let newTotalAmount = totalAmount;
+  
       if (existingItem) {
-        // If already picked, remove the item
-        return prev.filter((picked) => picked.id !== itemId);
+        // If item exists, remove it
+        newTotalAmount -= price * existingItem.quantity;
+        console.log('minus unpicked amount ', newTotalAmount);
+        setTotalAmount(newTotalAmount);
+        return prev.filter((item) => item.itemId !== itemId);
+      } else {
+        // If item doesn't exist, add it
+        const newItem = { itemId, quantity };
+        newTotalAmount += price * quantity;
+        console.log('plus picked amount ', newTotalAmount);
+        setTotalAmount(newTotalAmount);
+        return [...prev, newItem];
       }
-      // Otherwise, add it with the current quantity
-      return [...prev, { id: itemId, quantity }];
     });
   };
+  
 
   const handleIncrement = () => {
     setQuantity((prev) => prev + 1);
@@ -503,7 +571,7 @@ export const ListItem: React.FC<{
     setQuantity((prev) => Math.max(1, prev - 1));
   };
 
-  const isPicked = pickedItems.some((picked) => picked.id === item._id);
+  const isPicked = pickedItems.find((item)=>item.itemId===formData._id);
 
   return (
     <div
@@ -539,7 +607,7 @@ export const ListItem: React.FC<{
           </div>
         </div>
 
-        <div className="flex gap-x-4 items-center">
+        <div className="flex gap-x-4">
           <div className="flex-auto w-64">
             <TextArea
               label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.DESCRIPTION_LABEL') + ':'}
@@ -573,7 +641,7 @@ export const ListItem: React.FC<{
                 quantity <= 1 || isPicked ? `bg-[grey]` : `bg-primary`
               }`}
               onClick={handleDecrement}
-              disabled={isPicked}
+              disabled={isPicked? true : false }
             >
               -
             </button>
@@ -582,14 +650,14 @@ export const ListItem: React.FC<{
               type="number"
               value={quantity}
               className="p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 text-center focus:border-[#1d724b] border-[2px] max-w-[65px]"
-              disabled={isPicked}
+              disabled={isPicked? true : false}
             />
             <button
               className={`text-[#ffc153] text-3xl font-bold rounded-full w-10 h-10 flex items-center justify-center ${
                 isPicked ? `bg-[grey]` : `bg-primary`
               }`}
               onClick={handleIncrement}
-              disabled={isPicked} 
+              disabled={isPicked? true : false} 
             >
               +
             </button>
@@ -603,7 +671,7 @@ export const ListItem: React.FC<{
               color: '#ffc153',
               width: '100%',
             }}
-            onClick={() => handlePicked(item._id)}
+            onClick={() => handlePicked(formData._id, parseFloat(formData.price.$numberDecimal))}
           />
         </div>
       </div>

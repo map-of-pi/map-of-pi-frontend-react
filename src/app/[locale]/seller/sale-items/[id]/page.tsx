@@ -4,14 +4,14 @@ import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext, useRef, ChangeEvent } from 'react';
 
 import ConfirmDialog from '@/components/shared/confirm';
 import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
-import { ISeller, IUserSettings, IUser, SellerItem } from '@/constants/types';
+import { ISeller, IUserSettings, IUser, SellerItem, PaymentDataType, PickedItems, FulfillmentType } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 import { fetchToggle } from '@/services/toggleApi';
@@ -19,8 +19,9 @@ import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import { ListItem, ShopItem } from '@/components/shared/Seller/ShopItem';
+import { ListItem } from '@/components/shared/Seller/ShopItem';
 import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
+import { payWithPi } from '@/config/payment';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -34,10 +35,12 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [sellerSettings, setSellerSettings] = useState<IUserSettings | null>(null);
   const [sellerInfo, setSellerInfo] = useState<IUser | null>(null);
   const [dbSellerItems, setDbSellerItems] = useState<SellerItem[] | null>(null)
+  const [totalAmount, setTotalAmount] = useState<number>(0.00);
+  const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { currentUser, autoLoginUser } = useContext(AppContext);
-  const [pickedItems, setPickedItems] = useState<{ id: string; quantity: number }[]>([]);
+  const [pickedItems, setPickedItems] = useState<{ itemId: string; quantity: number }[]>([]);
   const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
 
   const observer = useRef<IntersectionObserver | null>(null);
@@ -47,7 +50,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
       observer.current.observe(node);
     }
   };
-
+  
   useEffect(() => {
     checkAndAutoLoginUser(currentUser, autoLoginUser);
     
@@ -121,7 +124,25 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
       getSellerItems(sellerShopInfo.seller_id);
     }
   }, [sellerShopInfo]); 
-  
+
+  const checkoutOrder = async () => {
+    if(!currentUser?.pi_uid) return setError('user not login for payment');
+    const paymentData: PaymentDataType = {
+      amount: totalAmount,
+      memo: 'This is another Test Payment',
+      uid: currentUser.pi_uid,
+      metadata: { 
+        buyer: currentUser.pi_uid, 
+        seller: sellerId,
+        items: pickedItems,
+        amount: totalAmount,
+        fulfillment_method: sellerShopInfo?.fulfillment_method,
+        seller_fulfillment_description: sellerShopInfo?.fulfillment_description,
+        buyer_fulfillment_description: buyerDescription,
+      },
+    };
+    await payWithPi(paymentData)
+  }  
 
   const translateSellerCategory = (category: string): string => {
     switch (category) {
@@ -138,13 +159,13 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
 
   const translatedFulfillmentMethod = [
     {
-      value: 'pickup',
+      value: FulfillmentType.CollectionByBuyer,
       name: t(
         'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
       ),
     },
     {
-      value: 'delivery',
+      value: FulfillmentType.DeliveredToBuyer,
       name: t(
         'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
       ),
@@ -223,7 +244,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         {/* Online Shopping */}
         {isOnlineShoppingEnabled && (
           <ToggleCollapse
-            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_LABEL')}
+            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
             open={false}>
             <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
               {dbSellerItems && dbSellerItems.length > 0 && 
@@ -234,6 +255,8 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
                     pickedItems={pickedItems}
                     setPickedItems={setPickedItems}
                     refCallback={handleShopItemRef} // Attach observer
+                    totalAmount={totalAmount}
+                    setTotalAmount={setTotalAmount}
                   /> 
                 ))            
               }
@@ -256,18 +279,21 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
               <h2 className={SUBHEADER}>{t('Buyer Fulfillment Details')}</h2>
               <TextArea
                 name="buying_details"
-                type="text"
+                value={buyerDescription}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setBuyerDescription(e.target.value)}
               />
             </div>
-            <div className="mb-4 mt-3 ml-auto w-min">
+            <div className="mb-4 mt-3 ml-auto">
               <Button
-                label={t('Checkout')}
-                disabled={pickedItems.length === 0}
+                label={t('Checkout ') + `(${totalAmount.toString()} Pi)`}
+                disabled={!(pickedItems.length>0)}
                 styles={{
                   color: '#ffc153',
                   height: '40px',
                   padding: '15px 20px',
+                  marginLeft: 'auto'
                 }}
+                onClick={()=>checkoutOrder()}
               />
             </div>
           </ToggleCollapse>

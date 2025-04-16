@@ -43,7 +43,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Registro de Vendedor",
+      "SELLER_REGISTRATION_HEADER": "Administración del Vendedor",
       "SELLER_DETAILS_LABEL": "Detalles del vendedor",
       "EMAIL_LABEL": "Dirección de correo electrónico",
       "PHONE_NUMBER_LABEL": "Número de teléfono",
@@ -66,6 +66,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mi marcador en el mapa muestra dónde estoy vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Compras en Línea | Lista de Artículos en Venta",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Compras en Línea | Cumplimiento de Pedidos",
       "SELLER_ONLINE_SHOPPING_LABEL": "Compras en línea",
       "MAPPI_ALLOWANCE_LABEL": "Asignación de Mappi restante",
       "FULFILLMENT_METHOD_TYPE": {
@@ -114,6 +116,15 @@
         "SELLING_EXPIRATION_DATE": "Vender antes de {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Cumplimiento de pedido del vendedor",
+      "ORDER_SUBHEADER": "Encabezado del pedido",
+      "ORDERED_ITEMS_SUBHEADER": "Artículos pedidos",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "TOTAL_PRICE_LABEL": "Precio total",
+        "TIME_OF_ORDER_LABEL": "Hora del pedido"
+      }
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Comprar del Vendedor",
       "SELLER_DETAILS_LABEL": "Detalles del Vendedor",
@@ -125,7 +136,6 @@
       "REVIEWS_SCORE_MESSAGE": "Puntuación de Reseñas: {seller_review_rating} de 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Detalles de Contacto del Vendedor",
       "SELLER_USERNAME_LABEL": "Nombre de usuario",
-      "SELLER_PIONEER_ID_LABEL": "ID de Pionero",
       "SELLER_PHONE_NUMBER_LABEL": "Número de teléfono",
       "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico",
       "ONLINE_SHOPPING": {
@@ -241,7 +251,11 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pionero",
+    "PIONEER_ID_LABEL": "ID de Pionero",
     "BUY": "Comprar",
+    "RESET": "Restablecer",
+    "REFUND": "Reembolso",
+    "FULFILLED": "Cumplido",
     "NAVIGATE": "Navegar",
     "NO_COMMENT": "No se proporcionó comentario",
     "SEARCH_CENTER": "Establecer Centro de Búsqueda",
