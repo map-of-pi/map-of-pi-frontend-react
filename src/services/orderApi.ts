@@ -26,7 +26,7 @@ export const createOrUpdateOrder = async (orderData: any) => {
 };
 
 // Fetch all order list associated with the seller
-export const fetchOrderList = async (sellerId: string) => {
+export const fetchSellerOrder = async (sellerId: string) => {
   try {
     logger.info(`Fetching seller order list associated with sellerID: ${sellerId}`);
     const response = await axiosClient.get(`/orders/seller-order`);
@@ -42,6 +42,26 @@ export const fetchOrderList = async (sellerId: string) => {
   } catch (error) {
     logger.error('Fetch seller orders encountered an error:', error);
     throw new Error('Failed to fetch seller orders. Please try again later.');
+  }
+};
+
+// Fetch all orders associated with the current buyer
+export const fetchBuyerOrder = async (buyerId: string) => {
+  try {
+    logger.info(`Fetching buyer order list associated with userID: ${buyerId}`);
+    const response = await axiosClient.get(`/orders/review/buyer-order`);
+    if (response.status === 200) {
+      logger.info(`Fetch buyer orders successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Fetch buyer orders failed with Status ${response.status}`);
+      return null;
+    }
+  } catch (error) {
+    logger.error('Fetch buyer orders encountered an error:', error);
+    throw new Error('Failed to fetch buyer orders. Please try again later.');
   }
 };
 

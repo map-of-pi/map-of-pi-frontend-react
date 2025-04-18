@@ -3,23 +3,22 @@ import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 import { Input } from "../Forms/Inputs/Inputs";
 import logger from '../../../../logger.config.mjs';
-import { fetchOrderList } from "@/services/orderApi";
-import ToggleCollapse from "./ToggleCollapse";
+import { fetchSellerOrder } from "@/services/orderApi";
 import Link from "next/link";
 import { Button } from "../Forms/Buttons/Buttons";
 
 export const ListOrder: React.FC<{
-  seller_id: string;
-  seller_name?: string;
-  seller_type?: string
-}> = ({ seller_id, seller_name="", seller_type="" }) => {
+  user_id: string;
+  user_name?: string;
+  seller_type?: string;
+}> = ({ user_id, user_name="", seller_type="" }) => {
   const locale = useLocale();
   const [orderList, setOrderList] = useState<PartialOrderType[] >([]);
 
    useEffect(() => {
     const getOrderList= async (id: string) => {
       try {
-        const data = await fetchOrderList(id);
+        const data = await fetchSellerOrder(id);
         if (data) {
           setOrderList(data);
         } else {
@@ -30,15 +29,13 @@ export const ListOrder: React.FC<{
       }
     };
     
-    getOrderList(seller_id);
-  }, [seller_id]); 
+    getOrderList(user_id);
+  }, [user_id]); 
 
   const t = useTranslations();
 
   return (
-    <ToggleCollapse
-      header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL')}
-      open={false}>
+    <div>
         {orderList && orderList.length>0 && orderList.map((item, index)=>(
           <div
             data-id={item._id}
@@ -73,6 +70,7 @@ export const ListOrder: React.FC<{
               </div>
               <div>
               </div>
+              <label className="block text-[17px] text-[#333333]">Time of order:</label>
               <div className="flex items-center gap-4 w-full mt-1">
                 <div
                 className={`p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] w-full`}
@@ -90,7 +88,11 @@ export const ListOrder: React.FC<{
                     </label>
                   )}
                 </div>
-                <Link href={`/${locale}/seller/order-fulfillment/${item._id}?seller_name=${seller_name}&seller_type=${seller_type}`}>       
+                <Link href={seller_type ? 
+                `/${locale}/seller/order-fulfillment/${item._id}?seller_name=${user_name}&seller_type=${seller_type}` 
+                  :
+                  `/${locale}/user/order-item/${item._id}?seller_name=${user_name}`}
+                >       
                 <Button
                   label={"Fulfill"}
                   disabled={false} 
@@ -108,6 +110,6 @@ export const ListOrder: React.FC<{
             </div>
           </div>
         ))}      
-    </ToggleCollapse>
+    </div>
   );
 };

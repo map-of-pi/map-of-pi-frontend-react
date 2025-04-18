@@ -639,9 +639,11 @@ const SellerRegistrationForm = () => {
           )}
 
           {/*Order Fulfillment | Online Shopping */}
-          <div>
-            {dbSeller && <ListOrder seller_id={dbSeller.seller_id} seller_name={dbSeller.name}  seller_type={dbSeller.seller_type}/>}
-          </div>
+          <ToggleCollapse
+                header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL')}
+                open={false}>
+            {dbSeller && <ListOrder user_id={dbSeller.seller_id} user_name={dbSeller.name}  seller_type={dbSeller.seller_type}/>}
+          </ToggleCollapse>
           
         </div>
         <ConfirmDialog
