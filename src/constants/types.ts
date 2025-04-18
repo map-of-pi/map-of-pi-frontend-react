@@ -127,7 +127,12 @@ export interface PickedItems {
   quantity: number,
 }
 
-type PaymentMetadataType = {
+export enum PaymentType {
+  Membership = 'Membership', 
+  BuyerCheckout = 'Buyer Checkout'
+}
+
+export type OrderPaymentMetadataType = {
   items: PickedItems[],
   buyer: string,
   seller: string,
@@ -136,10 +141,18 @@ type PaymentMetadataType = {
   buyer_fulfillment_description: string
 }
 
+type MembershipPaymentMetadataType = {
+  membership_id: string
+}
+
 export type PaymentDataType = {
   amount: number;
   memo: string;
-  metadata: PaymentMetadataType;
+  metadata: {
+    payment_type: PaymentType,
+    OrderPayment?: OrderPaymentMetadataType,
+    MembershipPayment?: MembershipPaymentMetadataType
+  }
 }
 
 export interface PaymentDTO {
