@@ -31,13 +31,9 @@
     },
     "SEARCH_FILTERS_SUBHEADER": "Filtros de búsqueda",
     "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "Incluir vendedores activos",
-      "INCLUDE_INACTIVE_SELLERS": "Incluir vendedores inactivos",
-      "INCLUDE_TEST_SELLERS": "Incluir vendedores de prueba",
-      "INCLUDE_TRUST_LEVEL_100": "Incluir nivel de confianza 100",
-      "INCLUDE_TRUST_LEVEL_80": "Incluir nivel de confianza 80",
-      "INCLUDE_TRUST_LEVEL_50": "Incluir nivel de confianza 50",
-      "INCLUDE_TRUST_LEVEL_0": "Incluir nivel de confianza 0"
+      "INCLUDE_ACTIVE_SELLERS": "Vendedores activos",
+      "INCLUDE_INACTIVE_SELLERS": "Vendedores inactivos",
+      "INCLUDE_TEST_SELLERS": "Vendedores de prueba"
     },
     "CONTACT_MAP_OF_PI": "Contactar a Map of Pi",
     "VALIDATION": {

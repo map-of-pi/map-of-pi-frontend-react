@@ -31,13 +31,9 @@
     },
     "SEARCH_FILTERS_SUBHEADER": "Farantan Bincike",
     "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "Hada da masu sayarwa masu aiki",
-      "INCLUDE_INACTIVE_SELLERS": "Hada da masu sayarwa marasa aiki",
-      "INCLUDE_TEST_SELLERS": "Hada da masu sayarwa na gwaji",
-      "INCLUDE_TRUST_LEVEL_100": "Hada da matakin amana 100",
-      "INCLUDE_TRUST_LEVEL_80": "Hada da matakin amana 80",
-      "INCLUDE_TRUST_LEVEL_50": "Hada da matakin amana 50",
-      "INCLUDE_TRUST_LEVEL_0": "Hada da matakin amana 0"
+      "INCLUDE_ACTIVE_SELLERS": "Yan kasuwa masu aiki",
+      "INCLUDE_INACTIVE_SELLERS": "Yan kasuwa marasa aiki",
+      "INCLUDE_TEST_SELLERS": "Yan kasuwa na gwaji"
     },
     "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
     "VALIDATION": {

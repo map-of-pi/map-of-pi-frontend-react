@@ -31,13 +31,9 @@
     },
     "SEARCH_FILTERS_SUBHEADER": "Agbalẽŋlɔwo ƒe Filterwo",
     "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "Le ame aɖe si dɔ agboɖa le ŋkeke me",
-      "INCLUDE_INACTIVE_SELLERS": "Le ame aɖe si dɔ agboɖa o le ŋkeke me",
-      "INCLUDE_TEST_SELLERS": "Le ame aɖe si dɔ agboɖa dɔɖa",
-      "INCLUDE_TRUST_LEVEL_100": "Le ame aɖe si nà agbo 100%",
-      "INCLUDE_TRUST_LEVEL_80": "Le ame aɖe si nà agbo 80%",
-      "INCLUDE_TRUST_LEVEL_50": "Le ame aɖe si nà agbo 50%",
-      "INCLUDE_TRUST_LEVEL_0": "Le ame aɖe si nà agbo 0%"
+      "INCLUDE_ACTIVE_SELLERS": "Tɔxɛviawo siwo le dɔwɔme",
+      "INCLUDE_INACTIVE_SELLERS": "Tɔxɛviawo siwo mele dɔwɔme o",
+      "INCLUDE_TEST_SELLERS": "Tɔxɛviawo ƒe nɔnɔme ɖe sia ɖe"
     },
     "CONTACT_MAP_OF_PI": "Kadodo ƒe Map of Pi",
     "VALIDATION": {

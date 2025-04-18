@@ -31,13 +31,9 @@
     },
     "SEARCH_FILTERS_SUBHEADER": "فلاتر البحث",
     "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "تضمين البائعين النشطين",
-      "INCLUDE_INACTIVE_SELLERS": "تضمين البائعين غير النشطين",
-      "INCLUDE_TEST_SELLERS": "تضمين البائعين التجريبيين",
-      "INCLUDE_TRUST_LEVEL_100": "تضمين مستوى الثقة 100",
-      "INCLUDE_TRUST_LEVEL_80": "تضمين مستوى الثقة 80",
-      "INCLUDE_TRUST_LEVEL_50": "تضمين مستوى الثقة 50",
-      "INCLUDE_TRUST_LEVEL_0": "تضمين مستوى الثقة 0"
+      "INCLUDE_ACTIVE_SELLERS": "البائعون النشطون",
+      "INCLUDE_INACTIVE_SELLERS": "البائعون غير النشطين",
+      "INCLUDE_TEST_SELLERS": "البائعون التجريبيون"
     },
     "CONTACT_MAP_OF_PI": "اتصل بـ Map of Pi",
     "VALIDATION": {
