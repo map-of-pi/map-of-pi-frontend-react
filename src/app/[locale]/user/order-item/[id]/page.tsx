@@ -18,11 +18,11 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
   const t = useTranslations();
 
   const orderId = params.id;
-  const sellerName = searchParams.user_name;
+  const buyerName = searchParams.user_name;
 
   const [currentOrder, setCurrentOrder] = useState<PartialOrderType | null>(null);
   const [orderItems, setOrderItems] = useState<OrderItemType[]>([]);
-  const [buyerName, setBuyerName] = useState<string>('');
+  const [sellerName, setSellerName] = useState<string>('');
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -34,11 +34,11 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
         if (data) {
           setCurrentOrder(data.order);
           setOrderItems(data.orderItems);
-          setBuyerName(data.pi_username);
+          setSellerName(data.order.seller_id.name);
         } else {
           setCurrentOrder(null);
           setOrderItems([]);
-          setBuyerName('');
+          setSellerName('');
         }
       } catch (error) {
         logger.error('Error fetching seller items data:', error);
@@ -49,25 +49,6 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
     
     getOrder(orderId);
   }, [orderId]);
-
-    const translateSellerCategory = (category: string): string => {
-      switch (category) {
-        case 'activeSeller':
-          return t(
-            'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER',
-          );
-        case 'inactiveSeller':
-          return t(
-            'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER',
-          );
-        case 'testSeller':
-          return t(
-            'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER',
-          );
-        default:
-          return '';
-      }
-    };
   
     const translatedFulfillmentMethod = [
       {
@@ -96,7 +77,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
     <div className="w-full md:w-[500px] md:mx-auto p-4">
       <div className="text-center mb-5">
         <h3 className="text-gray-400 text-sm">
-          {sellerName}
+          {buyerName}
         </h3>
         <h1 className={HEADER}>
           {"Buyer Order Details"}
@@ -115,7 +96,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
                 label={'Seller:'}
                 name="name"
                 type="text"
-                value={buyerName}
+                value={sellerName}
                 disabled={true}
               />
             </div>

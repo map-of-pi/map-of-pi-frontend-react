@@ -176,7 +176,9 @@ export interface OrderType {
   buyer_id: {
     pi_username: string
   };
-  seller_id: string;
+  seller_id: {
+    name: string
+  };
   payment_id: string;
   total_amount: {$numberDecimal: number};
   status: OrderStatusType;
@@ -190,7 +192,7 @@ export interface OrderType {
 }
 
 
-export interface PartialOrderType extends Pick<OrderType, '_id' | 'buyer_id' | 'total_amount' | 'createdAt' |  'status' | 'fulfillment_method' | 'seller_fulfillment_description' | 'buyer_fulfillment_description' > {};
+export interface PartialOrderType extends Pick<OrderType, '_id' | 'buyer_id' | 'seller_id'| 'total_amount' | 'createdAt' |  'status' | 'fulfillment_method' | 'seller_fulfillment_description' | 'buyer_fulfillment_description' > {};
 
 export enum OrderItemStatus { 
   Refunded = 'refunded',

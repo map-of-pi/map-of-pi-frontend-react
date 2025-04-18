@@ -1,55 +1,42 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import Image from 'next/image';
 import Link from 'next/link';
-
-import React, { useEffect, useState, useContext, useRef } from 'react';
-
+import React, { useEffect, useState, useContext, } from 'react';
 import Skeleton from '@/components/skeleton/skeleton';
-import { ISeller, IUserSettings, IUser, SellerItem, PartialOrderType, OrderStatusType } from '@/constants/types';
-import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
-import { fetchSingleUserSettings } from '@/services/userSettingsApi';
-import { fetchToggle } from '@/services/toggleApi';
-import { checkAndAutoLoginUser } from '@/utils/auth';
-
+import { PartialOrderType, OrderStatusType } from '@/constants/types';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
-import { ListOrder } from '@/components/shared/Seller/OrderList';
-import { fetchOrderList } from '@/services/orderApi';
+import { fetchBuyerOrder } from '@/services/orderApi';
 import { Input } from '@/components/shared/Forms/Inputs/Inputs';
-import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 
-export default function OrderReviewPage({ params }: { params: { id: string } }) {
-  const SUBHEADER = "font-bold mb-2";
+export default function OrderReviewPage() {
   const locale = useLocale();
+  const HEADER = 'font-bold text-lg md:text-2xl';
 
   const [loading, setLoading] = useState<boolean>(true);
-  const { currentUser } = useContext(AppContext);
-
-
-  const HEADER = 'font-bold text-lg md:text-2xl';
   const [orderList, setOrderList] = useState<PartialOrderType[] >([]);
+  const { currentUser } = useContext(AppContext);
   
-     useEffect(() => {
-      const getOrderList= async (id: string) => {
-        setLoading(true);
-        try {
-          const data = await fetchOrderList(id);
-          if (data) {
-            setOrderList(data);
-          } else {
-            setOrderList([]);
-          }
-        } catch (error) {
-          logger.error('Error fetching seller items data:', error);
-        }finally {
-          setLoading(false);
+  useEffect(() => {
+    const getOrderList= async (id: string) => {
+      setLoading(true);
+      try {
+        const data = await fetchBuyerOrder(id);
+        if (data) {
+          setOrderList(data);
+        } else {
+          setOrderList([]);
         }
-      };
-      
-      getOrderList(currentUser?.pi_uid as string);
-    }, [currentUser?.pi_uid]); 
+      } catch (error) {
+        logger.error('Error fetching buyer data:', error);
+      }finally {
+        setLoading(false);
+      }
+    };
+    
+    getOrderList(currentUser?.pi_uid as string);
+  }, [currentUser?.pi_uid]); 
 
   // loading condition
   if (loading) {
@@ -87,7 +74,7 @@ export default function OrderReviewPage({ params }: { params: { id: string } }) 
                       label={'Seller:'}
                       name="name"
                       type="text"
-                      value={item.buyer_id.pi_username}
+                      value={item.seller_id.name}
                       disabled={true}
                     />
                   </div>
