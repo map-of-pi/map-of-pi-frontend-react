@@ -196,7 +196,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
               alt="seller logo" 
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ objectFit: 'cover', maxHeight: '200px', maxWidth: '100%' }}
+              style={{ objectFit: 'contain', maxHeight: '200px', maxWidth: '100%' }}
             />
           </div>
           <div className="my-auto">
