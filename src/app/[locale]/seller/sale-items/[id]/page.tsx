@@ -11,7 +11,7 @@ import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
-import { ISeller, IUserSettings, IUser, SellerItem, PaymentDataType, PickedItems, FulfillmentType } from '@/constants/types';
+import { ISeller, IUserSettings, IUser, SellerItem, PaymentDataType, PickedItems, FulfillmentType, PaymentType } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 import { fetchToggle } from '@/services/toggleApi';
@@ -131,13 +131,16 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
       amount: totalAmount,
       memo: 'This is another Test Payment',
       metadata: { 
-        buyer: currentUser.pi_uid, 
-        seller: sellerId,
-        items: pickedItems,
-        fulfillment_method: sellerShopInfo?.fulfillment_method,
-        seller_fulfillment_description: sellerShopInfo?.fulfillment_description,
-        buyer_fulfillment_description: buyerDescription,
-      },
+        payment_type: PaymentType.BuyerCheckout,
+        OrderPayment: {
+          items: pickedItems,
+          buyer: currentUser.pi_uid,
+          seller: sellerId,
+          fulfillment_method: sellerShopInfo?.fulfillment_method,
+          seller_fulfillment_description: sellerShopInfo?.fulfillment_description,
+          buyer_fulfillment_description: buyerDescription,
+        }
+      },        
     };
     await payWithPi(paymentData)
     setPickedItems([]);
