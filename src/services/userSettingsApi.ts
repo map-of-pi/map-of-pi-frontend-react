@@ -2,15 +2,35 @@ import axiosClient from "@/config/client";
 import { getMultipartFormDataHeaders } from "@/utils/api";
 import logger from '../../logger.config.mjs';
 
+// Helper to read token from cookies
+const getTokenFromCookie = () => {
+  if (typeof document !== 'undefined') {
+    return document.cookie
+      ?.split('; ')
+      .find(row => row.startsWith('token='))
+      ?.split('=')[1];
+  }
+  return null;
+};
+
 // Fetch the user settings of the user
 export const fetchUserSettings = async () => {
   try {
     logger.info('Fetching user settings..');
-    const response = await axiosClient.post(`/user-preferences/me`);
+    const token = getTokenFromCookie();
+
+    const response = await axiosClient.post(
+      `/user-preferences/me`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
     if (response.status === 200) {
-      logger.info(`Fetch user settings successful with Status ${response.status}`, {
-        data: response.data
-      });
+      logger.info(`Fetch user settings successful`, { data: response.data });
       return response.data;
     } else {
       logger.error(`Fetch user settings failed with Status ${response.status}`);
@@ -26,7 +46,14 @@ export const fetchUserSettings = async () => {
 export const fetchSingleUserSettings = async (sellerId: String) => {
   try {
     logger.info(`Fetching user settings for seller ID: ${sellerId}`);
-    const response = await axiosClient.get(`/user-preferences/${sellerId}`);
+    const token = getTokenFromCookie();
+
+    const response = await axiosClient.get(`/user-preferences/${sellerId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
     if (response.status === 200) {
       logger.info(`Fetch single user settings successful with Status ${response.status}`, {
         data: response.data
@@ -46,10 +73,14 @@ export const fetchSingleUserSettings = async (sellerId: String) => {
 export const createUserSettings = async (formData: FormData) => {
   try {
     logger.info('Creating or updating user settings with formData..');
-    const headers = getMultipartFormDataHeaders();
-    
+    const token = getTokenFromCookie();
+    const headers = {
+      ...getMultipartFormDataHeaders(),
+      Authorization: `Bearer ${token}`
+    };
+
     const response = await axiosClient.put('/user-preferences/add', formData, { headers });
-    
+
     if (response.status === 200) {
       logger.info(`Create or update user settings successful with Status ${response.status}`, {
         data: response.data
@@ -69,8 +100,14 @@ export const createUserSettings = async (formData: FormData) => {
 export const fetchUserLocation = async () => {
   try {
     logger.info('Fetching user location..');
-    const headers = getMultipartFormDataHeaders();
+    const token = getTokenFromCookie();
+    const headers = {
+      ...getMultipartFormDataHeaders(),
+      Authorization: `Bearer ${token}`
+    };
+
     const response = await axiosClient.get(`/user-preferences/location/me`, { headers });
+
     if (response.status === 200) {
       logger.info(`Fetch user location successful with Status ${response.status}`, {
         data: response.data
