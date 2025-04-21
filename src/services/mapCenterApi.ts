@@ -67,3 +67,20 @@ export const saveMapCenter = async (latitude: number, longitude: number, type: '
     throw new Error('Failed to save map center. Please try again later.');
   }
 };
+
+export async function checkIfInSanctionedRegion(latitude: number, longitude: number) {
+  try {
+    const response = await axiosClient.post('/sanctioned-regions/check-in-sanctioned-region', {
+      longitude,
+      latitude
+    });
+
+    if (response.status === 200) {
+      return response.data;
+    }else{
+      return null;
+    }
+  } catch (e) {
+    logger.error(`Failed to check point in sanctioned zones:`, e);
+  }
+}

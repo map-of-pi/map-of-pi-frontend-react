@@ -20,10 +20,11 @@ import { ConfirmDialogX } from '../confirm';
 import { Button } from '../Forms/Buttons/Buttons';
 import RecenterAutomatically from './RecenterAutomatically';
 import SearchBar from '../SearchBar/SearchBar';
-import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
+import { saveMapCenter, fetchMapCenter, checkIfInSanctionedRegion } from '@/services/mapCenterApi';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
+import { toast } from 'react-toastify';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -40,6 +41,7 @@ interface MapCenterProps {
 const MapCenter = ({ entryType }: MapCenterProps) => {
   const t = useTranslations();
   const [showPopup, setShowPopup] = useState(false);
+  const [showWarningPopup, setShowWarningPopup] = useState(false);
   const [center, setCenter] = useState<{ lat: number; lng: number }>({
     lng: 19.944544,
     lat: 50.064192,
@@ -133,9 +135,17 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
   const setMapCenter = async () => {
     if (center !== null && currentUser?.pi_uid) {
       try {
-        await saveMapCenter(center.lat, center.lng, entryType);
-        setShowPopup(true);
-        logger.info('Map center successfully saved.');
+        if (entryType === "sell") {
+          const response = await checkIfInSanctionedRegion(
+            center.lat,
+            center.lng
+          );
+          await saveAndNotifySellCenterStatus(response);
+        }else{
+          await saveMapCenter(center.lat, center.lng, entryType);
+          setShowPopup(true);
+          logger.info('Map center successfully saved.');
+        }
       } catch (error) {
         logger.error('Error saving map center:', error);
       }
@@ -146,11 +156,32 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
     setShowPopup(false);
   };
 
+  const handleWarningClickDialog = async () => {
+    const responseData = await saveMapCenter(center.lat, center.lng, entryType);
+    if (responseData) {
+      logger.info(`response data: ${JSON.stringify(responseData)}`);
+      setShowWarningPopup(false);
+    }
+  };
+
   const bounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
 
   const handleLocationButtonClick = () => { // Temporary placeholders for handling errors
     console.log('Location Button Clicked')
-  } 
+  }
+
+ async function saveAndNotifySellCenterStatus(response: {message: string, isRestricted: boolean}) {
+    if (response.isRestricted) {
+      setShowWarningPopup(true);
+      logger.info(response.message);
+      toast.error(response.message);
+    } else {
+      await saveMapCenter(center.lat, center.lng, entryType);
+      logger.info(response.message);
+      toast.info(response.message);
+      setShowPopup(true);
+    }
+  }
 
   return (
     <div className="search-container">
@@ -239,6 +270,13 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
           toggle={() => setShowPopup(false)}
           handleClicked={handleClickDialog}
           message={t('SHARED.MAP_CENTER.VALIDATION.MAP_CENTER_SUCCESS_MESSAGE')}
+        />
+      )}
+      {showWarningPopup && (
+        <ConfirmDialogX
+          toggle={() => setShowWarningPopup(false)}
+          handleClicked={handleWarningClickDialog}
+          message="Your sell center may be in a sanctioned region, your map marker may be removed from the map. Tap confirm to continue."
         />
       )}
     </div>
