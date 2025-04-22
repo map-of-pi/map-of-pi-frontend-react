@@ -70,7 +70,7 @@ export const saveMapCenter = async (latitude: number, longitude: number, type: '
 
 export async function checkIfInSanctionedRegion(latitude: number, longitude: number) {
   try {
-    const response = await axiosClient.post('/sanctioned-regions/check-in-sanctioned-region', {
+    const response = await axiosClient.post('/restrictions/check-sanction-status', {
       longitude,
       latitude
     });

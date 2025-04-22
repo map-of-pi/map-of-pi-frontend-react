@@ -169,8 +169,8 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
     console.log('Location Button Clicked')
   }
 
- async function saveAndNotifySellCenterStatus(response: {message: string, isRestricted: boolean}) {
-    if (response.isRestricted) {
+ async function saveAndNotifySellCenterStatus(response: {message: string, isSanctioned: boolean}) {
+    if (response.isSanctioned) {
       setShowWarningPopup(true);
     } else {
       await saveMapCenter(center.lat, center.lng, entryType);
