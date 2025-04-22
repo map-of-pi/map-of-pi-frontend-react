@@ -292,6 +292,10 @@ const SellerRegistrationForm = () => {
         return t(
           'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER',
         );
+      case 'restrictedSeller':
+      return t(
+        'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.RESTRICTED_SELLER',
+      );
       default:
         return '';
     }
@@ -443,15 +447,28 @@ const SellerRegistrationForm = () => {
                 onChange={handleChange}
               />
 
-              <Select
-                label={t(
-                  'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL',
-                )}
-                name="sellerType"
-                value={formData.sellerType}
-                onChange={handleChange}
-                options={translatedSellerTypeOptions}
-              />
+              { formData.sellerType !== 'restrictedSeller' ? (
+                <Select
+                  label={t(
+                    'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL',
+                  )}
+                  name="sellerType"
+                  value={formData.sellerType}
+                  onChange={handleChange}
+                  options={translatedSellerTypeOptions}
+                />
+              ) : (
+                <Input
+                  label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
+                  name="sellerType"
+                  value= "Restricted Seller"
+                  style={{
+                    backgroundColor: '#d0d0d0',
+                    cursor: 'not-allowed'
+                  }}
+                  disabled
+                />
+              )}
               <TextArea
                 label={t(
                   'SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL',

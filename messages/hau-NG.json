@@ -1,73 +1,153 @@
 {
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Shafin ba a samu ba",
+    "PAGE_NOT_FOUND_MESSAGE": "Yi hakuri, shafin da kake nema ba ya wanzu."
+  },
   "HOME": {
     "ADD_SELLER": "Sayar",
-    "SEARCH_CENTER_DEFAULT_MESSAGE": "An yanzu, Search Center ɗinku yana kan daidaitattun ƙofofi [0, 0]. Don inganta kwarewarku, da fatan za ku sabunta wurin Search Center ɗinku.",
-    "SEARCH_BAR_PLACEHOLDER": "Bincika masu sayarwa ko abubuwa",
-    "LOCATION_SERVICES": {
-      "ENABLE_LOCATION_SERVICES_MESSAGE": "Domin amfani da wannan aikin, to ka a sauke shiga manazarta a cikin saitinsa na kasa.",
-      "DISABLED_LOCATION_SERVICES_MESSAGE": "Manazarta sun baci. Da fatan za ka sauke shiga manazarta a cikin saitinsa na kasa."
-    },
     "AUTHENTICATION": {
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Bayanin Pi ba a samu ba",
       "SUCCESSFUL_LOGIN_MESSAGE": "Shiga cikin nasara",
-      "UNSUCCESSFUL_LOGIN_MESSAGE": "Shiga ya kasa",
-      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Bayanin Pi ba a samu ba"
-    }
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Shiga ya kasa"
+    },
+    "LOCATION_SERVICES": {
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "Manazarta sun baci. Da fatan za ka sauke shiga manazarta a cikin saitinsa na kasa.",
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "Domin amfani da wannan aikin, to ka a sauke shiga manazarta a cikin saitinsa na kasa."
+    },
+    "SEARCH_BAR_PLACEHOLDER": "Bincika masu sayarwa ko abubuwa",
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "An yanzu, Search Center ɗinku yana kan daidaitattun ƙofofi [0, 0]. Don inganta kwarewarku, da fatan za ku sabunta wurin Search Center ɗinku."
   },
-  "SIDE_NAVIGATION": {
-    "USER_PREFERENCES_HEADER": "Zaɓin mai amfani",
-    "PERSONALIZATION_SUBHEADER": "Keɓancewa",
-    "LANGUAGES": "Harsuna",
-    "ABOUT": {
-      "ABOUT_MAP_OF_PI": "Game da Map of Pi",
-      "APP_VERSION": "Sigar manhaja",
-      "PRIVACY_POLICY": "Takardar Kebantawa",
-      "TERMS_OF_SERVICE": "Sharuɗɗan Sabis"
+  "POPUP": {
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "Da fatan za a ba da rahoton lahani ga"
     },
-    "FIND_ME_PREFERENCE_LABEL": "Zaɓin FindMe",
-    "FIND_ME_OPTIONS": {
-      "PREFERRED_AUTO": "Atomatik",
-      "PREFERRED_DEVICE_GPS": "Yi amfani da GPS na na'urar",
-      "PREFERRED_SEARCH_CENTER": "Yi amfani da Cibiyar Bincike"
+    "MAP_MARKER": {
+      "DISTANCE_MESSAGE": "Nisa: XXX km nesa",
+      "SELLER_SALE_ITEMS_FIELD": "Kayan Sayarwa na siyarwa"
     },
-    "SEARCH_FILTERS_SUBHEADER": "Farantan Bincike",
-    "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "Yan kasuwa masu aiki",
-      "INCLUDE_INACTIVE_SELLERS": "Yan kasuwa marasa aiki",
-      "INCLUDE_TEST_SELLERS": "Yan kasuwa na gwaji"
+    "PRIVACY_POLICY_INFO": {
+      "EMAIL_ADDRESS": "Adireshin i-mel",
+      "LAST_UPDATED": "Sabuntawa Karshe",
+      "SECTIONS": {
+        "CONTENT_1": "Barka da zuwa Taswirar Pi app, wanda ƙungiyar taswirar Pi ta haɓaka tare da haɗin gwiwar Pi Community. Wannan Dokar Sirri tana fayyace yadda muke tattarawa, amfani, bayyanawa, da kare keɓaɓɓun bayanin ku lokacin da kuke amfani da manhajarmu ta hannu.",
+        "CONTENT_2_1_1": "Lokacin da kayi rajista matsayin mai amfani, ƙila mu tattara sunanka, adireshin imel, sunan mai amfani, da sauran bayanan da suka dace.",
+        "CONTENT_2_1_2": "Ƙila mu tattara bayanai game da na'urarka, gami da nau'in na'ura, tsarin aiki, da masu gano na'ura na musamman.",
+        "CONTENT_2_2_1": "Ana iya buƙatar masu siyarwa masu rijista akan dandamali don samar da bayanin Mai siyarwa, gami da sunan mai siyarwa, wuri, da bayanan tuntuɓar.",
+        "CONTENT_2_2_2": "Mai sayarwa na iya zama kasuwanci ko mutum mai zaman kansa.",
+        "CONTENT_3_1_1": "Muna amfani da bayanin ku don samarwa da haɓaka Taswirar ayyukan manhaja na Pi, gami da ayyukan mai amfani da mai siyarwa.",
+        "CONTENT_3_2_1": "Za mu iya amfani da bayanan tuntuɓar ku don aiko muku da sabuntawa, sanarwa, da saƙonnin tallatawa masu alaƙa da Taswirar manhajar Pi.",
+        "CONTENT_3_3_1": "Muna tattarawa da bincika bayanai don haɓaka aiki, fasali, da ayyukan ƙa'idar manhajar.",
+        "CONTENT_4_1_1": "Ana iya raba bayanin mai amfani tare da Masu siyarwa don cika oda da dalilai na sadarwa.",
+        "CONTENT_4_2_1": "Za mu iya raba bayani tare da masu ba da sabis na ɓangare na uku don aikin app, nazari, da sarrafa biyan kuɗi.",
+        "CONTENT_5_1": "Muna amfani da matakan tsaro na masana'antu don kare bayanan ku. Duk da haka, babu hanyar watsawa akan intanit ko ma'ajin lantarki da ke da cikakken tsaro.",
+        "CONTENT_6_1": "Kuna iya sabunta bayanan asusunku ta saitunan manhaja. Kuna iya share asusun Map of Pi ta hanyar share asusun cibiyar sadarwar Pi sannan zaɓi zaɓi don share bayanan Map Of Pi lokacin da kuka shiga Map of Pi na gaba. Kuna iya ficewa daga sadarwar talla.",
+        "CONTENT_7_1": "Za mu iya sabunta wannan takardar kenbantawa kamar yadda ya cancanta. Za a buga sabon sigar a gidan yanar gizon mu ko a cikin manhajar.",
+        "CONTENT_8_1": "Idan kuna da wasu tambayoyi ko damuwa game da wannan takardar kebantawa, da fatan za a tuntuɓe mu ta hanyar aika imel zuwa",
+        "HEADER_1": "Gabatarwa",
+        "HEADER_2": "Bayanan da muke tattarawa",
+        "HEADER_3": "Yadda Muke Amfani da Bayananku",
+        "HEADER_4": "Raba Bayananku",
+        "HEADER_5": "Matakan Tsaro",
+        "HEADER_6": "Zaɓuɓɓukaku",
+        "HEADER_7": "Canje-canje ga Wannan takardar kebantawa",
+        "HEADER_8": "Tuntuɓe Mu",
+        "SUBHEADER_2_1": "Bayanan Mai Amfani",
+        "SUBHEADER_2_2": "Bayanin mai siyarwa",
+        "SUBHEADER_3_1": "Bayar da Ayyuka",
+        "SUBHEADER_3_2": "Sadarwa",
+        "SUBHEADER_3_3": "Bincike",
+        "SUBHEADER_4_1": "Tare da Masu siyarwa",
+        "SUBHEADER_4_2": "Tare Da Jam'iyyu Na Uku"
+      },
+      "TITLE": "Takardar Kebantawa"
     },
-    "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
-    "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Zaɓuɓɓuka sun yi nasara",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Kuskure wajen adana zaɓuɓɓuka"
+    "TERMS_OF_SERVICE_INFO": {
+      "EMAIL_ADDRESS": "Adireshin i-mel",
+      "LAST_UPDATED": "An sabunta ta ƙarshe",
+      "SECTIONS": {
+        "CONTENT_1_1": "Barka da zuwa manhaja Map of Pi, wanda ƙungiyar Map of Pi ta haɓaka tare da haɗin gwiwar Pi Community. Ta amfani da wannan manhaja, kun yarda ku bi waɗannan Sharuɗɗan Sabis, da kuma Manufar Sirrin mu.",
+        "CONTENT_2_1": "Kun yarda da amfani da manhajar Map of Pi bisa bin duk dokoki da ƙa'idodi.",
+        "CONTENT_2_2": "Kada ku yi amfani da manhaja ɗin don kowane dalili na haram ko haramtaten dalili, ko ta kowace hanya da za ta iya lalata, musaki, nauyi, ko ɓata ƙa'idar..",
+        "CONTENT_2_3": "Don amfani da Map of Pi dole ne a yi muku rajista azaman pioneer mai amfani da hanyar sadarwar Pi.",
+        "CONTENT_3_1": "Manhajar Map of Pi da duk abun ciki, fasali, da ayyuka na Map of Pi ne kuma ana kiyaye su ta haƙƙin mallaka, alamar kasuwanci, da sauran dokokin mallakar fasaha..",
+        "CONTENT_4_1": "Map of Pi ba za ta kasance abin dogaro ga kowane kai tsaye, kaikaice, na bazata, na musamman, ko lahani mai lalacewa da ya taso daga ko ta kowace hanya da ke da alaƙa da amfani da manhajar Map of Pi.",
+        "CONTENT_5_1": "Kun yarda da ramuwa da riƙe Map of Pi mara lahani da masu haɗin gwiwa, jami'ai, daraktoci, ma'aikata, da wakilai daga kowane da'awar, alhaki, diyya, asara, ko kashe kuɗi (ciki har da kuɗin lauyoyi) waɗanda suka taso daga ko ta kowace hanya mai alaƙa. Don amfani da manhajar Map of Pi.",
+        "CONTENT_6_1": "Waɗannan Sharuɗɗan Sabis za a sarrafa su kuma a yi amfani da su daidai da dokar Ingila da Wales ba tare da la’akari da tanadin dokar su ba, gami da duk wata jayayya ko da’awar da ta taso daga ko dangane da batunsu ko samuwarsu (gami da rashin yarjejeniya). jayayya ko da'awar).",
+        "CONTENT_7_1": "Mun tanadi haƙƙin sabunta ko gyara waɗannan Sharuɗɗan Sabis a kowane lokaci ba tare da sanarwa ba. Za a buga sabon sigar a gidan yanar gizon mu ko a cikin manhaja.",
+        "HEADER_1": "Yarda da Sharuɗɗan",
+        "HEADER_2": "Amfani da manhajar",
+        "HEADER_3": "Kayayyakin da aka samar dasu ta Hanyan Kirkire-kirkire",
+        "HEADER_4": "Iyakance Abin Alhaki",
+        "HEADER_5": "Ramuwa",
+        "HEADER_6": "Dokokin Gudanarwa",
+        "HEADER_7": "Canje-Canje ga Wadannan Sharuddan"
+      },
+      "TITLE": "Sharuɗɗan Sabis"
     }
   },
   "SCREEN": {
-    "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Rajistar Mai Sayarwa",
-      "SELLER_DETAILS_LABEL": "Bayanin mai sayarwa",
-      "EMAIL_LABEL": "Adireshin imel",
-      "PHONE_NUMBER_LABEL": "Lambar waya",
-      "CONTACT_PUBLIC_NOTE": "Adireshin imel da lambar waya za su kasance a bayyane ga kowa.",
-      "SELLER_DETAILS_PLACEHOLDER": "Ina sayarwa ta hanyar Pay with Pi.",
-      "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayani",
-      "REVIEWS_SCORE_LABEL": "Maki Sake Dubawa",
-      "SELLER_NAME": "Sunan Mai Sayarwa",
-      "SELLER_TYPE": {
-        "SELLER_TYPE_LABEL": "Nau'in mai sayarwa",
-        "SELLER_TYPE_OPTIONS": {
-          "ACTIVE_SELLER": "Mai siyarwa mai aiki",
-          "INACTIVE_SELLER": "Mai siyarwa mara aiki",
-          "TEST_SELLER": "Mai siyarwa gwaji"
+    "BUY_FROM_SELLER": {
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Shigar da karin sharhi a nan",
+      "BUY_FROM_SELLER_HEADER": "Saya daga Mai Sayarwa",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kake ji game da wannan mai siyarwa na sama",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
+      "LEAVE_A_REVIEW_MESSAGE": "Bar Saƙon Bita",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "BUYING_QUANTITY_LABEL": "Yawan abu",
+          "DESCRIPTION_LABEL": "Bayani",
+          "ITEM_LABEL": "Abu",
+          "PHOTO": "Hoto",
+          "PICK_LABEL": "Kara",
+          "PRICE_LABEL": "Farashi",
+          "UNPICK_LABEL": "Cire"
         }
       },
-      "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
-      "SELLER_RETAIL_OUTLET_NAME": "Sunan mashaya",
-      "SELLER_ADDRESS_LOCATION_LABEL": "Adireshi ko inda kake siyarwa",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Alamar taswira ta na nuna inda nake sayarwa",
-      "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
-      "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Siyayya ta yanar gizo",
-      "MAPPI_ALLOWANCE_LABEL": "Ragowar adadin Mappi",
+      "REVIEWS_SCORE_MESSAGE": "Makin Sake Dubawa: {seller_review_rating} cikin 5.0",
+      "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayanin Sake Dubawa",
+      "SELLER_ADDRESS_POSITION_LABEL": "Adireshin Ko Matsayin Mai Sayarwa",
+      "SELLER_CONTACT_DETAILS_LABEL": "Bayanin Tuntuɓar Mai Siyarwa",
+      "SELLER_DETAILS_LABEL": "Bayanin Mai Sayarwa",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel",
+      "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
+      "SELLER_PIONEER_ID_LABEL": "ID na Pioneer",
+      "SELLER_USERNAME_LABEL": "Sunan mai amfani"
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "BY_REVIEWER": "Ta {buyer_id}",
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "Jerin Ra'ayoyin da aka bari na {seller_id}",
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Babu bita don {seller_id}"
+    },
+    "REPLY_TO_REVIEW": {
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Shigar da karin sharhi a nan",
+      "BY_REVIEWER": "Ta {buyer_id}",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kake ji game da mu'amalarka da wannan jagora",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Bayar da amsa ga bita",
+      "REPLY_TO_REVIEW_HEADER": "Amsa wa bita da aka bar wa {seller_id}",
+      "REPLY_TO_REVIEW_MESSAGE": "Bar amsar ku ga bita ta sama",
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Amsa Bita",
+      "REPLY_TO_REVIEW_SUBHEADER": "Bitar da kake maida martani",
+      "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "Kuskure wajen ɗaukar bita",
+        "SELF_REVIEW_NOT_POSSIBLE": "Ba zai yiwu ka duba kanka ba"
+      }
+    },
+    "REVIEWS": {
+      "GIVE_REVIEW_SECTION_HEADER": "Ba wa wannan jagora sharhi",
+      "REVIEWS_GIVEN_SECTION_HEADER": "Sharhi da aka ba wannan jagora",
+      "REVIEWS_HEADER": "Bita",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Sharhi da wannan jagora ya samu",
+      "VALIDATION": {
+        "NO_PIONEER_FOUND": "Ba a sami Mai-tushen {search_value} ba",
+        "NO_REVIEWS_FOUND": "Ba a sami bita ga Mai-tushen {search_value} ba"
+      }
+    },
+    "SELLER_REGISTRATION": {
+      "CONTACT_PUBLIC_NOTE": "Adireshin imel da lambar waya za su kasance a bayyane ga kowa.",
+      "EMAIL_LABEL": "Adireshin imel",
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Umarni na cika wa ga mai siya",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Tattara yana daga adireshin mai sayarwa. Idan an zaɓi isarwa, da fatan a shigar da adireshin mai siya.",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Hanyar Cika Umarni",
         "FULFILLMENT_METHOD_TYPE_OPTIONS": {
@@ -75,236 +155,157 @@
           "DELIVERED_TO_BUYER": "An kawo wa mai saya"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Umarni na cika wa ga mai siya",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Tattara yana daga adireshin mai sayarwa. Idan an zaɓi isarwa, da fatan a shigar da adireshin mai siya.",
-      "VALIDATION": {
-        "EMAIL_VALIDATION": "Don Allah shigar da ingantaccen adireshin imel",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rajista ta yi nasara",
-        "FAILED_REGISTRATION_SUBMISSION": "Kuskure wajen adana rajista",
-        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Rijista ta gaza saboda mai amfani ba a tantance shi ba",
-        "UNINITIALIZED_SELL_CENTER": "Da fatan za ku saita cibiyar sayarwarku",
-        "SUCCESSFUL_SELLER_ITEM_SAVED": "An adana kayan mai sayarwa cikin nasara",
-        "SUCCESSFUL_SELLER_ITEM_DELETED": "An cire kayan mai sayarwa cikin nasara",
-        "FAILED_SELLER_ITEM_SAVE": "Kuskure wajen adana kayan mai sayarwa",
-        "FAILED_SELLER_ITEM_DELETE": "Kuskure wajen share kayan mai sayarwa",
-        "SELLER_ITEM_NOT_FOUND": "Ba a samu kayan mai sayarwa ba",
-        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Ajiye ya yi nasara. An yi amfani da Mappi {mappi_count}",
-        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Ajiye bai yi nasara ba. Adadin Mappi ba ya wadatarwa"
-      },
+      "MAPPI_ALLOWANCE_LABEL": "Ragowar adadin Mappi",
+      "PHONE_NUMBER_LABEL": "Lambar waya",
+      "REVIEWS_SCORE_LABEL": "Maki Sake Dubawa",
+      "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayani",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Adireshi ko inda kake siyarwa",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Alamar taswira ta na nuna inda nake sayarwa",
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
+      "SELLER_DETAILS_LABEL": "Bayanin mai sayarwa",
+      "SELLER_DETAILS_PLACEHOLDER": "Ina sayarwa ta hanyar Pay with Pi.",
       "SELLER_ITEMS_FEATURE": {
-        "ITEM_LABEL": "Abu",
-        "PRICE_LABEL": "Farashi",
-        "STOCK_LABEL": "Matsayin kaya",
         "DESCRIPTION_LABEL": "Bayani",
+        "ITEM_LABEL": "Abu",
         "PHOTO": "Hoto",
+        "PRICE_LABEL": "Farashi",
         "SELLING_DURATION_LABEL": "Tsawon lokacin siyarwa a makonni",
+        "SELLING_EXPIRATION_DATE": "Sayarwa kafin {expired_by_date}",
         "SELLING_STATUS_OPTIONS": {
           "ACTIVE": "Aiki",
           "EXPIRED": "Ƙarewa"
         },
+        "STOCK_LABEL": "Matsayin kaya",
         "STOCK_LEVEL_OPTIONS": {
           "AVAILABLE_1": "1 akwai",
           "AVAILABLE_2": "2 akwai",
           "AVAILABLE_3": "3 akwai",
-          "MANY": "Da yawa akwai",
           "MADE_TO_ORDER": "An yi domin oda",
+          "MANY": "Da yawa akwai",
           "ONGOING_SERVICE": "Aikin ci gaba",
           "SOLD": "An sayar"
-        },
-        "SELLING_EXPIRATION_DATE": "Sayarwa kafin {expired_by_date}"
-      }
-    },
-    "BUY_FROM_SELLER": {
-      "BUY_FROM_SELLER_HEADER": "Saya daga Mai Sayarwa",
-      "SELLER_DETAILS_LABEL": "Bayanin Mai Sayarwa",
-      "SELLER_ADDRESS_POSITION_LABEL": "Adireshin Ko Matsayin Mai Sayarwa",
-      "LEAVE_A_REVIEW_MESSAGE": "Bar Saƙon Bita",
-      "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kake ji game da wannan mai siyarwa na sama",	
-      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Shigar da karin sharhi a nan",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
-      "REVIEWS_SUMMARY_LABEL": "Takaitaccen Bayanin Sake Dubawa",
-      "REVIEWS_SCORE_MESSAGE": "Makin Sake Dubawa: {seller_review_rating} cikin 5.0",
-      "SELLER_CONTACT_DETAILS_LABEL": "Bayanin Tuntuɓar Mai Siyarwa",
-      "SELLER_USERNAME_LABEL": "Sunan mai amfani",
-      "SELLER_PIONEER_ID_LABEL": "ID na Pioneer",
-      "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel",
-      "ONLINE_SHOPPING": {
-        "SELLER_ITEMS_FEATURE": {
-          "ITEM_LABEL": "Abu",
-          "PRICE_LABEL": "Farashi",
-          "DESCRIPTION_LABEL": "Bayani",
-          "PHOTO": "Hoto",
-          "BUYING_QUANTITY_LABEL": "Yawan abu",
-          "PICK_LABEL": "Kara",
-          "UNPICK_LABEL": "Cire"
         }
-      }
-    },
-    "REVIEWS": {
-      "REVIEWS_HEADER": "Bita",
-      "GIVE_REVIEW_SECTION_HEADER": "Ba wa wannan jagora sharhi",
-      "REVIEWS_GIVEN_SECTION_HEADER": "Sharhi da aka ba wannan jagora",
-      "REVIEWS_RECEIVED_SECTION_HEADER": "Sharhi da wannan jagora ya samu",
+      },
+      "SELLER_NAME": "Sunan Mai Sayarwa",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Siyayya ta yanar gizo",
+      "SELLER_REGISTRATION_HEADER": "Rajistar Mai Sayarwa",
+      "SELLER_RETAIL_OUTLET_NAME": "Sunan mashaya",
+      "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
+      "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "Nau'in mai sayarwa",
+        "SELLER_TYPE_OPTIONS": {
+          "ACTIVE_SELLER": "Mai siyarwa mai aiki",
+          "INACTIVE_SELLER": "Mai siyarwa mara aiki",
+          "RESTRICTED_SELLER": "Ƙuntataccen Mai siyarwa",
+          "TEST_SELLER": "Mai siyarwa gwaji"
+        }
+      },
       "VALIDATION": {
-        "NO_REVIEWS_FOUND": "Ba a sami bita ga Mai-tushen {search_value} ba",
-        "NO_PIONEER_FOUND": "Ba a sami Mai-tushen {search_value} ba"
-      }
-    },
-    "CHECK_REVIEWS_FEEDBACK": {
-      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "Babu bita don {seller_id}",
-      "CHECK_REVIEWS_FEEDBACK_HEADER": "Jerin Ra'ayoyin da aka bari na {seller_id}",
-      "BY_REVIEWER": "Ta {buyer_id}"
-    },
-    "REPLY_TO_REVIEW": {
-      "REPLY_TO_REVIEW_STATIC_HEADER": "Amsa Bita",
-      "REPLY_TO_REVIEW_SUBHEADER": "Bitar da kake maida martani",
-      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Bayar da amsa ga bita",
-      "REPLY_TO_REVIEW_HEADER": "Amsa wa bita da aka bar wa {seller_id}",
-      "BY_REVIEWER": "Ta {buyer_id}",
-      "REPLY_TO_REVIEW_MESSAGE": "Bar amsar ku ga bita ta sama",
-      "FACE_SELECTION_REVIEW_MESSAGE": "Zaɓi fuskar da ke nuna yadda kake ji game da mu'amalarka da wannan jagora",
-      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Shigar da karin sharhi a nan",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Loda Hoto Martani",
-      "VALIDATION": {
-        "LOADING_REVIEW_FAILURE": "Kuskure wajen ɗaukar bita",
-        "SELF_REVIEW_NOT_POSSIBLE": "Ba zai yiwu ka duba kanka ba"
-      }
-    }
-  },
-  "POPUP": {
-    "MAP_MARKER": {
-      "SELLER_SALE_ITEMS_FIELD": "Kayan Sayarwa na siyarwa",
-      "DISTANCE_MESSAGE": "Nisa: XXX km nesa"
-    },
-    "APP_VERSION_INFO": {
-      "REPORTING_MESSAGE": "Da fatan za a ba da rahoton lahani ga"
-    },
-    "PRIVACY_POLICY_INFO": {
-      "TITLE": "Takardar Kebantawa",
-      "LAST_UPDATED": "Sabuntawa Karshe",
-      "EMAIL_ADDRESS": "Adireshin i-mel",
-      "SECTIONS": {
-        "HEADER_1": "Gabatarwa",
-        "CONTENT_1": "Barka da zuwa Taswirar Pi app, wanda ƙungiyar taswirar Pi ta haɓaka tare da haɗin gwiwar Pi Community. Wannan Dokar Sirri tana fayyace yadda muke tattarawa, amfani, bayyanawa, da kare keɓaɓɓun bayanin ku lokacin da kuke amfani da manhajarmu ta hannu.",
-        "HEADER_2": "Bayanan da muke tattarawa",
-        "SUBHEADER_2_1": "Bayanan Mai Amfani",
-        "CONTENT_2_1_1": "Lokacin da kayi rajista matsayin mai amfani, ƙila mu tattara sunanka, adireshin imel, sunan mai amfani, da sauran bayanan da suka dace.",
-        "CONTENT_2_1_2": "Ƙila mu tattara bayanai game da na'urarka, gami da nau'in na'ura, tsarin aiki, da masu gano na'ura na musamman.",
-        "SUBHEADER_2_2": "Bayanin mai siyarwa",
-        "CONTENT_2_2_1": "Ana iya buƙatar masu siyarwa masu rijista akan dandamali don samar da bayanin Mai siyarwa, gami da sunan mai siyarwa, wuri, da bayanan tuntuɓar.",
-        "CONTENT_2_2_2": "Mai sayarwa na iya zama kasuwanci ko mutum mai zaman kansa.",
-        "HEADER_3": "Yadda Muke Amfani da Bayananku",
-        "SUBHEADER_3_1": "Bayar da Ayyuka",
-        "CONTENT_3_1_1": "Muna amfani da bayanin ku don samarwa da haɓaka Taswirar ayyukan manhaja na Pi, gami da ayyukan mai amfani da mai siyarwa.",
-        "SUBHEADER_3_2": "Sadarwa",
-        "CONTENT_3_2_1": "Za mu iya amfani da bayanan tuntuɓar ku don aiko muku da sabuntawa, sanarwa, da saƙonnin tallatawa masu alaƙa da Taswirar manhajar Pi.",
-        "SUBHEADER_3_3": "Bincike",
-        "CONTENT_3_3_1": "Muna tattarawa da bincika bayanai don haɓaka aiki, fasali, da ayyukan ƙa'idar manhajar.",
-        "HEADER_4": "Raba Bayananku",
-        "SUBHEADER_4_1": "Tare da Masu siyarwa",
-        "CONTENT_4_1_1": "Ana iya raba bayanin mai amfani tare da Masu siyarwa don cika oda da dalilai na sadarwa.",
-        "SUBHEADER_4_2": "Tare Da Jam'iyyu Na Uku",
-        "CONTENT_4_2_1": "Za mu iya raba bayani tare da masu ba da sabis na ɓangare na uku don aikin app, nazari, da sarrafa biyan kuɗi.",
-        "HEADER_5": "Matakan Tsaro",
-        "CONTENT_5_1": "Muna amfani da matakan tsaro na masana'antu don kare bayanan ku. Duk da haka, babu hanyar watsawa akan intanit ko ma'ajin lantarki da ke da cikakken tsaro.",
-        "HEADER_6": "Zaɓuɓɓukaku",
-        "CONTENT_6_1": "Kuna iya sabunta bayanan asusunku ta saitunan manhaja. Kuna iya share asusun Map of Pi ta hanyar share asusun cibiyar sadarwar Pi sannan zaɓi zaɓi don share bayanan Map Of Pi lokacin da kuka shiga Map of Pi na gaba. Kuna iya ficewa daga sadarwar talla.",
-        "HEADER_7": "Canje-canje ga Wannan takardar kebantawa",
-        "CONTENT_7_1": "Za mu iya sabunta wannan takardar kenbantawa kamar yadda ya cancanta. Za a buga sabon sigar a gidan yanar gizon mu ko a cikin manhajar.",
-        "HEADER_8": "Tuntuɓe Mu",
-        "CONTENT_8_1": "Idan kuna da wasu tambayoyi ko damuwa game da wannan takardar kebantawa, da fatan za a tuntuɓe mu ta hanyar aika imel zuwa"
-      }
-    },
-    "TERMS_OF_SERVICE_INFO": {
-      "TITLE": "Sharuɗɗan Sabis",
-      "LAST_UPDATED": "An sabunta ta ƙarshe",
-      "EMAIL_ADDRESS": "Adireshin i-mel",
-      "SECTIONS": {
-        "HEADER_1": "Yarda da Sharuɗɗan",
-        "CONTENT_1_1": "Barka da zuwa manhaja Map of Pi, wanda ƙungiyar Map of Pi ta haɓaka tare da haɗin gwiwar Pi Community. Ta amfani da wannan manhaja, kun yarda ku bi waɗannan Sharuɗɗan Sabis, da kuma Manufar Sirrin mu.",
-        "HEADER_2": "Amfani da manhajar",
-        "CONTENT_2_1": "Kun yarda da amfani da manhajar Map of Pi bisa bin duk dokoki da ƙa'idodi.",
-        "CONTENT_2_2": "Kada ku yi amfani da manhaja ɗin don kowane dalili na haram ko haramtaten dalili, ko ta kowace hanya da za ta iya lalata, musaki, nauyi, ko ɓata ƙa'idar..",
-        "CONTENT_2_3": "Don amfani da Map of Pi dole ne a yi muku rajista azaman pioneer mai amfani da hanyar sadarwar Pi.",
-        "HEADER_3": "Kayayyakin da aka samar dasu ta Hanyan Kirkire-kirkire",
-        "CONTENT_3_1": "Manhajar Map of Pi da duk abun ciki, fasali, da ayyuka na Map of Pi ne kuma ana kiyaye su ta haƙƙin mallaka, alamar kasuwanci, da sauran dokokin mallakar fasaha..",
-        "HEADER_4": "Iyakance Abin Alhaki",
-        "CONTENT_4_1": "Map of Pi ba za ta kasance abin dogaro ga kowane kai tsaye, kaikaice, na bazata, na musamman, ko lahani mai lalacewa da ya taso daga ko ta kowace hanya da ke da alaƙa da amfani da manhajar Map of Pi.",
-        "HEADER_5": "Ramuwa",
-        "CONTENT_5_1": "Kun yarda da ramuwa da riƙe Map of Pi mara lahani da masu haɗin gwiwa, jami'ai, daraktoci, ma'aikata, da wakilai daga kowane da'awar, alhaki, diyya, asara, ko kashe kuɗi (ciki har da kuɗin lauyoyi) waɗanda suka taso daga ko ta kowace hanya mai alaƙa. Don amfani da manhajar Map of Pi.",
-        "HEADER_6": "Dokokin Gudanarwa",
-        "CONTENT_6_1": "Waɗannan Sharuɗɗan Sabis za a sarrafa su kuma a yi amfani da su daidai da dokar Ingila da Wales ba tare da la’akari da tanadin dokar su ba, gami da duk wata jayayya ko da’awar da ta taso daga ko dangane da batunsu ko samuwarsu (gami da rashin yarjejeniya). jayayya ko da'awar).",
-        "HEADER_7": "Canje-Canje ga Wadannan Sharuddan",
-        "CONTENT_7_1": "Mun tanadi haƙƙin sabunta ko gyara waɗannan Sharuɗɗan Sabis a kowane lokaci ba tare da sanarwa ba. Za a buga sabon sigar a gidan yanar gizon mu ko a cikin manhaja."
+        "EMAIL_VALIDATION": "Don Allah shigar da ingantaccen adireshin imel",
+        "FAILED_REGISTRATION_SUBMISSION": "Kuskure wajen adana rajista",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Ajiye bai yi nasara ba. Adadin Mappi ba ya wadatarwa",
+        "FAILED_SELLER_ITEM_DELETE": "Kuskure wajen share kayan mai sayarwa",
+        "FAILED_SELLER_ITEM_SAVE": "Kuskure wajen adana kayan mai sayarwa",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Rijista ta gaza saboda mai amfani ba a tantance shi ba",
+        "SELLER_ITEM_NOT_FOUND": "Ba a samu kayan mai sayarwa ba",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rajista ta yi nasara",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Ajiye ya yi nasara. An yi amfani da Mappi {mappi_count}",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "An cire kayan mai sayarwa cikin nasara",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "An adana kayan mai sayarwa cikin nasara",
+        "UNINITIALIZED_SELL_CENTER": "Da fatan za ku saita cibiyar sayarwarku"
       }
     }
   },
   "SHARED": {
-    "PIONEER_LABEL": "Pione",
-    "BUY": "Saya",
-    "NAVIGATE": "Kewaya",
-    "NO_COMMENT": "Ba a ba da tsokaci ba",
-    "SEARCH_CENTER": "Saita Cibiyar Bincike",
-    "CHECK_REVIEWS": "Duba Sake Dubawa",
-    "SEARCH_REVIEWS": "Binciken sharhi",
-    "SEARCH_LOADING": "Ana ɗora bincike...",
-    "REPLY": "Amsa",
     "ADD_ITEM": "Ƙara abu",
-    "DELETE": "Goge",
-    "CONFIRM_DELETE": "Shin da gaske kake son share wannan abu? Wannan aiki ba zai iya dawowa ba.",
-    "SAVE": "Ajiye",
+    "BUY": "Saya",
+    "CHECK_REVIEWS": "Duba Sake Dubawa",
     "CONFIRM": "Tabbatar",
+    "CONFIRM_DELETE": "Shin da gaske kake son share wannan abu? Wannan aiki ba zai iya dawowa ba.",
     "CONFIRM_DIALOG": "Kuna da canje-canje marasa ajiya. Da gaske kuna son barin?",
-    "USER_INFORMATION": {
-      "PI_USERNAME_LABEL": "Sunan mai amfani na Pi",
-      "NAME_LABEL": "Suna",
-      "PHONE_NUMBER_LABEL": "Lambar wayar",
-      "EMAIL_LABEL": "Imel"
-    },
-    "PHOTO": {
-      "UPLOAD_PHOTO_LABEL": "Loda hoto",
-      "UPLOAD_PHOTO_PLACEHOLDER": "Dora hoto don taimakawa jan hankalin masu saye (PNG, JPG, JPEG, WEBP)",
-      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Loda hoto don tallafawa bita (PNG, JPG, JPEG, WEBP)",
-      "IMAGE_DROP_UPLOAD_MESSAGE": "Ajiye hotonku anan ko shiga yanar gizo",
-      "SUPPORTS_FILE_MESSAGE": "Goyon baya: PNG, JPG, JPEG, WEBP",
-      "MISC_LABELS": {
-        "USER_PREFERENCES_LABEL": "Hoton bayanin martaba",
-        "SELLER_IMAGE_LABEL": "Hoton mai sayarwa",
-        "REVIEW_FEEDBACK_IMAGE_LABEL": "Hoton bita"
-      }
-    },
-    "REACTION_RATING": {
-      "UNSAFE": "Akwai Haɗari",
-      "TRUSTWORTHY": "Amintacce",
-      "EMOTIONS": {
-        "DESPAIR": "Yanke Kauna",
-        "SAD": "Bakin ciki",
-        "OKAY": "Lafiya",
-        "HAPPY": "Farin ciki",
-        "DELIGHT": "Murna"
-      },
-      "VALIDATION": {
-        "SUCCESSFUL_REVIEW_SUBMISSION": "Bincike ya samu nasara",
-        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Bincike bai samu nasara ba",
-        "SELECT_EMOJI_EXPRESSION": "Da fatan za a zaɓi emoji mai bayyana rai"
-      }
-    },
+    "DELETE": "Goge",
+    "LOADING_SCREEN_MESSAGE": "Ana loda ...",
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Nema wuri, birni, ko adireshi",
       "VALIDATION": {
         "MAP_CENTER_SUCCESS_MESSAGE": "An adana cibiyar ku cikin nasara"
       }
     },
-    "LOADING_SCREEN_MESSAGE": "Ana loda ...",
+    "NAVIGATE": "Kewaya",
+    "NO_COMMENT": "Ba a ba da tsokaci ba",
+    "PHOTO": {
+      "IMAGE_DROP_UPLOAD_MESSAGE": "Ajiye hotonku anan ko shiga yanar gizo",
+      "MISC_LABELS": {
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Hoton bita",
+        "SELLER_IMAGE_LABEL": "Hoton mai sayarwa",
+        "USER_PREFERENCES_LABEL": "Hoton bayanin martaba"
+      },
+      "SUPPORTS_FILE_MESSAGE": "Goyon baya: PNG, JPG, JPEG, WEBP",
+      "UPLOAD_PHOTO_LABEL": "Loda hoto",
+      "UPLOAD_PHOTO_PLACEHOLDER": "Dora hoto don taimakawa jan hankalin masu saye (PNG, JPG, JPEG, WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Loda hoto don tallafawa bita (PNG, JPG, JPEG, WEBP)"
+    },
+    "PIONEER_LABEL": "Pione",
+    "REACTION_RATING": {
+      "EMOTIONS": {
+        "DELIGHT": "Murna",
+        "DESPAIR": "Yanke Kauna",
+        "HAPPY": "Farin ciki",
+        "OKAY": "Lafiya",
+        "SAD": "Bakin ciki"
+      },
+      "TRUSTWORTHY": "Amintacce",
+      "UNSAFE": "Akwai Haɗari",
+      "VALIDATION": {
+        "SELECT_EMOJI_EXPRESSION": "Da fatan za a zaɓi emoji mai bayyana rai",
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Bincike ya samu nasara",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Bincike bai samu nasara ba"
+      }
+    },
+    "REPLY": "Amsa",
+    "SAVE": "Ajiye",
     "SAVING_SCREEN_MESSAGE": "Ana ajiya ...",
+    "SEARCH_CENTER": "Saita Cibiyar Bincike",
+    "SEARCH_LOADING": "Ana ɗora bincike...",
+    "SEARCH_REVIEWS": "Binciken sharhi",
+    "USER_INFORMATION": {
+      "EMAIL_LABEL": "Imel",
+      "NAME_LABEL": "Suna",
+      "PHONE_NUMBER_LABEL": "Lambar wayar",
+      "PI_USERNAME_LABEL": "Sunan mai amfani na Pi"
+    },
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Aika ya kasa saboda mai amfani ba a tabbatar da shi ba",
       "UNEXPECTED_ERROR_MESSAGE": "An samu kuskure da ba a zata ba"
     }
   },
-  "ERROR": {
-    "PAGE_NOT_FOUND_HEADER": "Shafin ba a samu ba",
-    "PAGE_NOT_FOUND_MESSAGE": "Yi hakuri, shafin da kake nema ba ya wanzu."
+  "SIDE_NAVIGATION": {
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "Game da Map of Pi",
+      "APP_VERSION": "Sigar manhaja",
+      "PRIVACY_POLICY": "Takardar Kebantawa",
+      "TERMS_OF_SERVICE": "Sharuɗɗan Sabis"
+    },
+    "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Atomatik",
+      "PREFERRED_DEVICE_GPS": "Yi amfani da GPS na na'urar",
+      "PREFERRED_SEARCH_CENTER": "Yi amfani da Cibiyar Bincike"
+    },
+    "FIND_ME_PREFERENCE_LABEL": "Zaɓin FindMe",
+    "LANGUAGES": "Harsuna",
+    "PERSONALIZATION_SUBHEADER": "Keɓancewa",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Yan kasuwa masu aiki",
+      "INCLUDE_INACTIVE_SELLERS": "Yan kasuwa marasa aiki",
+      "INCLUDE_TEST_SELLERS": "Yan kasuwa na gwaji"
+    },
+    "SEARCH_FILTERS_SUBHEADER": "Farantan Bincike",
+    "USER_PREFERENCES_HEADER": "Zaɓin mai amfani",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Zaɓuɓɓuka sun yi nasara",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Kuskure wajen adana zaɓuɓɓuka"
+    }
   }
 }
