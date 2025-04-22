@@ -222,7 +222,7 @@
     "CHECK_REVIEWS": "리뷰 확인",
     "CONFIRM": "확인",
     "CONFIRM_DELETE": "정말로 이 항목을 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
-    "CONFIRM_DIALOG": "저장되지 않은 변경 사항이 있습니다. 정말 나가시겠습니까?",
+    "CONFIRM_RESTRICTION_DIALOG": "판매 센터가 제재 지역에 있을 수 있으며, 지도에서 지도 표시가 제거되었을 수 있습니다. 계속하려면 '확인'을 탭하세요.",
     "DELETE": "삭제",
     "LOADING_SCREEN_MESSAGE": "로딩 중 ...",
     "MAP_CENTER": {

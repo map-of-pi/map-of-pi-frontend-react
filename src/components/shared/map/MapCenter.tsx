@@ -159,7 +159,6 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
   const handleWarningClickDialog = async () => {
     const responseData = await saveMapCenter(center.lat, center.lng, entryType);
     if (responseData) {
-      logger.info(`response data: ${JSON.stringify(responseData)}`);
       setShowWarningPopup(false);
     }
   };
@@ -173,12 +172,8 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
  async function saveAndNotifySellCenterStatus(response: {message: string, isRestricted: boolean}) {
     if (response.isRestricted) {
       setShowWarningPopup(true);
-      logger.info(response.message);
-      toast.error(response.message);
     } else {
       await saveMapCenter(center.lat, center.lng, entryType);
-      logger.info(response.message);
-      toast.info(response.message);
       setShowPopup(true);
     }
   }
@@ -276,7 +271,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <ConfirmDialogX
           toggle={() => setShowWarningPopup(false)}
           handleClicked={handleWarningClickDialog}
-          message="Your sell center may be in a sanctioned region, your map marker may be removed from the map. Tap confirm to continue."
+          message={t('SHARED.CONFIRM_RESTRICTION_DIALOG')}
         />
       )}
     </div>

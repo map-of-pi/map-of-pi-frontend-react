@@ -223,7 +223,7 @@
     "CHECK_REVIEWS": "查看评论",
     "CONFIRM": "确认",
     "CONFIRM_DELETE": "您确定要删除此项目吗？此操作无法撤销。",
-    "CONFIRM_DIALOG": "您有未保存的更改。确定要离开吗？",
+    "CONFIRM_RESTRICTION_DIALOG": "您的销售中心可能位于受制裁区域，您的地图标记可能会从地图上移除。点击“确认”继续。",
     "DELETE": "删除",
     "LOADING_SCREEN_MESSAGE": "加载中...",
     "MAP_CENTER": {

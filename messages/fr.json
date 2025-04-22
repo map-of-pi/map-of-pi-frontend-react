@@ -223,7 +223,7 @@
     "CHECK_REVIEWS": "Vérifier les avis",
     "CONFIRM": "Confirmer",
     "CONFIRM_DELETE": "Voulez-vous vraiment supprimer cet élément? Cette action est irréversible.",
-    "CONFIRM_DIALOG": "Vos modifications ne sont pas enregistrées. Voulez-vous vraiment quitter?",
+    "CONFIRM_RESTRICTION_DIALOG": "Votre centre de vente se trouve peut-être dans une région sanctionnée ; votre marqueur pourrait être supprimé de la carte. Appuyez sur « Confirmer » pour continuer.",
     "DELETE": "Supprimer",
     "LOADING_SCREEN_MESSAGE": "Chargement ...",
     "MAP_CENTER": {

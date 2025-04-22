@@ -222,7 +222,7 @@
     "CHECK_REVIEWS": "Check Reviews",
     "CONFIRM": "Confirm",
     "CONFIRM_DELETE": "Do you really want to delete this item? This action cannot be undone.",
-    "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",
+    "CONFIRM_RESTRICTION_DIALOG": "Your sell center may be in a sanctioned region, your map marker may be removed from the map. Tap confirm to continue.",
     "DELETE": "Delete",
     "LOADING_SCREEN_MESSAGE": "Loading ...",
     "MAP_CENTER": {

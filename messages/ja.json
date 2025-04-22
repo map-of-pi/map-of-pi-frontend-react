@@ -222,7 +222,7 @@
     "BUY": "購入",
     "CHECK_REVIEWS": "レビューを確認",
     "CONFIRM_DELETE": "本当にこのアイテムを削除しますか？この操作は元に戻せません。",
-    "CONFIRM_DIALOG": "保存されていない変更があります。本当に離れますか？",
+    "CONFIRM_RESTRICTION_DIALOG": "販売センターが制裁対象地域にある場合、マップマーカーが地図から削除される可能性があります。続行するには「確認」をタップしてください。",
     "DELETE": "削除",
     "LOADING_SCREEN_MESSAGE": "読み込み中...",
     "MAP_CENTER": {

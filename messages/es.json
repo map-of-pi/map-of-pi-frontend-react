@@ -222,7 +222,7 @@
     "CHECK_REVIEWS": "Ver Reseñas",
     "CONFIRM": "Confirmar",
     "CONFIRM_DELETE": "¿Realmente quieres eliminar este elemento? Esta acción no se puede deshacer.",
-    "CONFIRM_DIALOG": "Tienes cambios sin guardar. Realmente quieres salir?",
+    "CONFIRM_RESTRICTION_DIALOG": "Es posible que tu centro de ventas se encuentre en una región sancionada. Tu marcador podría desaparecer del mapa. Pulsa \"Confirmar\" para continuar.",
     "DELETE": "Eliminar",
     "LOADING_SCREEN_MESSAGE": "Cargando ...",
     "MAP_CENTER": {

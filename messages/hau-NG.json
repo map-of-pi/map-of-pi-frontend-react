@@ -223,7 +223,7 @@
     "CHECK_REVIEWS": "Duba Sake Dubawa",
     "CONFIRM": "Tabbatar",
     "CONFIRM_DELETE": "Shin da gaske kake son share wannan abu? Wannan aiki ba zai iya dawowa ba.",
-    "CONFIRM_DIALOG": "Kuna da canje-canje marasa ajiya. Da gaske kuna son barin?",
+    "CONFIRM_RESTRICTION_DIALOG": "Cibiyar sayar da ku na iya kasancewa a cikin yankin da aka sanya takunkumi, ana iya cire alamar taswirar ku daga taswirar. Matsa tabbatarwa don ci gaba.",
     "DELETE": "Goge",
     "LOADING_SCREEN_MESSAGE": "Ana loda ...",
     "MAP_CENTER": {

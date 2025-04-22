@@ -223,7 +223,7 @@
     "CHECK_REVIEWS": "Kiểm tra Đánh giá",
     "CONFIRM": "Xác nhận",
     "CONFIRM_DELETE": "Bạn có thực sự muốn xóa mục này không? Hành động này không thể hoàn tác.",
-    "CONFIRM_DIALOG": "Bạn có thay đổi chưa lưu. Bạn thực sự muốn rời đi?",
+    "CONFIRM_RESTRICTION_DIALOG": "Trung tâm bán hàng của bạn có thể nằm trong khu vực bị cấm, điểm đánh dấu bản đồ của bạn có thể bị xóa khỏi bản đồ. Nhấn xác nhận để tiếp tục.",
     "DELETE": "Xóa",
     "LOADING_SCREEN_MESSAGE": "Đang tải ...",
     "MAP_CENTER": {

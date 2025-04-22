@@ -461,7 +461,7 @@ const SellerRegistrationForm = () => {
                 <Input
                   label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
                   name="sellerType"
-                  value= "Restricted Seller"
+                  value= {t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.RESTRICTED_SELLER')}
                   style={{
                     backgroundColor: '#d0d0d0',
                     cursor: 'not-allowed'
