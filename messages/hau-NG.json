@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Mai siyarwa mai aiki",
           "INACTIVE_SELLER": "Mai siyarwa mara aiki",
-          "TEST_SELLER": "Mai siyarwa gwaji"
+          "TEST_SELLER": "Mai siyarwa gwaji",
+          "RESTRICTED_SELLER": "Mai siyarwa da aka takaita"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",

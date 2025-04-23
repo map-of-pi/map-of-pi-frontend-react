@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "活躍賣家",
           "INACTIVE_SELLER": "非活躍賣家",
-          "TEST_SELLER": "測試賣家"
+          "TEST_SELLER": "測試賣家",
+          "RESTRICTED_SELLER": "受限賣家"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "高級賣家設定",

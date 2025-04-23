@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Nusatɔ he to nus able-ble",
           "INACTIVE_SELLER": "Nǔsátɔ́ e ma ɖò azɔ̌ wà wɛ ǎ é le",
-          "TEST_SELLER": "Tɛnkpɔn nusatɔ"
+          "TEST_SELLER": "Tɛnkpɔn nusatɔ",
+          "RESTRICTED_SELLER": "Zan tò hùntɔ̀n"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Azɔwatɔ Nukɔntɔn lɛ sin réglages",

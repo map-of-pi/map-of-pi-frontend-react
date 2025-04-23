@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Onítajà lọ́wọ́-lọ́wọ́",
           "INACTIVE_SELLER": "Onítajà aláì ṣi ṣẹ́mọ́",
-          "TEST_SELLER": "Idanwo Olutaja"
+          "TEST_SELLER": "Idanwo Olutaja",
+          "RESTRICTED_SELLER": "Olutaja to ni idiwọ"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Eto Olutaja to ti ni ilọsiwaju",

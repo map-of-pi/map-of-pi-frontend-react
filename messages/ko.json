@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "활성 판매자",
           "INACTIVE_SELLER": "비활성 판매자",
-          "TEST_SELLER": "테스트 판매자"
+          "TEST_SELLER": "테스트 판매자",
+          "RESTRICTED_SELLER": "제한된 판매자"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "고급 판매자 설정",

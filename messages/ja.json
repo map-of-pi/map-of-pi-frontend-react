@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "アクティブな販売者",
           "INACTIVE_SELLER": "非アクティブな販売者",
-          "TEST_SELLER": "テスト販売者"
+          "TEST_SELLER": "テスト販売者",
+          "RESTRICTED_SELLER": "制限された販売者"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "販売者の詳細設定",

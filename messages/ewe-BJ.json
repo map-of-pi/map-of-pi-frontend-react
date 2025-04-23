@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Nudzrala si le dɔ wɔm",
           "INACTIVE_SELLER": "Nudzrala si mele dɔ wɔm o",
-          "TEST_SELLER": "Dodokpɔ ƒe nudzrala"
+          "TEST_SELLER": "Dodokpɔ ƒe nudzrala",
+          "RESTRICTED_SELLER": "Tɔxɛvia si le dɔwɔme le eme o"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Nudzrala ƒe Ðoɖo Deŋgɔwo",

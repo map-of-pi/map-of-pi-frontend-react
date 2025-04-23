@@ -293,9 +293,9 @@ const SellerRegistrationForm = () => {
           'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER',
         );
       case 'restrictedSeller':
-      return t(
-        'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.RESTRICTED_SELLER',
-      );
+        return t(
+          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.RESTRICTED_SELLER',
+        );
       default:
         return '';
     }

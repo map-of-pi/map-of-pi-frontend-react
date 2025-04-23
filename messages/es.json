@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Vendedor activo",
           "INACTIVE_SELLER": "Vendedor inactivo",
-          "TEST_SELLER": "Vendedor de prueba"
+          "TEST_SELLER": "Vendedor de prueba",
+          "RESTRICTED_SELLER": "Vendedor restringido"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",
