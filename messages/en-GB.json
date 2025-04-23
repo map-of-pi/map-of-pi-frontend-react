@@ -1,152 +1,73 @@
 {
-  "ERROR": {
-    "PAGE_NOT_FOUND_HEADER": "Page not found",
-    "PAGE_NOT_FOUND_MESSAGE": "Sorry, the page you are looking for does not exist."
-  },
   "HOME": {
     "ADD_SELLER": "Sell",
-    "AUTHENTICATION": {
-      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi information not found",
-      "SUCCESSFUL_LOGIN_MESSAGE": "Successful login",
-      "UNSUCCESSFUL_LOGIN_MESSAGE": "Login failed"
-    },
-    "LOCATION_SERVICES": {
-      "DISABLED_LOCATION_SERVICES_MESSAGE": "Location services are disabled. Please enable your device's location setting.",
-      "ENABLE_LOCATION_SERVICES_MESSAGE": "To use this feature, please enable location services in your device settings."
-    },
+    "SEARCH_CENTER_DEFAULT_MESSAGE": "Your Search Centre is currently set to the default coordinates [0, 0]. To enhance your experience, please update your Search Centre location.",
     "SEARCH_BAR_PLACEHOLDER": "Search for sellers or items",
-    "SEARCH_CENTER_DEFAULT_MESSAGE": "Your Search Centre is currently set to the default coordinates [0, 0]. To enhance your experience, please update your Search Centre location."
+    "LOCATION_SERVICES": {
+      "ENABLE_LOCATION_SERVICES_MESSAGE": "To use this feature, please enable location services in your device settings.",
+      "DISABLED_LOCATION_SERVICES_MESSAGE": "Location services are disabled. Please enable your device's location setting."
+    },
+    "AUTHENTICATION": {
+      "SUCCESSFUL_LOGIN_MESSAGE": "Successful login",
+      "UNSUCCESSFUL_LOGIN_MESSAGE": "Login failed",
+      "PI_INFORMATION_NOT_FOUND_MESSAGE": "Pi information not found"
+    }
   },
-  "POPUP": {
-    "APP_VERSION_INFO": {
-      "REPORTING_MESSAGE": "Please report defects to"
+  "SIDE_NAVIGATION": {
+    "USER_PREFERENCES_HEADER": "User Preferences",
+    "PERSONALIZATION_SUBHEADER": "Personalisation",
+    "LANGUAGES": "Languages",
+    "ABOUT": {
+      "ABOUT_MAP_OF_PI": "About Map of Pi",
+      "APP_VERSION": "App Version",
+      "PRIVACY_POLICY": "Privacy Policy",
+      "TERMS_OF_SERVICE": "Terms of Service"
     },
-    "MAP_MARKER": {
-      "DISTANCE_MESSAGE": "Distance: XXX km away",
-      "SELLER_SALE_ITEMS_FIELD": "Seller items for sale"
+    "FIND_ME_PREFERENCE_LABEL": "FindMe Preference",
+    "FIND_ME_OPTIONS": {
+      "PREFERRED_AUTO": "Automatic",
+      "PREFERRED_DEVICE_GPS": "Use my device GPS",
+      "PREFERRED_SEARCH_CENTER": "Use Search Centre"
     },
-    "PRIVACY_POLICY_INFO": {
-      "EMAIL_ADDRESS": "Email Address",
-      "LAST_UPDATED": "Last Updated",
-      "SECTIONS": {
-        "CONTENT_1": "Welcome to the Map of Pi app, developed by the Map of Pi team in collaboration with the Pi Community. This Privacy Policy outlines how we collect, use, disclose, and protect your personal information when you use our mobile application.",
-        "CONTENT_2_1_1": "When you register as a user, we may collect your name, email address, username, and other relevant details.",
-        "CONTENT_2_1_2": "We may collect information about your device, including device type, operating system, and unique device identifiers.",
-        "CONTENT_2_2_1": "Sellers registering on the platform may be required to provide Seller information, including Seller name, location, and contact details.",
-        "CONTENT_2_2_2": "A Seller may be a business or a private individual.",
-        "CONTENT_3_1_1": "We use your information to provide and enhance the Map of Pi app services, including user and Seller functionalities.",
-        "CONTENT_3_2_1": "We may use your contact information to send you updates, notifications, and promotional messages related to the Map of Pi app.",
-        "CONTENT_3_3_1": "We collect and analyse data to improve the performance, features, and functionality of the app.",
-        "CONTENT_4_1_1": "User information may be shared with Sellers for order fulfilment and communication purposes.",
-        "CONTENT_4_2_1": "We may share information with third-party service providers for app functionality, analytics, and payment processing.",
-        "CONTENT_5_1": "We employ industry-standard security measures to protect your information. However, no method of transmission over the internet or electronic storage is completely secure.",
-        "CONTENT_6_1": "You can update your account information through the app settings. You may delete your Map of Pi account by deleting your Pi Network account and then choosing the option to delete your Map of Pi data when you next access Map of Pi. You may opt-out of promotional communications.",
-        "CONTENT_7_1": "We may update this Privacy Policy as necessary. The latest version will be posted on our website or within the app.",
-        "CONTENT_8_1": "If you have any questions or concerns about this Privacy Policy, please contact us by sending an email to",
-        "HEADER_1": "Introduction",
-        "HEADER_2": "Information We Collect",
-        "HEADER_3": "How We Use Your Information",
-        "HEADER_4": "Sharing Your Information",
-        "HEADER_5": "Security Measures",
-        "HEADER_6": "Your Choices",
-        "HEADER_7": "Changes to This Privacy Policy",
-        "HEADER_8": "Contact Us",
-        "SUBHEADER_2_1": "User Information",
-        "SUBHEADER_2_2": "Seller Information",
-        "SUBHEADER_3_1": "Providing Services",
-        "SUBHEADER_3_2": "Communications",
-        "SUBHEADER_3_3": "Analytics",
-        "SUBHEADER_4_1": "With Sellers",
-        "SUBHEADER_4_2": "With Third Parties"
-      },
-      "TITLE": "Privacy Policy"
+    "SEARCH_FILTERS_SUBHEADER": "Search Filters",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Active sellers",
+      "INCLUDE_INACTIVE_SELLERS": "Inactive sellers",
+      "INCLUDE_TEST_SELLERS": "Test sellers"
     },
-    "TERMS_OF_SERVICE_INFO": {
-      "EMAIL_ADDRESS": "Email Address",
-      "LAST_UPDATED": "Last Updated",
-      "SECTIONS": {
-        "CONTENT_1_1": "Welcome to the Map of Pi app, developed by the Map of Pi team in collaboration with the Pi Community. By using this app, you agree to abide by these Terms of Service, as well as our Privacy Policy.",
-        "CONTENT_2_1": "You agree to use the Map of Pi app in compliance with all applicable laws and regulations.",
-        "CONTENT_2_2": "You shall not use the app for any unlawful or prohibited purpose, or in any way that could damage, disable, overburden, or impair the app.",
-        "CONTENT_2_3": "To use Map of Pi you must be registered as a pioneer user of the Pi Network.",
-        "CONTENT_3_1": "The Map of Pi app and all content, features, and functionality are owned by Map of Pi and are protected by copyright, trademark, and other intellectual property laws.",
-        "CONTENT_4_1": "Map of Pi shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with the use of the Map of Pi app.",
-        "CONTENT_5_1": "You agree to indemnify and hold harmless Map of Pi and its affiliates, officers, directors, employees, and agents from any and all claims, liabilities, damages, losses, or expenses (including attorneys' fees) arising out of or in any way related to your use of the Map of Pi app.",
-        "CONTENT_6_1": "These Terms of Service shall be governed by and construed in accordance with the law of England and Wales without regard to their conflict of law provisions, including any dispute or claim arising out of or in connection with their subject matter or formation (including non-contractual disputes or claims).",
-        "CONTENT_7_1": "We reserve the right to update or modify these Terms of Service at any time without prior notice. The latest version will be posted on our website or within the app.",
-        "HEADER_1": "Acceptance of Terms",
-        "HEADER_2": "Use of the App",
-        "HEADER_3": "Intellectual Property",
-        "HEADER_4": "Limitation of Liability",
-        "HEADER_5": "Indemnification",
-        "HEADER_6": "Governing Law",
-        "HEADER_7": "Changes to These Terms"
-      },
-      "TITLE": "Terms of Service"
+    "CONTACT_MAP_OF_PI": "Contact Map of Pi",
+    "VALIDATION": {
+      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Preferences successful",
+      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Error saving preferences"
     }
   },
   "SCREEN": {
-    "BUY_FROM_SELLER": {
-      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
-      "BUY_FROM_SELLER_HEADER": "Buy from Seller",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
-      "LEAVE_A_REVIEW_MESSAGE": "Leave a Review",
-      "ONLINE_SHOPPING": {
-        "SELLER_ITEMS_FEATURE": {
-          "BUYING_QUANTITY_LABEL": "Quantity",
-          "DESCRIPTION_LABEL": "Description",
-          "ITEM_LABEL": "Item",
-          "PHOTO": "Photo",
-          "PICK_LABEL": "Pick",
-          "PRICE_LABEL": "Price",
-          "UNPICK_LABEL": "Unpick"
+    "SELLER_REGISTRATION": {
+      "SELLER_REGISTRATION_HEADER": "Seller Registration",
+      "SELLER_DETAILS_LABEL": "Seller Details",
+      "EMAIL_LABEL": "Email address",
+      "PHONE_NUMBER_LABEL": "Phone number",
+      "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
+      "SELLER_DETAILS_PLACEHOLDER": "I sell via Pay with Pi.",
+      "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
+      "REVIEWS_SCORE_LABEL": "Reviews Score",
+      "SELLER_NAME": "Seller Name",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "Seller type",
+        "SELLER_TYPE_OPTIONS": {
+          "ACTIVE_SELLER": "Active seller", 
+          "INACTIVE_SELLER": "Inactive seller", 
+          "TEST_SELLER": "Test seller"
         }
       },
-      "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
-      "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
-      "SELLER_ADDRESS_POSITION_LABEL": "Seller Address or Position",
-      "SELLER_CONTACT_DETAILS_LABEL": "Seller Contact Details",
-      "SELLER_DETAILS_LABEL": "Seller Details",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Email address",
-      "SELLER_PHONE_NUMBER_LABEL": "Phone number",
-      "SELLER_PIONEER_ID_LABEL": "Pioneer ID",
-      "SELLER_USERNAME_LABEL": "Username"
-    },
-    "CHECK_REVIEWS_FEEDBACK": {
-      "BY_REVIEWER": "By {buyer_id}",
-      "CHECK_REVIEWS_FEEDBACK_HEADER": "List of Reviews left for {seller_id}",
-      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No reviews for {seller_id}"
-    },
-    "REPLY_TO_REVIEW": {
-      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
-      "BY_REVIEWER": "By {buyer_id}",
-      "FACE_SELECTION_REVIEW_MESSAGE": "Select the face that shows how you feel about your interaction with this pioneer",
-      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
-      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Give reply to review",
-      "REPLY_TO_REVIEW_HEADER": "Reply to Review left for {seller_id}",
-      "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
-      "REPLY_TO_REVIEW_STATIC_HEADER": "Reply to Review",
-      "REPLY_TO_REVIEW_SUBHEADER": "The review you are replying to",
-      "VALIDATION": {
-        "LOADING_REVIEW_FAILURE": "Error loading review",
-        "SELF_REVIEW_NOT_POSSIBLE": "Self-review is not possible"
-      }
-    },
-    "REVIEWS": {
-      "GIVE_REVIEW_SECTION_HEADER": "Give review to this pioneer",
-      "REVIEWS_GIVEN_SECTION_HEADER": "Reviews given by this pioneer",
-      "REVIEWS_HEADER": "Reviews",
-      "REVIEWS_RECEIVED_SECTION_HEADER": "Reviews received by this pioneer",
-      "VALIDATION": {
-        "NO_PIONEER_FOUND": "Pioneer {search_value} not found",
-        "NO_REVIEWS_FOUND": "No reviews found for Pioneer {search_value}"
-      }
-    },
-    "SELLER_REGISTRATION": {
-      "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
-      "EMAIL_LABEL": "Email address",
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Fulfilment instructions to buyer",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
+      "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
+      "SELLER_SETTINGS_LABEL": "Seller Settings",
+      "SELLER_SELL_CENTER": "Set Sell Centre",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Online Shopping",
+      "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Fulfilment method",
         "FULFILLMENT_METHOD_TYPE_OPTIONS": {
@@ -154,157 +75,248 @@
           "DELIVERED_TO_BUYER": "Delivered to buyer"
         }
       },
-      "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
-      "PHONE_NUMBER_LABEL": "Phone number",
-      "REVIEWS_SCORE_LABEL": "Reviews Score",
-      "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
-      "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
-      "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
-      "SELLER_DETAILS_LABEL": "Seller Details",
-      "SELLER_DETAILS_PLACEHOLDER": "I sell via Pay with Pi.",
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Fulfilment instructions to buyer",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
+      "VALIDATION": {
+        "EMAIL_VALIDATION": "Please enter a valid email address",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",
+        "FAILED_REGISTRATION_SUBMISSION": "Error saving registration",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated",
+        "UNINITIALIZED_SELL_CENTER": "Please set your Sell Centre",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Seller item saved successfully",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Seller item deleted successfully",
+        "FAILED_SELLER_ITEM_SAVE": "Error saving seller item",
+        "FAILED_SELLER_ITEM_DELETE": "Error deleting seller item",
+        "SELLER_ITEM_NOT_FOUND": "Seller item not found",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Save successful. Mappi allowance used {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Save unsuccessful. Insufficient Mappi allowance available"
+      },
       "SELLER_ITEMS_FEATURE": {
-        "DESCRIPTION_LABEL": "Description",
         "ITEM_LABEL": "Item",
-        "PHOTO": "Photo",
         "PRICE_LABEL": "Price",
+        "STOCK_LABEL": "Stock level",
+        "DESCRIPTION_LABEL": "Description",
+        "PHOTO": "Photo",
         "SELLING_DURATION_LABEL": "Selling duration in weeks",
-        "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}",
         "SELLING_STATUS_OPTIONS": {
-          "ACTIVE": "Active",
+          "ACTIVE": "Active", 
           "EXPIRED": "Expired"
         },
-        "STOCK_LABEL": "Stock level",
         "STOCK_LEVEL_OPTIONS": {
           "AVAILABLE_1": "1 available",
           "AVAILABLE_2": "2 available",
           "AVAILABLE_3": "3 available",
-          "MADE_TO_ORDER": "Made to order",
           "MANY": "Many available",
+          "MADE_TO_ORDER": "Made to order",
           "ONGOING_SERVICE": "Ongoing service",
-          "SOLD": "Sold"
-        }
-      },
-      "SELLER_NAME": "Seller Name",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Online Shopping",
-      "SELLER_REGISTRATION_HEADER": "Seller Registration",
-      "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
-      "SELLER_SELL_CENTER": "Set Sell Centre",
-      "SELLER_SETTINGS_LABEL": "Seller Settings",
-      "SELLER_TYPE": {
-        "SELLER_TYPE_LABEL": "Seller type",
-        "SELLER_TYPE_OPTIONS": {
-          "ACTIVE_SELLER": "Active seller",
-          "INACTIVE_SELLER": "Inactive seller",
-          "RESTRICTED_SELLER": "Restricted Seller",
-          "TEST_SELLER": "Test seller"
-        }
-      },
+          "SOLD": "Sold"  
+        },
+        "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}"
+      }
+    },
+    "BUY_FROM_SELLER": {
+      "BUY_FROM_SELLER_HEADER": "Buy from Seller",
+      "SELLER_DETAILS_LABEL": "Seller Details",
+      "SELLER_ADDRESS_POSITION_LABEL": "Seller Address or Position",
+      "LEAVE_A_REVIEW_MESSAGE": "Leave a Review",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
+      "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
+      "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
+      "SELLER_CONTACT_DETAILS_LABEL": "Seller Contact Details",
+      "SELLER_USERNAME_LABEL": "Username",
+      "SELLER_PIONEER_ID_LABEL": "Pioneer ID", 
+      "SELLER_PHONE_NUMBER_LABEL": "Phone number",
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email address",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Item",
+          "PRICE_LABEL": "Price",
+          "DESCRIPTION_LABEL": "Description",
+          "PHOTO": "Photo",
+          "BUYING_QUANTITY_LABEL": "Quantity",
+          "PICK_LABEL": "Pick",
+          "UNPICK_LABEL": "Unpick"
+        }  
+      }
+    },
+    "REVIEWS": {
+      "REVIEWS_HEADER": "Reviews",
+      "GIVE_REVIEW_SECTION_HEADER": "Give review to this pioneer",
+      "REVIEWS_GIVEN_SECTION_HEADER": "Reviews given by this pioneer",
+      "REVIEWS_RECEIVED_SECTION_HEADER": "Reviews received by this pioneer",
       "VALIDATION": {
-        "EMAIL_VALIDATION": "Please enter a valid email address",
-        "FAILED_REGISTRATION_SUBMISSION": "Error saving registration",
-        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Save unsuccessful. Insufficient Mappi allowance available",
-        "FAILED_SELLER_ITEM_DELETE": "Error deleting seller item",
-        "FAILED_SELLER_ITEM_SAVE": "Error saving seller item",
-        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated",
-        "SELLER_ITEM_NOT_FOUND": "Seller item not found",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",
-        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Save successful. Mappi allowance used {mappi_count}",
-        "SUCCESSFUL_SELLER_ITEM_DELETED": "Seller item deleted successfully",
-        "SUCCESSFUL_SELLER_ITEM_SAVED": "Seller item saved successfully",
-        "UNINITIALIZED_SELL_CENTER": "Please set your Sell Centre"
+        "NO_REVIEWS_FOUND": "No reviews found for Pioneer {search_value}",
+        "NO_PIONEER_FOUND": "Pioneer {search_value} not found"  
+      }
+    },
+    "CHECK_REVIEWS_FEEDBACK": {
+      "CHECK_REVIEWS_NO_FEEDBACK_HEADER": "No reviews for {seller_id}",
+      "CHECK_REVIEWS_FEEDBACK_HEADER": "List of Reviews left for {seller_id}",
+      "BY_REVIEWER": "By {buyer_id}"
+    },
+    "REPLY_TO_REVIEW": {
+      "REPLY_TO_REVIEW_STATIC_HEADER": "Reply to Review",
+      "REPLY_TO_REVIEW_SUBHEADER": "The review you are replying to",
+      "GIVE_REPLY_TO_REVIEW_SUBHEADER": "Give reply to review",
+      "REPLY_TO_REVIEW_HEADER": "Reply to Review left for {seller_id}",
+      "BY_REVIEWER": "By {buyer_id}",
+      "REPLY_TO_REVIEW_MESSAGE": "Leave your reply to the above review",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Select the face that shows how you feel about your interaction with this pioneer",
+      "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
+      "FEEDBACK_PHOTO_UPLOAD_LABEL": "Feedback photo upload",
+      "VALIDATION": {
+        "LOADING_REVIEW_FAILURE": "Error loading review",
+        "SELF_REVIEW_NOT_POSSIBLE": "Self-review is not possible"
+      }
+    }
+  },
+  "POPUP": {
+    "MAP_MARKER": {
+      "SELLER_SALE_ITEMS_FIELD": "Seller items for sale",
+      "DISTANCE_MESSAGE": "Distance: XXX km away"
+    },
+    "APP_VERSION_INFO": {
+      "REPORTING_MESSAGE": "Please report defects to"
+    },
+    "PRIVACY_POLICY_INFO": {
+      "TITLE": "Privacy Policy",
+      "LAST_UPDATED": "Last Updated",
+      "EMAIL_ADDRESS": "Email Address",
+      "SECTIONS": {
+        "HEADER_1": "Introduction",
+        "CONTENT_1": "Welcome to the Map of Pi app, developed by the Map of Pi team in collaboration with the Pi Community. This Privacy Policy outlines how we collect, use, disclose, and protect your personal information when you use our mobile application.",
+        
+        "HEADER_2": "Information We Collect",
+        "SUBHEADER_2_1": "User Information",
+        "CONTENT_2_1_1": "When you register as a user, we may collect your name, email address, username, and other relevant details.",
+        "CONTENT_2_1_2": "We may collect information about your device, including device type, operating system, and unique device identifiers.",
+        "SUBHEADER_2_2": "Seller Information",
+        "CONTENT_2_2_1": "Sellers registering on the platform may be required to provide Seller information, including Seller name, location, and contact details.",
+        "CONTENT_2_2_2": "A Seller may be a business or a private individual.",
+
+        "HEADER_3": "How We Use Your Information",
+        "SUBHEADER_3_1": "Providing Services",
+        "CONTENT_3_1_1": "We use your information to provide and enhance the Map of Pi app services, including user and Seller functionalities.",
+        "SUBHEADER_3_2": "Communications",
+        "CONTENT_3_2_1": "We may use your contact information to send you updates, notifications, and promotional messages related to the Map of Pi app.",
+        "SUBHEADER_3_3": "Analytics",
+        "CONTENT_3_3_1": "We collect and analyse data to improve the performance, features, and functionality of the app.",
+
+        "HEADER_4": "Sharing Your Information",
+        "SUBHEADER_4_1": "With Sellers",
+        "CONTENT_4_1_1": "User information may be shared with Sellers for order fulfilment and communication purposes.",
+        "SUBHEADER_4_2": "With Third Parties",
+        "CONTENT_4_2_1": "We may share information with third-party service providers for app functionality, analytics, and payment processing.",
+
+        "HEADER_5": "Security Measures",
+        "CONTENT_5_1": "We employ industry-standard security measures to protect your information. However, no method of transmission over the internet or electronic storage is completely secure.",
+
+        "HEADER_6": "Your Choices",
+        "CONTENT_6_1": "You can update your account information through the app settings. You may delete your Map of Pi account by deleting your Pi Network account and then choosing the option to delete your Map of Pi data when you next access Map of Pi. You may opt-out of promotional communications.",
+
+        "HEADER_7": "Changes to This Privacy Policy",
+        "CONTENT_7_1": "We may update this Privacy Policy as necessary. The latest version will be posted on our website or within the app.",
+
+        "HEADER_8": "Contact Us",
+        "CONTENT_8_1": "If you have any questions or concerns about this Privacy Policy, please contact us by sending an email to"
+      }
+    },
+    "TERMS_OF_SERVICE_INFO": {
+      "TITLE": "Terms of Service",
+      "LAST_UPDATED": "Last Updated",
+      "EMAIL_ADDRESS": "Email Address",
+      "SECTIONS": {
+        "HEADER_1": "Acceptance of Terms",
+        "CONTENT_1_1": "Welcome to the Map of Pi app, developed by the Map of Pi team in collaboration with the Pi Community. By using this app, you agree to abide by these Terms of Service, as well as our Privacy Policy.",
+        
+        "HEADER_2": "Use of the App",
+        "CONTENT_2_1": "You agree to use the Map of Pi app in compliance with all applicable laws and regulations.",
+        "CONTENT_2_2": "You shall not use the app for any unlawful or prohibited purpose, or in any way that could damage, disable, overburden, or impair the app.", 
+        "CONTENT_2_3": "To use Map of Pi you must be registered as a pioneer user of the Pi Network.", 
+
+        "HEADER_3": "Intellectual Property",
+        "CONTENT_3_1": "The Map of Pi app and all content, features, and functionality are owned by Map of Pi and are protected by copyright, trademark, and other intellectual property laws.",
+
+        "HEADER_4": "Limitation of Liability",
+        "CONTENT_4_1": "Map of Pi shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with the use of the Map of Pi app.",
+
+        "HEADER_5": "Indemnification",
+        "CONTENT_5_1": "You agree to indemnify and hold harmless Map of Pi and its affiliates, officers, directors, employees, and agents from any and all claims, liabilities, damages, losses, or expenses (including attorneys' fees) arising out of or in any way related to your use of the Map of Pi app.",
+
+        "HEADER_6": "Governing Law",
+        "CONTENT_6_1": "These Terms of Service shall be governed by and construed in accordance with the law of England and Wales without regard to their conflict of law provisions, including any dispute or claim arising out of or in connection with their subject matter or formation (including non-contractual disputes or claims).",
+
+        "HEADER_7": "Changes to These Terms",
+        "CONTENT_7_1": "We reserve the right to update or modify these Terms of Service at any time without prior notice. The latest version will be posted on our website or within the app."
       }
     }
   },
   "SHARED": {
-    "ADD_ITEM": "Add Item",
+    "PIONEER_LABEL": "Pioneer",
     "BUY": "Buy",
+    "NAVIGATE": "Navigate",
+    "NO_COMMENT": "No comment provided",
+    "SEARCH_CENTER": "Set Search Centre",
     "CHECK_REVIEWS": "Check Reviews",
-    "CONFIRM": "Confirm",
-    "CONFIRM_DELETE": "Do you really want to delete this item? This action cannot be undone.",
-    "CONFIRM_RESTRICTION_DIALOG": "Your sell center may be in a sanctioned region, your map marker may be removed from the map. Tap confirm to continue.",
+    "SEARCH_REVIEWS": "Search Reviews",
+    "SEARCH_LOADING": "Search loading...",
+    "REPLY": "Reply",
+    "ADD_ITEM": "Add Item",
     "DELETE": "Delete",
-    "LOADING_SCREEN_MESSAGE": "Loading ...",
+    "CONFIRM_DELETE": "Do you really want to delete this item? This action cannot be undone.",
+    "SAVE": "Save",
+    "CONFIRM": "Confirm",
+    "CONFIRM_DIALOG": "You have unsaved changes. Do you really want to leave?",
+    "USER_INFORMATION": {
+      "PI_USERNAME_LABEL": "Pi username",
+      "NAME_LABEL": "Name",
+      "PHONE_NUMBER_LABEL": "Phone number",
+      "EMAIL_LABEL": "Email" 
+    },
+    "PHOTO": {
+      "UPLOAD_PHOTO_LABEL": "Upload photo",
+      "UPLOAD_PHOTO_PLACEHOLDER": "Upload image to help attract buyers (PNG, JPG, JPEG, WEBP)",
+      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Upload an image to support your review (PNG, JPG, JPEG, WEBP)",
+      "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
+      "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
+      "MISC_LABELS": {
+        "USER_PREFERENCES_LABEL": "Profile image",
+        "SELLER_IMAGE_LABEL": "Seller image",
+        "REVIEW_FEEDBACK_IMAGE_LABEL": "Review image"
+      }
+    },
+    "REACTION_RATING": {
+      "UNSAFE": "Unsafe",
+      "TRUSTWORTHY": "Trustworthy",
+      "EMOTIONS": {
+        "DESPAIR": "Despair",
+        "SAD": "Sad",
+        "OKAY": "Okay",
+        "HAPPY": "Happy",
+        "DELIGHT": "Delight"
+      },
+      "VALIDATION": {
+        "SUCCESSFUL_REVIEW_SUBMISSION": "Review submitted successfully",
+        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Review failed to submit",
+        "SELECT_EMOJI_EXPRESSION": "Please select emoji expression"
+      }
+    },
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Search a location, city, or address",
       "VALIDATION": {
         "MAP_CENTER_SUCCESS_MESSAGE": "Your centre has been saved successfully"
       }
     },
-    "NAVIGATE": "Navigate",
-    "NO_COMMENT": "No comment provided",
-    "PHOTO": {
-      "IMAGE_DROP_UPLOAD_MESSAGE": "Drop your image here or browse",
-      "MISC_LABELS": {
-        "REVIEW_FEEDBACK_IMAGE_LABEL": "Review image",
-        "SELLER_IMAGE_LABEL": "Seller image",
-        "USER_PREFERENCES_LABEL": "Profile image"
-      },
-      "SUPPORTS_FILE_MESSAGE": "Supports: PNG, JPG, JPEG, WEBP",
-      "UPLOAD_PHOTO_LABEL": "Upload photo",
-      "UPLOAD_PHOTO_PLACEHOLDER": "Upload image to help attract buyers (PNG, JPG, JPEG, WEBP)",
-      "UPLOAD_PHOTO_REVIEW_PLACEHOLDER": "Upload an image to support your review (PNG, JPG, JPEG, WEBP)"
-    },
-    "PIONEER_LABEL": "Pioneer",
-    "REACTION_RATING": {
-      "EMOTIONS": {
-        "DELIGHT": "Delight",
-        "DESPAIR": "Despair",
-        "HAPPY": "Happy",
-        "OKAY": "Okay",
-        "SAD": "Sad"
-      },
-      "TRUSTWORTHY": "Trustworthy",
-      "UNSAFE": "Unsafe",
-      "VALIDATION": {
-        "SELECT_EMOJI_EXPRESSION": "Please select emoji expression",
-        "SUCCESSFUL_REVIEW_SUBMISSION": "Review submitted successfully",
-        "UNSUCCESSFUL_REVIEW_SUBMISSION": "Review failed to submit"
-      }
-    },
-    "REPLY": "Reply",
-    "SAVE": "Save",
+    "LOADING_SCREEN_MESSAGE": "Loading ...",
     "SAVING_SCREEN_MESSAGE": "Saving ...",
-    "SEARCH_CENTER": "Set Search Centre",
-    "SEARCH_LOADING": "Search loading...",
-    "SEARCH_REVIEWS": "Search Reviews",
-    "USER_INFORMATION": {
-      "EMAIL_LABEL": "Email",
-      "NAME_LABEL": "Name",
-      "PHONE_NUMBER_LABEL": "Phone number",
-      "PI_USERNAME_LABEL": "Pi username"
-    },
     "VALIDATION": {
       "SUBMISSION_FAILED_USER_NOT_AUTHENTICATED": "Submission failed because user is not authenticated",
-      "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"
+      "UNEXPECTED_ERROR_MESSAGE": "Unexpected error occurred"  
     }
   },
-  "SIDE_NAVIGATION": {
-    "ABOUT": {
-      "ABOUT_MAP_OF_PI": "About Map of Pi",
-      "APP_VERSION": "App Version",
-      "PRIVACY_POLICY": "Privacy Policy",
-      "TERMS_OF_SERVICE": "Terms of Service"
-    },
-    "CONTACT_MAP_OF_PI": "Contact Map of Pi",
-    "FIND_ME_OPTIONS": {
-      "PREFERRED_AUTO": "Automatic",
-      "PREFERRED_DEVICE_GPS": "Use my device GPS",
-      "PREFERRED_SEARCH_CENTER": "Use Search Centre"
-    },
-    "FIND_ME_PREFERENCE_LABEL": "FindMe Preference",
-    "LANGUAGES": "Languages",
-    "PERSONALIZATION_SUBHEADER": "Personalisation",
-    "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "Active sellers",
-      "INCLUDE_INACTIVE_SELLERS": "Inactive sellers",
-      "INCLUDE_TEST_SELLERS": "Test sellers"
-    },
-    "SEARCH_FILTERS_SUBHEADER": "Search Filters",
-    "USER_PREFERENCES_HEADER": "User Preferences",
-    "VALIDATION": {
-      "SUCCESSFUL_PREFERENCES_SUBMISSION": "Preferences successful",
-      "UNSUCCESSFUL_PREFERENCES_SUBMISSION": "Error saving preferences"
-    }
+  "ERROR": {
+    "PAGE_NOT_FOUND_HEADER": "Page not found",
+    "PAGE_NOT_FOUND_MESSAGE": "Sorry, the page you are looking for does not exist."
   }
 }
