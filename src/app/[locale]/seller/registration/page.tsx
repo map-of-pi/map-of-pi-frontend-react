@@ -459,7 +459,9 @@ const SellerRegistrationForm = () => {
                 />
               ) : (
                 <Input
-                  label={t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL')}
+                  label={t(
+                    'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL',
+                  )}
                   name="sellerType"
                   value= {t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.RESTRICTED_SELLER')}
                   style={{

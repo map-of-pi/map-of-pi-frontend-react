@@ -294,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "搜索位置、城市或地址",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "中心点保存成功"
+        "MAP_CENTER_SUCCESS_MESSAGE": "中心点保存成功",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "您選擇的位置似乎位於受限區域。如果確認，您的銷售標記可能會從地圖中移除。"
       }
     },
     "LOADING_SCREEN_MESSAGE": "加载中...",

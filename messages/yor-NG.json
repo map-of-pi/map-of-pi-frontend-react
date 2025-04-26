@@ -293,7 +293,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Ṣawari ipo kan, ilu, tabi adirẹsi",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "A ti fipamọ ile-iṣẹ rẹ dara dada"
+        "MAP_CENTER_SUCCESS_MESSAGE": "A ti fipamọ ile-iṣẹ rẹ dara dada",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Ibi ti o yan dabi pe o wa ninu agbegbe ti a fi idiwọ si. Ti a ba fọwọsi, a le yọ aami tita rẹ kuro lori maapu."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Iboju Ikojopo ifiranse ...",

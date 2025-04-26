@@ -294,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Search a location, city, or address",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Your center has been saved successfully"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Your center has been saved successfully",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Your selected location appears to be in a sanctioned region. If confirmed, your sell marker may be removed from the map."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Loading ...",

@@ -293,7 +293,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "場所、都市、住所を検索",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "センターが正常に保存されました"
+        "MAP_CENTER_SUCCESS_MESSAGE": "センターが正常に保存されました",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "選択した場所は制裁対象地域にあるようです。確認されると、売り手マーカーが地図から削除される場合があります。"
       }
     },
     "LOADING_SCREEN_MESSAGE": "読み込み中...",

@@ -293,7 +293,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "위치, 도시 또는 주소 검색",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "귀하의 센터가 성공적으로 저장되었습니다"
+        "MAP_CENTER_SUCCESS_MESSAGE": "귀하의 센터가 성공적으로 저장되었습니다",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "선택한 위치가 제재 지역에 있는 것으로 보입니다. 확인되면 판매 마커가 지도에서 제거될 수 있습니다."
       }
     },
     "LOADING_SCREEN_MESSAGE": "로딩 중 ...",

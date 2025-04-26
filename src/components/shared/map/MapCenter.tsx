@@ -20,11 +20,10 @@ import { ConfirmDialogX } from '../confirm';
 import { Button } from '../Forms/Buttons/Buttons';
 import RecenterAutomatically from './RecenterAutomatically';
 import SearchBar from '../SearchBar/SearchBar';
-import { saveMapCenter, fetchMapCenter, checkIfInSanctionedRegion } from '@/services/mapCenterApi';
+import { saveMapCenter, fetchMapCenter, checkSanctionStatus } from '@/services/mapCenterApi';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
-import { toast } from 'react-toastify';
 
 // Define the crosshair icon for the center of the map
 const crosshairIcon = new L.Icon({
@@ -133,22 +132,38 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
   };
 
   const setMapCenter = async () => {
-    if (center !== null && currentUser?.pi_uid) {
-      try {
-        if (entryType === "sell") {
-          const response = await checkIfInSanctionedRegion(
-            center.lat,
-            center.lng
-          );
-          await saveAndNotifySellCenterStatus(response);
-        }else{
-          await saveMapCenter(center.lat, center.lng, entryType);
-          setShowPopup(true);
-          logger.info('Map center successfully saved.');
+    if (!center || !currentUser?.pi_uid) return;
+  
+    const { lat, lng } = center;
+  
+    try {
+      switch (entryType) {
+        case 'sell': {
+          const response = await checkSanctionStatus(lat, lng);
+          if (response?.isSanctioned) {
+            setShowWarningPopup(true);
+          } else {
+            await saveMapCenter(lat, lng, entryType);
+            setShowPopup(true);
+            logger.info(`Sell Center saved at [${lat}, ${lng}]`);
+          }
+          break;
         }
-      } catch (error) {
-        logger.error('Error saving map center:', error);
+  
+        case 'search': {
+          await saveMapCenter(lat, lng, entryType);
+          setShowPopup(true);
+          logger.info(`Search Center saved at [${lat}, ${lng}]`);
+          break;
+        }
+  
+        default: {
+          logger.warn(`Unexpected entryType: ${entryType}`);
+          break;
+        }
       }
+    } catch (error) {
+      logger.error('Error setting map center:', error);
     }
   };
   
@@ -167,15 +182,6 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
 
   const handleLocationButtonClick = () => { // Temporary placeholders for handling errors
     console.log('Location Button Clicked')
-  }
-
- async function saveAndNotifySellCenterStatus(response: {message: string, isSanctioned: boolean}) {
-    if (response.isSanctioned) {
-      setShowWarningPopup(true);
-    } else {
-      await saveMapCenter(center.lat, center.lng, entryType);
-      setShowPopup(true);
-    }
   }
 
   return (

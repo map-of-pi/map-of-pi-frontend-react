@@ -68,8 +68,10 @@ export const saveMapCenter = async (latitude: number, longitude: number, type: '
   }
 };
 
-export async function checkIfInSanctionedRegion(latitude: number, longitude: number) {
+export async function checkSanctionStatus(latitude: number, longitude: number) {
   try {
+    logger.info(`Checking sanction status for coordinates: longitude ${longitude}, latitude ${latitude}`);
+
     const response = await axiosClient.post('/restrictions/check-sanction-status', {
       longitude,
       latitude
@@ -77,10 +79,12 @@ export async function checkIfInSanctionedRegion(latitude: number, longitude: num
 
     if (response.status === 200) {
       return response.data;
-    }else{
+    } else {
+      logger.error(`Check sanction status failed with Status ${response.status}`);
       return null;
     }
-  } catch (e) {
-    logger.error(`Failed to check point in sanctioned zones:`, e);
+  } catch (error) {
+    logger.error('Check sanction status encountered an error:', error);
+    throw new Error('Failed to check sanction status. Please try again later.');
   }
 }

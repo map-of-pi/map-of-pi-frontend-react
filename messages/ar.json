@@ -294,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "ابحث عن موقع، مدينة، أو عنوان",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "تم حفظ موقعك بنجاح"
+        "MAP_CENTER_SUCCESS_MESSAGE": "تم حفظ موقعك بنجاح",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "يبدو أن الموقع الذي اخترته يقع في منطقة محظورة. إذا تم التأكيد، قد يتم إزالة علامة البيع من الخريطة."
       }
     },
     "LOADING_SCREEN_MESSAGE": "جار التحميل ...",

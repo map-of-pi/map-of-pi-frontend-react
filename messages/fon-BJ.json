@@ -294,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Ba oxo ton ɖe, abǐ adlɛsi ɖe",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Ŋkɔ́ nì wɛ́ ɖò dàn ná tɔ́n nɔ kplɔ́ mɛ"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Ŋkɔ́ nì wɛ́ ɖò dàn ná tɔ́n nɔ kplɔ́ mɛ",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Aɖe nu kple aɖe bɔxɔ gbe na to ɖa aɖo. So yè kpli, egbè nu hãɖe ɖa wà map."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Tɔn ná mɛ̌ ...",
