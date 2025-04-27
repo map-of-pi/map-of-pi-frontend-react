@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Active seller", 
           "INACTIVE_SELLER": "Inactive seller", 
-          "TEST_SELLER": "Test seller"
+          "TEST_SELLER": "Test seller",
+          "RESTRICTED_SELLER": "Restricted seller"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
@@ -305,7 +306,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Search a location, city, or address",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Your centre has been saved successfully"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Your centre has been saved successfully",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Your selected location appears to be in a sanctioned region. If confirmed, your sell marker may be removed from the map."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Loading ...",
