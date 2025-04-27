@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Vendedor activo",
           "INACTIVE_SELLER": "Vendedor inactivo",
-          "TEST_SELLER": "Vendedor de prueba"
+          "TEST_SELLER": "Vendedor de prueba",
+          "RESTRICTED_SELLER": "Vendedor restringido"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",
@@ -292,7 +293,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Buscar una ubicación, ciudad o dirección",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Su centro ha sido guardado con éxito"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Su centro ha sido guardado con éxito",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Parece que la ubicación seleccionada está en una región sancionada. Si se confirma, es posible que se elimine tu marcador de venta del mapa."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Cargando ...",

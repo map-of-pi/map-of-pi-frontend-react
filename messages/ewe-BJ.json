@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Nudzrala si le dɔ wɔm",
           "INACTIVE_SELLER": "Nudzrala si mele dɔ wɔm o",
-          "TEST_SELLER": "Dodokpɔ ƒe nudzrala"
+          "TEST_SELLER": "Dodokpɔ ƒe nudzrala",
+          "RESTRICTED_SELLER": "Tɔxɛvia si le dɔwɔme le eme o"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Nudzrala ƒe Ðoɖo Deŋgɔwo",
@@ -293,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Nemo wuri, gari ko adireshi",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Woƒe xɔ sia le afisi mɔ na mi"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Woƒe xɔ sia le afisi mɔ na mi",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Wɔwɔ nuŋlɔdɔwɔwɔ ƒe agbleme la, eye wòkɔ nyuie, wo be wo toɖe ƒe akɔdɔ gblɔ ƒe map."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Gɔme ɖa ...",
