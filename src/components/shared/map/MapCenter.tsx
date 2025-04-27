@@ -277,7 +277,7 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
         <ConfirmDialogX
           toggle={() => setShowWarningPopup(false)}
           handleClicked={handleWarningClickDialog}
-          message={t('SHARED.CONFIRM_RESTRICTION_DIALOG')}
+          message={t('SHARED.MAP_CENTER.VALIDATION.SELL_CENTER_SANCTIONED_MESSAGE')}
         />
       )}
     </div>
