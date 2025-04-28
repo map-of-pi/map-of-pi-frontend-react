@@ -255,6 +255,7 @@
     "DELETE": "削除",
     "CONFIRM_DELETE": "本当にこのアイテムを削除しますか？この操作は元に戻せません。",
     "SAVE": "保存",
+    "CONFIRM": "確認",
     "CONFIRM_DIALOG": "保存されていない変更があります。本当に離れますか？",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Piユーザー名",
