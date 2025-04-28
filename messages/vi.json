@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Người bán hoạt động",
           "INACTIVE_SELLER": "Người bán không hoạt động",
-          "TEST_SELLER": "Người bán thử nghiệm"
+          "TEST_SELLER": "Người bán thử nghiệm",
+          "RESTRICTED_SELLER": "Người bán bị hạn chế"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Cài đặt nâng cao cho người bán",
@@ -307,7 +308,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Tìm kiếm địa điểm, thành phố hoặc địa chỉ",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Vị trí của bạn đã được lưu thành công"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Vị trí của bạn đã được lưu thành công",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Vị trí bạn chọn có vẻ nằm trong khu vực bị cấm. Nếu được xác nhận, đánh dấu bán của bạn có thể bị xóa khỏi bản đồ."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Đang tải ...",
