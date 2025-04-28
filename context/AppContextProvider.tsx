@@ -11,8 +11,7 @@ import {
   useEffect
 } from 'react';
 
-import { Pi } from '@pinetwork-js/sdk';
-import axiosClient, {setAuthToken} from '@/config/client';
+import axiosClient, { setAuthToken } from '@/config/client';
 import { onIncompletePaymentFound } from '@/utils/auth';
 import { AuthResult } from '@/constants/pi';
 import { IUser } from '@/constants/types';
@@ -23,7 +22,7 @@ interface IAppContextProps {
   currentUser: IUser | null;
   setCurrentUser: React.Dispatch<SetStateAction<IUser | null>>;
   registerUser: () => void;
-  autoLoginUser: ()=> void;
+  autoLoginUser: () => void;
   isSigningInUser: boolean;
   reload: boolean;
   alertMessage: string | null;
@@ -32,21 +31,23 @@ interface IAppContextProps {
   setReload: React.Dispatch<SetStateAction<boolean>>;
   isSaveLoading: boolean;
   setIsSaveLoading: React.Dispatch<SetStateAction<boolean>>;
+  adsSupported: boolean;
 }
 
 const initialState: IAppContextProps = {
   currentUser: null,
-  setCurrentUser: () => {},
+  setCurrentUser: () => { },
   registerUser: () => { },
-  autoLoginUser: ()=> {},
+  autoLoginUser: () => { },
   isSigningInUser: false,
   reload: false,
   alertMessage: null,
-  setAlertMessage: () => {},
-  showAlert: () => {},
-  setReload: () => {},
+  setAlertMessage: () => { },
+  showAlert: () => { },
+  setReload: () => { },
   isSaveLoading: false,
-  setIsSaveLoading: () => {}
+  setIsSaveLoading: () => { },
+  adsSupported: false
 };
 
 export const AppContext = createContext<IAppContextProps>(initialState);
@@ -61,6 +62,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [isSigningInUser, setIsSigningInUser] = useState(false);
   const [reload, setReload] = useState(false);
   const [isSaveLoading, setIsSaveLoading] = useState(false);
+  const [adsSupported, setAdsSupported] = useState(false)
 
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
@@ -72,11 +74,9 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   };
 
   const registerUser = async () => {
-    logger.info('Initializing Pi SDK for user registration.');
-    await Pi.init({ version: '2.0', sandbox: process.env.NODE_ENV === 'development' });
-    let isInitiated = Pi.initialized;
+    logger.info('Starting user registration.');
 
-    if (isInitiated) {
+    if (Pi.initialized) {
       try {
         setIsSigningInUser(true);
         const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);
@@ -101,7 +101,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
           setCurrentUser(null);
           logger.error('User authentication failed.');
           setIsSigningInUser(false);
-        }        
+        }
       } catch (error) {
         logger.error('Error during user registration:', error);
         setIsSigningInUser(false);
@@ -132,10 +132,30 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       logger.error('Auto login unresolved; attempting Pi SDK authentication:', error);
       await registerUser();
     }
+
   }
 
   useEffect(() => {
     logger.info('AppContextProvider mounted.');
+
+    const node_env = process.env.NODE_ENV
+
+    const script = document.createElement('script');
+    script.src = 'https://sdk.minepi.com/pi-sdk.js';
+    script.async = true;
+    script.onload = async () => {
+      Pi.init({ version: '2.0', sandbox: node_env === 'development' });
+
+      window.Pi = Pi
+
+      const nativeFeaturesList = await Pi.nativeFeaturesList();
+      const adNetworkSupported = nativeFeaturesList.includes("ad_network");
+
+      setAdsSupported(adNetworkSupported)
+    };
+
+    document.head.appendChild(script);
+
     if (!currentUser) {
       registerUser();
     } else {
@@ -144,7 +164,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser, reload, setReload, showAlert, alertMessage, setAlertMessage, isSaveLoading, setIsSaveLoading }}>
+    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser, reload, setReload, showAlert, alertMessage, setAlertMessage, isSaveLoading, setIsSaveLoading, adsSupported }}>
       {children}
     </AppContext.Provider>
   );
