@@ -32,6 +32,9 @@ interface IAppContextProps {
   setReload: React.Dispatch<SetStateAction<boolean>>;
   isSaveLoading: boolean;
   setIsSaveLoading: React.Dispatch<SetStateAction<boolean>>;
+  setToggleNotification: React.Dispatch<SetStateAction<boolean>>;
+  toggleNotification: boolean;
+
 }
 
 const initialState: IAppContextProps = {
@@ -46,7 +49,9 @@ const initialState: IAppContextProps = {
   showAlert: () => {},
   setReload: () => {},
   isSaveLoading: false,
-  setIsSaveLoading: () => {}
+  setIsSaveLoading: () => {},
+  setToggleNotification: () => {},
+  toggleNotification: false,
 };
 
 export const AppContext = createContext<IAppContextProps>(initialState);
@@ -61,6 +66,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [isSigningInUser, setIsSigningInUser] = useState(false);
   const [reload, setReload] = useState(false);
   const [isSaveLoading, setIsSaveLoading] = useState(false);
+  const [toggleNotification, setToggleNotification] = useState<boolean>(false);
 
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
@@ -144,7 +150,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser, reload, setReload, showAlert, alertMessage, setAlertMessage, isSaveLoading, setIsSaveLoading }}>
+    <AppContext.Provider value={{ currentUser, setCurrentUser, registerUser, autoLoginUser, isSigningInUser, reload, setReload, showAlert, alertMessage, setAlertMessage, isSaveLoading, setIsSaveLoading, setToggleNotification, toggleNotification }}>
       {children}
     </AppContext.Provider>
   );
