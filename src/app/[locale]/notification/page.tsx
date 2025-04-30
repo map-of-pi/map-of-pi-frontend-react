@@ -14,64 +14,6 @@ import Skeleton from '@/components/skeleton/skeleton';
 import Image from 'next/image';
 import { INotification } from '@/constants/types';
 
-const NotificationData = [
-  {
-    heading: 'You have receive a new order from buyer',
-    time: `Febuary 11th, 2025. 15:26pm`,
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-  {
-    heading: 'You have receive a new order from buyer',
-    time: 'Febuary 11th, 2025. 15:26pm',
-  },
-];
 function page() {
   type NotificationType = {
     _id: string;
@@ -150,11 +92,16 @@ function page() {
     if (is_cleared) return;
     try {
       await updateNotification(id);
-      setNotification((prev) =>
-        prev.map((item) =>
-          item._id === id ? { ...item, is_cleared: true } : item
-        )
-      );
+
+      // setNotification((prev) =>
+      //   prev.map((item) =>
+      //     item._id === id ? { ...item, is_cleared: true } : item
+      //   )
+      // );
+
+     const notificationId = notification.findIndex((notify) => notify._id === id);
+      notification[notificationId].is_cleared = true;
+      setNotification(notification)
       filterNotification(notification, []);
     } catch (err: any) {
       console.log(err);
@@ -315,10 +262,21 @@ function page() {
           ))
         )}
       </div>
+
       {/* USED FOR OBSERVER TO LOAD MORE NOTIFICATION DATA */}
       {isLoading && (
         <Skeleton type="notification" />
+
+        // <div className="w-full h-5 text-[var(--default-primary-color)] items-center text-green flex justify-center animate-pulse">
+        //   <ImSpinner2 className="animate-spin mr-2 ml-1" />
+        //   <div className="">Loading more notifications...</div>
+        // </div>
       )}
+      {/* {!hasMore && (
+        <div className="w-full h-5 text-gray-500 flex justify-center">
+          No more notification
+        </div>
+      )} */}
 
       {/* <button
         onClick={() => {

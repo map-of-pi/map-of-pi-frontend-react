@@ -58,6 +58,7 @@ export default function Page({ params }: { params: { locale: string } }) {
     reload,
     setReload,
     toggleNotification,
+    setToggleNotification
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -223,9 +224,10 @@ export default function Page({ params }: { params: { locale: string } }) {
       </div>
       {toggleNotification && (
         <Notification
-          message={`You have Notification`}
+          message={`You have Notifications`}
           onClose={() => setShowPopup(false)}
           url={`/notification`}
+          setToggleNotification={setToggleNotification}
         />
       )}
     </>

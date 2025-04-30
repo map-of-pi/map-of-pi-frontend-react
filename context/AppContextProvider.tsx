@@ -66,7 +66,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [isSigningInUser, setIsSigningInUser] = useState(false);
   const [reload, setReload] = useState(false);
   const [isSaveLoading, setIsSaveLoading] = useState(false);
-  const [toggleNotification, setToggleNotification] = useState<boolean>(false);
+  const [toggleNotification, setToggleNotification] = useState<boolean>(true);
 
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
 

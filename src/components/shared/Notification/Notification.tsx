@@ -1,21 +1,27 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { createPortal } from 'react-dom';
+// import { createPortal } from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
 
-function Notification({ onClose, message, url }:any) {
+function Notification({ onClose, message, url, setToggleNotification }:any) {
   const router = useRouter();
 
    const handleClicked = () => {
      router.push(url);
+     setToggleNotification(false)
+   }
+
+   const handleClose = () => {
+    onClose
+    setToggleNotification(false)
    }
  
-   return createPortal(
-     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-       <div className="bg-white rounded-lg p-4 w-[80%] max-w-[250px] relative">
+   return(
+    //  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+       <div className="bg-white rounded-2xl p-4 w-[80%] max-w-[230px] fixed top-1/2 left-1/2 z-100 translate-y-[-50%] translate-x-[-50%] shadow-sm border-2 border-solid border-gray-600">
          <button
-           onClick={onClose}
-           className="absolute top-3 right-3"
+           onClick={handleClose}
+           className="absolute top-2 right-2"
          >
            <IoMdClose size={24} className="text-gray-600 hover:text-gray-800" />
          </button>
@@ -24,15 +30,14 @@ function Notification({ onClose, message, url }:any) {
            <div className="flex justify-center mx-3">
              <button
                onClick={handleClicked}
-               className="px-4 py-2 bg-primary text-secondary text-lg rounded-md"
+               className="px-4 py-2 bg-primary text-secondary text-lg rounded-md w-full"
              >
               See notifications
              </button>
            </div>
          </div>
        </div>
-     </div>,
-     document.body
+      //  </div>
    );
 }
 
