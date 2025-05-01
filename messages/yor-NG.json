@@ -33,11 +33,7 @@
     "SEARCH_FILTERS": {
       "INCLUDE_ACTIVE_SELLERS": "Fi awọn olutaja ti n ṣiṣẹ kun",
       "INCLUDE_INACTIVE_SELLERS": "Fi awọn olutaja ti ko n ṣiṣẹ kun",
-      "INCLUDE_TEST_SELLERS": "Fi awọn olutaja idanwo kun",
-      "INCLUDE_TRUST_LEVEL_100": "Fi ipele igbẹkẹle 100 kun",
-      "INCLUDE_TRUST_LEVEL_80": "Fi ipele igbẹkẹle 80 kun",
-      "INCLUDE_TRUST_LEVEL_50": "Fi ipele igbẹkẹle 50 kun",
-      "INCLUDE_TRUST_LEVEL_0": "Fi ipele igbẹkẹle 0 kun"
+      "INCLUDE_TEST_SELLERS": "Fi awọn olutaja idanwo kun"
     },
     "CONTACT_MAP_OF_PI": "Olubasọrọ Map of Pi",
     "VALIDATION": {
@@ -61,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Onítajà lọ́wọ́-lọ́wọ́",
           "INACTIVE_SELLER": "Onítajà aláì ṣi ṣẹ́mọ́",
-          "TEST_SELLER": "Idanwo Olutaja"
+          "TEST_SELLER": "Idanwo Olutaja",
+          "RESTRICTED_SELLER": "Olutaja to ni idiwọ"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Eto Olutaja to ti ni ilọsiwaju",
@@ -255,7 +252,8 @@
     "SEARCH_LOADING": "Ṣawari nlo...", 
     "REPLY": "E te pada", 
     "ADD_ITEM": "Fikun un Item",  
-    "DELETE": "Pàdánù",  
+    "DELETE": "Pàdánù",
+    "CONFIRM": "Jẹrisi",  
     "CONFIRM_DELETE": "Ṣé o dájú pé o fẹ́ pa àyọkà yìí? Ìṣe yìí kò lè tún ṣe.",
     "SAVE": "Fipamọ",
     "CONFIRM_DIALOG": "O ni awọn ayipada ti a ko fi pamọ. Ṣe o fẹ lati lọ nitootọ?",
@@ -296,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Ṣawari ipo kan, ilu, tabi adirẹsi",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "A ti fipamọ ile-iṣẹ rẹ dara dada"
+        "MAP_CENTER_SUCCESS_MESSAGE": "A ti fipamọ ile-iṣẹ rẹ dara dada",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Ibi ti o yan dabi pe o wa ninu agbegbe ti a fi idiwọ si. Ti a ba fọwọsi, a le yọ aami tita rẹ kuro lori maapu."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Iboju Ikojopo ifiranse ...",

@@ -33,11 +33,7 @@
     "SEARCH_FILTERS": {
       "INCLUDE_ACTIVE_SELLERS": "활동 중인 판매자 포함",
       "INCLUDE_INACTIVE_SELLERS": "비활동 중인 판매자 포함",
-      "INCLUDE_TEST_SELLERS": "테스트 판매자 포함",
-      "INCLUDE_TRUST_LEVEL_100": "신뢰 수준 100 포함",
-      "INCLUDE_TRUST_LEVEL_80": "신뢰 수준 80 포함",
-      "INCLUDE_TRUST_LEVEL_50": "신뢰 수준 50 포함",
-      "INCLUDE_TRUST_LEVEL_0": "신뢰 수준 0 포함"
+      "INCLUDE_TEST_SELLERS": "테스트 판매자 포함"
     },
     "CONTACT_MAP_OF_PI": "Map of Pi에 문의",
     "VALIDATION": {
@@ -61,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "활성 판매자",
           "INACTIVE_SELLER": "비활성 판매자",
-          "TEST_SELLER": "테스트 판매자"
+          "TEST_SELLER": "테스트 판매자",
+          "RESTRICTED_SELLER": "제한된 판매자"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "고급 판매자 설정",
@@ -123,6 +120,7 @@
       "SELLER_DETAILS_LABEL": "판매자 세부 정보",
       "SELLER_ADDRESS_POSITION_LABEL": "판매자 주소 또는 위치",
       "LEAVE_A_REVIEW_MESSAGE": "리뷰 남기기",
+      "FACE_SELECTION_REVIEW_MESSAGE": "위 판매자에 대한 당신의 감정을 보여주는 얼굴을 선택하세요",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "추가 의견을 입력하세요",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "피드백 사진 업로드",
       "REVIEWS_SUMMARY_LABEL": "리뷰 요약",
@@ -296,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "위치, 도시 또는 주소 검색",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "귀하의 센터가 성공적으로 저장되었습니다"
+        "MAP_CENTER_SUCCESS_MESSAGE": "귀하의 센터가 성공적으로 저장되었습니다",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "선택한 위치가 제재 지역에 있는 것으로 보입니다. 확인되면 판매 마커가 지도에서 제거될 수 있습니다."
       }
     },
     "LOADING_SCREEN_MESSAGE": "로딩 중 ...",

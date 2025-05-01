@@ -31,13 +31,9 @@
     },
     "SEARCH_FILTERS_SUBHEADER": "Wàɖànsu ƒè Filtèr",
     "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "Gba anɔnkɔ tɔn xɔxɔ me",
-      "INCLUDE_INACTIVE_SELLERS": "Gba anɔnkɔ tɔn mà xɔxɔ o me",
-      "INCLUDE_TEST_SELLERS": "Gba anɔnkɔ tɔn sɔ̃ɖo me",
-      "INCLUDE_TRUST_LEVEL_100": "Gba anɔnkɔ tɔn wɔ ɖe 100%",
-      "INCLUDE_TRUST_LEVEL_80": "Gba anɔnkɔ tɔn wɔ ɖe 80%",
-      "INCLUDE_TRUST_LEVEL_50": "Gba anɔnkɔ tɔn wɔ ɖe 50%",
-      "INCLUDE_TRUST_LEVEL_0": "Gba anɔnkɔ tɔn wɔ ɖe 0%"
+      "INCLUDE_ACTIVE_SELLERS": "Zan tó wà do",
+      "INCLUDE_INACTIVE_SELLERS": "Zan tó mɛ̀ wà do",
+      "INCLUDE_TEST_SELLERS": "Zan sì wɛ́n"
     },
     "CONTACT_MAP_OF_PI": "Do xo sedo Map Of Pi",
     "VALIDATION": {
@@ -61,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Nusatɔ he to nus able-ble",
           "INACTIVE_SELLER": "Nǔsátɔ́ e ma ɖò azɔ̌ wà wɛ ǎ é le",
-          "TEST_SELLER": "Tɛnkpɔn nusatɔ"
+          "TEST_SELLER": "Tɛnkpɔn nusatɔ",
+          "RESTRICTED_SELLER": "Zan tò hùntɔ̀n"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Azɔwatɔ Nukɔntɔn lɛ sin réglages",
@@ -297,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Ba oxo ton ɖe, abǐ adlɛsi ɖe",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Ŋkɔ́ nì wɛ́ ɖò dàn ná tɔ́n nɔ kplɔ́ mɛ"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Ŋkɔ́ nì wɛ́ ɖò dàn ná tɔ́n nɔ kplɔ́ mɛ",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Aɖe nu kple aɖe bɔxɔ gbe na to ɖa aɖo. So yè kpli, egbè nu hãɖe ɖa wà map."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Tɔn ná mɛ̌ ...",
