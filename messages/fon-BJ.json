@@ -70,13 +70,13 @@
       "SELLER_ONLINE_SHOPPING_LABEL": "Ajótin  Onǔxixo ton ɖò Ɛntɛnɛti jí ton",
       "MAPPI_ALLOWANCE_LABEL": "Mappi sín akpáxwé e kpò é",
       "FULFILLMENT_METHOD_TYPE": {
-        "FULFILLMENT_METHOD_TYPE_LABEL":"Wlɛn owín tito e è na zán do w’azɔ̌ é",
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Wlɛn owín tito e è na zán do w’azɔ̌ é",
         "FULFILLMENT_METHOD_TYPE_OPTIONS": {
           "COLLECTION_BY_BUYER": "Nǔ e nǔ xɔt ɔ jlo na xɔ",
           "DELIVERED_TO_BUYER": "È sɔ́ agban jó nú  nuxɔt ɔ"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL":"Alixlɛ́mɛ sin e è na zán dó sanú lɛ nu  nú xɔtɔ́ ɔ",
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Alixlɛ́mɛ sin e è na zán dó sanú lɛ nu  nú xɔtɔ́ ɔ",
       "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Nǔxixo ɔ, nǔsátɔ́ ɔ sín adlɛsi jí wɛ è na yí nu ɔ do . Nú NUxɔtɔ́ ɔ yigbe bo na sɔ́ nǔsisá ɔ, kɛnklɛn bo wlan nuxɔtɔ́ ɔ sín adlɛsi do fi",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Mi kɛnklɛn bo wlan adlɛsi mɛyiyi tɔn ɖe sɔgbe ɔ",
@@ -84,7 +84,7 @@
         "FAILED_REGISTRATION_SUBMISSION": "Nuwanyido ɖo wema wlanwlan hɛn ɖ'ayi mɛ",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nyɔma wlanwlan gló ɖó mɛ e nɔ zán é kún nyí mɛɖebǔ ó",
         "UNINITIALIZED_SELL_CENTER": "Mi kɛnklɛn bo ze tɛn mitɔn ɖo te",
-        "SUCCESSFUL_SELLER_ITEM_SAVED":"Nǔsat ɔ sín nǔwlanwlán ɖó ɖuɖeji jí ",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Nǔsat ɔ sín nǔwlanwlán ɖó ɖuɖeji jí ",
         "SUCCESSFUL_SELLER_ITEM_DELETED": "Nusatɔ́  súnsún nǔ e è sà é sè ganji",
         "FAILED_SELLER_ITEM_SAVE": "Nǔwanyido ɖò nǔsát ɔ sín nǔwlanwlán mɛ",
         "FAILED_SELLER_ITEM_DELETE": "Nǔwanyido ɖò nǔsátɔ́ ɔ sín nǔ  è súnsun mɛ",
