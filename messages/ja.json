@@ -57,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "アクティブな販売者",
           "INACTIVE_SELLER": "非アクティブな販売者",
-          "TEST_SELLER": "テスト販売者"
+          "TEST_SELLER": "テスト販売者",
+          "RESTRICTED_SELLER": "制限された販売者"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "販売者の詳細設定",
@@ -268,6 +269,7 @@
     "DELETE": "削除",
     "CONFIRM_DELETE": "本当にこのアイテムを削除しますか？この操作は元に戻せません。",
     "SAVE": "保存",
+    "CONFIRM": "確認",
     "CONFIRM_DIALOG": "保存されていない変更があります。本当に離れますか？",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Piユーザー名",
@@ -306,7 +308,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "場所、都市、住所を検索",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "センターが正常に保存されました"
+        "MAP_CENTER_SUCCESS_MESSAGE": "センターが正常に保存されました",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "選択した場所は制裁対象地域にあるようです。確認されると、売り手マーカーが地図から削除される場合があります。"
       }
     },
     "LOADING_SCREEN_MESSAGE": "読み込み中...",

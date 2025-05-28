@@ -67,3 +67,24 @@ export const saveMapCenter = async (latitude: number, longitude: number, type: '
     throw new Error('Failed to save map center. Please try again later.');
   }
 };
+
+export async function checkSanctionStatus(latitude: number, longitude: number) {
+  try {
+    logger.info(`Checking sanction status for coordinates: longitude ${longitude}, latitude ${latitude}`);
+
+    const response = await axiosClient.post('/restrictions/check-sanction-status', {
+      longitude,
+      latitude
+    });
+
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      logger.error(`Check sanction status failed with Status ${response.status}`);
+      return null;
+    }
+  } catch (error) {
+    logger.error('Check sanction status encountered an error:', error);
+    throw new Error('Failed to check sanction status. Please try again later.');
+  }
+}
