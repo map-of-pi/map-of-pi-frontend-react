@@ -4,14 +4,25 @@ import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import React, { useEffect, useState, useContext, useRef, ChangeEvent } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 
 import ConfirmDialog from '@/components/shared/confirm';
 import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
+import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
+import { ListItem } from '@/components/shared/Seller/ShopItem';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
-import { ISeller, IUserSettings, IUser, SellerItem, PaymentDataType, PickedItems, FulfillmentType, PaymentType } from '@/constants/types';
+import { payWithPi } from '@/config/payment';
+import { 
+  ISeller, 
+  IUserSettings, 
+  IUser, 
+  SellerItem, 
+  PaymentDataType, 
+  FulfillmentType, 
+  PaymentType 
+} from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 import { fetchToggle } from '@/services/toggleApi';
@@ -19,9 +30,6 @@ import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import { ListItem } from '@/components/shared/Seller/ShopItem';
-import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
-import { payWithPi } from '@/config/payment';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -246,60 +254,62 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         </div>
         
         {/* Online Shopping */}
-        <ToggleCollapse
-          header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
-          open={false}>
-          <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
-            {dbSellerItems && dbSellerItems.length > 0 && 
-              dbSellerItems.map((item) => (
-                <ListItem
-                  key={item._id}
-                  item={item}
-                  pickedItems={pickedItems}
-                  setPickedItems={setPickedItems}
-                  refCallback={handleShopItemRef} // Attach observer
-                  totalAmount={totalAmount}
-                  setTotalAmount={setTotalAmount}
-                /> 
-              ))            
-            }
-          </div>
-          <div>
-            <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}</h2>
-            <Select
-              name="fulfillment_method"
-              options={translatedFulfillmentMethod}
-              value={sellerShopInfo.fulfillment_method}
-              disabled={true}
-            />
-            <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL')}</h2>
-            <TextArea
-              name="fulfillment_description"
-              type="text"
-              value={sellerShopInfo.fulfillment_description}
-              disabled
-            />
-            <h2 className={SUBHEADER}>{t('Buyer Fulfillment Details')}</h2>
-            <TextArea
-              name="buying_details"
-              value={buyerDescription}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setBuyerDescription(e.target.value)}
-            />
-          </div>
-          <div className="mb-4 mt-3 ml-auto">
-            <Button
-              label={t('Checkout ') + `(${totalAmount.toString()} Pi)`}
-              disabled={!(pickedItems.length>0)}
-              styles={{
-                color: '#ffc153',
-                height: '40px',
-                padding: '15px 20px',
-                marginLeft: 'auto'
-              }}
-              onClick={()=>checkoutOrder()}
-            />
-          </div>
-        </ToggleCollapse>
+        {isOnlineShoppingEnabled && (
+          <ToggleCollapse
+            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
+            open={false}>
+            <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
+              {dbSellerItems && dbSellerItems.length > 0 && 
+                dbSellerItems.map((item) => (
+                  <ListItem
+                    key={item._id}
+                    item={item}
+                    pickedItems={pickedItems}
+                    setPickedItems={setPickedItems}
+                    refCallback={handleShopItemRef} // Attach observer
+                    totalAmount={totalAmount}
+                    setTotalAmount={setTotalAmount}
+                  /> 
+                ))            
+              }
+            </div>
+            <div>
+              <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}</h2>
+              <Select
+                name="fulfillment_method"
+                options={translatedFulfillmentMethod}
+                value={sellerShopInfo.fulfillment_method}
+                disabled={true}
+              />
+              <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL')}</h2>
+              <TextArea
+                name="fulfillment_description"
+                type="text"
+                value={sellerShopInfo.fulfillment_description}
+                disabled
+              />
+              <h2 className={SUBHEADER}>{t('Buyer Fulfillment Details')}</h2>
+              <TextArea
+                name="buying_details"
+                value={buyerDescription}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setBuyerDescription(e.target.value)}
+              />
+            </div>
+            <div className="mb-4 mt-3 ml-auto">
+              <Button
+                label={t('Checkout ') + `(${totalAmount.toString()} Pi)`}
+                disabled={!(pickedItems.length>0)}
+                styles={{
+                  color: '#ffc153',
+                  height: '40px',
+                  padding: '15px 20px',
+                  marginLeft: 'auto'
+                }}
+                onClick={()=>checkoutOrder()}
+              />
+            </div>
+          </ToggleCollapse>
+        )}
 
         <ToggleCollapse
           header={t('SCREEN.BUY_FROM_SELLER.SELLER_CONTACT_DETAILS_LABEL')}>

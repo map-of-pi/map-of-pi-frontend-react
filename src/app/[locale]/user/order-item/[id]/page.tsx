@@ -3,12 +3,11 @@
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/shared/Forms/Buttons/Buttons";
 import { Input, Select, TextArea } from "@/components/shared/Forms/Inputs/Inputs";
-import { FulfillmentType, OrderItemStatus, OrderItemType, PartialOrderType, PickedItems, SellerItem } from "@/constants/types";
-import { fetchOrderById, updateCompletedOrder, updateOrderItemStatus } from "@/services/orderApi";
-import logger from '../../../../../../logger.config.mjs';
 import Skeleton from "@/components/skeleton/skeleton";
+import { FulfillmentType, OrderItemStatus, OrderItemType, PartialOrderType } from "@/constants/types";
+import { fetchOrderById } from "@/services/orderApi";
+import logger from '../../../../../../logger.config.mjs';
 
 export default function ReviewOrderItemPage({ params, searchParams }: { params: { id: string }, searchParams: { user_name: string, seller_type: string } }) {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -23,7 +22,6 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
   const [currentOrder, setCurrentOrder] = useState<PartialOrderType | null>(null);
   const [orderItems, setOrderItems] = useState<OrderItemType[]>([]);
   const [sellerName, setSellerName] = useState<string>('');
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -41,8 +39,8 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
           setSellerName('');
         }
       } catch (error) {
-        logger.error('Error fetching seller items data:', error);
-      }finally {
+        logger.error('Error fetching order items data:', error);
+      } finally {
         setLoading(false);
       }
     };
@@ -50,20 +48,20 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
     getOrder(orderId);
   }, [orderId]);
   
-    const translatedFulfillmentMethod = [
-      {
-        value: FulfillmentType.CollectionByBuyer,
-        name: t(
-          'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
-        ),
-      },
-      {
-        value: FulfillmentType.DeliveredToBuyer,
-        name: t(
-          'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
-        ),
-      },
-    ];
+  const translatedFulfillmentMethod = [
+    {
+      value: FulfillmentType.CollectionByBuyer,
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
+      ),
+    },
+    {
+      value: FulfillmentType.DeliveredToBuyer,
+      name: t(
+        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
+      ),
+    },
+  ];
 
   // loading condition
   if (loading) {

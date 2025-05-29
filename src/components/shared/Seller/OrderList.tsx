@@ -3,7 +3,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 import { Input } from "../Forms/Inputs/Inputs";
 import logger from '../../../../logger.config.mjs';
-import { fetchSellerOrder } from "@/services/orderApi";
+import { fetchSellerOrders } from "@/services/orderApi";
 import Link from "next/link";
 import { Button } from "../Forms/Buttons/Buttons";
 
@@ -18,7 +18,7 @@ export const ListOrder: React.FC<{
    useEffect(() => {
     const getOrderList= async (id: string) => {
       try {
-        const data = await fetchSellerOrder(id);
+        const data = await fetchSellerOrders(id);
         if (data) {
           setOrderList(data);
         } else {

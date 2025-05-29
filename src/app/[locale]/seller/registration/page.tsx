@@ -15,9 +15,10 @@ import {
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import OnlineShopping from '@/components/shared/Seller/ShopItem';
+import { ListOrder } from '@/components/shared/Seller/OrderList';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
-import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
+import Skeleton from '@/components/skeleton/skeleton';
 import { IUserSettings, ISeller, FulfillmentType } from '@/constants/types';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
@@ -26,7 +27,6 @@ import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
-import { ListOrder } from '@/components/shared/Seller/OrderList';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';
@@ -659,8 +659,8 @@ const SellerRegistrationForm = () => {
 
           {/*Order Fulfillment | Online Shopping */}
           <ToggleCollapse
-                header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL')}
-                open={false}>
+              header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL')}
+              open={false}>
             {dbSeller && <ListOrder user_id={dbSeller.seller_id} user_name={dbSeller.name}  seller_type={dbSeller.seller_type}/>}
           </ToggleCollapse>
           
