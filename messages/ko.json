@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "구매자에게 배송"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "구매자에게 전달할 이행 지침",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "수거는 판매자의 주소에서 이루어집니다. 배송이 선택된 경우, 구매자의 주소를 입력하세요.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "구매자에게 전달할 이행 지침",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "수거는 판매자의 주소에서 이루어집니다. 배송이 선택된 경우, 구매자의 주소를 입력하세요.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "구매자에서 판매자에게의 이행 세부정보",
       "VALIDATION": {
         "EMAIL_VALIDATION": "유효한 이메일 주소를 입력하세요",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "등록이 성공적으로 완료되었습니다",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "총 가격",
         "TIME_OF_ORDER_LABEL": "주문 시간"
-      }  
+      },
+      "ORDER_COMPLETED_LABEL": "주문 완료",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "주문 발송/수령"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "판매자로부터 구매",

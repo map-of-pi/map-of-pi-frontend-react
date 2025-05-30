@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "Títẹ̀sí lọ sí oníbàárà"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Ìtọná ìpẹ̀yà sí oníbàárà",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Ìkó nàgó jẹ́ láti àdírẹ́sì olùtà. Tí ìfí tọ́jú bá ti yan, jọ̀wọ́ fi àdírẹ́sì oníbàárà rẹ̀ sílẹ̀.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Ìtọná ìpẹ̀yà sí oníbàárà",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Ìkó nàgó jẹ́ láti àdírẹ́sì olùtà. Tí ìfí tọ́jú bá ti yan, jọ̀wọ́ fi àdírẹ́sì oníbàárà rẹ̀ sílẹ̀.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Àlàyé ìmúlò oníra fún olùtà",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Jọwọ tẹ adirẹsi imeeli to sise dada eyi to wulo",  
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Aṣeyọri Iforukọsilẹ",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "Lapapọ iye",
         "TIME_OF_ORDER_LABEL": "Akoko ibere"
-      }  
+      },
+      "ORDER_COMPLETED_LABEL": "Àṣẹ parí",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Àṣẹ ránṣẹ́ / ti gba"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Ra oja ni owo olutaja",

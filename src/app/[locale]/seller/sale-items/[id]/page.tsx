@@ -281,7 +281,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
                 value={sellerShopInfo.fulfillment_method}
                 disabled={true}
               />
-              <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL')}</h2>
+              <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL')}</h2>
               <TextArea
                 name="fulfillment_description"
                 type="text"

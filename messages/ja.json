@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "購入者への配達"  
         }  
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "購入者への履行指示",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "収集は販売者の住所から行われます。配達を選択した場合は、購入者の住所を入力してください。",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "購入者への履行指示",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "収集は販売者の住所から行われます。配達を選択した場合は、購入者の住所を入力してください。",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "購入者から販売者への履行詳細",
       "VALIDATION": {
         "EMAIL_VALIDATION": "有効なメールアドレスを入力してください",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "登録成功",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "合計金額",
         "TIME_OF_ORDER_LABEL": "注文時間"
-      }
+      },
+      "ORDER_COMPLETED_LABEL": "注文完了",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "注文発送／受取済み"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "販売者から購入",

@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "Entregado al comprador"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Instrucciones de cumplimiento para el comprador",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "La recogida es desde la dirección del vendedor. Si se selecciona la entrega, por favor ingrese la dirección del comprador.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Instrucciones de cumplimiento para el comprador",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "La recogida es desde la dirección del vendedor. Si se selecciona la entrega, por favor ingrese la dirección del comprador.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Detalles de cumplimiento del comprador",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Por favor, ingresa una dirección de correo electrónico válida",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro exitoso",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "Precio total",
         "TIME_OF_ORDER_LABEL": "Hora del pedido"
-      }
+      },
+      "ORDER_COMPLETED_LABEL": "Pedido completado",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Pedido despachado/recogido"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Comprar del Vendedor",

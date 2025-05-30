@@ -39,7 +39,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
           setBuyerName('');
         }
       } catch (error) {
-        logger.error('Error fetching seller items data:', error);
+        logger.error('Error fetching order item data:', error);
       }
     };
     
@@ -191,13 +191,13 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
       </div>}
 
       <h2 className={SUBHEADER}>
-        Ordered Items:
+        {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDERED_ITEMS_SUBHEADER')}
       </h2>
       <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
         {orderItems && orderItems.length>0 && orderItems.map((item, index)=>(<div
           data-id={item._id}
           className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
-            item.status===OrderItemStatus.Fulfilled || item.status===OrderItemStatus.Refunded ? 
+            item.status === OrderItemStatus.Fulfilled || item.status === OrderItemStatus.Refunded ? 
             'bg-yellow-100' : ''
           }`}
           key={index}
@@ -217,7 +217,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
               <div className="flex-auto w-32">
                 <div className="flex items-center gap-2">
                   <Input
-                    label={'Amount:'}
+                    label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
                     name="price"
                     type="number"
                     value={item.subtotal.$numberDecimal || item.subtotal.$numberDecimal.toString()}
@@ -266,7 +266,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                 />
               </div>
               <Button
-                label="Reset"
+                label={t('SHARED.RESET')}
                 styles={{
                   color: '#ffc153',
                   width: '100%',
@@ -276,7 +276,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
               />
 
               <Button
-                label="Refund"
+                label={t('SHARED.REFUND')}
                 styles={{
                   color: '#ffc153',
                   width: '100%',
@@ -285,7 +285,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                 onClick={() => handleFulfillment(item._id, OrderItemStatus.Refunded)}
               />
               <Button
-                label="Fulfill"
+                label={t('SHARED.FULFILLED')}
                 styles={{
                   color: '#ffc153',
                   width: '100%',
@@ -306,21 +306,21 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
           value={currentOrder?.fulfillment_method}
           disabled={true}
         />
-        <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL')}</h2>
+        <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL')}</h2>
         <TextArea
           name="fulfillment_description"
           type="text"
           value={currentOrder?.seller_fulfillment_description}
           disabled
         />
-        <h2 className={SUBHEADER}>{t('Buyer Fulfillment Details')}</h2>
+        <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL')}</h2>
         <TextArea
           name="buying_details"
           value={currentOrder?.buyer_fulfillment_description}
         />
         <div className="flex flex-col gap-y-4">
           <Button
-            label={"Order completed"}
+            label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_COMPLETED_LABEL')}
             disabled={isCompleted}
             styles={{
               color: '#ffc153',
@@ -332,7 +332,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
           />
 
           <Button
-            label={"Order Dispatched/Collected"}
+            label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_DISPATCHED_COLLECTED_LABEL')}
             styles={{
               color: '#ffc153',
               height: '40px',

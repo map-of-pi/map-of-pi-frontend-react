@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "Livré à l'acheteur"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Instructions de réalisation pour l'acheteur",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Le retrait se fait à l'adresse du vendeur. Si la livraison est choisie, veuillez entrer l'adresse de l'acheteur.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Instructions de réalisation pour l'acheteur",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Le retrait se fait à l'adresse du vendeur. Si la livraison est choisie, veuillez entrer l'adresse de l'acheteur.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Détails d'exécution de l'acheteur",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Veuillez entrer une adresse e-mail valide",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Enregistrement réussi",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "Prix total",
         "TIME_OF_ORDER_LABEL": "Heure de la commande"
-      }
+      },
+      "ORDER_COMPLETED_LABEL": "Commande terminée",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Commande expédiée/collectée"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Acheter chez le vendeur",

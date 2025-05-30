@@ -631,10 +631,10 @@ const SellerRegistrationForm = () => {
                 </h2>
                 <TextArea
                   label={t(
-                    'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
+                    'SCREEN.SELLER_REGISTRATION.SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL',
                   )}
                   placeholder={t(
-                    'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
+                    'SCREEN.SELLER_REGISTRATION.SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
                   )}
                   name="fulfillment_description"
                   type="text"

@@ -77,8 +77,9 @@
           "DELIVERED_TO_BUYER": "Delivered to buyer"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Fulfilment instructions to buyer",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Seller fulfilment instructions to buyer",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Buyer fulfilment details",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Please enter a valid email address",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",
@@ -123,7 +124,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "Total price",
         "TIME_OF_ORDER_LABEL": "Time of order"
-      }
+      },
+      "ORDER_COMPLETED_LABEL": "Order Completed",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Order Dispatched/Collected"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Buy from Seller",

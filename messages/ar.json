@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "تسليم إلى المشتري"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "تعليمات التنفيذ للمشتري",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "الدفع يكون من عنوان البائع. إذا تم اختيار التوصيل، يرجى إدخال عنوان المشتري.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "تعليمات التنفيذ للمشتري",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "الدفع يكون من عنوان البائع. إذا تم اختيار التوصيل، يرجى إدخال عنوان المشتري.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "تفاصيل تنفيذ المشتري",
       "VALIDATION": {
         "EMAIL_VALIDATION": "يرجى إدخال بريد إلكتروني صالح",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "تم التسجيل بنجاح",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "السعر الإجمالي",
         "TIME_OF_ORDER_LABEL": "وقت الطلب"
-      }
+      },
+      "ORDER_COMPLETED_LABEL": "تم إكمال الطلب",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "تم شحن/استلام الطلب"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "شراء من البائع",

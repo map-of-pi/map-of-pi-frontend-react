@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "È sɔ́ agban jó nú  nuxɔt ɔ"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Alixlɛ́mɛ sin e è na zán dó sanú lɛ nu  nú xɔtɔ́ ɔ",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Nǔxixo ɔ, nǔsátɔ́ ɔ sín adlɛsi jí wɛ è na yí nu ɔ do . Nú NUxɔtɔ́ ɔ yigbe bo na sɔ́ nǔsisá ɔ, kɛnklɛn bo wlan nuxɔtɔ́ ɔ sín adlɛsi do fi",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Alixlɛ́mɛ sin e è na zán dó sanú lɛ nu  nú xɔtɔ́ ɔ",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Nǔxixo ɔ, nǔsátɔ́ ɔ sín adlɛsi jí wɛ è na yí nu ɔ do . Nú NUxɔtɔ́ ɔ yigbe bo na sɔ́ nǔsisá ɔ, kɛnklɛn bo wlan nuxɔtɔ́ ɔ sín adlɛsi do fi",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Alodé ɖo hànnù wɛ gbɛ gànzɔ",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Mi kɛnklɛn bo wlan adlɛsi mɛyiyi tɔn ɖe sɔgbe ɔ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Wlanwlan ɖuɖeji",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "Hɛnnu jiji",
         "TIME_OF_ORDER_LABEL": "Dɔwɛ hɛnnu"
-      }
+      },
+      "ORDER_COMPLETED_LABEL": "Wɛgbɛ tɔn",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Wɛgbɛ dɔ / tɔn hɔn"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Xo do sato gon",

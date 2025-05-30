@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "An kawo wa mai saya"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Umarni na cika wa ga mai siya",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Tattara yana daga adireshin mai sayarwa. Idan an zaɓi isarwa, da fatan a shigar da adireshin mai siya.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Umarni na cika wa ga mai siya",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Tattara yana daga adireshin mai sayarwa. Idan an zaɓi isarwa, da fatan a shigar da adireshin mai siya.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Cikakken bayani na mai siye ga mai sayarwa",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Don Allah shigar da ingantaccen adireshin imel",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rajista ta yi nasara",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "Jimillar farashi",
         "TIME_OF_ORDER_LABEL": "Lokacin umarni"
-      }    
+      },
+      "ORDER_COMPLETED_LABEL": "An kammala oda",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "An tura/karɓi oda"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Saya daga Mai Sayarwa",
