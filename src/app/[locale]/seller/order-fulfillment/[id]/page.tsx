@@ -5,8 +5,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/shared/Forms/Buttons/Buttons";
 import { Input, Select, TextArea } from "@/components/shared/Forms/Inputs/Inputs";
-import { FulfillmentType, OrderItemStatus, OrderItemType, PartialOrderType, PickedItems, SellerItem } from "@/constants/types";
-import { fetchOrderById, updateCompletedOrder, updateOrderItemStatus } from "@/services/orderApi";
+import { FulfillmentType, OrderItemStatus, OrderItemType, OrderStatusType, PartialOrderType } from "@/constants/types";
+import { fetchOrderById, updateOrderStatus, updateOrderItemStatus } from "@/services/orderApi";
 import logger from '../../../../../../logger.config.mjs';
 
 export default function OrderItemPage({ params, searchParams }: { params: { id: string }, searchParams: { seller_name: string, seller_type: string } }) {
@@ -39,7 +39,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
           setBuyerName('');
         }
       } catch (error) {
-        logger.error('Error fetching seller items data:', error);
+        logger.error('Error fetching order item data:', error);
       }
     };
     
@@ -59,6 +59,10 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
       case 'testSeller':
         return t(
           'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER',
+        );
+      case 'restrictedSeller':
+        return t(
+          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.RESTRICTED_SELLER',
         );
       default:
         return '';
@@ -82,28 +86,28 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
   
   const handleFulfillment = async (itemId: string, status: OrderItemStatus) => {
     try {
-      logger.info(`Updating order item status with id: ${itemId}`);
+      logger.info(`Updating order item status to ${status} with id: ${itemId}`);
       const updateItem = await updateOrderItemStatus(itemId, status);
 
       if (updateItem) {
-            setOrderItems((prev) => {
-                const updatedItems = prev.map((item) =>
-                    item._id === itemId ? { ...item, status: status } : item
-                );
-                return updatedItems;
-            });
+        setOrderItems((prev) => {
+          const updatedItems = prev.map((item) =>
+            item._id === itemId ? { ...item, status: status } : item
+          );
+          return updatedItems;
+        });
       } else {
-        logger.warn("Failed to update item status on the server.");
+        logger.warn("Failed to update order item status on the server.");
       }
     } catch (error) {
-      logger.error("Error updating item status:", error);
+      logger.error(`Error updating order item status to ${status}:`, error);
     }
   };
 
-  const handleCompleted = async () => {
+  const handleCompleted = async (status: OrderStatusType) => {
     try {
-      logger.info(`Updating order item status with id: ${orderId}`);
-      const data = await updateCompletedOrder(orderId);
+      logger.info(`Updating order status to ${status} with id: ${orderId}`);
+      const data = await updateOrderStatus(orderId, status);
 
       if (data) {
         setCurrentOrder(data.order);
@@ -111,11 +115,11 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
         setBuyerName(data.pi_username);
         setIsCompleted(true);
       } else {
-        logger.warn("Failed to update item status on the server.");
+        logger.warn("Failed to update completed order on the server.");
       }
     }
     catch (error) {
-      logger.error("Error updating item status:", error);
+      logger.error(`Error updating order status to ${status}:`, error);
     }
   };
 
@@ -134,67 +138,66 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
       </div>
 
       <h2 className={SUBHEADER}>
-      {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_SUBHEADER')}
+        {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_SUBHEADER')}
       </h2>
       {currentOrder && <div className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7`}
       >
         <div className="p-3">
-              <div className="flex gap-x-4">
-                <div className="flex-auto w-64">
-                  <Input
-                    label={t('SHARED.PIONEER_ID_LABEL')}
-                    name="name"
-                    type="text"
-                    value={buyerName}
-                    disabled={true}
-                  />
-                </div>
+          <div className="flex gap-x-4">
+            <div className="flex-auto w-64">
+              <Input
+                label={t('SHARED.PIONEER_ID_LABEL')}
+                name="name"
+                type="text"
+                value={buyerName}
+                disabled={true}
+              />
+            </div>
 
-                <div className="flex-auto w-32">
-                  <div className="flex items-center gap-2">
-                    <Input
-                      label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.TOTAL_PRICE_LABEL')}
-                      name="price"
-                      type="number"
-                      value={currentOrder.total_amount.$numberDecimal || currentOrder.total_amount.$numberDecimal.toString()}
-                      disabled={true}
-                    />
-                    <p className="text-gray-500 text-sm">Pi</p>
-                  </div>
-                </div>
+            <div className="flex-auto w-32">
+              <div className="flex items-center gap-2">
+                <Input
+                  label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.TOTAL_PRICE_LABEL')}
+                  name="price"
+                  type="number"
+                  value={currentOrder.total_amount.$numberDecimal || currentOrder.total_amount.$numberDecimal.toString()}
+                  disabled={true}
+                />
+                <p className="text-gray-500 text-sm">Pi</p>
               </div>
-              <div>
-              </div>
-              <div className="flex items-center gap-4 w-full mt-1">
-                <div
-                className={`p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] w-full`}
-                >
-                  {currentOrder?.createdAt && (
-                    <label className="text-[14px] text-[#333333]">
-                     { new Intl.DateTimeFormat(locale || 'en-US', {
-                        day: '2-digit',
-                        month: 'long',
-                        year: 'numeric',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                        hour12: true,
-                      }).format(new Date(currentOrder.createdAt))}
-                    </label>
-                  )}
-                </div>                
-              </div>
-
+            </div>
+          </div>
+          <div>
+          </div>
+          <div className="flex items-center gap-4 w-full mt-1">
+            <div
+            className={`p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] w-full`}
+            >
+              {currentOrder?.createdAt && (
+                <label className="text-[14px] text-[#333333]">
+                  { new Intl.DateTimeFormat(locale || 'en-US', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                  }).format(new Date(currentOrder.createdAt))}
+                </label>
+              )}
+            </div>                
+          </div>
         </div>
       </div>}
 
       <h2 className={SUBHEADER}>
-        Ordered Items:
+        {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDERED_ITEMS_SUBHEADER')}
       </h2>
       <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
         {orderItems && orderItems.length>0 && orderItems.map((item, index)=>(<div
           data-id={item._id}
           className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
-            item.status===OrderItemStatus.Fulfilled || item.status===OrderItemStatus.Refunded? 
+            item.status === OrderItemStatus.Fulfilled || item.status === OrderItemStatus.Refunded ? 
             'bg-yellow-100' : ''
           }`}
           key={index}
@@ -214,7 +217,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
               <div className="flex-auto w-32">
                 <div className="flex items-center gap-2">
                   <Input
-                    label={'Amount:'}
+                    label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
                     name="price"
                     type="number"
                     value={item.subtotal.$numberDecimal || item.subtotal.$numberDecimal.toString()}
@@ -263,7 +266,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                 />
               </div>
               <Button
-                label="Reset"
+                label={t('SHARED.RESET')}
                 styles={{
                   color: '#ffc153',
                   width: '100%',
@@ -273,7 +276,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
               />
 
               <Button
-                label="Refund"
+                label={t('SHARED.REFUND')}
                 styles={{
                   color: '#ffc153',
                   width: '100%',
@@ -282,7 +285,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                 onClick={() => handleFulfillment(item._id, OrderItemStatus.Refunded)}
               />
               <Button
-                label="Fulfill"
+                label={t('SHARED.FULFILLED')}
                 styles={{
                   color: '#ffc153',
                   width: '100%',
@@ -303,21 +306,21 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
           value={currentOrder?.fulfillment_method}
           disabled={true}
         />
-        <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL')}</h2>
+        <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL')}</h2>
         <TextArea
           name="fulfillment_description"
           type="text"
           value={currentOrder?.seller_fulfillment_description}
           disabled
         />
-        <h2 className={SUBHEADER}>{t('Buyer Fulfillment Details')}</h2>
+        <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL')}</h2>
         <TextArea
           name="buying_details"
           value={currentOrder?.buyer_fulfillment_description}
         />
         <div className="flex flex-col gap-y-4">
           <Button
-            label={"Order completed"}
+            label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_COMPLETED_LABEL')}
             disabled={isCompleted}
             styles={{
               color: '#ffc153',
@@ -325,19 +328,17 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
               padding: '15px 20px',
               width:'100%'
             }}
-            onClick={()=>handleCompleted()}
+            onClick={()=>handleCompleted(OrderStatusType.Completed)}
           />
 
           <Button
-            label={"Order Dispatched/Collected"}
-            // disabled={!isSaveEnabled}
+            label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_DISPATCHED_COLLECTED_LABEL')}
             styles={{
               color: '#ffc153',
               height: '40px',
               padding: '15px 20px',
               width:'100%'
             }}
-            // onClick={()=>checkoutOrder()}
           />
         </div>
       </div>

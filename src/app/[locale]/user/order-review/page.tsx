@@ -7,7 +7,7 @@ import Skeleton from '@/components/skeleton/skeleton';
 import { PartialOrderType, OrderStatusType } from '@/constants/types';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
-import { fetchBuyerOrder } from '@/services/orderApi';
+import { fetchBuyerOrders } from '@/services/orderApi';
 import { Input } from '@/components/shared/Forms/Inputs/Inputs';
 
 export default function OrderReviewPage() {
@@ -22,7 +22,7 @@ export default function OrderReviewPage() {
     const getOrderList= async (id: string) => {
       setLoading(true);
       try {
-        const data = await fetchBuyerOrder(id);
+        const data = await fetchBuyerOrders(id);
         if (data) {
           setOrderList(data);
         } else {

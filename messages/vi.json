@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "Giao hàng cho người mua"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Hướng dẫn hoàn thành cho người mua",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Lấy hàng tại địa chỉ của người bán. Nếu chọn giao hàng, vui lòng nhập địa chỉ của người mua.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Hướng dẫn hoàn thành cho người mua",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Lấy hàng tại địa chỉ của người bán. Nếu chọn giao hàng, vui lòng nhập địa chỉ của người mua.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Chi tiết thực hiện từ người mua đến người bán",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Vui lòng nhập địa chỉ email hợp lệ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Đăng ký thành công",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "Tổng giá",
         "TIME_OF_ORDER_LABEL": "Thời gian đặt hàng"
-      }    
+      },
+      "ORDER_COMPLETED_LABEL": "Đơn hàng hoàn thành",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Đơn hàng đã gửi/đã nhận"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Mua từ người bán",

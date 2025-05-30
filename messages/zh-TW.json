@@ -78,8 +78,9 @@
           "DELIVERED_TO_BUYER": "送貨到買家"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "給買家的履行說明",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "取貨地址為賣家的地址。如果選擇配送，請輸入買家的地址。",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "給買家的履行說明",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "取貨地址為賣家的地址。如果選擇配送，請輸入買家的地址。",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "買家向賣家的履約詳情",
       "VALIDATION": {
         "EMAIL_VALIDATION": "請輸入有效的電子郵件地址",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "註冊成功",
@@ -124,7 +125,9 @@
       "ORDER_HEADER_ITEMS_FEATURE": {
         "TOTAL_PRICE_LABEL": "總價",
         "TIME_OF_ORDER_LABEL": "訂單時間"
-      }  
+      },
+      "ORDER_COMPLETED_LABEL": "訂單已完成",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "訂單已發貨/已收取"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "從賣家購買",
