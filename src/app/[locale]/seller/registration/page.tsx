@@ -15,6 +15,7 @@ import {
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
 import OnlineShopping from '@/components/shared/Seller/ShopItem';
+import { ListOrder } from '@/components/shared/Seller/OrderList';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
@@ -24,6 +25,7 @@ import { fetchUserSettings } from '@/services/userSettingsApi';
 import { fetchToggle } from '@/services/toggleApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
+
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
 
@@ -351,13 +353,13 @@ const SellerRegistrationForm = () => {
 
   const translatedFulfillmentMethod = [
     {
-      value: 'pickup',
+      value: FulfillmentType.CollectionByBuyer,
       name: t(
         'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
       ),
     },
     {
-      value: 'delivery',
+      value: FulfillmentType.DeliveredToBuyer,
       name: t(
         'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
       ),
@@ -609,10 +611,10 @@ const SellerRegistrationForm = () => {
             </div>
           </ToggleCollapse>
           
-          {/* Online Shopping */}
+          {/* List Items | Online Shopping */}
           {isOnlineShoppingEnabled && (
             <ToggleCollapse
-              header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_LABEL')}
+              header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
               open={false}>
               {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
               <div>
@@ -630,10 +632,10 @@ const SellerRegistrationForm = () => {
                 </h2>
                 <TextArea
                   label={t(
-                    'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
+                    'SCREEN.SELLER_REGISTRATION.SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL',
                   )}
                   placeholder={t(
-                    'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
+                    'SCREEN.SELLER_REGISTRATION.SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
                   )}
                   name="fulfillment_description"
                   type="text"
@@ -655,8 +657,17 @@ const SellerRegistrationForm = () => {
               </div>
             </ToggleCollapse>
           )}
-          
+
+          {/*Order Fulfillment | Online Shopping */}
+          {isOnlineShoppingEnabled && (
+            <ToggleCollapse
+                header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL')}
+                open={false}>
+              {dbSeller && <ListOrder user_id={dbSeller.seller_id} user_name={dbSeller.name}  seller_type={dbSeller.seller_type}/>}
+            </ToggleCollapse>
+          )}
         </div>
+
         <ConfirmDialog
           show={showConfirmDialog}
           onClose={() => setShowConfirmDialog(false)}
@@ -664,6 +675,7 @@ const SellerRegistrationForm = () => {
           message={t('SHARED.CONFIRM_DIALOG')}
           url={linkUrl}
         />
+
       </div>
     </>
   );

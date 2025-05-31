@@ -43,7 +43,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Nudzrala ƒe Ŋkɔ ŋɔŋlɔ",
+      "SELLER_REGISTRATION_HEADER": "ƒeƒeɖoɖoɖoɖo ƒe Nyɔnu",
       "SELLER_DETAILS_LABEL": "Nudzrala ƒe Nyatakakawo",
       "EMAIL_LABEL": "Email adrɛsi",
       "PHONE_NUMBER_LABEL": "Telefon xexlẽdzesi",
@@ -67,7 +67,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nye anyigbatata ƒe dzesi fia afisi mele nu dzram le",
       "SELLER_SETTINGS_LABEL": "Nudzrala ƒe Ðoɖowo",
       "SELLER_SELL_CENTER": "Ðo Dzadzra ƒe Titina",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Tsɔtsɔ abe internet me",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Ŋkekewo ƒe ŋkɔɖoɖo | Ŋkekeɖoɖowo le ata",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Ŋkekewo ƒe ŋkɔɖoɖo | Nyatakakpɔkpɔ",
       "MAPPI_ALLOWANCE_LABEL": "Mappi ƒe ɖasele le eɖokui me",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Ŋu wɔ ƒe tɔxɛ me",
@@ -76,8 +77,9 @@
           "DELIVERED_TO_BUYER": "Va nyo klotsi"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Ɖoɖoɖo si wòɖo na dɔwɔla",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Wotsɔ teƒe si ŋutsuɖɔla le dzi. Ne wòfa dɔɖɔ kplɔa, medea teƒe si dɔwɔla le ɖe dzi.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Ɖoɖoɖo si wòɖo na dɔwɔla",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Wotsɔ teƒe si ŋutsuɖɔla le dzi. Ne wòfa dɔɖɔ kplɔa, medea teƒe si dɔwɔla le ɖe dzi.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Nutsotso ƒe nu vɔ̃ɖi aɖe siɖeɖe le dɔwɔla kple xɔxɔla me",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Taflatse ŋlɔ e-mail adrɛsi si sɔ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Ŋkɔ ŋɔŋlɔ kpɔ dzidzedze",
@@ -115,6 +117,21 @@
         "SELLING_EXPIRATION_DATE": "Dɔ nu {expired_by_date}"
       }
     },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Nukpɔkpɔ ŋutinya me",
+      "VIEW_ORDER_HEADER": "Kpɔ dɔwɔa",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Dɔwɔ ƒe ŋɔ ɖoɖo",
+      "ORDER_SUBHEADER": "Dɔwɔ ƒe ŋɔ",
+      "ORDERED_ITEMS_SUBHEADER": "Ŋkeke si dɔ",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Dɔwɔla",
+        "TOTAL_PRICE_LABEL": "ƒeƒe ŋutɔ",
+        "TIME_OF_ORDER_LABEL": "Ɣeyi dɔwɔ",
+        "STATUS_LABEL": "Nuŋlɔɖi"
+      },
+      "ORDER_COMPLETED_LABEL": "Nusɔɔsi dzo",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Nusɔɔsi dzi tɔ̃wo / gbeɖeɖewo"
+    },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Ƒle nu tso Nudzrala gbɔ",
       "SELLER_DETAILS_LABEL": "Nudzrala ƒe Nyatakakawo",
@@ -127,7 +144,6 @@
       "REVIEWS_SCORE_MESSAGE": "Totoɖemewo ƒe Dzesi: {seller_review_rating} tso 5.0 me",
       "SELLER_CONTACT_DETAILS_LABEL": "Nudzrala ƒe Kadodo Ŋuti Nyatakakawo",
       "SELLER_USERNAME_LABEL": "Zãla ƒe ŋkɔ",
-      "SELLER_PIONEER_ID_LABEL": "Mɔɖela Pionier ƒe ID",
       "SELLER_PHONE_NUMBER_LABEL": "Telefon xexlẽdzesi",
       "SELLER_EMAIL_ADDRESS_LABEL": "Email adrɛsi",
       "ONLINE_SHOPPING": {
@@ -171,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "Vodada le agbatsɔtsɔ ƒe ŋkuléleɖenuŋu me",
         "SELF_REVIEW_NOT_POSSIBLE": "Ame ŋutɔ ƒe ŋkuléle ɖe nu ŋu mateŋu adzɔ o"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Kpɔ dɔwɔa"
     }
   },
   "POPUP": {
@@ -242,8 +261,14 @@
     }
   },
   "SHARED": {
-    "PIONEER_LABEL": "Pione",
+    "PIONEER_LABEL": "Pionier",
+    "PIONEER_ID_LABEL": "Mɔɖela Pionier ƒe ID",
     "BUY": "Gbe",
+    "RESET": "Dɔwɔ ɖo to",
+    "REFUND": "Zɔmɛ na nu",
+    "FULFILL": "Dzraɖeɖe",
+    "FULFILLED": "Kpɔɖeŋu",
+    "PENDING": "Le agbagba",
     "NAVIGATE": "Nyɔɖo",
     "NO_COMMENT": "Mekɔme mɛkpɔ",
     "SEARCH_CENTER": "Fetɔ ƒe Gbɔtɔwo",
@@ -252,6 +277,7 @@
     "SEARCH_LOADING": "Gɔgɔme nyateƒe kplɔ...",
     "REPLY": "Ɖe si",
     "ADD_ITEM": "Tsɔ nyateƒe",
+    "CHECKOUT": "Ɖoɖoɖo si gbɔ",
     "DELETE": "Zɔ",
     "CONFIRM_DELETE": "Míe nya dzɔ aɖe be woanɔ anyi sia dzi nyuie? Woate ŋu kɔ woanɔ anyiŋú gɔme o.",
     "SAVE": "Ŋutɔ",
