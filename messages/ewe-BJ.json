@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "Ðo Dzadzra ƒe Titina",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Ŋkekewo ƒe ŋkɔɖoɖo | Ŋkekeɖoɖowo le ata",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Ŋkekewo ƒe ŋkɔɖoɖo | Nyatakakpɔkpɔ",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Tsɔtsɔ abe internet me",
       "MAPPI_ALLOWANCE_LABEL": "Mappi ƒe ɖasele le eɖokui me",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Ŋu wɔ ƒe tɔxɛ me",
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Nukpɔkpɔ ŋutinya me",
+      "VIEW_ORDER_HEADER": "Kpɔ dɔwɔa",
       "SELLER_ORDER_FULFILLMENT_HEADER": "Dɔwɔ ƒe ŋɔ ɖoɖo",
       "ORDER_SUBHEADER": "Dɔwɔ ƒe ŋɔ",
       "ORDERED_ITEMS_SUBHEADER": "Ŋkeke si dɔ",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Dɔwɔla",
         "TOTAL_PRICE_LABEL": "ƒeƒe ŋutɔ",
-        "TIME_OF_ORDER_LABEL": "Ɣeyi dɔwɔ"
+        "TIME_OF_ORDER_LABEL": "Ɣeyi dɔwɔ",
+        "STATUS_LABEL": "Nuŋlɔɖi"
       },
       "ORDER_COMPLETED_LABEL": "Nusɔɔsi dzo",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Nusɔɔsi dzi tɔ̃wo / gbeɖeɖewo"
@@ -184,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "Vodada le agbatsɔtsɔ ƒe ŋkuléleɖenuŋu me",
         "SELF_REVIEW_NOT_POSSIBLE": "Ame ŋutɔ ƒe ŋkuléle ɖe nu ŋu mateŋu adzɔ o"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Kpɔ dɔwɔa"
     }
   },
   "POPUP": {
@@ -260,7 +266,9 @@
     "BUY": "Gbe",
     "RESET": "Dɔwɔ ɖo to",
     "REFUND": "Zɔmɛ na nu",
+    "FULFILL": "Dzraɖeɖe",
     "FULFILLED": "Kpɔɖeŋu",
+    "PENDING": "Le agbagba",
     "NAVIGATE": "Nyɔɖo",
     "NO_COMMENT": "Mekɔme mɛkpɔ",
     "SEARCH_CENTER": "Fetɔ ƒe Gbɔtɔwo",
@@ -269,6 +277,7 @@
     "SEARCH_LOADING": "Gɔgɔme nyateƒe kplɔ...",
     "REPLY": "Ɖe si",
     "ADD_ITEM": "Tsɔ nyateƒe",
+    "CHECKOUT": "Ɖoɖoɖo si gbɔ",
     "DELETE": "Zɔ",
     "CONFIRM_DELETE": "Míe nya dzɔ aɖe be woanɔ anyi sia dzi nyuie? Woate ŋu kɔ woanɔ anyiŋú gɔme o.",
     "SAVE": "Ŋutɔ",

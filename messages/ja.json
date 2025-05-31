@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "販売センターを設定",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "オンラインショッピング | 販売商品のリスト",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "オンラインショッピング | 注文の履行",
-      "SELLER_ONLINE_SHOPPING_LABEL": "オンラインショッピング",
       "MAPPI_ALLOWANCE_LABEL": "Mappiの残り許容量",  
       "FULFILLMENT_METHOD_TYPE": {  
         "FULFILLMENT_METHOD_TYPE_LABEL": "履行方法",  
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "注文リスト",
+      "VIEW_ORDER_HEADER": "注文を表示",
       "SELLER_ORDER_FULFILLMENT_HEADER": "販売者の注文履行",
       "ORDER_SUBHEADER": "注文ヘッダー",
       "ORDERED_ITEMS_SUBHEADER": "注文された商品",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "販売者",
         "TOTAL_PRICE_LABEL": "合計金額",
-        "TIME_OF_ORDER_LABEL": "注文時間"
+        "TIME_OF_ORDER_LABEL": "注文時間",
+        "STATUS_LABEL": "ステータス"
       },
       "ORDER_COMPLETED_LABEL": "注文完了",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "注文発送／受取済み"
@@ -184,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "レビューの読み込みエラー",
         "SELF_REVIEW_NOT_POSSIBLE": "自分自身へのレビューはできません"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "注文を見る"
     }
   },
   "POPUP": {
@@ -260,7 +266,9 @@
     "BUY": "購入",
     "RESET": "リセット",
     "REFUND": "返金",
+    "FULFILL": "完了する",
     "FULFILLED": "完了",
+    "PENDING": "保留中",
     "NAVIGATE": "ナビゲート",
     "NO_COMMENT": "コメントが提供されていません",
     "SEARCH_CENTER": "検索センターを設定",
@@ -269,6 +277,7 @@
     "SEARCH_LOADING": "検索中...",
     "REPLY": "返信",
     "ADD_ITEM": "アイテムを追加",
+    "CHECKOUT": "お会計",
     "DELETE": "削除",
     "CONFIRM_DELETE": "本当にこのアイテムを削除しますか？この操作は元に戻せません。",
     "SAVE": "保存",

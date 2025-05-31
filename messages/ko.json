@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "판매 센터 설정",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "온라인 쇼핑 | 판매 항목 목록",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "온라인 쇼핑 | 주문 처리",
-      "SELLER_ONLINE_SHOPPING_LABEL": "온라인 쇼핑",
       "MAPPI_ALLOWANCE_LABEL": "남은 Mappi 허용량",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "이행 방법",
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "주문 목록",
+      "VIEW_ORDER_HEADER": "주문 보기",
       "SELLER_ORDER_FULFILLMENT_HEADER": "판매자 주문 이행",
       "ORDER_SUBHEADER": "주문 헤더",
       "ORDERED_ITEMS_SUBHEADER": "주문된 항목",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "판매자",
         "TOTAL_PRICE_LABEL": "총 가격",
-        "TIME_OF_ORDER_LABEL": "주문 시간"
+        "TIME_OF_ORDER_LABEL": "주문 시간",
+        "STATUS_LABEL": "상태"
       },
       "ORDER_COMPLETED_LABEL": "주문 완료",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "주문 발송/수령"
@@ -184,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "리뷰 로딩 오류",
         "SELF_REVIEW_NOT_POSSIBLE": "자기 평가가 불가능합니다"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "주문 보기"
     }
   },
   "POPUP": {
@@ -260,7 +266,9 @@
     "BUY": "구매",
     "RESET": "재설정",
     "REFUND": "환불",
+    "FULFILL": "완료하다",
     "FULFILLED": "완료됨",
+    "PENDING": "대기 중",
     "NAVIGATE": "탐색",
     "NO_COMMENT": "댓글이 제공되지 않았습니다",
     "SEARCH_CENTER": "검색 센터 설정",
@@ -269,6 +277,7 @@
     "SEARCH_LOADING": "검색 로딩 중...",
     "REPLY": "답장",
     "ADD_ITEM": "항목 추가",
+    "CHECKOUT": "결제하기",
     "DELETE": "삭제",
     "CONFIRM_DELETE": "정말로 이 항목을 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
     "SAVE": "저장",

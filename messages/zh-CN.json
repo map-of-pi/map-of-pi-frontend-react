@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "设定销售中心",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "在线购物 | 列出待售商品",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "在线购物 | 订单履行",
-      "SELLER_ONLINE_SHOPPING_LABEL": "在线购物",
       "MAPPI_ALLOWANCE_LABEL": "剩余的 Mappi 额度",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "履行方式",
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "订单列表",
+      "VIEW_ORDER_HEADER": "查看订单",
       "SELLER_ORDER_FULFILLMENT_HEADER": "卖家订单履行",
       "ORDER_SUBHEADER": "订单标题",
       "ORDERED_ITEMS_SUBHEADER": "已订购商品",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "卖家",
         "TOTAL_PRICE_LABEL": "总价",
-        "TIME_OF_ORDER_LABEL": "订单时间"
+        "TIME_OF_ORDER_LABEL": "订单时间",
+        "STATUS_LABEL": "状态"
       },
       "ORDER_COMPLETED_LABEL": "订单已完成",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "订单已发货/已收取"
@@ -184,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "加载评论时出错",
         "SELF_REVIEW_NOT_POSSIBLE": "无法对自己进行评论"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "查看订单"
     }
   },
   "POPUP": {
@@ -260,7 +266,9 @@
     "BUY": "购买",
     "RESET": "重置",
     "REFUND": "退款",
+    "FULFILL": "完成",
     "FULFILLED": "已完成",
+    "PENDING": "待处理",
     "NAVIGATE": "导航",
     "NO_COMMENT": "无评论",
     "SEARCH_CENTER": "设置搜索中心",
@@ -269,6 +277,7 @@
     "SEARCH_LOADING": "搜索加载中...",
     "REPLY": "回复",
     "ADD_ITEM": "添加项目",
+    "CHECKOUT": "结账",
     "DELETE": "删除",
     "CONFIRM_DELETE": "您确定要删除此项目吗？此操作无法撤销。",
     "SAVE": "保存",

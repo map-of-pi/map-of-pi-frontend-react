@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Siyayya ta Kan layi | Jerin Abubuwan da Ake Sayarwa",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Siyayya ta Kan layi | Cika Umarni",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Siyayya ta yanar gizo",
       "MAPPI_ALLOWANCE_LABEL": "Ragowar adadin Mappi",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Hanyar Cika Umarni",
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Jerin Umarni",
+      "VIEW_ORDER_HEADER": "Duba oda",
       "SELLER_ORDER_FULFILLMENT_HEADER": "Cikar umarnin mai sayarwa",
       "ORDER_SUBHEADER": "Kanun umarni",
       "ORDERED_ITEMS_SUBHEADER": "Kayayyakin da aka umarce",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Mai sayarwa",
         "TOTAL_PRICE_LABEL": "Jimillar farashi",
-        "TIME_OF_ORDER_LABEL": "Lokacin umarni"
+        "TIME_OF_ORDER_LABEL": "Lokacin umarni",
+        "STATUS_LABEL": "Matsayi"
       },
       "ORDER_COMPLETED_LABEL": "An kammala oda",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "An tura/karɓi oda"
@@ -184,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "Kuskure wajen ɗaukar bita",
         "SELF_REVIEW_NOT_POSSIBLE": "Ba zai yiwu ka duba kanka ba"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Duba odar"
     }
   },
   "POPUP": {
@@ -260,7 +266,9 @@
     "BUY": "Saya",
     "RESET": "Sake saiti",
     "REFUND": "Mayar da kudi",
+    "FULFILL": "Cika",
     "FULFILLED": "An cika",
+    "PENDING": "A jira",
     "NAVIGATE": "Kewaya",
     "NO_COMMENT": "Ba a ba da tsokaci ba",
     "SEARCH_CENTER": "Saita Cibiyar Bincike",
@@ -269,6 +277,7 @@
     "SEARCH_LOADING": "Ana ɗora bincike...",
     "REPLY": "Amsa",
     "ADD_ITEM": "Ƙara abu",
+    "CHECKOUT": "Biya kuɗi",
     "DELETE": "Goge",
     "CONFIRM_DELETE": "Shin da gaske kake son share wannan abu? Wannan aiki ba zai iya dawowa ba.",
     "SAVE": "Ajiye",

@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "تحديد مركز البيع",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "التسوق عبر الإنترنت | قائمة العناصر للبيع",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "التسوق عبر الإنترنت | تنفيذ الطلبات",
-      "SELLER_ONLINE_SHOPPING_LABEL": "التسوق عبر الإنترنت",
       "MAPPI_ALLOWANCE_LABEL": "المخصص المتبقي في Mappi",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "طريقة الإتمام",
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "قائمة الطلبات",
+      "VIEW_ORDER_HEADER": "عرض الطلب",
       "SELLER_ORDER_FULFILLMENT_HEADER": "إتمام طلب البائع",
       "ORDER_HEADER_SUBHEADER": "رأس الطلب",
       "ORDERED_ITEMS_SUBHEADER": "العناصر المطلوبة",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "البائع",
         "TOTAL_PRICE_LABEL": "السعر الإجمالي",
-        "TIME_OF_ORDER_LABEL": "وقت الطلب"
+        "TIME_OF_ORDER_LABEL": "وقت الطلب",
+        "STATUS_LABEL": "الحالة"
       },
       "ORDER_COMPLETED_LABEL": "تم إكمال الطلب",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "تم شحن/استلام الطلب"
@@ -184,7 +187,10 @@
         "LOADING_REVIEW_FAILURE": "خطأ في تحميل التقييم", 
         "SELF_REVIEW_NOT_POSSIBLE": "لا يمكن تقييم نفسك" 
       } 
-    } 
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "عرض الطلب"
+    }
   } ,
   "POPUP": {
     "MAP_MARKER": {
@@ -260,7 +266,9 @@
     "BUY": "شراء",
     "RESET": "إعادة تعيين",
     "REFUND": "استرداد",
+    "FULFILL": "تنفيذ",
     "FULFILLED": "مكتمل",
+    "PENDING": "قيد الانتظار",
     "NAVIGATE": "تنقل",
     "NO_COMMENT": "لم يتم تقديم تعليق",
     "SEARCH_CENTER": "تعيين مركز البحث",
@@ -269,6 +277,7 @@
     "SEARCH_LOADING": "جارٍ تحميل البحث...",
     "REPLY": "رد",
     "ADD_ITEM": "إضافة منتج",
+    "CHECKOUT": "الدفع",
     "DELETE": "حذف",
     "CONFIRM_DELETE": "هل تريد حقًا حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.",
     "SAVE": "حفظ",

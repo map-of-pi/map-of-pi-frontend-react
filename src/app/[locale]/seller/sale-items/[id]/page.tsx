@@ -134,7 +134,8 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   }, [sellerShopInfo]); 
 
   const checkoutOrder = async () => {
-    if(!currentUser?.pi_uid) return setError('user not login for payment');
+    if (!currentUser?.pi_uid) return setError('User not logged in for payment');
+
     const paymentData: PaymentDataType = {
       amount: totalAmount,
       memo: 'This is another Test Payment',
@@ -150,7 +151,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         }
       },        
     };
-    await payWithPi(paymentData)
+    await payWithPi(paymentData);
     setPickedItems([]);
     setTotalAmount(0);
     setBuyerDescription("");
@@ -288,7 +289,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
                 value={sellerShopInfo.fulfillment_description}
                 disabled
               />
-              <h2 className={SUBHEADER}>{t('Buyer Fulfillment Details')}</h2>
+              <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL')}</h2>
               <TextArea
                 name="buying_details"
                 value={buyerDescription}
@@ -297,7 +298,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             </div>
             <div className="mb-4 mt-3 ml-auto">
               <Button
-                label={t('Checkout ') + `(${totalAmount.toString()} Pi)`}
+                label={t('SHARED.CHECKOUT') + ` (${totalAmount.toString()} Pi)`}
                 disabled={!(pickedItems.length>0)}
                 styles={{
                   color: '#ffc153',

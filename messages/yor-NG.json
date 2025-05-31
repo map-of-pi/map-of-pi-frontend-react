@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "Ṣeto aarin Ile-iṣẹ Tita",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Rira Lori Ayelujara | Atokọ Awọn Ohun Ti O Ta",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Rira Lori Ayelujara | Imuṣẹ Ibere",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Ìṣàkóso Ọjà Lórí Ayélujára",
       "MAPPI_ALLOWANCE_LABEL": "Ìkúnrẹ́rẹ́ Mappi tó kù",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Ọ̀nà ìpẹ̀yà",
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Àkójọ Àṣẹ",
+      "VIEW_ORDER_HEADER": "Wo àṣẹ",
       "SELLER_ORDER_FULFILLMENT_HEADER": "Ipari ibere onisowo",
       "ORDER_SUBHEADER": "Akọle ibere",
       "ORDERED_ITEMS_SUBHEADER": "Awọn ohun ti a bere",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Oníṣòwò",
         "TOTAL_PRICE_LABEL": "Lapapọ iye",
-        "TIME_OF_ORDER_LABEL": "Akoko ibere"
+        "TIME_OF_ORDER_LABEL": "Akoko ibere",
+        "STATUS_LABEL": "Ìpò"
       },
       "ORDER_COMPLETED_LABEL": "Àṣẹ parí",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Àṣẹ ránṣẹ́ / ti gba"
@@ -184,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "àṣìṣe ayẹ̀wò ìrùsókè fun awotele",
         "SELF_REVIEW_NOT_POSSIBLE": "àtúnyẹ̀wò ara eni ko seesé ṣe"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Wo pèsè"
     }
   },
   "POPUP": {
@@ -260,7 +266,9 @@
     "BUY": "Ra oja",
     "RESET": "Tunṣe",
     "REFUND": "Ìsanwó pada",
+    "FULFILL": "Ṣeé ṣe",
     "FULFILLED": "Ti ṣe",
+    "PENDING": "N dúró de",
     "NAVIGATE": "Ṣàbẹ̀wò",
     "NO_COMMENT": "Ko si asọye ti a pese", 
     "SEARCH_CENTER": "Ṣeto ile-iṣẹ wiwa", 
@@ -268,7 +276,8 @@
     "SEARCH_REVIEWS": "Awọn atunwo wiwa", 
     "SEARCH_LOADING": "Ṣawari nlo...", 
     "REPLY": "E te pada", 
-    "ADD_ITEM": "Fikun un Item",  
+    "ADD_ITEM": "Fikun un Item",
+    "CHECKOUT": "Sanwo",
     "DELETE": "Pàdánù",
     "CONFIRM": "Jẹrisi",  
     "CONFIRM_DELETE": "Ṣé o dájú pé o fẹ́ pa àyọkà yìí? Ìṣe yìí kò lè tún ṣe.",

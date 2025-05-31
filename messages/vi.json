@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "Đặt Trung tâm bán hàng",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Mua Sắm Trực Tuyến | Danh Sách Mặt Hàng Bán",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Mua Sắm Trực Tuyến | Hoàn Thành Đơn Hàng",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Mua sắm trực tuyến",
       "MAPPI_ALLOWANCE_LABEL": "Trợ cấp Mappi còn lại",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Phương thức hoàn thành",
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Danh sách đơn hàng",
+      "VIEW_ORDER_HEADER": "Xem đơn hàng",
       "SELLER_ORDER_FULFILLMENT_HEADER": "Hoàn thành đơn hàng người bán",
       "ORDER_SUBHEADER": "Tiêu đề đơn hàng",
       "ORDERED_ITEMS_SUBHEADER": "Mặt hàng đã đặt",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Người bán",
         "TOTAL_PRICE_LABEL": "Tổng giá",
-        "TIME_OF_ORDER_LABEL": "Thời gian đặt hàng"
+        "TIME_OF_ORDER_LABEL": "Thời gian đặt hàng",
+        "STATUS_LABEL": "Trạng thái"
       },
       "ORDER_COMPLETED_LABEL": "Đơn hàng hoàn thành",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Đơn hàng đã gửi/đã nhận"
@@ -184,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "Lỗi khi tải đánh giá",
         "SELF_REVIEW_NOT_POSSIBLE": "Không thể tự đánh giá"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Xem đơn hàng"
     }
   },
   "POPUP": {
@@ -260,7 +266,9 @@
     "BUY": "Mua",
     "RESET": "Đặt lại",
     "REFUND": "Hoàn tiền",
+    "FULFILL": "Hoàn thành",
     "FULFILLED": "Đã hoàn thành",
+    "PENDING": "Đang chờ xử lý",
     "NAVIGATE": "Dẫn đường",
     "NO_COMMENT": "Chưa có bình luận",
     "SEARCH_CENTER": "Đặt Trung tâm Tìm kiếm",
@@ -269,6 +277,7 @@
     "SEARCH_LOADING": "Đang tải tìm kiếm...",
     "REPLY": "Trả lời",
     "ADD_ITEM": "Thêm mục",
+    "CHECKOUT": "Thanh toán",
     "DELETE": "Xóa",
     "CONFIRM_DELETE": "Bạn có thực sự muốn xóa mục này không? Hành động này không thể hoàn tác.",
     "SAVE": "Lưu",

@@ -27,7 +27,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
   useEffect(() => {
     const getOrder= async (id: string) => {
       try {
-        setLoading(true)
+        setLoading(true);
         const data = await fetchOrderById(id);
         if (data) {
           setCurrentOrder(data.order);
@@ -78,12 +78,12 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
           {buyerName}
         </h3>
         <h1 className={HEADER}>
-          {"Buyer Order Details"}
+          {t('SCREEN.SELLER_ORDER_FULFILLMENT.VIEW_ORDER_HEADER')}
         </h1>
       </div>
 
       <h2 className={SUBHEADER}>
-      {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_SUBHEADER')}
+        {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_SUBHEADER')}
       </h2>
       {currentOrder && <div className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7`}
       >
@@ -91,7 +91,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
           <div className="flex gap-x-4">
             <div className="flex-auto w-64">
               <Input
-                label={'Seller:'}
+                label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.SELLER_LABEL') + ':'}
                 name="name"
                 type="text"
                 value={sellerName}
@@ -102,7 +102,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
             <div className="flex-auto w-32">
               <div className="flex items-center gap-2">
                 <Input
-                  label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.TOTAL_PRICE_LABEL')}
+                  label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.TOTAL_PRICE_LABEL') + ':'}
                   name="Total price"
                   type="number"
                   value={currentOrder.total_amount.$numberDecimal || currentOrder.total_amount.$numberDecimal.toString()}
@@ -116,7 +116,9 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
           </div>
           <div className="flex gap-x-4 w-full mt-1">
             <div className="flex-auto w-64">
-              <label className="block text-[17px] text-[#333333] mb-1">Time of order:</label>
+              <label className="block text-[17px] text-[#333333] mb-1">
+                {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.TIME_OF_ORDER_LABEL') + ':'}
+              </label>
               <div
                 className={`p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 focus:border-[#1d724b] border-[2px] w-full mb-2`}
               >
@@ -136,10 +138,10 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
             </div>
             <div className="flex-auto w-32">
               <Input
-                label={'Status:'}
+                label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.STATUS_LABEL') + ':'}
                 name="status"
                 type="text"
-                value={currentOrder.status || 'Pending'}
+                value={currentOrder.status || t('SHARED.PENDING')}
                 disabled={true}
               />
             </div>                 
@@ -150,13 +152,13 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
       </div>}
 
       <h2 className={SUBHEADER}>
-        Ordered Items:
+        {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDERED_ITEMS_SUBHEADER')}
       </h2>
       <div className="max-h-[600px] overflow-y-auto p-1 mb-4 mt-3">
         {orderItems && orderItems.length>0 && orderItems.map((item, index)=>(<div
           data-id={item._id}
           className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
-            item.status===OrderItemStatus.Fulfilled || item.status===OrderItemStatus.Refunded? 
+            item.status === OrderItemStatus.Fulfilled || item.status === OrderItemStatus.Refunded? 
             'bg-yellow-100' : ''
           }`}
           key={index}
@@ -176,7 +178,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
               <div className="flex-auto w-32">
                 <div className="flex items-center gap-2">
                   <Input
-                    label={'Amount:'}
+                    label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
                     name="price"
                     type="number"
                     value={item.subtotal.$numberDecimal || item.subtotal.$numberDecimal.toString()}
@@ -214,7 +216,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
             <div className="flex items-center gap-x-5 w-full mt-2">
               <div className="flex-auto w-64 mr-2">
                 <Input
-                  label={"Quantity"}
+                  label={t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.BUYING_QUANTITY_LABEL') + ':'}
                   name="quantity"
                   type="number"
                   value={item.quantity}
@@ -225,7 +227,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
               </div> 
               <div className="flex-auto w-32">
                 <Input
-                  label={'Status:'}
+                  label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.STATUS_LABEL') + ':'}
                   name="Status"
                   type="text"
                   value={item.status}
@@ -254,7 +256,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
           value={currentOrder?.seller_fulfillment_description}
           disabled
         />
-        <h2 className={SUBHEADER}>{t('Buyer Fulfillment Details')}</h2>
+        <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL')}</h2>
         <TextArea
           name="buying_details"
           value={currentOrder?.buyer_fulfillment_description}

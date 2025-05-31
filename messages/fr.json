@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "Définir le centre de vente",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Achats en Ligne | Lister les Articles en Vente",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Achats en Ligne | Traitement des Commandes",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Achats en ligne",
       "MAPPI_ALLOWANCE_LABEL": "Allocation Mappi restante",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Méthode de réalisation",
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Liste des commandes",
+      "VIEW_ORDER_HEADER": "Voir la commande",
       "SELLER_ORDER_FULFILLMENT_HEADER": "Exécution de commande du vendeur",
       "ORDER_SUBHEADER": "En-tête de commande",
       "ORDERED_ITEMS_SUBHEADER": "Articles commandés",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Vendeur",
         "TOTAL_PRICE_LABEL": "Prix total",
-        "TIME_OF_ORDER_LABEL": "Heure de la commande"
+        "TIME_OF_ORDER_LABEL": "Heure de la commande",
+        "STATUS_LABEL": "Statut"
       },
       "ORDER_COMPLETED_LABEL": "Commande terminée",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Commande expédiée/collectée"
@@ -184,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "Erreur lors d'enregistrement de l'avis",
         "SELF_REVIEW_NOT_POSSIBLE": "Auto-évaluation non possible"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Voir la commande"
     }
   },
   "POPUP": {
@@ -260,7 +266,9 @@
     "BUY": "Acheter",
     "RESET": "Réinitialiser",
     "REFUND": "Remboursement",
+    "FULFILL": "Exécuter",
     "FULFILLED": "Rempli",
+    "PENDING": "En attente",
     "NAVIGATE": "Naviguer",
     "NO_COMMENT": "Aucun commentaire fourni",
     "SEARCH_CENTER": "Définir le centre de recherche",
@@ -269,6 +277,7 @@
     "SEARCH_LOADING": "Chargement de la recherche...",
     "REPLY": "Répondre",
     "ADD_ITEM": "Ajouter un article",
+    "CHECKOUT": "Paiement",
     "DELETE": "Supprimer",
     "CONFIRM_DELETE": "Voulez-vous vraiment supprimer cet élément? Cette action est irréversible.",
     "SAVE": "Enregistrer",

@@ -69,7 +69,6 @@
       "SELLER_SELL_CENTER": "Nǔsatɔ́ sín tito",
       "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Zɔzɔ kɛ tɔn | Dɔwɛ̀ ji xɔn",
       "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Zɔzɔ kɛ tɔn | Dɔkpo we",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Ajótin  Onǔxixo ton ɖò Ɛntɛnɛti jí ton",
       "MAPPI_ALLOWANCE_LABEL": "Mappi sín akpáxwé e kpò é",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Wlɛn owín tito e è na zán do w’azɔ̌ é",
@@ -119,12 +118,16 @@
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Zan kpé lɛ",
+      "VIEW_ORDER_HEADER": "Wɛ dɔnnu",
       "SELLER_ORDER_FULFILLMENT_HEADER": "Dɔkpo xɔxɔ hɛnnu",
       "ORDER_SUBHEADER": "Dɔkpo xɔxɔ",
       "ORDERED_ITEMS_SUBHEADER": "Dɔwɛ si xɔn",
       "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Dɔnnu gànlɔ",
         "TOTAL_PRICE_LABEL": "Hɛnnu jiji",
-        "TIME_OF_ORDER_LABEL": "Dɔwɛ hɛnnu"
+        "TIME_OF_ORDER_LABEL": "Dɔwɛ hɛnnu",
+        "STATUS_LABEL": "Ŋkɔ́wɛ"
       },
       "ORDER_COMPLETED_LABEL": "Wɛgbɛ tɔn",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Wɛgbɛ dɔ / tɔn hɔn"
@@ -184,6 +187,9 @@
         "LOADING_REVIEW_FAILURE": "Nuwanyido ɖo nukpɔn mɛ ɔ mɛ",
         "SELF_REVIEW_NOT_POSSIBLE": "Mɛɖesunɔ gbéjé kpɔ́n sixu jɛ ǎ"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Wè ɖòxɔ"
     }
   },
   "POPUP": {
@@ -260,7 +266,9 @@
     "BUY": "Xɔ nu",
     "RESET": "Wɛ to",
     "REFUND": "Zɔ na azɔ",
+    "FULFILL": "Hɔnɔ",
     "FULFILLED": "Dada",
+    "PENDING": "Mi xɛ ɖe",
     "NAVIGATE": "Kɔn",
     "NO_COMMENT": "È na xó ɖé ǎ",
     "SEARCH_CENTER": "Sɔ́ tɛn e mɛ è nɔ ba nǔ ɖè é",
@@ -269,6 +277,7 @@
     "SEARCH_LOADING": "Biba ɖo yiyi wɛ...",
     "REPLY": "Xósin",
     "ADD_ITEM": "Gɔ́ nǔ ɖévo nu nǔ ɔ",
+    "CHECKOUT": "Gbé wɛ gbà",
     "DELETE": "Súnsún",
     "CONFIRM_DELETE": "A ka ganjɛwu ɖɔ a jló na súnsún nǔ élɔ́ nugbo à? Bonú è súsun nǔ élɔ́ vɔ , ye sɔ na mo à.",
     "SAVE": "Hɛn",
