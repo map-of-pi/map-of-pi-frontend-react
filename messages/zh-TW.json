@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "查看訂單",
     "USER_PREFERENCES_HEADER": "使用者偏好",
     "PERSONALIZATION_SUBHEADER": "個性化設定",
     "LANGUAGES": "語言",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "正在進行的服務",
           "SOLD": "已售出"
         },
-        "SELLING_EXPIRATION_DATE": "{expired_by_date} 前銷售"
+        "SELLING_EXPIRATION_DATE": "{expired_by_date} 前銷售",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "銷售期限不能縮短到低於已用的{spent_weeks}週"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

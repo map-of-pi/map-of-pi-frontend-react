@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Ɖeŋu Kpɔnudɔla",
     "USER_PREFERENCES_HEADER": "Zãla ƒe Tiatia",
     "PERSONALIZATION_SUBHEADER": "Ame ŋutɔ ƒe nɔnɔme",
     "LANGUAGES": "Gbegbɔgblɔwo",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "Nùtsɔame si le na",
           "SOLD": "Wò tsɔ"
         },
-        "SELLING_EXPIRATION_DATE": "Dɔ nu {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Dɔ nu {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Gaƒoɖoe dɔwɔmɛ mètse ɖi o tɔ {spent_weeks} kɔsiwo si wòxɔ alea"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

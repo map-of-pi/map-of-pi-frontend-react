@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Xem đơn hàng",
     "USER_PREFERENCES_HEADER": "Tùy chọn người dùng",
     "PERSONALIZATION_SUBHEADER": "Cá nhân hóa",
     "LANGUAGES": "Ngôn ngữ",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "Dịch vụ đang hoạt động",
           "SOLD": "Đã bán"
         },
-        "SELLING_EXPIRATION_DATE": "Bán trước {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Bán trước {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Thời gian bán không thể rút ngắn dưới {spent_weeks} tuần đã sử dụng"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

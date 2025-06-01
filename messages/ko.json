@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "주문 보기",
     "USER_PREFERENCES_HEADER": "사용자 설정",
     "PERSONALIZATION_SUBHEADER": "개인화",
     "LANGUAGES": "언어",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "진행 중인 서비스",
           "SOLD": "판매 완료"
         },
-        "SELLING_EXPIRATION_DATE": "{expired_by_date}까지 판매"
+        "SELLING_EXPIRATION_DATE": "{expired_by_date}까지 판매",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "판매 기간은 이미 경과한 {spent_weeks}주보다 줄일 수 없습니다"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

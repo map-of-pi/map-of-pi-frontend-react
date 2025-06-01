@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Wo Àṣẹ",
     "USER_PREFERENCES_HEADER": "Awọn ayanfẹ Olumulo",   
     "PERSONALIZATION_SUBHEADER": "Ẹni-ara-ẹni",    
     "LANGUAGES": "Awọn ede",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "Ìrànlọwọ tó nlọ lọwọ",
           "SOLD": "Tà"
         },
-        "SELLING_EXPIRATION_DATE": "Títà ní {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Títà ní {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Akoko tita ko le dinku ju {spent_weeks} ọsẹ ti a ti lo lọ"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

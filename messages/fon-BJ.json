@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Zɔnɔ Dɔnu",
     "USER_PREFERENCES_HEADER": "Nǔ e mɛ e nɔ zán é yí wǎn na é",
     "PERSONALIZATION_SUBHEADER": "Mɛɖesunɔ sin nu",
     "LANGUAGES": "Gbè lɛ",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "Azɔwiwa ɖò yiyi wɛ desǔ",
           "SOLD": "È hé é sa" 
         },
-        "SELLING_EXPIRATION_DATE": "Sa ɖo {expired_by_date} mɛ"
+        "SELLING_EXPIRATION_DATE": "Sa ɖo {expired_by_date} mɛ",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Wɛ dɔ gbè tò ɖo doxɔmɛ lè {spent_weeks} sɔ́nù wɛ wɛ́ lɛ"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

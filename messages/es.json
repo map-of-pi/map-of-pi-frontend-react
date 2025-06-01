@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Ver pedidos",
     "USER_PREFERENCES_HEADER": "Preferencias del Usuario",
     "PERSONALIZATION_SUBHEADER": "Personalización",
     "LANGUAGES": "Idiomas",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "Servicio continuo",
           "SOLD": "Vendido"
         },
-        "SELLING_EXPIRATION_DATE": "Vender antes de {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Vender antes de {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "La duración de venta no puede reducirse por debajo de las {spent_weeks} semanas ya transcurridas"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

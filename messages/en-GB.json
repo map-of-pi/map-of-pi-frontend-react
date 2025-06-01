@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "View Orders",
     "USER_PREFERENCES_HEADER": "User Preferences",
     "PERSONALIZATION_SUBHEADER": "Personalisation",
     "LANGUAGES": "Languages",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "Ongoing service",
           "SOLD": "Sold"  
         },
-        "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Selling duration cannot be reduced below the {spent_weeks} weeks already spent"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

@@ -204,7 +204,6 @@ export interface OrderType {
   updatedAt?: Date;
 }
 
-
 export interface PartialOrderType extends Pick<OrderType, '_id' | 'buyer_id' | 'seller_id'| 'total_amount' | 'createdAt' |  'status' | 'fulfillment_method' | 'seller_fulfillment_description' | 'buyer_fulfillment_description' > {};
 
 export enum OrderItemStatus { 
@@ -212,7 +211,6 @@ export enum OrderItemStatus {
   Fulfilled = "fulfilled",
   Pending = 'pending',
 }
-
 
 export interface OrderItemType {
   _id: string;

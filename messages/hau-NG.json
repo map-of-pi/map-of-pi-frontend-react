@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Duba Umarni",
     "USER_PREFERENCES_HEADER": "Zaɓin mai amfani",
     "PERSONALIZATION_SUBHEADER": "Keɓancewa",
     "LANGUAGES": "Harsuna",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "Aikin ci gaba",
           "SOLD": "An sayar"
         },
-        "SELLING_EXPIRATION_DATE": "Sayarwa kafin {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Sayarwa kafin {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Ba za a iya rage lokacin sayarwa kasa da makonni {spent_weeks} da aka riga aka yi ba"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

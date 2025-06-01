@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "عرض الطلبات",
     "USER_PREFERENCES_HEADER": "تفضيلات المستخدم",
     "PERSONALIZATION_SUBHEADER": "التخصيص",
     "LANGUAGES": "اللغات",
@@ -114,7 +115,10 @@
           "ONGOING_SERVICE": "خدمة مستمرة",
           "SOLD": "تم البيع"
         },
-        "SELLING_EXPIRATION_DATE": "يباع بتاريخ صلاحية {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "يباع بتاريخ صلاحية {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "لا يمكن تقليل مدة البيع إلى أقل من {spent_weeks} أسبوعًا تم قضاؤها بالفعل"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {

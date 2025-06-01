@@ -2,20 +2,18 @@
 
 import { useState, SetStateAction, useContext, useEffect, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import Image from "next/image";
+import { ConfirmDialogX, Notification } from "../confirm";
 import { Button } from "../Forms/Buttons/Buttons";
 import { TextArea, Input, FileInput, Select } from "../Forms/Inputs/Inputs";
-import { ConfirmDialogX, Notification } from "../confirm";
 import { ISeller, PickedItems, SellerItem, StockLevelType } from "@/constants/types";
 import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/services/sellerApi";
 import removeUrls from "@/utils/sanitize";
 import { AppContext } from "../../../../context/AppContextProvider";
 import logger from '../../../../logger.config.mjs';
-import Image from "next/image";
 
 export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
   const t = useTranslations();
-
-  const SUBHEADER = 'font-bold mb-2';
 
   const { reload, setReload } = useContext(AppContext);
   const [isAddItemEnabled, setIsAddItemEnabled] = useState(false);
@@ -260,8 +258,6 @@ export const ShopItem: React.FC<{
       ...formData,
       [name]: value,
     };
-    if (name==='price'){
-    }
     setFormData(updatedFormData);
   
     // enable or disable add item button based on form inputs
@@ -295,12 +291,13 @@ export const ShopItem: React.FC<{
 
         // Ensure the new duration is not less than already spent weeks
       if (duration < spentWeeks) {
-        setDialogueMessage(`Selling duration cannot be reduced below the ${spentWeeks} weeks already spent`);
+        setDialogueMessage(t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.VALIDATION.REDUCED_DURATION_BELOW_SPENT_WEEKS', {
+          spent_weeks: spentWeeks
+      }));
         setShowDialog(true);
         return null;
       }
     }
-    // console.log("item price: ", formData.price.$numberDecimal)
 
     const formDataToSend = new FormData();
     // Prepare form data
@@ -313,37 +310,32 @@ export const ShopItem: React.FC<{
     const price = (formData.price as unknown as string) || '0.01';
     formDataToSend.append('price', parseFloat(price).toFixed(2));
 
-
-    // for (let [key, value] of formDataToSend.entries()) {
-    //   console.log(`${key}: ${value}`);
-    // }
-
     // Add file if provided
     if (file) {
-        formDataToSend.append('image', file);
+      formDataToSend.append('image', file);
     }
 
     try {
-        logger.info('Form data being sent:', Object.fromEntries(formDataToSend.entries()));
+      logger.info('Form data being sent:', Object.fromEntries(formDataToSend.entries()));
 
-        // Send data to backend
-        const data = await addOrUpdateSellerItem(formDataToSend);
+      // Send data to backend
+      const data = await addOrUpdateSellerItem(formDataToSend);
 
-        if (data) {
-            logger.info('Saved seller item:', data);
-            setReload(true);
-            setDialogueMessage(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT', {
-                mappi_count: '99'
-            }));
-            setShowDialog(true);
-            setIsAddItemEnabled(false);
-            showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_SAVED'));
-        }
+      if (data) {
+        logger.info('Saved seller item:', data);
+        setReload(true);
+        setDialogueMessage(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT', {
+            mappi_count: '99'
+        }));
+        setShowDialog(true);
+        setIsAddItemEnabled(false);
+        showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.SUCCESSFUL_SELLER_ITEM_SAVED'));
+      }
     } catch (error) {
-        logger.error('Error saving seller item:', error);
-        showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_SAVE'));
+      logger.error('Error saving seller item:', error);
+      showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_SAVE'));
     }
-};
+  };
 
   
   const handleDelete = async (item_id: string)=> {
@@ -412,7 +404,9 @@ export const ShopItem: React.FC<{
               />
             </div>
             <div className="flex-auto w-32 gap-2">
-              <label className="block text-[17px] text-[#333333]">Photo:</label>
+              <label className="block text-[17px] text-[#333333]">
+                {t('SCREEN.BUY_FROM_SELLER.ONLINE_SHOPPING.SELLER_ITEMS_FEATURE.PHOTO') + ':'}
+              </label>
               <FileInput
                 imageUrl={previewImage}
                 handleAddImage={handleAddImage}
@@ -548,21 +542,18 @@ export const ListItem: React.FC<{
       if (existingItem) {
         // If item exists, remove it
         newTotalAmount -= price * existingItem.quantity;
-        console.log('minus unpicked amount ', newTotalAmount);
         setTotalAmount(newTotalAmount);
         return prev.filter((item) => item.itemId !== itemId);
       } else {
         // If item doesn't exist, add it
         const newItem = { itemId, quantity };
         newTotalAmount += price * quantity;
-        console.log('plus picked amount ', newTotalAmount);
         setTotalAmount(newTotalAmount);
         return [...prev, newItem];
       }
     });
   };
   
-
   const handleIncrement = () => {
     setQuantity((prev) => prev + 1);
   };
@@ -678,4 +669,3 @@ export const ListItem: React.FC<{
     </div>
   );
 };
-

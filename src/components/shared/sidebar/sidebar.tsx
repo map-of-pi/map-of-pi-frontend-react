@@ -400,7 +400,7 @@ function Sidebar(props: any) {
           {/* review order button */}
           <div className="mb-2">
             <Button
-              label={'View Orders'}
+              label={t('SIDE_NAVIGATION.VIEW_ORDERS_LABEL')}
               styles={{
                 color: '#ffc153',
                 width: '100%',

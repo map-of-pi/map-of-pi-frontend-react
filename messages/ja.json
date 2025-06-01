@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "注文を見る",
     "USER_PREFERENCES_HEADER": "ユーザー設定",
     "PERSONALIZATION_SUBHEADER": "パーソナライズ",
     "LANGUAGES": "言語",
@@ -114,7 +115,10 @@
             "ONGOING_SERVICE": "継続的サービス",
             "SOLD": "販売済み"
         },
-        "SELLING_EXPIRATION_DATE": "販売期限 {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "販売期限 {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "販売期間は、すでに経過した{spent_weeks}週間より短くすることはできません"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
