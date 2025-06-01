@@ -27,6 +27,7 @@ import {
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
 import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import { fetchToggle } from '@/services/toggleApi';
 import removeUrls from "@/utils/sanitize";
 
 import { AppContext } from '../../../../context/AppContextProvider';
@@ -105,6 +106,7 @@ function Sidebar(props: any) {
     include_trust_level_50: false,
     include_trust_level_0: false,
   });
+  const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
 
   useEffect(() => {
     if (!currentUser) {
@@ -126,7 +128,18 @@ function Sidebar(props: any) {
         logger.error('Error fetching user settings data:', error);
       }
     };
+
+    const getToggleData = async () => {
+      try {
+        const toggle = await fetchToggle('onlineShoppingFeature');
+        setOnlineShoppingEnabled(toggle.enabled);
+      } catch (error) {
+        logger.error('Error fetching toggle:', error);
+      }
+    };
+
     getUserSettingsData();
+    getToggleData();
   }, []);
 
   // Initialize formData with dbUserSettings values if available
@@ -397,23 +410,26 @@ function Sidebar(props: any) {
               }}
             />
           </div>
+          
           {/* review order button */}
-          <div className="mb-2">
-            <Button
-              label={t('SIDE_NAVIGATION.VIEW_ORDERS_LABEL')}
-              styles={{
-                color: '#ffc153',
-                width: '100%',
-                padding: '10px',
-                borderRadius: '10px',
-                fontSize: '18px',
-              }}
-              onClick={() => {
-                router.push(`/${locale}/user/order-review`);
-                props.setToggleDis(false); // Close sidebar on click
-              }}
-            />
-          </div>
+          {isOnlineShoppingEnabled && (
+            <div className="mb-2">
+              <Button
+                label={t('SIDE_NAVIGATION.VIEW_ORDERS_LABEL')}
+                styles={{
+                  color: '#ffc153',
+                  width: '100%',
+                  padding: '10px',
+                  borderRadius: '10px',
+                  fontSize: '18px',
+                }}
+                onClick={() => {
+                  router.push(`/${locale}/user/order-review`);
+                  props.setToggleDis(false); // Close sidebar on click
+                }}
+              />
+            </div>
+          )}
 
           {/* user settings form fields */}
           <div className="flex flex-col justify-items-center mx-auto text-center gap-1">
