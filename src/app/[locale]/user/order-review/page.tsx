@@ -49,6 +49,21 @@ export default function OrderReviewPage() {
     );
   }
 
+  const translateOrderStatusType = (status: string): string => {
+    switch (status) {
+      case OrderStatusType.Initialized:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.INITIALIZED');
+      case OrderStatusType.Pending:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING');
+      case OrderStatusType.Completed:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.COMPLETED');
+      case OrderStatusType.Cancelled:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.CANCELED');
+      default:
+        return '';
+    }
+  };
+
   return (
     <>
     <div className="w-full md:w-[500px] md:mx-auto p-4">
@@ -92,7 +107,7 @@ export default function OrderReviewPage() {
                         value={item.total_amount.$numberDecimal || item.total_amount.$numberDecimal.toString()}
                         disabled={true}
                       />
-                      <p className="text-gray-500 text-sm">Pi</p>
+                      <p className="text-gray-500 text-sm">π</p>
                     </div>
                   </div>
                 </div>
@@ -126,7 +141,7 @@ export default function OrderReviewPage() {
                       label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.STATUS_LABEL') + ':'}
                       name="status"
                       type="text"
-                      value={item.status || t('SHARED.PENDING')}
+                      value={translateOrderStatusType(item.status) || t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING')}
                       disabled={true}
                     />
                   </div>                 

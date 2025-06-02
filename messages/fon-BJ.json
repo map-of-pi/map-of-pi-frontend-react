@@ -133,6 +133,14 @@
         "TIME_OF_ORDER_LABEL": "Dɔwɛ hɛnnu",
         "STATUS_LABEL": "Ŋkɔ́wɛ"
       },
+      "STATUS_TYPE": {
+        "INITIALIZED": "Wè gbɛ ɖo",
+        "PENDING": "Dè do wé",
+        "COMPLETED": "Wè fi",
+        "CANCELED": "Wè tu",
+        "REFUNDED": "Wɛ ɖo xwé",
+        "FULFILLED": "Wɛ klu"
+      },
       "ORDER_COMPLETED_LABEL": "Wɛgbɛ tɔn",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Wɛgbɛ dɔ / tɔn hɔn"
     },

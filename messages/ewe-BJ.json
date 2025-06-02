@@ -133,6 +133,14 @@
         "TIME_OF_ORDER_LABEL": "Ɣeyi dɔwɔ",
         "STATUS_LABEL": "Nuŋlɔɖi"
       },
+      "STATUS_TYPE": {
+        "INITIALIZED": "ɖoɖoe me le",
+        "PENDING": "Le agbeŋu",
+        "COMPLETED": "Dzra ɖe",
+        "CANCELED": "Wɔ le eme",
+        "REFUNDED": "Tso asi wòaɖo ŋu",
+        "FULFILLED": "Wòtsɔ nu"
+      },
       "ORDER_COMPLETED_LABEL": "Nusɔɔsi dzo",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Nusɔɔsi dzi tɔ̃wo / gbeɖeɖewo"
     },

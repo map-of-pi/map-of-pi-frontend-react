@@ -133,6 +133,14 @@
         "TIME_OF_ORDER_LABEL": "訂單時間",
         "STATUS_LABEL": "狀態"
       },
+      "STATUS_TYPE": {
+        "INITIALIZED": "已初始化",
+        "PENDING": "待處理",
+        "COMPLETED": "已完成",
+        "CANCELED": "已取消",
+        "REFUNDED": "已退款",
+        "FULFILLED": "訂單已完成"
+      },
       "ORDER_COMPLETED_LABEL": "訂單已完成",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "訂單已發貨/已收取"
     },

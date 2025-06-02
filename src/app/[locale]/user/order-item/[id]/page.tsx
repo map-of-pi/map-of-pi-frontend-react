@@ -5,7 +5,13 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Input, Select, TextArea } from "@/components/shared/Forms/Inputs/Inputs";
 import Skeleton from "@/components/skeleton/skeleton";
-import { FulfillmentType, OrderItemStatus, OrderItemType, PartialOrderType } from "@/constants/types";
+import { 
+  FulfillmentType, 
+  OrderItemStatus, 
+  OrderItemType, 
+  OrderStatusType, 
+  PartialOrderType 
+} from "@/constants/types";
 import { fetchOrderById } from "@/services/orderApi";
 import logger from '../../../../../../logger.config.mjs';
 
@@ -63,6 +69,34 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
     },
   ];
 
+  const translateOrderStatusType = (status: string): string => {
+    switch (status) {
+      case OrderStatusType.Initialized:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.INITIALIZED');
+      case OrderStatusType.Pending:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING');
+      case OrderStatusType.Completed:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.COMPLETED');
+      case OrderStatusType.Cancelled:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.CANCELED');
+      default:
+        return '';
+    }
+  };
+
+  const translateOrderItemStatusType = (status: string): string => {
+    switch (status) {
+      case OrderItemStatus.Refunded:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.REFUNDED');
+      case OrderItemStatus.Fulfilled:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.FULFILLED');
+      case OrderItemStatus.Pending:
+        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING');
+      default:
+        return '';
+    }
+  };
+
   // loading condition
   if (loading) {
     logger.info('Loading seller data..');
@@ -108,7 +142,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
                   value={currentOrder.total_amount.$numberDecimal || currentOrder.total_amount.$numberDecimal.toString()}
                   disabled={true}
                 />
-                <p className="text-gray-500 text-sm">Pi</p>
+                <p className="text-gray-500 text-sm">π</p>
               </div>
             </div>
           </div>
@@ -141,7 +175,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
                 label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.STATUS_LABEL') + ':'}
                 name="status"
                 type="text"
-                value={currentOrder.status || t('SHARED.PENDING')}
+                value={translateOrderStatusType(currentOrder.status) || t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING')}
                 disabled={true}
               />
             </div>                 
@@ -184,7 +218,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
                     value={item.subtotal.$numberDecimal || item.subtotal.$numberDecimal.toString()}
                     disabled={true}
                   />
-                  <p className="text-gray-500 text-sm">Pi</p>
+                  <p className="text-gray-500 text-sm">π</p>
                 </div>
               </div>
             </div>
@@ -230,7 +264,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
                   label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.STATUS_LABEL') + ':'}
                   name="Status"
                   type="text"
-                  value={item.status}
+                  value={translateOrderItemStatusType(item.status)}
                   className="p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 text-center focus:border-[#1d724b] border-[2px] max-w-[100px]"
                   disabled={true}
                 />

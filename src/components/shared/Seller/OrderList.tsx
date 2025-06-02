@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "../Forms/Buttons/Buttons";
 import { Input } from "../Forms/Inputs/Inputs";
-import { OrderStatusType, PartialOrderType } from "@/constants/types";
+import { PartialOrderType } from "@/constants/types";
 import { fetchSellerOrders } from "@/services/orderApi";
 import logger from '../../../../logger.config.mjs';
 
@@ -33,7 +33,6 @@ export const ListOrder: React.FC<{
     
     getOrderList(user_id);
   }, [user_id]); 
-
 
   return (
     <div>
@@ -65,7 +64,7 @@ export const ListOrder: React.FC<{
                     value={item.total_amount.$numberDecimal || item.total_amount.$numberDecimal.toString()}
                     disabled={true}
                   />
-                  <p className="text-gray-500 text-sm">Pi</p>
+                  <p className="text-gray-500 text-sm">π</p>
                 </div>
               </div>
             </div>
@@ -96,15 +95,15 @@ export const ListOrder: React.FC<{
                 :
                 `/${locale}/user/order-item/${item._id}?seller_name=${user_name}`}
               >       
-              <Button
-                label={t('SHARED.FULFILL')}
-                disabled={false} 
-                styles={{
-                  color: '#ffc153',
-                  height: '40px',
-                  padding: '10px 15px'
-                }}
-              />
+                <Button
+                  label={t('SHARED.FULFILL')}
+                  disabled={false} 
+                  styles={{
+                    color: '#ffc153',
+                    height: '40px',
+                    padding: '10px 15px'
+                  }}
+                />
               </Link>
               
             </div>

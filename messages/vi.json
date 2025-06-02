@@ -133,6 +133,14 @@
         "TIME_OF_ORDER_LABEL": "Thời gian đặt hàng",
         "STATUS_LABEL": "Trạng thái"
       },
+      "STATUS_TYPE": {
+        "INITIALIZED": "Đã khởi tạo",
+        "PENDING": "Đang chờ xử lý",
+        "COMPLETED": "Đã hoàn thành",
+        "CANCELED": "Đã hủy",
+        "REFUNDED": "Đã hoàn tiền",
+        "FULFILLED": "Đơn hàng đã được xử lý"
+      },
       "ORDER_COMPLETED_LABEL": "Đơn hàng hoàn thành",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Đơn hàng đã gửi/đã nhận"
     },

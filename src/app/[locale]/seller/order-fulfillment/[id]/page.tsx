@@ -163,7 +163,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                   value={currentOrder.total_amount.$numberDecimal || currentOrder.total_amount.$numberDecimal.toString()}
                   disabled={true}
                 />
-                <p className="text-gray-500 text-sm">Pi</p>
+                <p className="text-gray-500 text-sm">π</p>
               </div>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
                     value={item.subtotal.$numberDecimal || item.subtotal.$numberDecimal.toString()}
                     disabled={true}
                   />
-                  <p className="text-gray-500 text-sm">Pi</p>
+                  <p className="text-gray-500 text-sm">π</p>
                 </div>
               </div>
             </div>

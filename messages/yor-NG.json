@@ -133,6 +133,14 @@
         "TIME_OF_ORDER_LABEL": "Akoko ibere",
         "STATUS_LABEL": "Ìpò"
       },
+      "STATUS_TYPE": {
+        "INITIALIZED": "Ti bẹ̀rẹ̀",
+        "PENDING": "N dúró de",
+        "COMPLETED": "Ti parí",
+        "CANCELED": "Ti fagilé",
+        "REFUNDED": "Ti pada owo",
+        "FULFILLED": "A ti pari aṣẹ naa"
+      },
       "ORDER_COMPLETED_LABEL": "Àṣẹ parí",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Àṣẹ ránṣẹ́ / ti gba"
     },

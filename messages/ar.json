@@ -133,6 +133,14 @@
         "TIME_OF_ORDER_LABEL": "وقت الطلب",
         "STATUS_LABEL": "الحالة"
       },
+      "STATUS_TYPE": {
+        "INITIALIZED": "تم البدء",
+        "PENDING": "قيد الانتظار",
+        "COMPLETED": "مكتمل",
+        "CANCELED": "تم الإلغاء",
+        "REFUNDED": "تم استرداد المبلغ",
+        "FULFILLED": "تم التنفيذ"
+      },
       "ORDER_COMPLETED_LABEL": "تم إكمال الطلب",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "تم شحن/استلام الطلب"
     },

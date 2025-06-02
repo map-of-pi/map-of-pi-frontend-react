@@ -133,6 +133,14 @@
         "TIME_OF_ORDER_LABEL": "주문 시간",
         "STATUS_LABEL": "상태"
       },
+      "STATUS_TYPE": {
+        "INITIALIZED": "초기화됨",
+        "PENDING": "대기 중",
+        "COMPLETED": "완료됨",
+        "CANCELED": "취소됨",
+        "REFUNDED": "환불됨",
+        "FULFILLED": "이행됨"
+      },
       "ORDER_COMPLETED_LABEL": "주문 완료",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "주문 발송/수령"
     },

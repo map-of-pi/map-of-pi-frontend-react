@@ -133,6 +133,14 @@
         "TIME_OF_ORDER_LABEL": "Heure de la commande",
         "STATUS_LABEL": "Statut"
       },
+      "STATUS_TYPE": {
+        "INITIALIZED": "Initialisé",
+        "PENDING": "En attente",
+        "COMPLETED": "Terminé",
+        "CANCELED": "Annulé",
+        "REFUNDED": "Remboursé",
+        "FULFILLED": "Exécuté"
+      },
       "ORDER_COMPLETED_LABEL": "Commande terminée",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Commande expédiée/collectée"
     },
