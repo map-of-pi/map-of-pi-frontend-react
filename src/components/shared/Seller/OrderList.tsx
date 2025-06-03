@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "../Forms/Buttons/Buttons";
 import { Input } from "../Forms/Inputs/Inputs";
-import { PartialOrderType } from "@/constants/types";
+import { OrderStatusType, PartialOrderType } from "@/constants/types";
 import { fetchSellerOrders } from "@/services/orderApi";
 import logger from '../../../../logger.config.mjs';
 
