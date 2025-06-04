@@ -6,13 +6,16 @@ import { useEffect, useState } from "react";
 import { Input, Select, TextArea } from "@/components/shared/Forms/Inputs/Inputs";
 import Skeleton from "@/components/skeleton/skeleton";
 import { 
-  FulfillmentType, 
   OrderItemStatus, 
   OrderItemType, 
-  OrderStatusType, 
   PartialOrderType 
 } from "@/constants/types";
 import { fetchOrderById } from "@/services/orderApi";
+import { 
+  getFulfillmentMethodOptions, 
+  translateOrderItemStatusType, 
+  translateOrderStatusType 
+} from "@/utils/translate";
 import logger from '../../../../../../logger.config.mjs';
 
 export default function ReviewOrderItemPage({ params, searchParams }: { params: { id: string }, searchParams: { user_name: string, seller_type: string } }) {
@@ -53,49 +56,6 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
     
     getOrder(orderId);
   }, [orderId]);
-  
-  const translatedFulfillmentMethod = [
-    {
-      value: FulfillmentType.CollectionByBuyer,
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
-      ),
-    },
-    {
-      value: FulfillmentType.DeliveredToBuyer,
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
-      ),
-    },
-  ];
-
-  const translateOrderStatusType = (status: string): string => {
-    switch (status) {
-      case OrderStatusType.Initialized:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.INITIALIZED');
-      case OrderStatusType.Pending:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING');
-      case OrderStatusType.Completed:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.COMPLETED');
-      case OrderStatusType.Cancelled:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.CANCELED');
-      default:
-        return '';
-    }
-  };
-
-  const translateOrderItemStatusType = (status: string): string => {
-    switch (status) {
-      case OrderItemStatus.Refunded:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.REFUNDED');
-      case OrderItemStatus.Fulfilled:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.FULFILLED');
-      case OrderItemStatus.Pending:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING');
-      default:
-        return '';
-    }
-  };
 
   // loading condition
   if (loading) {
@@ -175,7 +135,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
                 label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.STATUS_LABEL') + ':'}
                 name="status"
                 type="text"
-                value={translateOrderStatusType(currentOrder.status) || t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING')}
+                value={translateOrderStatusType(currentOrder.status, t) || t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING')}
                 disabled={true}
               />
             </div>                 
@@ -264,7 +224,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
                   label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.STATUS_LABEL') + ':'}
                   name="Status"
                   type="text"
-                  value={translateOrderItemStatusType(item.status)}
+                  value={translateOrderItemStatusType(item.status, t)}
                   className="p-[10px] block rounded-xl border-[#BDBDBD] bg-transparent outline-0 text-center focus:border-[#1d724b] border-[2px] max-w-[100px]"
                   disabled={true}
                 />
@@ -279,7 +239,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
         <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}</h2>
         <Select
           name="fulfillment_method"
-          options={translatedFulfillmentMethod}
+          options={getFulfillmentMethodOptions(t)}
           value={currentOrder?.fulfillment_method}
           disabled={true}
         />

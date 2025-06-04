@@ -47,6 +47,13 @@ export interface ISeller {
   fulfillment_description?: string;
 }
 
+export enum SellerType {
+  active_seller = 'activeSeller', 
+  inactive_seller = 'inactiveSeller', 
+  test_seller = 'testSeller',
+  restrictedSeller = 'restrictedSeller'
+}
+
 export interface IReviewFeedback {
   _id: string;
   review_receiver_id: string;

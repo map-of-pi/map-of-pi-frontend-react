@@ -9,6 +9,7 @@ import { TextArea, Input, FileInput, Select } from "../Forms/Inputs/Inputs";
 import { ISeller, PickedItems, SellerItem, StockLevelType } from "@/constants/types";
 import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/services/sellerApi";
 import removeUrls from "@/utils/sanitize";
+import { getStockLevelOptions } from "@/utils/translate";
 import { AppContext } from "../../../../context/AppContextProvider";
 import logger from '../../../../logger.config.mjs';
 
@@ -138,51 +139,6 @@ export const ShopItem: React.FC<{
   const locale = useLocale();
   const t = useTranslations();
   
-  const translatedStockLevelOptions = [
-    {
-      value: '1 available',
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_1',
-      ),
-    },
-    {
-      value: '2 available',
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_2',
-      ),
-    },
-    {
-      value: '3 available',
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_3',
-      ),
-    },
-    {
-      value: 'Many available',
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MANY',
-      ),
-    },
-    {
-      value: 'Made to order',
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MADE_TO_ORDER',
-      ),
-    },
-    {
-      value: 'Ongoing service',
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.ONGOING_SERVICE',
-      ),
-    },
-    {
-      value: 'Sold',
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.SOLD',
-      ),
-    }
-  ];
-  
   const [formData, setFormData] = useState<SellerItem>({
     seller_id: item.seller_id || '',
     name: item.name || '',
@@ -190,7 +146,7 @@ export const ShopItem: React.FC<{
     duration: item.duration || 1,
     price: { $numberDecimal: item.price?.$numberDecimal?.toString()},
     image: item.image || '',
-    stock_level: item.stock_level || translatedStockLevelOptions[0].name,
+    stock_level: item.stock_level || getStockLevelOptions(t)[0].name,
     expired_by: item.expired_by, 
     _id: item._id || ''
   });
@@ -420,7 +376,7 @@ export const ShopItem: React.FC<{
             name="stock_level"
             value={formData.stock_level}
             onChange={handleChange}
-            options={translatedStockLevelOptions}
+            options={getStockLevelOptions(t)}
             disabled={!isActive}
           />
           <label className="text-[18px] text-[#333333]">
@@ -511,16 +467,6 @@ export const ListItem: React.FC<{
 }> = ({ item, refCallback, setPickedItems, pickedItems=[], totalAmount, setTotalAmount }) => {
   const t = useTranslations();
 
-  const translatedStockLevelOptions = [
-    { value: '1 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_1') },
-    { value: '2 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_2') },
-    { value: '3 available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.AVAILABLE_3') },
-    { value: 'Many available', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MANY') },
-    { value: 'Made to order', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.MADE_TO_ORDER') },
-    { value: 'Ongoing service', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.ONGOING_SERVICE') },
-    { value: 'Sold', name: t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.STOCK_LEVEL_OPTIONS.SOLD') },
-  ];
-
   const [formData, setFormData] = useState<SellerItem>({
     seller_id: item.seller_id || '',
     name: item.name || '',
@@ -528,7 +474,7 @@ export const ListItem: React.FC<{
     duration: item.duration || 1,
     price: item.price || 0.01,
     image: item.image || '',
-    stock_level: item.stock_level || translatedStockLevelOptions[0].name,
+    stock_level: item.stock_level || getStockLevelOptions(t)[0].name,
     expired_by: item.expired_by,
     _id: item._id || '',
   });

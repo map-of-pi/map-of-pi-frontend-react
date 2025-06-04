@@ -5,8 +5,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/shared/Forms/Buttons/Buttons";
 import { Input, Select, TextArea } from "@/components/shared/Forms/Inputs/Inputs";
-import { FulfillmentType, OrderItemStatus, OrderItemType, OrderStatusType, PartialOrderType } from "@/constants/types";
+import { OrderItemStatus, OrderItemType, OrderStatusType, PartialOrderType } from "@/constants/types";
 import { fetchOrderById, updateOrderStatus, updateOrderItemStatus } from "@/services/orderApi";
+import { 
+  getFulfillmentMethodOptions, 
+  translateSellerCategory 
+} from "@/utils/translate";
 import logger from '../../../../../../logger.config.mjs';
 
 export default function OrderItemPage({ params, searchParams }: { params: { id: string }, searchParams: { seller_name: string, seller_type: string } }) {
@@ -45,44 +49,6 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
     
     getOrder(orderId);
   }, [orderId]);
-
-  const translateSellerCategory = (category: string): string => {
-    switch (category) {
-      case 'activeSeller':
-        return t(
-          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER',
-        );
-      case 'inactiveSeller':
-        return t(
-          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER',
-        );
-      case 'testSeller':
-        return t(
-          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER',
-        );
-      case 'restrictedSeller':
-        return t(
-          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.RESTRICTED_SELLER',
-        );
-      default:
-        return '';
-    }
-  };
-
-  const translatedFulfillmentMethod = [
-    {
-      value: FulfillmentType.CollectionByBuyer,
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.COLLECTION_BY_BUYER',
-      ),
-    },
-    {
-      value: FulfillmentType.DeliveredToBuyer,
-      name: t(
-        'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER',
-      ),
-    },
-  ];
   
   const handleFulfillment = async (itemId: string, status: OrderItemStatus) => {
     try {
@@ -133,7 +99,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
           {t('SCREEN.SELLER_ORDER_FULFILLMENT.SELLER_ORDER_FULFILLMENT_HEADER')}
         </h1>
         <p className="text-gray-400 text-sm">
-          {translateSellerCategory(sellerType)}
+          {translateSellerCategory(sellerType, t)}
         </p>
       </div>
 
@@ -302,7 +268,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
         <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}</h2>
         <Select
           name="fulfillment_method"
-          options={translatedFulfillmentMethod}
+          options={getFulfillmentMethodOptions(t)}
           value={currentOrder?.fulfillment_method}
           disabled={true}
         />

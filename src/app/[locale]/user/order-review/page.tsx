@@ -7,6 +7,7 @@ import { Input } from '@/components/shared/Forms/Inputs/Inputs';
 import Skeleton from '@/components/skeleton/skeleton';
 import { PartialOrderType, OrderStatusType } from '@/constants/types';
 import { fetchBuyerOrders } from '@/services/orderApi';
+import { translateOrderStatusType } from '@/utils/translate';
 
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
@@ -48,21 +49,6 @@ export default function OrderReviewPage() {
       <Skeleton type="seller_review" />
     );
   }
-
-  const translateOrderStatusType = (status: string): string => {
-    switch (status) {
-      case OrderStatusType.Initialized:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.INITIALIZED');
-      case OrderStatusType.Pending:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING');
-      case OrderStatusType.Completed:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.COMPLETED');
-      case OrderStatusType.Cancelled:
-        return t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.CANCELED');
-      default:
-        return '';
-    }
-  };
 
   return (
     <>
@@ -141,7 +127,7 @@ export default function OrderReviewPage() {
                       label={t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_HEADER_ITEMS_FEATURE.STATUS_LABEL') + ':'}
                       name="status"
                       type="text"
-                      value={translateOrderStatusType(item.status) || t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING')}
+                      value={translateOrderStatusType(item.status, t) || t('SCREEN.SELLER_ORDER_FULFILLMENT.STATUS_TYPE.PENDING')}
                       disabled={true}
                     />
                   </div>                 
