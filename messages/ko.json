@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "주문 보기",
     "USER_PREFERENCES_HEADER": "사용자 설정",
     "PERSONALIZATION_SUBHEADER": "개인화",
     "LANGUAGES": "언어",
@@ -43,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "판매자 등록",
+      "SELLER_REGISTRATION_HEADER": "판매자 관리",
       "SELLER_DETAILS_LABEL": "판매자 세부 정보",
       "EMAIL_LABEL": "이메일 주소",
       "PHONE_NUMBER_LABEL": "전화번호",
@@ -67,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "내 지도 마커가 판매 위치를 표시합니다",
       "SELLER_SETTINGS_LABEL": "판매자 설정",
       "SELLER_SELL_CENTER": "판매 센터 설정",
-      "SELLER_ONLINE_SHOPPING_LABEL": "온라인 쇼핑",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "온라인 쇼핑 | 판매 항목 목록",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "온라인 쇼핑 | 주문 처리",
       "MAPPI_ALLOWANCE_LABEL": "남은 Mappi 허용량",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "이행 방법",
@@ -76,8 +78,9 @@
           "DELIVERED_TO_BUYER": "구매자에게 배송"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "구매자에게 전달할 이행 지침",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "수거는 판매자의 주소에서 이루어집니다. 배송이 선택된 경우, 구매자의 주소를 입력하세요.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "구매자에게 전달할 이행 지침",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "수거는 판매자의 주소에서 이루어집니다. 배송이 선택된 경우, 구매자의 주소를 입력하세요.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "구매자에서 판매자에게의 이행 세부정보",
       "VALIDATION": {
         "EMAIL_VALIDATION": "유효한 이메일 주소를 입력하세요",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "등록이 성공적으로 완료되었습니다",
@@ -112,8 +115,34 @@
           "ONGOING_SERVICE": "진행 중인 서비스",
           "SOLD": "판매 완료"
         },
-        "SELLING_EXPIRATION_DATE": "{expired_by_date}까지 판매"
+        "SELLING_EXPIRATION_DATE": "{expired_by_date}까지 판매",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "판매 기간은 이미 경과한 {spent_weeks}주보다 줄일 수 없습니다"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "주문 목록",
+      "VIEW_ORDER_HEADER": "주문 보기",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "판매자 주문 이행",
+      "ORDER_SUBHEADER": "주문 헤더",
+      "ORDERED_ITEMS_SUBHEADER": "주문된 항목",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "판매자",
+        "TOTAL_PRICE_LABEL": "총 가격",
+        "TIME_OF_ORDER_LABEL": "주문 시간",
+        "STATUS_LABEL": "상태"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "초기화됨",
+        "PENDING": "대기 중",
+        "COMPLETED": "완료됨",
+        "CANCELED": "취소됨",
+        "REFUNDED": "환불됨",
+        "FULFILLED": "이행됨"
+      },
+      "ORDER_COMPLETED_LABEL": "주문 완료",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "주문 발송/수령"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "판매자로부터 구매",
@@ -127,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "리뷰 점수: {seller_review_rating} / 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "판매자 연락처 정보",
       "SELLER_USERNAME_LABEL": "사용자 이름",
-      "SELLER_PIONEER_ID_LABEL": "파이오니어 ID",
       "SELLER_PHONE_NUMBER_LABEL": "전화번호",
       "SELLER_EMAIL_ADDRESS_LABEL": "이메일 주소",
       "ONLINE_SHOPPING": {
@@ -171,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "리뷰 로딩 오류",
         "SELF_REVIEW_NOT_POSSIBLE": "자기 평가가 불가능합니다"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "주문 보기"
     }
   },
   "POPUP": {
@@ -243,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "개척자",
+    "PIONEER_ID_LABEL": "파이오니어 ID",
     "BUY": "구매",
+    "RESET": "재설정",
+    "REFUND": "환불",
+    "FULFILL": "완료하다",
+    "FULFILLED": "완료됨",
+    "PENDING": "대기 중",
     "NAVIGATE": "탐색",
     "NO_COMMENT": "댓글이 제공되지 않았습니다",
     "SEARCH_CENTER": "검색 센터 설정",
@@ -252,6 +289,7 @@
     "SEARCH_LOADING": "검색 로딩 중...",
     "REPLY": "답장",
     "ADD_ITEM": "항목 추가",
+    "CHECKOUT": "결제하기",
     "DELETE": "삭제",
     "CONFIRM_DELETE": "정말로 이 항목을 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
     "SAVE": "저장",

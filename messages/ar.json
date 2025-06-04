@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "عرض الطلبات",
     "USER_PREFERENCES_HEADER": "تفضيلات المستخدم",
     "PERSONALIZATION_SUBHEADER": "التخصيص",
     "LANGUAGES": "اللغات",
@@ -43,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "تسجيل البائع",
+      "SELLER_REGISTRATION_HEADER": "إدارة البائع",
       "SELLER_DETAILS_LABEL": "تفاصيل البائع",
       "EMAIL_LABEL": "البريد الإلكتروني",
       "PHONE_NUMBER_LABEL": "رقم الهاتف",
@@ -67,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "علامة الموقع على الخريطة تظهر مكان بيعي",
       "SELLER_SETTINGS_LABEL": "إعدادات البائع",
       "SELLER_SELL_CENTER": "تحديد مركز البيع",
-      "SELLER_ONLINE_SHOPPING_LABEL": "التسوق عبر الإنترنت",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "التسوق عبر الإنترنت | قائمة العناصر للبيع",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "التسوق عبر الإنترنت | تنفيذ الطلبات",
       "MAPPI_ALLOWANCE_LABEL": "المخصص المتبقي في Mappi",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "طريقة الإتمام",
@@ -76,8 +78,9 @@
           "DELIVERED_TO_BUYER": "تسليم إلى المشتري"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "تعليمات التنفيذ للمشتري",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "الدفع يكون من عنوان البائع. إذا تم اختيار التوصيل، يرجى إدخال عنوان المشتري.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "تعليمات التنفيذ للمشتري",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "الدفع يكون من عنوان البائع. إذا تم اختيار التوصيل، يرجى إدخال عنوان المشتري.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "تفاصيل تنفيذ المشتري",
       "VALIDATION": {
         "EMAIL_VALIDATION": "يرجى إدخال بريد إلكتروني صالح",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "تم التسجيل بنجاح",
@@ -112,8 +115,34 @@
           "ONGOING_SERVICE": "خدمة مستمرة",
           "SOLD": "تم البيع"
         },
-        "SELLING_EXPIRATION_DATE": "يباع بتاريخ صلاحية {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "يباع بتاريخ صلاحية {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "لا يمكن تقليل مدة البيع إلى أقل من {spent_weeks} أسبوعًا تم قضاؤها بالفعل"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "قائمة الطلبات",
+      "VIEW_ORDER_HEADER": "عرض الطلب",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "إتمام طلب البائع",
+      "ORDER_HEADER_SUBHEADER": "رأس الطلب",
+      "ORDERED_ITEMS_SUBHEADER": "العناصر المطلوبة",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "البائع",
+        "TOTAL_PRICE_LABEL": "السعر الإجمالي",
+        "TIME_OF_ORDER_LABEL": "وقت الطلب",
+        "STATUS_LABEL": "الحالة"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "تم البدء",
+        "PENDING": "قيد الانتظار",
+        "COMPLETED": "مكتمل",
+        "CANCELED": "تم الإلغاء",
+        "REFUNDED": "تم استرداد المبلغ",
+        "FULFILLED": "تم التنفيذ"
+      },
+      "ORDER_COMPLETED_LABEL": "تم إكمال الطلب",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "تم شحن/استلام الطلب"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "شراء من البائع",
@@ -127,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "درجة التقييمات: {seller_review_rating} من 5.0", 
       "SELLER_CONTACT_DETAILS_LABEL": "تفاصيل الاتصال بالبائع", 
       "SELLER_USERNAME_LABEL": "اسم المستخدم", 
-      "SELLER_PIONEER_ID_LABEL": "معرف المستخدم", 
       "SELLER_PHONE_NUMBER_LABEL": "رقم الهاتف", 
       "SELLER_EMAIL_ADDRESS_LABEL": "البريد الإلكتروني",
       "ONLINE_SHOPPING": {
@@ -171,7 +199,10 @@
         "LOADING_REVIEW_FAILURE": "خطأ في تحميل التقييم", 
         "SELF_REVIEW_NOT_POSSIBLE": "لا يمكن تقييم نفسك" 
       } 
-    } 
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "عرض الطلب"
+    }
   } ,
   "POPUP": {
     "MAP_MARKER": {
@@ -243,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "رائد",
+    "PIONEER_ID_LABEL": "معرف المستخدم", 
     "BUY": "شراء",
+    "RESET": "إعادة تعيين",
+    "REFUND": "استرداد",
+    "FULFILL": "تنفيذ",
+    "FULFILLED": "مكتمل",
+    "PENDING": "قيد الانتظار",
     "NAVIGATE": "تنقل",
     "NO_COMMENT": "لم يتم تقديم تعليق",
     "SEARCH_CENTER": "تعيين مركز البحث",
@@ -252,6 +289,7 @@
     "SEARCH_LOADING": "جارٍ تحميل البحث...",
     "REPLY": "رد",
     "ADD_ITEM": "إضافة منتج",
+    "CHECKOUT": "الدفع",
     "DELETE": "حذف",
     "CONFIRM_DELETE": "هل تريد حقًا حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.",
     "SAVE": "حفظ",
