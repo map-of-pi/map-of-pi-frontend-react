@@ -1,12 +1,10 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import TrustMeter from '@/components/shared/Review/TrustMeter';
-import { Button } from '../Forms/Buttons/Buttons';
-
-import logger from '../../../../logger.config.mjs';
 import MembershipIcon from '../membership/MembershipIcon';
+import { Button } from '../Forms/Buttons/Buttons';
+import logger from '../../../../logger.config.mjs';
 
 const MapMarkerPopup = ({ seller }: { seller: any }) => {
   const t = useTranslations();
@@ -50,7 +48,9 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
             }}
-          >{truncateChars(seller.name, 12)} {/* Adjust limit as needed */}</h2>
+          >
+            {truncateChars(seller.name, 12)} {/* Adjust limit as needed */}
+          </h2>
           <MembershipIcon category='triple_gold' styleComponent={{height: "14px"}} />
         </div>
 

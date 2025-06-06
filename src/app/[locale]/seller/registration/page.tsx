@@ -14,6 +14,7 @@ import {
   TelephoneInput
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
+import MembershipIcon from '@/components/shared/membership/MembershipIcon';
 import OnlineShopping from '@/components/shared/Seller/ShopItem';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
@@ -26,7 +27,6 @@ import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
 import logger from '../../../../../logger.config.mjs';
-import MembershipIcon from '@/components/shared/membership/MembershipIcon';
 
 const SellerRegistrationForm = () => {
   const HEADER = 'font-bold text-lg md:text-2xl';

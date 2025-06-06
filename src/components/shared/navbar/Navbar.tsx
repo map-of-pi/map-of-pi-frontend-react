@@ -11,11 +11,11 @@ import { ImSpinner2 } from 'react-icons/im';
 import { IoMdArrowBack, IoMdClose } from 'react-icons/io';
 import { MdHome } from 'react-icons/md';
 
-import Sidebar from '../sidebar/sidebar';
 import styles from './Navbar.module.css';
+import MembershipIcon from '../membership/MembershipIcon';
+import Sidebar from '../sidebar/sidebar';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
-import MembershipIcon from '../membership/MembershipIcon';
 
 function Navbar() {
   const router = useRouter();

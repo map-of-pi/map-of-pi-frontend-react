@@ -8,7 +8,10 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 
 import ConfirmDialog from '@/components/shared/confirm';
 import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
+import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
+import MembershipIcon from '@/components/shared/membership/MembershipIcon';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
+import { ListItem } from '@/components/shared/Seller/ShopItem';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { ISeller, IUserSettings, IUser, SellerItem } from '@/constants/types';
@@ -19,9 +22,6 @@ import { checkAndAutoLoginUser } from '@/utils/auth';
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import MembershipIcon from '@/components/shared/membership/MembershipIcon';
-import { ListItem, ShopItem } from '@/components/shared/Seller/ShopItem';
-import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -179,7 +179,9 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             />
           </div>
           <div className="my-auto">
-            <h2 className="font-bold text-[18px] mb-2 flex items-center">{sellerShopInfo.name} <MembershipIcon category='triple_gold' styleComponent={{height: "14px", marginLeft: "10px"}} /></h2>
+            <h2 className="font-bold text-[18px] mb-2 flex items-center">
+              {sellerShopInfo.name} <MembershipIcon category='triple_gold' styleComponent={{height: "14px", marginLeft: "10px"}} />
+            </h2>
             <p className="text-sm">{translateSellerCategory(sellerShopInfo.seller_type)}</p>
           </div>
         </div>
