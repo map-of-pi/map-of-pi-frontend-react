@@ -29,6 +29,12 @@
       "PREFERRED_DEVICE_GPS": "Zã nye mɔ̃a ƒe GPS",
       "PREFERRED_SEARCH_CENTER": "Zã Didiƒe"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Agbalẽŋlɔwo ƒe Filterwo",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Tɔxɛviawo siwo le dɔwɔme",
+      "INCLUDE_INACTIVE_SELLERS": "Tɔxɛviawo siwo mele dɔwɔme o",
+      "INCLUDE_TEST_SELLERS": "Tɔxɛviawo ƒe nɔnɔme ɖe sia ɖe"
+    },
     "CONTACT_MAP_OF_PI": "Kadodo ƒe Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nu siwo wodi la kpɔ dzidzedze",
@@ -51,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Nudzrala si le dɔ wɔm",
           "INACTIVE_SELLER": "Nudzrala si mele dɔ wɔm o",
-          "TEST_SELLER": "Dodokpɔ ƒe nudzrala"
+          "TEST_SELLER": "Dodokpɔ ƒe nudzrala",
+          "RESTRICTED_SELLER": "Tɔxɛvia si le dɔwɔme le eme o"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Nudzrala ƒe Ðoɖo Deŋgɔwo",
@@ -122,7 +129,18 @@
       "SELLER_USERNAME_LABEL": "Zãla ƒe ŋkɔ",
       "SELLER_PIONEER_ID_LABEL": "Mɔɖela Pionier ƒe ID",
       "SELLER_PHONE_NUMBER_LABEL": "Telefon xexlẽdzesi",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Email adrɛsi"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Email adrɛsi",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Agbalẽ",
+          "PRICE_LABEL": "Nuxlɔ̃",
+          "DESCRIPTION_LABEL": "Nukpɔkpɔ",
+          "PHOTO": "Fɔto",
+          "BUYING_QUANTITY_LABEL": "Dɔwɔƒe ŋkekea",
+          "PICK_LABEL": "Tutu",
+          "UNPICK_LABEL": "Dzi"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Totoɖemewo",
@@ -276,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Nemo wuri, gari ko adireshi",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Woƒe xɔ sia le afisi mɔ na mi"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Woƒe xɔ sia le afisi mɔ na mi",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Wɔwɔ nuŋlɔdɔwɔwɔ ƒe agbleme la, eye wòkɔ nyuie, wo be wo toɖe ƒe akɔdɔ gblɔ ƒe map."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Gɔme ɖa ...",

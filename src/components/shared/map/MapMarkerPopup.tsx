@@ -17,6 +17,10 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
       ? seller.image
       : '/images/logo.svg';
 
+  const truncateChars = (text: string, maxChars: number): string => {
+    return text.length > maxChars ? text.slice(0, maxChars) + '...' : text;
+  };
+
   const translateSellerCategory = (category: string): string => {
     switch (category) {
       case 'activeSeller':
@@ -37,24 +41,39 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
       {/* Seller name and type - Close with a small gap */}
       <div style={{ textAlign: 'center', marginBottom: '5px' }}>
         <div className="flex gap-2 justify-center items-center">
-        <h2 style={{ fontWeight: 'bold', fontSize: '18px', marginBottom: '2px' }}>{seller.name}</h2>
-        <MembershipIcon category='triple_gold' styleComponent={{height: "14px"}} />
+          <h2
+            style={{
+              fontWeight: 'bold',
+              fontSize: '15px',
+              marginBottom: '2px',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >{truncateChars(seller.name, 12)} {/* Adjust limit as needed */}</h2>
+          <MembershipIcon category='triple_gold' styleComponent={{height: "14px"}} />
         </div>
+
         {seller.seller_type && (
           <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '0px', marginBottom: '4px' }}>
             {translateSellerCategory(seller.seller_type)}
           </p>
+
         )}
       </div>
 
       {/* Seller image - Close to seller type */}
-      <div style={{ textAlign: 'center', marginBottom: '5px' }}>
+      <div style={{ width: '150px', height: '70px', overflow: 'hidden', margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Image
           src={imageUrl}
           alt="Seller Image"
           width={150}
-          height={50}
-          style={{ borderRadius: '0px', objectFit: 'cover', display: 'block', margin: '0 auto' }}
+          height={70}
+          style={{
+            objectFit: 'contain',
+            width: '100%',
+            height: '100%',
+          }}
         />
       </div>
 

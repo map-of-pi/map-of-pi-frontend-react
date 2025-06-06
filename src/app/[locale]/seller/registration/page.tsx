@@ -21,6 +21,7 @@ import { itemData } from '@/constants/demoAPI';
 import { IUserSettings, ISeller, FulfillmentType } from '@/constants/types';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
+import { fetchToggle } from '@/services/toggleApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
 import removeUrls from '../../../../utils/sanitize';
 import { AppContext } from '../../../../../context/AppContextProvider';
@@ -75,6 +76,7 @@ const SellerRegistrationForm = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
   
   // Fetch seller data and user settings on component mount
@@ -112,8 +114,18 @@ const SellerRegistrationForm = () => {
       }
     };
 
+    const getToggleData = async () => {
+      try {
+        const toggle = await fetchToggle('onlineShoppingFeature');
+        setOnlineShoppingEnabled(toggle.enabled);
+      } catch (error) {
+        logger.error('Error fetching toggle:', error);
+      }
+    };
+
     getSellerData();
     getUserSettingsData();
+    getToggleData();
   }, [currentUser]);
 
   // Initialize formData with dbSeller values if available
@@ -281,6 +293,10 @@ const SellerRegistrationForm = () => {
         return t(
           'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER',
         );
+      case 'restrictedSeller':
+        return t(
+          'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.RESTRICTED_SELLER',
+        );
       default:
         return '';
     }
@@ -432,15 +448,30 @@ const SellerRegistrationForm = () => {
                 onChange={handleChange}
               />
 
-              <Select
-                label={t(
-                  'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL',
-                )}
-                name="sellerType"
-                value={formData.sellerType}
-                onChange={handleChange}
-                options={translatedSellerTypeOptions}
-              />
+              { formData.sellerType !== 'restrictedSeller' ? (
+                <Select
+                  label={t(
+                    'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL',
+                  )}
+                  name="sellerType"
+                  value={formData.sellerType}
+                  onChange={handleChange}
+                  options={translatedSellerTypeOptions}
+                />
+              ) : (
+                <Input
+                  label={t(
+                    'SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_LABEL',
+                  )}
+                  name="sellerType"
+                  value= {t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.RESTRICTED_SELLER')}
+                  style={{
+                    backgroundColor: '#d0d0d0',
+                    cursor: 'not-allowed'
+                  }}
+                  disabled
+                />
+              )}
               <TextArea
                 label={t(
                   'SCREEN.SELLER_REGISTRATION.SELLER_ADDRESS_LOCATION_LABEL',
@@ -580,49 +611,51 @@ const SellerRegistrationForm = () => {
           </ToggleCollapse>
           
           {/* Online Shopping */}
-          <ToggleCollapse
-            header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_LABEL')}
-            open={false}>
-            {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
-            <div>
-              <Select
-                label={t(
-                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL',
-                )}
-                name="fulfillment_method"
-                options={translatedFulfillmentMethod}
-                value={formData.fulfillment_method}
-                onChange={handleChange}
-              />
-              <h2 className={SUBHEADER}>
-                {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}
-              </h2>
-              <TextArea
-                label={t(
-                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
-                )}
-                placeholder={t(
-                  'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
-                )}
-                name="fulfillment_description"
-                type="text"
-                value={formData.fulfillment_description}
-                onChange={handleChange}
-              />
-              <div className="mb-4 mt-3 ml-auto w-min">
-                <Button
-                  label={t('SHARED.SAVE')}
-                  disabled={!isSaveEnabled}
-                  styles={{
-                    color: '#ffc153',
-                    height: '40px',
-                    padding: '10px 15px',
-                  }}
-                  onClick={handleSave}
+          {isOnlineShoppingEnabled && (
+            <ToggleCollapse
+              header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_LABEL')}
+              open={false}>
+              {dbSeller && <OnlineShopping dbSeller={dbSeller} />}
+              <div>
+                <Select
+                  label={t(
+                    'SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL',
+                  )}
+                  name="fulfillment_method"
+                  options={translatedFulfillmentMethod}
+                  value={formData.fulfillment_method}
+                  onChange={handleChange}
                 />
+                <h2 className={SUBHEADER}>
+                  {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}
+                </h2>
+                <TextArea
+                  label={t(
+                    'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_LABEL',
+                  )}
+                  placeholder={t(
+                    'SCREEN.SELLER_REGISTRATION.FULFILLMENT_INSTRUCTIONS_PLACEHOLDER',
+                  )}
+                  name="fulfillment_description"
+                  type="text"
+                  value={formData.fulfillment_description}
+                  onChange={handleChange}
+                />
+                <div className="mb-4 mt-3 ml-auto w-min">
+                  <Button
+                    label={t('SHARED.SAVE')}
+                    disabled={!isSaveEnabled}
+                    styles={{
+                      color: '#ffc153',
+                      height: '40px',
+                      padding: '10px 15px',
+                    }}
+                    onClick={handleSave}
+                  />
+                </div>
               </div>
-            </div>
-          </ToggleCollapse>
+            </ToggleCollapse>
+          )}
           
         </div>
         <ConfirmDialog

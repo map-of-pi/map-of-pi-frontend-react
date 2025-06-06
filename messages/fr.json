@@ -29,6 +29,12 @@
       "PREFERRED_DEVICE_GPS": "Utiliser le GPS de mon appareil",
       "PREFERRED_SEARCH_CENTER": "Utiliser le Centre de recherche"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Filtres de recherche",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Vendeurs actifs",
+      "INCLUDE_INACTIVE_SELLERS": "Vendeurs inactifs",
+      "INCLUDE_TEST_SELLERS": "Vendeurs de test"
+    },
     "CONTACT_MAP_OF_PI": "Contacter Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Préférences enregistrées",
@@ -51,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Vendeur activé",
           "INACTIVE_SELLER": "Vendeur desactivé",
-          "TEST_SELLER": "Vendeur de test"
+          "TEST_SELLER": "Vendeur de test",
+          "RESTRICTED_SELLER": "Vendeur restreint"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Paramètres vendeur detaillés",
@@ -122,7 +129,18 @@
       "SELLER_USERNAME_LABEL": "Nom d'utilisateur",
       "SELLER_PIONEER_ID_LABEL": "identifianf du pionier",
       "SELLER_PHONE_NUMBER_LABEL": "Numéro de téléphone",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adresse e-mail"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adresse e-mail",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Article",
+          "PRICE_LABEL": "Prix",
+          "DESCRIPTION_LABEL": "Description",
+          "PHOTO": "Photo",
+          "BUYING_QUANTITY_LABEL": "Quantité",
+          "PICK_LABEL": "Ajouter",
+          "UNPICK_LABEL": "Retirer"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Avis",
@@ -276,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Recherchez un lieu, une ville ou une adresse",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Votre localisation a été enregistrée avec succès"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Votre localisation a été enregistrée avec succès",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Il semble que l'emplacement sélectionné se trouve dans une région sanctionnée. Si cela est confirmé, votre marqueur de vente pourrait être retiré de la carte."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Chargement ...",

@@ -12,7 +12,7 @@ function ToggleCollapse({ children, header, open = false }: ToggleCollapseProps)
 
   return (
     <div className="mb-2">
-      <div className="flex items-center gap-4 cursor-pointer mb-2" onClick={() => setToggle(!toggle)}>
+      <div className="flex items-center justify-center gap-4 cursor-pointer mb-2" onClick={() => setToggle(!toggle)}>
         <h2 className="font-bold">{header}</h2>
         <FaChevronDown
           size={13}

@@ -29,6 +29,12 @@
       "PREFERRED_DEVICE_GPS": "Usar el GPS de mi dispositivo",
       "PREFERRED_SEARCH_CENTER": "Usar el Centro de Búsqueda"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Filtros de búsqueda",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Vendedores activos",
+      "INCLUDE_INACTIVE_SELLERS": "Vendedores inactivos",
+      "INCLUDE_TEST_SELLERS": "Vendedores de prueba"
+    },
     "CONTACT_MAP_OF_PI": "Contactar a Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Preferencias guardadas con éxito",
@@ -51,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Vendedor activo",
           "INACTIVE_SELLER": "Vendedor inactivo",
-          "TEST_SELLER": "Vendedor de prueba"
+          "TEST_SELLER": "Vendedor de prueba",
+          "RESTRICTED_SELLER": "Vendedor restringido"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Configuración Avanzada del Vendedor",
@@ -113,6 +120,7 @@
       "SELLER_DETAILS_LABEL": "Detalles del Vendedor",
       "SELLER_ADDRESS_POSITION_LABEL": "Dirección o Posición del Vendedor",
       "LEAVE_A_REVIEW_MESSAGE": "Dejar una Reseña",
+      "FACE_SELECTION_REVIEW_MESSAGE": "Selecciona la cara que muestra cómo te sientes acerca del vendedor anterior",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Introduce comentarios adicionales aquí",
       "FEEDBACK_PHOTO_UPLOAD_LABEL": "Subir foto de retroalimentación",
       "REVIEWS_SUMMARY_LABEL": "Resumen de Reseñas",
@@ -121,7 +129,18 @@
       "SELLER_USERNAME_LABEL": "Nombre de usuario",
       "SELLER_PIONEER_ID_LABEL": "ID de Pionero",
       "SELLER_PHONE_NUMBER_LABEL": "Número de teléfono",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Artículo",
+          "PRICE_LABEL": "Precio",
+          "DESCRIPTION_LABEL": "Descripción",
+          "PHOTO": "Foto",
+          "BUYING_QUANTITY_LABEL": "Cantidad",
+          "PICK_LABEL": "Agregar",
+          "UNPICK_LABEL": "Eliminar"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Reseñas",
@@ -275,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Buscar una ubicación, ciudad o dirección",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Su centro ha sido guardado con éxito"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Su centro ha sido guardado con éxito",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Parece que la ubicación seleccionada está en una región sancionada. Si se confirma, es posible que se elimine tu marcador de venta del mapa."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Cargando ...",

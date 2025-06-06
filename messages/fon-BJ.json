@@ -29,6 +29,12 @@
       "PREFERRED_DEVICE_GPS": "Zan GPS azɔwanú ce tɔn",
       "PREFERRED_SEARCH_CENTER": "Zan Bibaatɛn"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Wàɖànsu ƒè Filtèr",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Zan tó wà do",
+      "INCLUDE_INACTIVE_SELLERS": "Zan tó mɛ̀ wà do",
+      "INCLUDE_TEST_SELLERS": "Zan sì wɛ́n"
+    },
     "CONTACT_MAP_OF_PI": "Do xo sedo Map Of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Nǔ e jló we lɛ é ɖuɖeji",
@@ -51,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Nusatɔ he to nus able-ble",
           "INACTIVE_SELLER": "Nǔsátɔ́ e ma ɖò azɔ̌ wà wɛ ǎ é le",
-          "TEST_SELLER": "Tɛnkpɔn nusatɔ"
+          "TEST_SELLER": "Tɛnkpɔn nusatɔ",
+          "RESTRICTED_SELLER": "Zan tò hùntɔ̀n"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Azɔwatɔ Nukɔntɔn lɛ sin réglages",
@@ -60,30 +67,30 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Nǔsatɔ́ sín oto he min e te kpo do Katier e ton kpo",
       "SELLER_SETTINGS_LABEL": "Seller Settings, Nǔ e nɔ xlɛ́ fí e un ɖò nǔ sà ɖè é wɛ",
       "SELLER_SELL_CENTER": "Nǔsatɔ́ sín tito",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Sɛnawe hwehwɛ ta",
-      "MAPPI_ALLOWANCE_LABEL": "Dada Mappi tɔ̌n gbè",
+      "SELLER_ONLINE_SHOPPING_LABEL": "Ajótin  Onǔxixo ton ɖò Ɛntɛnɛti jí ton",
+      "MAPPI_ALLOWANCE_LABEL": "Mappi sín akpáxwé e kpò é",
       "FULFILLMENT_METHOD_TYPE": {
-        "FULFILLMENT_METHOD_TYPE_LABEL": "Hèzɔ wuwɛ",
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Wlɛn owín tito e è na zán do w’azɔ̌ é",
         "FULFILLMENT_METHOD_TYPE_OPTIONS": {
-          "COLLECTION_BY_BUYER": "Gan mì xɔ",
-          "DELIVERED_TO_BUYER": "Gan mì sò"
+          "COLLECTION_BY_BUYER": "Nǔ e nǔ xɔt ɔ jlo na xɔ",
+          "DELIVERED_TO_BUYER": "È sɔ́ agban jó nú  nuxɔt ɔ"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Aɖoɖo si ɖò ná tòxɔmɛ",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Àxɔmɛ nɔ tɔxɔ si tòxɔmɛ le. Mà tɔkpò tòxɔ mɛ, mède yè tòxɔmɛ lɛ tò hènɔ.",
+      "FULFILLMENT_INSTRUCTIONS_LABEL": "Alixlɛ́mɛ sin e è na zán dó sanú lɛ nu  nú xɔtɔ́ ɔ",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Nǔxixo ɔ, nǔsátɔ́ ɔ sín adlɛsi jí wɛ è na yí nu ɔ do . Nú NUxɔtɔ́ ɔ yigbe bo na sɔ́ nǔsisá ɔ, kɛnklɛn bo wlan nuxɔtɔ́ ɔ sín adlɛsi do fi",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Mi kɛnklɛn bo wlan adlɛsi mɛyiyi tɔn ɖe sɔgbe ɔ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Wlanwlan ɖuɖeji",
         "FAILED_REGISTRATION_SUBMISSION": "Nuwanyido ɖo wema wlanwlan hɛn ɖ'ayi mɛ",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Nyɔma wlanwlan gló ɖó mɛ e nɔ zán é kún nyí mɛɖebǔ ó",
         "UNINITIALIZED_SELL_CENTER": "Mi kɛnklɛn bo ze tɛn mitɔn ɖo te",
-        "SUCCESSFUL_SELLER_ITEM_SAVED": "Wɛ kan xɛ sɔn sɔ",
-        "SUCCESSFUL_SELLER_ITEM_DELETED": "Kan xɛ wɔ ɔ gba ji",
-        "FAILED_SELLER_ITEM_SAVE": "Wɛ kan ɖɔ hɛn wɔ a wɔ xɔ sɔ",
-        "FAILED_SELLER_ITEM_DELETE": "Kan xɛ wɔ ɔ gba sɛnɔn",
-        "SELLER_ITEM_NOT_FOUND": "Kan xɛ wɔ ɔ dɛ",
-        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Dɔ yì kpɔ. Mappi dɔ kɛ kpé {mappi_count}",
-        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Dɔ yì kpɔ mìxwé. Mappi nɔ ke tɔ nɔ kɛ kpɔ"
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Nǔsat ɔ sín nǔwlanwlán ɖó ɖuɖeji jí ",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Nusatɔ́  súnsún nǔ e è sà é sè ganji",
+        "FAILED_SELLER_ITEM_SAVE": "Nǔwanyido ɖò nǔsát ɔ sín nǔwlanwlán mɛ",
+        "FAILED_SELLER_ITEM_DELETE": "Nǔwanyido ɖò nǔsátɔ́ ɔ sín nǔ  è súnsun mɛ",
+        "SELLER_ITEM_NOT_FOUND": "Nǔsatɔ́ ɔ sín nǔ e mɔ ǎ",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Nǔwlanwlán ɔ ɖo duɖeji , bo no zán whé binu {mappi_count}",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Nǔwlanwlan ɖó te. Lo bo do ɖuɖeji Azɔwiwa kù ɖò yiyi wɛ ǎ do Mappi ji ooo"
       },
       "SELLER_ITEMS_FEATURE": {
         "ITEM_LABEL": "Wɛ",
@@ -91,21 +98,21 @@
         "STOCK_LABEL": "Atchon kpɔ nu",
         "DESCRIPTION_LABEL": "Hɛnɔnɔn",
         "PHOTO": "Wɛnɔ kpɔ nɔn",
-        "SELLING_DURATION_LABEL": "Wɛ hɛnɔn de xɔ zɔɖɔ hɛn nyɔ hɛn",
+        "SELLING_DURATION_LABEL": "Hwenu ojle  è sà é ɖò aklunɔzángbe gbla mɛ lɛ",
         "SELLING_STATUS_OPTIONS": {
-          "ACTIVE": "Dɔnɛ",
-          "EXPIRED": "Wɛ tò xɔ wɔn"
+          "ACTIVE": "É ɖò azɔ̌ wà wɛ",
+          "EXPIRED": "Ojle lo Ko wá yì"
         },
         "STOCK_LEVEL_OPTIONS": {
-          "AVAILABLE_1": "1 do gbe",
-          "AVAILABLE_2": "2 do gbe",
-          "AVAILABLE_3": "3 do gbe",
-          "MANY": "Kpɔnu do gbe",
-          "MADE_TO_ORDER": "Sɛ yé ɖa",
-          "ONGOING_SERVICE": "Wɛ na gbeto",
-          "SOLD": "Wɛ klé"
+          "AVAILABLE_1": "1 E do finɛ",
+          "AVAILABLE_2": "2 E do finɛ",
+          "AVAILABLE_3": "3 E do finɛ",
+          "MANY": "Nǔ gègě e ɖò finɛ ɔ",
+          "MADE_TO_ORDER": "Ye bló ɖó sɛ́n dodonǔ ji",
+          "ONGOING_SERVICE": "Azɔwiwa ɖò yiyi wɛ desǔ",
+          "SOLD": "È hé é sa" 
         },
-        "SELLING_EXPIRATION_DATE": "Nɛnɔ {expired_by_date} kɛ"
+        "SELLING_EXPIRATION_DATE": "Sa ɖo {expired_by_date} mɛ"
       }
     },
     "BUY_FROM_SELLER": {
@@ -122,7 +129,18 @@
       "SELLER_USERNAME_LABEL": "Nyikɔ mɛtɔn",
       "SELLER_PIONEER_ID_LABEL": "Pioneer ID Towe",
       "SELLER_PHONE_NUMBER_LABEL": "Nǔsátɔ́ sin numɛro",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adlɛsi Email Nǔsátɔ́ ton",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Nǔ e è wlan é",
+          "PRICE_LABEL": "Akwɛ́ tɔn ",
+          "DESCRIPTION_LABEL": "Na oho tínmɛ",
+          "PHOTO": "Fótóo",
+          "BUYING_QUANTITY_LABEL": "Nɔ̀nɔ hɛnnu",
+          "PICK_LABEL": "Tɔn",
+          "UNPICK_LABEL": "Zàn"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Kpondewu",
@@ -233,9 +251,9 @@
     "SEARCH_REVIEWS": "Biba Xóɖɔɖókpɔ́ lɛ",
     "SEARCH_LOADING": "Biba ɖo yiyi wɛ...",
     "REPLY": "Xósin",
-    "ADD_ITEM": "Tán nūn",
-    "DELETE": "Hã",
-    "CONFIRM_DELETE": "Ɛ wɛ nyɛnã anɔ hɛn dó kɔ̀ sí wá ɖú ɖɛ? Ɛ kó nyɔ ní sɛ́ wɛ̀ ɖú nɔn wá gbónu mé yè.",
+    "ADD_ITEM": "Gɔ́ nǔ ɖévo nu nǔ ɔ",
+    "DELETE": "Súnsún",
+    "CONFIRM_DELETE": "A ka ganjɛwu ɖɔ a jló na súnsún nǔ élɔ́ nugbo à? Bonú è súsun nǔ élɔ́ vɔ , ye sɔ na mo à.",
     "SAVE": "Hɛn",
     "CONFIRM": "Ganmɛ",
     "CONFIRM_DIALOG": "A ɖo ɖyɔɖyɔ e ma ko hɛn ɖ'ayi ǎ lɛ. A jlo na gosin nugbo a?",
@@ -276,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Ba oxo ton ɖe, abǐ adlɛsi ɖe",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Ŋkɔ́ nì wɛ́ ɖò dàn ná tɔ́n nɔ kplɔ́ mɛ"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Ŋkɔ́ nì wɛ́ ɖò dàn ná tɔ́n nɔ kplɔ́ mɛ",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Aɖe nu kple aɖe bɔxɔ gbe na to ɖa aɖo. So yè kpli, egbè nu hãɖe ɖa wà map."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Tɔn ná mɛ̌ ...",

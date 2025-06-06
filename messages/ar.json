@@ -1,6 +1,6 @@
 {
   "HOME": {
-    "ADD_SELLER": "بيع",
+    "ADD_SELLER": "بائع",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "مركز البحث الخاص بك مضبوط حاليًا على الإحداثيات الافتراضية [0، 0]. لتحسين تجربتك، يُرجى تحديث موقع مركز البحث الخاص بك.",
     "SEARCH_BAR_PLACEHOLDER": "ابحث عن البائعين أو العناصر",
     "LOCATION_SERVICES": {
@@ -29,6 +29,12 @@
       "PREFERRED_DEVICE_GPS": "استخدام GPS الجهاز",
       "PREFERRED_SEARCH_CENTER": "استخدام مركز البحث"
     },
+    "SEARCH_FILTERS_SUBHEADER": "فلاتر البحث",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "البائعون النشطون",
+      "INCLUDE_INACTIVE_SELLERS": "البائعون غير النشطين",
+      "INCLUDE_TEST_SELLERS": "البائعون التجريبيون"
+    },
     "CONTACT_MAP_OF_PI": "اتصل بـ Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "تم حفظ التفضيلات بنجاح",
@@ -39,9 +45,9 @@
     "SELLER_REGISTRATION": {
       "SELLER_REGISTRATION_HEADER": "تسجيل البائع",
       "SELLER_DETAILS_LABEL": "تفاصيل البائع",
-      "EMAIL_LABEL": "عنوان البريد الإلكتروني",
+      "EMAIL_LABEL": "البريد الإلكتروني",
       "PHONE_NUMBER_LABEL": "رقم الهاتف",
-      "CONTACT_PUBLIC_NOTE": "عنوان البريد الإلكتروني ورقم الهاتف سيكونان مرئيين للعموم.",
+      "CONTACT_PUBLIC_NOTE": "البريد الإلكتروني ورقم الهاتف سيكونان مرئيين للعموم.",
       "SELLER_DETAILS_PLACEHOLDER": "أبيع عبر Pay with Pi.",
       "REVIEWS_SUMMARY_LABEL": "ملخص التقييمات",
       "REVIEWS_SCORE_LABEL": "درجة التقييمات",
@@ -49,9 +55,10 @@
       "SELLER_TYPE": {
         "SELLER_TYPE_LABEL": "نوع البائع",
         "SELLER_TYPE_OPTIONS": {
-            "ACTIVE_SELLER": "بائع نشط",
-            "INACTIVE_SELLER": "بائع غير نشط",
-            "TEST_SELLER": "بائع تجريبي"
+          "ACTIVE_SELLER": "بائع نشط",
+          "INACTIVE_SELLER": "بائع غير نشط",
+          "TEST_SELLER": "بائع تجريبي",
+          "RESTRICTED_SELLER": "بائع مقيّد"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "إعدادات متقدمة للبائع",
@@ -65,28 +72,28 @@
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "طريقة الإتمام",
         "FULFILLMENT_METHOD_TYPE_OPTIONS": {
-          "COLLECTION_BY_BUYER": "جمع من قبل المشتري",
+          "COLLECTION_BY_BUYER": "الدفع من قبل المشتري",
           "DELIVERED_TO_BUYER": "تسليم إلى المشتري"
         }
       },
       "FULFILLMENT_INSTRUCTIONS_LABEL": "تعليمات التنفيذ للمشتري",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "التجميع يكون من عنوان البائع. إذا تم اختيار التوصيل، يرجى إدخال عنوان المشتري.",
+      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "الدفع يكون من عنوان البائع. إذا تم اختيار التوصيل، يرجى إدخال عنوان المشتري.",
       "VALIDATION": {
-        "EMAIL_VALIDATION": "يرجى إدخال عنوان بريد إلكتروني صالح",
+        "EMAIL_VALIDATION": "يرجى إدخال بريد إلكتروني صالح",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "تم التسجيل بنجاح",
         "FAILED_REGISTRATION_SUBMISSION": "خطأ في حفظ التسجيل",
         "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "فشل التسجيل بسبب عدم المصادقة",
         "UNINITIALIZED_SELL_CENTER": "يرجى تحديد مركز البيع",
-        "SUCCESSFUL_SELLER_ITEM_SAVED": "تم حفظ عنصر البائع بنجاح",
-        "SUCCESSFUL_SELLER_ITEM_DELETED": "تم حذف عنصر البائع بنجاح",
-        "FAILED_SELLER_ITEM_SAVE": "حدث خطأ أثناء حفظ عنصر البائع",
-        "FAILED_SELLER_ITEM_DELETE": "خطأ في حذف عنصر البائع",
-        "SELLER_ITEM_NOT_FOUND": "عنصر البائع غير موجود",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "تم حفظ منتج البائع بنجاح",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "تم حذف منتج البائع بنجاح",
+        "FAILED_SELLER_ITEM_SAVE": "حدث خطأ أثناء حفظ منتج البائع",
+        "FAILED_SELLER_ITEM_DELETE": "خطأ في حذف منتج البائع",
+        "SELLER_ITEM_NOT_FOUND": "منتج البائع غير موجود",
         "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "تم الحفظ بنجاح. تم استخدام مخصصات Mappi {mappi_count}",
         "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "فشل الحفظ. المخصصات المتاحة من Mappi غير كافية"
       },
       "SELLER_ITEMS_FEATURE": {
-        "ITEM_LABEL": "العنصر",
+        "ITEM_LABEL": "منتج",
         "PRICE_LABEL": "السعر",
         "STOCK_LABEL": "مستوى المخزون",
         "DESCRIPTION_LABEL": "الوصف",
@@ -105,13 +112,13 @@
           "ONGOING_SERVICE": "خدمة مستمرة",
           "SOLD": "تم البيع"
         },
-        "SELLING_EXPIRATION_DATE": "يباع بحلول {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "يباع بتاريخ صلاحية {expired_by_date}"
       }
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "شراء من البائع",
       "SELLER_DETAILS_LABEL": "تفاصيل البائع",
-      "SELLER_ADDRESS_POSITION_LABEL": "عنوان أو موقع البائع",
+      "SELLER_ADDRESS_POSITION_LABEL": "عنوان أو مكان البائع",
       "LEAVE_A_REVIEW_MESSAGE": "اترك تقييمًا",
       "FACE_SELECTION_REVIEW_MESSAGE": "اختر الوجه الذي يعبر عن شعورك حول هذا البائع",
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "أدخل تعليقات إضافية هنا",
@@ -122,7 +129,18 @@
       "SELLER_USERNAME_LABEL": "اسم المستخدم", 
       "SELLER_PIONEER_ID_LABEL": "معرف المستخدم", 
       "SELLER_PHONE_NUMBER_LABEL": "رقم الهاتف", 
-      "SELLER_EMAIL_ADDRESS_LABEL": "عنوان البريد الإلكتروني" 
+      "SELLER_EMAIL_ADDRESS_LABEL": "البريد الإلكتروني",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "المنتج",
+          "PRICE_LABEL": "السعر",
+          "DESCRIPTION_LABEL": "الوصف",
+          "PHOTO": "صورة",
+          "BUYING_QUANTITY_LABEL": "الكمية",
+          "PICK_LABEL": "إضافة",
+          "UNPICK_LABEL": "إزالة"
+        }
+      } 
     }, 
     "REVIEWS": { 
       "REVIEWS_HEADER": "التقييمات", 
@@ -158,7 +176,7 @@
   "POPUP": {
     "MAP_MARKER": {
       "SELLER_SALE_ITEMS_FIELD": "عناصر البائع للبيع",
-      "DISTANCE_MESSAGE": "المسافة: XXX كم بعيدا"
+      "DISTANCE_MESSAGE": "المسافة: XXX كم"
     },
     "APP_VERSION_INFO": {
       "REPORTING_MESSAGE": "يرجى الإبلاغ عن الأخطاء إلى"
@@ -166,13 +184,13 @@
     "PRIVACY_POLICY_INFO": {
       "TITLE": "سياسة الخصوصية",
       "LAST_UPDATED": "آخر تحديث",
-      "EMAIL_ADDRESS": "عنوان البريد الإلكتروني",
+      "EMAIL_ADDRESS": "البريد الإلكتروني",
       "SECTIONS": {
         "HEADER_1": "مقدمة",
         "CONTENT_1": "مرحبًا بكم في تطبيق Map of Pi، الذي تم تطويره بواسطة فريق Map of Pi بالتعاون مع مجتمع Pi. توضح سياسة الخصوصية هذه كيفية جمع واستخدام وكشف وحماية معلوماتك الشخصية عند استخدام تطبيقنا للجوال.",
         "HEADER_2": "المعلومات التي نجمعها",
         "SUBHEADER_2_1": "معلومات المستخدم",
-        "CONTENT_2_1_1": "عند التسجيل كمستخدم، قد نقوم بجمع اسمك وعنوان بريدك الإلكتروني واسم المستخدم وغيرها من التفاصيل ذات الصلة.",
+        "CONTENT_2_1_1": "عند التسجيل كمستخدم، قد نقوم بجمع اسمك و بريدك الإلكتروني واسم المستخدم وغيرها من التفاصيل ذات الصلة.",
         "CONTENT_2_1_2": "قد نجمع معلومات حول جهازك، بما في ذلك نوع الجهاز ونظام التشغيل ومعرفات الجهاز الفريدة.",
         "SUBHEADER_2_2": "معلومات البائع",
         "CONTENT_2_2_1": "قد يُطلب من البائعين المسجلين على المنصة تقديم معلومات البائع، بما في ذلك اسم البائع والموقع وبيانات الاتصال.",
@@ -202,7 +220,7 @@
     "TERMS_OF_SERVICE_INFO": {
       "TITLE": "شروط الخدمة",
       "LAST_UPDATED": "آخر تحديث",
-      "EMAIL_ADDRESS": "عنوان البريد الإلكتروني",
+      "EMAIL_ADDRESS": "البريد الإلكتروني",
       "SECTIONS": {
         "HEADER_1": "قبول الشروط",
         "CONTENT_1_1": "مرحبًا بكم في تطبيق Map of Pi، الذي تم تطويره بواسطة فريق Map of Pi بالتعاون مع مجتمع Pi. باستخدام هذا التطبيق، فإنك توافق على الالتزام بشروط الخدمة هذه، بالإضافة إلى سياسة الخصوصية الخاصة بنا.",
@@ -233,9 +251,9 @@
     "SEARCH_REVIEWS": "البحث في التقييمات",
     "SEARCH_LOADING": "جارٍ تحميل البحث...",
     "REPLY": "رد",
-    "ADD_ITEM": "إضافة عنصر",
+    "ADD_ITEM": "إضافة منتج",
     "DELETE": "حذف",
-    "CONFIRM_DELETE": "هل تريد حقًا حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.",
+    "CONFIRM_DELETE": "هل تريد حقًا حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.",
     "SAVE": "حفظ",
     "CONFIRM": "تأكيد",
     "CONFIRM_DIALOG": "لديك تغييرات غير محفوظة. هل تريد مغادرة الصفحة حقًا؟",
@@ -261,11 +279,11 @@
       "UNSAFE": "غير آمن",
       "TRUSTWORTHY": "موثوق",
       "EMOTIONS": {
-        "DESPAIR": "يأس",
+        "DESPAIR": "حزين جدا",
         "SAD": "حزين",
         "OKAY": "جيد",
         "HAPPY": "سعيد",
-        "DELIGHT": "سعادة"
+        "DELIGHT": "سعيد جدا"
       },
       "VALIDATION": {
         "SUCCESSFUL_REVIEW_SUBMISSION": "تم إرسال التقييم بنجاح",
@@ -276,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "ابحث عن موقع، مدينة، أو عنوان",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "تم حفظ مركزك بنجاح"
+        "MAP_CENTER_SUCCESS_MESSAGE": "تم حفظ موقعك بنجاح",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "يبدو أن الموقع الذي اخترته يقع في منطقة محظورة. إذا تم التأكيد، قد يتم إزالة علامة البيع من الخريطة."
       }
     },
     "LOADING_SCREEN_MESSAGE": "جار التحميل ...",

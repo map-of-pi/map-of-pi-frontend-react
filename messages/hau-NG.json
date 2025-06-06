@@ -29,6 +29,12 @@
       "PREFERRED_DEVICE_GPS": "Yi amfani da GPS na na'urar",
       "PREFERRED_SEARCH_CENTER": "Yi amfani da Cibiyar Bincike"
     },
+    "SEARCH_FILTERS_SUBHEADER": "Farantan Bincike",
+    "SEARCH_FILTERS": {
+      "INCLUDE_ACTIVE_SELLERS": "Yan kasuwa masu aiki",
+      "INCLUDE_INACTIVE_SELLERS": "Yan kasuwa marasa aiki",
+      "INCLUDE_TEST_SELLERS": "Yan kasuwa na gwaji"
+    },
     "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
     "VALIDATION": {
       "SUCCESSFUL_PREFERENCES_SUBMISSION": "Zaɓuɓɓuka sun yi nasara",
@@ -51,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Mai siyarwa mai aiki",
           "INACTIVE_SELLER": "Mai siyarwa mara aiki",
-          "TEST_SELLER": "Mai siyarwa gwaji"
+          "TEST_SELLER": "Mai siyarwa gwaji",
+          "RESTRICTED_SELLER": "Mai siyarwa da aka takaita"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
@@ -122,7 +129,18 @@
       "SELLER_USERNAME_LABEL": "Sunan mai amfani",
       "SELLER_PIONEER_ID_LABEL": "ID na Pioneer",
       "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
-      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel"
+      "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel",
+      "ONLINE_SHOPPING": {
+        "SELLER_ITEMS_FEATURE": {
+          "ITEM_LABEL": "Abu",
+          "PRICE_LABEL": "Farashi",
+          "DESCRIPTION_LABEL": "Bayani",
+          "PHOTO": "Hoto",
+          "BUYING_QUANTITY_LABEL": "Yawan abu",
+          "PICK_LABEL": "Kara",
+          "UNPICK_LABEL": "Cire"
+        }
+      }
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Bita",
@@ -276,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Nema wuri, birni, ko adireshi",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "An adana cibiyar ku cikin nasara"
+        "MAP_CENTER_SUCCESS_MESSAGE": "An adana cibiyar ku cikin nasara",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Yankin da ka zaɓa yana bayyana a cikin yanki da aka haramta. Idan an tabbatar, alamar sayarwarka na iya ɓacewa daga taswira."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Ana loda ...",

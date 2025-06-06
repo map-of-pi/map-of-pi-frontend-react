@@ -20,7 +20,7 @@ import { ConfirmDialogX } from '../confirm';
 import { Button } from '../Forms/Buttons/Buttons';
 import RecenterAutomatically from './RecenterAutomatically';
 import SearchBar from '../SearchBar/SearchBar';
-import { saveMapCenter, fetchMapCenter } from '@/services/mapCenterApi';
+import { saveMapCenter, fetchMapCenter, checkSanctionStatus } from '@/services/mapCenterApi';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
@@ -40,6 +40,7 @@ interface MapCenterProps {
 const MapCenter = ({ entryType }: MapCenterProps) => {
   const t = useTranslations();
   const [showPopup, setShowPopup] = useState(false);
+  const [showWarningPopup, setShowWarningPopup] = useState(false);
   const [center, setCenter] = useState<{ lat: number; lng: number }>({
     lng: 19.944544,
     lat: 50.064192,
@@ -131,14 +132,38 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
   };
 
   const setMapCenter = async () => {
-    if (center !== null && currentUser?.pi_uid) {
-      try {
-        await saveMapCenter(center.lat, center.lng, entryType);
-        setShowPopup(true);
-        logger.info('Map center successfully saved.');
-      } catch (error) {
-        logger.error('Error saving map center:', error);
+    if (!center || !currentUser?.pi_uid) return;
+  
+    const { lat, lng } = center;
+  
+    try {
+      switch (entryType) {
+        case 'sell': {
+          const response = await checkSanctionStatus(lat, lng);
+          if (response?.isSanctioned) {
+            setShowWarningPopup(true);
+          } else {
+            await saveMapCenter(lat, lng, entryType);
+            setShowPopup(true);
+            logger.info(`Sell Center saved at [${lat}, ${lng}]`);
+          }
+          break;
+        }
+  
+        case 'search': {
+          await saveMapCenter(lat, lng, entryType);
+          setShowPopup(true);
+          logger.info(`Search Center saved at [${lat}, ${lng}]`);
+          break;
+        }
+  
+        default: {
+          logger.warn(`Unexpected entryType: ${entryType}`);
+          break;
+        }
       }
+    } catch (error) {
+      logger.error('Error setting map center:', error);
     }
   };
   
@@ -146,11 +171,18 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
     setShowPopup(false);
   };
 
+  const handleWarningClickDialog = async () => {
+    const responseData = await saveMapCenter(center.lat, center.lng, entryType);
+    if (responseData) {
+      setShowWarningPopup(false);
+    }
+  };
+
   const bounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
 
   const handleLocationButtonClick = () => { // Temporary placeholders for handling errors
     console.log('Location Button Clicked')
-  } 
+  }
 
   return (
     <div className="search-container">
@@ -239,6 +271,13 @@ const MapCenter = ({ entryType }: MapCenterProps) => {
           toggle={() => setShowPopup(false)}
           handleClicked={handleClickDialog}
           message={t('SHARED.MAP_CENTER.VALIDATION.MAP_CENTER_SUCCESS_MESSAGE')}
+        />
+      )}
+      {showWarningPopup && (
+        <ConfirmDialogX
+          toggle={() => setShowWarningPopup(false)}
+          handleClicked={handleWarningClickDialog}
+          message={t('SHARED.MAP_CENTER.VALIDATION.SELL_CENTER_SANCTIONED_MESSAGE')}
         />
       )}
     </div>
