@@ -14,6 +14,7 @@ import {
   TelephoneInput
 } from '@/components/shared/Forms/Inputs/Inputs';
 import ConfirmDialog from '@/components/shared/confirm';
+import MembershipIcon from '@/components/shared/membership/MembershipIcon';
 import OnlineShopping from '@/components/shared/Seller/ShopItem';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
@@ -372,9 +373,9 @@ const SellerRegistrationForm = () => {
   return (
     <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
-        <div className="text-center mb-5">
-          <h3 className="text-gray-400 text-sm">
-            {dbSeller ? dbSeller.name : ''}
+        <div className="w-full flex flex-col items-center mb-5">
+          <h3 className="text-gray-400 text-sm  flex items-center">
+            {dbSeller ? dbSeller.name : ''} <MembershipIcon category='triple_gold' styleComponent={{height: "14px", marginLeft: "10px"}} />
           </h3>
           <h1 className={HEADER}>
             {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
