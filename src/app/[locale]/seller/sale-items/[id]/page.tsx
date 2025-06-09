@@ -180,7 +180,16 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           </div>
           <div className="my-auto">
             <h2 className="font-bold text-[18px] mb-2 flex items-center">
-              {sellerShopInfo.name} <MembershipIcon category='triple_gold' styleComponent={{height: "14px", marginLeft: "10px"}} />
+              {sellerShopInfo.name} 
+              <MembershipIcon 
+                category='triple_gold' 
+                className="ml-1"
+                styleComponent={{
+                  display: "inline-block",
+                  objectFit: "contain",
+                  verticalAlign: "middle"
+                }}
+              />
             </h2>
             <p className="text-sm">{translateSellerCategory(sellerShopInfo.seller_type)}</p>
           </div>

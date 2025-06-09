@@ -38,7 +38,7 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
     <div style={{ position: 'relative', zIndex: 20, padding: '10px' }}>
       {/* Seller name and type - Close with a small gap */}
       <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-        <div className="flex gap-2 justify-center items-center">
+        <div className="flex gap-1 justify-center items-center">
           <h2
             style={{
               fontWeight: 'bold',
@@ -51,7 +51,14 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
           >
             {truncateChars(seller.name, 12)} {/* Adjust limit as needed */}
           </h2>
-          <MembershipIcon category='triple_gold' styleComponent={{height: "14px"}} />
+          <MembershipIcon 
+            category='triple_gold' 
+            styleComponent={{
+              display: "inline-block",
+              objectFit: "contain",
+              verticalAlign: "middle"
+            }}
+          />
         </div>
 
         {seller.seller_type && (

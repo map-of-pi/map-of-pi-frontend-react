@@ -20,13 +20,17 @@ function MembershipIcon({ category, className, styleComponent }: { category: str
       case "white":
         return WhiteIcon
       default:
-        return ""
+        return null
     }
   }
 
+  const icon = HandleMembership(category);
+
+  if (!icon) return null; // Don't render anything for casual members
+
   return (
-    <div className={`w-7 h-5 relative float-right ${className}`} style={styleComponent}>
-      <Image src={HandleMembership(category)} fill alt={category} />
+    <div className={`w-7 h-5 relative float-right ${className || ''}`} style={styleComponent}>
+      <Image src={icon} alt={category} fill style={{ objectFit: 'contain' }}/>
     </div>
   )
 }

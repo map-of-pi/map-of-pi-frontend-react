@@ -374,8 +374,17 @@ const SellerRegistrationForm = () => {
     <>
       <div className="w-full md:w-[500px] md:mx-auto p-4">
         <div className="w-full flex flex-col items-center mb-5">
-          <h3 className="text-gray-400 text-sm  flex items-center">
-            {dbSeller ? dbSeller.name : ''} <MembershipIcon category='triple_gold' styleComponent={{height: "14px", marginLeft: "10px"}} />
+          <h3 className="text-gray-400 text-sm flex items-center">
+            {dbSeller ? dbSeller.name : ''} 
+            <MembershipIcon 
+              category='triple_gold' 
+              className="ml-1"
+              styleComponent={{
+                display: "inline-block",
+                objectFit: "contain",
+                verticalAlign: "middle"
+              }}
+            />
           </h3>
           <h1 className={HEADER}>
             {t('SCREEN.SELLER_REGISTRATION.SELLER_REGISTRATION_HEADER')}
