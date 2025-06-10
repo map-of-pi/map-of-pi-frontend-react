@@ -71,12 +71,10 @@ type ShowAdResponse =
     adId?: string;
   };
 
-
 type IsAdReadyResponse = {
   type: AdType;
   ready: boolean;
 };
-
 
 type RequestAdResponse = {
   type: AdType;
