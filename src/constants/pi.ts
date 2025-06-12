@@ -23,10 +23,10 @@ interface PaymentDTO {
   },
 };
 
-type PiScope =  "payments" | "username" | "roles" | "wallet_address";
+type PiScope = "payments" | "username" | "roles" | "wallet_address";
 
 // TODO: Add more adequate typing if payments are introduced
-export type OnIncompletePaymentFoundType = (payment: PaymentDTO) => void ;
+export type OnIncompletePaymentFoundType = (payment: PaymentDTO) => void;
 
 export interface AuthResult {
   accessToken: string;
@@ -50,6 +50,35 @@ interface PiType {
   authenticate: AuthenticateType;
   init: (config: InitParams) => void;
   initialized: boolean;
+  nativeFeaturesList(): Promise<("inline_media" | "request_permission" | "ad_network")[]>;
+  Ads: {
+    showAd: (adType: AdType) => Promise<ShowAdResponse>
+    isAdReady: (adType: AdType) => Promise<IsAdReadyResponse>
+    requestAd: (adType: AdType) => Promise<RequestAdResponse>
+  }
+};
+
+type AdType = "interstitial" | "rewarded";
+
+type ShowAdResponse =
+  | {
+    type: "interstitial";
+    result: "AD_CLOSED" | "AD_DISPLAY_ERROR" | "AD_NETWORK_ERROR" | "AD_NOT_AVAILABLE";
+  }
+  | {
+    type: "rewarded";
+    result: "AD_REWARDED" | "AD_CLOSED" | "AD_DISPLAY_ERROR" | "AD_NETWORK_ERROR" | "AD_NOT_AVAILABLE" | "ADS_NOT_SUPPORTED" | "USER_UNAUTHENTICATED";
+    adId?: string;
+  };
+
+type IsAdReadyResponse = {
+  type: AdType;
+  ready: boolean;
+};
+
+type RequestAdResponse = {
+  type: AdType;
+  result: "AD_LOADED" | "AD_FAILED_TO_LOAD" | "AD_NOT_AVAILABLE";
 };
 
 declare global {
