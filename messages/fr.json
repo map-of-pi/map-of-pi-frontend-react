@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Voir les commandes",
     "USER_PREFERENCES_HEADER": "Préférences utilisateur",
     "PERSONALIZATION_SUBHEADER": "Personnalisation",
     "LANGUAGES": "Langues",
@@ -43,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Enregistrement des données vendeur",
+      "SELLER_REGISTRATION_HEADER": "Administration du Vendeur",
       "SELLER_DETAILS_LABEL": "Données vendeur",
       "EMAIL_LABEL": "Adresse e-mail",
       "PHONE_NUMBER_LABEL": "Numéro de téléphone",
@@ -67,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mon marqueur mon lieu de vente",
       "SELLER_SETTINGS_LABEL": "Paramètres vendeur",
       "SELLER_SELL_CENTER": "Définir le centre de vente",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Achats en ligne",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Achats en Ligne | Lister les Articles en Vente",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Achats en Ligne | Traitement des Commandes",
       "MAPPI_ALLOWANCE_LABEL": "Allocation Mappi restante",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Méthode de réalisation",
@@ -76,8 +78,9 @@
           "DELIVERED_TO_BUYER": "Livré à l'acheteur"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Instructions de réalisation pour l'acheteur",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Le retrait se fait à l'adresse du vendeur. Si la livraison est choisie, veuillez entrer l'adresse de l'acheteur.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Instructions de réalisation pour l'acheteur",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Le retrait se fait à l'adresse du vendeur. Si la livraison est choisie, veuillez entrer l'adresse de l'acheteur.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Détails d'exécution de l'acheteur",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Veuillez entrer une adresse e-mail valide",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Enregistrement réussi",
@@ -112,8 +115,34 @@
           "ONGOING_SERVICE": "Service continu",
           "SOLD": "Vendu"
         },
-        "SELLING_EXPIRATION_DATE": "À vendre avant le {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "À vendre avant le {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "La durée de vente ne peut pas être réduite en dessous des {spent_weeks} semaines déjà écoulées"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Liste des commandes",
+      "VIEW_ORDER_HEADER": "Voir la commande",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Exécution de commande du vendeur",
+      "ORDER_SUBHEADER": "En-tête de commande",
+      "ORDERED_ITEMS_SUBHEADER": "Articles commandés",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Vendeur",
+        "TOTAL_PRICE_LABEL": "Prix total",
+        "TIME_OF_ORDER_LABEL": "Heure de la commande",
+        "STATUS_LABEL": "Statut"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "Initialisé",
+        "PENDING": "En attente",
+        "COMPLETED": "Terminé",
+        "CANCELED": "Annulé",
+        "REFUNDED": "Remboursé",
+        "FULFILLED": "Exécuté"
+      },
+      "ORDER_COMPLETED_LABEL": "Commande terminée",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Commande expédiée/collectée"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Acheter chez le vendeur",
@@ -127,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "Score de votre evaluation: {seller_review_rating} sur 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Détails de contact du vendeur",
       "SELLER_USERNAME_LABEL": "Nom d'utilisateur",
-      "SELLER_PIONEER_ID_LABEL": "identifianf du pionier",
       "SELLER_PHONE_NUMBER_LABEL": "Numéro de téléphone",
       "SELLER_EMAIL_ADDRESS_LABEL": "Adresse e-mail",
       "ONLINE_SHOPPING": {
@@ -171,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "Erreur lors d'enregistrement de l'avis",
         "SELF_REVIEW_NOT_POSSIBLE": "Auto-évaluation non possible"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Voir la commande"
     }
   },
   "POPUP": {
@@ -243,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pionnier",
+    "PIONEER_ID_LABEL": "identifianf du Pionnier",
     "BUY": "Acheter",
+    "RESET": "Réinitialiser",
+    "REFUND": "Remboursement",
+    "FULFILL": "Exécuter",
+    "FULFILLED": "Rempli",
+    "PENDING": "En attente",
     "NAVIGATE": "Naviguer",
     "NO_COMMENT": "Aucun commentaire fourni",
     "SEARCH_CENTER": "Définir le centre de recherche",
@@ -252,6 +289,7 @@
     "SEARCH_LOADING": "Chargement de la recherche...",
     "REPLY": "Répondre",
     "ADD_ITEM": "Ajouter un article",
+    "CHECKOUT": "Paiement",
     "DELETE": "Supprimer",
     "CONFIRM_DELETE": "Voulez-vous vraiment supprimer cet élément? Cette action est irréversible.",
     "SAVE": "Enregistrer",

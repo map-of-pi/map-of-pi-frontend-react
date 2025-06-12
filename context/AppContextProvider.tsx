@@ -10,9 +10,9 @@ import {
   useEffect
 } from 'react';
 import axiosClient, { setAuthToken } from '@/config/client';
+import { onIncompletePaymentFound } from '@/config/payment';
 import { AuthResult } from '@/constants/pi';
 import { IUser } from '@/constants/types';
-import { onIncompletePaymentFound } from '@/utils/auth';
 
 import logger from '../logger.config.mjs';
 
@@ -79,11 +79,15 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     if (typeof window !== 'undefined' && window.Pi?.initialized) {
       try {
         setIsSigningInUser(true);
-        const pioneerAuth: AuthResult = await window.Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);
+        const pioneerAuth: AuthResult = await window.Pi.authenticate([
+          'username', 
+          'payments', 
+          'wallet_address'
+        ], onIncompletePaymentFound);
 
         // Send accessToken to backend
         const res = await axiosClient.post(
-          "/users/authenticate",
+          "/users/authenticate", 
           {}, // empty body
           {
             headers: {
