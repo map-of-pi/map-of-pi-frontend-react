@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Ver pedidos",
     "USER_PREFERENCES_HEADER": "Preferencias del Usuario",
     "PERSONALIZATION_SUBHEADER": "Personalización",
     "LANGUAGES": "Idiomas",
@@ -43,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Registro de Vendedor",
+      "SELLER_REGISTRATION_HEADER": "Administración del Vendedor",
       "SELLER_DETAILS_LABEL": "Detalles del vendedor",
       "EMAIL_LABEL": "Dirección de correo electrónico",
       "PHONE_NUMBER_LABEL": "Número de teléfono",
@@ -67,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Mi marcador en el mapa muestra dónde estoy vendiendo",
       "SELLER_SETTINGS_LABEL": "Configuración del Vendedor",
       "SELLER_SELL_CENTER": "Establecer Centro de Venta",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Compras en línea",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Compras en Línea | Lista de Artículos en Venta",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Compras en Línea | Cumplimiento de Pedidos",
       "MAPPI_ALLOWANCE_LABEL": "Asignación de Mappi restante",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Método de cumplimiento",
@@ -76,8 +78,9 @@
           "DELIVERED_TO_BUYER": "Entregado al comprador"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Instrucciones de cumplimiento para el comprador",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "La recogida es desde la dirección del vendedor. Si se selecciona la entrega, por favor ingrese la dirección del comprador.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Instrucciones de cumplimiento para el comprador",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "La recogida es desde la dirección del vendedor. Si se selecciona la entrega, por favor ingrese la dirección del comprador.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Detalles de cumplimiento del comprador",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Por favor, ingresa una dirección de correo electrónico válida",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registro exitoso",
@@ -112,8 +115,34 @@
           "ONGOING_SERVICE": "Servicio continuo",
           "SOLD": "Vendido"
         },
-        "SELLING_EXPIRATION_DATE": "Vender antes de {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Vender antes de {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "La duración de venta no puede reducirse por debajo de las {spent_weeks} semanas ya transcurridas"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Lista de pedidos",
+      "VIEW_ORDER_HEADER": "Ver pedido",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Cumplimiento de pedido del vendedor",
+      "ORDER_SUBHEADER": "Encabezado del pedido",
+      "ORDERED_ITEMS_SUBHEADER": "Artículos pedidos",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Vendedor",
+        "TOTAL_PRICE_LABEL": "Precio total",
+        "TIME_OF_ORDER_LABEL": "Hora del pedido",
+        "STATUS_LABEL": "Estado"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "Iniciado",
+        "PENDING": "Pendiente",
+        "COMPLETED": "Completado",
+        "CANCELED": "Cancelado",
+        "REFUNDED": "Reembolsado",
+        "FULFILLED": "Tramitado"
+      },
+      "ORDER_COMPLETED_LABEL": "Pedido completado",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Pedido despachado/recogido"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Comprar del Vendedor",
@@ -127,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "Puntuación de Reseñas: {seller_review_rating} de 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Detalles de Contacto del Vendedor",
       "SELLER_USERNAME_LABEL": "Nombre de usuario",
-      "SELLER_PIONEER_ID_LABEL": "ID de Pionero",
       "SELLER_PHONE_NUMBER_LABEL": "Número de teléfono",
       "SELLER_EMAIL_ADDRESS_LABEL": "Dirección de correo electrónico",
       "ONLINE_SHOPPING": {
@@ -171,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "Error al cargar la reseña",
         "SELF_REVIEW_NOT_POSSIBLE": "No es posible autoevaluarse"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Ver pedido"
     }
   },
   "POPUP": {
@@ -243,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pionero",
+    "PIONEER_ID_LABEL": "ID de Pionero",
     "BUY": "Comprar",
+    "RESET": "Restablecer",
+    "REFUND": "Reembolso",
+    "FULFILL": "Cumplir",
+    "FULFILLED": "Cumplido",
+    "PENDING": "Pendiente",
     "NAVIGATE": "Navegar",
     "NO_COMMENT": "No se proporcionó comentario",
     "SEARCH_CENTER": "Establecer Centro de Búsqueda",
@@ -252,6 +289,7 @@
     "SEARCH_LOADING": "Cargando búsqueda...",
     "REPLY": "Responder",
     "ADD_ITEM": "Agregar artículo",
+    "CHECKOUT": "Pagar",
     "DELETE": "Eliminar",
     "CONFIRM_DELETE": "¿Realmente quieres eliminar este elemento? Esta acción no se puede deshacer.",
     "SAVE": "Guardar",

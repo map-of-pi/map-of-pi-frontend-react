@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "View Orders",
     "USER_PREFERENCES_HEADER": "User Preferences",
     "PERSONALIZATION_SUBHEADER": "Personalisation",
     "LANGUAGES": "Languages",
@@ -43,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Seller Registration",
+      "SELLER_REGISTRATION_HEADER": "Seller Administration",
       "SELLER_DETAILS_LABEL": "Seller Details",
       "EMAIL_LABEL": "Email address",
       "PHONE_NUMBER_LABEL": "Phone number",
@@ -67,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
       "SELLER_SETTINGS_LABEL": "Seller Settings",
       "SELLER_SELL_CENTER": "Set Sell Centre",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Online Shopping",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Online Shopping | List Items for Sale",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Online Shopping | Order Fulfilment",
       "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Fulfilment method",
@@ -76,8 +78,9 @@
           "DELIVERED_TO_BUYER": "Delivered to buyer"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Fulfilment instructions to buyer",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Seller fulfilment instructions to buyer",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Buyer fulfilment details",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Please enter a valid email address",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",
@@ -112,8 +115,34 @@
           "ONGOING_SERVICE": "Ongoing service",
           "SOLD": "Sold"  
         },
-        "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Selling duration cannot be reduced below the {spent_weeks} weeks already spent"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Order List",
+      "VIEW_ORDER_HEADER": "View Order",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Seller Order Fulfilment",
+      "ORDER_SUBHEADER": "Order Header",
+      "ORDERED_ITEMS_SUBHEADER": "Ordered Items",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Seller",
+        "TOTAL_PRICE_LABEL": "Total price",
+        "TIME_OF_ORDER_LABEL": "Time of order",
+        "STATUS_LABEL": "Status"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "Initiated",
+        "PENDING": "Pending",
+        "COMPLETED": "Completed",
+        "CANCELED": "Cancelled",
+        "REFUNDED": "Refunded",
+        "FULFILLED": "Fulfilled"
+      },
+      "ORDER_COMPLETED_LABEL": "Order Completed",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Order Dispatched/Collected"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Buy from Seller",
@@ -126,8 +155,7 @@
       "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
       "REVIEWS_SCORE_MESSAGE": "Reviews Score: {seller_review_rating} out of 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Seller Contact Details",
-      "SELLER_USERNAME_LABEL": "Username",
-      "SELLER_PIONEER_ID_LABEL": "Pioneer ID", 
+      "SELLER_USERNAME_LABEL": "Username", 
       "SELLER_PHONE_NUMBER_LABEL": "Phone number",
       "SELLER_EMAIL_ADDRESS_LABEL": "Email address",
       "ONLINE_SHOPPING": {
@@ -171,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "Error loading review",
         "SELF_REVIEW_NOT_POSSIBLE": "Self-review is not possible"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "View Order"
     }
   },
   "POPUP": {
@@ -243,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pioneer",
+    "PIONEER_ID_LABEL": "Pioneer ID",
     "BUY": "Buy",
+    "RESET": "Reset",
+    "REFUND": "Refund",
+    "FULFILL": "Fulfil",
+    "FULFILLED": "Fulfilled",
+    "PENDING": "Pending",
     "NAVIGATE": "Navigate",
     "NO_COMMENT": "No comment provided",
     "SEARCH_CENTER": "Set Search Centre",
@@ -252,6 +289,7 @@
     "SEARCH_LOADING": "Search loading...",
     "REPLY": "Reply",
     "ADD_ITEM": "Add Item",
+    "CHECKOUT": "Checkout",
     "DELETE": "Delete",
     "CONFIRM_DELETE": "Do you really want to delete this item? This action cannot be undone.",
     "SAVE": "Save",
