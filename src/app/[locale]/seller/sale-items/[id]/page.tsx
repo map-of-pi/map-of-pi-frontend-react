@@ -234,7 +234,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           <ToggleCollapse
             header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
             open={false}>
-            <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
+            <div className="overflow-x-auto mb-7 mt-3 flex p-2 gap-x-5 w-full">
               {dbSellerItems && dbSellerItems.length > 0 && 
                 dbSellerItems.map((item) => (
                   <ListItem

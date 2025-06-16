@@ -104,7 +104,7 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
           }}
         />
       </div>
-      <div className="max-h-[600px] overflow-y-auto p-1 mb-7">
+      <div className="overflow-x-auto p-2 gap-x-5 mb-5 w-full flex">
         {(isNewItem) && 
           <ShopItem
             key={''}
@@ -514,7 +514,7 @@ export const ListItem: React.FC<{
     <div
       ref={refCallback}
       data-id={item._id}
-      className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
+      className={`relative outline outline-50 outline-gray-600 rounded-lg mb-4 ${
         isPicked ? 'bg-yellow-100' : ''
       }`}
     >
