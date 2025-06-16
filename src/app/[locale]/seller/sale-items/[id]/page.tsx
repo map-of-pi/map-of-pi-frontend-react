@@ -141,7 +141,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
 
     const paymentData: PaymentDataType = {
       amount: totalAmount,
-      memo: 'This is another Test Payment',
+      memo: `Map of Pi payment from ${currentUser.pi_username} to ${sellerInfo?.pi_username}`,
       metadata: { 
         payment_type: PaymentType.BuyerCheckout,
         OrderPayment: {
