@@ -2,8 +2,9 @@ import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { Button } from '../Forms/Buttons/Buttons';
+import TrustMeter from '@/components/shared/Review/TrustMeter';
+import { translateSellerCategory } from '@/utils/translate';
 
 import logger from '../../../../logger.config.mjs';
 
@@ -16,17 +17,8 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
       ? seller.image
       : '/images/logo.svg';
 
-  const translateSellerCategory = (category: string): string => {
-    switch (category) {
-      case 'activeSeller':
-        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER');
-      case 'inactiveSeller':
-        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER');
-      case 'testSeller':
-        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER');
-      default:
-        return '';
-    }
+  const truncateChars = (text: string, maxChars: number): string => {
+    return text.length > maxChars ? text.slice(0, maxChars) + '...' : text;
   };
 
   logger.info('Rendering MapMarkerPopup for seller:', { seller });
@@ -35,24 +27,39 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
     <div style={{ position: 'relative', zIndex: 20, padding: '10px' }}>
       {/* Seller name and type - Close with a small gap */}
       <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-        <h2 style={{ fontWeight: 'bold', fontSize: '18px', marginBottom: '2px' }}>
-          {seller.name}
+        <h2
+          style={{
+            fontWeight: 'bold',
+            fontSize: '15px',
+            marginBottom: '2px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {truncateChars(seller.name, 12)} {/* Adjust limit as needed */}
         </h2>
+
         {seller.seller_type && (
           <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '0px', marginBottom: '4px' }}>
-            {translateSellerCategory(seller.seller_type)}
+            {translateSellerCategory(seller.seller_type, t)}
           </p>
+
         )}
       </div>
 
       {/* Seller image - Close to seller type */}
-      <div style={{ textAlign: 'center', marginBottom: '5px' }}>
+      <div style={{ width: '150px', height: '70px', overflow: 'hidden', margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Image
           src={imageUrl}
           alt="Seller Image"
           width={150}
-          height={50}
-          style={{ borderRadius: '0px', objectFit: 'cover', display: 'block', margin: '0 auto' }}
+          height={70}
+          style={{
+            objectFit: 'contain',
+            width: '100%',
+            height: '100%',
+          }}
         />
       </div>
 

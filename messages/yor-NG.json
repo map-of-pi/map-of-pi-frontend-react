@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Wo Àṣẹ",
     "USER_PREFERENCES_HEADER": "Awọn ayanfẹ Olumulo",   
     "PERSONALIZATION_SUBHEADER": "Ẹni-ara-ẹni",    
     "LANGUAGES": "Awọn ede",
@@ -33,11 +34,7 @@
     "SEARCH_FILTERS": {
       "INCLUDE_ACTIVE_SELLERS": "Fi awọn olutaja ti n ṣiṣẹ kun",
       "INCLUDE_INACTIVE_SELLERS": "Fi awọn olutaja ti ko n ṣiṣẹ kun",
-      "INCLUDE_TEST_SELLERS": "Fi awọn olutaja idanwo kun",
-      "INCLUDE_TRUST_LEVEL_100": "Fi ipele igbẹkẹle 100 kun",
-      "INCLUDE_TRUST_LEVEL_80": "Fi ipele igbẹkẹle 80 kun",
-      "INCLUDE_TRUST_LEVEL_50": "Fi ipele igbẹkẹle 50 kun",
-      "INCLUDE_TRUST_LEVEL_0": "Fi ipele igbẹkẹle 0 kun"
+      "INCLUDE_TEST_SELLERS": "Fi awọn olutaja idanwo kun"
     },
     "CONTACT_MAP_OF_PI": "Olubasọrọ Map of Pi",
     "VALIDATION": {
@@ -47,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Iforukosile Olutaja",
+      "SELLER_REGISTRATION_HEADER": "Isakoso Onisowo",
       "SELLER_DETAILS_LABEL": "Awọn alaye Olutaja",
       "EMAIL_LABEL": "Adirẹsi imeeli",
       "PHONE_NUMBER_LABEL": "Nọmba foonu re",
@@ -61,7 +58,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Onítajà lọ́wọ́-lọ́wọ́",
           "INACTIVE_SELLER": "Onítajà aláì ṣi ṣẹ́mọ́",
-          "TEST_SELLER": "Idanwo Olutaja"
+          "TEST_SELLER": "Idanwo Olutaja",
+          "RESTRICTED_SELLER": "Olutaja to ni idiwọ"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Eto Olutaja to ti ni ilọsiwaju",
@@ -70,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Ifiran adirẹsi ile itaja mi , tabi awon nkan ti mo nta",
       "SELLER_SETTINGS_LABEL": "Eto reglage ti Olutaja",
       "SELLER_SELL_CENTER": "Ṣeto aarin Ile-iṣẹ Tita",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Ìṣàkóso Ọjà Lórí Ayélujára",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Rira Lori Ayelujara | Atokọ Awọn Ohun Ti O Ta",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Rira Lori Ayelujara | Imuṣẹ Ibere",
       "MAPPI_ALLOWANCE_LABEL": "Ìkúnrẹ́rẹ́ Mappi tó kù",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Ọ̀nà ìpẹ̀yà",
@@ -79,8 +78,9 @@
           "DELIVERED_TO_BUYER": "Títẹ̀sí lọ sí oníbàárà"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Ìtọná ìpẹ̀yà sí oníbàárà",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Ìkó nàgó jẹ́ láti àdírẹ́sì olùtà. Tí ìfí tọ́jú bá ti yan, jọ̀wọ́ fi àdírẹ́sì oníbàárà rẹ̀ sílẹ̀.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Ìtọná ìpẹ̀yà sí oníbàárà",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Ìkó nàgó jẹ́ láti àdírẹ́sì olùtà. Tí ìfí tọ́jú bá ti yan, jọ̀wọ́ fi àdírẹ́sì oníbàárà rẹ̀ sílẹ̀.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Àlàyé ìmúlò oníra fún olùtà",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Jọwọ tẹ adirẹsi imeeli to sise dada eyi to wulo",  
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Aṣeyọri Iforukọsilẹ",
@@ -115,8 +115,34 @@
           "ONGOING_SERVICE": "Ìrànlọwọ tó nlọ lọwọ",
           "SOLD": "Tà"
         },
-        "SELLING_EXPIRATION_DATE": "Títà ní {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Títà ní {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Akoko tita ko le dinku ju {spent_weeks} ọsẹ ti a ti lo lọ"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Àkójọ Àṣẹ",
+      "VIEW_ORDER_HEADER": "Wo àṣẹ",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Ipari ibere onisowo",
+      "ORDER_SUBHEADER": "Akọle ibere",
+      "ORDERED_ITEMS_SUBHEADER": "Awọn ohun ti a bere",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Oníṣòwò",
+        "TOTAL_PRICE_LABEL": "Lapapọ iye",
+        "TIME_OF_ORDER_LABEL": "Akoko ibere",
+        "STATUS_LABEL": "Ìpò"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "Ti bẹ̀rẹ̀",
+        "PENDING": "N dúró de",
+        "COMPLETED": "Ti parí",
+        "CANCELED": "Ti fagilé",
+        "REFUNDED": "Ti pada owo",
+        "FULFILLED": "A ti pari aṣẹ naa"
+      },
+      "ORDER_COMPLETED_LABEL": "Àṣẹ parí",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Àṣẹ ránṣẹ́ / ti gba"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Ra oja ni owo olutaja",
@@ -130,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "Atunwo Dimegilio: {seller_review_rating} ninu 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Awon alaye olubasoro eniti ta oja",
       "SELLER_USERNAME_LABEL": "Orukọ olumulo", 
-      "SELLER_PIONEER_ID_LABEL": "ID aṣáájú-ọnà",
       "SELLER_PHONE_NUMBER_LABEL": "Foonu nomba", 
       "SELLER_EMAIL_ADDRESS_LABEL": "Adirẹsi imeeli",
       "ONLINE_SHOPPING": {
@@ -174,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "àṣìṣe ayẹ̀wò ìrùsókè fun awotele",
         "SELF_REVIEW_NOT_POSSIBLE": "àtúnyẹ̀wò ara eni ko seesé ṣe"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Wo pèsè"
     }
   },
   "POPUP": {
@@ -246,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pionier",
+    "PIONEER_ID_LABEL": "ID aṣáájú-ọnà",
     "BUY": "Ra oja",
+    "RESET": "Tunṣe",
+    "REFUND": "Ìsanwó pada",
+    "FULFILL": "Ṣeé ṣe",
+    "FULFILLED": "Ti ṣe",
+    "PENDING": "N dúró de",
     "NAVIGATE": "Ṣàbẹ̀wò",
     "NO_COMMENT": "Ko si asọye ti a pese", 
     "SEARCH_CENTER": "Ṣeto ile-iṣẹ wiwa", 
@@ -254,8 +288,10 @@
     "SEARCH_REVIEWS": "Awọn atunwo wiwa", 
     "SEARCH_LOADING": "Ṣawari nlo...", 
     "REPLY": "E te pada", 
-    "ADD_ITEM": "Fikun un Item",  
-    "DELETE": "Pàdánù",  
+    "ADD_ITEM": "Fikun un Item",
+    "CHECKOUT": "Sanwo",
+    "DELETE": "Pàdánù",
+    "CONFIRM": "Jẹrisi",  
     "CONFIRM_DELETE": "Ṣé o dájú pé o fẹ́ pa àyọkà yìí? Ìṣe yìí kò lè tún ṣe.",
     "SAVE": "Fipamọ",
     "CONFIRM_DIALOG": "O ni awọn ayipada ti a ko fi pamọ. Ṣe o fẹ lati lọ nitootọ?",
@@ -296,7 +332,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Ṣawari ipo kan, ilu, tabi adirẹsi",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "A ti fipamọ ile-iṣẹ rẹ dara dada"
+        "MAP_CENTER_SUCCESS_MESSAGE": "A ti fipamọ ile-iṣẹ rẹ dara dada",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Ibi ti o yan dabi pe o wa ninu agbegbe ti a fi idiwọ si. Ti a ba fọwọsi, a le yọ aami tita rẹ kuro lori maapu."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Iboju Ikojopo ifiranse ...",

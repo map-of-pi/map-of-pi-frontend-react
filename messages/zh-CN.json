@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "查看订单",
     "USER_PREFERENCES_HEADER": "用户偏好",
     "PERSONALIZATION_SUBHEADER": "个性化设置",
     "LANGUAGES": "语言",
@@ -33,11 +34,7 @@
     "SEARCH_FILTERS": {
       "INCLUDE_ACTIVE_SELLERS": "包含活跃卖家",
       "INCLUDE_INACTIVE_SELLERS": "包含非活跃卖家",
-      "INCLUDE_TEST_SELLERS": "包含测试卖家",
-      "INCLUDE_TRUST_LEVEL_100": "包含信任等级100",
-      "INCLUDE_TRUST_LEVEL_80": "包含信任等级80",
-      "INCLUDE_TRUST_LEVEL_50": "包含信任等级50",
-      "INCLUDE_TRUST_LEVEL_0": "包含信任等级0"
+      "INCLUDE_TEST_SELLERS": "包含测试卖家"
     },
     "CONTACT_MAP_OF_PI": "联络 Map of Pi",
     "VALIDATION": {
@@ -47,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "卖家注册",
+      "SELLER_REGISTRATION_HEADER": "卖家管理",
       "SELLER_DETAILS_LABEL": "卖家详情",
       "EMAIL_LABEL": "电子邮件地址",
       "PHONE_NUMBER_LABEL": "电话号码",
@@ -61,7 +58,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "活跃卖家",
           "INACTIVE_SELLER": "非活跃卖家",
-          "TEST_SELLER": "测试卖家"
+          "TEST_SELLER": "测试卖家",
+          "RESTRICTED_SELLER": "受限卖家"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "高级卖家设置",
@@ -70,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "我的地图标记显示我的销售位置",
       "SELLER_SETTINGS_LABEL": "卖家设置",
       "SELLER_SELL_CENTER": "设定销售中心",
-      "SELLER_ONLINE_SHOPPING_LABEL": "在线购物",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "在线购物 | 列出待售商品",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "在线购物 | 订单履行",
       "MAPPI_ALLOWANCE_LABEL": "剩余的 Mappi 额度",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "履行方式",
@@ -79,8 +78,9 @@
           "DELIVERED_TO_BUYER": "送货到买家"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "给买家的履行说明",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "取货地址为卖家的地址。如果选择配送，请输入买家的地址。",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "给买家的履行说明",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "取货地址为卖家的地址。如果选择配送，请输入买家的地址。",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "买家向卖家的履约详情",
       "VALIDATION": {
         "EMAIL_VALIDATION": "请输入有效的电子邮件地址",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "注册成功",
@@ -115,8 +115,34 @@
           "ONGOING_SERVICE": "正在进行的服务",
           "SOLD": "已售出"
         },
-        "SELLING_EXPIRATION_DATE": "{expired_by_date} 前销售"
+        "SELLING_EXPIRATION_DATE": "{expired_by_date} 前销售",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "销售期限不能缩短到低于已用的{spent_weeks}周"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "订单列表",
+      "VIEW_ORDER_HEADER": "查看订单",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "卖家订单履行",
+      "ORDER_SUBHEADER": "订单标题",
+      "ORDERED_ITEMS_SUBHEADER": "已订购商品",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "卖家",
+        "TOTAL_PRICE_LABEL": "总价",
+        "TIME_OF_ORDER_LABEL": "订单时间",
+        "STATUS_LABEL": "状态"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "已初始化",
+        "PENDING": "待处理",
+        "COMPLETED": "已完成",
+        "CANCELED": "已取消",
+        "REFUNDED": "已退款",
+        "FULFILLED": "订单已完成"
+      },
+      "ORDER_COMPLETED_LABEL": "订单已完成",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "订单已发货/已收取"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "从卖家购买",
@@ -130,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "评论评分：{seller_review_rating} 满分 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "卖家联系信息",
       "SELLER_USERNAME_LABEL": "用户名",
-      "SELLER_PIONEER_ID_LABEL": "先锋 ID",
       "SELLER_PHONE_NUMBER_LABEL": "电话号码",
       "SELLER_EMAIL_ADDRESS_LABEL": "电子邮件地址",
       "ONLINE_SHOPPING": {
@@ -174,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "加载评论时出错",
         "SELF_REVIEW_NOT_POSSIBLE": "无法对自己进行评论"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "查看订单"
     }
   },
   "POPUP": {
@@ -246,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "先锋",
+    "PIONEER_ID_LABEL": "先锋 ID",
     "BUY": "购买",
+    "RESET": "重置",
+    "REFUND": "退款",
+    "FULFILL": "完成",
+    "FULFILLED": "已完成",
+    "PENDING": "待处理",
     "NAVIGATE": "导航",
     "NO_COMMENT": "无评论",
     "SEARCH_CENTER": "设置搜索中心",
@@ -255,6 +289,7 @@
     "SEARCH_LOADING": "搜索加载中...",
     "REPLY": "回复",
     "ADD_ITEM": "添加项目",
+    "CHECKOUT": "结账",
     "DELETE": "删除",
     "CONFIRM_DELETE": "您确定要删除此项目吗？此操作无法撤销。",
     "SAVE": "保存",
@@ -297,7 +332,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "搜索位置、城市或地址",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "中心点保存成功"
+        "MAP_CENTER_SUCCESS_MESSAGE": "中心点保存成功",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "您选择的位置似乎位于受限区域。如果确认，您的销售标记可能会从地图中移除。"
       }
     },
     "LOADING_SCREEN_MESSAGE": "加载中...",

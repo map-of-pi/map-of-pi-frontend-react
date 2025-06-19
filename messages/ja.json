@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "注文を見る",
     "USER_PREFERENCES_HEADER": "ユーザー設定",
     "PERSONALIZATION_SUBHEADER": "パーソナライズ",
     "LANGUAGES": "言語",
@@ -31,13 +32,9 @@
     },
     "SEARCH_FILTERS_SUBHEADER": "検索フィルター",
     "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "アクティブな販売者を含める",
-      "INCLUDE_INACTIVE_SELLERS": "非アクティブな販売者を含める",
-      "INCLUDE_TEST_SELLERS": "テスト販売者を含める",
-      "INCLUDE_TRUST_LEVEL_100": "信頼レベル100を含める",
-      "INCLUDE_TRUST_LEVEL_80": "信頼レベル80を含める",
-      "INCLUDE_TRUST_LEVEL_50": "信頼レベル50を含める",
-      "INCLUDE_TRUST_LEVEL_0": "信頼レベル0を含める"
+      "INCLUDE_ACTIVE_SELLERS": "アクティブな販売者を含む",
+      "INCLUDE_INACTIVE_SELLERS": "非アクティブな販売者を含む",
+      "INCLUDE_TEST_SELLERS": "テスト販売者を含む"
     },
     "CONTACT_MAP_OF_PI": "Map of Pi に連絡",
     "VALIDATION": {
@@ -47,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "販売者登録",
+      "SELLER_REGISTRATION_HEADER": "販売者管理",
       "SELLER_DETAILS_LABEL": "販売者の詳細",
       "EMAIL_LABEL": "メールアドレス",
       "PHONE_NUMBER_LABEL": "電話番号",
@@ -61,7 +58,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "アクティブな販売者",
           "INACTIVE_SELLER": "非アクティブな販売者",
-          "TEST_SELLER": "テスト販売者"
+          "TEST_SELLER": "テスト販売者",
+          "RESTRICTED_SELLER": "制限された販売者"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "販売者の詳細設定",
@@ -70,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "マップマーカーが私の販売場所を示しています",
       "SELLER_SETTINGS_LABEL": "販売者設定",
       "SELLER_SELL_CENTER": "販売センターを設定",
-      "SELLER_ONLINE_SHOPPING_LABEL": "オンラインショッピング",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "オンラインショッピング | 販売商品のリスト",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "オンラインショッピング | 注文の履行",
       "MAPPI_ALLOWANCE_LABEL": "Mappiの残り許容量",  
       "FULFILLMENT_METHOD_TYPE": {  
         "FULFILLMENT_METHOD_TYPE_LABEL": "履行方法",  
@@ -79,8 +78,9 @@
           "DELIVERED_TO_BUYER": "購入者への配達"  
         }  
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "購入者への履行指示",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "収集は販売者の住所から行われます。配達を選択した場合は、購入者の住所を入力してください。",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "購入者への履行指示",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "収集は販売者の住所から行われます。配達を選択した場合は、購入者の住所を入力してください。",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "購入者から販売者への履行詳細",
       "VALIDATION": {
         "EMAIL_VALIDATION": "有効なメールアドレスを入力してください",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "登録成功",
@@ -115,8 +115,34 @@
             "ONGOING_SERVICE": "継続的サービス",
             "SOLD": "販売済み"
         },
-        "SELLING_EXPIRATION_DATE": "販売期限 {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "販売期限 {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "販売期間は、すでに経過した{spent_weeks}週間より短くすることはできません"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "注文リスト",
+      "VIEW_ORDER_HEADER": "注文を表示",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "販売者の注文履行",
+      "ORDER_SUBHEADER": "注文ヘッダー",
+      "ORDERED_ITEMS_SUBHEADER": "注文された商品",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "販売者",
+        "TOTAL_PRICE_LABEL": "合計金額",
+        "TIME_OF_ORDER_LABEL": "注文時間",
+        "STATUS_LABEL": "ステータス"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "初期化済み",
+        "PENDING": "保留中",
+        "COMPLETED": "完了",
+        "CANCELED": "キャンセル済み",
+        "REFUNDED": "返金済み",
+        "FULFILLED": "発送済み"
+      },
+      "ORDER_COMPLETED_LABEL": "注文完了",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "注文発送／受取済み"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "販売者から購入",
@@ -130,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "レビュー評価: 5.0中 {seller_review_rating}",
       "SELLER_CONTACT_DETAILS_LABEL": "販売者の連絡先",
       "SELLER_USERNAME_LABEL": "ユーザー名",
-      "SELLER_PIONEER_ID_LABEL": "パイオニアID",
       "SELLER_PHONE_NUMBER_LABEL": "電話番号",
       "SELLER_EMAIL_ADDRESS_LABEL": "メールアドレス",
       "ONLINE_SHOPPING": {
@@ -174,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "レビューの読み込みエラー",
         "SELF_REVIEW_NOT_POSSIBLE": "自分自身へのレビューはできません"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "注文を見る"
     }
   },
   "POPUP": {
@@ -246,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "パイオニア",
+    "PIONEER_ID_LABEL": "パイオニアID",
     "BUY": "購入",
+    "RESET": "リセット",
+    "REFUND": "返金",
+    "FULFILL": "完了する",
+    "FULFILLED": "完了",
+    "PENDING": "保留中",
     "NAVIGATE": "ナビゲート",
     "NO_COMMENT": "コメントが提供されていません",
     "SEARCH_CENTER": "検索センターを設定",
@@ -255,9 +289,11 @@
     "SEARCH_LOADING": "検索中...",
     "REPLY": "返信",
     "ADD_ITEM": "アイテムを追加",
+    "CHECKOUT": "お会計",
     "DELETE": "削除",
     "CONFIRM_DELETE": "本当にこのアイテムを削除しますか？この操作は元に戻せません。",
     "SAVE": "保存",
+    "CONFIRM": "確認",
     "CONFIRM_DIALOG": "保存されていない変更があります。本当に離れますか？",
     "USER_INFORMATION": {
       "PI_USERNAME_LABEL": "Piユーザー名",
@@ -296,7 +332,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "場所、都市、住所を検索",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "センターが正常に保存されました"
+        "MAP_CENTER_SUCCESS_MESSAGE": "センターが正常に保存されました",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "選択した場所は制裁対象地域にあるようです。確認されると、売り手マーカーが地図から削除される場合があります。"
       }
     },
     "LOADING_SCREEN_MESSAGE": "読み込み中...",

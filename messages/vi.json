@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Xem đơn hàng",
     "USER_PREFERENCES_HEADER": "Tùy chọn người dùng",
     "PERSONALIZATION_SUBHEADER": "Cá nhân hóa",
     "LANGUAGES": "Ngôn ngữ",
@@ -33,11 +34,7 @@
     "SEARCH_FILTERS": {
       "INCLUDE_ACTIVE_SELLERS": "Bao gồm người bán hoạt động",
       "INCLUDE_INACTIVE_SELLERS": "Bao gồm người bán không hoạt động",
-      "INCLUDE_TEST_SELLERS": "Bao gồm người bán thử nghiệm",
-      "INCLUDE_TRUST_LEVEL_100": "Bao gồm mức độ tin cậy 100",
-      "INCLUDE_TRUST_LEVEL_80": "Bao gồm mức độ tin cậy 80",
-      "INCLUDE_TRUST_LEVEL_50": "Bao gồm mức độ tin cậy 50",
-      "INCLUDE_TRUST_LEVEL_0": "Bao gồm mức độ tin cậy 0"
+      "INCLUDE_TEST_SELLERS": "Bao gồm người bán thử nghiệm"
     },
     "CONTACT_MAP_OF_PI": "Liên hệ với Map of Pi",
     "VALIDATION": {
@@ -47,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Đăng ký người bán",
+      "SELLER_REGISTRATION_HEADER": "Quản Lý Người Bán",
       "SELLER_DETAILS_LABEL": "Thông tin người bán",
       "EMAIL_LABEL": "Địa chỉ email",
       "PHONE_NUMBER_LABEL": "Số điện thoại",
@@ -61,7 +58,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Người bán hoạt động",
           "INACTIVE_SELLER": "Người bán không hoạt động",
-          "TEST_SELLER": "Người bán thử nghiệm"
+          "TEST_SELLER": "Người bán thử nghiệm",
+          "RESTRICTED_SELLER": "Người bán bị hạn chế"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Cài đặt nâng cao cho người bán",
@@ -70,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Vị trí trên bản đồ của tôi cũng là nơi tôi đang bán",
       "SELLER_SETTINGS_LABEL": "Cài đặt người bán",
       "SELLER_SELL_CENTER": "Đặt Trung tâm bán hàng",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Mua sắm trực tuyến",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Mua Sắm Trực Tuyến | Danh Sách Mặt Hàng Bán",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Mua Sắm Trực Tuyến | Hoàn Thành Đơn Hàng",
       "MAPPI_ALLOWANCE_LABEL": "Trợ cấp Mappi còn lại",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Phương thức hoàn thành",
@@ -79,8 +78,9 @@
           "DELIVERED_TO_BUYER": "Giao hàng cho người mua"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Hướng dẫn hoàn thành cho người mua",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Lấy hàng tại địa chỉ của người bán. Nếu chọn giao hàng, vui lòng nhập địa chỉ của người mua.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Hướng dẫn hoàn thành cho người mua",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Lấy hàng tại địa chỉ của người bán. Nếu chọn giao hàng, vui lòng nhập địa chỉ của người mua.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Chi tiết thực hiện từ người mua đến người bán",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Vui lòng nhập địa chỉ email hợp lệ",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Đăng ký thành công",
@@ -115,8 +115,34 @@
           "ONGOING_SERVICE": "Dịch vụ đang hoạt động",
           "SOLD": "Đã bán"
         },
-        "SELLING_EXPIRATION_DATE": "Bán trước {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Bán trước {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Thời gian bán không thể rút ngắn dưới {spent_weeks} tuần đã sử dụng"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Danh sách đơn hàng",
+      "VIEW_ORDER_HEADER": "Xem đơn hàng",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Hoàn thành đơn hàng người bán",
+      "ORDER_SUBHEADER": "Tiêu đề đơn hàng",
+      "ORDERED_ITEMS_SUBHEADER": "Mặt hàng đã đặt",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Người bán",
+        "TOTAL_PRICE_LABEL": "Tổng giá",
+        "TIME_OF_ORDER_LABEL": "Thời gian đặt hàng",
+        "STATUS_LABEL": "Trạng thái"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "Đã khởi tạo",
+        "PENDING": "Đang chờ xử lý",
+        "COMPLETED": "Đã hoàn thành",
+        "CANCELED": "Đã hủy",
+        "REFUNDED": "Đã hoàn tiền",
+        "FULFILLED": "Đơn hàng đã được xử lý"
+      },
+      "ORDER_COMPLETED_LABEL": "Đơn hàng hoàn thành",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Đơn hàng đã gửi/đã nhận"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Mua từ người bán",
@@ -130,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "Điểm đánh giá: {seller_review_rating} trên 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Thông tin liên hệ người bán",
       "SELLER_USERNAME_LABEL": "Tên người dùng",
-      "SELLER_PIONEER_ID_LABEL": "Mã Pioneer",
       "SELLER_PHONE_NUMBER_LABEL": "Số điện thoại",
       "SELLER_EMAIL_ADDRESS_LABEL": "Địa chỉ email",
       "ONLINE_SHOPPING": {
@@ -174,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "Lỗi khi tải đánh giá",
         "SELF_REVIEW_NOT_POSSIBLE": "Không thể tự đánh giá"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Xem đơn hàng"
     }
   },
   "POPUP": {
@@ -246,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Tiên phong",
+    "PIONEER_ID_LABEL": "Mã Pioneer",
     "BUY": "Mua",
+    "RESET": "Đặt lại",
+    "REFUND": "Hoàn tiền",
+    "FULFILL": "Hoàn thành",
+    "FULFILLED": "Đã hoàn thành",
+    "PENDING": "Đang chờ xử lý",
     "NAVIGATE": "Dẫn đường",
     "NO_COMMENT": "Chưa có bình luận",
     "SEARCH_CENTER": "Đặt Trung tâm Tìm kiếm",
@@ -255,6 +289,7 @@
     "SEARCH_LOADING": "Đang tải tìm kiếm...",
     "REPLY": "Trả lời",
     "ADD_ITEM": "Thêm mục",
+    "CHECKOUT": "Thanh toán",
     "DELETE": "Xóa",
     "CONFIRM_DELETE": "Bạn có thực sự muốn xóa mục này không? Hành động này không thể hoàn tác.",
     "SAVE": "Lưu",
@@ -297,7 +332,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Tìm kiếm địa điểm, thành phố hoặc địa chỉ",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Vị trí của bạn đã được lưu thành công"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Vị trí của bạn đã được lưu thành công",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Vị trí bạn chọn có vẻ nằm trong khu vực bị cấm. Nếu được xác nhận, đánh dấu bán của bạn có thể bị xóa khỏi bản đồ."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Đang tải ...",

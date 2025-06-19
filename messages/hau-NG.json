@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Duba Umarni",
     "USER_PREFERENCES_HEADER": "Zaɓin mai amfani",
     "PERSONALIZATION_SUBHEADER": "Keɓancewa",
     "LANGUAGES": "Harsuna",
@@ -31,13 +32,9 @@
     },
     "SEARCH_FILTERS_SUBHEADER": "Farantan Bincike",
     "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "Hada da masu sayarwa masu aiki",
-      "INCLUDE_INACTIVE_SELLERS": "Hada da masu sayarwa marasa aiki",
-      "INCLUDE_TEST_SELLERS": "Hada da masu sayarwa na gwaji",
-      "INCLUDE_TRUST_LEVEL_100": "Hada da matakin amana 100",
-      "INCLUDE_TRUST_LEVEL_80": "Hada da matakin amana 80",
-      "INCLUDE_TRUST_LEVEL_50": "Hada da matakin amana 50",
-      "INCLUDE_TRUST_LEVEL_0": "Hada da matakin amana 0"
+      "INCLUDE_ACTIVE_SELLERS": "Yan kasuwa masu aiki",
+      "INCLUDE_INACTIVE_SELLERS": "Yan kasuwa marasa aiki",
+      "INCLUDE_TEST_SELLERS": "Yan kasuwa na gwaji"
     },
     "CONTACT_MAP_OF_PI": "Tuntubi Map of Pi",
     "VALIDATION": {
@@ -47,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "Rajistar Mai Sayarwa",
+      "SELLER_REGISTRATION_HEADER": "Gudanar da Mai Sayarwa",
       "SELLER_DETAILS_LABEL": "Bayanin mai sayarwa",
       "EMAIL_LABEL": "Adireshin imel",
       "PHONE_NUMBER_LABEL": "Lambar waya",
@@ -61,7 +58,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Mai siyarwa mai aiki",
           "INACTIVE_SELLER": "Mai siyarwa mara aiki",
-          "TEST_SELLER": "Mai siyarwa gwaji"
+          "TEST_SELLER": "Mai siyarwa gwaji",
+          "RESTRICTED_SELLER": "Mai siyarwa da aka takaita"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Saitunan Ci Gaban Mai Siyarwa",
@@ -70,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Alamar taswira ta na nuna inda nake sayarwa",
       "SELLER_SETTINGS_LABEL": "Saitunan Mai Sayarwa",
       "SELLER_SELL_CENTER": "Saita Cibiyar Sayarwa",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Siyayya ta yanar gizo",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Siyayya ta Kan layi | Jerin Abubuwan da Ake Sayarwa",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Siyayya ta Kan layi | Cika Umarni",
       "MAPPI_ALLOWANCE_LABEL": "Ragowar adadin Mappi",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Hanyar Cika Umarni",
@@ -79,8 +78,9 @@
           "DELIVERED_TO_BUYER": "An kawo wa mai saya"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Umarni na cika wa ga mai siya",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Tattara yana daga adireshin mai sayarwa. Idan an zaɓi isarwa, da fatan a shigar da adireshin mai siya.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Umarni na cika wa ga mai siya",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Tattara yana daga adireshin mai sayarwa. Idan an zaɓi isarwa, da fatan a shigar da adireshin mai siya.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Cikakken bayani na mai siye ga mai sayarwa",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Don Allah shigar da ingantaccen adireshin imel",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Rajista ta yi nasara",
@@ -115,8 +115,34 @@
           "ONGOING_SERVICE": "Aikin ci gaba",
           "SOLD": "An sayar"
         },
-        "SELLING_EXPIRATION_DATE": "Sayarwa kafin {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Sayarwa kafin {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Ba za a iya rage lokacin sayarwa kasa da makonni {spent_weeks} da aka riga aka yi ba"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Jerin Umarni",
+      "VIEW_ORDER_HEADER": "Duba oda",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Cikar umarnin mai sayarwa",
+      "ORDER_SUBHEADER": "Kanun umarni",
+      "ORDERED_ITEMS_SUBHEADER": "Kayayyakin da aka umarce",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "Mai sayarwa",
+        "TOTAL_PRICE_LABEL": "Jimillar farashi",
+        "TIME_OF_ORDER_LABEL": "Lokacin umarni",
+        "STATUS_LABEL": "Matsayi"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "An fara",
+        "PENDING": "Ana jiran",
+        "COMPLETED": "An kammala",
+        "CANCELED": "An soke",
+        "REFUNDED": "An mayar da kuɗi",
+        "FULFILLED": "An cika"
+      },
+      "ORDER_COMPLETED_LABEL": "An kammala oda",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "An tura/karɓi oda"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Saya daga Mai Sayarwa",
@@ -130,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "Makin Sake Dubawa: {seller_review_rating} cikin 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "Bayanin Tuntuɓar Mai Siyarwa",
       "SELLER_USERNAME_LABEL": "Sunan mai amfani",
-      "SELLER_PIONEER_ID_LABEL": "ID na Pioneer",
       "SELLER_PHONE_NUMBER_LABEL": "Lambar waya",
       "SELLER_EMAIL_ADDRESS_LABEL": "Adireshin imel",
       "ONLINE_SHOPPING": {
@@ -174,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "Kuskure wajen ɗaukar bita",
         "SELF_REVIEW_NOT_POSSIBLE": "Ba zai yiwu ka duba kanka ba"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "Duba odar"
     }
   },
   "POPUP": {
@@ -245,8 +273,14 @@
     }
   },
   "SHARED": {
-    "PIONEER_LABEL": "Pione",
+    "PIONEER_LABEL": "Pioneer",
+    "PIONEER_ID_LABEL": "ID na Pioneer",
     "BUY": "Saya",
+    "RESET": "Sake saiti",
+    "REFUND": "Mayar da kudi",
+    "FULFILL": "Cika",
+    "FULFILLED": "An cika",
+    "PENDING": "A jira",
     "NAVIGATE": "Kewaya",
     "NO_COMMENT": "Ba a ba da tsokaci ba",
     "SEARCH_CENTER": "Saita Cibiyar Bincike",
@@ -255,6 +289,7 @@
     "SEARCH_LOADING": "Ana ɗora bincike...",
     "REPLY": "Amsa",
     "ADD_ITEM": "Ƙara abu",
+    "CHECKOUT": "Biya kuɗi",
     "DELETE": "Goge",
     "CONFIRM_DELETE": "Shin da gaske kake son share wannan abu? Wannan aiki ba zai iya dawowa ba.",
     "SAVE": "Ajiye",
@@ -297,7 +332,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Nema wuri, birni, ko adireshi",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "An adana cibiyar ku cikin nasara"
+        "MAP_CENTER_SUCCESS_MESSAGE": "An adana cibiyar ku cikin nasara",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Yankin da ka zaɓa yana bayyana a cikin yanki da aka haramta. Idan an tabbatar, alamar sayarwarka na iya ɓacewa daga taswira."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Ana loda ...",
