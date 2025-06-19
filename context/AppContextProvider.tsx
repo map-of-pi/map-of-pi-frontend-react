@@ -48,8 +48,8 @@ const initialState: IAppContextProps = {
   setReload: () => {},
   isSaveLoading: false,
   setIsSaveLoading: () => {},
-  adsSupported: false
-  toggleNotification: false,,
+  adsSupported: false,
+  toggleNotification: false,
   setToggleNotification: () => {},
 };
 
