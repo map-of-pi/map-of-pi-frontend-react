@@ -27,7 +27,9 @@ import {
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
 import { createUserSettings, fetchUserSettings } from '@/services/userSettingsApi';
+import { fetchToggle } from '@/services/toggleApi';
 import removeUrls from "@/utils/sanitize";
+import { getFindMeOptions } from '@/utils/translate';
 
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
@@ -105,6 +107,7 @@ function Sidebar(props: any) {
     include_trust_level_50: false,
     include_trust_level_0: false,
   });
+  const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
 
   useEffect(() => {
     if (!currentUser) {
@@ -126,7 +129,18 @@ function Sidebar(props: any) {
         logger.error('Error fetching user settings data:', error);
       }
     };
+
+    const getToggleData = async () => {
+      try {
+        const toggle = await fetchToggle('onlineShoppingFeature');
+        setOnlineShoppingEnabled(toggle.enabled);
+      } catch (error) {
+        logger.error('Error fetching toggle:', error);
+      }
+    };
+
     getUserSettingsData();
+    getToggleData();
   }, []);
 
   // Initialize formData with dbUserSettings values if available
@@ -135,7 +149,7 @@ function Sidebar(props: any) {
       setFormData({
         user_name: dbUserSettings.user_name || '',
         image: dbUserSettings.image || '',
-        findme: dbUserSettings.findme || translateFindMeOptions[0].value,
+        findme: dbUserSettings.findme || getFindMeOptions(t)[0].value,
         trust_meter_rating: dbUserSettings.trust_meter_rating,
       });
     }
@@ -277,21 +291,6 @@ function Sidebar(props: any) {
     }
   };
 
-  const translateFindMeOptions = [
-    {
-      value: 'auto',
-      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_AUTO'),
-    },
-    {
-      value: 'deviceGPS',
-      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_DEVICE_GPS'),
-    },
-    {
-      value: 'searchCenter',
-      name: t('SIDE_NAVIGATION.FIND_ME_OPTIONS.PREFERRED_SEARCH_CENTER'),
-    },
-  ];
-
   // Function to save data to the database
   const handleSave = async () => {
     // check if user is authenticated and form is valid
@@ -397,6 +396,26 @@ function Sidebar(props: any) {
               }}
             />
           </div>
+          
+          {/* review order button */}
+          {isOnlineShoppingEnabled && (
+            <div className="mb-2">
+              <Button
+                label={t('SIDE_NAVIGATION.VIEW_ORDERS_LABEL')}
+                styles={{
+                  color: '#ffc153',
+                  width: '100%',
+                  padding: '10px',
+                  borderRadius: '10px',
+                  fontSize: '18px',
+                }}
+                onClick={() => {
+                  router.push(`/${locale}/user/order-review`);
+                  props.setToggleDis(false); // Close sidebar on click
+                }}
+              />
+            </div>
+          )}
 
           {/* user settings form fields */}
           <div className="flex flex-col justify-items-center mx-auto text-center gap-1">
@@ -499,7 +518,7 @@ function Sidebar(props: any) {
                   name="findme"
                   value={formData.findme}
                   onChange={handleChange}
-                  options={translateFindMeOptions}
+                  options={getFindMeOptions(t)}
                 />
                 <div key={menu.Languages.id} className="">
                   <div

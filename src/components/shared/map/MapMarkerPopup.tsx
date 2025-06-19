@@ -1,9 +1,11 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import TrustMeter from '@/components/shared/Review/TrustMeter';
-import MembershipIcon from '../membership/MembershipIcon';
+
 import { Button } from '../Forms/Buttons/Buttons';
+import MembershipIcon from '../membership/MembershipIcon';
+import TrustMeter from '@/components/shared/Review/TrustMeter';
+import { translateSellerCategory } from '@/utils/translate';
 import logger from '../../../../logger.config.mjs';
 
 const MapMarkerPopup = ({ seller }: { seller: any }) => {
@@ -17,19 +19,6 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
 
   const truncateChars = (text: string, maxChars: number): string => {
     return text.length > maxChars ? text.slice(0, maxChars) + '...' : text;
-  };
-
-  const translateSellerCategory = (category: string): string => {
-    switch (category) {
-      case 'activeSeller':
-        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.ACTIVE_SELLER');
-      case 'inactiveSeller':
-        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.INACTIVE_SELLER');
-      case 'testSeller':
-        return t('SCREEN.SELLER_REGISTRATION.SELLER_TYPE.SELLER_TYPE_OPTIONS.TEST_SELLER');
-      default:
-        return '';
-    }
   };
 
   logger.info('Rendering MapMarkerPopup for seller:', { seller });
@@ -63,7 +52,7 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
 
         {seller.seller_type && (
           <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '0px', marginBottom: '4px' }}>
-            {translateSellerCategory(seller.seller_type)}
+            {translateSellerCategory(seller.seller_type, t)}
           </p>
 
         )}

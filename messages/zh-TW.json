@@ -14,6 +14,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "查看訂單",
     "USER_PREFERENCES_HEADER": "使用者偏好",
     "PERSONALIZATION_SUBHEADER": "個性化設定",
     "LANGUAGES": "語言",
@@ -43,7 +44,7 @@
   },
   "SCREEN": {
     "SELLER_REGISTRATION": {
-      "SELLER_REGISTRATION_HEADER": "賣家註冊",
+      "SELLER_REGISTRATION_HEADER": "賣家管理",
       "SELLER_DETAILS_LABEL": "賣家詳細資訊",
       "EMAIL_LABEL": "電子郵件地址",
       "PHONE_NUMBER_LABEL": "電話號碼",
@@ -67,7 +68,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "我的地圖標記顯示我的銷售位置",
       "SELLER_SETTINGS_LABEL": "賣家設定",
       "SELLER_SELL_CENTER": "設定銷售中心",
-      "SELLER_ONLINE_SHOPPING_LABEL": "線上購物",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "線上購物 | 列出待售商品",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "線上購物 | 訂單履行",
       "MAPPI_ALLOWANCE_LABEL": "剩餘的 Mappi 額度",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "履行方式",
@@ -76,8 +78,9 @@
           "DELIVERED_TO_BUYER": "送貨到買家"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "給買家的履行說明",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "取貨地址為賣家的地址。如果選擇配送，請輸入買家的地址。",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "給買家的履行說明",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "取貨地址為賣家的地址。如果選擇配送，請輸入買家的地址。",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "買家向賣家的履約詳情",
       "VALIDATION": {
         "EMAIL_VALIDATION": "請輸入有效的電子郵件地址",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "註冊成功",
@@ -112,8 +115,34 @@
           "ONGOING_SERVICE": "正在進行的服務",
           "SOLD": "已售出"
         },
-        "SELLING_EXPIRATION_DATE": "{expired_by_date} 前銷售"
+        "SELLING_EXPIRATION_DATE": "{expired_by_date} 前銷售",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "銷售期限不能縮短到低於已用的{spent_weeks}週"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "訂單列表",
+      "VIEW_ORDER_HEADER": "查看訂單",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "賣家訂單履行",
+      "ORDER_SUBHEADER": "訂單標題",
+      "ORDERED_ITEMS_SUBHEADER": "已訂購商品",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+        "SELLER_LABEL": "賣家",
+        "TOTAL_PRICE_LABEL": "總價",
+        "TIME_OF_ORDER_LABEL": "訂單時間",
+        "STATUS_LABEL": "狀態"
+      },
+      "STATUS_TYPE": {
+        "INITIALIZED": "已初始化",
+        "PENDING": "待處理",
+        "COMPLETED": "已完成",
+        "CANCELED": "已取消",
+        "REFUNDED": "已退款",
+        "FULFILLED": "訂單已完成"
+      },
+      "ORDER_COMPLETED_LABEL": "訂單已完成",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "訂單已發貨/已收取"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "從賣家購買",
@@ -127,7 +156,6 @@
       "REVIEWS_SCORE_MESSAGE": "評論評分：{seller_review_rating} 滿分 5.0",
       "SELLER_CONTACT_DETAILS_LABEL": "賣家聯絡資訊",
       "SELLER_USERNAME_LABEL": "用戶名稱",
-      "SELLER_PIONEER_ID_LABEL": "先鋒 ID",
       "SELLER_PHONE_NUMBER_LABEL": "電話號碼",
       "SELLER_EMAIL_ADDRESS_LABEL": "電子郵件地址",
       "ONLINE_SHOPPING": {
@@ -171,6 +199,9 @@
         "LOADING_REVIEW_FAILURE": "加載評論時出錯",
         "SELF_REVIEW_NOT_POSSIBLE": "無法對自己進行評論"
       }
+    },
+    "VIEW_ORDER": {
+      "VIEW_ORDER_HEADER": "查看訂單"
     }
   },
   "POPUP": {
@@ -243,7 +274,13 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "先锋",
+    "PIONEER_ID_LABEL": "先鋒 ID",
     "BUY": "购买",
+    "RESET": "重設",
+    "REFUND": "退款",
+    "FULFILL": "完成",
+    "FULFILLED": "已完成",
+    "PENDING": "待處理",
     "NAVIGATE": "导航",
     "NO_COMMENT": "无评论",
     "SEARCH_CENTER": "设置搜索中心",
@@ -252,6 +289,7 @@
     "SEARCH_LOADING": "搜索加载中...",
     "REPLY": "回复",
     "ADD_ITEM": "新增項目",
+    "CHECKOUT": "結帳",
     "DELETE": "刪除",
     "CONFIRM_DELETE": "您確定要刪除此項目嗎？此操作無法撤銷。",
     "SAVE": "保存",
