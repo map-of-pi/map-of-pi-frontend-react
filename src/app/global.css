@@ -5,10 +5,10 @@
 @import '~react-phone-number-input/style.css';
 
 :root {
-  --default-primary-color: #386F4F;
-  --default-secondary-color: #F6C367;
+  --default-primary-color: #386f4f;
+  --default-secondary-color: #f6c367;
   --default-tertiary-color: #808080;
-  --default-bg-color: #EBF1ED;
+  --default-bg-color: #ebf1ed;
 }
 
 * {
@@ -22,27 +22,27 @@
   display: none !important;
 }
 
-.seller_item_container{
-  background: #E0E0E066;
-  border: 1px solid #BDBDBD4D;
-  width: Fill (335px)px;
-  height: Hug (94px)px;
+.seller_item_container {
+  background: #e0e0e066;
+  border: 1px solid #bdbdbd4d;
+  width: Fill (335px) px;
+  height: Hug (94px) px;
   padding: 8px 16px 8px 16px;
   gap: 12px;
   border-radius: 10px 10px 10px 10px;
 }
 
-.subheader_text{
+.subheader_text {
   font-family: Lato;
   font-size: 16px;
   font-weight: 600;
   line-height: 18px;
 }
 
-.normal_btn{
+.normal_btn {
   border: 1px solid var(--default-primary-color);
-  width: Fixed (122px)px;
-  height: Fixed (38px)px;
+  width: Fixed (122px) px;
+  height: Fixed (38px) px;
   padding: var(--space-0) var(--space-8) var(--space-0) var(--space-8);
   gap: var(--space-3);
   border-radius: 6px;
@@ -52,5 +52,20 @@
 .disabled {
   pointer-events: none;
   /* opacity: 0.5; */
-  color: grey
+  color: grey;
+}
+
+.notiCard {
+  border: 2px solid #bdbdbd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 12px;
+  transform: translateX(100px);
+  opacity: 0;
+  transition: 150ms;
+}
+
+.notiCard.show {
+  transform: translateX(0);
+  opacity: 1;
 }

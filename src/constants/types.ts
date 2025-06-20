@@ -79,6 +79,11 @@ export interface ReviewInt {
   image: string;
 }
 
+export interface INotification {
+  is_cleared?: boolean;
+  reason: string;
+}
+
 export enum DeviceLocationType {
   Automatic = 'auto',
   GPS = 'deviceGPS',
@@ -126,6 +131,8 @@ export type PartialReview = {
   giver: string;
   receiver: string;
 }
+
+
 
 export interface IReviewOutput extends IReviewFeedback, PartialReview {}
 
