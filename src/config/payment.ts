@@ -19,9 +19,10 @@ const onCancel = (paymentId: string) => {
   return axiosClient.post('/payments/cancelled_payment', { paymentId }, config);
 }
 
-const onError = (error: Error, payment?: PaymentDTO) => {
-  if (payment) {
-    // TODO: handle the error accordingly
+const onError = (error: Error, paymentDTO?: PaymentDTO) => {
+  console.log("payment throw new error: ", error)
+  if (paymentDTO) {
+    return axiosClient.post('/payments/error', { paymentDTO, error }, config);
   }
 }
 
