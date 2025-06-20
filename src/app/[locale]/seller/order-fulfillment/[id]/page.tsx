@@ -159,7 +159,7 @@ export default function OrderItemPage({ params, searchParams }: { params: { id: 
       <h2 className={SUBHEADER}>
         {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDERED_ITEMS_SUBHEADER')}
       </h2>
-      <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
+      <div className="overflow-x-auto p-2 mb-5 mt-3 flex gap-x-5">
         {orderItems && orderItems.length>0 && orderItems.map((item, index)=>(<div
           data-id={item._id}
           className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${

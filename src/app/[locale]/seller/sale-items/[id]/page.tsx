@@ -141,7 +141,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
 
     const paymentData: PaymentDataType = {
       amount: totalAmount,
-      memo: 'This is another Test Payment',
+      memo: `Map of Pi payment from ${currentUser.pi_username} to ${sellerInfo?.pi_username}`,
       metadata: { 
         payment_type: PaymentType.BuyerCheckout,
         OrderPayment: {
@@ -234,7 +234,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           <ToggleCollapse
             header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
             open={false}>
-            <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
+            <div className="overflow-x-auto mb-7 mt-3 flex p-2 gap-x-5 w-full">
               {dbSellerItems && dbSellerItems.length > 0 && 
                 dbSellerItems.map((item) => (
                   <ListItem
@@ -273,7 +273,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             </div>
             <div className="mb-4 mt-3 ml-auto">
               <Button
-                label={t('SHARED.CHECKOUT') + ` (${totalAmount.toString()} π)`}
+                label={t('SHARED.CHECKOUT') + ` (${totalAmount.toFixed(3).toString()} π)`}
                 disabled={!(pickedItems.length>0)}
                 styles={{
                   color: '#ffc153',
