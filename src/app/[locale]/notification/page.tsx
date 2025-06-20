@@ -14,7 +14,7 @@ import Skeleton from '@/components/skeleton/skeleton';
 import Image from 'next/image';
 import { INotification } from '@/constants/types';
 
-function page() {
+export default function NotificationPage() {
   type NotificationType = {
     _id: string;
     pi_uid: string;
@@ -287,5 +287,3 @@ function page() {
     </div>
   );
 }
-
-export default page;
