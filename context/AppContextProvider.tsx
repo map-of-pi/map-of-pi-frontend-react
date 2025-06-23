@@ -30,7 +30,6 @@ interface IAppContextProps {
   isSaveLoading: boolean;
   setIsSaveLoading: React.Dispatch<SetStateAction<boolean>>;
   adsSupported: boolean;
-
   toggleNotification: boolean;
   setToggleNotification: React.Dispatch<SetStateAction<boolean>>;
 }
@@ -76,8 +75,6 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     }, 5000);
   };
 
-  
-  
   /* Register User via Pi SDK */
   const registerUser = async () => {
     logger.info('Starting user registration.');

@@ -55,7 +55,7 @@
   color: grey;
 }
 
-.notiCard {
+.notificationCard {
   border: 2px solid #bdbdbd;
   border-radius: 8px;
   padding: 1rem;
@@ -65,7 +65,7 @@
   transition: 150ms;
 }
 
-.notiCard.show {
+.notificationCard.show {
   transform: translateX(0);
   opacity: 1;
 }

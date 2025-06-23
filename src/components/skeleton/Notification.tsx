@@ -1,7 +1,6 @@
-import React from 'react';
-
-function SkeletonNotification() {
+export const SkeletonNotification = () => {
   return (
+    <>
     <div className="skeleton">
       <div className="w-full border-2 border-solid border-[#bdbdbd] rounded-lg p-4 mb-3 my-bg-trans">
         <div className="w-[26%] h-[15px] mb-[4px] bg-[#bdbdbd]"></div>
@@ -13,7 +12,6 @@ function SkeletonNotification() {
         </div>
       </div>
     </div>
+    </>
   );
-}
-
-export default SkeletonNotification;
+};

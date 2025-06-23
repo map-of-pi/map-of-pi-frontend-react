@@ -4,7 +4,7 @@ import { SkeletonSellerRegistration } from './seller/Registration';
 import { SkeletonSellerReview } from './seller/Review';
 import { SkeletonSellerItem } from './seller/SellerItem';
 import { SkeletonSidebar } from './Sidebar';
-import SkeletonNotification from './SkeletonNotification';
+import { SkeletonNotification } from './Notification';
 
 function Skeleton(props : any) {
   if (props.type === "seller_registration") return <SkeletonSellerRegistration />;

@@ -1,42 +1,30 @@
 'use client';
 
-import { Button } from '@/components/shared/Forms/Buttons/Buttons';
-import Notification from '@/components/shared/Notification/Notification';
+import { useTranslations } from "next-intl";
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { ImSpinner2 } from 'react-icons/im';
-import { AppContext } from '../../../../context/AppContextProvider';
+import { Button } from '@/components/shared/Forms/Buttons/Buttons';
+import Skeleton from '@/components/skeleton/skeleton';
+import { INotification, NotificationType } from '@/constants/types';
 import {
-  fetchNotificationApi,
-  sendNotification,
+  getNotifications as fetchNotificationsApi,
   updateNotification,
 } from '@/services/notificationApi';
-import Skeleton from '@/components/skeleton/skeleton';
-import Image from 'next/image';
-import { INotification } from '@/constants/types';
+import { AppContext } from '../../../../context/AppContextProvider';
+import logger from '../../../../logger.config.mjs';
 
 export default function NotificationPage() {
-  type NotificationType = {
-    _id: string;
-    pi_uid: string;
-    is_cleared: boolean;
-    reason: string;
-    createdAt: Date;
-    updatedAt: Date;
-  };
+  const HEADER = 'font-bold text-lg md:text-2xl';
+  const SUBHEADER = 'font-bold mb-2';
+  const t = useTranslations();
 
   const { currentUser } = useContext(AppContext);
-
   const [notification, setNotification] = useState<NotificationType[]>([]);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(10);
-  // const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-
   const container = useRef<HTMLDivElement[]>([]);
   const observer = useRef<IntersectionObserver | null>(null);
-  const LoadMoreNotificationObserver = useRef<IntersectionObserver | null>(
-    null,
-  );
+  const LoadMoreNotificationObserver = useRef<IntersectionObserver | null>(null);
 
   function formatDate(dateString: string | Date) {
     const date = new Date(dateString);
@@ -92,81 +80,69 @@ export default function NotificationPage() {
     if (is_cleared) return;
     try {
       await updateNotification(id);
-
-      // setNotification((prev) =>
-      //   prev.map((item) =>
-      //     item._id === id ? { ...item, is_cleared: true } : item
-      //   )
-      // );
-
-     const notificationId = notification.findIndex((notify) => notify._id === id);
+      const notificationId = notification.findIndex((notify) => notify._id === id);
       notification[notificationId].is_cleared = true;
-      setNotification(notification)
+      setNotification(notification);
       filterNotification(notification, []);
-    } catch (err: any) {
-      console.log(err);
+    } catch (error) {
+      logger.error('Error updating notification:', error);
     }
   };
 
   const filterNotification = (currentNotification: INotification[], newNotification: INotification[]) => {
     const mergeNotification = [...currentNotification, ...newNotification];
-    const sortNotification :any = []
+    const sortNotification : any = [];
     const notClearedArray = mergeNotification.filter((notification) => {
-      if(notification.is_cleared === false) {
-        sortNotification.push(notification)
+      if (notification.is_cleared === false) {
+        sortNotification.push(notification);
       }
     });
-
+    logger.info('Not Cleared array', notClearedArray);
+    
     const clearedArray = mergeNotification.filter((notification) => {
-      if(notification.is_cleared === true) {
-        sortNotification.push(notification)
+      if (notification.is_cleared === true) {
+        sortNotification.push(notification);
       }
     });
-    // sortNotification.push(notClearedArray)
-    // sortNotification.push(clearedArray)
-    console.log("cleared Array",clearedArray)
-    console.log("un-cleared Array",notClearedArray)
-    console.log("sort Array",sortNotification)
+    logger.info('Cleared array', clearedArray);
+
+    logger.info('Sorted notification array', sortNotification);
     
     setNotification(sortNotification);
-    // return sortNotification;
   }
 
-  const fetchNotification = async () => {
+  const fetchNotifications = async () => {
     if (isLoading) return;
     setIsLoading(true);
 
     try {
-      const response = await fetchNotificationApi({
+      const response = await fetchNotificationsApi({
         pi_uid: currentUser?.pi_uid as string,
         skip: skip,
         limit: limit,
       });
       const newNotifications = response;
-      console.log(newNotifications);
+      logger.info('New notifications', newNotifications);
 
       if (newNotifications?.length === 0) {
-        // setHasMore(false);
       } else {
         filterNotification(notification, newNotifications);
         setSkip(skip + limit);
-        // setNotification((prev) => [...prev, ...newNotifications]);
       }
-    } catch (err: any) {
-      console.log(err);
+    } catch (error) {
+      logger.error('Error fetching notifications:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchNotification();
+    fetchNotifications();
   }, []);
 
   useEffect(() => {
     if (observer.current) observer.current.disconnect();
-    if (LoadMoreNotificationObserver.current)
-      LoadMoreNotificationObserver.current.disconnect();
+    if (LoadMoreNotificationObserver.current) LoadMoreNotificationObserver.current.disconnect();
 
     observer.current = new IntersectionObserver(
       (entries) => {
@@ -188,7 +164,7 @@ export default function NotificationPage() {
       (entries) => {
         const lastEntry = entries[0];
         if (!lastEntry.isIntersecting) return;
-        fetchNotification();
+        fetchNotifications();
         LoadMoreNotificationObserver.current?.unobserve(lastEntry.target); // Stop observing old last item
       },
       {
@@ -208,82 +184,65 @@ export default function NotificationPage() {
     };
   }, [notification]);
 
-  // useEffect(() => {
-
-  // }, [notification]);
-
   return (
-    <div className="w-full md:w-[500px] md:mx-auto p-4">
-      <h1 className="mb-5 text-center font-bold text-lg md:text-2xl">
-        Notification
-      </h1>
-      <div className="">
-        {!isLoading && notification.length === 0 ? (
-          <div className="w-full relative h-[calc(100vh-80px-2rem-32px-20px)] gap-2 text-2xl text-gray-500">
-            <div className="absolute m-auto inset-x-0 translate-y-[-50%] top-[50%] mt-[-52px] flex-col h-max w-max flex justify-center items-center">
-            <Image
-              src="/images/shared/rocket.PNG"
-              alt="No notification"
-              width={100}
-              height={100}
-            />
-            No notification
-            </div>
-          </div>
-        ) : (
-          notification.map((notify, index) => (
-            <div
-              key={index}
-              ref={(el) => {
-                if (el) container.current[index] = el;
-              }}
-              className={`notiCard`}
-              style={{
-                backgroundColor: notify.is_cleared ? '#eedfb6' : 'transparent',
-              }}>
-              <div className="text-sm text-[#555]">Notification:</div>
-              <div className="border border-[#BDBDBD] rounded border-solid px-2 py-1 text-sm mb-1">
-                {notify.reason}
-              </div>
-              <div className="text-sm text-[#555]">Time of notification:</div>
-              <div className="flex gap-2">
-                <div className="border border-[#BDBDBD] rounded border-solid flex-1 px-2 py-1 text-sm">
-                  {formatDate(notify?.createdAt)}
+    <>
+      <div className="w-full md:w-[500px] md:mx-auto p-4">
+        <div className="text-center mb-5">
+          <h1 className={HEADER}>
+            {t('SCREEN.NOTIFICATIONS.NOTIFICATIONS_HEADER')}
+          </h1>
+        </div>
+
+        <div className="mb-4">
+          {!isLoading && notification.length === 0 ? (
+            <h2 className={SUBHEADER}>
+              {t('SCREEN.NOTIFICATIONS.NO_NOTIFICATIONS_SUBHEADER')}
+            </h2>
+          ) : (
+            notification.map((notify, index) => (
+              <div
+                key={index}
+                ref={(el) => {
+                  if (el) container.current[index] = el;
+                }}
+                className={`notiCard`}
+                style={{
+                  backgroundColor: notify.is_cleared ? '#eedfb6' : 'transparent',
+                }}>
+                <div className="text-sm text-[#555]">
+                  {t('SCREEN.NOTIFICATIONS.NOTIFICATION_SECTION.NOTIFICATION_LABEL') + ': '}
                 </div>
-                <Button
-                  label={notify.is_cleared ? 'Un-clear' : 'Clear'}
-                  styles={{ color: '#ffc153' }}
-                  onClick={() =>
-                    handleUpdateNotification(notify._id, notify.is_cleared)
-                  }
-                />
+                <div className="border border-[#BDBDBD] rounded border-solid px-2 py-1 text-sm mb-1">
+                  {notify.reason}
+                </div>
+                <div className="text-sm text-[#555]">
+                {t('SCREEN.NOTIFICATIONS.NOTIFICATION_SECTION.NOTIFICATION_TIME_LABEL') + ': '}
+                </div>
+                <div className="flex gap-2">
+                  <div className="border border-[#BDBDBD] rounded border-solid flex-1 px-2 py-1 text-sm">
+                    {formatDate(notify?.createdAt)}
+                  </div>
+                  <Button
+                    label={notify.is_cleared ? 
+                      t('SCREEN.NOTIFICATIONS.NOTIFICATION_SECTION.NOTIFICATION_STATUS.UNREAD') 
+                      : t('SCREEN.NOTIFICATIONS.NOTIFICATION_SECTION.NOTIFICATION_STATUS.READ')
+                    }
+                    styles={{ color: '#ffc153' }}
+                    onClick={() =>
+                      handleUpdateNotification(notify._id, notify.is_cleared)
+                    }
+                  />
+                </div>
               </div>
-            </div>
-          ))
+            ))
+          )}
+        </div>
+
+        {/* USED FOR OBSERVER TO LOAD MORE NOTIFICATION DATA */}
+        {isLoading && (
+          <Skeleton type="notification" />
         )}
       </div>
-
-      {/* USED FOR OBSERVER TO LOAD MORE NOTIFICATION DATA */}
-      {isLoading && (
-        <Skeleton type="notification" />
-
-        // <div className="w-full h-5 text-[var(--default-primary-color)] items-center text-green flex justify-center animate-pulse">
-        //   <ImSpinner2 className="animate-spin mr-2 ml-1" />
-        //   <div className="">Loading more notifications...</div>
-        // </div>
-      )}
-      {/* {!hasMore && (
-        <div className="w-full h-5 text-gray-500 flex justify-center">
-          No more notification
-        </div>
-      )} */}
-
-      {/* <button
-        onClick={() => {
-          sendNotification({ reason: `You paid for an order to a seller` });
-        }}>
-        Add Notification
-      </button> */}
-    </div>
+    </>
   );
 }

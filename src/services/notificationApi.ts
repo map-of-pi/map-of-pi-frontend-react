@@ -1,60 +1,61 @@
 import axiosClient from '@/config/client';
+import { INotification } from '@/constants/types';
 import { getMultipartFormDataHeaders } from '@/utils/api';
 import logger from '../../logger.config.mjs';
-import { INotification } from '@/constants/types';
 
-export const fetchNotificationApi = async ({pi_uid, skip, limit}: {pi_uid: string, skip: number, limit: number}) => {
+export const getNotifications = async ({pi_uid, skip, limit}: {pi_uid: string, skip: number, limit: number}) => {
   try {
     const headers = getMultipartFormDataHeaders();
-    const response = await axiosClient.get(`/notification/get/${pi_uid}?skip=${skip}&limit=${limit}`, {
+    const response = await axiosClient.get(`/notifications/${pi_uid}?skip=${skip}&limit=${limit}`, {
       headers,
     });
     if (response.status === 200) {
+      logger.info(`Get notifications successful with Status ${response.status}`, {
+        data: response.data
+      });
       return response.data;
     } else {
-      logger.error(
-        `Fetch Notification failed with error status: ${response.status}`,
-      );
+      logger.error(`Get notifications failed with Status ${response.status}`);
       return null;
     }
   } catch (error) {
-    logger.error('Fetch Notification failed with error:', error);
-    throw error;
+    logger.error('Get notifications encountered an error:', error);
+    throw new Error('Failed to get notifications. Please try again later.');
   }
 };
 
-export const sendNotification = async (data: INotification) => {
-    try {
-      const response = await axiosClient.post(`/notification/send`, data);
-      if (response.status === 200) {
-        logger.info(`Notification send successfully ${response.status}`, {
-          data: response.data
-        });
-        return response.data;
-      } else {
-        logger.error(`Send notification failed with Status ${response.status}`);
-        return null;
-      }
-    } catch (error) {
-      logger.error('Send notification encountered an error:', error);
-      throw new Error('Failed to Send notification. Please try again later.');
+export const buildNotification = async (data: INotification) => {
+  try {
+    const response = await axiosClient.post(`/notifications`, data);
+    if (response.status === 200) {
+      logger.info(`Build notification successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Build notification failed with Status ${response.status}`);
+      return null;
     }
-  };
+  } catch (error) {
+    logger.error('Build notification encountered an error:', error);
+    throw new Error('Failed to build notification. Please try again later.');
+  }
+};
 
-export const updateNotification = async (id: string) => {
-    try {
-      const response = await axiosClient.put(`/notification/update/${id}`);
-      if (response.status === 200) {
-        logger.info(`Notification send successfully ${response.status}`, {
-          data: response.data
-        });
-        return response.data;
-      } else {
-        logger.error(`Send notification failed with Status ${response.status}`);
-        return null;
-      }
-    } catch (error) {
-      logger.error('Send notification encountered an error:', error);
-      throw new Error('Failed to Send notification. Please try again later.');
+export const updateNotification = async (notification_id: string) => {
+  try {
+    const response = await axiosClient.put(`/notifications/update/${notification_id}`);
+    if (response.status === 200) {
+      logger.info(`Update notification successful with Status ${response.status}`, {
+        data: response.data
+      });
+      return response.data;
+    } else {
+      logger.error(`Update notification failed with Status ${response.status}`);
+      return null;
     }
-  };
+  } catch (error) {
+    logger.error('Update notification encountered an error:', error);
+    throw new Error('Failed to update notification. Please try again later.');
+  }
+};
