@@ -98,7 +98,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
 
         if (res.status === 200) {
           setAuthToken(res.data?.token);
-          setCurrentUser(res.data.user);
+          setCurrentUser({ ...res.data.user, token: res.data.token });
           logger.info('User authenticated successfully.');
         } else {
           setCurrentUser(null);
