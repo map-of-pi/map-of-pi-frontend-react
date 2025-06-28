@@ -18,7 +18,7 @@ export default function NotificationPage() {
   const t = useTranslations();
 
   const { currentUser } = useContext(AppContext);
-  const [notification, setNotification] = useState<NotificationType[]>([]);
+  const [notifications, setNotification] = useState<NotificationType[]>([]);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
@@ -80,10 +80,10 @@ export default function NotificationPage() {
     if (is_cleared) return;
     try {
       await updateNotification(id);
-      const notificationId = notification.findIndex((notify) => notify._id === id);
-      notification[notificationId].is_cleared = true;
-      setNotification(notification);
-      filterNotification(notification, []);
+      const notificationId = notifications.findIndex((notify) => notify._id === id);
+      notifications[notificationId].is_cleared = true;
+      setNotification(notifications);
+      filterNotification(notifications, []);
     } catch (error) {
       logger.error('Error updating notification:', error);
     }
@@ -126,7 +126,7 @@ export default function NotificationPage() {
 
       if (newNotifications?.length === 0) {
       } else {
-        filterNotification(notification, newNotifications);
+        filterNotification(notifications, newNotifications);
         setSkip(skip + limit);
       }
     } catch (error) {
@@ -182,7 +182,7 @@ export default function NotificationPage() {
       observer.current?.disconnect();
       LoadMoreNotificationObserver.current?.disconnect();
     };
-  }, [notification]);
+  }, [notifications]);
 
   return (
     <>
@@ -193,19 +193,19 @@ export default function NotificationPage() {
           </h1>
         </div>
 
-        <div className="mb-4">
-          {!isLoading && notification.length === 0 ? (
+        <div className="text-center mb-4">
+          {!isLoading && notifications.length === 0 ? (
             <h2 className={SUBHEADER}>
               {t('SCREEN.NOTIFICATIONS.NO_NOTIFICATIONS_SUBHEADER')}
             </h2>
           ) : (
-            notification.map((notify, index) => (
+            notifications.map((notify, index) => (
               <div
                 key={index}
                 ref={(el) => {
                   if (el) container.current[index] = el;
                 }}
-                className={`notiCard`}
+                className={`notificationCard`}
                 style={{
                   backgroundColor: notify.is_cleared ? '#eedfb6' : 'transparent',
                 }}>

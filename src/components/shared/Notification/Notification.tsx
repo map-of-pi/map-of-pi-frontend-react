@@ -13,8 +13,8 @@ function Notification({ onClose, message, url, setToggleNotification } : any) {
   }
 
   const handleClose = () => {
-  onClose;
-  setToggleNotification(false);
+    onClose;
+    setToggleNotification(false);
   }
  
   return(

@@ -211,7 +211,7 @@ export default function Page({ params }: { params: { locale: string } }) {
         <Notification
           message={t('HOME.NEW_NOTIFICATIONS_MESSAGE')}
           onClose={() => setShowPopup(false)}
-          url={`/notification`}
+          url={`/${locale}/notification`}
           setToggleNotification={setToggleNotification}
         />
       )}
