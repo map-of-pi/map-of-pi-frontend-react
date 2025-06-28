@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '../Forms/Buttons/Buttons';
+import MembershipIcon from '../membership/MembershipIcon';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { translateSellerCategory } from '@/utils/translate';
-
 import logger from '../../../../logger.config.mjs';
 
 const MapMarkerPopup = ({ seller }: { seller: any }) => {
@@ -27,18 +27,28 @@ const MapMarkerPopup = ({ seller }: { seller: any }) => {
     <div style={{ position: 'relative', zIndex: 20, padding: '10px' }}>
       {/* Seller name and type - Close with a small gap */}
       <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-        <h2
-          style={{
-            fontWeight: 'bold',
-            fontSize: '15px',
-            marginBottom: '2px',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-          }}
-        >
-          {truncateChars(seller.name, 12)} {/* Adjust limit as needed */}
-        </h2>
+        <div className="flex gap-1 justify-center items-center">
+          <h2
+            style={{
+              fontWeight: 'bold',
+              fontSize: '15px',
+              marginBottom: '2px',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {truncateChars(seller.name, 12)} {/* Adjust limit as needed */}
+          </h2>
+          <MembershipIcon 
+            category='triple_gold' 
+            styleComponent={{
+              display: "inline-block",
+              objectFit: "contain",
+              verticalAlign: "middle"
+            }}
+          />
+        </div>
 
         {seller.seller_type && (
           <p style={{ fontSize: '14px', color: '#6B7280', marginTop: '0px', marginBottom: '4px' }}>
