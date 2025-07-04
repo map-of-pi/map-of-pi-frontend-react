@@ -10,7 +10,7 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import ConfirmDialog from '@/components/shared/confirm';
-import Notification from '@/components/shared/Notification/Notification';
+import NotificationDialog from '@/components/shared/Notification/NotificationDialog';
 import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { DeviceLocationType, IUserSettings } from '@/constants/types';
@@ -208,7 +208,7 @@ export default function Page({ params }: { params: { locale: string } }) {
         )}
       </div>
       {toggleNotification && (
-        <Notification
+        <NotificationDialog
           message={t('HOME.NEW_NOTIFICATIONS_MESSAGE')}
           onClose={() => setShowPopup(false)}
           url={`/${locale}/notification`}
