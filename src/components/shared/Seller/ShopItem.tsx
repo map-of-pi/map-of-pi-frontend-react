@@ -104,7 +104,7 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
           }}
         />
       </div>
-      <div className="max-h-[600px] overflow-y-auto p-1 mb-7">
+      <div className="overflow-x-auto p-2 gap-x-5 mb-5 w-full flex">
         {(isNewItem) && 
           <ShopItem
             key={''}
@@ -158,7 +158,7 @@ export const ShopItem: React.FC<{
   const [showDialog, setShowDialog] = useState<boolean>(false);
   const [dialogueMessage, setDialogueMessage] = useState<string>('');
   const [file, setFile] = useState<File | null>(null);
-  const { reload, setReload, showAlert } = useContext(AppContext);
+  const { reload, setReload, showAlert, isSaveLoading, setIsSaveLoading } = useContext(AppContext);
   const [sellingStatus, setSellingStatus] = useState('');
   const [formattedDate, setFormattedDate] = useState('');
 
@@ -236,6 +236,7 @@ export const ShopItem: React.FC<{
   };
 
   const handleSave = async () => {
+    setIsSaveLoading(true);
     const duration = Number(formData.duration);
     const today = new Date();
 
@@ -290,6 +291,8 @@ export const ShopItem: React.FC<{
     } catch (error) {
       logger.error('Error saving seller item:', error);
       showAlert(t('SCREEN.SELLER_REGISTRATION.VALIDATION.FAILED_SELLER_ITEM_SAVE'));
+    } finally {
+      setIsSaveLoading(false);
     }
   };
 
@@ -424,7 +427,7 @@ export const ShopItem: React.FC<{
             />
             <Button
               label={t('SHARED.SAVE')}
-              disabled={!isActive} // Disable if not active
+              disabled={!isActive || isSaveLoading} // Disable if not active
               styles={{
                 color: '#ffc153',
                 height: '40px',
@@ -514,7 +517,7 @@ export const ListItem: React.FC<{
     <div
       ref={refCallback}
       data-id={item._id}
-      className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
+      className={`relative outline outline-50 outline-gray-600 rounded-lg mb-4 ${
         isPicked ? 'bg-yellow-100' : ''
       }`}
     >
