@@ -262,7 +262,8 @@ const SellerRegistrationForm = () => {
     formDataToSend.append('email', formData.email ?? '');
     formDataToSend.append('phone_number', formData.phone_number?.toString() ?? '');
     formDataToSend.append('fulfillment_method', formData.fulfillment_method);
-    formDataToSend.append('fulfillment_description', removeUrls(formData.fulfillment_description))
+    formDataToSend.append('fulfillment_description', removeUrls(formData.fulfillment_description));
+    formDataToSend.append('gas_saver', formData.gas_saver === GasSaverType.OnGasSaver ? 'true' : 'false');
     // hardcode the value until the form element is built
     formDataToSend.append('order_online_enabled_pref', 'false');
 
