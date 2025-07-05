@@ -45,6 +45,7 @@ export interface ISeller {
   order_online_enabled_pref: boolean;
   fulfillment_method: FulfillmentType;
   fulfillment_description?: string;
+  gas_saver: boolean;
 }
 
 export enum SellerType {
@@ -88,6 +89,11 @@ export enum DeviceLocationType {
 export enum FulfillmentType {
   CollectionByBuyer = 'Collection by buyer',
   DeliveredToBuyer = 'Delivered to buyer'
+}
+
+export enum GasSaverType {
+  OnGasSaver = 'On - one gas fee for 3 days of payments',
+  OffGasSaver = 'Off - payments withing 24 hours, gas fee for each payment'
 }
 
 export enum StockLevelType {

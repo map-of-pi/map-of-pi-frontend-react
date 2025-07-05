@@ -4,7 +4,8 @@ import {
   OrderItemStatus, 
   OrderStatusType, 
   SellerType, 
-  StockLevelType
+  StockLevelType,
+  GasSaverType
 } from "@/constants/types";
 
 export const getFindMeOptions = (t: (key: string) => string) => [
@@ -96,6 +97,17 @@ export const getFulfillmentMethodOptions = (t: (key: string) => string) => [
   {
     value: FulfillmentType.DeliveredToBuyer,
     name: t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_OPTIONS.DELIVERED_TO_BUYER'),
+  },
+];
+
+export const getGasSaverOptions = (t: (key: string) => string) => [
+  {
+    value: GasSaverType.OnGasSaver ,
+    name: t('SCREEN.SELLER_REGISTRATION.GAS_SAVER_TYPE.GAS_SAVER_TYPE_OPTIONS.ON_GAS_SAVER'),
+  },
+  {
+    value: GasSaverType.OffGasSaver,
+    name: t('SCREEN.SELLER_REGISTRATION.GAS_SAVER_TYPE.GAS_SAVER_TYPE_OPTIONS.OFF_GAS_SAVER'),
   },
 ];
 

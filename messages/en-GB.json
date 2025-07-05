@@ -78,6 +78,13 @@
           "DELIVERED_TO_BUYER": "Delivered to buyer"
         }
       },
+      "GAS_SAVER_TYPE": {
+        "GAS_SAVER_TYPE_LABEL": "Gas-saver",
+        "GAS_SAVER_TYPE_OPTIONS": {
+          "ON_GAS_SAVER": "On - one gas fee for 3 days of payments",
+          "OFF_GAS_SAVER": "Off - payments withing 24 hours, gas fee for each payment"
+        }
+      },
       "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Seller fulfilment instructions to buyer",
       "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
       "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Buyer fulfilment details",

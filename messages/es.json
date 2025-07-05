@@ -119,6 +119,13 @@
         "VALIDATION": {
           "REDUCED_DURATION_BELOW_SPENT_WEEKS": "La duración de venta no puede reducirse por debajo de las {spent_weeks} semanas ya transcurridas"
         }
+      },
+      "GAS_SAVER_TYPE": {
+        "GAS_SAVER_TYPE_LABEL": "Gas-saver",
+        "GAS_SAVER_TYPE_OPTIONS": {
+          "ON_GAS_SAVER": "On - one gas fee for 3 days of payments",
+          "OFF_GAS_SAVER": "Off - payments withing 24 hours, gas fee for each payment"
+        }
       }
     },
     "SELLER_ORDER_FULFILLMENT": {
