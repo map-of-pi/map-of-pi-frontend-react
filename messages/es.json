@@ -3,6 +3,7 @@
     "ADD_SELLER": "Vender",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "Tu Centro de Búsqueda está configurado actualmente en las coordenadas predeterminadas [0, 0]. Para mejorar tu experiencia, actualiza la ubicación de tu Centro de Búsqueda.",
     "SEARCH_BAR_PLACEHOLDER": "Buscar vendedores o artículos",
+    "NEW_NOTIFICATIONS_MESSAGE": "Tienes notificaciones",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Para usar esta función, por favor active los servicios de ubicación en la configuración de su dispositivo.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Los servicios de ubicación están desactivados. Por favor, active la configuración de ubicación de su dispositivo."
@@ -200,8 +201,17 @@
         "SELF_REVIEW_NOT_POSSIBLE": "No es posible autoevaluarse"
       }
     },
-    "VIEW_ORDER": {
-      "VIEW_ORDER_HEADER": "Ver pedido"
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "Notificaciones",
+      "NO_NOTIFICATIONS_SUBHEADER": "Aún no tienes notificaciones",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "Notificación",
+        "NOTIFICATION_TIME_LABEL": "Hora de la notificación",
+        "NOTIFICATION_STATUS": {
+          "READ": "Leído",
+          "UNREAD": "No leído"
+        }
+      }
     }
   },
   "POPUP": {
@@ -287,6 +297,7 @@
     "CHECK_REVIEWS": "Ver Reseñas",
     "SEARCH_REVIEWS": "Buscar reseñas",
     "SEARCH_LOADING": "Cargando búsqueda...",
+    "VIEW_NOTIFICATIONS": "Ver notificaciones",
     "REPLY": "Responder",
     "ADD_ITEM": "Agregar artículo",
     "CHECKOUT": "Pagar",

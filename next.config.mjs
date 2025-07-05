@@ -48,6 +48,9 @@ const nextConfig = {
 
 const sentryWebpackPluginOptions = {
   silent: true, // suppress Sentry errors during the build process
+  sourcemaps: {
+    deleteSourcemapsAfterUpload: true,
+  },
 };
 
 // wrap existing configuration with Sentry

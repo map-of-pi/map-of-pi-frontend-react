@@ -3,6 +3,7 @@
     "ADD_SELLER": "出售",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "您的搜尋中心目前設定為預設座標 [0, 0]。為提升您的體驗，請更新您的搜尋中心位置。",
     "SEARCH_BAR_PLACEHOLDER": "搜尋賣家或商品",
+    "NEW_NOTIFICATIONS_MESSAGE": "您有通知",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "要使用此功能，請在設備設定中啟用位置服務。",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "位置服務已禁用。請啟用設備的定位設定。"
@@ -200,8 +201,17 @@
         "SELF_REVIEW_NOT_POSSIBLE": "無法對自己進行評論"
       }
     },
-    "VIEW_ORDER": {
-      "VIEW_ORDER_HEADER": "查看訂單"
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "通知",
+      "NO_NOTIFICATIONS_SUBHEADER": "您還沒有通知",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "通知",
+        "NOTIFICATION_TIME_LABEL": "通知時間",
+        "NOTIFICATION_STATUS": {
+          "READ": "已讀",
+          "UNREAD": "未讀"
+        }
+      }
     }
   },
   "POPUP": {
@@ -287,6 +297,7 @@
     "CHECK_REVIEWS": "查看评论",
     "SEARCH_REVIEWS": "搜索评论",
     "SEARCH_LOADING": "搜索加载中...",
+    "VIEW_NOTIFICATIONS": "查看通知",
     "REPLY": "回复",
     "ADD_ITEM": "新增項目",
     "CHECKOUT": "結帳",

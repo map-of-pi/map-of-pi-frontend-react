@@ -3,6 +3,7 @@
     "ADD_SELLER": "Vendre",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "Votre centre de recherche est actuellement défini sur les coordonnées par défaut [0, 0]. Pour améliorer votre expérience, veuillez mettre à jour la localisation de votre centre de recherche.",
     "SEARCH_BAR_PLACEHOLDER": "Recherchez des vendeurs ou des articles",
+    "NEW_NOTIFICATIONS_MESSAGE": "Vous avez des notifications",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Pour utiliser cette fonctionnalité, veuillez activer les services de localisation dans les paramètres de votre appareil.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Les services de localisation sont désactivés. Veuillez activer la localisation de votre appareil."
@@ -200,8 +201,17 @@
         "SELF_REVIEW_NOT_POSSIBLE": "Auto-évaluation non possible"
       }
     },
-    "VIEW_ORDER": {
-      "VIEW_ORDER_HEADER": "Voir la commande"
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "Notifications",
+      "NO_NOTIFICATIONS_SUBHEADER": "Vous n'avez pas encore de notifications",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "Notification",
+        "NOTIFICATION_TIME_LABEL": "Heure de la notification",
+        "NOTIFICATION_STATUS": {
+          "READ": "Lu",
+          "UNREAD": "Non lu"
+        }
+      }
     }
   },
   "POPUP": {
@@ -287,6 +297,7 @@
     "CHECK_REVIEWS": "Vérifier les avis",
     "SEARCH_REVIEWS": "Rechercher des avis",
     "SEARCH_LOADING": "Chargement de la recherche...",
+    "VIEW_NOTIFICATIONS": "Voir les notifications",
     "REPLY": "Répondre",
     "ADD_ITEM": "Ajouter un article",
     "CHECKOUT": "Paiement",

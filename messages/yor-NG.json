@@ -2,7 +2,8 @@
   "HOME": {
     "ADD_SELLER": "Ta Oja",   
     "SEARCH_CENTER_DEFAULT_MESSAGE": "Ile-iṣẹ wiwa rẹ ti ṣeto lọwọlọwọ si awọn ipoidojuko aiyipada [0, 0]. Lati mu iriri rẹ pọ si, jọwọ ṣe imudojuiwọn ipo Ile-iwadii rẹ.",   
-    "SEARCH_BAR_PLACEHOLDER": "Ṣawari fun awọn ti o ntaa tabi awọn ohun kan",    
+    "SEARCH_BAR_PLACEHOLDER": "Ṣawari fun awọn ti o ntaa tabi awọn ohun kan",
+    "NEW_NOTIFICATIONS_MESSAGE": "O ní ìkìlọ̀",   
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Lati lo ẹya ara ẹrọ yii, jọwọ mu awọn iṣẹ ipo ṣiṣẹ ninu awọn eto ẹrọ rẹ.",      
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Awọn iṣẹ iṣeto agbegbe jẹ alaabo. Jọwọ mu ipo ẹrọ rẹ ṣiṣẹ."     
@@ -200,8 +201,17 @@
         "SELF_REVIEW_NOT_POSSIBLE": "àtúnyẹ̀wò ara eni ko seesé ṣe"
       }
     },
-    "VIEW_ORDER": {
-      "VIEW_ORDER_HEADER": "Wo pèsè"
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "Ìkìlò",
+      "NO_NOTIFICATIONS_SUBHEADER": "O kò tíì ní ìkìlò kankan",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "Ìkìlò",
+        "NOTIFICATION_TIME_LABEL": "Àkókò ìkìlò",
+        "NOTIFICATION_STATUS": {
+          "READ": "Ka",
+          "UNREAD": "Kò tíì ka"
+        }
+      }
     }
   },
   "POPUP": {
@@ -286,7 +296,8 @@
     "SEARCH_CENTER": "Ṣeto ile-iṣẹ wiwa", 
     "CHECK_REVIEWS": "Ṣayẹwo Awọn atunwo",
     "SEARCH_REVIEWS": "Awọn atunwo wiwa", 
-    "SEARCH_LOADING": "Ṣawari nlo...", 
+    "SEARCH_LOADING": "Ṣawari nlo...",
+    "VIEW_NOTIFICATIONS": "Wo ìkìlọ̀",
     "REPLY": "E te pada", 
     "ADD_ITEM": "Fikun un Item",
     "CHECKOUT": "Sanwo",

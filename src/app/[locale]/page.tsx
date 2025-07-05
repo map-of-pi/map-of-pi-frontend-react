@@ -5,11 +5,12 @@ import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext, useEffect, useState, useRef, ChangeEvent } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import ConfirmDialog from '@/components/shared/confirm';
+import NotificationDialog from '@/components/shared/Notification/NotificationDialog';
 import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { DeviceLocationType, IUserSettings } from '@/constants/types';
@@ -40,7 +41,15 @@ export default function Page({ params }: { params: { locale: string } }) {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
-  const { isSigningInUser, currentUser, autoLoginUser, reload, setReload } = useContext(AppContext);
+  const {
+    isSigningInUser,
+    currentUser,
+    autoLoginUser,
+    reload,
+    setReload,
+    toggleNotification,
+    setToggleNotification
+  } = useContext(AppContext);
 
   useEffect(() => {
     // clear previous map state when findme option is changed
@@ -103,8 +112,8 @@ export default function Page({ params }: { params: { locale: string } }) {
       const loc = await userLocation(dbUserSettings);
       if (loc) {
         setSearchCenter({ lat: loc[0], lng: loc[1] });
-        logger.info('User location obtained successfully on button click:', { location });
-      } else{
+        logger.info('User location obtained successfully on button click:', {location});
+      } else {
         setSearchCenter(null);
       }
     }
@@ -198,6 +207,14 @@ export default function Page({ params }: { params: { locale: string } }) {
           />
         )}
       </div>
+      {toggleNotification && (
+        <NotificationDialog
+          message={t('HOME.NEW_NOTIFICATIONS_MESSAGE')}
+          onClose={() => setShowPopup(false)}
+          url={`/${locale}/notification`}
+          setToggleNotification={setToggleNotification}
+        />
+      )}
     </>
   );
 }

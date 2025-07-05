@@ -3,6 +3,7 @@
     "ADD_SELLER": "Dzra",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "Woɖo wò Didiƒe fifia ɖe kɔordinate gbãtɔwo dzi [0, 0]. Be nàna wò nuteƒekpɔkpɔ nanyo ɖe edzi la, taflatse trɔ asi le wò Didiƒe ƒe teƒe ŋu.",
     "SEARCH_BAR_PLACEHOLDER": "Di nudzralawo alo nuwo",
+    "NEW_NOTIFICATIONS_MESSAGE": "Wòle ɖeɖeɖeɖe me",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Ne èdi be yeazã nɔnɔme sia la, taflatse na teƒe ƒe dɔwɔnawo nawɔ dɔ le wò mɔ̃a ƒe ɖoɖowo me.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Wowɔ teƒe ƒe dɔwɔnawo nuwɔametɔwo. Taflatse na wò mɔ̃a ƒe teƒe ƒe ɖoɖoa nawɔ dɔ."
@@ -200,8 +201,17 @@
         "SELF_REVIEW_NOT_POSSIBLE": "Ame ŋutɔ ƒe ŋkuléle ɖe nu ŋu mateŋu adzɔ o"
       }
     },
-    "VIEW_ORDER": {
-      "VIEW_ORDER_HEADER": "Kpɔ dɔwɔa"
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "Nɔnɔmeɖeɖe",
+      "NO_NOTIFICATIONS_SUBHEADER": "Nenye nɔnɔmeɖeɖe o ɖe wò nɔ",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "Nɔnɔmeɖeɖe",
+        "NOTIFICATION_TIME_LABEL": "Fiẽ nɔnɔmeɖeɖe",
+        "NOTIFICATION_STATUS": {
+          "READ": "Vɔ̃ ŋu",
+          "UNREAD": "Mè vɔ̃ ŋu"
+        }
+      }
     }
   },
   "POPUP": {
@@ -287,6 +297,7 @@
     "CHECK_REVIEWS": "Vɔ si ɖe tsoɖe",
     "SEARCH_REVIEWS": "Dii reviewwo",
     "SEARCH_LOADING": "Gɔgɔme nyateƒe kplɔ...",
+    "VIEW_NOTIFICATIONS": "Wòle ɖeɖeɖeɖe kple eme",
     "REPLY": "Ɖe si",
     "ADD_ITEM": "Tsɔ nyateƒe",
     "CHECKOUT": "Ɖoɖoɖo si gbɔ",
