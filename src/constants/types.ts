@@ -92,8 +92,8 @@ export enum FulfillmentType {
 }
 
 export enum GasSaverType {
-  OnGasSaver = 'On - one gas fee for 3 days of payments',
-  OffGasSaver = 'Off - payments withing 24 hours, gas fee for each payment'
+  OnGasSaver = 'true',
+  OffGasSaver = 'false'
 }
 
 export enum StockLevelType {

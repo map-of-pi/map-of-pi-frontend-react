@@ -102,7 +102,7 @@ export const getFulfillmentMethodOptions = (t: (key: string) => string) => [
 
 export const getGasSaverOptions = (t: (key: string) => string) => [
   {
-    value: GasSaverType.OnGasSaver ,
+    value: GasSaverType.OnGasSaver,
     name: t('SCREEN.SELLER_REGISTRATION.GAS_SAVER_TYPE.GAS_SAVER_TYPE_OPTIONS.ON_GAS_SAVER'),
   },
   {
