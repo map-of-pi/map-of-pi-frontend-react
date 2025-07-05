@@ -54,18 +54,3 @@
   /* opacity: 0.5; */
   color: grey;
 }
-
-.notificationCard {
-  border: 2px solid #bdbdbd;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 12px;
-  transform: translateX(100px);
-  opacity: 0;
-  transition: 150ms;
-}
-
-.notificationCard.show {
-  transform: translateX(0);
-  opacity: 1;
-}
