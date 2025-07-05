@@ -285,7 +285,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             </div>
             <div className="mb-4 mt-3 ml-auto">
               <Button
-                label={t('SHARED.CHECKOUT') + ` (${totalAmount.toFixed(3).toString()} π)`}
+                label={`${t('SHARED.CHECKOUT')} (${totalAmount.toFixed(3).toString()} π)`}
                 disabled={!(pickedItems.length>0)}
                 styles={{
                   color: '#ffc153',
