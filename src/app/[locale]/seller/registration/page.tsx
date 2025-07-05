@@ -20,7 +20,7 @@ import { ListOrder } from '@/components/shared/Seller/OrderList';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
 import { itemData } from '@/constants/demoAPI';
-import { IUserSettings, ISeller, FulfillmentType } from '@/constants/types';
+import { IUserSettings, ISeller, FulfillmentType, GasSaverType } from '@/constants/types';
 import { fetchSellerRegistration, registerSeller } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { fetchToggle } from '@/services/toggleApi';
@@ -28,7 +28,8 @@ import { checkAndAutoLoginUser } from '@/utils/auth';
 import { 
   translateSellerCategory, 
   getFulfillmentMethodOptions,
-  getSellerCategoryOptions 
+  getSellerCategoryOptions,
+  getGasSaverOptions
 } from '@/utils/translate';
 import removeUrls from '../../../../utils/sanitize';
 
@@ -55,6 +56,7 @@ const SellerRegistrationForm = () => {
     image: string;
     fulfillment_method: string;
     fulfillment_description: string;
+    gas_saver: string;
   };
 
   // Initialize state with appropriate types
@@ -68,6 +70,7 @@ const SellerRegistrationForm = () => {
     image: '',
     fulfillment_method: FulfillmentType.CollectionByBuyer,
     fulfillment_description: '',
+    gas_saver: GasSaverType.OnGasSaver
   });
 
   const [dbSeller, setDbSeller] = useState<ISeller | null>(null);
@@ -148,7 +151,8 @@ const SellerRegistrationForm = () => {
         phone_number: dbUserSettings?.phone_number || '',
         image: dbSeller.image || '',
         fulfillment_method: dbSeller.fulfillment_method || FulfillmentType.CollectionByBuyer,
-        fulfillment_description: dbSeller.fulfillment_description || ''
+        fulfillment_description: dbSeller.fulfillment_description || '',
+        gas_saver: dbSeller.gas_saver? GasSaverType.OnGasSaver: GasSaverType.OffGasSaver || GasSaverType.OnGasSaver
       });
     } else {
       setFormData({
@@ -160,7 +164,8 @@ const SellerRegistrationForm = () => {
         phone_number: dbUserSettings?.phone_number || '',
         image: '',
         fulfillment_method: FulfillmentType.CollectionByBuyer,
-        fulfillment_description: ''
+        fulfillment_description: '',
+        gas_saver: GasSaverType.OnGasSaver
       });
     }
   }, [dbSeller, dbUserSettings]);
@@ -258,7 +263,8 @@ const SellerRegistrationForm = () => {
     formDataToSend.append('email', formData.email ?? '');
     formDataToSend.append('phone_number', formData.phone_number?.toString() ?? '');
     formDataToSend.append('fulfillment_method', formData.fulfillment_method);
-    formDataToSend.append('fulfillment_description', removeUrls(formData.fulfillment_description))
+    formDataToSend.append('fulfillment_description', removeUrls(formData.fulfillment_description));
+    formDataToSend.append('gas_saver', formData.gas_saver);
     // hardcode the value until the form element is built
     formDataToSend.append('order_online_enabled_pref', 'false');
 
@@ -583,9 +589,8 @@ const SellerRegistrationForm = () => {
                   value={formData.fulfillment_method}
                   onChange={handleChange}
                 />
-                <h2 className={SUBHEADER}>
-                  {t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}
-                </h2>
+
+                {/* Seller instruction to buyer field */}
                 <TextArea
                   label={t(
                     'SCREEN.SELLER_REGISTRATION.SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL',
@@ -596,6 +601,17 @@ const SellerRegistrationForm = () => {
                   name="fulfillment_description"
                   type="text"
                   value={formData.fulfillment_description}
+                  onChange={handleChange}
+                />
+
+                {/* Gas saver option field*/}
+                <Select
+                  label={t(
+                    'SCREEN.SELLER_REGISTRATION.GAS_SAVER_TYPE.GAS_SAVER_TYPE_LABEL',
+                  )}
+                  name="gas_saver"
+                  options={getGasSaverOptions(t)}
+                  value={formData.gas_saver}
                   onChange={handleChange}
                 />
                 <div className="mb-4 mt-3 ml-auto w-min">
