@@ -9,6 +9,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import ConfirmDialog from '@/components/shared/confirm';
 import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
+import MembershipIcon from '@/components/shared/membership/MembershipIcon';
 import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { ListItem } from '@/components/shared/Seller/ShopItem';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
@@ -26,13 +27,13 @@ import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 import { fetchToggle } from '@/services/toggleApi';
 import { checkAndAutoLoginUser } from '@/utils/auth';
-
-import { AppContext } from '../../../../../../context/AppContextProvider';
-import logger from '../../../../../../logger.config.mjs';
 import { 
   getFulfillmentMethodOptions, 
   translateSellerCategory 
 } from '@/utils/translate';
+
+import { AppContext } from '../../../../../../context/AppContextProvider';
+import logger from '../../../../../../logger.config.mjs';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -187,7 +188,18 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             />
           </div>
           <div className="my-auto">
-            <h2 className="font-bold mb-2">{sellerShopInfo.name}</h2>
+            <h2 className="font-bold text-[18px] mb-2 flex items-center">
+              {sellerShopInfo.name} 
+              <MembershipIcon 
+                category='triple_gold' 
+                className="ml-1"
+                styleComponent={{
+                  display: "inline-block",
+                  objectFit: "contain",
+                  verticalAlign: "middle"
+                }}
+              />
+            </h2>
             <p className="text-sm">{translateSellerCategory(sellerShopInfo.seller_type, t)}</p>
           </div>
         </div>
@@ -273,7 +285,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             </div>
             <div className="mb-4 mt-3 ml-auto">
               <Button
-                label={t('SHARED.CHECKOUT') + ` (${totalAmount.toFixed(3)} π)`}
+                label={t('SHARED.CHECKOUT') + ` (${totalAmount.toFixed(3).toString()} π)`}
                 disabled={!(pickedItems.length>0)}
                 styles={{
                   color: '#ffc153',
