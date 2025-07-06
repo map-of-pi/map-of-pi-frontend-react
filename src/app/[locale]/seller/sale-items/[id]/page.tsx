@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import React, { useEffect, useState, useContext, useRef } from 'react';
 
-import ConfirmDialog from '@/components/shared/confirm';
+import ConfirmDialog, { Notification } from '@/components/shared/confirm';
 import { Button, OutlineBtn } from '@/components/shared/Forms/Buttons/Buttons';
 import { Select, TextArea } from '@/components/shared/Forms/Inputs/Inputs';
 import MembershipIcon from '@/components/shared/membership/MembershipIcon';
@@ -51,9 +51,10 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { currentUser, autoLoginUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser, showAlert, setAlertMessage } = useContext(AppContext);
   const [pickedItems, setPickedItems] = useState<{ itemId: string; quantity: number }[]>([]);
   const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
+  const [showCheckoutStatus, setShowCheckoutStatus] = useState(false);
 
   const observer = useRef<IntersectionObserver | null>(null);
 
@@ -140,22 +141,8 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const checkoutOrder = async () => {
     if (!currentUser?.pi_uid) return setError('User not logged in for payment');
 
-    const paymentData: PaymentDataType = {
-      amount: totalAmount,
-      memo: `Map of Pi payment from ${currentUser.pi_username} to ${sellerInfo?.pi_username}`,
-      metadata: { 
-        payment_type: PaymentType.BuyerCheckout,
-        OrderPayment: {
-          items: pickedItems,
-          buyer: currentUser.pi_uid,
-          seller: sellerId,
-          fulfillment_method: sellerShopInfo?.fulfillment_method,
-          seller_fulfillment_description: sellerShopInfo?.fulfillment_description,
-          buyer_fulfillment_description: buyerDescription,
-        }
-      },        
-    };
-    await payWithPi(paymentData);
+    showAlert("order placed successfully")
+    setShowCheckoutStatus(true)
     setPickedItems([]);
     setTotalAmount(0);
     setBuyerDescription("");
@@ -334,6 +321,10 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           message={t('SHARED.CONFIRM_DIALOG')}
           url={linkUrl}
         />
+        {showCheckoutStatus && <div className='fixed inset-0 flex items-center justify-center'>
+          <Notification message='Order placed successfully' showDialog={showCheckoutStatus} setShowDialog={setShowCheckoutStatus} />
+        </div>}
+        
       </div>
       )}
     </div>  
