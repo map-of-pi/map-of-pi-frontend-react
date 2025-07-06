@@ -321,6 +321,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
           message={t('SHARED.CONFIRM_DIALOG')}
           url={linkUrl}
         />
+        
         {showCheckoutStatus && <div className='fixed inset-0 flex items-center justify-center'>
           <Notification message='Order placed successfully' showDialog={showCheckoutStatus} setShowDialog={setShowCheckoutStatus} />
         </div>}
