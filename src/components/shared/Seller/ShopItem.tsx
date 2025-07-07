@@ -130,6 +130,20 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
   );
 };
 
+type ShopeItemType = {
+  _id: string;
+  seller_id: string;
+  name: string;
+  description?: string;
+  duration: number;
+  stock_level: StockLevelType;
+  image?: string;
+  price:  string;
+  created_at?: Date;
+  updated_at?: Date;
+  expired_by?: Date;
+}
+
 export const ShopItem: React.FC<{
   item: SellerItem;
   isActive: boolean;
@@ -139,12 +153,12 @@ export const ShopItem: React.FC<{
   const locale = useLocale();
   const t = useTranslations();
   
-  const [formData, setFormData] = useState<SellerItem>({
+  const [formData, setFormData] = useState<ShopeItemType>({
     seller_id: item.seller_id || '',
     name: item.name || '',
     description: item.description || '',
     duration: item.duration || 1,
-    price: { $numberDecimal: item.price?.$numberDecimal?.toString()},
+    price: item.price?.$numberDecimal?.toString(),
     image: item.image || '',
     stock_level: item.stock_level || getStockLevelOptions(t)[0].name,
     expired_by: item.expired_by, 
@@ -264,8 +278,7 @@ export const ShopItem: React.FC<{
     formDataToSend.append('duration', formData.duration?.toString() || '1');
     formDataToSend.append('seller_id', formData.seller_id || '');
     formDataToSend.append('stock_level', formData.stock_level || '1 available');
-    const price = (formData.price as unknown as string) || '0.01';
-    formDataToSend.append('price', parseFloat(price).toFixed(2));
+    formDataToSend.append('price', parseFloat(formData.price).toFixed(3).toString() || '0.01');
 
     // Add file if provided
     if (file) {
@@ -343,7 +356,7 @@ export const ShopItem: React.FC<{
                   label={t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
                   name="price"
                   type="number"
-                  value={formData.price.$numberDecimal}
+                  value={formData.price}
                   onChange={handleChange}
                   disabled={!isActive} // Disable if not active
                 />
