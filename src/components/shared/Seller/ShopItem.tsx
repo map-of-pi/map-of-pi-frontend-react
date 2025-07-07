@@ -515,9 +515,22 @@ export const ListItem: React.FC<{
       }
     });
   };
+
+  const quantityLimit = (stockLevel: StockLevelType) => {
+    switch (stockLevel) {
+      case StockLevelType.available_1:
+        return 1;
+      case StockLevelType.available_2:
+        return 2;
+      case StockLevelType.available_3:
+        return 3;
+      default:
+        return 10000; // Default to 1k if no stock level matches
+    }
+  }
   
   const handleIncrement = () => {
-    setQuantity((prev) => prev + 1);
+    setQuantity((prev) => Math.min(quantityLimit(item.stock_level), prev + 1));
   };
 
   const handleDecrement = () => {
