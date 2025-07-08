@@ -31,13 +31,9 @@
     },
     "SEARCH_FILTERS_SUBHEADER": "Filtres de recherche",
     "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "Inclure les vendeurs actifs",
-      "INCLUDE_INACTIVE_SELLERS": "Inclure les vendeurs inactifs",
-      "INCLUDE_TEST_SELLERS": "Inclure les vendeurs test",
-      "INCLUDE_TRUST_LEVEL_100": "Inclure le niveau de confiance 100",
-      "INCLUDE_TRUST_LEVEL_80": "Inclure le niveau de confiance 80",
-      "INCLUDE_TRUST_LEVEL_50": "Inclure le niveau de confiance 50",
-      "INCLUDE_TRUST_LEVEL_0": "Inclure le niveau de confiance 0"
+      "INCLUDE_ACTIVE_SELLERS": "Vendeurs actifs",
+      "INCLUDE_INACTIVE_SELLERS": "Vendeurs inactifs",
+      "INCLUDE_TEST_SELLERS": "Vendeurs de test"
     },
     "CONTACT_MAP_OF_PI": "Contacter Map of Pi",
     "VALIDATION": {
@@ -61,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Vendeur activé",
           "INACTIVE_SELLER": "Vendeur desactivé",
-          "TEST_SELLER": "Vendeur de test"
+          "TEST_SELLER": "Vendeur de test",
+          "RESTRICTED_SELLER": "Vendeur restreint"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Paramètres vendeur detaillés",
@@ -297,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Recherchez un lieu, une ville ou une adresse",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Votre localisation a été enregistrée avec succès"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Votre localisation a été enregistrée avec succès",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Il semble que l'emplacement sélectionné se trouve dans une région sanctionnée. Si cela est confirmé, votre marqueur de vente pourrait être retiré de la carte."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Chargement ...",

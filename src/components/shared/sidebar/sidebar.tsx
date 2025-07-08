@@ -62,10 +62,10 @@ function Sidebar(props: any) {
     { target: 'include_active_sellers', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_ACTIVE_SELLERS') },
     { target: 'include_inactive_sellers', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_INACTIVE_SELLERS') },
     { target: 'include_test_sellers', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TEST_SELLERS') },
-    { target: 'include_trust_level_100', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_100') },
-    { target: 'include_trust_level_80', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_80') },
-    { target: 'include_trust_level_50', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_50') },
-    { target: 'include_trust_level_0', title: t('SIDE_NAVIGATION.SEARCH_FILTERS.INCLUDE_TRUST_LEVEL_0') },
+    { target: 'include_trust_level_100', title: 'Trust-o-meter 100%'},
+    { target: 'include_trust_level_80', title: 'Trust-o-meter 80%'},
+    { target: 'include_trust_level_50', title: 'Trust-o-meter 50%'},
+    { target: 'include_trust_level_0', title: 'Trust-o-meter 0%'},
   ];
 
   const { currentUser, autoLoginUser, setReload, showAlert } = useContext(AppContext);

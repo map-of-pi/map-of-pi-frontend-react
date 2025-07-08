@@ -31,13 +31,9 @@
     },
     "SEARCH_FILTERS_SUBHEADER": "Search Filters",
     "SEARCH_FILTERS": {
-      "INCLUDE_ACTIVE_SELLERS": "Include active sellers",
-      "INCLUDE_INACTIVE_SELLERS": "Include inactive sellers",
-      "INCLUDE_TEST_SELLERS": "Include test sellers",
-      "INCLUDE_TRUST_LEVEL_100": "Include trust level 100",
-      "INCLUDE_TRUST_LEVEL_80": "Include trust level 80",
-      "INCLUDE_TRUST_LEVEL_50": "Include trust level 50",
-      "INCLUDE_TRUST_LEVEL_0": "Include trust level 0"
+      "INCLUDE_ACTIVE_SELLERS": "Active sellers",
+      "INCLUDE_INACTIVE_SELLERS": "Inactive sellers",
+      "INCLUDE_TEST_SELLERS": "Test sellers"
     },
     "CONTACT_MAP_OF_PI": "Contact Map of Pi",
     "VALIDATION": {
@@ -61,7 +57,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Active seller",
           "INACTIVE_SELLER": "Inactive seller",
-          "TEST_SELLER": "Test seller"
+          "TEST_SELLER": "Test seller",
+          "RESTRICTED_SELLER": "Restricted seller"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
@@ -297,7 +294,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Search a location, city, or address",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Your center has been saved successfully"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Your center has been saved successfully",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Your selected location appears to be in a sanctioned region. If confirmed, your sell marker may be removed from the map."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Loading ...",
