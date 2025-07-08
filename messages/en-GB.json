@@ -3,6 +3,7 @@
     "ADD_SELLER": "Sell",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "Your Search Centre is currently set to the default coordinates [0, 0]. To enhance your experience, please update your Search Centre location.",
     "SEARCH_BAR_PLACEHOLDER": "Search for sellers or items",
+    "NEW_NOTIFICATIONS_MESSAGE": "You have notifications",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "To use this feature, please enable location services in your device settings.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Location services are disabled. Please enable your device's location setting."
@@ -200,8 +201,17 @@
         "SELF_REVIEW_NOT_POSSIBLE": "Self-review is not possible"
       }
     },
-    "VIEW_ORDER": {
-      "VIEW_ORDER_HEADER": "View Order"
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "Notifications",
+      "NO_NOTIFICATIONS_SUBHEADER": "You have no notifications yet",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "Notification",
+        "NOTIFICATION_TIME_LABEL": "Time of notification",
+        "NOTIFICATION_STATUS": {
+          "READ": "Clear",
+          "UNREAD": "Un-clear" 
+        }
+      }
     }
   },
   "POPUP": {
@@ -287,6 +297,7 @@
     "CHECK_REVIEWS": "Check Reviews",
     "SEARCH_REVIEWS": "Search Reviews",
     "SEARCH_LOADING": "Search loading...",
+    "VIEW_NOTIFICATIONS": "See notifications",
     "REPLY": "Reply",
     "ADD_ITEM": "Add Item",
     "CHECKOUT": "Checkout",

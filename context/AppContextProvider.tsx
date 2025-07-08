@@ -30,6 +30,8 @@ interface IAppContextProps {
   isSaveLoading: boolean;
   setIsSaveLoading: React.Dispatch<SetStateAction<boolean>>;
   adsSupported: boolean;
+  toggleNotification: boolean;
+  setToggleNotification: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const initialState: IAppContextProps = {
@@ -45,7 +47,9 @@ const initialState: IAppContextProps = {
   setReload: () => {},
   isSaveLoading: false,
   setIsSaveLoading: () => {},
-  adsSupported: false
+  adsSupported: false,
+  toggleNotification: false,
+  setToggleNotification: () => {},
 };
 
 export const AppContext = createContext<IAppContextProps>(initialState);
@@ -60,8 +64,9 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [isSigningInUser, setIsSigningInUser] = useState(false);
   const [reload, setReload] = useState(false);
   const [isSaveLoading, setIsSaveLoading] = useState(false);
-  const [adsSupported, setAdsSupported] = useState(false);
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [adsSupported, setAdsSupported] = useState(false);
+  const [toggleNotification, setToggleNotification] = useState<boolean>(true);
 
   const showAlert = (message: string) => {
     setAlertMessage(message);
@@ -70,8 +75,6 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     }, 5000);
   };
 
-  
-  
   /* Register User via Pi SDK */
   const registerUser = async () => {
     logger.info('Starting user registration.');
@@ -202,7 +205,9 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         setAlertMessage, 
         isSaveLoading, 
         setIsSaveLoading, 
-        adsSupported 
+        adsSupported,
+        toggleNotification,
+        setToggleNotification
       }}
     >
       {children}
