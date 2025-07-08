@@ -21,7 +21,8 @@ import {
   IUser, 
   SellerItem, 
   PaymentDataType,  
-  PaymentType 
+  PaymentType, 
+  StockLevelType
 } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
@@ -247,19 +248,22 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
             open={false}>
             <div className="overflow-x-auto mb-7 mt-3 flex p-2 gap-x-5 w-full">
-              {dbSellerItems && dbSellerItems.length > 0 && 
-                dbSellerItems.map((item) => (
-                  <ListItem
-                    key={item._id}
-                    item={item}
-                    pickedItems={pickedItems}
-                    setPickedItems={setPickedItems}
-                    refCallback={handleShopItemRef} // Attach observer
-                    totalAmount={totalAmount}
-                    setTotalAmount={setTotalAmount}
-                  /> 
-                ))            
+              {dbSellerItems && dbSellerItems.length > 0 &&
+                dbSellerItems
+                  .filter(item => item.stock_level !== StockLevelType.sold)
+                  .map(item => (
+                    <ListItem
+                      key={item._id}
+                      item={item}
+                      pickedItems={pickedItems}
+                      setPickedItems={setPickedItems}
+                      refCallback={handleShopItemRef}
+                      totalAmount={totalAmount}
+                      setTotalAmount={setTotalAmount}
+                    />
+                  ))
               }
+
             </div>
             <div>
               <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}</h2>
