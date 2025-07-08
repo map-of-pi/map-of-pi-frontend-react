@@ -21,7 +21,10 @@ import {
   IUser, 
   SellerItem, 
   PaymentDataType,  
-  PaymentType 
+  PaymentType, 
+  StockLevelType,
+  OrderStatusType,
+  PickedItems
 } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
@@ -34,6 +37,7 @@ import {
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
+import { createAndUpdateOrder } from '@/services/orderApi';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -51,10 +55,11 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { currentUser, autoLoginUser, showAlert, setAlertMessage } = useContext(AppContext);
-  const [pickedItems, setPickedItems] = useState<{ itemId: string; quantity: number }[]>([]);
+  const { currentUser, autoLoginUser, showAlert } = useContext(AppContext);
+  const [pickedItems, setPickedItems] = useState<PickedItems[]>([]);
   const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
   const [showCheckoutStatus, setShowCheckoutStatus] = useState(false);
+  const [checkoutStatusMessage, setCheckoutStatusMessage] = useState<string>("")
 
   const observer = useRef<IntersectionObserver | null>(null);
 
@@ -141,11 +146,36 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const checkoutOrder = async () => {
     if (!currentUser?.pi_uid) return setError('User not logged in for payment');
 
-    showAlert("order placed successfully")
-    setShowCheckoutStatus(true)
-    setPickedItems([]);
-    setTotalAmount(0);
-    setBuyerDescription("");
+    const newOrderData = {    
+      buyerId: currentUser.pi_uid,
+      sellerId: sellerId,        
+      paymentId: null,
+      totalAmount: totalAmount,
+      status: OrderStatusType.Pending,
+      fulfillmentMethod: sellerShopInfo?.fulfillment_method,
+      sellerFulfillmentDescription: sellerShopInfo?.fulfillment_description,
+      buyerFulfillmentDescription: buyerDescription,
+    };
+
+    try {
+      const newOrder = await createAndUpdateOrder(newOrderData, pickedItems);
+      if (newOrder && newOrder._id) {
+        showAlert(`order placed successfully`);
+        setCheckoutStatusMessage(`order placed successfully with ID: ${newOrder._id.toString()}`);
+        setShowCheckoutStatus(true);
+        setPickedItems([]);
+        setTotalAmount(0);
+        setBuyerDescription("");
+      }
+      return
+
+    } catch (error:any) {
+      logger.error("error creating new order");
+      setCheckoutStatusMessage("Failed to placed new Order")
+      setShowCheckoutStatus(true);
+      return
+    }   
+    
   }  
 
   // loading condition
@@ -234,19 +264,21 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
             open={false}>
             <div className="overflow-x-auto mb-7 mt-3 flex p-2 gap-x-5 w-full">
-              {dbSellerItems && dbSellerItems.length > 0 && 
-                dbSellerItems.map((item) => (
-                  <ListItem
-                    key={item._id}
-                    item={item}
-                    pickedItems={pickedItems}
-                    setPickedItems={setPickedItems}
-                    refCallback={handleShopItemRef} // Attach observer
-                    totalAmount={totalAmount}
-                    setTotalAmount={setTotalAmount}
-                  /> 
-                ))            
+              {dbSellerItems && dbSellerItems.length > 0 &&
+                dbSellerItems
+                  .map(item => (
+                    <ListItem
+                      key={item._id}
+                      item={item}
+                      pickedItems={pickedItems}
+                      setPickedItems={setPickedItems}
+                      refCallback={handleShopItemRef}
+                      totalAmount={totalAmount}
+                      setTotalAmount={setTotalAmount}
+                    />
+                  ))
               }
+
             </div>
             <div>
               <h2 className={SUBHEADER}>{t('SCREEN.SELLER_REGISTRATION.FULFILLMENT_METHOD_TYPE.FULFILLMENT_METHOD_TYPE_LABEL')}</h2>
@@ -323,7 +355,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         />
         
         {showCheckoutStatus && <div className='fixed inset-0 flex items-center justify-center'>
-          <Notification message='Order placed successfully' showDialog={showCheckoutStatus} setShowDialog={setShowCheckoutStatus} />
+          <Notification message={checkoutStatusMessage} showDialog={showCheckoutStatus} setShowDialog={setShowCheckoutStatus} />
         </div>}
         
       </div>
