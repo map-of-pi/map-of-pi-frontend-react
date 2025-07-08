@@ -45,19 +45,27 @@ export interface ISeller {
   };
   coordinates: [number, number];
   order_online_enabled_pref: boolean;
-  fulfillment_method: string;
+  fulfillment_method: FulfillmentType;
   fulfillment_description?: string;
 }
+
 
 export interface IMembership {
   _id: string;
   membership_id: string;
-  membership_expiry_date: string | null;
+  membership_expiration: string | null;
   mappi_balance: number;
   mappi_used_to_date?: number;
   membership_class: MembershipClassType;
   user?: string;
   createdAt?: string;
+}
+
+export enum SellerType {
+  active_seller = 'activeSeller', 
+  inactive_seller = 'inactiveSeller', 
+  test_seller = 'testSeller',
+  restrictedSeller = 'restrictedSeller'
 }
 
 export interface IReviewFeedback {
@@ -121,7 +129,7 @@ export type SellerItem = {
   stock_level: StockLevelType;
   image?: string;
   price: {
-    $numberDecimal: number;
+    $numberDecimal: string;
   };
   created_at?: Date;
   updated_at?: Date;
@@ -134,3 +142,138 @@ export type PartialReview = {
 }
 
 export interface IReviewOutput extends IReviewFeedback, PartialReview {}
+
+export interface PickedItems {
+  itemId: string,
+  quantity: number,
+}
+
+export enum PaymentType {
+  Membership = 'Membership', 
+  BuyerCheckout = 'Buyer Checkout'
+}
+
+export type OrderPaymentMetadataType = {
+  items: PickedItems[],
+  buyer: string,
+  seller: string,
+  fulfillment_method: FulfillmentType | undefined,
+  seller_fulfillment_description:string | undefined,
+  buyer_fulfillment_description: string
+}
+
+type MembershipPaymentMetadataType = {
+  membership_id: string
+}
+
+export type PaymentDataType = {
+  amount: number;
+  memo: string;
+  metadata: {
+    payment_type: PaymentType,
+    OrderPayment?: OrderPaymentMetadataType,
+    MembershipPayment?: MembershipPaymentMetadataType
+  }
+}
+
+export interface PaymentDTO {
+  amount: number,
+  user_uid: string,
+  created_at: string,
+  identifier: string,
+  metadata: Object,
+  memo: string,
+  status: {
+    developer_approved: boolean,
+    transaction_verified: boolean,
+    developer_completed: boolean,
+    cancelled: boolean,
+    user_cancelled: boolean,
+  },
+  to_address: string,
+  transaction: null | {
+    txid: string,
+    verified: boolean,
+    _link: string,
+  },
+};
+
+export enum OrderStatusType {
+  Initialized = 'initialized',
+  Pending = 'pending',
+  Completed = 'completed', 
+  Cancelled = 'cancelled'
+}
+
+export interface OrderType {
+  _id: string;
+  buyer_id: {
+    pi_username: string
+  };
+  seller_id: {
+    name: string
+  };
+  payment_id: string;
+  total_amount: {$numberDecimal: number};
+  status: OrderStatusType;
+  is_paid: boolean;
+  is_fulfilled: boolean;
+  fulfillment_method: FulfillmentType | undefined,
+  seller_fulfillment_description:string | undefined,
+  buyer_fulfillment_description: string
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface PartialOrderType extends Pick<OrderType, '_id' | 'buyer_id' | 'seller_id'| 'total_amount' | 'createdAt' |  'status' | 'fulfillment_method' | 'seller_fulfillment_description' | 'buyer_fulfillment_description' > {};
+
+export enum OrderItemStatus { 
+  Refunded = 'refunded',
+  Fulfilled = "fulfilled",
+  Pending = 'pending',
+}
+
+export interface OrderItemType {
+  _id: string;
+  order: string;
+  seller_item_id: SellerItem;
+  quantity: number;
+  subtotal: {$numberDecimal: number};
+  status: OrderItemStatus;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface TransactionType {
+  _id: string;
+  order: string;
+  user: string;
+  amount: number;
+  paid: boolean;
+  memo: string;
+  payment_id: string;
+  txid: string | null;
+  cancelled: boolean;
+  createdAt?: Date;
+}
+
+export enum U2UPaymentStatus {
+  Pending = 'Pending', 
+  U2ACompleted = 'U2A Completed',
+  U2AFailed = 'U2A Failed',
+  A2UCompleted = 'A2U Completed',
+  A2UFailed = 'A2U Failed',
+  Completed = 'Completed'
+}
+
+export interface PaymentCrossReferenceType {
+  _id: string;
+  u2a_payment_id: string;
+  a2u_payment_id: string;
+  u2u_status: U2UPaymentStatus;
+  error_message: string;
+  u2a_completed_at: Date;
+  a2u_completed_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
