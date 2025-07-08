@@ -3,6 +3,7 @@
     "ADD_SELLER": "بائع",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "مركز البحث الخاص بك مضبوط حاليًا على الإحداثيات الافتراضية [0، 0]. لتحسين تجربتك، يُرجى تحديث موقع مركز البحث الخاص بك.",
     "SEARCH_BAR_PLACEHOLDER": "ابحث عن البائعين أو العناصر",
+    "NEW_NOTIFICATIONS_MESSAGE": "لديك إشعارات",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "لتفعيل هذه الميزة، يرجى تفعيل خدمات الموقع في إعدادات جهازك.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "خدمات الموقع معطلة. يرجى تفعيل إعدادات الموقع في جهازك."
@@ -200,10 +201,19 @@
         "SELF_REVIEW_NOT_POSSIBLE": "لا يمكن تقييم نفسك" 
       } 
     },
-    "VIEW_ORDER": {
-      "VIEW_ORDER_HEADER": "عرض الطلب"
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "الإشعارات",
+      "NO_NOTIFICATIONS_SUBHEADER": "ليس لديك أي إشعارات بعد",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "إشعار",
+        "NOTIFICATION_TIME_LABEL": "وقت الإشعار",
+        "NOTIFICATION_STATUS": {
+          "READ": "مقروء",
+          "UNREAD": "غير مقروء"
+        }
+      }
     }
-  } ,
+  },
   "POPUP": {
     "MAP_MARKER": {
       "SELLER_SALE_ITEMS_FIELD": "عناصر البائع للبيع",
@@ -287,6 +297,7 @@
     "CHECK_REVIEWS": "تحقق من التقييمات",
     "SEARCH_REVIEWS": "البحث في التقييمات",
     "SEARCH_LOADING": "جارٍ تحميل البحث...",
+    "VIEW_NOTIFICATIONS": "عرض الإشعارات",
     "REPLY": "رد",
     "ADD_ITEM": "إضافة منتج",
     "CHECKOUT": "الدفع",
