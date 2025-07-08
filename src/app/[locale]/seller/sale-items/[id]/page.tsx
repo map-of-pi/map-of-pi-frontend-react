@@ -250,7 +250,11 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             <div className="overflow-x-auto mb-7 mt-3 flex p-2 gap-x-5 w-full">
               {dbSellerItems && dbSellerItems.length > 0 &&
                 dbSellerItems
-                  .filter(item => item.stock_level !== StockLevelType.sold)
+                  .filter(item => {
+                    const isSold = item.stock_level === StockLevelType.sold;
+                    const isExpired = item.expired_by && new Date(item.expired_by) < new Date();
+                    return !isSold && !isExpired;
+                  })
                   .map(item => (
                     <ListItem
                       key={item._id}
