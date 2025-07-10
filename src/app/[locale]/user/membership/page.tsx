@@ -1,6 +1,9 @@
 import { useTranslations } from "next-intl";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../../../context/AppContextProvider";
+import { IMembership } from "@/constants/types"
+import { MembershipClassType } from "@/constants/membershipClassType"
+import { fetchMembership } from "@/services/membershipApi"
 
 export default function MembershipPage() {
   const { currentUser, showAlert } = useContext(AppContext);
