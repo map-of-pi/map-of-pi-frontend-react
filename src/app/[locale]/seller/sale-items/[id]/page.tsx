@@ -21,7 +21,8 @@ import {
   IUser, 
   SellerItem, 
   PaymentDataType,  
-  PaymentType 
+  PaymentType, 
+  StockLevelType
 } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
@@ -247,18 +248,23 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
             open={false}>
             <div className="overflow-x-auto mb-7 mt-3 flex p-2 gap-x-5 w-full">
-              {dbSellerItems && dbSellerItems.length > 0 && 
-                dbSellerItems.map((item) => (
+              {dbSellerItems && dbSellerItems.length > 0 && dbSellerItems
+                .filter(item => {
+                  const isSold = item.stock_level === StockLevelType.sold;
+                  const isExpired = item.expired_by && new Date(item.expired_by) < new Date();
+                  return !isSold && !isExpired;
+                })
+                .map(item => (
                   <ListItem
                     key={item._id}
                     item={item}
                     pickedItems={pickedItems}
                     setPickedItems={setPickedItems}
-                    refCallback={handleShopItemRef} // Attach observer
+                    refCallback={handleShopItemRef}
                     totalAmount={totalAmount}
                     setTotalAmount={setTotalAmount}
-                  /> 
-                ))            
+                  />
+                ))
               }
             </div>
             <div>

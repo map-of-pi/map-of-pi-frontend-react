@@ -16,7 +16,7 @@ const onReadyForServerCompletion = (paymentId: string, txid: string) => {
 }
 
 const onCancel = (paymentId: string) => {
-  return axiosClient.post('/payments/cancelled_payment', { paymentId }, config);
+  return axiosClient.post('/payments/cancelled-payment', { paymentId }, config);
 }
 
 const onError = (error: Error, paymentDTO?: PaymentDTO) => {
