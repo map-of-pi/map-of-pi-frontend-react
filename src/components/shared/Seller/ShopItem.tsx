@@ -511,7 +511,7 @@ export const ListItem: React.FC<{
       case StockLevelType.available_3:
         return 3;
       default:
-        return 1000; // Default to 1k if no stock level matches
+        return 9999; // Default value if no stock level matches
     }
   };
   
