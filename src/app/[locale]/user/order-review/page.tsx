@@ -18,9 +18,9 @@ export default function OrderReviewPage() {
 
   const HEADER = 'font-bold text-lg md:text-2xl';
 
+  const { currentUser } = useContext(AppContext);
   const [loading, setLoading] = useState<boolean>(true);
   const [orderList, setOrderList] = useState<PartialOrderType[] >([]);
-  const { currentUser } = useContext(AppContext);
   
   useEffect(() => {
     const getOrderList= async (id: string) => {
@@ -55,10 +55,10 @@ export default function OrderReviewPage() {
     <div className="w-full md:w-[500px] md:mx-auto p-4">
       <div className="text-center mb-7">
         <h3 className="text-gray-400 text-sm">
-          {currentUser?.user_name ||""}
+          {currentUser?.user_name || ""}
         </h3>
         <h1 className={HEADER}>
-        {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_LIST_HEADER')}
+          {t('SCREEN.SELLER_ORDER_FULFILLMENT.ORDER_LIST_HEADER')}
         </h1>
       </div>
 
