@@ -21,3 +21,20 @@ export const membershipOptions: MembershipOption[] = [
   { value: MembershipClassType.MEMBER, label: "Member (2 weeks)", cost: 0.5 },
   { value: MembershipClassType.CASUAL, label: "Casual", cost: 0 },
 ];
+
+export enum MembershipBuyType {
+  BUY = "buy",
+  ADS = "Watch ads (free)",
+  VOUCHER = "Use a voucher code (free)",
+}
+
+export interface MembershipBuyOption {
+  value: MembershipBuyType; // same as back-end
+  label: string;
+}
+
+export const membershipBuyOptions: MembershipBuyOption[] = [
+  { value: MembershipBuyType.BUY, label: "Pay with pi" },
+  { value: MembershipBuyType.ADS, label: "Watch ads (free)" },
+  { value: MembershipBuyType.VOUCHER, label: "Use a voucher code (free)" },
+];
