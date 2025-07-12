@@ -8,6 +8,7 @@ import { MembershipClassType, membershipOptions, membershipBuyOptions, Membershi
 import { fetchMembership } from "@/services/membershipApi"
 import { Button } from "@/components/shared/Forms/Buttons/Buttons";
 import { Input } from "@/components/shared/Forms/Inputs/Inputs";
+import MembershipIcon from '@/components/shared/membership/MembershipIcon';
 
 export default function MembershipPage() {
   const { currentUser, showAlert } = useContext(AppContext);
@@ -86,7 +87,18 @@ export default function MembershipPage() {
                   <div className="p-1 bg-yellow-400 rounded"></div>                  
                 )
               }
-              {option.label} - {option.cost}π
+              {option.label} 
+              
+              <MembershipIcon 
+                category='triple_gold' 
+                className="ml-1"
+                styleComponent={{
+                  display: "inline-block",
+                  objectFit: "contain",
+                  verticalAlign: "middle"
+                }}
+              />
+               - {option.cost}π
             </div>
           ))}
         </div>
