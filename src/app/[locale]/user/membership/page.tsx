@@ -17,8 +17,7 @@ export default function MembershipPage() {
     membershipOptions[0].value
   );
   const [loading, setLoading] = useState(false);
-  const [pickedMembership, setPickedMembership] = useState<MembershipClassType>(MembershipClassType.CASUAL);
-  const [pickedMethod, setPickedMethod] = useState<MembershipBuyType>(MembershipBuyType.BUY);
+  const [selectedMethod, setSelectedMethod] = useState<MembershipBuyType>(MembershipBuyType.BUY);
   const [showUpgradeSuccess, setShowUpgradeSuccess] = useState(false);
   const [upgradedTier, setUpgradedTier] = useState<MembershipClassType | null>(null);
 
@@ -51,7 +50,7 @@ export default function MembershipPage() {
       <div className="mb-5">
         <h2 className={SUBHEADER}>Current Member Class:</h2>
         <p className="text-gray-600 text-xs mt-1">
-          {membershipData?.membership_class || "Casual"}
+          {membershipData?.membership_class || MembershipClassType.SINGLE}
         </p>
       </div>
 
@@ -77,9 +76,9 @@ export default function MembershipPage() {
             <div
               key={index}
               className="mb-1 flex gap-2 pr-7 items-center cursor-pointer text-nowrap"
-              onClick={() => setPickedMembership(option.value)}>
+              onClick={() => setSelectedMembership(option.value)}>
               {                                       
-                pickedMembership === option.value ? (
+                selectedMembership === option.value ? (
                   // <IoCheckmark />
                   <div className="p-1 bg-green-700 rounded"></div>
                   ) : (
@@ -90,7 +89,7 @@ export default function MembershipPage() {
               {option.label} 
               
               <MembershipIcon 
-                category='triple_gold' 
+                category={option.value} 
                 className="ml-1"
                 styleComponent={{
                   display: "inline-block",
@@ -98,10 +97,11 @@ export default function MembershipPage() {
                   verticalAlign: "middle"
                 }}
               />
-               - {option.cost}π
+               <span> {option.cost}π</span>
             </div>
           ))}
         </div>
+
       </div>
 
       <div className="mb-5">
@@ -112,9 +112,9 @@ export default function MembershipPage() {
             <div
               key={index}
               className="mb-1 flex gap-2 pr-7 items-center cursor-pointer text-nowrap"
-              onClick={() => setPickedMethod(option.value)}>
+              onClick={() => setSelectedMethod(option.value)}>
               {                                       
-                pickedMethod === option.value ? (
+                selectedMethod === option.value ? (
                   <div className="p-1 bg-green-700 rounded"></div>
                   ) : (
                   <div className="p-1 bg-yellow-400 rounded"></div>                  
@@ -123,7 +123,7 @@ export default function MembershipPage() {
               {option.label}
             </div>
           ))}
-          {pickedMethod === MembershipBuyType.VOUCHER && (
+          {selectedMethod === MembershipBuyType.VOUCHER && (
             <div className="mb-4">
               <Input
                 label={""}
@@ -140,7 +140,7 @@ export default function MembershipPage() {
 
       <div className="mb-5 mt-3 ml-auto w-min">
         <Button
-          label={pickedMethod === MembershipBuyType.ADS ? "Watch" : "Buy"}
+          label={selectedMethod === MembershipBuyType.ADS ? "Watch" : "Buy"}
           // disabled={!isSaveEnabled}
           styles={{
             color: '#ffc153',

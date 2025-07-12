@@ -15,10 +15,13 @@ import { AuthResult } from '@/constants/pi';
 import { IUser } from '@/constants/types';
 
 import logger from '../logger.config.mjs';
+import { MembershipClassType } from '@/constants/membershipClassType';
 
 interface IAppContextProps {
   currentUser: IUser | null;
   setCurrentUser: React.Dispatch<SetStateAction<IUser | null>>;
+  userMembership: MembershipClassType;
+  setUserMembership: React.Dispatch<SetStateAction<MembershipClassType>>;
   registerUser: () => void;
   autoLoginUser: () => void;
   isSigningInUser: boolean;
@@ -37,6 +40,8 @@ interface IAppContextProps {
 const initialState: IAppContextProps = {
   currentUser: null,
   setCurrentUser: () => {},
+  userMembership: MembershipClassType.SINGLE,
+  setUserMembership: () => {},
   registerUser: () => {},
   autoLoginUser: () => {},
   isSigningInUser: false,
@@ -61,6 +66,7 @@ interface AppContextProviderProps {
 const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const t = useTranslations();
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+  const [userMembership, setUserMembership] = useState<MembershipClassType>(MembershipClassType.DOUBLE_GOLD);
   const [isSigningInUser, setIsSigningInUser] = useState(false);
   const [reload, setReload] = useState(false);
   const [isSaveLoading, setIsSaveLoading] = useState(false);
@@ -170,6 +176,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       value={{ 
         currentUser, 
         setCurrentUser, 
+        userMembership,
+        setUserMembership,
         registerUser, 
         autoLoginUser, 
         isSigningInUser, 
