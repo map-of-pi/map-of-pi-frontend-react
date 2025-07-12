@@ -1,3 +1,5 @@
+import { MembershipClassType } from "@/constants/membershipClassType"
+
 // ========================
 // USER MODELS
 // ========================
@@ -45,6 +47,17 @@ export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'email' | 'p
 type MembershipPaymentMetadataType = {
   membership_id: string
 };
+
+export interface IMembership {
+  _id: string;
+  membership_id: string;
+  membership_expiration: string | null;
+  mappi_balance: number;
+  mappi_used_to_date?: number;
+  membership_class: MembershipClassType;
+  user?: string;
+  createdAt?: string;
+}
 
 // ========================
 // SELLER MODELS
