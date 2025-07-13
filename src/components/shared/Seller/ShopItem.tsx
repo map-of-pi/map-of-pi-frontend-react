@@ -483,17 +483,6 @@ export const ListItem: React.FC<{
 }> = ({ item, refCallback, setPickedItems, pickedItems=[], totalAmount, setTotalAmount }) => {
   const t = useTranslations();
 
-  const [formData, setFormData] = useState<SellerItem>({
-    seller_id: item.seller_id || '',
-    name: item.name || '',
-    description: item.description || '',
-    duration: item.duration || 1,
-    price: item.price || 0.01,
-    image: item.image || '',
-    stock_level: item.stock_level || getStockLevelOptions(t)[0].name,
-    expired_by: item.expired_by,
-    _id: item._id || '',
-  });
   const [quantity, setQuantity] = useState<number>(1)
 
   const handlePicked = (itemId: string, price: number): void => {
@@ -537,7 +526,7 @@ export const ListItem: React.FC<{
     setQuantity((prev) => Math.max(1, prev - 1));
   };
 
-  const isPicked = pickedItems.find((item)=>item.itemId===formData._id);
+  const isPicked = pickedItems.find((picked) => picked.itemId === item._id);
 
   return (
     <div
@@ -637,7 +626,7 @@ export const ListItem: React.FC<{
               color: '#ffc153',
               width: '100%',
             }}
-            onClick={() => handlePicked(formData._id, parseFloat(formData.price.$numberDecimal))}
+            onClick={() => handlePicked(item._id, parseFloat(item.price.$numberDecimal))}
           />
         </div>
       </div>
