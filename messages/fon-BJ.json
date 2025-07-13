@@ -3,6 +3,7 @@
     "ADD_SELLER": "Onùsisà",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "Search Center nu xɔxɔ wɔ nyuie [0, 0]. Ne wòle dzogbɔ dzinɖo, wòbɔ Search Center xɔ xɔ na.",
     "SEARCH_BAR_PLACEHOLDER": "Mi ba nusatɔ lê alò onùsisa lê",
+    "NEW_NOTIFICATIONS_MESSAGE": "Éwé kɔ̀wé dɔ̀",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Bo nu ana zan o, kin klin bo ta GPS towe to Alokan madosi towe dji.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "GPS miton ma to tita."
@@ -200,8 +201,17 @@
         "SELF_REVIEW_NOT_POSSIBLE": "Mɛɖesunɔ gbéjé kpɔ́n sixu jɛ ǎ"
       }
     },
-    "VIEW_ORDER": {
-      "VIEW_ORDER_HEADER": "Wè ɖòxɔ"
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "Zan nɔ́n",
+      "NO_NOTIFICATIONS_SUBHEADER": "Zan nɔ́n wɛ̀n gbè hàn ná wɛ",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "Zan nɔ́n",
+        "NOTIFICATION_TIME_LABEL": "Dògó zan nɔ́n",
+        "NOTIFICATION_STATUS": {
+          "READ": "Wɛ kàn",
+          "UNREAD": "Wɛ mɛ kàn"
+        }
+      }
     }
   },
   "POPUP": {
@@ -287,6 +297,7 @@
     "CHECK_REVIEWS": "Kpɔ́n xóɖɔɖókpɔ́ lɛ",
     "SEARCH_REVIEWS": "Biba Xóɖɔɖókpɔ́ lɛ",
     "SEARCH_LOADING": "Biba ɖo yiyi wɛ...",
+    "VIEW_NOTIFICATIONS": "Kpɔ̀wé dɔ̀",
     "REPLY": "Xósin",
     "ADD_ITEM": "Gɔ́ nǔ ɖévo nu nǔ ɔ",
     "CHECKOUT": "Gbé wɛ gbà",

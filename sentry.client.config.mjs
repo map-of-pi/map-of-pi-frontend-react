@@ -16,5 +16,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export const logToSentry = (message) => {
-  Sentry.captureException(new Error(message));
+  if (message instanceof Error) {
+    Sentry.captureException(message);
+  } else if (typeof message === 'string') {
+    Sentry.captureException(new Error(message));
+  } else {
+    // Handle fallback for unknown cases like object arrays
+    Sentry.captureException(new Error(JSON.stringify(message)));
+  }
 };
