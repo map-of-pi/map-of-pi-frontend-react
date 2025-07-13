@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ConfirmDialogX, Notification } from "../confirm";
 import { Button } from "../Forms/Buttons/Buttons";
 import { TextArea, Input, FileInput, Select } from "../Forms/Inputs/Inputs";
-import { ISeller, PickedItems, SellerItem, StockLevelType } from "@/constants/types";
+import { ISeller, PickedItems, SellerItem, ShopItemData, StockLevelType } from "@/constants/types";
 import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/services/sellerApi";
 import removeUrls from "@/utils/sanitize";
 import { getStockLevelOptions } from "@/utils/translate";
@@ -139,12 +139,12 @@ export const ShopItem: React.FC<{
   const locale = useLocale();
   const t = useTranslations();
   
-  const [formData, setFormData] = useState<SellerItem>({
+  const [formData, setFormData] = useState<ShopItemData>({
     seller_id: item.seller_id || '',
     name: item.name || '',
     description: item.description || '',
     duration: item.duration || 1,
-    price: { $numberDecimal: item.price?.$numberDecimal?.toString()},
+    price: item.price?.$numberDecimal?.toString(),
     image: item.image || '',
     stock_level: item.stock_level || getStockLevelOptions(t)[0].name,
     expired_by: item.expired_by, 
@@ -264,8 +264,7 @@ export const ShopItem: React.FC<{
     formDataToSend.append('duration', formData.duration?.toString() || '1');
     formDataToSend.append('seller_id', formData.seller_id || '');
     formDataToSend.append('stock_level', formData.stock_level || '1 available');
-    const price = (formData.price as unknown as string) || '0.01';
-    formDataToSend.append('price', parseFloat(price).toFixed(2));
+    formDataToSend.append('price', parseFloat(formData.price).toFixed(3).toString() || '0.01');
 
     // Add file if provided
     if (file) {
@@ -343,7 +342,7 @@ export const ShopItem: React.FC<{
                   label={t('SCREEN.SELLER_REGISTRATION.SELLER_ITEMS_FEATURE.PRICE_LABEL') + ':'}
                   name="price"
                   type="number"
-                  value={formData.price.$numberDecimal}
+                  value={formData.price}
                   onChange={handleChange}
                   disabled={!isActive} // Disable if not active
                 />
@@ -470,17 +469,6 @@ export const ListItem: React.FC<{
 }> = ({ item, refCallback, setPickedItems, pickedItems=[], totalAmount, setTotalAmount }) => {
   const t = useTranslations();
 
-  const [formData, setFormData] = useState<SellerItem>({
-    seller_id: item.seller_id || '',
-    name: item.name || '',
-    description: item.description || '',
-    duration: item.duration || 1,
-    price: item.price || 0.01,
-    image: item.image || '',
-    stock_level: item.stock_level || getStockLevelOptions(t)[0].name,
-    expired_by: item.expired_by,
-    _id: item._id || '',
-  });
   const [quantity, setQuantity] = useState<number>(1)
 
   const handlePicked = (itemId: string, price: number): void => {
@@ -502,16 +490,29 @@ export const ListItem: React.FC<{
       }
     });
   };
+
+  const quantityLimit = (stockLevel: StockLevelType) => {
+    switch (stockLevel) {
+      case StockLevelType.available_1:
+        return 1;
+      case StockLevelType.available_2:
+        return 2;
+      case StockLevelType.available_3:
+        return 3;
+      default:
+        return 9999; // Default value if no stock level matches
+    }
+  };
   
   const handleIncrement = () => {
-    setQuantity((prev) => prev + 1);
+    setQuantity((prev) => Math.min(quantityLimit(item.stock_level), prev + 1));
   };
 
   const handleDecrement = () => {
     setQuantity((prev) => Math.max(1, prev - 1));
   };
 
-  const isPicked = pickedItems.find((item)=>item.itemId===formData._id);
+  const isPicked = pickedItems.find((picked) => picked.itemId === item._id);
 
   return (
     <div
@@ -611,7 +612,7 @@ export const ListItem: React.FC<{
               color: '#ffc153',
               width: '100%',
             }}
-            onClick={() => handlePicked(formData._id, parseFloat(formData.price.$numberDecimal))}
+            onClick={() => handlePicked(item._id, parseFloat(item.price.$numberDecimal))}
           />
         </div>
       </div>

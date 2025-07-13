@@ -21,7 +21,8 @@ import {
   IUser, 
   SellerItem, 
   PaymentDataType,  
-  PaymentType 
+  PaymentType, 
+  StockLevelType
 } from '@/constants/types';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
@@ -34,6 +35,7 @@ import {
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
+import axiosClient from "@/config/client";
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -51,7 +53,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { currentUser, autoLoginUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser, reload, setReload, showAlert } = useContext(AppContext);
   const [pickedItems, setPickedItems] = useState<{ itemId: string; quantity: number }[]>([]);
   const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
 
@@ -117,25 +119,36 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
     getToggleData();
   }, []);
 
-   // Fetch seller items
   useEffect(() => {
-    const getSellerItems = async (seller_id: string) => {
+    const getSellerItems = async () => {
+      if (!sellerShopInfo) return;
+
       try {
-        const items = await fetchSellerItems(seller_id);
-        if (items) {
-          setDbSellerItems(items);
-        } else {
-          setDbSellerItems(null);
-        }
-      } catch (error) {
+        const items:SellerItem[] = await fetchSellerItems(sellerShopInfo.seller_id);
+        setDbSellerItems(items.map(item => ({ ...item })) || null);
         logger.error('Error fetching seller items data:', error);
+      } finally {
+        if (reload) setReload(false); // Only reset reload if it was triggered
       }
     };
-    
-    if (sellerShopInfo){
-      getSellerItems(sellerShopInfo.seller_id);
-    }
-  }, [sellerShopInfo]); 
+
+    getSellerItems();
+  }, [sellerShopInfo, reload]); 
+
+  const onPaymentComplete = (data:any) => {
+    logger.info('Payment completed successfully:', data.message);
+    showAlert('Payment completed successfully');
+    setPickedItems([]);
+    setReload(true);
+    setTotalAmount(0);
+    setBuyerDescription("");
+  }
+
+  const onPaymentError = (error: Error) => {
+    logger.error('Error completing payment:', error);
+    showAlert('Error completing payment: ' + error.message);
+    setReload(true);
+  }
 
   const checkoutOrder = async () => {
     if (!currentUser?.pi_uid) return setError('User not logged in for payment');
@@ -155,11 +168,9 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
         }
       },        
     };
-    await payWithPi(paymentData);
+    await payWithPi(paymentData, onPaymentComplete, onPaymentError);
     setPickedItems([]);
-    setTotalAmount(0);
-    setBuyerDescription("");
-  }  
+  } 
 
   // loading condition
   if (loading) {
@@ -247,18 +258,23 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
             open={false}>
             <div className="overflow-x-auto mb-7 mt-3 flex p-2 gap-x-5 w-full">
-              {dbSellerItems && dbSellerItems.length > 0 && 
-                dbSellerItems.map((item) => (
+              {dbSellerItems && dbSellerItems.length > 0 && dbSellerItems
+                .filter(item => {
+                  const isSold = item.stock_level === StockLevelType.sold;
+                  const isExpired = item.expired_by && new Date(item.expired_by) < new Date();
+                  return !isSold && !isExpired;
+                })
+                .map(item => (
                   <ListItem
                     key={item._id}
                     item={item}
                     pickedItems={pickedItems}
                     setPickedItems={setPickedItems}
-                    refCallback={handleShopItemRef} // Attach observer
+                    refCallback={handleShopItemRef}
                     totalAmount={totalAmount}
                     setTotalAmount={setTotalAmount}
-                  /> 
-                ))            
+                  />
+                ))
               }
             </div>
             <div>
