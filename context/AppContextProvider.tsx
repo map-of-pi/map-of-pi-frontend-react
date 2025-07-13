@@ -30,6 +30,8 @@ interface IAppContextProps {
   isSaveLoading: boolean;
   setIsSaveLoading: React.Dispatch<SetStateAction<boolean>>;
   adsSupported: boolean;
+  toggleNotification: boolean;
+  setToggleNotification: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const initialState: IAppContextProps = {
@@ -45,7 +47,9 @@ const initialState: IAppContextProps = {
   setReload: () => {},
   isSaveLoading: false,
   setIsSaveLoading: () => {},
-  adsSupported: false
+  adsSupported: false,
+  toggleNotification: false,
+  setToggleNotification: () => {},
 };
 
 export const AppContext = createContext<IAppContextProps>(initialState);
@@ -60,8 +64,9 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [isSigningInUser, setIsSigningInUser] = useState(false);
   const [reload, setReload] = useState(false);
   const [isSaveLoading, setIsSaveLoading] = useState(false);
-  const [adsSupported, setAdsSupported] = useState(false);
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [adsSupported, setAdsSupported] = useState(false);
+  const [toggleNotification, setToggleNotification] = useState<boolean>(true);
 
   const showAlert = (message: string) => {
     setAlertMessage(message);
@@ -70,8 +75,6 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     }, 5000);
   };
 
-  
-  
   /* Register User via Pi SDK */
   const registerUser = async () => {
     logger.info('Starting user registration.');
@@ -136,55 +139,30 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     }
   };
 
-  /* Wait for Pi SDK to load (polling) */
-  const waitForPi = (): Promise<typeof window.Pi> => {
+  const loadPiSdk = (): Promise<typeof window.Pi> => {
     return new Promise((resolve, reject) => {
-      const interval = setInterval(() => {
-        if (typeof window !== 'undefined' && window.Pi) {
-          clearInterval(interval);
-          resolve(window.Pi);
-        }
-      }, 100);
-
-      setTimeout(() => {
-        clearInterval(interval);
-        reject(new Error('Pi SDK failed to load.'));
-      }, 5000);
+      const script = document.createElement('script');
+      script.src = 'https://sdk.minepi.com/pi-sdk.js';
+      script.async = true;
+      script.onload = () => resolve(window.Pi);
+      script.onerror = () => reject(new Error('Failed to load Pi SDK'));
+      document.head.appendChild(script);
     });
   };
 
   useEffect(() => {
     logger.info('AppContextProvider mounted.');
 
-    const node_env = process.env.NODE_ENV;
+    autoLoginUser();
 
-    // Dynamically load the Pi SDK script
-    const script = document.createElement('script');
-    script.src = 'https://sdk.minepi.com/pi-sdk.js';
-    script.async = true;
-
-    script.onload = async () => {
-      try {
-        const Pi = await waitForPi();
-
-        Pi.init({ version: '2.0', sandbox: node_env === 'development' });
-        
-        // Initialize Ad Network
-        const nativeFeaturesList = await Pi.nativeFeaturesList();
-        const adNetworkSupported = nativeFeaturesList.includes("ad_network");
-        setAdsSupported(adNetworkSupported);
-
-        if (!currentUser) {
-          registerUser();
-        } else {
-          autoLoginUser();
-        }
-      } catch (error) {
-        logger.error('Error initializing Pi SDK:', error);
-      }
-    };
-
-    document.head.appendChild(script);
+    // attempt to load and initialize Pi SDK in parallel
+    loadPiSdk()
+      .then(Pi => {
+        Pi.init({ version: '2.0', sandbox: process.env.NODE_ENV === 'development' });
+        return Pi.nativeFeaturesList();
+      })
+      .then(features => setAdsSupported(features.includes("ad_network")))
+      .catch(err => logger.error('Pi SDK load/ init error:', err));
   }, []);
 
   return (
@@ -202,7 +180,9 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         setAlertMessage, 
         isSaveLoading, 
         setIsSaveLoading, 
-        adsSupported 
+        adsSupported,
+        toggleNotification,
+        setToggleNotification
       }}
     >
       {children}

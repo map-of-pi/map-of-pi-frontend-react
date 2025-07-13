@@ -3,6 +3,7 @@
     "ADD_SELLER": "판매",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "현재 검색 센터가 기본 좌표 [0, 0]로 설정되어 있습니다. 경험을 개선하려면 검색 센터 위치를 업데이트하세요.",
     "SEARCH_BAR_PLACEHOLDER": "판매자 또는 항목 검색",
+    "NEW_NOTIFICATIONS_MESSAGE": "알림이 있습니다",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "이 기능을 사용하려면 장치 설정에서 위치 서비스를 활성화하세요.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "위치 서비스가 비활성화되어 있습니다. 장치의 위치 설정을 활성화해 주세요."
@@ -200,8 +201,17 @@
         "SELF_REVIEW_NOT_POSSIBLE": "자기 평가가 불가능합니다"
       }
     },
-    "VIEW_ORDER": {
-      "VIEW_ORDER_HEADER": "주문 보기"
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "알림",
+      "NO_NOTIFICATIONS_SUBHEADER": "아직 알림이 없습니다",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "알림",
+        "NOTIFICATION_TIME_LABEL": "알림 시간",
+        "NOTIFICATION_STATUS": {
+          "READ": "읽음",
+          "UNREAD": "읽지 않음"
+        }
+      }
     }
   },
   "POPUP": {
@@ -287,6 +297,7 @@
     "CHECK_REVIEWS": "리뷰 확인",
     "SEARCH_REVIEWS": "리뷰 검색",
     "SEARCH_LOADING": "검색 로딩 중...",
+    "VIEW_NOTIFICATIONS": "알림 보기",
     "REPLY": "답장",
     "ADD_ITEM": "항목 추가",
     "CHECKOUT": "결제하기",
