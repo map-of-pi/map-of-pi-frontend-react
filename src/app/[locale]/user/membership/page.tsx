@@ -11,10 +11,10 @@ import { Input } from "@/components/shared/Forms/Inputs/Inputs";
 import MembershipIcon from '@/components/shared/membership/MembershipIcon';
 
 export default function MembershipPage() {
-  const { currentUser, showAlert } = useContext(AppContext);
+  const { currentUser, showAlert, userMembership, setUserMembership } = useContext(AppContext);
   const [membershipData, setMembershipData] = useState<IMembership | null>(null);
   const [selectedMembership, setSelectedMembership] = useState<MembershipClassType>(
-    membershipOptions[0].value
+    userMembership
   );
   const [loading, setLoading] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<MembershipBuyType>(MembershipBuyType.BUY);
@@ -33,14 +33,15 @@ export default function MembershipPage() {
     const loadMembership = async () => {
       if (!currentUser?.pi_uid) return;
       try {
-        const data = await fetchMembership(currentUser.pi_uid);
-        setMembershipData(data);
+        // const data = await fetchMembership(currentUser.pi_uid);
+        // setMembershipData(data);
+        setUserMembership(selectedMembership);
       } catch {
         showAlert("Could not load membership data");
       }
     };
     loadMembership();
-  }, [currentUser]);
+  }, [currentUser, selectedMembership]);
 
 
   return (
@@ -50,7 +51,7 @@ export default function MembershipPage() {
       <div className="mb-5">
         <h2 className={SUBHEADER}>Current Member Class:</h2>
         <p className="text-gray-600 text-xs mt-1">
-          {membershipData?.membership_class || MembershipClassType.SINGLE}
+          {membershipData?.membership_class || userMembership}
         </p>
       </div>
 
