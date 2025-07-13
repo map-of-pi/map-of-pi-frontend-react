@@ -169,7 +169,10 @@
           "PICK_LABEL": "Agregar",
           "UNPICK_LABEL": "Eliminar"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "Pedido realizado con éxito",
+      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "Pedido realizado con éxito con ID: {order_id}",
+      "ORDER_FAILED_MESSAGE": "No se pudo realizar el nuevo pedido"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Reseñas",

@@ -169,7 +169,10 @@
           "PICK_LABEL": "新增",
           "UNPICK_LABEL": "移除"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "訂單提交成功",
+      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "訂單提交成功，訂單編號：{order_id}",
+      "ORDER_FAILED_MESSAGE": "提交新訂單失敗"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "評論",

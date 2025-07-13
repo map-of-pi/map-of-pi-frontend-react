@@ -169,7 +169,10 @@
           "PICK_LABEL": "追加",
           "UNPICK_LABEL": "削除"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "注文が正常に完了しました",
+      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "注文が正常に完了しました。注文ID: {order_id}",
+      "ORDER_FAILED_MESSAGE": "新しい注文に失敗しました"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "レビュー",

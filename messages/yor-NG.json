@@ -169,7 +169,10 @@
           "PICK_LABEL": "Fi kun",
           "UNPICK_LABEL": "Yọ"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "A ti fiṣẹṣẹ ránṣẹ̀",
+      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "A ti fiṣẹṣẹ ránṣẹ̀ pẹlu ID: {order_id}",
+      "ORDER_FAILED_MESSAGE": "Ìfiṣẹṣẹ tuntun kò ṣàṣeyọrí"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Atunyẹwo",

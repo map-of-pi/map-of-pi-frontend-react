@@ -169,7 +169,10 @@
           "PICK_LABEL": "إضافة",
           "UNPICK_LABEL": "إزالة"
         }
-      } 
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "تم تقديم الطلب بنجاح",
+      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "تم تقديم الطلب بنجاح برقم المعرف: {order_id}",
+      "ORDER_FAILED_MESSAGE": "فشل في تقديم الطلب الجديد"
     }, 
     "REVIEWS": { 
       "REVIEWS_HEADER": "التقييمات", 

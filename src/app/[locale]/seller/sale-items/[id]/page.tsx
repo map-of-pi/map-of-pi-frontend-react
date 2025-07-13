@@ -14,7 +14,6 @@ import TrustMeter from '@/components/shared/Review/TrustMeter';
 import { ListItem } from '@/components/shared/Seller/ShopItem';
 import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
 import Skeleton from '@/components/skeleton/skeleton';
-import { payWithPi } from '@/config/payment';
 import { 
   ISeller, 
   IUserSettings, 
@@ -26,6 +25,7 @@ import {
   OrderStatusType,
   PickedItems
 } from '@/constants/types';
+import { createAndUpdateOrder } from '@/services/orderApi';
 import { fetchSellerItems, fetchSingleSeller } from '@/services/sellerApi';
 import { fetchSingleUserSettings } from '@/services/userSettingsApi';
 import { fetchToggle } from '@/services/toggleApi';
@@ -37,14 +37,14 @@ import {
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import { createAndUpdateOrder } from '@/services/orderApi';
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
   const t = useTranslations();
   const locale = useLocale();
   const sellerId = params.id; 
-
+  
+  const { currentUser, autoLoginUser, showAlert } = useContext(AppContext);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
   const [sellerShopInfo, setSellerShopInfo] = useState<ISeller | null>(null);
@@ -55,7 +55,6 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { currentUser, autoLoginUser, showAlert } = useContext(AppContext);
   const [pickedItems, setPickedItems] = useState<PickedItems[]>([]);
   const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
   const [showCheckoutStatus, setShowCheckoutStatus] = useState(false);
@@ -144,7 +143,9 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   }, [sellerShopInfo]); 
 
   const checkoutOrder = async () => {
-    if (!currentUser?.pi_uid) return setError('User not logged in for payment');
+    if (!currentUser?.pi_uid) {
+      return setError('User not logged in for payment');
+    }
 
     const newOrderData = {    
       buyerId: currentUser.pi_uid,
@@ -160,22 +161,22 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
     try {
       const newOrder = await createAndUpdateOrder(newOrderData, pickedItems);
       if (newOrder && newOrder._id) {
-        showAlert(`order placed successfully`);
-        setCheckoutStatusMessage(`order placed successfully with ID: ${newOrder._id.toString()}`);
+        showAlert(t('SCREEN.BUY_FROM_SELLER.ORDER_SUCCESSFUL_MESSAGE'));
+        setCheckoutStatusMessage(
+          t('SCREEN.BUY_FROM_SELLER.ORDER_SUCCESSFUL_WITH_ID_MESSAGE', { 
+            order_id: newOrder._id.toString() 
+          })
+        );
         setShowCheckoutStatus(true);
         setPickedItems([]);
         setTotalAmount(0);
         setBuyerDescription("");
       }
-      return
-
     } catch (error:any) {
-      logger.error("error creating new order");
-      setCheckoutStatusMessage("Failed to placed new Order")
+      logger.error("Error creating new order");
+      setCheckoutStatusMessage(t('SCREEN.BUY_FROM_SELLER.ORDER_FAILED_MESSAGE'))
       setShowCheckoutStatus(true);
-      return
-    }   
-    
+    }
   }  
 
   // loading condition

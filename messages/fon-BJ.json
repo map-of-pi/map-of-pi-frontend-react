@@ -169,7 +169,10 @@
           "PICK_LABEL": "Tɔn",
           "UNPICK_LABEL": "Zàn"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "Wɛ ɖe wɛ̀ nɔ̀",
+      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "Wɛ ɖe wɛ̀ nɔ̀ ní ID: {order_id}",
+      "ORDER_FAILED_MESSAGE": "Kàkà wɛ̀ ɖe wɛ̀ nɔ̀ tuntun"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Kpondewu",
