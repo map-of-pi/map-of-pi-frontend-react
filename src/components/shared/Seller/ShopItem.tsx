@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ConfirmDialogX, Notification } from "../confirm";
 import { Button } from "../Forms/Buttons/Buttons";
 import { TextArea, Input, FileInput, Select } from "../Forms/Inputs/Inputs";
-import { ISeller, PickedItems, SellerItem, StockLevelType } from "@/constants/types";
+import { ISeller, PickedItems, SellerItem, ShopItemData, StockLevelType } from "@/constants/types";
 import { addOrUpdateSellerItem, deleteSellerItem, fetchSellerItems } from "@/services/sellerApi";
 import removeUrls from "@/utils/sanitize";
 import { getStockLevelOptions } from "@/utils/translate";
@@ -130,20 +130,6 @@ export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
   );
 };
 
-type ShopeItemType = {
-  _id: string;
-  seller_id: string;
-  name: string;
-  description?: string;
-  duration: number;
-  stock_level: StockLevelType;
-  image?: string;
-  price:  string;
-  created_at?: Date;
-  updated_at?: Date;
-  expired_by?: Date;
-}
-
 export const ShopItem: React.FC<{
   item: SellerItem;
   isActive: boolean;
@@ -153,7 +139,7 @@ export const ShopItem: React.FC<{
   const locale = useLocale();
   const t = useTranslations();
   
-  const [formData, setFormData] = useState<ShopeItemType>({
+  const [formData, setFormData] = useState<ShopItemData>({
     seller_id: item.seller_id || '',
     name: item.name || '',
     description: item.description || '',
@@ -514,9 +500,9 @@ export const ListItem: React.FC<{
       case StockLevelType.available_3:
         return 3;
       default:
-        return 10000; // Default to 1k if no stock level matches
+        return 9999; // Default value if no stock level matches
     }
-  }
+  };
   
   const handleIncrement = () => {
     setQuantity((prev) => Math.min(quantityLimit(item.stock_level), prev + 1));
