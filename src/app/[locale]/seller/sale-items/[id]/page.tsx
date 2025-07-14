@@ -18,9 +18,7 @@ import {
   ISeller, 
   IUserSettings, 
   IUser, 
-  SellerItem, 
-  PaymentDataType,  
-  PaymentType, 
+  SellerItem,
   StockLevelType,
   OrderStatusType,
   PickedItems
@@ -37,7 +35,6 @@ import {
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
-import axiosClient from "@/config/client";
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -143,6 +140,13 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const onPaymentComplete = (data:any) => {
     logger.info('Payment completed successfully:', data.message);
     showAlert('Payment completed successfully');
+    showAlert(t('SCREEN.BUY_FROM_SELLER.ORDER_SUCCESSFUL_MESSAGE'));
+    setCheckoutStatusMessage(
+      t('SCREEN.BUY_FROM_SELLER.ORDER_SUCCESSFUL_WITH_ID_MESSAGE', { 
+        order_id: data._id.toString() 
+      })
+    );
+    setShowCheckoutStatus(true);
     setPickedItems([]);
     setReload(true);
     setTotalAmount(0);
@@ -150,9 +154,9 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   }
 
   const onPaymentError = (error: Error) => {
-    logger.error('Error completing payment:', error);
-    showAlert('Error completing payment: ' + error.message);
-    setReload(true);
+    logger.error("Error creating new order", error.message);
+    setCheckoutStatusMessage(t('SCREEN.BUY_FROM_SELLER.ORDER_FAILED_MESSAGE'))
+    setShowCheckoutStatus(true);
   }
 
   const checkoutOrder = async () => {
@@ -174,21 +178,11 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
     try {
       const newOrder = await createAndUpdateOrder(newOrderData, pickedItems);
       if (newOrder && newOrder._id) {
-        showAlert(t('SCREEN.BUY_FROM_SELLER.ORDER_SUCCESSFUL_MESSAGE'));
-        setCheckoutStatusMessage(
-          t('SCREEN.BUY_FROM_SELLER.ORDER_SUCCESSFUL_WITH_ID_MESSAGE', { 
-            order_id: newOrder._id.toString() 
-          })
-        );
-        setShowCheckoutStatus(true);
+        onPaymentComplete(newOrder)
         setPickedItems([]);
-        setTotalAmount(0);
-        setBuyerDescription("");
       }
     } catch (error:any) {
-      logger.error("Error creating new order");
-      setCheckoutStatusMessage(t('SCREEN.BUY_FROM_SELLER.ORDER_FAILED_MESSAGE'))
-      setShowCheckoutStatus(true);
+      onPaymentError(error);
     }
   }  
 
@@ -279,6 +273,11 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             open={false}>
             <div className="overflow-x-auto mb-7 mt-3 flex p-2 gap-x-5 w-full">
               {dbSellerItems && dbSellerItems.length > 0 && dbSellerItems
+                .filter(item => {
+                  const isSold = item.stock_level === StockLevelType.sold;
+                  const isExpired = item.expired_by && new Date(item.expired_by) < new Date();
+                  return !isSold && !isExpired;
+                })
                 .map(item => (
                   <ListItem
                     key={item._id}
