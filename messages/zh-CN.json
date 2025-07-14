@@ -169,7 +169,9 @@
           "PICK_LABEL": "添加",
           "UNPICK_LABEL": "移除"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "订单提交成功",
+      "ORDER_FAILED_MESSAGE": "提交新订单失败"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "评论",

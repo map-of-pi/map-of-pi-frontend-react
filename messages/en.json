@@ -169,7 +169,9 @@
           "PICK_LABEL": "Pick",
           "UNPICK_LABEL": "Unpick"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "Order placed successfully",
+      "ORDER_FAILED_MESSAGE": "Failed to place new order"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Reviews",
