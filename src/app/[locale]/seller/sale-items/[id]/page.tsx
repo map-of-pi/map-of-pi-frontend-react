@@ -137,15 +137,10 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
     getSellerItems();
   }, [sellerShopInfo, reload]); 
 
-  const onPaymentComplete = (data:any) => {
-    logger.info('Payment completed successfully:', data.message);
-    showAlert('Payment completed successfully');
-    showAlert(t('SCREEN.BUY_FROM_SELLER.ORDER_SUCCESSFUL_MESSAGE'));
-    setCheckoutStatusMessage(
-      t('SCREEN.BUY_FROM_SELLER.ORDER_SUCCESSFUL_WITH_ID_MESSAGE', { 
-        order_id: data._id.toString() 
-      })
-    );
+  const onOrderComplete = (data:any) => {
+    logger.info('Order placed successfully:', data.message);
+    showAlert('Order placed successfully');
+    setCheckoutStatusMessage(t('SCREEN.BUY_FROM_SELLER.ORDER_SUCCESSFUL_MESSAGE'))
     setShowCheckoutStatus(true);
     setPickedItems([]);
     setReload(true);
@@ -153,7 +148,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
     setBuyerDescription("");
   }
 
-  const onPaymentError = (error: Error) => {
+  const onOrderError = (error: Error) => {
     logger.error("Error creating new order", error.message);
     setCheckoutStatusMessage(t('SCREEN.BUY_FROM_SELLER.ORDER_FAILED_MESSAGE'))
     setShowCheckoutStatus(true);
@@ -178,11 +173,11 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
     try {
       const newOrder = await createAndUpdateOrder(newOrderData, pickedItems);
       if (newOrder && newOrder._id) {
-        onPaymentComplete(newOrder)
+        onOrderComplete(newOrder)
         setPickedItems([]);
       }
     } catch (error:any) {
-      onPaymentError(error);
+      onOrderError(error);
     }
   }  
 

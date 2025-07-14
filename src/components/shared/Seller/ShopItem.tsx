@@ -12,7 +12,6 @@ import removeUrls from "@/utils/sanitize";
 import { getStockLevelOptions } from "@/utils/translate";
 import { AppContext } from "../../../../context/AppContextProvider";
 import logger from '../../../../logger.config.mjs';
-import { set } from "lodash";
 
 export default function OnlineShopping({ dbSeller }: { dbSeller: ISeller }) {
   const t = useTranslations();
@@ -474,8 +473,8 @@ export const ListItem: React.FC<{
 
   // Reset quantity when item changes
   useEffect(() => {
-      setQuantity(1);
-    }, [item]);
+    setQuantity(1);
+  }, [item]);
 
   const handlePicked = (itemId: string, price: number): void => {
     setPickedItems((prev) => {
