@@ -37,6 +37,7 @@ import {
 
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
+import axiosClient from "@/config/client";
 
 export default function BuyFromSellerForm({ params }: { params: { id: string } }) {
   const SUBHEADER = "font-bold mb-2";
@@ -44,7 +45,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const locale = useLocale();
   const sellerId = params.id; 
   
-  const { currentUser, autoLoginUser, showAlert } = useContext(AppContext);
+  const { currentUser, autoLoginUser, reload, setReload, showAlert } = useContext(AppContext);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
   const [sellerShopInfo, setSellerShopInfo] = useState<ISeller | null>(null);
@@ -55,6 +56,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  
   const [pickedItems, setPickedItems] = useState<PickedItems[]>([]);
   const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
   const [showCheckoutStatus, setShowCheckoutStatus] = useState(false);
@@ -122,25 +124,36 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
     getToggleData();
   }, []);
 
-   // Fetch seller items
   useEffect(() => {
-    const getSellerItems = async (seller_id: string) => {
+    const getSellerItems = async () => {
+      if (!sellerShopInfo) return;
+
       try {
-        const items = await fetchSellerItems(seller_id);
-        if (items) {
-          setDbSellerItems(items);
-        } else {
-          setDbSellerItems(null);
-        }
-      } catch (error) {
+        const items:SellerItem[] = await fetchSellerItems(sellerShopInfo.seller_id);
+        setDbSellerItems(items.map(item => ({ ...item })) || null);
         logger.error('Error fetching seller items data:', error);
+      } finally {
+        if (reload) setReload(false); // Only reset reload if it was triggered
       }
     };
-    
-    if (sellerShopInfo){
-      getSellerItems(sellerShopInfo.seller_id);
-    }
-  }, [sellerShopInfo]); 
+
+    getSellerItems();
+  }, [sellerShopInfo, reload]); 
+
+  const onPaymentComplete = (data:any) => {
+    logger.info('Payment completed successfully:', data.message);
+    showAlert('Payment completed successfully');
+    setPickedItems([]);
+    setReload(true);
+    setTotalAmount(0);
+    setBuyerDescription("");
+  }
+
+  const onPaymentError = (error: Error) => {
+    logger.error('Error completing payment:', error);
+    showAlert('Error completing payment: ' + error.message);
+    setReload(true);
+  }
 
   const checkoutOrder = async () => {
     if (!currentUser?.pi_uid) {
@@ -265,19 +278,18 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             header={t('SCREEN.SELLER_REGISTRATION.SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL')}
             open={false}>
             <div className="overflow-x-auto mb-7 mt-3 flex p-2 gap-x-5 w-full">
-              {dbSellerItems && dbSellerItems.length > 0 &&
-                dbSellerItems
-                  .map(item => (
-                    <ListItem
-                      key={item._id}
-                      item={item}
-                      pickedItems={pickedItems}
-                      setPickedItems={setPickedItems}
-                      refCallback={handleShopItemRef}
-                      totalAmount={totalAmount}
-                      setTotalAmount={setTotalAmount}
-                    />
-                  ))
+              {dbSellerItems && dbSellerItems.length > 0 && dbSellerItems
+                .map(item => (
+                  <ListItem
+                    key={item._id}
+                    item={item}
+                    pickedItems={pickedItems}
+                    setPickedItems={setPickedItems}
+                    refCallback={handleShopItemRef}
+                    totalAmount={totalAmount}
+                    setTotalAmount={setTotalAmount}
+                  />
+                ))
               }
 
             </div>
