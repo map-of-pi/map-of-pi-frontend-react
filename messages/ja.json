@@ -171,7 +171,6 @@
         }
       },
       "ORDER_SUCCESSFUL_MESSAGE": "注文が正常に完了しました",
-      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "注文が正常に完了しました。注文ID: {order_id}",
       "ORDER_FAILED_MESSAGE": "新しい注文に失敗しました"
     },
     "REVIEWS": {

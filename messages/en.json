@@ -171,7 +171,6 @@
         }
       },
       "ORDER_SUCCESSFUL_MESSAGE": "Order placed successfully",
-      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "Order placed successfully with ID: {order_id}",
       "ORDER_FAILED_MESSAGE": "Failed to place new order"
     },
     "REVIEWS": {

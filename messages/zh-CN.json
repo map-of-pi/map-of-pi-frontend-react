@@ -171,7 +171,6 @@
         }
       },
       "ORDER_SUCCESSFUL_MESSAGE": "订单提交成功",
-      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "订单提交成功，订单编号：{order_id}",
       "ORDER_FAILED_MESSAGE": "提交新订单失败"
     },
     "REVIEWS": {

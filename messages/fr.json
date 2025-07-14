@@ -171,7 +171,6 @@
         }
       },
       "ORDER_SUCCESSFUL_MESSAGE": "Commande passée avec succès",
-      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "Commande passée avec succès avec l’ID : {order_id}",
       "ORDER_FAILED_MESSAGE": "Échec de la passation de la nouvelle commande"
     },
     "REVIEWS": {

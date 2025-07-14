@@ -171,7 +171,6 @@
         }
       },
       "ORDER_SUCCESSFUL_MESSAGE": "Đặt hàng thành công",
-      "ORDER_SUCCESSFUL_WITH_ID_MESSAGE": "Đặt hàng thành công với mã đơn: {order_id}",
       "ORDER_FAILED_MESSAGE": "Không thể đặt đơn hàng mới"
     },
     "REVIEWS": {
