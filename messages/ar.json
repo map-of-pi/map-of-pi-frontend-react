@@ -169,7 +169,9 @@
           "PICK_LABEL": "إضافة",
           "UNPICK_LABEL": "إزالة"
         }
-      } 
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "تم تقديم الطلب بنجاح",
+      "ORDER_FAILED_MESSAGE": "فشل في تقديم الطلب الجديد"
     }, 
     "REVIEWS": { 
       "REVIEWS_HEADER": "التقييمات", 

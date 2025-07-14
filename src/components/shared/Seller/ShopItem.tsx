@@ -471,6 +471,11 @@ export const ListItem: React.FC<{
 
   const [quantity, setQuantity] = useState<number>(1)
 
+  // Reset quantity when item changes
+  useEffect(() => {
+    setQuantity(1);
+  }, [item]);
+
   const handlePicked = (itemId: string, price: number): void => {
     setPickedItems((prev) => {
       const existingItem = prev.find((item) => item.itemId === itemId);

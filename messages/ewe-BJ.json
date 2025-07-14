@@ -169,7 +169,9 @@
           "PICK_LABEL": "Tutu",
           "UNPICK_LABEL": "Dzi"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "Wòɖo ɖɔɖɔ laɖoɖo",
+      "ORDER_FAILED_MESSAGE": "Ɖe wòɖo ɖɔɖɔ laɖoɖo fofó me nyɛ"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Totoɖemewo",
