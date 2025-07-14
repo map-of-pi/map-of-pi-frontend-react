@@ -51,7 +51,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
   const [buyerDescription, setBuyerDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { currentUser, autoLoginUser } = useContext(AppContext);
+  const { currentUser, autoLoginUser, userMembership } = useContext(AppContext);
   const [pickedItems, setPickedItems] = useState<{ itemId: string; quantity: number }[]>([]);
   const [isOnlineShoppingEnabled, setOnlineShoppingEnabled] = useState(false);
 
@@ -191,7 +191,7 @@ export default function BuyFromSellerForm({ params }: { params: { id: string } }
             <h2 className="font-bold text-[18px] mb-2 flex items-center">
               {sellerShopInfo.name} 
               <MembershipIcon 
-                category='triple_gold' 
+                category={userMembership} 
                 className="ml-1"
                 styleComponent={{
                   display: "inline-block",
