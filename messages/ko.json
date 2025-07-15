@@ -169,7 +169,9 @@
           "PICK_LABEL": "추가",
           "UNPICK_LABEL": "제거"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "주문이 성공적으로 완료되었습니다",
+      "ORDER_FAILED_MESSAGE": "새 주문을 실패했습니다"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "리뷰",

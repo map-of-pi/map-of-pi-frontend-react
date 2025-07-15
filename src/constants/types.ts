@@ -123,6 +123,20 @@ export type SellerItem = {
   expired_by?: Date;
 };
 
+export type ShopItemData = {
+  _id: string;
+  seller_id: string;
+  name: string;
+  description?: string;
+  duration: number;
+  stock_level: StockLevelType;
+  image?: string;
+  price:  string;
+  created_at?: Date;
+  updated_at?: Date;
+  expired_by?: Date;
+};
+
 // ========================
 // REVIEW / FEEDBACK MODELS
 // ========================

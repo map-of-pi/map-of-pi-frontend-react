@@ -33,8 +33,8 @@ export default function MembershipPage() {
     const loadMembership = async () => {
       if (!currentUser?.pi_uid) return;
       try {
-        // const data = await fetchMembership(currentUser.pi_uid);
-        // setMembershipData(data);
+        const data = await fetchMembership(currentUser.pi_uid);
+        setMembershipData(data);
         setUserMembership(selectedMembership);
       } catch {
         showAlert("Could not load membership data");
