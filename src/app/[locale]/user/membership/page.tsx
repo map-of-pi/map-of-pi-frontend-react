@@ -60,7 +60,7 @@ export default function MembershipPage() {
   
     const paymentData: PaymentDataType = {
       amount: totalAmount,
-      memo: `Map of Payment for {selectedMembership} membership`,
+      memo: `Map of Payment for ${selectedMembership} membership`,
       metadata: { 
         payment_type: PaymentType.Membership,
         MembershipPayment: {

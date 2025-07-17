@@ -108,6 +108,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         if (res.status === 200) {
           setAuthToken(res.data?.token);
           setCurrentUser(res.data.user);
+          setUserMembership(res.data.membership_class);
           logger.info('User authenticated successfully.');
         } else {
           setCurrentUser(null);
@@ -132,7 +133,8 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
 
       if (res.status === 200) {
         logger.info('Auto-login successful.');
-        setCurrentUser(res.data);
+        setCurrentUser(res.data.user);
+        setUserMembership(res.data.membership_class);
       } else {
         logger.warn('Auto-login failed.');
         setCurrentUser(null);
