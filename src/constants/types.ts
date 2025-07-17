@@ -45,7 +45,7 @@ export type PartialUserSettings = Pick<IUserSettings, 'user_name' | 'email' | 'p
 // MEMBERSHIP MODELS
 // ========================
 type MembershipPaymentMetadataType = {
-  membership_id: string
+  membership_class: MembershipClassType
 };
 
 export interface IMembership {

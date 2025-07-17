@@ -40,7 +40,7 @@ interface IAppContextProps {
 const initialState: IAppContextProps = {
   currentUser: null,
   setCurrentUser: () => {},
-  userMembership: MembershipClassType.SINGLE,
+  userMembership: MembershipClassType.CASUAL,
   setUserMembership: () => {},
   registerUser: () => {},
   autoLoginUser: () => {},
@@ -66,7 +66,7 @@ interface AppContextProviderProps {
 const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const t = useTranslations();
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
-  const [userMembership, setUserMembership] = useState<MembershipClassType>(MembershipClassType.DOUBLE_GOLD);
+  const [userMembership, setUserMembership] = useState<MembershipClassType>(MembershipClassType.CASUAL);
   const [isSigningInUser, setIsSigningInUser] = useState(false);
   const [reload, setReload] = useState(false);
   const [isSaveLoading, setIsSaveLoading] = useState(false);

@@ -3,28 +3,24 @@
 import { useTranslations } from "next-intl";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../../../context/AppContextProvider";
-import { IMembership } from "@/constants/types"
-import { MembershipClassType, membershipOptions, membershipBuyOptions, MembershipBuyType } from "@/constants/membershipClassType"
-import { fetchMembership } from "@/services/membershipApi"
+import { IMembership, PaymentDataType, PaymentType } from "@/constants/types"
+import { MembershipClassType, MembershipOption, membershipBuyOptions, MembershipBuyType, dumyList } from "@/constants/membershipClassType"
+import { fetchMembership, fetchMembershipList } from "@/services/membershipApi"
 import { Button } from "@/components/shared/Forms/Buttons/Buttons";
 import { Input } from "@/components/shared/Forms/Inputs/Inputs";
 import MembershipIcon from '@/components/shared/membership/MembershipIcon';
+import { payWithPi } from "@/config/payment";
+import logger from "../../../../../logger.config.mjs"
 
 export default function MembershipPage() {
   const { currentUser, showAlert, userMembership, setUserMembership } = useContext(AppContext);
   const [membershipData, setMembershipData] = useState<IMembership | null>(null);
-  const [selectedMembership, setSelectedMembership] = useState<MembershipClassType>(
-    userMembership
-  );
+  const [membershipList, setMembershipList] = useState<MembershipOption[] | null>(dumyList);
+  const [selectedMembership, setSelectedMembership] = useState<MembershipClassType>(userMembership);
+  const [totalAmount, setTotalAmount] = useState<number>(0.00);
   const [loading, setLoading] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<MembershipBuyType>(MembershipBuyType.BUY);
-  const [showUpgradeSuccess, setShowUpgradeSuccess] = useState(false);
-  const [upgradedTier, setUpgradedTier] = useState<MembershipClassType | null>(null);
 
-  const getMembershipLabel = (tier: MembershipClassType | null) => {
-    const match = membershipOptions.find((opt) => opt.value === tier);
-    return match?.label || tier;
-  };
   const t = useTranslations();
   const HEADER = 'font-bold text-lg md:text-2xl';
   const SUBHEADER = 'font-bold mb-2';
@@ -33,16 +29,47 @@ export default function MembershipPage() {
     const loadMembership = async () => {
       if (!currentUser?.pi_uid) return;
       try {
+        const subList = await fetchMembershipList();
+        setMembershipList(subList);
+
         const data = await fetchMembership(currentUser.pi_uid);
         setMembershipData(data);
-        setUserMembership(selectedMembership);
+        setUserMembership(data? data?.membership_class: userMembership);
       } catch {
         showAlert("Could not load membership data");
       }
     };
     loadMembership();
-  }, [currentUser, selectedMembership]);
+  }, [currentUser]);
 
+  const onPaymentComplete = (data:any) => {
+    logger.info('Membership placed successfully:', data);
+    setMembershipData(data.membership);
+    setUserMembership(data.membership.membership_class);
+    showAlert('Membership placed successfully');
+  }
+  
+  const onPaymentError = (error: Error) => {
+    logger.error("Error paying for membership", error.message);
+    showAlert("Error paying for membership")
+  }
+  
+  const handleBuy = async () => {
+    if (!currentUser?.pi_uid) return showAlert('User not logged in for payment');
+    if (selectedMethod!==MembershipBuyType.BUY) return
+  
+    const paymentData: PaymentDataType = {
+      amount: totalAmount,
+      memo: `Map of Payment for {selectedMembership} membership`,
+      metadata: { 
+        payment_type: PaymentType.Membership,
+        MembershipPayment: {
+          membership_class: selectedMembership
+        }
+      },        
+    };
+    await payWithPi(paymentData, onPaymentComplete, onPaymentError);
+  } 
 
   return (
     <div className="w-full md:w-[500px] md:mx-auto p-4">
@@ -73,11 +100,11 @@ export default function MembershipPage() {
         <h2 className={SUBHEADER}>Pick membership or mappi to buy:</h2>
 
         <div className="">
-          {membershipOptions.map((option, index) => (
+          {membershipList && membershipList.length>0 && membershipList.map((option, index) => (
             <div
               key={index}
               className="mb-1 flex gap-2 pr-7 items-center cursor-pointer text-nowrap"
-              onClick={() => setSelectedMembership(option.value)}>
+              onClick={() => {setSelectedMembership(option.value); setTotalAmount(option.cost)} }>
               {                                       
                 selectedMembership === option.value ? (
                   // <IoCheckmark />
@@ -87,7 +114,7 @@ export default function MembershipPage() {
                   <div className="p-1 bg-yellow-400 rounded"></div>                  
                 )
               }
-              {option.label} 
+              {`${option.value} membership (${option.duration} weeks)`} 
               
               <MembershipIcon 
                 category={option.value} 
@@ -131,8 +158,6 @@ export default function MembershipPage() {
                 placeholder="Enter voucher code"
                 type="email"
                 name="email"
-                // value={formData.email ? formData.email : ''}
-                // onChange={handleChange}
               />
             </div>)
           }
@@ -142,13 +167,12 @@ export default function MembershipPage() {
       <div className="mb-5 mt-3 ml-auto w-min">
         <Button
           label={selectedMethod === MembershipBuyType.ADS ? "Watch" : "Buy"}
-          // disabled={!isSaveEnabled}
           styles={{
             color: '#ffc153',
             height: '40px',
             padding: '10px 15px',
           }}
-          // onClick={handleSave}
+          onClick={handleBuy}
         />
       </div>
 

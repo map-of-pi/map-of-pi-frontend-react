@@ -1,4 +1,5 @@
 export enum MembershipClassType {
+  CASUAL = "Casual",
   SINGLE = "Single",
   WHITE = "White",
   GREEN = "Green",
@@ -7,21 +8,59 @@ export enum MembershipClassType {
   TRIPLE_GOLD = "Triple Gold",
 }
 
+
 export interface MembershipOption {
-  value: MembershipClassType; // same as back-end
-  label: string;
+  value: MembershipClassType;
   cost: number;
+  duration: number | null; // in weeks
+  mappi_allowance: number;
 }
 
-export const membershipOptions: MembershipOption[] = [  
-  { value: MembershipClassType.SINGLE, label: "Single mappi (2 weeks)", cost: 0.2 },
-  { value: MembershipClassType.WHITE, label: "White membership", cost: 1 },
-  { value: MembershipClassType.GREEN, label: "Green membership (4 weeks)", cost: 1.5 },
-  { value: MembershipClassType.GOLD, label: "Gold membership (10 weeks)", cost: 5 },
-  { value: MembershipClassType.DOUBLE_GOLD, label: "Double gold membership (20 weeks)", cost: 10 },
-  { value: MembershipClassType.TRIPLE_GOLD, label: "Triple gold membership (50 weeks)", cost: 20 },
+export const dumyList: MembershipOption[] = [  
+  {
+    value: MembershipClassType.CASUAL,
+    mappi_allowance: 0,
+    cost: 0,
+    duration: null,
+  },
+  {
+    value: MembershipClassType.SINGLE,
+    mappi_allowance: 10,
+    cost: 0.2,
+    duration: 2,
+  },
+  {
+    value: MembershipClassType.WHITE,
+    mappi_allowance: 20,
+    cost: 1,
+    duration: 3,
+  },
+  {
+    value: MembershipClassType.GREEN,
+    mappi_allowance: 50,
+    cost: 1.5,
+    duration: 4,
+  },
+   {
+    value: MembershipClassType.GOLD,
+    mappi_allowance: 100,
+    cost: 5,
+    duration: 10,
+  },
+  {
+    value: MembershipClassType.DOUBLE_GOLD,
+    mappi_allowance: 200,
+    cost: 10,
+    duration: 20,
+  },
+  {
+    value: MembershipClassType.TRIPLE_GOLD,
+    mappi_allowance: 300,
+    cost: 20,
+    duration: 50,
+  }
+]
 
-];
 
 export enum MembershipBuyType {
   BUY = "buy",
