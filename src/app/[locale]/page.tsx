@@ -11,6 +11,7 @@ import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import SearchBar from '@/components/shared/SearchBar/SearchBar';
 import ConfirmDialog from '@/components/shared/confirm';
 import NotificationDialog from '@/components/shared/Notification/NotificationDialog';
+import { getNotifications } from '@/services/notificationApi';
 import { fetchSellers } from '@/services/sellerApi';
 import { fetchUserSettings } from '@/services/userSettingsApi';
 import { DeviceLocationType, IUserSettings } from '@/constants/types';
@@ -29,17 +30,14 @@ export default function Page({ params }: { params: { locale: string } }) {
   const mapRef = useRef<L.Map | null>(null);
 
   // State management with proper typing
-  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number } | null>(null);
   const [searchCenter, setSearchCenter] = useState<{ lat: number; lng: number } | null>(null);
-  const [findme, setFindme] = useState<DeviceLocationType>(DeviceLocationType.SearchCenter);
   const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
   const [zoomLevel, setZoomLevel] = useState(2);
-  const [locationError, setLocationError] = useState<string | null>(null);
-  const [searchBarValue, setSearchBarValue] = useState('');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [mapIsReady, setMapIsReady] = useState(false);
 
   const {
     isSigningInUser,
@@ -89,6 +87,37 @@ export default function Page({ params }: { params: { locale: string } }) {
 
     getUserSettingsData();
   }, [currentUser, reload]);
+
+  useEffect(() => {
+    // evaluate notification alert state
+    const checkUnclearedNotifications = async () => {
+      try {
+        if (!currentUser?.pi_uid) return;
+
+        const hasShownNotificationThisSession = sessionStorage.getItem('notificationShown');
+        if (hasShownNotificationThisSession === 'true') return; // Don't show again this session
+
+        const notifications = await getNotifications({
+          pi_uid: currentUser.pi_uid,
+          skip: 0,
+          limit: 0,
+          status: 'uncleared'
+        });
+        
+        if (notifications?.length > 0) {
+          setToggleNotification(true);
+          sessionStorage.setItem('notificationShown', 'true');
+        } else {
+          setToggleNotification(false);
+        }
+      } catch (error) {
+        logger.error('Error getting new notifications:', error);
+        setToggleNotification(false);
+      }
+    };
+
+    checkUnclearedNotifications();
+  }, [currentUser]);
 
   useEffect(() => {
     const resolveLocation = async () => {
@@ -148,6 +177,7 @@ export default function Page({ params }: { params: { locale: string } }) {
         searchQuery={searchQuery}
         isSearchClicked={isSearchClicked}
         searchResults={searchResults || []}
+        onMapReady={() => setMapIsReady(true)}
       />
       <SearchBar
         page={'default'}
@@ -207,7 +237,7 @@ export default function Page({ params }: { params: { locale: string } }) {
           />
         )}
       </div>
-      {toggleNotification && (
+      {toggleNotification && mapIsReady && (
         <NotificationDialog
           message={t('HOME.NEW_NOTIFICATIONS_MESSAGE')}
           onClose={() => setShowPopup(false)}
