@@ -1,23 +1,24 @@
 import axiosClient from "@/config/client";
+import { PickedItems } from "@/constants/types";
 import logger from '../../logger.config.mjs';
 
-// Create or Update an Order
-export const createOrUpdateOrder = async (orderData: any) => {
+// Create and update an Order
+export const createAndUpdateOrder = async (orderData: any, orderItems: PickedItems[]) => {
   try {
-    logger.info("Sending request to create or update order", { orderData });
-    const response = await axiosClient.post("/orders", orderData);
-    if (response.status === 201) {
-      logger.info(`Order processed successfully with Status ${response.status}`, {
+    logger.info("Sending request to create and update order", { orderData });
+    const response = await axiosClient.post("/orders", { orderData, orderItems });
+    if (response.status === 200) {
+      logger.info(`Order created and updated successfully with Status ${response.status}`, {
         data: response.data,
       });
       return response.data;
     } else {
-      logger.error(`Order processing failed with Status ${response.status}`);
+      logger.error(`Order creation and update failed with Status ${response.status}`);
       return null;
     }
   } catch (error) {
-    logger.error("Error processing order:", error);
-    throw new Error("Failed to create or update order. Please try again later.");
+    logger.error('Creating and updating order encountered an error:', error);
+    throw new Error('Failed to create and update order. Please try again later.');
   }
 };
 

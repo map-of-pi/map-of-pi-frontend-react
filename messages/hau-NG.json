@@ -169,7 +169,9 @@
           "PICK_LABEL": "Kara",
           "UNPICK_LABEL": "Cire"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "An yi oda cikin nasara",
+      "ORDER_FAILED_MESSAGE": "Gaza yin sabon oda"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Bita",
