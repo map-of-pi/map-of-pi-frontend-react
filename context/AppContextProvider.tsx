@@ -30,8 +30,6 @@ interface IAppContextProps {
   isSaveLoading: boolean;
   setIsSaveLoading: React.Dispatch<SetStateAction<boolean>>;
   adsSupported: boolean;
-  toggleNotification: boolean;
-  setToggleNotification: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const initialState: IAppContextProps = {
@@ -47,9 +45,7 @@ const initialState: IAppContextProps = {
   setReload: () => {},
   isSaveLoading: false,
   setIsSaveLoading: () => {},
-  adsSupported: false,
-  toggleNotification: false,
-  setToggleNotification: () => {},
+  adsSupported: false
 };
 
 export const AppContext = createContext<IAppContextProps>(initialState);
@@ -66,7 +62,6 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [isSaveLoading, setIsSaveLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const [adsSupported, setAdsSupported] = useState(false);
-  const [toggleNotification, setToggleNotification] = useState<boolean>(true);
 
   const showAlert = (message: string) => {
     setAlertMessage(message);
@@ -180,9 +175,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
         setAlertMessage, 
         isSaveLoading, 
         setIsSaveLoading, 
-        adsSupported,
-        toggleNotification,
-        setToggleNotification
+        adsSupported
       }}
     >
       {children}
