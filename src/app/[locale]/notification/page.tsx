@@ -17,6 +17,7 @@ export default function NotificationPage() {
   const [skip, setSkip] = useState(0);
   const [limit] = useState(10);
   const [isLoading, setLoading] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
 
   const container = useRef<HTMLDivElement[]>([]);
   const observer = useRef<IntersectionObserver | null>(null);
@@ -76,12 +77,14 @@ export default function NotificationPage() {
     } catch (error) {
       logger.error('Error fetching notifications:', error);
     } finally {
+      setHasFetched(true);
       setLoading(false);
     }
   };
 
   useEffect(() => {
     if (!currentUser?.pi_uid) return;
+
     setNotifications([]);
     setSkip(0);
     fetchNotifications();
@@ -135,7 +138,7 @@ export default function NotificationPage() {
 
       {/* Notifications */}
       <div>
-        {!isLoading && notifications.length === 0 ? (
+        {!isLoading && hasFetched && notifications.length === 0 ? (
           <h2 className="font-bold mb-2 text-center">
             {t('SCREEN.NOTIFICATIONS.NO_NOTIFICATIONS_SUBHEADER')}
           </h2>
