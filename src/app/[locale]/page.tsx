@@ -36,7 +36,6 @@ export default function Page({ params }: { params: { locale: string } }) {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSearchClicked, setSearchClicked] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [mapIsReady, setMapIsReady] = useState(false);
   const [showSearchCenterPopup, setSearchCenterPopup] = useState<boolean>(false);
   const [showNotificationPopup, setShowNotificationPopup] = useState<boolean>(false);
 
@@ -99,6 +98,8 @@ export default function Page({ params }: { params: { locale: string } }) {
           limit: 0,
           status: 'uncleared'
         });
+
+        console.log('Uncleared notifications response:', notifications);
         
         if (notifications?.length > 0) {
           setShowNotificationPopup(true);
@@ -113,10 +114,8 @@ export default function Page({ params }: { params: { locale: string } }) {
     };
 
     // Only proceed once currentUser is defined with a valid pi_uid
-    if (currentUser?.pi_uid) {
-      getUserSettingsData();
-      checkUnclearedNotifications();
-    }
+    getUserSettingsData();
+    checkUnclearedNotifications();
   }, [currentUser, reload]);
 
   useEffect(() => {
@@ -141,7 +140,7 @@ export default function Page({ params }: { params: { locale: string } }) {
       const loc = await userLocation(dbUserSettings);
       if (loc) {
         setSearchCenter({ lat: loc[0], lng: loc[1] });
-        logger.info('User location obtained successfully on button click:', {location});
+        logger.info('User location obtained successfully on button click:', {loc});
       } else {
         setSearchCenter(null);
       }
@@ -177,7 +176,6 @@ export default function Page({ params }: { params: { locale: string } }) {
         searchQuery={searchQuery}
         isSearchClicked={isSearchClicked}
         searchResults={searchResults || []}
-        onMapReady={() => setMapIsReady(true)}
       />
       <SearchBar
         page={'default'}
@@ -237,13 +235,13 @@ export default function Page({ params }: { params: { locale: string } }) {
           />
         )}
       </div>
-      
-      {showNotificationPopup && mapIsReady && (
+     
+      {showNotificationPopup &&  (
         <NotificationDialog
+          show={setShowNotificationPopup}
+          onClose={() => setShowNotificationPopup(false)}
           message={t('HOME.NEW_NOTIFICATIONS_MESSAGE')}
-          onClose={() => setSearchCenterPopup(false)}
           url={`/${locale}/notification`}
-          setToggleNotification={setShowNotificationPopup}
         />
       )}
     </>
