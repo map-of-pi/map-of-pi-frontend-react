@@ -19,6 +19,9 @@ import { resolveDate } from '@/utils/date';
 import { AppContext } from '../../../../../../context/AppContextProvider';
 import logger from '../../../../../../logger.config.mjs';
 
+
+
+
 function SellerReviews({
   params,
   searchParams,
@@ -37,6 +40,8 @@ function SellerReviews({
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const { currentUser, reload, setReload, autoLoginUser } = useContext(AppContext);
+  const userDefaultImage = currentUser?.userSettings?.image;
+
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchBarValue, setSearchBarValue] = useState('');
   const [toUser, setToUser] = useState('');
@@ -233,15 +238,14 @@ function SellerReviews({
                       <p>{review.time}</p>
                     </div>
                     <div className="flex gap-2 items-center">
-                      {review.image ? (
-                        <Image
-                          src={review.image}
-                          alt="emoji image"
-                          width={50}
-                          height={50}
-                          className="object-cover rounded-md"
-                        />
-                      ) : null}
+                     <Image
+                        src={review.image || userDefaultImage}
+                             alt="default review image"
+                               width={50}
+                                height={50}
+  className="object-cover rounded-md"
+/>
+
                       <p className="text-xl max-w-[50px]" title={review.reaction}>
                         {review.unicode}
                       </p>
@@ -282,19 +286,18 @@ function SellerReviews({
                     <p>{review.time}</p>
                   </div>
                   <div className="flex gap-2 items-center">
-                    {review.image ? (
-                      <Image
-                        src={review.image}
-                        alt="emoji image"
-                        width={50}
-                        height={50}
-                        className="object-cover rounded-md"
-                      />
-                    ) : null}
-                    <p className="text-xl max-w-[50px]" title={review.reaction}>
-                      {review.unicode}
-                    </p>
-                  </div>
+  <Image
+    src={review.image || userDefaultImage}
+    alt="review default image"
+    width={50}
+    height={50}
+    className="object-cover rounded-md"
+  />
+  <p className="text-xl max-w-[50px]" title={review.reaction}>
+    {review.unicode}
+  </p>
+</div>
+
                   <div className="flex justify-between items-center">
                     <Link href={`/${locale}/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
                       <OutlineBtn label={t('SHARED.REPLY')} />
