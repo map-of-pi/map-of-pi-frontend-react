@@ -22,6 +22,12 @@ export default function NotificationPage() {
   const container = useRef<HTMLDivElement[]>([]);
   const observer = useRef<IntersectionObserver | null>(null);
   const loadMoreObserver = useRef<IntersectionObserver | null>(null);
+  
+    const handleShopItemRef = (node: HTMLElement | null) => {
+      if (node && observer.current) {
+        observer.current.observe(node);
+      }
+    };
 
   const handleUpdateNotification = async (id: string) => {
     const prev = notifications.find((n) => n._id === id);
@@ -137,7 +143,7 @@ export default function NotificationPage() {
       </div>
 
       {/* Notifications */}
-      <div>
+      <div className="max-h-[600px] overflow-y-auto p-1 mb-7 mt-3">
         {!isLoading && hasFetched && notifications.length === 0 ? (
           <h2 className="font-bold mb-2 text-center">
             {t('SCREEN.NOTIFICATIONS.NO_NOTIFICATIONS_SUBHEADER')}
@@ -148,9 +154,7 @@ export default function NotificationPage() {
               key={notify._id}
               notification={notify}
               onToggleClear={handleUpdateNotification}
-              forwardedRef={(el) => {
-                if (el) container.current[index] = el;
-              }}
+              refCallback={handleShopItemRef} // Attach observer
             />
           ))
         )}

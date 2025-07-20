@@ -9,13 +9,13 @@ import { NotificationType } from '@/constants/types';
 type NotificationCardProps = {
   notification: NotificationType;
   onToggleClear: (id: string) => void;
-  forwardedRef?: React.Ref<HTMLDivElement>; // optional for scroll observer
+  refCallback: (node: HTMLElement | null) => void;
 };
 
 export default function NotificationCard({
   notification,
   onToggleClear,
-  forwardedRef,
+  refCallback,
 }: NotificationCardProps) {
   const t = useTranslations();
   const locale = useLocale();
@@ -31,7 +31,7 @@ export default function NotificationCard({
 
   return (
     <div
-      ref={forwardedRef}
+      ref={refCallback}
       className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7
         transition-all duration-150 ease-in-out transform
         ${notification.is_cleared ? 'bg-yellow-100' : ''}
