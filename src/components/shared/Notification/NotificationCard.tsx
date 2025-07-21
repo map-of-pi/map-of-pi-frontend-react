@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { Input } from '@/components/shared/Forms/Inputs/Inputs';
 import { NotificationType } from '@/constants/types';
+// import logger from '../../../../logger.config.mjs';
 
 type NotificationCardProps = {
   notification: NotificationType;
@@ -20,6 +21,8 @@ export default function NotificationCard({
   const t = useTranslations();
   const locale = useLocale();
 
+  // logger.info("notification", notification);
+
   const formattedDate = new Intl.DateTimeFormat(locale || 'en-US', {
     day: '2-digit',
     month: 'long',
@@ -32,6 +35,7 @@ export default function NotificationCard({
   return (
     <div
       ref={refCallback}
+      data-id={notification._id}
       className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7
         transition-all duration-150 ease-in-out transform
         ${notification.is_cleared ? 'bg-yellow-100' : ''}
