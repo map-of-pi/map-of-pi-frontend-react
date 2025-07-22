@@ -1,5 +1,5 @@
 'use client';
-
+import { fetchUserSettings } from '@/services/userSettingsApi';
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -39,6 +39,7 @@ function SellerReviews({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [userFallbackImage, setUserFallbackImage] = useState<string | null>(null);
   const { currentUser, reload, setReload, autoLoginUser } = useContext(AppContext);
   const userDefaultImage = currentUser?.userSettings?.image;
 
@@ -109,10 +110,24 @@ function SellerReviews({
     }
   };
 
-  useEffect(() => {
-    checkAndAutoLoginUser(currentUser, autoLoginUser);
-    fetchUserReviews(userId);
-  }, [userId, currentUser]);
+ useEffect(() => {
+  checkAndAutoLoginUser(currentUser, autoLoginUser);
+  fetchUserReviews(userId);
+
+  const loadUserImage = async () => {
+    try {
+      const settings = await fetchUserSettings();
+      if (settings?.image) {
+        setUserFallbackImage(settings.image);
+      }
+    } catch (error) {
+      logger.warn('Could not fetch fallback user image.', error);
+    }
+  };
+
+  loadUserImage();
+}, [userId, currentUser]);
+
 
   // Handle search logic
   const handleSearch = async () => {
@@ -238,14 +253,13 @@ function SellerReviews({
                       <p>{review.time}</p>
                     </div>
                     <div className="flex gap-2 items-center">
-                     <Image
-                        src={review.image || userDefaultImage}
-                             alt="default review image"
-                               width={50}
-                                height={50}
-  className="object-cover rounded-md"
-/>
-
+                <Image
+                   src={review.image || userFallbackImage}
+                     alt="review image"
+                     width={50}
+                     height={50}
+                      className="object-cover rounded-md"
+                          />
                       <p className="text-xl max-w-[50px]" title={review.reaction}>
                         {review.unicode}
                       </p>
@@ -286,18 +300,17 @@ function SellerReviews({
                     <p>{review.time}</p>
                   </div>
                   <div className="flex gap-2 items-center">
-  <Image
-    src={review.image || userDefaultImage}
-    alt="review default image"
-    width={50}
-    height={50}
-    className="object-cover rounded-md"
-  />
-  <p className="text-xl max-w-[50px]" title={review.reaction}>
-    {review.unicode}
-  </p>
-</div>
-
+                  <Image
+                      src={review.image || userFallbackImage}
+                       alt="review image"
+                         width={50}
+                          height={50}
+                           className="object-cover rounded-md"
+                             />
+                       <p className="text-xl max-w-[50px]" title={review.reaction}>
+                       {review.unicode}
+                         </p>
+                       </div>
                   <div className="flex justify-between items-center">
                     <Link href={`/${locale}/seller/reviews/feedback/${review.reviewId}?seller_name=${review.giver}`}>
                       <OutlineBtn label={t('SHARED.REPLY')} />
