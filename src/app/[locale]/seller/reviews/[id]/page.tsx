@@ -180,6 +180,11 @@ function SellerReviews({
     logger.info('Loading seller reviews..');
     return <Skeleton type='seller_review' />;
   }
+  const getImageSrc = (img?: string | null): string => {
+  if (!img) return ''; // ensures the src is never null
+  if (img.startsWith('http')) return img;
+  return `${process.env.NEXT_PUBLIC_BASE_URL}/${img}`;
+};
 
   return (
     <>
@@ -254,12 +259,12 @@ function SellerReviews({
                     </div>
                     <div className="flex gap-2 items-center">
                 <Image
-                   src={review.image || userFallbackImage}
-                     alt="review image"
+                  src={getImageSrc(review.image || userFallbackImage || '')}
+                   alt="review image"
                      width={50}
-                     height={50}
-                      className="object-cover rounded-md"
-                          />
+                      height={50}
+                     className="object-cover rounded-md"
+                      />
                       <p className="text-xl max-w-[50px]" title={review.reaction}>
                         {review.unicode}
                       </p>
@@ -300,13 +305,13 @@ function SellerReviews({
                     <p>{review.time}</p>
                   </div>
                   <div className="flex gap-2 items-center">
-                  <Image
-                      src={review.image || userFallbackImage}
-                       alt="review image"
-                         width={50}
-                          height={50}
-                           className="object-cover rounded-md"
-                             />
+                <Image
+                  src={getImageSrc(review.image || userFallbackImage || '')}
+                  alt="review image"
+                   width={50}
+                      height={50}
+                      className="object-cover rounded-md"
+                         />
                        <p className="text-xl max-w-[50px]" title={review.reaction}>
                        {review.unicode}
                          </p>
