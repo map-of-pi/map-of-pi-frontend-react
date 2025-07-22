@@ -41,7 +41,7 @@ function SellerReviews({
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [userFallbackImage, setUserFallbackImage] = useState<string | null>(null);
   const { currentUser, reload, setReload, autoLoginUser } = useContext(AppContext);
-  const userDefaultImage = currentUser?.userSettings?.image;
+  
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchBarValue, setSearchBarValue] = useState('');
