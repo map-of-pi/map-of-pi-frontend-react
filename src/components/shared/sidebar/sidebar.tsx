@@ -420,7 +420,7 @@ function Sidebar(props: any) {
           <div className="mb-2">
             <Link href={`/${locale}/notification`}>
               <Button
-                label={t('Notification')}
+                label={t('View Notifications')} // Stay consistent with 'View Orders'; TODO - Apply language translation
                 styles={{
                   color: '#ffc153',
                   width: '100%',

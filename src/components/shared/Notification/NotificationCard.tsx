@@ -5,7 +5,6 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Button } from '@/components/shared/Forms/Buttons/Buttons';
 import { Input } from '@/components/shared/Forms/Inputs/Inputs';
 import { NotificationType } from '@/constants/types';
-// import logger from '../../../../logger.config.mjs';
 
 type NotificationCardProps = {
   notification: NotificationType;
@@ -20,8 +19,6 @@ export default function NotificationCard({
 }: NotificationCardProps) {
   const t = useTranslations();
   const locale = useLocale();
-
-  // logger.info("notification", notification);
 
   const formattedDate = new Intl.DateTimeFormat(locale || 'en-US', {
     day: '2-digit',

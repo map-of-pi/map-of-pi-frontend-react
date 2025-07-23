@@ -19,18 +19,18 @@ export default function NotificationPage() {
   const [limit] = useState(5);
   const [isLoading, setLoading] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const observer = useRef<IntersectionObserver | null>(null);
   const loadMoreObserver = useRef<IntersectionObserver | null>(null);
-  const [hasMore, setHasMore] = useState(true);
   
-    const handleShopItemRef = (node: HTMLElement | null) => {
-      if (node && observer.current) {
-        observer.current.observe(node);
-      }
-    };
+  const handleShopItemRef = (node: HTMLElement | null) => {
+    if (node && observer.current) {
+      observer.current.observe(node);
+    }
+  };
 
   const handleUpdateNotification = async (id: string) => {
     const prev = notifications.find((n) => n._id === id);
@@ -68,7 +68,6 @@ export default function NotificationPage() {
   const fetchNotifications = async () => {
     if (isLoading || !currentUser?.pi_uid || !hasMore) return;
 
-    // setLoading(true);
     try {
       const newNotifications = await getNotifications({
         pi_uid: currentUser.pi_uid,
@@ -140,8 +139,6 @@ export default function NotificationPage() {
       }
     };
   }, [currentUser?.pi_uid, hasMore, notifications]);
-
-
 
   return (
     <div className="w-full md:w-[500px] md:mx-auto p-4">
