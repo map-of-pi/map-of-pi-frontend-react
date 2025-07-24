@@ -1,5 +1,6 @@
 // Can be imported from a shared config
 export const locales = [
+  'ak-TW',
   'ar', 
   'en', 
   'en-GB', 
