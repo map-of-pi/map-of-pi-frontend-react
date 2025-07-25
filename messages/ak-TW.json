@@ -3,6 +3,7 @@
     "ADD_SELLER": "Tɔn",
     "SEARCH_CENTER_DEFAULT_MESSAGE": "Wo Hwehwɛ Fie no wɔ default nhyehyɛe [0, 0] so. Sɛ wopɛ sɛ wunya ɔsom pa, mesrɛ, sesa w’ Hwehwɛ Fie beaeɛ.",
     "SEARCH_BAR_PLACEHOLDER": "Hwehwɛ atɔnfoɔ anaa adeɛ",
+    "NEW_NOTIFICATIONS_MESSAGE": "Wowɔ nsɛm foforɔ",
     "LOCATION_SERVICES": {
       "ENABLE_LOCATION_SERVICES_MESSAGE": "Sɛ wopɛ sɛ wode saa nsɛm yi di dwuma a, bue wo location service wɔ wo fon no nhyehyɛe mu.",
       "DISABLED_LOCATION_SERVICES_MESSAGE": "Location service no abɔ mu. Mesrɛ, bue wo fon location nhyehyɛe."
@@ -14,6 +15,7 @@
     }
   },
   "SIDE_NAVIGATION": {
+    "VIEW_ORDERS_LABEL": "Hwɛ nkɔmhyɛ",
     "USER_PREFERENCES_HEADER": "Abapɔw a ɛfa ɔdefo ho",
     "PERSONALIZATION_SUBHEADER": "Nwoma a ɛbɛyɛ wo dea",
     "LANGUAGES": "Kasa",
@@ -57,7 +59,8 @@
         "SELLER_TYPE_OPTIONS": {
           "ACTIVE_SELLER": "Atɔnfoɔ a ɔyɛ adwuma",
           "INACTIVE_SELLER": "Atɔnfoɔ a wagyae adwuma",
-          "TEST_SELLER": "Nsɔhwɛ Atɔnfoɔ"
+          "TEST_SELLER": "Nsɔhwɛ Atɔnfoɔ",
+          "RESTRICTED_SELLER": "Dwadifo a wɔakyiw no"
         }
       },
       "SELLER_ADVANCED_SETTINGS_LABEL": "Atɔnfoɔ Ntotoho Kɛse",
@@ -66,7 +69,8 @@
       "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "Me map marker kyerɛ beaeɛ a meyɛ adwuma no",
       "SELLER_SETTINGS_LABEL": "Atɔnfoɔ Ntotoho",
       "SELLER_SELL_CENTER": "Siesie beaeɛ a wopɛ sɛ wotɔn no",
-      "SELLER_ONLINE_SHOPPING_LABEL": "Ɛdan mu Tɔre",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Intanɛt Tɔguare | Kyerɛw adeɛ a woretɔn",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Intanɛt Tɔguare | Hyɛdeɛ Didi So",
       "MAPPI_ALLOWANCE_LABEL": "Mappi kwan a aka",
       "FULFILLMENT_METHOD_TYPE": {
         "FULFILLMENT_METHOD_TYPE_LABEL": "Sɛnea ɔtɔfo bɛnya adeɛ no",
@@ -75,8 +79,9 @@
           "DELIVERED_TO_BUYER": "Wode bɛbrɛ ɔtɔfo no"
         }
       },
-      "FULFILLMENT_INSTRUCTIONS_LABEL": "Ahyɛdeɛ kyerɛ ɔtɔfo no",
-      "FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Ɔtɔfo bɛba afi atɔnfoɔ fie. Sɛ wopaw sɛ wopɛ sɛ wɔde brɛ ɔtɔfo no a, kyerɛ ɔtɔfo fie adresɛ.",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Dwadifo ahyɛdeɛ akyerɛtɛ buyer no",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Wobetumi agye adeɛ no fi dwadifo fie. Sɛ wɔpaw sɛ wɔbɛsom no a, kyerɛ buyer no fie adiresɛ.",
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Buyer ahyɛdeɛ nsɛm a ɛsɛ sɛ dwadifo hu",
       "VALIDATION": {
         "EMAIL_VALIDATION": "Mesrɛ, kyerɛ email adresɛ a ɛyɛ nokware",
         "SUCCESSFUL_REGISTRATION_SUBMISSION": "Wɔakɔm din mu yiye",
@@ -111,8 +116,34 @@
           "ONGOING_SERVICE": "Wɔreyɛ no da biara",
           "SOLD": "Wɔatɔn no"
         },
-        "SELLING_EXPIRATION_DATE": "Tɔn ansa na ɛsi {expired_by_date}"
+        "SELLING_EXPIRATION_DATE": "Tɔn ansa na ɛsi {expired_by_date}",
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Wontumi mmua tɔn bere no so sen nnawɔtwe {spent_weeks} a wɔde atɔ dada"
+        }
       }
+    },
+    "SELLER_ORDER_FULFILLMENT": {
+      "ORDER_LIST_HEADER": "Hyɛdeɛ Nohoɔ",
+      "VIEW_ORDER_HEADER": "Hwɛ Hyɛdeɛ No",
+      "SELLER_ORDER_FULFILLMENT_HEADER": "Dwadifo Hyɛdeɛ Didi So",
+      "ORDER_SUBHEADER": "Hyɛdeɛ Ti",
+      "ORDERED_ITEMS_SUBHEADER": "Adea a wɔahyɛ no",
+      "ORDER_HEADER_ITEMS_FEATURE": {
+    	"SELLER_LABEL": "Dwadifo",
+    	"TOTAL_PRICE_LABEL": "Totɔ Boɔ",
+    	"TIME_OF_ORDER_LABEL": "Bere a wɔyɛɛ hyɛdeɛ no",
+    	"STATUS_LABEL": "Hyɛmu"
+      },
+      "STATUS_TYPE": {
+    	"INITIALIZED": "Ahyɛ ase",
+    	"PENDING": "Retwɛn so",
+    	"COMPLETED": "Awieeɛ",
+    	"CANCELED": "Atwa mu",
+    	"REFUNDED": "Wɔasan de sika no ama",
+    	"FULFILLED": "Wɔadi so"
+      },
+      "ORDER_COMPLETED_LABEL": "Hyɛdeɛ No Awie",
+      "ORDER_DISPATCHED_COLLECTED_LABEL": "Hyɛdeɛ No Asoma/Agye"
     },
     "BUY_FROM_SELLER": {
       "BUY_FROM_SELLER_HEADER": "Tɔ Firi Ɔtɔnni Hɔ",
@@ -126,7 +157,6 @@
       "REVIEWS_SCORE_MESSAGE": "Nsɛm Nka Ho: {seller_review_rating} fi 5.0 mu",
       "SELLER_CONTACT_DETAILS_LABEL": "Ɔtɔnni Nkyerɛkyerɛ Fa N'Ho",
       "SELLER_USERNAME_LABEL": "Din a ɔde hyɛ mu",
-      "SELLER_PIONEER_ID_LABEL": "Pioneer ID",
       "SELLER_PHONE_NUMBER_LABEL": "Fon nɔma",
       "SELLER_EMAIL_ADDRESS_LABEL": "Email adrɛs",
       "ONLINE_SHOPPING": {
@@ -139,7 +169,9 @@
           "PICK_LABEL": "Paw",
           "UNPICK_LABEL": "Twa Ho"
         }
-      }
+      },
+      "ORDER_SUCCESSFUL_MESSAGE": "Wɔahyɛ hyɛdeɛ no yiye",
+      "ORDER_FAILED_MESSAGE": "Wɔnntumi anhyɛ hyɛdeɛ foforɔ no"
     },
     "REVIEWS": {
       "REVIEWS_HEADER": "Nsɛnkɔm",
@@ -169,6 +201,18 @@
       "VALIDATION": {
         "LOADING_REVIEW_FAILURE": "Eyi yɛ mfomso wɔ nsɛnkɔm no mu",
         "SELF_REVIEW_NOT_POSSIBLE": "Wɔnntumi nyɛ nsɛnkɔm ho nhwehwɛmu"
+      }
+    },
+    "NOTIFICATIONS": {
+      "NOTIFICATIONS_HEADER": "Nsɛm a wɔde brɛ wo",
+      "NO_NOTIFICATIONS_SUBHEADER": "Wo nni nsɛm biara deɛ ɛbɛto wo so",
+      "NOTIFICATION_SECTION": {
+        "NOTIFICATION_LABEL": "Nsɛm no",
+        "NOTIFICATION_TIME_LABEL": "Bere a wɔde brɛɛ wo",
+        "NOTIFICATION_STATUS": {
+          "READ": "Pepa",
+          "UNREAD": "Nnpepam"
+        }
       }
     }
   },
@@ -242,15 +286,23 @@
   },
   "SHARED": {
     "PIONEER_LABEL": "Pioneer",
+    "PIONEER_ID_LABEL": "Pioneer ahyɛnsodeɛ",
     "BUY": "Tɔ",
+    "RESET": "San hyɛ bio",
+    "REFUND": "San sika no",
+    "FULFILL": "Di dwuma no so",
+    "FULFILLED": "Wɔadi dwuma no so",
+    "PENDING": "Retwɛn so",
     "NAVIGATE": "Kɔ",
     "NO_COMMENT": "Nkomentɛn bi nni hɔ",
     "SEARCH_CENTER": "Seti Search Center",
     "CHECK_REVIEWS": "Hwɛ Reviews",
     "SEARCH_REVIEWS": "Hwehwɛ Reviews",
     "SEARCH_LOADING": "Search rehyɛ...",
+    "VIEW_NOTIFICATIONS": "Hwɛ nsɛm no",
     "REPLY": "Ka",
     "ADD_ITEM": "Ka Item",
+    "CHECKOUT": "Tua ka",
     "DELETE": "Popa",
     "CONFIRM_DELETE": "Wopɛ sɛ wopopa saa item yi? Saa nsɛm no rentumi mfa.",
     "SAVE": "Sie",
@@ -293,7 +345,8 @@
     "MAP_CENTER": {
       "SEARCH_BAR_PLACEHOLDER": "Hwehwɛ bea, kurom, anaa adress",
       "VALIDATION": {
-        "MAP_CENTER_SUCCESS_MESSAGE": "Wo center no atɔ so yie"
+        "MAP_CENTER_SUCCESS_MESSAGE": "Wo center no atɔ so yie",
+        "SELL_CENTER_SANCTIONED_MESSAGE": "Beae a wopawɛ no te sɛ ɛwɔ ɛkuo a wɔakyiw no mu. Sɛ ɛyɛ nokware a, w’aguadum nsɛntitiriw no betumi ayɛ sɛ wɔbɛyi no afi map no so."
       }
     },
     "LOADING_SCREEN_MESSAGE": "Rehyɛ ...",
