@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import NotificationCard from '@/components/shared/Notification/NotificationCard';
 import Skeleton from '@/components/skeleton/skeleton';
 import { NotificationType } from '@/constants/types';
+import { useScrollablePagination } from '@/hooks/useScrollablePagination';
 import { getNotifications, updateNotification } from '@/services/notificationApi';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
@@ -21,10 +22,8 @@ export default function NotificationPage() {
   const [hasFetched, setHasFetched] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const observer = useRef<IntersectionObserver | null>(null);
-  const loadMoreObserver = useRef<IntersectionObserver | null>(null);
   
   const handleShopItemRef = (node: HTMLElement | null) => {
     if (node && observer.current) {
@@ -102,44 +101,17 @@ export default function NotificationPage() {
     fetchNotifications();
   }, [currentUser?.pi_uid]);
 
-  useEffect(() => {
-    if (!currentUser?.pi_uid || !hasMore) return;
-
-    if (loadMoreObserver.current) {
-      loadMoreObserver.current.disconnect();
-    }
-
-    loadMoreObserver.current = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting && !isLoading && hasMore) {
-          setLoading(true);
-          if (debounceTimer.current) clearTimeout(debounceTimer.current);
-
-          debounceTimer.current = setTimeout(() => {
-            fetchNotifications();
-          }, 1000); // ⏱️ 1s delay before triggering fetch
-        }
-      },
-      {
-        root: scrollContainerRef.current, // ✅ use actual DOM ref
-        rootMargin: '0px',
-        threshold: 1.0,
-      }
-    );
-
-    const currentRef = loadMoreRef.current;
-    if (currentRef) {
-      loadMoreObserver.current.observe(currentRef);
-    }
-
-    return () => {
-      if (loadMoreObserver.current && currentRef) {
-        loadMoreObserver.current.unobserve(currentRef);
-      }
-    };
-  }, [currentUser?.pi_uid, hasMore, notifications]);
-
+  useScrollablePagination({
+    containerRef: scrollContainerRef,
+    loadMoreRef,
+    fetchNextPage: async () => {
+      setLoading(true);
+      await fetchNotifications();
+    },
+    hasMore,
+    isLoading,
+  });
+  
   return (
     <div className="w-full md:w-[500px] md:mx-auto p-4">
       <div className="text-center mb-7">
