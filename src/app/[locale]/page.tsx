@@ -238,7 +238,7 @@ export default function Page({ params }: { params: { locale: string } }) {
      
       {showNotificationPopup &&  (
         <NotificationDialog
-          show={setShowNotificationPopup}
+          setShowDialog={setShowNotificationPopup}
           onClose={() => setShowNotificationPopup(false)}
           message={t('HOME.NEW_NOTIFICATIONS_MESSAGE')}
           url={`/${locale}/notification`}

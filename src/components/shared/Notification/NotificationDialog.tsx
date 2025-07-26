@@ -3,18 +3,18 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { IoMdClose } from 'react-icons/io';
 
-function NotificationDialog({ show, onClose, message, url } : any) {
+function NotificationDialog({ setShowDialog, onClose, message, url } : any) {
   const t = useTranslations();
   const router = useRouter();
 
   const handleClicked = () => {
     router.push(url);
-    show(false);
+    setShowDialog(false);
   }
 
   const handleClose = () => {
-    onClose;
-    show(false);
+    onClose?.();
+    setShowDialog(false);
   }
  
   return (
