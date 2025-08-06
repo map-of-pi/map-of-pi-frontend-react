@@ -87,6 +87,85 @@
     }
   },
   "SCREEN": {
+    "SELLER_REGISTRATION": {
+      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Buyer fulfillment details",
+      "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
+      "EMAIL_LABEL": "Email address",
+      "FULFILLMENT_METHOD_TYPE": {
+        "FULFILLMENT_METHOD_TYPE_LABEL": "Fulfillment method",
+        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
+          "COLLECTION_BY_BUYER": "Collection by buyer",
+          "DELIVERED_TO_BUYER": "Delivered to buyer"
+        }
+      },
+      "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
+      "PHONE_NUMBER_LABEL": "Phone number",
+      "REVIEWS_SCORE_LABEL": "Reviews Score",
+      "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
+      "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
+      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
+      "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
+      "SELLER_DETAILS_LABEL": "Seller Details",
+      "SELLER_DETAILS_PLACEHOLDER": "I sell via Pay with Pi.",
+      "SELLER_ITEMS_FEATURE": {
+        "DESCRIPTION_LABEL": "Description",
+        "ITEM_LABEL": "Item",
+        "PHOTO": "Photo",
+        "PRICE_LABEL": "Price",
+        "SELLING_DURATION_LABEL": "Selling duration in weeks",
+        "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}",
+        "SELLING_STATUS_OPTIONS": {
+          "ACTIVE": "Active",
+          "EXPIRED": "Expired"
+        },
+        "STOCK_LABEL": "Stock level",
+        "STOCK_LEVEL_OPTIONS": {
+          "AVAILABLE_1": "1 available",
+          "AVAILABLE_2": "2 available",
+          "AVAILABLE_3": "3 available",
+          "MADE_TO_ORDER": "Made to order",
+          "MANY": "Many available",
+          "ONGOING_SERVICE": "Ongoing service",
+          "SOLD": "Sold"
+        },
+        "VALIDATION": {
+          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Selling duration cannot be reduced below the {spent_weeks} weeks already spent"
+        }
+      },
+      "SELLER_NAME": "Seller Name",
+      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Online Shopping | List Items for Sale",
+      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Online Shopping | Order Fulfillment",
+      "SELLER_REGISTRATION_HEADER": "Seller Administration",
+      "SELLER_RESTRICTION_MESSAGE": "Your Sell Center is in a region sanctioned by Pi Network so your map marker will be hidden to all users",
+      "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
+      "SELLER_SELL_CENTER": "Set Sell Center",
+      "SELLER_SETTINGS_LABEL": "Seller Settings",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Seller fulfillment instructions to buyer",
+      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
+      "SELLER_TYPE": {
+        "SELLER_TYPE_LABEL": "Seller type",
+        "SELLER_TYPE_OPTIONS": {
+          "ACTIVE_SELLER": "Active seller",
+          "INACTIVE_SELLER": "Inactive seller",
+          "RESTRICTED_SELLER": "Restricted seller",
+          "TEST_SELLER": "Test seller"
+        }
+      },
+      "VALIDATION": {
+        "EMAIL_VALIDATION": "Please enter a valid email address",
+        "FAILED_REGISTRATION_SUBMISSION": "Error saving registration",
+        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Save unsuccessful. Insufficient Mappi allowance available",
+        "FAILED_SELLER_ITEM_DELETE": "Error deleting seller item",
+        "FAILED_SELLER_ITEM_SAVE": "Error saving seller item",
+        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated",
+        "SELLER_ITEM_NOT_FOUND": "Seller item not found",
+        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",
+        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Save successful. Mappi allowance used {mappi_count}",
+        "SUCCESSFUL_SELLER_ITEM_DELETED": "Seller item deleted successfully",
+        "SUCCESSFUL_SELLER_ITEM_SAVED": "Seller item saved successfully",
+        "UNINITIALIZED_SELL_CENTER": "Please set your Sell Center"
+      }
+    },
     "BUY_FROM_SELLER": {
       "ADDITIONAL_COMMENTS_PLACEHOLDER": "Enter additional comments here",
       "BUY_FROM_SELLER_HEADER": "Buy from Seller",
@@ -177,85 +256,6 @@
         "REFUNDED": "Refunded"
       },
       "VIEW_ORDER_HEADER": "View Order"
-    },
-    "SELLER_REGISTRATION": {
-      "BUYER_TO_SELLER_FULFILLMENT_DETAILS_LABEL": "Buyer fulfillment details",
-      "CONTACT_PUBLIC_NOTE": "Email address and phone number will be publicly visible.",
-      "EMAIL_LABEL": "Email address",
-      "FULFILLMENT_METHOD_TYPE": {
-        "FULFILLMENT_METHOD_TYPE_LABEL": "Fulfillment method",
-        "FULFILLMENT_METHOD_TYPE_OPTIONS": {
-          "COLLECTION_BY_BUYER": "Collection by buyer",
-          "DELIVERED_TO_BUYER": "Delivered to buyer"
-        }
-      },
-      "MAPPI_ALLOWANCE_LABEL": "Mappi allowance remaining",
-      "PHONE_NUMBER_LABEL": "Phone number",
-      "REVIEWS_SCORE_LABEL": "Reviews Score",
-      "REVIEWS_SUMMARY_LABEL": "Reviews Summary",
-      "SELLER_ADDRESS_LOCATION_LABEL": "Address or where selling",
-      "SELLER_ADDRESS_LOCATION_PLACEHOLDER": "My map marker shows where I am selling",
-      "SELLER_ADVANCED_SETTINGS_LABEL": "Advanced Seller Settings",
-      "SELLER_DETAILS_LABEL": "Seller Details",
-      "SELLER_DETAILS_PLACEHOLDER": "I sell via Pay with Pi.",
-      "SELLER_ITEMS_FEATURE": {
-        "DESCRIPTION_LABEL": "Description",
-        "ITEM_LABEL": "Item",
-        "PHOTO": "Photo",
-        "PRICE_LABEL": "Price",
-        "SELLING_DURATION_LABEL": "Selling duration in weeks",
-        "SELLING_EXPIRATION_DATE": "Sell by {expired_by_date}",
-        "SELLING_STATUS_OPTIONS": {
-          "ACTIVE": "Active",
-          "EXPIRED": "Expired"
-        },
-        "STOCK_LABEL": "Stock level",
-        "STOCK_LEVEL_OPTIONS": {
-          "AVAILABLE_1": "1 available",
-          "AVAILABLE_2": "2 available",
-          "AVAILABLE_3": "3 available",
-          "MADE_TO_ORDER": "Made to order",
-          "MANY": "Many available",
-          "ONGOING_SERVICE": "Ongoing service",
-          "SOLD": "Sold"
-        },
-        "VALIDATION": {
-          "REDUCED_DURATION_BELOW_SPENT_WEEKS": "Selling duration cannot be reduced below the {spent_weeks} weeks already spent"
-        }
-      },
-      "SELLER_NAME": "Seller Name",
-      "SELLER_ONLINE_SHOPPING_ITEMS_LIST_LABEL": "Online Shopping | List Items for Sale",
-      "SELLER_ONLINE_SHOPPING_ORDER_FULFILLMENT_LABEL": "Online Shopping | Order Fulfillment",
-      "SELLER_REGISTRATION_HEADER": "Seller Administration",
-      "SELLER_RESTRICTION_MESSAGE": "Your Sell Centre is in a region sanctioned by Pi Network so your map marker will be hidden to all users",
-      "SELLER_RETAIL_OUTLET_NAME": "Retail outlet name",
-      "SELLER_SELL_CENTER": "Set Sell Center",
-      "SELLER_SETTINGS_LABEL": "Seller Settings",
-      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_LABEL": "Seller fulfillment instructions to buyer",
-      "SELLER_TO_BUYER_FULFILLMENT_INSTRUCTIONS_PLACEHOLDER": "Collection is from the seller's address. If delivery is selected, please enter the buyer's address.",
-      "SELLER_TYPE": {
-        "SELLER_TYPE_LABEL": "Seller type",
-        "SELLER_TYPE_OPTIONS": {
-          "ACTIVE_SELLER": "Active seller",
-          "INACTIVE_SELLER": "Inactive seller",
-          "RESTRICTED_SELLER": "Restricted seller",
-          "TEST_SELLER": "Test seller"
-        }
-      },
-      "VALIDATION": {
-        "EMAIL_VALIDATION": "Please enter a valid email address",
-        "FAILED_REGISTRATION_SUBMISSION": "Error saving registration",
-        "FAILED_SAVE_MAPPI_ALLOWANCE_INSUFFICIENT": "Save unsuccessful. Insufficient Mappi allowance available",
-        "FAILED_SELLER_ITEM_DELETE": "Error deleting seller item",
-        "FAILED_SELLER_ITEM_SAVE": "Error saving seller item",
-        "REGISTRATION_FAILED_USER_NOT_AUTHENTICATED": "Registration failed because user is not authenticated",
-        "SELLER_ITEM_NOT_FOUND": "Seller item not found",
-        "SUCCESSFUL_REGISTRATION_SUBMISSION": "Registration successful",
-        "SUCCESSFUL_SAVE_MAPPI_ALLOWANCE_SUFFICIENT": "Save successful. Mappi allowance used {mappi_count}",
-        "SUCCESSFUL_SELLER_ITEM_DELETED": "Seller item deleted successfully",
-        "SUCCESSFUL_SELLER_ITEM_SAVED": "Seller item saved successfully",
-        "UNINITIALIZED_SELL_CENTER": "Please set your Sell Center"
-      }
     }
   },
   "SHARED": {
