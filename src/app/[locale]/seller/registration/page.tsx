@@ -339,7 +339,7 @@ const SellerRegistrationForm = () => {
           </h1>
           <p className="text-gray-400 text-sm text-center">
             {dbSeller ? (
-              dbSeller.seller_type === SellerType.restrictedSeller ? (
+              dbSeller.isRestricted ? (
                 t('SCREEN.SELLER_REGISTRATION.SELLER_RESTRICTION_MESSAGE')
               ) : (
                 translateSellerCategory(dbSeller.seller_type, t)
