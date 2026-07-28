@@ -56,12 +56,14 @@
       "PICK_MEMBERSHIP_MAPPI_TO_BUY_LABEL": "Chọn tư cách thành viên hoặc Mappi để mua",
       "PICK_MEMBERSHIP_DURATION_IN_WEEKS_LABEL": "thành viên ({duration} tuần)",
       "PICK_BUY_METHOD_LABEL": "Chọn phương thức mua",
+      "NO_ACTIVE_MEMBERSHIP": "Bạn không có gói thành viên nào đang hoạt động",
       "PURCHASE_OPTIONS": {
-        "PAY_WITH_PI": "Thanh toán bằng π",
+        "PAY_WITH_PI": "Thanh toán bằng Pi",
         "WATCH_ADS": "Xem quảng cáo (miễn phí)",
         "USE_VOUCHER": "Sử dụng mã voucher (miễn phí)"
       },
       "ENTER_VOUCHER_CODE_PLACEHOLDER": "Nhập mã voucher",
+      "PICK_FROM_AVAILABLE_VOUCHERS": "Chọn từ các voucher có sẵn",
       "VALIDATION": {
         "SUCCESSFUL_MEMBERSHIP_ACTIVATION_MESSAGE": "Kích hoạt hội viên thành công",
         "FAILED_LOAD_MEMBERSHIP_MESSAGE": "Không tải được dữ liệu hội viên",
@@ -130,6 +132,8 @@
         "DESCRIPTION_LABEL": "Mô tả",
         "PHOTO": "Ảnh",
         "SELLING_DURATION_LABEL": "Thời gian bán hàng (tính theo tuần)",
+        "MAPPI_COST_PREVIEW": "Việc này sẽ tốn {mappi_count} Mappi",
+        "MAPPI_REFUND_PREVIEW": "Bạn sẽ được hoàn lại {mappi_count} Mappi",
         "SELLING_STATUS_OPTIONS": {
           "ACTIVE": "Đang hoạt động",
           "EXPIRED": "Đã hết hạn"
@@ -145,7 +149,8 @@
         },
         "SELLING_EXPIRATION_DATE": "Bán trước {expired_by_date}",
         "VALIDATION": {
-          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "Thời gian bán không thể giảm xuống dưới {remaining_weeks} tuần"
+          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "Thời gian bán không thể giảm xuống dưới {remaining_weeks} tuần",
+          "DURATION_MINIMUM": "Thời gian đăng bán phải ít nhất là 1 tuần"
         }
       }
     },
@@ -170,6 +175,10 @@
         "FULFILLED": "Đơn hàng đã được xử lý"
       },
       "ORDER_COMPLETED_LABEL": "Đơn hàng hoàn thành",
+      "BUYER_WALLET_ADDRESS_LABEL": "Địa chỉ ví của người mua",
+      "BUYER_WALLET_ADDRESS_NOT_PROVIDED_MESSAGE": "Liên hệ người nhận để yêu cầu địa chỉ ví.",
+      "BUYER_WALLET_ADDRESS_COPY_LABEL": "Nhấn để sao chép",
+      "BUYER_WALLET_ADDRESS_COPIED_LABEL": "Đã sao chép",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Đơn hàng đã gửi/đã nhận"
     },
     "BUY_FROM_SELLER": {
@@ -209,7 +218,15 @@
       "REVIEWS_RECEIVED_SECTION_HEADER": "Đánh giá nhận được của Pioneer này",
       "VALIDATION": {
         "NO_REVIEWS_FOUND": "Không tìm thấy đánh giá cho Pioneer {search_value}",
-        "NO_PIONEER_FOUND": "Không tìm thấy Pioneer {search_value}"
+        "NO_PIONEER_FOUND": "Không tìm thấy Pioneer {search_value}",
+        "TRUST_PROTECT_ACTIVATION_SUCCESSFUL": "Trust Protect đã được kích hoạt thành công.",
+        "TRUST_PROTECT_INVALID_REVIEW_ID": "Không tìm thấy review này. Vui lòng làm mới màn hình và thử lại.",
+        "TRUST_PROTECT_REVIEW_NOT_FOUND": "Không tìm thấy review này. Review này có thể đã bị xóa hoặc thay đổi.",
+        "TRUST_PROTECT_FORBIDDEN_RECEIVER_ONLY": "Chỉ Pioneer đã nhận review này mới có thể sử dụng Trust Protect.",
+        "TRUST_PROTECT_ALREADY_APPLIED": "Trust Protect đã được áp dụng cho review này.",
+        "TRUST_PROTECT_REVIEW_NOT_DESPAIR": "Trust Protect chỉ có thể được sử dụng cho các review có rating [DESPAIR].",
+        "TRUST_PROTECT_INSUFFICIENT_MAPPI": "Mỗi lần sử dụng Trust Protect sẽ tiêu tốn 100 Mappi. Hãy sử dụng màn hình Membership để tăng số dư Mappi của bạn.",
+        "TRUST_PROTECT_ACTIVATION_FAILED": "Không thể kích hoạt Trust Protect."
       }
     },
     "EDIT_REVIEW": {
@@ -341,6 +358,7 @@
     "COPY": "Sao chép",
     "ADD_ITEM": "Thêm mục",
     "CHECKOUT": "Thanh toán",
+    "REDEEM": "Đổi",
     "DELETE": "Xóa",
     "CONFIRM_DELETE": "Bạn có thực sự muốn xóa mục này không? Hành động này không thể hoàn tác.",
     "SAVE": "Lưu",

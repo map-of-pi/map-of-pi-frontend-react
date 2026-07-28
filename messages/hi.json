@@ -56,12 +56,14 @@
       "PICK_MEMBERSHIP_MAPPI_TO_BUY_LABEL": "सदस्यता या Mappi खरीदें चुनें",
       "PICK_MEMBERSHIP_DURATION_IN_WEEKS_LABEL": "सदस्यता ({duration} सप्ताह)",
       "PICK_BUY_METHOD_LABEL": "खरीदने की विधि चुनें",
+      "NO_ACTIVE_MEMBERSHIP": "आपके पास कोई सक्रिय सदस्यता नहीं है",
       "PURCHASE_OPTIONS": {
-        "PAY_WITH_PI": "π के साथ भुगतान करें",
+        "PAY_WITH_PI": "Pi के साथ भुगतान करें",
         "WATCH_ADS": "विज्ञापन देखें (फ्री)",
         "USE_VOUCHER": "वाउचर कोड का उपयोग करें (फ्री)"
       },
       "ENTER_VOUCHER_CODE_PLACEHOLDER": "वाउचर कोड दर्ज करें",
+      "PICK_FROM_AVAILABLE_VOUCHERS": "उपलब्ध वाउचर में से चुनें",
       "VALIDATION": {
         "SUCCESSFUL_MEMBERSHIP_ACTIVATION_MESSAGE": "सदस्यता सफलतापूर्वक सक्रिय कर दी गई है",
         "FAILED_LOAD_MEMBERSHIP_MESSAGE": "सदस्यता डेटा लोड करने में विफल",
@@ -130,6 +132,8 @@
         "DESCRIPTION_LABEL": "विवरण",
         "PHOTO": "फ़ोटो",
         "SELLING_DURATION_LABEL": "हफ्तों में बिक्री की अवधि",
+        "MAPPI_COST_PREVIEW": "इसके लिए {mappi_count} Mappi खर्च होंगे",
+        "MAPPI_REFUND_PREVIEW": "आपको {mappi_count} Mappi वापस मिलेंगे",
         "SELLING_STATUS_OPTIONS": {
           "ACTIVE": "सक्रिय", 
           "EXPIRED": "समाप्त हो गया"
@@ -145,7 +149,8 @@
         },
         "SELLING_EXPIRATION_DATE": "द्वारा बेचें {expired_by_date}",
         "VALIDATION": {
-          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "बिक्री की अवधि {remaining_weeks} सप्ताह से कम नहीं की जा सकती"
+          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "बिक्री की अवधि {remaining_weeks} सप्ताह से कम नहीं की जा सकती",
+          "DURATION_MINIMUM": "लिस्टिंग की अवधि कम से कम 1 सप्ताह होनी चाहिए"
         }
       }
     },
@@ -170,6 +175,10 @@
         "FULFILLED": "पूर्ण"
       },
       "ORDER_COMPLETED_LABEL": "आदेश पूरा हुआ",
+      "BUYER_WALLET_ADDRESS_LABEL": "खरीदार का wallet address",
+      "BUYER_WALLET_ADDRESS_NOT_PROVIDED_MESSAGE": "wallet address प्राप्त करने के लिए प्राप्तकर्ता से संपर्क करें।",
+      "BUYER_WALLET_ADDRESS_COPY_LABEL": "कॉपी करने के लिए टैप करें",
+      "BUYER_WALLET_ADDRESS_COPIED_LABEL": "कॉपी हो गया",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "आदेश भेजा गया/संग्रहित"
     },
     "BUY_FROM_SELLER": {
@@ -209,7 +218,15 @@
       "REVIEWS_RECEIVED_SECTION_HEADER": "इस अग्रणी द्वारा प्राप्त समीक्षाएं",
       "VALIDATION": {
         "NO_REVIEWS_FOUND": "पायनियर के लिए कोई समीक्षा नहीं मिली {search_value}",
-        "NO_PIONEER_FOUND": "अग्रणी {search_value} नहीं मिला"  
+        "NO_PIONEER_FOUND": "अग्रणी {search_value} नहीं मिला",
+        "TRUST_PROTECT_ACTIVATION_SUCCESSFUL": "Trust Protect सफलतापूर्वक सक्रिय किया गया।",
+        "TRUST_PROTECT_INVALID_REVIEW_ID": "यह review नहीं मिला। कृपया स्क्रीन को रीफ़्रेश करें और पुनः प्रयास करें।",
+        "TRUST_PROTECT_REVIEW_NOT_FOUND": "यह review नहीं मिला। हो सकता है कि इसे हटा दिया गया हो या इसमें बदलाव किया गया हो।",
+        "TRUST_PROTECT_FORBIDDEN_RECEIVER_ONLY": "केवल वही Pioneer जिसने यह review प्राप्त किया है, Trust Protect का उपयोग कर सकता है।",
+        "TRUST_PROTECT_ALREADY_APPLIED": "इस review पर Trust Protect पहले ही लागू किया जा चुका है।",
+        "TRUST_PROTECT_REVIEW_NOT_DESPAIR": "Trust Protect का उपयोग केवल उन review पर किया जा सकता है जिनकी rating [DESPAIR] है।",
+        "TRUST_PROTECT_INSUFFICIENT_MAPPI": "Trust Protect का प्रत्येक उपयोग 100 Mappi खर्च करता है। अपना Mappi बैलेंस बढ़ाने के लिए Membership स्क्रीन का उपयोग करें।",
+        "TRUST_PROTECT_ACTIVATION_FAILED": "Trust Protect सक्रिय नहीं किया जा सका।"
       }
     },
     "EDIT_REVIEW": {
@@ -341,6 +358,7 @@
     "COPY": "कॉपी",
     "ADD_ITEM": "आइटम जोड़ें",
     "CHECKOUT": "भुगतान-स्थल",
+    "REDEEM": "रिडीम करें",
     "DELETE": "मिटाएं",
     "CONFIRM_DELETE": "क्या आप वास्तव में इस आइटम को हटाना चाहते हैं? इस क्रिया को पूर्ववत नहीं किया जा सकता है।",
     "SAVE": "बचाओ",

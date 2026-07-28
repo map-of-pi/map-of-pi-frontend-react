@@ -56,12 +56,14 @@
       "PICK_MEMBERSHIP_MAPPI_TO_BUY_LABEL": "Choisissez l’adhésion ou Mappi à acheter",
       "PICK_MEMBERSHIP_DURATION_IN_WEEKS_LABEL": "adhésion ({duration} semaines)",
       "PICK_BUY_METHOD_LABEL": "Choisissez la méthode d’achat",
+      "NO_ACTIVE_MEMBERSHIP": "Vous n'avez aucun abonnement actif",
       "PURCHASE_OPTIONS": {
-        "PAY_WITH_PI": "Payer avec π",
+        "PAY_WITH_PI": "Payer avec Pi",
         "WATCH_ADS": "Regarder les publicités (gratuit)",
         "USE_VOUCHER": "Utiliser un code voucher (gratuit)"
       },
       "ENTER_VOUCHER_CODE_PLACEHOLDER": "Entrez le code du bon",
+      "PICK_FROM_AVAILABLE_VOUCHERS": "Choisissez parmi les bons disponibles",
       "VALIDATION": {
         "SUCCESSFUL_MEMBERSHIP_ACTIVATION_MESSAGE": "Adhésion activée avec succès",
         "FAILED_LOAD_MEMBERSHIP_MESSAGE": "Échec du chargement des données d’adhésion",
@@ -130,6 +132,8 @@
         "DESCRIPTION_LABEL": "Description",
         "PHOTO": "Photo",
         "SELLING_DURATION_LABEL": "Durée de vente en semaines",
+        "MAPPI_COST_PREVIEW": "{mappi_count} Mappi seront facturés",
+        "MAPPI_REFUND_PREVIEW": "{mappi_count} Mappi seront remboursés",
         "SELLING_STATUS_OPTIONS": {
           "ACTIVE": "Actif",
           "EXPIRED": "Expiré"
@@ -145,7 +149,8 @@
         },
         "SELLING_EXPIRATION_DATE": "À vendre avant le {expired_by_date}",
         "VALIDATION": {
-          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "La durée de vente ne peut pas être réduite en dessous de {remaining_weeks} semaines"
+          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "La durée de vente ne peut pas être réduite en dessous de {remaining_weeks} semaines",
+          "DURATION_MINIMUM": "La durée de l'annonce doit être d'au moins 1 semaine"
         }
       }
     },
@@ -170,6 +175,10 @@
         "FULFILLED": "Exécuté"
       },
       "ORDER_COMPLETED_LABEL": "Commande terminée",
+      "BUYER_WALLET_ADDRESS_LABEL": "Adresse du portefeuille de l'acheteur",
+      "BUYER_WALLET_ADDRESS_NOT_PROVIDED_MESSAGE": "Contactez le destinataire pour demander l'adresse du portefeuille.",
+      "BUYER_WALLET_ADDRESS_COPY_LABEL": "Appuyez pour copier",
+      "BUYER_WALLET_ADDRESS_COPIED_LABEL": "Copié",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Commande expédiée/collectée"
     },
     "BUY_FROM_SELLER": {
@@ -209,7 +218,15 @@
       "REVIEWS_RECEIVED_SECTION_HEADER": "Avis reçus par ce pionnier",
       "VALIDATION": {
         "NO_REVIEWS_FOUND": "Aucun avis trouvé pour le pionnier {search_value}",
-        "NO_PIONEER_FOUND": "Pionnier {search_value} non trouvé"
+        "NO_PIONEER_FOUND": "Pionnier {search_value} non trouvé",
+        "TRUST_PROTECT_ACTIVATION_SUCCESSFUL": "Trust Protect a été activé avec succès.",
+        "TRUST_PROTECT_INVALID_REVIEW_ID": "Cet avis est introuvable. Veuillez actualiser l'écran et réessayer.",
+        "TRUST_PROTECT_REVIEW_NOT_FOUND": "Cet avis est introuvable. Il a peut-être été supprimé ou modifié.",
+        "TRUST_PROTECT_FORBIDDEN_RECEIVER_ONLY": "Seul le Pioneer ayant reçu cet avis peut utiliser Trust Protect.",
+        "TRUST_PROTECT_ALREADY_APPLIED": "Trust Protect a déjà été appliqué à cet avis.",
+        "TRUST_PROTECT_REVIEW_NOT_DESPAIR": "Trust Protect ne peut être utilisé que pour les avis ayant une note [DESPAIR].",
+        "TRUST_PROTECT_INSUFFICIENT_MAPPI": "Chaque utilisation de Trust Protect consomme 100 Mappi. Utilisez l'écran Membership pour augmenter votre solde Mappi.",
+        "TRUST_PROTECT_ACTIVATION_FAILED": "Impossible d'activer Trust Protect."
       }
     },
     "EDIT_REVIEW": {
@@ -341,6 +358,7 @@
     "COPY": "Copier",
     "ADD_ITEM": "Ajouter un article",
     "CHECKOUT": "Paiement",
+    "REDEEM": "Utiliser",
     "DELETE": "Supprimer",
     "CONFIRM_DELETE": "Voulez-vous vraiment supprimer cet élément? Cette action est irréversible.",
     "SAVE": "Enregistrer",

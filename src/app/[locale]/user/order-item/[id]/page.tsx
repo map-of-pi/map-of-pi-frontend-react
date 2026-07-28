@@ -105,7 +105,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
                   value={currentOrder.total_amount.$numberDecimal || currentOrder.total_amount.$numberDecimal.toString()}
                   disabled={true}
                 />
-                <p className="text-gray-500 text-sm">π</p>
+                <p className="text-gray-500 text-sm">Pi</p>
               </div>
             </div>
           </div>
@@ -147,7 +147,8 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
       <div className="overflow-x-auto p-2 mb-5 mt-3 flex gap-x-5">
         {orderItems && orderItems.length>0 && orderItems.map((item, index)=>(<div
           data-id={item._id}
-          className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7 ${
+          className={`relative outline outline-50 outline-gray-600 rounded-lg mb-7
+          flex-shrink-0 w-[88%] sm:w-[85%] md:w-[70%] snap-start ${
             item.status === OrderItemStatus.Fulfilled || item.status === OrderItemStatus.Refunded? 
             'bg-yellow-100' : ''
           }`}
@@ -174,7 +175,7 @@ export default function ReviewOrderItemPage({ params, searchParams }: { params: 
                     value={item.subtotal.$numberDecimal || item.subtotal.$numberDecimal.toString()}
                     disabled={true}
                   />
-                  <p className="text-gray-500 text-sm">π</p>
+                  <p className="text-gray-500 text-sm">Pi</p>
                 </div>
               </div>
             </div>

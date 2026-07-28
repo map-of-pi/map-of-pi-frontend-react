@@ -56,12 +56,14 @@
       "PICK_MEMBERSHIP_MAPPI_TO_BUY_LABEL": "اختر العضوية أو Mappi للشراء",
       "PICK_MEMBERSHIP_DURATION_IN_WEEKS_LABEL": "العضوية ({duration} أسابيع)",
       "PICK_BUY_METHOD_LABEL": "اختر طريقة الشراء",
+      "NO_ACTIVE_MEMBERSHIP": "ليس لديك أي عضوية",
       "PURCHASE_OPTIONS": {
-        "PAY_WITH_PI": "الدفع بواسطة π",
+        "PAY_WITH_PI": "الدفع بواسطة Pi",
         "WATCH_ADS": "شاهد الإعلانات (مجاني)",
         "USE_VOUCHER": "استخدم رمز القسيمة (مجاني)"
       },
       "ENTER_VOUCHER_CODE_PLACEHOLDER": "أدخل رمز القسيمة",
+      "PICK_FROM_AVAILABLE_VOUCHERS": "اختر من القسائم المتاحة",
       "VALIDATION": {
         "SUCCESSFUL_MEMBERSHIP_ACTIVATION_MESSAGE": "تم تفعيل العضوية بنجاح",
         "FAILED_LOAD_MEMBERSHIP_MESSAGE": "فشل في تحميل بيانات العضوية",
@@ -130,6 +132,8 @@
         "DESCRIPTION_LABEL": "الوصف",
         "PHOTO": "الصورة",
         "SELLING_DURATION_LABEL": "مدة البيع بالأسابيع",
+        "MAPPI_COST_PREVIEW": "ستكون التكلفة {mappi_count} Mappi",
+        "MAPPI_REFUND_PREVIEW": "سيتم رد {mappi_count} Mappi",
         "SELLING_STATUS_OPTIONS": {
           "ACTIVE": "نشط",
           "EXPIRED": "منتهي الصلاحية"
@@ -145,7 +149,8 @@
         },
         "SELLING_EXPIRATION_DATE": "يباع بتاريخ صلاحية {expired_by_date}",
         "VALIDATION": {
-          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "لا يمكن تقليل مدة البيع إلى أقل من {remaining_weeks} أسابيع"
+          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "لا يمكن تقليل مدة البيع إلى أقل من {remaining_weeks} أسابيع",
+          "DURATION_MINIMUM": "يجب ألا تقل مدة الإدراج عن أسبوع واحد"
         }
       }
     },
@@ -170,6 +175,10 @@
         "FULFILLED": "تم التنفيذ"
       },
       "ORDER_COMPLETED_LABEL": "تم إكمال الطلب",
+      "BUYER_WALLET_ADDRESS_LABEL": "عنوان محفظة المشتري",
+      "BUYER_WALLET_ADDRESS_NOT_PROVIDED_MESSAGE": "تواصل مع المستلم لطلب عنوان المحفظة.",
+      "BUYER_WALLET_ADDRESS_COPY_LABEL": "اضغط للنسخ",
+      "BUYER_WALLET_ADDRESS_COPIED_LABEL": "تم النسخ",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "تم شحن/استلام الطلب"
     },
     "BUY_FROM_SELLER": {
@@ -209,7 +218,15 @@
       "REVIEWS_RECEIVED_SECTION_HEADER": "التقييمات التي تلقاها هذا المستخدم", 
       "VALIDATION": { 
         "NO_REVIEWS_FOUND": "لم يتم العثور على تقييمات للمستخدم {search_value}", 
-        "NO_PIONEER_FOUND": "لم يتم العثور على المستخدم {search_value}" 
+        "NO_PIONEER_FOUND": "لم يتم العثور على المستخدم {search_value}",
+        "TRUST_PROTECT_ACTIVATION_SUCCESSFUL": "تم تفعيل Trust Protect بنجاح",
+        "TRUST_PROTECT_INVALID_REVIEW_ID": "تعذر العثور على هذا التقييم. يرجى تحديث الشاشة والمحاولة مرة أخرى.",
+        "TRUST_PROTECT_REVIEW_NOT_FOUND": "تعذر العثور على هذا التقييم. ربما تمت إزالته أو تغييره.",
+        "TRUST_PROTECT_FORBIDDEN_RECEIVER_ONLY": "يمكن فقط لـ Pioneer الذي تلقى هذا التقييم استخدام Trust Protect.",
+        "TRUST_PROTECT_ALREADY_APPLIED": "تم تطبيق Trust Protect بالفعل على هذا التقييم.",
+        "TRUST_PROTECT_REVIEW_NOT_DESPAIR": "لا يمكن استخدام Trust Protect إلا مع التقييمات التي تحمل تصنيف [DESPAIR].",
+        "TRUST_PROTECT_INSUFFICIENT_MAPPI": "كل استخدام لميزة Trust Protect يستهلك 100 Mappi. استخدم شاشة Membership لزيادة رصيد Mappi الخاص بك.",
+        "TRUST_PROTECT_ACTIVATION_FAILED": "فشل في تفعيل Trust Protect."
       } 
     },
     "EDIT_REVIEW": {
@@ -341,6 +358,7 @@
     "COPY": "نسخ",
     "ADD_ITEM": "إضافة منتج",
     "CHECKOUT": "الدفع",
+    "REDEEM": "استرداد",
     "DELETE": "حذف",
     "CONFIRM_DELETE": "هل تريد حقًا حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.",
     "SAVE": "حفظ",

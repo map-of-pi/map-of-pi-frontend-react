@@ -1,19 +1,21 @@
 'use client';
 import { useTranslations, useLocale } from 'next-intl';
-import { useEffect, useContext, useState } from 'react';
-import EmojiPicker from '@/components/shared/Review/emojipicker';
-import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
-import Skeleton from '@/components/skeleton/skeleton';
+import { useContext, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { FormControl, TextField } from '@mui/material';
-import { fetchReviews } from '@/services/reviewsApi';
-import { fetchUserSettings } from '@/services/userSettingsApi';
-import { checkAndAutoLoginUser } from '@/utils/auth';
-import { AppContext } from '../../../../../../context/AppContextProvider';
-import { processReviews, useCursorInfiniteScroll } from '@/hooks/useInfiniteReviews';
+import EmojiPicker from '@/components/shared/Review/emojipicker';
 import { ReviewCard } from '@/components/shared/Review/ReviewCard';
+import ToggleCollapse from '@/components/shared/Seller/ToggleCollapse';
+import Skeleton from '@/components/skeleton/skeleton';
+import { isTrustProtectErrorCode } from '@/constants/errors';
 import { IReviewOutput, ReviewInt } from '@/constants/types';
+import {
+  processReviews,
+  useCursorInfiniteScroll,
+} from '@/hooks/useInfiniteReviews';
+import { fetchReviews, activateTrustProtect } from '@/services/reviewsApi';
 import logger from '../../../../../../logger.config.mjs';
+import { AppContext } from '../../../../../../context/AppContextProvider';
 
 interface SellerReviewsProps {
   params: { id: string };
@@ -23,28 +25,19 @@ interface SellerReviewsProps {
 function SellerReviews({ params, searchParams }: SellerReviewsProps) {
   const t = useTranslations();
   const locale = useLocale();
-  const { currentUser, authenticateUser } = useContext(AppContext);
+  const { currentUser, showAlert, refreshUserMembership } =
+    useContext(AppContext);
 
-  const [userFallbackImage, setUserFallbackImage] = useState<string | null>(null);
   const [searchInput, setSearchInput] = useState('');
   const [searchQuery, setSearchQuery] = useState<string>('');
-
   // Displayed user state — starts as the route owner
   const [toUser, setToUser] = useState(params.id);
   const [displayName, setDisplayName] = useState(searchParams.user_name ?? '');
 
   const [refreshKey, setRefreshKey] = useState(0);
 
-  useEffect(() => {
-    checkAndAutoLoginUser(currentUser, authenticateUser);
-
-    fetchUserSettings()
-      .then((settings) => { if (settings?.image) setUserFallbackImage(settings.image); })
-      .catch((err) => logger.warn('Could not fetch fallback user image', err));
-  }, [currentUser]);
-
   const triggerRefresh = () => {
-    setRefreshKey(prev => prev + 1);
+    setRefreshKey((prev) => prev + 1);
   };
 
   // ─── Search ──────────────────────────────────────────────────────────────────
@@ -66,7 +59,7 @@ function SellerReviews({ params, searchParams }: SellerReviewsProps) {
         toUser,
         searchQuery.trim() || undefined,
         cursor,
-        'given'
+        'given',
       );
 
       if (data?.resolvedUser) {
@@ -83,20 +76,50 @@ function SellerReviews({ params, searchParams }: SellerReviewsProps) {
     dependencies: [toUser, searchQuery, refreshKey],
   });
 
+  const handleTrustProtect = async (reviewId: string) => {
+    try {
+      await activateTrustProtect(reviewId);
+
+      refreshUserMembership().catch((membershipRefreshError) => {
+        logger.error(
+          'Failed to refresh membership after Trust Protect:',
+          membershipRefreshError,
+        );
+      });
+
+      showAlert(
+        t('SCREEN.REVIEWS.VALIDATION.TRUST_PROTECT_ACTIVATION_SUCCESSFUL'),);
+
+      triggerRefresh();
+    } catch (error: any) {
+      logger.error(
+        'Failed to activate Trust Protect:',
+        error?.response?.data || error,
+      );
+
+      const errorCode = error?.response?.data?.code;
+
+      showAlert(
+        isTrustProtectErrorCode(errorCode)
+          ? t(`SCREEN.REVIEWS.VALIDATION.${errorCode}`)
+          : t('SCREEN.REVIEWS.VALIDATION.TRUST_PROTECT_ACTIVATION_FAILED'),
+      );
+    }
+  };
+  
   const {
     items: receivedReviews,
     loading: loadingReceived,
     initialLoading: initialLoadingReceived,
     hasMore: hasMoreReceived,
     sentinelRef: receivedObserverRef,
-    reset: resetReceived,
   } = useCursorInfiniteScroll<IReviewOutput, ReviewInt>({
     fetchPage: async (cursor) => {
       const data = await fetchReviews(
         toUser,
         searchQuery.trim() || undefined,
         cursor,
-        'received'
+        'received',
       );
 
       if (data?.resolvedUser) {
@@ -114,7 +137,8 @@ function SellerReviews({ params, searchParams }: SellerReviewsProps) {
   });
 
   // ─── Render ──────────────────────────────────────────────────────────────────
-  if (initialLoadingReceived && initialLoadingGiven) return <Skeleton type="seller_review" />;
+  if (initialLoadingReceived && initialLoadingGiven)
+    return <Skeleton type="seller_review" />;
 
   return (
     <div className="px-4 py-[20px] text-[#333333] sm:max-w-[520px] w-full m-auto gap-5">
@@ -135,19 +159,25 @@ function SellerReviews({ params, searchParams }: SellerReviewsProps) {
             placeholder={displayName}
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') handleSearch(); }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSearch();
+            }}
             autoCorrect="off"
             autoCapitalize="off"
             autoComplete="off"
             spellCheck={false}
-            inputProps={{ autoCorrect: 'off', autoCapitalize: 'off', spellCheck: 'false', autoComplete: 'new-password' }}
+            inputProps={{
+              autoCorrect: 'off',
+              autoCapitalize: 'off',
+              spellCheck: 'false',
+              autoComplete: 'new-password',
+            }}
           />
         </FormControl>
         <button
           aria-label="search"
           onClick={handleSearch}
-          className="bg-primary rounded h-full w-15 p-[15.5px] flex items-center justify-center hover:bg-gray-600"
-        >
+          className="bg-primary rounded h-full w-15 p-[15.5px] flex items-center justify-center hover:bg-gray-600">
           <SearchIcon className="text-[#ffc153]" />
         </button>
       </div>
@@ -164,9 +194,17 @@ function SellerReviews({ params, searchParams }: SellerReviewsProps) {
 
       {/* Reviews Given */}
       <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_GIVEN_SECTION_HEADER')}>
-        {initialLoadingGiven ? <Skeleton type="seller_review" /> : givenReviews.map((review) => (
-          <ReviewCard key={review.reviewId} review={review} currentUserId={currentUser?.pi_uid} userFallbackImage={userFallbackImage} />
-        ))}
+        {initialLoadingGiven ? (
+          <Skeleton type="seller_review" />
+        ) : (
+          givenReviews.map((review) => (
+            <ReviewCard
+              key={review.reviewId}
+              review={review}
+              currentUserId={currentUser?.pi_uid}
+            />
+          ))
+        )}
 
         {hasMoreGiven && !loadingGiven && (
           <div ref={givenObserverRef} className="h-10" />
@@ -176,10 +214,21 @@ function SellerReviews({ params, searchParams }: SellerReviewsProps) {
       </ToggleCollapse>
 
       {/* Reviews Received */}
-      <ToggleCollapse header={t('SCREEN.REVIEWS.REVIEWS_RECEIVED_SECTION_HEADER')} open>
-        {initialLoadingReceived ? <Skeleton type="seller_review" /> : receivedReviews.map((review) => (
-          <ReviewCard key={review.reviewId} review={review} currentUserId={currentUser?.pi_uid} userFallbackImage={userFallbackImage} />
-        ))}
+      <ToggleCollapse
+        header={t('SCREEN.REVIEWS.REVIEWS_RECEIVED_SECTION_HEADER')}
+        open>
+        {initialLoadingReceived ? (
+          <Skeleton type="seller_review" />
+        ) : (
+          receivedReviews.map((review) => (
+            <ReviewCard
+              key={review.reviewId}
+              review={review}
+              currentUserId={currentUser?.pi_uid}
+              onTrustProtect={handleTrustProtect}
+            />
+          ))
+        )}
 
         {hasMoreReceived && !loadingReceived && (
           <div ref={receivedObserverRef} className="h-10" />

@@ -57,12 +57,14 @@
       "PICK_MEMBERSHIP_MAPPI_TO_BUY_LABEL": "Mitgliedschaft oder Mappi zum Kauf auswählen",
       "PICK_MEMBERSHIP_DURATION_IN_WEEKS_LABEL": "Mitgliedschaft ({duration} Wochen)",
       "PICK_BUY_METHOD_LABEL": "Kaufmethode auswählen",
+      "NO_ACTIVE_MEMBERSHIP": "Du hast keine aktive Mitgliedschaft",
       "PURCHASE_OPTIONS": {
-        "PAY_WITH_PI": "Mit π bezahlen",
+        "PAY_WITH_PI": "Mit Pi bezahlen",
         "WATCH_ADS": "Werbung ansehen (kostenlos)",
         "USE_VOUCHER": "Gutscheincode verwenden (kostenlos)"
       },
       "ENTER_VOUCHER_CODE_PLACEHOLDER": "Gutscheincode eingeben",
+      "PICK_FROM_AVAILABLE_VOUCHERS": "Wähle aus den verfügbaren Gutscheinen",
       "VALIDATION": {
         "SUCCESSFUL_MEMBERSHIP_ACTIVATION_MESSAGE": "Mitgliedschaft erfolgreich aktiviert",
         "FAILED_LOAD_MEMBERSHIP_MESSAGE": "Mitgliedsdaten konnten nicht geladen werden",
@@ -131,6 +133,8 @@
         "DESCRIPTION_LABEL": "Beschreibung",
         "PHOTO": "Foto",
         "SELLING_DURATION_LABEL": "Verkaufsdauer in Wochen",
+        "MAPPI_COST_PREVIEW": "Dies kostet {mappi_count} Mappi",
+        "MAPPI_REFUND_PREVIEW": "Dies erstattet {mappi_count} Mappi",
         "SELLING_STATUS_OPTIONS": {
           "ACTIVE": "Aktives Mitglied", 
           "EXPIRED": "Abgelaufen"
@@ -146,7 +150,8 @@
         },
         "SELLING_EXPIRATION_DATE": "Verkaufen von {expired_by_date}",
         "VALIDATION": {
-          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "Die Verkaufsdauer kann nicht auf weniger als {remaining_weeks} Wochen reduziert werden"
+          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "Die Verkaufsdauer kann nicht auf weniger als {remaining_weeks} Wochen reduziert werden",
+          "DURATION_MINIMUM": "Die Angebotsdauer muss mindestens 1 Woche betragen"
         }
       }
     },
@@ -171,6 +176,10 @@
         "FULFILLED": "Erfüllt"
       },
       "ORDER_COMPLETED_LABEL": "Bestellung abgeschlossen",
+      "BUYER_WALLET_ADDRESS_LABEL": "Wallet-Adresse des Käufers",
+      "BUYER_WALLET_ADDRESS_NOT_PROVIDED_MESSAGE": "Kontaktiere den Empfänger, um die Wallet-Adresse anzufordern.",
+      "BUYER_WALLET_ADDRESS_COPY_LABEL": "Zum Kopieren tippen",
+      "BUYER_WALLET_ADDRESS_COPIED_LABEL": "Kopiert",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Bestellung Versandt/Gesammelt"
     },
     "BUY_FROM_SELLER": {
@@ -210,7 +219,15 @@
       "REVIEWS_RECEIVED_SECTION_HEADER": "Bewertungen von diesem Pionier erhalten",
       "VALIDATION": {
         "NO_REVIEWS_FOUND": "Keine Bewertungen für Pionier gefunden {search_value}",
-        "NO_PIONEER_FOUND": "Pionier {search_value} Nicht gefunden"  
+        "NO_PIONEER_FOUND": "Pionier {search_value} Nicht gefunden",
+        "TRUST_PROTECT_ACTIVATION_SUCCESSFUL": "Trust Protect wurde erfolgreich aktiviert.",
+        "TRUST_PROTECT_INVALID_REVIEW_ID": "Diese Bewertung konnte nicht gefunden werden. Bitte aktualisieren Sie den Bildschirm und versuchen Sie es erneut.",
+        "TRUST_PROTECT_REVIEW_NOT_FOUND": "Diese Bewertung konnte nicht gefunden werden. Sie wurde möglicherweise entfernt oder geändert.",
+        "TRUST_PROTECT_FORBIDDEN_RECEIVER_ONLY": "Nur der Pioneer, der diese Bewertung erhalten hat, kann Trust Protect verwenden.",
+        "TRUST_PROTECT_ALREADY_APPLIED": "Trust Protect wurde bereits auf diese Bewertung angewendet.",
+        "TRUST_PROTECT_REVIEW_NOT_DESPAIR": "Trust Protect kann nur für Bewertungen mit der Bewertung [DESPAIR] verwendet werden.",
+        "TRUST_PROTECT_INSUFFICIENT_MAPPI": "Jede Nutzung von Trust Protect verbraucht 100 Mappi. Verwende den Membership-Bildschirm, um dein Mappi-Guthaben zu erhöhen.",
+        "TRUST_PROTECT_ACTIVATION_FAILED": "Trust Protect konnte nicht aktiviert werden."
       }
     },
     "EDIT_REVIEW": {
@@ -342,6 +359,7 @@
     "COPY": "Kopieren",
     "ADD_ITEM": "Artikel hinzufügen",
     "CHECKOUT": "Kasse",
+    "REDEEM": "Einlösen",
     "DELETE": "Löschen",
     "CONFIRM_DELETE": "Möchten Sie diesen Artikel wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
     "SAVE": "Sparen",

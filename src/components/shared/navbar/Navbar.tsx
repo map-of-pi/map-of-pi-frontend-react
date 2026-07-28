@@ -17,6 +17,7 @@ import MembershipIcon from '@/components/shared/membership/MembershipIcon';
 import Sidebar from '../sidebar/sidebar';
 import { AppContext } from '../../../../context/AppContextProvider';
 import logger from '../../../../logger.config.mjs';
+import { MembershipClassType } from '@/constants/types';
 
 function Navbar() {
   const router = useRouter();
@@ -71,7 +72,7 @@ function Navbar() {
             { headerLabel }
           </div>
           <div className="flex-1 flex justify-end">
-            <MembershipIcon category={userMembership} />
+            <MembershipIcon category={userMembership?.membership_class || MembershipClassType.CASUAL} />
           </div>
         </div>
 
@@ -134,7 +135,6 @@ function Navbar() {
                           bg-red-500
                           border-2
                           border-[var(--default-secondary-color)]
-                          animate-pulse
                         "
                       />
                     )}

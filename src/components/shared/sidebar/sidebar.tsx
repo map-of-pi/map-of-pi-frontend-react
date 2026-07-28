@@ -34,7 +34,7 @@ import {
   fetchUserSettings,
 } from '@/services/userSettingsApi';
 import { fetchToggle } from '@/services/toggleApi';
-import removeUrls from '@/utils/sanitize';
+import { removeUrls } from '@/utils/sanitize';
 import { getFindMeOptions } from '@/utils/translate';
 
 import { AppContext } from '../../../../context/AppContextProvider';
@@ -129,7 +129,8 @@ function Sidebar(props: any) {
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
   const [showTermsOfServiceModel, setShowTermsOfServiceModel] = useState(false);
-  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [isNameSaveEnabled, setIsNameSaveEnabled] = useState(false);
+  const [isPersonalisationSaveEnabled, setIsPersonalisationSaveEnabled] = useState(false);
   const [filterLoading, setFilterLoading] = useState({
     include_active_sellers: false,
     include_inactive_sellers: false,
@@ -218,7 +219,7 @@ function Sidebar(props: any) {
       setPreviewImage(objectUrl);
       logger.info('Image selected for upload:', { selectedFile });
 
-      setIsSaveEnabled(true);
+      setIsPersonalisationSaveEnabled(true);
     }
   };
 
@@ -269,25 +270,36 @@ function Sidebar(props: any) {
   };
 
   const handleChange = (
-    e:
-      | React.ChangeEvent<
-          HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-        >
-      | { name: string; value: string },
-  ) => {
-    // handle such scenarios where the event might not have the typical e.target structure i.e., PhoneInput.
-    const name = 'target' in e ? e.target.name : e.name;
-    const value = 'target' in e ? e.target.value : e.value;
+  e:
+    | React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    | { name: string; value: string },
+) => {
+  const name = 'target' in e ? e.target.name : e.name;
+  const value = 'target' in e ? e.target.value : e.value;
 
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-
-    // enable or disable save button based on form inputs
-    const isFormFilled = Object.values(formData).some((v) => v !== '');
-    setIsSaveEnabled(isFormFilled);
+  const nextFormData = {
+    ...formData,
+    [name]: value,
   };
+
+  setFormData(nextFormData);
+
+  if (name === 'user_name') {
+    setIsNameSaveEnabled(value !== (dbUserSettings?.user_name || ''));
+  }
+
+  if (name === 'wallet_address' || name === 'findme') {
+    const walletChanged =
+      (nextFormData.wallet_address || '') !== (dbUserSettings?.wallet_address || '');
+
+    const findMeChanged =
+      nextFormData.findme !== (dbUserSettings?.findme || getFindMeOptions(t)[0].value);
+
+    setIsPersonalisationSaveEnabled(walletChanged || findMeChanged || !!file);
+  }
+};
 
   const translateMenuTitle = (title: string): string => {
     switch (title) {
@@ -334,13 +346,7 @@ function Sidebar(props: any) {
     const formDataToSend = new FormData();
     formDataToSend.append('user_name', removeUrls(formData.user_name));
     formDataToSend.append('findme', formData.findme);
-
-    if (formData.wallet_address) {
-      formDataToSend.append(
-        'wallet_address',
-        removeUrls(formData.wallet_address),
-      );
-    }
+    formDataToSend.append('wallet_address', removeUrls(formData.wallet_address ?? ''));
     // add the image if it exists
     if (file) {
       formDataToSend.append('image', file);
@@ -357,7 +363,9 @@ function Sidebar(props: any) {
       const data = await createUserSettings(formDataToSend);
       if (data.settings) {
         setDbUserSettings(data.settings);
-        setIsSaveEnabled(false);
+        setIsNameSaveEnabled(false);
+        setIsPersonalisationSaveEnabled(false);
+        setFile(null);
         logger.info('User Settings saved successfully:', { data });
         showAlert(
           t('SIDE_NAVIGATION.VALIDATION.SUCCESSFUL_PREFERENCES_SUBMISSION'),
@@ -541,7 +549,7 @@ function Sidebar(props: any) {
 
             <Button
               label={t('SHARED.SAVE')}
-              disabled={!isSaveEnabled}
+              disabled={!isNameSaveEnabled}
               styles={{
                 color: '#ffc153',
                 height: '40px',
@@ -617,6 +625,7 @@ function Sidebar(props: any) {
                     label={t('SHARED.PHOTO.MISC_LABELS.USER_PREFERENCES_LABEL')}
                     imageUrl={previewImage}
                     handleAddImage={handleAddImage}
+                    height="h-[120px]"
                   />
                 </div>
                 <TextArea
@@ -717,6 +726,7 @@ function Sidebar(props: any) {
                 <div className="mb-3 mt-3">
                   <Button
                     label={t('SHARED.SAVE')}
+                    disabled={!isPersonalisationSaveEnabled}
                     styles={{
                       color: '#ffc153',
                       height: '40px',

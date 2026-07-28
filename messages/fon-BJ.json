@@ -56,12 +56,14 @@
       "PICK_MEMBERSHIP_MAPPI_TO_BUY_LABEL": "Wɛ lidantɔ alo Mappi tó nɔ hɔn",
       "PICK_MEMBERSHIP_DURATION_IN_WEEKS_LABEL": "lɛsinɔ ({duration} ɖon)",
       "PICK_BUY_METHOD_LABEL": "Wɛ hɔn ɖoɖo tɔn",
+      "NO_ACTIVE_MEMBERSHIP": "Àsìwá membasip tɔ́n mɛ̀ ɖe o",
       "PURCHASE_OPTIONS": {
-        "PAY_WITH_PI": "Sɔn π",
+        "PAY_WITH_PI": "Sɔn Pi",
         "WATCH_ADS": "Wɛ ads (free)",
         "USE_VOUCHER": "Wɛ voucher code (free)"
       },
       "ENTER_VOUCHER_CODE_PLACEHOLDER": "Sɔ voucher kódo",
+      "PICK_FROM_AVAILABLE_VOUCHERS": "Tia voucher lɛ́ si lɛ́",
       "VALIDATION": {
         "SUCCESSFUL_MEMBERSHIP_ACTIVATION_MESSAGE": "Mɛmbɛship gán hɛ̀ wá nù",
         "FAILED_LOAD_MEMBERSHIP_MESSAGE": "Mɛmbɛship dàtá hɛ̀ wá nù",
@@ -130,6 +132,8 @@
         "DESCRIPTION_LABEL": "Hɛnɔnɔn",
         "PHOTO": "Wɛnɔ kpɔ nɔn",
         "SELLING_DURATION_LABEL": "Hwenu ojle  è sà é ɖò aklunɔzángbe gbla mɛ lɛ",
+        "MAPPI_COST_PREVIEW": "Ènyí ná xó Mappi {mappi_count}",
+        "MAPPI_REFUND_PREVIEW": "A ná sɔ̀ Mappi {mappi_count} gbè na wò",
         "SELLING_STATUS_OPTIONS": {
           "ACTIVE": "É ɖò azɔ̌ wà wɛ",
           "EXPIRED": "Ojle lo Ko wá yì"
@@ -145,7 +149,8 @@
         },
         "SELLING_EXPIRATION_DATE": "Sa ɖo {expired_by_date} mɛ",
         "VALIDATION": {
-          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "A kpɔ ɖo xóxó ná wá nɔ́ ɖè {remaining_weeks} wékè wɛ̀ lɛ̀ ɖò"
+          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "A kpɔ ɖo xóxó ná wá nɔ́ ɖè {remaining_weeks} wékè wɛ̀ lɛ̀ ɖò",
+          "DURATION_MINIMUM": "Àsìwá xwéɖeɖe náà gbọ́dọ̀ jẹ́ ó kéré tán ọ̀sẹ̀ kan"
         }
       }
     },
@@ -170,6 +175,10 @@
         "FULFILLED": "Wɛ klu"
       },
       "ORDER_COMPLETED_LABEL": "Wɛgbɛ tɔn",
+      "BUYER_WALLET_ADDRESS_LABEL": "Asìwàtɔ wallet address",
+      "BUYER_WALLET_ADDRESS_NOT_PROVIDED_MESSAGE": "Kpɔ̀ amɛ̀ si ná xɔ̀ nɔ̀ náà bɛ̀ nà bìá wallet address tɔ̀n.",
+      "BUYER_WALLET_ADDRESS_COPY_LABEL": "Tɛ́ bɛ̀ nà kɔpí",
+      "BUYER_WALLET_ADDRESS_COPIED_LABEL": "Kɔpí",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Wɛgbɛ dɔ / tɔn hɔn"
     },
     "BUY_FROM_SELLER": {
@@ -209,7 +218,15 @@
       "REVIEWS_RECEIVED_SECTION_HEADER": "Xóɖɔɖókpɔ́ e nukɔntɔ́ élɔ́ yí é",
       "VALIDATION": {
         "NO_REVIEWS_FOUND": "Ɖo_Ɖɔ_Ɖɔ nu Pioneer {search_value}",
-        "NO_PIONEER_FOUND": "Mɔ_pionnier {search_value} a"
+        "NO_PIONEER_FOUND": "Mɔ_pionnier {search_value} a",
+        "TRUST_PROTECT_ACTIVATION_SUCCESSFUL": "Trust Protect wá xwla nyuie.",
+        "TRUST_PROTECT_INVALID_REVIEW_ID": "A ma nyi review enẹ o. Jọ̀wọ́, gbugbɔ screen náà bo gbìmọ̀ lẹ́ẹ̀kansi.",
+        "TRUST_PROTECT_REVIEW_NOT_FOUND": "A ma nyi review enẹ o. Ó ṣeé ṣe kí wọ́n yọ ọ tàbí kí wọ́n yí i padà.",
+        "TRUST_PROTECT_FORBIDDEN_RECEIVER_ONLY": "Pioneer kɛ́kɛ́ tɔn bɛ xɔ review enẹ wɛ̀ ko lɛ́ sɛ́ Trust Protect.",
+        "TRUST_PROTECT_ALREADY_APPLIED": "Trust Protect wá zã ɖe review enẹ ji xoxo.",
+        "TRUST_PROTECT_REVIEW_NOT_DESPAIR": "Trust Protect lɛ́ sɛ́ zã ɖe review siwo xɔ [DESPAIR] rating ko ji.",
+        "TRUST_PROTECT_INSUFFICIENT_MAPPI": "Trust Protect zãzã ɖeɖeɖe bɛ xɔ Mappi 100. Zã Membership screen lɛ bɛ nàgblɔ Mappi wò tɔ́ lɛ sɔ gbɔ.",
+        "TRUST_PROTECT_ACTIVATION_FAILED": "Trust Protect mɛ tɔn xwla o."
       }
     },
     "EDIT_REVIEW": {
@@ -341,6 +358,7 @@
     "COPY": "Kɔpí",
     "ADD_ITEM": "Gɔ́ nǔ ɖévo nu nǔ ɔ",
     "CHECKOUT": "Gbé wɛ gbà",
+    "REDEEM": "Xɔ",
     "DELETE": "Súnsún",
     "CONFIRM_DELETE": "A ka ganjɛwu ɖɔ a jló na súnsún nǔ élɔ́ nugbo à? Bonú è súsun nǔ élɔ́ vɔ , ye sɔ na mo à.",
     "SAVE": "Hɛn",

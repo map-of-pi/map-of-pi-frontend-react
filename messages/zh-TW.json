@@ -56,12 +56,14 @@
       "PICK_MEMBERSHIP_MAPPI_TO_BUY_LABEL": "選擇要購買的會員或Mappi",
       "PICK_MEMBERSHIP_DURATION_IN_WEEKS_LABEL": "會員資格（{duration} 週）",
       "PICK_BUY_METHOD_LABEL": "選擇購買方式",
+      "NO_ACTIVE_MEMBERSHIP": "您目前沒有任何有效會員資格",
       "PURCHASE_OPTIONS": {
-        "PAY_WITH_PI": "使用 π 付款",
+        "PAY_WITH_PI": "使用 Pi 付款",
         "WATCH_ADS": "觀看廣告（免費）",
         "USE_VOUCHER": "使用優惠券代碼（免費）"
       },
       "ENTER_VOUCHER_CODE_PLACEHOLDER": "輸入優惠碼",
+      "PICK_FROM_AVAILABLE_VOUCHERS": "從可用優惠券中選擇",
       "VALIDATION": {
         "SUCCESSFUL_MEMBERSHIP_ACTIVATION_MESSAGE": "會員啟用成功",
         "FAILED_LOAD_MEMBERSHIP_MESSAGE": "無法載入會員資料",
@@ -130,6 +132,8 @@
         "DESCRIPTION_LABEL": "描述",
         "PHOTO": "照片",
         "SELLING_DURATION_LABEL": "銷售周期（以週為單位）",
+        "MAPPI_COST_PREVIEW": "需要支付 {mappi_count} Mappi",
+        "MAPPI_REFUND_PREVIEW": "將退還 {mappi_count} Mappi",
         "SELLING_STATUS_OPTIONS": {
           "ACTIVE": "活躍中",
           "EXPIRED": "已過期"
@@ -145,7 +149,8 @@
         },
         "SELLING_EXPIRATION_DATE": "{expired_by_date} 前銷售",
         "VALIDATION": {
-          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "銷售週期不能少於 {remaining_weeks} 週"
+          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "銷售週期不能少於 {remaining_weeks} 週",
+          "DURATION_MINIMUM": "商品上架時間不得少於 1 週"
         }
       }
     },
@@ -170,6 +175,10 @@
         "FULFILLED": "訂單已完成"
       },
       "ORDER_COMPLETED_LABEL": "訂單已完成",
+      "BUYER_WALLET_ADDRESS_LABEL": "買家錢包地址",
+      "BUYER_WALLET_ADDRESS_NOT_PROVIDED_MESSAGE": "請聯絡收款人以取得錢包地址。",
+      "BUYER_WALLET_ADDRESS_COPY_LABEL": "點擊複製",
+      "BUYER_WALLET_ADDRESS_COPIED_LABEL": "已複製",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "訂單已發貨/已收取"
     },
     "BUY_FROM_SELLER": {
@@ -209,7 +218,15 @@
       "REVIEWS_RECEIVED_SECTION_HEADER": "該先鋒收到的評論",
       "VALIDATION": {
         "NO_REVIEWS_FOUND": "未找到先鋒 {search_value} 的評論",
-        "NO_PIONEER_FOUND": "未找到先鋒 {search_value}"
+        "NO_PIONEER_FOUND": "未找到先鋒 {search_value}",
+        "TRUST_PROTECT_ACTIVATION_SUCCESSFUL": "Trust Protect 已成功啟用。",
+        "TRUST_PROTECT_INVALID_REVIEW_ID": "找不到此評論。請重新整理頁面後再試一次。",
+        "TRUST_PROTECT_REVIEW_NOT_FOUND": "找不到此評論。此評論可能已被刪除或修改。",
+        "TRUST_PROTECT_FORBIDDEN_RECEIVER_ONLY": "只有收到此評論的 Pioneer 才能使用 Trust Protect。",
+        "TRUST_PROTECT_ALREADY_APPLIED": "此評論已套用 Trust Protect。",
+        "TRUST_PROTECT_REVIEW_NOT_DESPAIR": "Trust Protect 只能用於具有 [DESPAIR] 評級的評論。",
+        "TRUST_PROTECT_INSUFFICIENT_MAPPI": "每次使用 Trust Protect 都會消耗 100 Mappi。請使用 Membership 頁面來增加您的 Mappi 餘額。",
+        "TRUST_PROTECT_ACTIVATION_FAILED": "無法啟用 Trust Protect。"
       }
     },
     "EDIT_REVIEW": {
@@ -341,6 +358,7 @@
     "COPY": "複製",
     "ADD_ITEM": "新增項目",
     "CHECKOUT": "結帳",
+    "REDEEM": "兌換",
     "DELETE": "刪除",
     "CONFIRM_DELETE": "您確定要刪除此項目嗎？此操作無法撤銷。",
     "SAVE": "保存",

@@ -56,12 +56,14 @@
       "PICK_MEMBERSHIP_MAPPI_TO_BUY_LABEL": "Yan ìṣọkan tàbí Mappi láti rà",
       "PICK_MEMBERSHIP_DURATION_IN_WEEKS_LABEL": "ìmọ̀lára ({duration} ọ̀sẹ̀)",
       "PICK_BUY_METHOD_LABEL": "Yan ọ̀nà rira",
+      "NO_ACTIVE_MEMBERSHIP": "O kò ní ọmọ ẹgbẹ́ kankan tí ó ń ṣiṣẹ́",
       "PURCHASE_OPTIONS": {
-        "PAY_WITH_PI": "Sanwo pẹlu π",
+        "PAY_WITH_PI": "Sanwo pẹlu Pi",
         "WATCH_ADS": "Wo ìpolówó (fẹ́fẹ́)",
         "USE_VOUCHER": "Lo koodu voucher (fẹ́fẹ́)"
       },
       "ENTER_VOUCHER_CODE_PLACEHOLDER": "Tẹ kóòdù voucher",
+      "PICK_FROM_AVAILABLE_VOUCHERS": "Yan lára àwọn voucher tó wà",
       "VALIDATION": {
         "SUCCESSFUL_MEMBERSHIP_ACTIVATION_MESSAGE": "Ìforúkọsílẹ̀ ọmọ ẹgbẹ́ ti ṣàkóso ní àṣeyọrí",
         "FAILED_LOAD_MEMBERSHIP_MESSAGE": "A kò lè gbé data ọmọ ẹgbẹ́ wọlé",
@@ -130,6 +132,8 @@
         "DESCRIPTION_LABEL": "Àpejúwe",
         "PHOTO": "Fọ́tò",
         "SELLING_DURATION_LABEL": "Àkókò títà ní ọsẹ",
+        "MAPPI_COST_PREVIEW": "Èyí yóò na {mappi_count} Mappi",
+        "MAPPI_REFUND_PREVIEW": "A ó da {mappi_count} Mappi padà fún ọ",
         "SELLING_STATUS_OPTIONS": {
           "ACTIVE": "Ṣiṣẹ́",
           "EXPIRED": "Tí parí"
@@ -145,7 +149,8 @@
         },
         "SELLING_EXPIRATION_DATE": "Títà ní {expired_by_date}",
         "VALIDATION": {
-          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "A kò le dín àkókò tita kù ju ọ̀sẹ̀ {remaining_weeks} tó ku lọ"
+          "REDUCED_DURATION_BELOW_REMAINING_WEEKS": "A kò le dín àkókò tita kù ju ọ̀sẹ̀ {remaining_weeks} tó ku lọ",
+          "DURATION_MINIMUM": "Àkókò ìpolówó gbọ́dọ̀ jẹ́ ó kéré tán ọ̀sẹ̀ kan"
         }
       }
     },
@@ -170,6 +175,10 @@
         "FULFILLED": "A ti pari aṣẹ naa"
       },
       "ORDER_COMPLETED_LABEL": "Àṣẹ parí",
+      "BUYER_WALLET_ADDRESS_LABEL": "Adirẹsi apamọwọ olùrà",
+      "BUYER_WALLET_ADDRESS_NOT_PROVIDED_MESSAGE": "Kan sí olùgbà láti béèrè fún adirẹsi apamọwọ.",
+      "BUYER_WALLET_ADDRESS_COPY_LABEL": "Fọwọ́ kan láti daakọ",
+      "BUYER_WALLET_ADDRESS_COPIED_LABEL": "A ti daakọ",
       "ORDER_DISPATCHED_COLLECTED_LABEL": "Àṣẹ ránṣẹ́ / ti gba"
     },
     "BUY_FROM_SELLER": {
@@ -209,7 +218,15 @@
       "REVIEWS_RECEIVED_SECTION_HEADER": "Àwọn àyẹ̀wò tí aṣáájú-ọ̀nà yìí gbàkò rí fún Pionnier yi",
       "VALIDATION": {
         "NO_REVIEWS_FOUND": "Ko si awọn awotẹlẹ ti o rii fun Pioneer {search_value}",
-        "NO_PIONEER_FOUND": "Pionnier a kò rí aṣáájú-ọ̀nà {search_value}"  
+        "NO_PIONEER_FOUND": "Pionnier a kò rí aṣáájú-ọ̀nà {search_value}",
+        "TRUST_PROTECT_ACTIVATION_SUCCESSFUL": "Trust Protect ti ṣiṣẹ́ ní àṣeyọrí.",
+        "TRUST_PROTECT_INVALID_REVIEW_ID": "A kò rí review yìí. Jọ̀wọ́ tún ojú-ìbojú náà ṣe kí o sì tún gbìyànjú lẹ́ẹ̀kansi.",
+        "TRUST_PROTECT_REVIEW_NOT_FOUND": "A kò rí review yìí. Ó ṣeé ṣe kí wọ́n ti yọ ọ́ kúrò tàbí kí wọ́n ti yí i padà.",
+        "TRUST_PROTECT_FORBIDDEN_RECEIVER_ONLY": "Pioneer tí ó gba review yìí nìkan ló lè lo Trust Protect.",
+        "TRUST_PROTECT_ALREADY_APPLIED": "Trust Protect ti wà lórí review yìí tẹ́lẹ̀.",
+        "TRUST_PROTECT_REVIEW_NOT_DESPAIR": "Trust Protect lè ṣee lò lórí review tí ó ní rating [DESPAIR] nìkan.",
+        "TRUST_PROTECT_INSUFFICIENT_MAPPI": "Lílo Trust Protect kọ̀ọ̀kan máa ń lo 100 Mappi. Lo ojú-ìbojú Membership láti pọ̀si ìwọ̀ntúnwọ̀nsì Mappi rẹ.",
+        "TRUST_PROTECT_ACTIVATION_FAILED": "A kò lè mú Trust Protect ṣiṣẹ́."
       }
     },
     "EDIT_REVIEW": {
@@ -341,6 +358,7 @@
     "COPY": "Daakọ",
     "ADD_ITEM": "Fikun un Item",
     "CHECKOUT": "Sanwo",
+    "REDEEM": "Lo",
     "DELETE": "Pàdánù",
     "CONFIRM": "Jẹrisi",  
     "CONFIRM_DELETE": "Ṣé o dájú pé o fẹ́ pa àyọkà yìí? Ìṣe yìí kò lè tún ṣe.",
