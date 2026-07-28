@@ -24,7 +24,7 @@ import {
   FileInput,
   Input,
   Select,
-  TextArea
+  TextArea,
 } from '@/components/shared/Forms/Inputs/Inputs';
 import { menu } from '@/constants/menu';
 import { IUserSettings } from '@/constants/types';
@@ -42,11 +42,9 @@ import logger from '../../../../logger.config.mjs';
 
 import dynamic from 'next/dynamic';
 
-const MapCenter = dynamic(() => 
-  import('@/components/shared/map/MapCenter'), {
-    ssr: false
-  }
-);
+const MapCenter = dynamic(() => import('@/components/shared/map/MapCenter'), {
+  ssr: false,
+});
 
 interface MenuItem {
   id: number;
@@ -98,8 +96,11 @@ function Sidebar(props: any) {
     { target: 'include_trust_level_0', title: 'Trust-o-meter 0%' },
   ];
 
-  const { currentUser, authenticateUser, setReload, showAlert } = useContext(AppContext);
-  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(null);
+  const { currentUser, authenticateUser, setReload, showAlert } =
+    useContext(AppContext);
+  const [dbUserSettings, setDbUserSettings] = useState<IUserSettings | null>(
+    null,
+  );
   // Initialize state with appropriate types
   const [formData, setFormData] = useState<{
     user_name: string;
@@ -121,7 +122,9 @@ function Sidebar(props: any) {
   });
 
   const [file, setFile] = useState<File | null>(null);
-  const [previewImage, setPreviewImage] = useState<string>(dbUserSettings?.image || '');
+  const [previewImage, setPreviewImage] = useState<string>(
+    dbUserSettings?.image || '',
+  );
   const [showMapCenter] = useState(false);
   const [showInfoModel, setShowInfoModel] = useState(false);
   const [showPrivacyPolicyModel, setShowPrivacyPolicyModel] = useState(false);
@@ -244,13 +247,12 @@ function Sidebar(props: any) {
     }
   };
 
- const handleChildMenu = (title: any, code: string) => {
-  logger.debug(`Child menu item selected: ${title}, Code: ${code}`);
-  if (title === 'Languages') {
-    document.cookie = `NEXT_LOCALE=${code}; path=/; max-age=31536000; SameSite=Lax`;
-    router.replace(pathname, { locale: code });
-    props.setToggleDis(false);
-  }
+  const handleChildMenu = (title: any, code: string) => {
+    logger.debug(`Child menu item selected: ${title}, Code: ${code}`);
+    if (title === 'Languages') {
+      router.replace(pathname, { locale: code });
+      props.setToggleDis(false);
+    }
     if (title === 'Themes') {
       code === 'dark' ? setTheme('dark') : setTheme('light');
       props.setToggleDis(false);
@@ -334,7 +336,10 @@ function Sidebar(props: any) {
     formDataToSend.append('findme', formData.findme);
 
     if (formData.wallet_address) {
-      formDataToSend.append('wallet_address', removeUrls(formData.wallet_address));
+      formDataToSend.append(
+        'wallet_address',
+        removeUrls(formData.wallet_address),
+      );
     }
     // add the image if it exists
     if (file) {
@@ -459,9 +464,8 @@ function Sidebar(props: any) {
                       className={clsx(
                         'absolute top-[-6px] right-[-6px] bg-[#ff4d4f] text-[#f6c367] text-xs font-bold px-[8px] py-[2px] border-[2px] border-[#f6c367]',
                         'rounded-full min-w-[22px] text-center',
-                        ordersCount > 99 && 'px-[4px] min-w-[28px]'
-                      )}
-                    >
+                        ordersCount > 99 && 'px-[4px] min-w-[28px]',
+                      )}>
                       {ordersCount > 99 ? '99+' : ordersCount}
                     </span>
                   )}
@@ -512,9 +516,8 @@ function Sidebar(props: any) {
                     className={clsx(
                       'absolute top-[-6px] right-[-6px] bg-[#ff4d4f] text-[#f6c367] text-xs font-bold px-[8px] py-[2px] border-[2px] border-[#f6c367]',
                       'rounded-full min-w-[22px] text-center',
-                      notificationsCount > 99 && 'px-[4px] min-w-[28px]'
-                    )}
-                  >
+                      notificationsCount > 99 && 'px-[4px] min-w-[28px]',
+                    )}>
                     {notificationsCount > 99 ? '99+' : notificationsCount}
                   </span>
                 )}
