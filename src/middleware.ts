@@ -5,11 +5,13 @@ import { localePrefix } from './navigation';
 export default createMiddleware({
   locales,
   defaultLocale,
-  localePrefix
+  localePrefix,
+  localeCookie: {
+    name: 'NEXT_LOCALE',
+    maxAge: 60 * 60 * 24 * 365, // 1 year
+  },
 });
 
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|_next/image|_vercel|.*\\..*).*)'
-  ]
+  matcher: ['/((?!api|_next/static|_next/image|_vercel|.*\\..*).*)'],
 };
