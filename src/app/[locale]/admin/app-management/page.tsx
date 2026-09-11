@@ -362,18 +362,19 @@ const AddVouchersTab = () => {
     setIsSaveLoading(true);
     try {
       const days = parseInt(validityDays, 10);
-      const validUntil = addDays(new Date(), days);
       const result = await addVoucher({
         pi_username: recipient,
         voucher_code: voucherCode,
         membership_class: selectedMembership,
-        expiry_date: validUntil
+        validity_period: days
       });
+
       if (!result.success) {
         showAlert(result.error || 'unable to assign voucher');
       } else {
         showAlert('Assign voucher successfully');
       }
+      
     } catch (error) {
       showAlert('error adding voucher');
     } finally {

@@ -75,7 +75,7 @@ export const addVoucher = async (body: {
   pi_username: string, 
   voucher_code: string,
   membership_class: MembershipClassType,
-  expiry_date: Date
+  validity_period: number,
 }): Promise<IVoucherRedemptionResult> => {
   try {
     logger.info(`Assigning voucher to user`);
