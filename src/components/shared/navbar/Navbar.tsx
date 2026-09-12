@@ -162,7 +162,6 @@ function Navbar() {
                           bg-red-500
                           border-2
                           border-[var(--default-secondary-color)]
-                          animate-pulse
                         "
                       />
                     )}
